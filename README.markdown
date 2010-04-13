@@ -27,7 +27,7 @@ Also you need Rubygems and [Jake][4].
     $ cp build/stake-min.js path/to/your/project
 
 It should work in all browsers though I've not tried it yet. The
-spec pass on SpiderMonkey and Rhino, I know that much.
+specs pass on SpiderMonkey and Rhino, I know that much.
 
 [3]: http://jsclass.jcoglan.com
 [4]: http://github.com/jcoglan/jake
@@ -51,7 +51,7 @@ The full range of parsing expressions is:
   that tries each subparser in turn until one works.
 * `['maybe', x]` will parse `x` if it is present; it's the equivalent
   of a `?` operator in regular expressions.
-* `['repeat', n, x ...]` takes a number and a parsing expression, and
+* `['repeat', n, x]` takes a number and a parsing expression, and
   parses input that matches the subparser at least `n` times.
 * `['sequence', x ...]` takes one or more expressions and makes a
   parser that accepts input that matches each subexpression in turn.
@@ -59,6 +59,8 @@ The full range of parsing expressions is:
 
 Parsing output is in the form of a tree of nodes, inspired by [Treetop][5].
 For example, here's a parser that matches positive integers:
+
+[5]: http://treetop.rubyforge.org/
 
     var intParser = Stake.Parser.fromSexp(
                     ['sequence',
