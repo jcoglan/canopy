@@ -466,11 +466,11 @@ module Lisp
     end
 
     i0 = index
-    if has_terminal?("::(", false, index)
-      r1 = instantiate_node(SyntaxNode,input, index...(index + 3))
-      @index += 3
+    if has_terminal?("(", false, index)
+      r1 = instantiate_node(SyntaxNode,input, index...(index + 1))
+      @index += 1
     else
-      terminal_parse_failure("::(")
+      terminal_parse_failure("(")
       r1 = nil
     end
     if r1

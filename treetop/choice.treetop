@@ -1,0 +1,14 @@
+grammar Choice
+  rule root
+    (word type / word) "bar"
+  end
+  
+  rule word
+    "word"
+  end
+  
+  rule type
+    "type"
+  end
+end
+
