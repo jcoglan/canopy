@@ -54,5 +54,67 @@ Stake.ChoiceParserSpec = JS.Test.describe(Stake.ChoiceParser, function() { with(
         parser.parse('chunkybacon') )
     }})
   }})
+  
+  describe('backtracking', function() { with(this) {
+    before(function() { with(this) {
+      this.parser = Stake.Parser.fromSexp(
+                    ['choice',
+                      ['string', 'foob'],
+                      ['string', 'foo']])
+    }})
+    
+    it('chooses the first path if it completes the input', function() { with(this) {
+      assertEqual( {textValue: 'foob', offset: 0, elements: []}, parser.parse('foob') )
+    }})
+    
+    it('chooses the second path otherwise', function() { with(this) {
+      assertEqual( {textValue: 'foo', offset: 0, elements: []}, parser.parse('foo') )
+    }})
+    
+    describe('within a sequence', function() { with(this) {
+      before(function() { with(this) {
+        // ("word" "type" / "word") "bar"
+        this.parser = Stake.Parser.fromSexp(
+                      ['sequence',
+                        ['choice',
+                          ['sequence',
+                            ['string', 'word'],
+                            ['string', 'type']],
+                          ['string', 'word']],
+                        ['string', 'bar']])
+      }})
+      
+      it('parses the long version', function() { with(this) {
+        assertEqual( {
+            textValue: 'wordtypebar',
+            offset: 0,
+            elements: [
+              {
+                textValue: 'wordtype',
+                offset: 0,
+                elements: [
+                  {textValue: 'word', offset: 0, elements: []},
+                  {textValue: 'type', offset: 4, elements: []}
+                ]
+              },
+              {textValue: 'bar', offset: 8, elements: []}
+            ]
+          },
+          parser.parse('wordtypebar') )
+      }})
+      
+      it('parses the short version', function() { with(this) {
+        assertEqual( {
+            textValue: 'wordbar',
+            offset: 0,
+            elements: [
+              {textValue: 'word', offset: 0, elements: []},
+              {textValue: 'bar', offset: 4, elements: []}
+            ]
+          },
+          parser.parse('wordbar') )
+      }})
+    }})
+  }})
 }})
 
