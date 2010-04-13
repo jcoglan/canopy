@@ -7,7 +7,8 @@ JS.Packages(function() { with(this) {
 }})
 
 require('JS.Test', 'Stake', function() {
-    require('Stake.ChoiceParserSpec',
+    require('Stake.CharClassParserSpec',
+            'Stake.ChoiceParserSpec',
             'Stake.MaybeParserSpec',
             'Stake.RepeatParserSpec',
             'Stake.SequenceParserSpec',
