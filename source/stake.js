@@ -56,6 +56,27 @@ Stake.extend({
     }
   }),
   
+  RepeatParser: new JS.Class(Stake.Parser, {
+    initialize: function(parser) {
+      this._parser = parser;
+    },
+    
+    consume: function(input, offset) {
+      var elements  = [],
+          textValue = '',
+          counter   = offset,
+          node      = true;
+      
+      while (node = this._parser.consume(input, counter)) {
+        elements.push(node);
+        input = input.substring(node.textValue.length);
+        textValue += node.textValue;
+        counter   += node.textValue.length;
+      }
+      return this._syntaxNode(textValue, offset, elements);
+    }
+  }),
+  
   SequenceParser: new JS.Class(Stake.Parser, {
     extend: {
       create: function() {

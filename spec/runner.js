@@ -8,6 +8,7 @@ JS.Packages(function() { with(this) {
 
 require('JS.Test', 'Stake', function() {
     require('Stake.MaybeParserSpec',
+            'Stake.RepeatParserSpec',
             'Stake.SequenceParserSpec',
             'Stake.StringParserSpec',
             
