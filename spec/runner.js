@@ -6,8 +6,10 @@ JS.Packages(function() { with(this) {
     autoload(/^(.*)Spec$/, {from: 'spec', require: '$1'})
 }})
 
-require('JS.Test', function() {
-    require('StakeSpec',
+require('JS.Test', 'Stake', function() {
+    require('Stake.MaybeParserSpec',
+            'Stake.SequenceParserSpec',
+            'Stake.StringParserSpec',
             
     JS.Test.method('autorun'))
 })
