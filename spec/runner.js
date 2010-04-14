@@ -10,6 +10,7 @@ require('JS.Test', 'Stake', function() {
     require('Stake.CharClassParserSpec',
             'Stake.ChoiceParserSpec',
             'Stake.MaybeParserSpec',
+            'Stake.NotParserSpec',
             'Stake.RepeatParserSpec',
             'Stake.SequenceParserSpec',
             'Stake.StringParserSpec',

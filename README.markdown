@@ -51,6 +51,8 @@ The full range of parsing expressions is:
   that tries each subparser in turn until one works.
 * `['maybe', x]` will parse `x` if it is present; it's the equivalent
   of a `?` operator in regular expressions.
+* `['not', x]` makes a negative-lookahead parser that checks the input
+  does not match `x` but does not consume any input.
 * `['repeat', n, x]` takes a number and a parsing expression, and
   parses input that matches the subparser at least `n` times.
 * `['sequence', x ...]` takes one or more expressions and makes a
