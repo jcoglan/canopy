@@ -45,6 +45,8 @@ example to make a parser that recognises the string "a":
 
 The full range of parsing expressions is:
 
+* `['any-char']` makes a parser that consumes one character of input,
+  similar to the `.` operator in regular expressions.
 * `['char-class', x]` makes a character class parser, for example
   `['char-class', '[0-9]']` makes a parser that recognizes any digit.
 * `['choice', x ...]` takes one or more expressions and makes a parser

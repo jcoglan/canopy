@@ -45,6 +45,13 @@ Stake.extend({
 });
 
 Stake.extend({
+  AnyCharParser: new JS.Class(Stake.Parser, {
+    consume: function(input, offset) {
+      if (input === '') return null;
+      return this._syntaxNode(input.substring(0,1), offset);
+    }
+  }),
+  
   CharClassParser: new JS.Class(Stake.Parser, {
     initialize: function(charClass) {
       this._charClass = charClass;
