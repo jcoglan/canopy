@@ -34,7 +34,7 @@ Stake.NotParserSpec = JS.Test.describe(Stake.NotParser, function() { with(this) 
                       ['string', ' ']])
     }})
     
-    it('mathces a word followed by a space', function() { with(this) {
+    it('matches a word followed by a space', function() { with(this) {
       assertEqual( {
           textValue: 'fun ',
           offset: 0,

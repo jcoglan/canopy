@@ -38,7 +38,7 @@ function() { with(this) {
     }})
   }})
   
-  describe('with sequencing and repetion', function() { with(this) {
+  describe('with sequencing and repetition', function() { with(this) {
     before(function() { with(this) {
       this.parser = Stake.Parser.fromSexp(
                     ['sequence',
