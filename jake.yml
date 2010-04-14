@@ -15,6 +15,14 @@ packages:
   stake:
     files:
       - stake
+      - stake/any_char_parser
+      - stake/char_class_parser
+      - stake/choice_parser
+      - stake/maybe_parser
+      - stake/not_parser
+      - stake/repeat_parser
+      - stake/sequence_parser
+      - stake/string_parser
     meta:
       provides:
         - Stake
