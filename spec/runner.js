@@ -9,6 +9,7 @@ JS.Packages(function() { with(this) {
 require('JS.Test', 'Stake', function() {
     require('Stake.CharClassParserSpec',
             'Stake.ChoiceParserSpec',
+            'Stake.LabelParserSpec',
             'Stake.MaybeParserSpec',
             'Stake.NotParserSpec',
             'Stake.RepeatParserSpec',

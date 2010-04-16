@@ -15,19 +15,22 @@ Stake.extend({
           parsers   = this._parsers,
           textValue = '',
           counter   = offset,
-          n = parsers.length, i, node;
+          labelled  = {},
+          n = parsers.length, i, node, label;
       
       for (i = 0; i < n; i++) {
         node = parsers[i].consume(input, counter);
         if (!node) return null;
         
+        if (label = parsers[i].label) labelled[label] = node;
         elements.push(node);
+        
         input = input.substring(node.textValue.length);
         
         textValue += node.textValue;
         counter   += node.textValue.length;
       }
-      return this._syntaxNode(textValue, offset, elements);
+      return this._syntaxNode(textValue, offset, elements, labelled);
     }
   })
 });

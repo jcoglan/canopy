@@ -32,8 +32,9 @@ Stake.extend({
       return input.substring(0,matcher.length) === matcher;
     },
     
-    _syntaxNode: function(textValue, offset, elements) {
-      return {textValue: textValue, offset: offset, elements: elements || []};
+    _syntaxNode: function(textValue, offset, elements, properties) {
+      var node = {textValue: textValue, offset: offset, elements: elements || []};
+      return JS.extend(node, properties);
     },
     
     parse: function(input) {
