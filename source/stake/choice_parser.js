@@ -10,12 +10,14 @@ Stake.extend({
       this._choices = choices;
     },
     
-    consume: function(input, offset) {
+    consume: function(input, session) {
       var choices = this._choices,
+          offset  = session.offset,
           n = choices.length, i, node;
       
       for (i = 0; i < n; i++) {
-        if (node = choices[i].consume(input, offset))
+        session.offset = offset;
+        if (node = choices[i].consume(input, session))
           return node;
       }
       return null;

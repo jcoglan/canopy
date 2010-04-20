@@ -4,9 +4,9 @@ Stake.extend({
       this._parser = parser;
     },
     
-    consume: function(input, offset) {
-      var node = this._parser.consume(input, offset);
-      return node || this._syntaxNode('', offset);
+    consume: function(input, session) {
+      var node = this._parser.consume(input, session);
+      return node || this._syntaxNode('', session.offset);
     }
   })
 });

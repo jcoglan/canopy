@@ -10,16 +10,16 @@ Stake.extend({
       this._parsers = parsers;
     },
     
-    consume: function(input, offset) {
+    consume: function(input, session) {
       var elements  = [],
           parsers   = this._parsers,
           textValue = '',
-          counter   = offset,
+          offset    = session.offset,
           labelled  = {},
           n = parsers.length, i, node, label;
       
       for (i = 0; i < n; i++) {
-        node = parsers[i].consume(input, counter);
+        node = parsers[i].consume(input, session);
         if (!node) return null;
         
         if (label = parsers[i].label) labelled[label] = node;
@@ -27,8 +27,8 @@ Stake.extend({
         
         input = input.substring(node.textValue.length);
         
-        textValue += node.textValue;
-        counter   += node.textValue.length;
+        textValue      += node.textValue;
+        session.offset  = offset + textValue.length;
       }
       return this._syntaxNode(textValue, offset, elements, labelled);
     }

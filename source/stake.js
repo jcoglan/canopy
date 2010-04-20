@@ -10,12 +10,18 @@ Stake.extend({
   
   Parser: new JS.Class({
     extend: {
+      ALIASES: {
+        rule: 'label'
+      },
+      
       fromSexp: function(sexp) {
         if (!(sexp instanceof Array)) return sexp;
         var components = Stake.map(sexp, this.fromSexp, this),
-            type = components.shift() + '-parser';
+            type = components.shift();
         
-        type = type.replace(/(^.|-.)/g, function(m) {
+        type = this.ALIASES[type] || type;
+        
+        type = (type + '-parser').replace(/(^.|-.)/g, function(m) {
           return m.replace('-', '').toUpperCase();
         });
         
@@ -38,9 +44,13 @@ Stake.extend({
     },
     
     parse: function(input) {
-      var node = this.consume(input, 0);
+      var node = this.consume(input, this.createSession());
       if (!node) return null;
       return (node.textValue === input) ? node : null;
+    },
+    
+    createSession: function() {
+      return {offset: 0};
     }
   })
 });

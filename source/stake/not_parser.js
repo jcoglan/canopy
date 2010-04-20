@@ -4,8 +4,11 @@ Stake.extend({
       this._parser = parser;
     },
     
-    consume: function(input, offset) {
-      var node = this._parser.consume(input, offset);
+    consume: function(input, session) {
+      var offset = session.offset,
+          node = this._parser.consume(input, session);
+      
+      session.offset = offset;
       return node ? null : this._syntaxNode('', offset);
     }
   })

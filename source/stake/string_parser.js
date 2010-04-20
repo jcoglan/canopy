@@ -4,9 +4,9 @@ Stake.extend({
       this._string = string;
     },
     
-    consume: function(input, offset) {
+    consume: function(input, session) {
       if (!this._begins(input, this._string)) return null;
-      return this._syntaxNode(this._string, offset);
+      return this._syntaxNode(this._string, session.offset);
     }
   })
 });

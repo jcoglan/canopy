@@ -18,9 +18,11 @@ packages:
       - stake/any_char_parser
       - stake/char_class_parser
       - stake/choice_parser
+      - stake/grammar_parser
       - stake/label_parser
       - stake/maybe_parser
       - stake/not_parser
+      - stake/reference_parser
       - stake/repeat_parser
       - stake/sequence_parser
       - stake/string_parser

@@ -11,19 +11,19 @@ Stake.extend({
       this._minimum = minimum || 0;
     },
     
-    consume: function(input, offset) {
+    consume: function(input, session) {
       var elements  = [],
           textValue = '',
-          counter   = offset,
+          offset    = session.offset,
           remaining = this._minimum,
           node      = true;
       
-      while (node = this._parser.consume(input, counter)) {
+      while (node = this._parser.consume(input, session)) {
         elements.push(node);
         input = input.substring(node.textValue.length);
-        textValue += node.textValue;
-        counter   += node.textValue.length;
-        remaining -= 1;
+        textValue      += node.textValue;
+        session.offset  = offset + textValue.length;
+        remaining      -= 1;
       }
       if (remaining > 0) return null;
       return this._syntaxNode(textValue, offset, elements);
