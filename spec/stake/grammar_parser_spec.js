@@ -17,21 +17,105 @@ Stake.GrammarParserSpec = JS.Test.describe(Stake.GrammarParser, function() { wit
   }})
   
   describe('with two rules and a reference', function() { with(this) {
-    before(function() { with(this) {
-      this.parser = Stake.Parser.fromSexp(
-                    ['grammar', 'OneRef',
-                      ['rule', 'first',
-                        ['reference', 'second']],
-                      ['rule', 'second',
-                        ['string', 'bar']]])
+    describe('where the root only contains a reference', function() { with(this) {
+      before(function() { with(this) {
+        this.parser = Stake.Parser.fromSexp(
+                      ['grammar', 'OneRef',
+                        ['rule', 'first',
+                          ['reference', 'second']],
+                        ['rule', 'second',
+                          ['string', 'bar']]])
+      }})
+      
+      it('parses strings matching the referenced rule', function() { with(this) {
+        assertEqual( {textValue: 'bar', offset: 0, elements: []}, parser.parse('bar') )
+      }})
+      
+      it('does not parse strings that do not match the referenced rule', function() { with(this) {
+        assertNull( parser.parse('foo') )
+      }})
     }})
     
-    it('parses strings matching the referenced rule', function() { with(this) {
-      assertEqual( {textValue: 'bar', offset: 0, elements: []}, parser.parse('bar') )
+    describe('where the root contains the reference as part of a sequence', function() { with(this) {
+      before(function() { with(this) {
+        this.parser = Stake.Parser.fromSexp(
+                      ['grammar', 'OneRefWithSequence',
+                        ['rule', 'first',
+                          ['sequence',
+                            ['reference', 'second'],
+                            ['string', 'end']]],
+                        ['rule', 'second',
+                          ['string', 'begin']]])
+      }})
+      
+      it('presents the reference as a labelled element', function() { with(this) {
+        assertEqual( {
+            textValue: 'beginend',
+            offset: 0,
+            elements: [
+              {textValue: 'begin', offset: 0, elements: []},
+              {textValue: 'end', offset: 5, elements: []}
+            ],
+            second: {textValue: 'begin', offset: 0, elements: []}
+          },
+          parser.parse('beginend') )
+      }})
     }})
     
-    it('does not parse strings that do not match the referenced rule', function() { with(this) {
-      assertNull( parser.parse('foo') )
+    describe('where the root contains the reference as part of a sub-sequence', function() { with(this) {
+      before(function() { with(this) {
+        this.parser = Stake.Parser.fromSexp(
+                      ['grammar', 'OneRefWithSubSequence',
+                        ['rule', 'first',
+                          ['sequence',
+                            ['sequence',
+                              ['reference', 'second'],
+                              ['string', 'sub']],
+                            ['string', 'end']]],
+                        ['rule', 'second',
+                          ['string', 'begin']]])
+      }})
+      
+      it('presents the reference as a labelled element in the subsequence', function() { with(this) {
+        assertEqual( {
+            textValue: 'beginsubend',
+            offset: 0,
+            elements: [
+              {
+                textValue: 'beginsub',
+                offset: 0,
+                elements: [
+                  {textValue: 'begin', offset: 0, elements: []},
+                  {textValue: 'sub', offset: 5, elements: []}
+                ],
+                second: {textValue: 'begin', offset: 0, elements: []}
+              },
+              {textValue: 'end', offset: 8, elements: []}
+            ]
+          },
+          parser.parse('beginsubend') )
+      }})
+    }})
+    
+    describe('when the root contains the reference as part of a choice', function() { with(this) {
+      before(function() { with(this) {
+        this.parser = Stake.Parser.fromSexp(
+                      ['grammar', 'OneRefWithChoice',
+                        ['rule', 'first',
+                          ['choice',
+                            ['reference', 'second'],
+                            ['string', 'end']]],
+                        ['rule', 'second',
+                          ['string', 'begin']]])
+      }})
+      
+      it('parses the first branch of the choice', function() { with(this) {
+        assertEqual( {textValue: 'begin', offset: 0, elements: []}, parser.parse('begin') )
+      }})
+      
+      it('parses the second branch of the choice', function() { with(this) {
+        assertEqual( {textValue: 'end', offset: 0, elements: []}, parser.parse('end') )
+      }})
     }})
   }})
 }})
