@@ -52,6 +52,16 @@ Stake.extend({
         }
       }),
       
+      ChoiceExpression: new JS.Module({
+        toSexp: function() {
+          var sexp = ['choice', this.first_expression.toSexp()];
+          this.rest_expressions.forEach(function(part) {
+            sexp.push(part.atom.toSexp());
+          });
+          return sexp;
+        }
+      }),
+      
       SequenceExpression: new JS.Module({
         toSexp: function() {
           var sexp = ['sequence', this.first_expression.toSexp()];

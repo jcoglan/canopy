@@ -31,6 +31,7 @@ Stake.extend({
       ['rule', 'parsing_expression',
         ['choice',
           ['reference', 'sequence_expression'],
+          ['reference', 'choice_expression'],
           ['reference', 'atom']]],
       
       ['rule', 'atom',
@@ -49,6 +50,19 @@ Stake.extend({
           ['sequence',
             ['string', '!'],
             ['reference', 'atom']]]],
+      
+      ['rule', 'choice_expression',
+        ['type', 'Stake.Compiler.ChoiceExpression',
+          ['sequence',
+            ['label', 'first_expression',
+              ['reference', 'atom']],
+            ['label', 'rest_expressions',
+              ['repeat', 1,
+                ['sequence',
+                  ['repeat', 1, ['reference', 'space']],
+                  ['string', '/'],
+                  ['repeat', 1, ['reference', 'space']],
+                  ['reference', 'atom']]]]]]],
       
       ['rule', 'sequence_expression',
         ['type', 'Stake.Compiler.SequenceExpression',

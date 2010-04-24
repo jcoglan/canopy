@@ -101,6 +101,25 @@ Stake.CompilerSpec = JS.Test.describe(Stake.Compiler, function() { with(this) {
     }})
   }})
   
+  describe('with a choice rule', function() { with(this) {
+    before(function() { with(this) {
+      this.compiler = new Stake.Compiler('\
+        grammar Choice                    \
+          #choice <- "foo" / "bar"        \
+      ')
+    }})
+    
+    it('compiles a choice-rule grammar', function() { with(this) {
+      assertEqual(['grammar', 'Choice',
+                    ['rule', 'choice',
+                      ['choice',
+                        ['string', 'foo'],
+                        ['string', 'bar']]]],
+          
+          compiler.toSexp() )
+    }})
+  }})
+  
   describe('with a sequence rule', function() { with(this) {
     before(function() { with(this) {
       this.compiler = new Stake.Compiler('\
