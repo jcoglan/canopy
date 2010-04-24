@@ -37,6 +37,7 @@ require('JS.Test', 'Stake', function() {
             'Stake.RepeatParserSpec',
             'Stake.SequenceParserSpec',
             'Stake.StringParserSpec',
+            'Stake.TypeParserSpec',
             
     JS.Test.method('autorun'))
 })

@@ -8,6 +8,8 @@ Stake.extend({
     return results;
   },
   
+  ENV: this,
+  
   Parser: new JS.Class({
     extend: {
       ALIASES: {
@@ -39,7 +41,13 @@ Stake.extend({
     },
     
     _syntaxNode: function(textValue, offset, elements, properties) {
-      return new Stake.SyntaxNode(textValue, offset, elements, properties);
+      var custom = this.nodeClass && Stake.ENV[this.nodeClass],
+          klass  = (custom instanceof Function) ? custom : Stake.SyntaxNode,
+          node   = new klass(textValue, offset, elements, properties);
+      
+      if (!custom || custom instanceof Function) return node;
+      node.extend(custom);
+      return node;
     },
     
     parse: function(input) {

@@ -26,6 +26,7 @@ packages:
       - stake/repeat_parser
       - stake/sequence_parser
       - stake/string_parser
+      - stake/type_parser
     meta:
       provides:
         - Stake
