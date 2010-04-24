@@ -34,8 +34,12 @@ Stake.extend({
           ['reference', 'atom']]],
       
       ['rule', 'atom',
-        ['choice',
-          ['reference', 'string_expression']]],
+        ['type', 'Stake.Compiler.Atom',
+          ['sequence',
+            ['maybe', ['reference', 'label']],
+            ['label', 'expression',
+              ['choice',
+                ['reference', 'string_expression']]]]]],
       
       ['rule', 'sequence_expression',
         ['type', 'Stake.Compiler.SequenceExpression',
@@ -54,6 +58,11 @@ Stake.extend({
             ['string', '"'],
             ['repeat', 0, ['char-class', '[^"]']],
             ['string', '"']]]],
+      
+      ['rule', 'label',
+        ['sequence',
+          ['reference', 'identifier'],
+          ['string', ':']]],
       
       ['rule', 'identifier',
         ['sequence',

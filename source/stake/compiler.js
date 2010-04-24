@@ -30,6 +30,15 @@ Stake.extend({
         }
       }),
       
+      Atom: new JS.Module({
+        toSexp: function() {
+          var sexp = this.expression.toSexp();
+          if (this.elements[0].identifier)
+            sexp = ['label', this.elements[0].identifier.textValue, sexp];
+          return sexp;
+        }
+      }),
+      
       SequenceExpression: new JS.Module({
         toSexp: function() {
           var sexp = ['sequence', this.first_expression.toSexp()];
