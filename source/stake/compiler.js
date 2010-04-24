@@ -33,9 +33,22 @@ Stake.extend({
       Atom: new JS.Module({
         toSexp: function() {
           var sexp = this.expression.toSexp();
+          
           if (this.elements[0].identifier)
             sexp = ['label', this.elements[0].identifier.textValue, sexp];
+          
+          switch (this.elements[2].textValue) {
+            case '?': sexp = ['maybe', sexp]; break;
+            case '*': sexp = ['repeat', 0, sexp]; break;
+            case '+': sexp = ['repeat', 1, sexp]; break;
+          }
           return sexp;
+        }
+      }),
+      
+      NegatedAtom: new JS.Module({
+        toSexp: function() {
+          return ['not', this.atom.toSexp()];
         }
       }),
       
