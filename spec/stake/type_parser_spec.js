@@ -3,7 +3,7 @@ Stake.TypeParserSpec = JS.Test.describe(Stake.TypeParser, function() { with(this
   
   describe('when the node type is a class', function() { with(this) {
     before(function() { with(this) {
-      NodeType = new JS.Class(Stake.SyntaxNode);
+      NodeType = new JS.Class(Stake.SyntaxNode)
       
       this.parser = Stake.Parser.fromSexp(
                     ['type', 'NodeType',
@@ -21,7 +21,7 @@ Stake.TypeParserSpec = JS.Test.describe(Stake.TypeParser, function() { with(this
   
   describe('when the node type is a mixin', function() { with(this) {
     before(function() { with(this) {
-      NodeType = new JS.Module({ custom: function(){} });
+      NodeType = new JS.Module({ custom: function(){} })
       
       this.parser = Stake.Parser.fromSexp(
                     ['type', 'NodeType',
@@ -36,6 +36,20 @@ Stake.TypeParserSpec = JS.Test.describe(Stake.TypeParser, function() { with(this
     
     it('contains the parse results in the returned node', function() { with(this) {
       assertParse( ['content', 0, []], parser.parse('content') )
+    }})
+  }})
+  
+  describe('when the node type is namespaced', function() { with(this) {
+    before(function() { with(this) {
+      NS = { NodeType : new JS.Class(Stake.SyntaxNode) }
+      
+      this.parser = Stake.Parser.fromSexp(
+                    ['type', 'NS.NodeType',
+                      ['string', 'content']])
+    }})
+    
+    it('creates nodes using the named type', function() { with(this) {
+      assertKindOf( NS.NodeType, parser.parse('content') )
     }})
   }})
 }})

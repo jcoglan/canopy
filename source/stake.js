@@ -8,6 +8,17 @@ Stake.extend({
     return results;
   },
   
+  getObject: function(name) {
+    var parts  = name.split('.'),
+        object = this.ENV,
+        part;
+    
+    while (part = parts.shift())
+      object = object && object[part];
+    
+    return object;
+  },
+  
   ENV: this,
   
   Parser: new JS.Class({
@@ -41,7 +52,7 @@ Stake.extend({
     },
     
     _syntaxNode: function(textValue, offset, elements, properties) {
-      var custom = this.nodeClass && Stake.ENV[this.nodeClass],
+      var custom = this.nodeClass && Stake.getObject(this.nodeClass),
           klass  = (custom instanceof Function) ? custom : Stake.SyntaxNode,
           node   = new klass(textValue, offset, elements, properties);
       
