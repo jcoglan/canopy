@@ -7,7 +7,7 @@ Stake.CompilerSpec = JS.Test.describe(Stake.Compiler, function() { with(this) {
       ')
     }})
     
-    it('compiles an any-char-rule grammar', function() { with(this) {
+    it('compiles an any-char-rule parser', function() { with(this) {
       assertEqual(['grammar', 'AnyChar',
                     ['rule', 'any',
                       ['any-char']]],
@@ -24,7 +24,7 @@ Stake.CompilerSpec = JS.Test.describe(Stake.Compiler, function() { with(this) {
       ')
     }})
     
-    it('compiles a string-rule grammar', function() { with(this) {
+    it('compiles a string-rule parser', function() { with(this) {
       assertEqual(['grammar', 'String',
                     ['rule', 'string',
                       ['string', 'foo']]],
@@ -41,7 +41,7 @@ Stake.CompilerSpec = JS.Test.describe(Stake.Compiler, function() { with(this) {
       ')
     }})
     
-    it('compiles a maybe string-rule grammar', function() { with(this) {
+    it('compiles a maybe string-rule parser', function() { with(this) {
       assertEqual(['grammar', 'MaybeString',
                     ['rule', 'string',
                       ['maybe', ['string', 'foo']]]],
@@ -58,7 +58,7 @@ Stake.CompilerSpec = JS.Test.describe(Stake.Compiler, function() { with(this) {
       ')
     }})
     
-    it('compiles a not string-rule grammar', function() { with(this) {
+    it('compiles a not string-rule parser', function() { with(this) {
       assertEqual(['grammar', 'NotString',
                     ['rule', 'string',
                       ['not', ['string', 'foo']]]],
@@ -75,7 +75,7 @@ Stake.CompilerSpec = JS.Test.describe(Stake.Compiler, function() { with(this) {
       ')
     }})
     
-    it('compiles a repeat-0 string-rule grammar', function() { with(this) {
+    it('compiles a repeat-0 string-rule parser', function() { with(this) {
       assertEqual(['grammar', 'StarString',
                     ['rule', 'string',
                       ['repeat', 0, ['string', 'foo']]]],
@@ -92,7 +92,7 @@ Stake.CompilerSpec = JS.Test.describe(Stake.Compiler, function() { with(this) {
       ')
     }})
     
-    it('compiles a repeat-1 string-rule grammar', function() { with(this) {
+    it('compiles a repeat-1 string-rule parser', function() { with(this) {
       assertEqual(['grammar', 'PlusString',
                     ['rule', 'string',
                       ['repeat', 1, ['string', 'foo']]]],
@@ -102,21 +102,44 @@ Stake.CompilerSpec = JS.Test.describe(Stake.Compiler, function() { with(this) {
   }})
   
   describe('with a choice rule', function() { with(this) {
-    before(function() { with(this) {
-      this.compiler = new Stake.Compiler('\
-        grammar Choice                    \
-          #choice <- "foo" / "bar"        \
-      ')
+    describe('containing strings', function() { with(this) {
+      before(function() { with(this) {
+        this.compiler = new Stake.Compiler('\
+          grammar Choice                    \
+            #choice <- "foo" / "bar"        \
+        ')
+      }})
+      
+      it('compiles a choice-rule parser', function() { with(this) {
+        assertEqual(['grammar', 'Choice',
+                      ['rule', 'choice',
+                        ['choice',
+                          ['string', 'foo'],
+                          ['string', 'bar']]]],
+            
+            compiler.toSexp() )
+      }})
     }})
     
-    it('compiles a choice-rule grammar', function() { with(this) {
-      assertEqual(['grammar', 'Choice',
-                    ['rule', 'choice',
-                      ['choice',
-                        ['string', 'foo'],
-                        ['string', 'bar']]]],
-          
-          compiler.toSexp() )
+    describe('containing sequences', function() { with(this) {
+      before(function() { with(this) {
+        this.compiler = new Stake.Compiler('  \
+          grammar Choice                      \
+            #choice <- "foo" "middle" / "bar" \
+        ')
+      }})
+      
+      it('compiles a choice-rule parser containing sequences', function() { with(this) {
+        assertEqual(['grammar', 'Choice',
+                      ['rule', 'choice',
+                        ['choice',
+                          ['sequence',
+                            ['string', 'foo'],
+                            ['string', 'middle']],
+                          ['string', 'bar']]]],
+            
+            compiler.toSexp() )
+      }})
     }})
   }})
   
@@ -128,7 +151,7 @@ Stake.CompilerSpec = JS.Test.describe(Stake.Compiler, function() { with(this) {
       ')
     }})
     
-    it('compiles a sequence-rule grammar', function() { with(this) {
+    it('compiles a sequence-rule parser', function() { with(this) {
       assertEqual(['grammar', 'Sequence',
                     ['rule', 'sequence',
                       ['sequence',

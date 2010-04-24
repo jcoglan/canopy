@@ -56,7 +56,7 @@ Stake.extend({
         toSexp: function() {
           var sexp = ['choice', this.first_expression.toSexp()];
           this.rest_expressions.forEach(function(part) {
-            sexp.push(part.atom.toSexp());
+            sexp.push(part.expression.toSexp());
           });
           return sexp;
         }
