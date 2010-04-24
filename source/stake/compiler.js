@@ -66,6 +66,12 @@ Stake.extend({
         toSexp: function() {
           return ['string', this.elements[1].textValue];
         }
+      }),
+      
+      AnyCharExpression: new JS.Module({
+        toSexp: function() {
+          return ['any-char'];
+        }
       })
     }
   })

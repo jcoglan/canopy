@@ -40,7 +40,8 @@ Stake.extend({
             ['label', 'expression',
               ['choice',
                 ['reference', 'negated_atom'],
-                ['reference', 'string_expression']]],
+                ['reference', 'string_expression'],
+                ['reference', 'any_char_expression']]],
             ['maybe', ['reference', 'quantifier']]]]],
       
       ['rule', 'negated_atom',
@@ -66,6 +67,10 @@ Stake.extend({
             ['string', '"'],
             ['repeat', 0, ['char-class', '[^"]']],
             ['string', '"']]]],
+      
+      ['rule', 'any_char_expression',
+        ['type', 'Stake.Compiler.AnyCharExpression',
+          ['string', '.']]],
       
       ['rule', 'label',
         ['sequence',
