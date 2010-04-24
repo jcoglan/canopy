@@ -78,6 +78,11 @@ Stake.extend({
       this.offset    = offset;
       this.elements  = elements || [];
       this.extend(properties);
+    },
+    
+    forEach: function(block, context) {
+      for (var i = 0, n = this.elements.length; i < n; i++)
+        block.call(context, this.elements[i], i);
     }
   })
 });
