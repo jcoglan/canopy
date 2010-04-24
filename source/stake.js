@@ -39,8 +39,7 @@ Stake.extend({
     },
     
     _syntaxNode: function(textValue, offset, elements, properties) {
-      var node = {textValue: textValue, offset: offset, elements: elements || []};
-      return JS.extend(node, properties);
+      return new Stake.SyntaxNode(textValue, offset, elements, properties);
     },
     
     parse: function(input) {
@@ -51,6 +50,15 @@ Stake.extend({
     
     createSession: function() {
       return {offset: 0};
+    }
+  }),
+  
+  SyntaxNode: new JS.Class({
+    initialize: function(textValue, offset, elements, properties) {
+      this.textValue = textValue;
+      this.offset    = offset;
+      this.elements  = elements || [];
+      this.extend(properties);
     }
   })
 });

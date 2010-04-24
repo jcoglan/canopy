@@ -1,4 +1,6 @@
 Stake.NotParserSpec = JS.Test.describe(Stake.NotParser, function() { with(this) {
+  include(Stake.SpecHelper)
+  
   before(function() { with(this) {
     this.parser = Stake.Parser.fromSexp(
                   ['sequence',
@@ -7,14 +9,10 @@ Stake.NotParserSpec = JS.Test.describe(Stake.NotParser, function() { with(this) 
   }})
   
   it('parses text that does not begin with the negated pattern', function() { with(this) {
-    assertEqual( {
-        textValue: 'bar',
-        offset: 0,
-        elements: [
-          {textValue: '', offset: 0, elements: []},
-          {textValue: 'bar', offset: 0, elements: []}
-        ]
-      },
+    assertParse(['bar', 0, [
+                  ['', 0, []],
+                  ['bar', 0, []]]],
+      
       parser.parse('bar') )
   }})
   
@@ -35,31 +33,19 @@ Stake.NotParserSpec = JS.Test.describe(Stake.NotParser, function() { with(this) 
     }})
     
     it('matches a word followed by a space', function() { with(this) {
-      assertEqual( {
-          textValue: 'fun ',
-          offset: 0,
-          elements: [
-            {
-              textValue: 'fun',
-              offset: 0,
-              elements: [
-                {textValue: 'f', offset: 0, elements: [
-                    {textValue: '', offset: 0, elements: []},
-                    {textValue: 'f', offset: 0, elements: []}
-                  ]},
-                {textValue: 'u', offset: 1, elements: [
-                    {textValue: '', offset: 1, elements: []},
-                    {textValue: 'u', offset: 1, elements: []}
-                  ]},
-                {textValue: 'n', offset: 2, elements: [
-                    {textValue: '', offset: 2, elements: []},
-                    {textValue: 'n', offset: 2, elements: []}
-                  ]}
-              ]
-            },
-            {textValue: ' ', offset: 3, elements: []}
-          ]
-        },
+      assertParse(['fun ', 0, [
+                    ['fun', 0, [
+                      ['f', 0, [
+                        ['', 0, []],
+                        ['f', 0, []]]],
+                      ['u', 1, [
+                        ['', 1, []],
+                        ['u', 1, []]]],
+                      ['n', 2, [
+                        ['', 2, []],
+                        ['n', 2, []]]]]],
+                    [' ', 3, []]]],
+        
         parser.parse('fun ') )
     }})
     

@@ -1,4 +1,6 @@
 Stake.SequenceParserSpec = JS.Test.describe(Stake.SequenceParser, function() { with(this) {
+  include(Stake.SpecHelper)
+  
   before(function() { with(this) {
     this.parser = Stake.Parser.fromSexp(
                   ['sequence',
@@ -7,14 +9,10 @@ Stake.SequenceParserSpec = JS.Test.describe(Stake.SequenceParser, function() { w
   }})
   
   it('parses sequences matching its content', function() { with(this) {
-    assertEqual( {
-        textValue: 'foobar',
-        offset: 0,
-        elements: [
-          {textValue: 'foo', offset: 0, elements: []},
-          {textValue: 'bar', offset: 3, elements: []}
-        ]
-      },
+    assertParse(['foobar', 0, [
+                  ['foo', 0, []],
+                  ['bar', 3, []]]],
+      
       parser.parse('foobar') )
   }})
   

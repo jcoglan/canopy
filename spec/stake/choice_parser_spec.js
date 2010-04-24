@@ -1,4 +1,6 @@
 Stake.ChoiceParserSpec = JS.Test.describe(Stake.ChoiceParser, function() { with(this) {
+  include(Stake.SpecHelper)
+  
   before(function() { with(this) {
     this.parser = Stake.Parser.fromSexp(
                   ['choice',
@@ -8,15 +10,15 @@ Stake.ChoiceParserSpec = JS.Test.describe(Stake.ChoiceParser, function() { with(
   }})
   
   it('parses the first choice', function() { with(this) {
-    assertEqual( {textValue: 'foo', offset: 0, elements: []}, parser.parse('foo') )
+    assertParse( ['foo', 0, []], parser.parse('foo') )
   }})
   
   it('parses the second choice', function() { with(this) {
-    assertEqual( {textValue: 'bar', offset: 0, elements: []}, parser.parse('bar') )
+    assertParse( ['bar', 0, []], parser.parse('bar') )
   }})
   
   it('parses the third choice', function() { with(this) {
-    assertEqual( {textValue: 'baz', offset: 0, elements: []}, parser.parse('baz') )
+    assertParse( ['baz', 0, []], parser.parse('baz') )
   }})
   
   it('does not parse two choices together', function() { with(this) {
@@ -43,14 +45,10 @@ Stake.ChoiceParserSpec = JS.Test.describe(Stake.ChoiceParser, function() { with(
     }})
     
     it('chooses the first matching path', function() { with(this) {
-      assertEqual( {
-          textValue: 'chunkybacon',
-          offset: 0,
-          elements: [
-            {textValue: 'chunky', offset: 0, elements: []},
-            {textValue: 'bacon', offset: 6, elements: []}
-          ]
-        },
+      assertParse(['chunkybacon', 0, [
+                    ['chunky', 0, []],
+                    ['bacon', 6, []]]],
+        
         parser.parse('chunkybacon') )
     }})
   }})
@@ -64,11 +62,11 @@ Stake.ChoiceParserSpec = JS.Test.describe(Stake.ChoiceParser, function() { with(
     }})
     
     it('chooses the first path if it completes the input', function() { with(this) {
-      assertEqual( {textValue: 'foob', offset: 0, elements: []}, parser.parse('foob') )
+      assertParse( ['foob', 0, []], parser.parse('foob') )
     }})
     
     it('chooses the second path otherwise', function() { with(this) {
-      assertEqual( {textValue: 'foo', offset: 0, elements: []}, parser.parse('foo') )
+      assertParse( ['foo', 0, []], parser.parse('foo') )
     }})
     
     describe('within a sequence', function() { with(this) {
@@ -85,33 +83,20 @@ Stake.ChoiceParserSpec = JS.Test.describe(Stake.ChoiceParser, function() { with(
       }})
       
       it('parses the long version', function() { with(this) {
-        assertEqual( {
-            textValue: 'wordtypebar',
-            offset: 0,
-            elements: [
-              {
-                textValue: 'wordtype',
-                offset: 0,
-                elements: [
-                  {textValue: 'word', offset: 0, elements: []},
-                  {textValue: 'type', offset: 4, elements: []}
-                ]
-              },
-              {textValue: 'bar', offset: 8, elements: []}
-            ]
-          },
+        assertParse(['wordtypebar', 0, [
+                      ['wordtype', 0, [
+                        ['word', 0, []],
+                        ['type', 4, []]]],
+                      ['bar', 8, []]]],
+          
           parser.parse('wordtypebar') )
       }})
       
       it('parses the short version', function() { with(this) {
-        assertEqual( {
-            textValue: 'wordbar',
-            offset: 0,
-            elements: [
-              {textValue: 'word', offset: 0, elements: []},
-              {textValue: 'bar', offset: 4, elements: []}
-            ]
-          },
+        assertParse(['wordbar', 0, [
+                      ['word', 0, []],
+                      ['bar', 4, []]]],
+          
           parser.parse('wordbar') )
       }})
     }})

@@ -1,4 +1,6 @@
 Stake.LabelParserSpec = JS.Test.describe(Stake.LabelParser, function() { with(this) {
+  include(Stake.SpecHelper)
+  
   describe('labelling a terminal node', function() { with(this) {
     before(function() { with(this) {
       this.parser = Stake.Parser.fromSexp(
@@ -9,16 +11,13 @@ Stake.LabelParserSpec = JS.Test.describe(Stake.LabelParser, function() { with(th
     }})
     
     it('adds the label as an extra property to the parse tree', function() { with(this) {
-      assertEqual( {
-          textValue: 'firstsecondthird',
-          offset: 0,
-          elements: [
-            {textValue: 'first', offset: 0, elements: []},
-            {textValue: 'second', offset: 5, elements: []},
-            {textValue: 'third', offset: 11, elements: []}
-          ],
-          middle: {textValue: 'second', offset: 5, elements: []}
-        },
+      assertParse(['firstsecondthird', 0, [
+                    ['first', 0, []],
+                    ['second', 5, []],
+                    ['third', 11, []]], {
+                    middle: ['second', 5, []]
+                  }],
+        
         parser.parse('firstsecondthird') )
     }})
   }})
@@ -35,30 +34,17 @@ Stake.LabelParserSpec = JS.Test.describe(Stake.LabelParser, function() { with(th
     }})
     
     it('labels the node containing the repetition', function() { with(this) {
-      assertEqual( {
-          textValue: 'firstaathird',
-          offset: 0,
-          elements: [
-            {textValue: 'first', offset: 0, elements: []},
-            {
-              textValue: 'aa',
-              offset: 5,
-              elements: [
-                {textValue: 'a', offset: 5, elements: []},
-                {textValue: 'a', offset: 6, elements: []}
-              ]
-            },
-            {textValue: 'third', offset: 7, elements: []}
-          ],
-          middle: {
-            textValue: 'aa',
-            offset: 5,
-            elements: [
-              {textValue: 'a', offset: 5, elements: []},
-              {textValue: 'a', offset: 6, elements: []}
-            ]
-          }
-        },
+      assertParse(['firstaathird', 0, [
+                    ['first', 0, []],
+                    ['aa', 5, [
+                      ['a', 5, []],
+                      ['a', 6, []]]],
+                    ['third', 7, []]], {
+                    middle: ['aa', 5, [
+                      ['a', 5, []],
+                      ['a', 6, []]]]
+                  }],
+        
         parser.parse('firstaathird') )
     }})
     
@@ -81,42 +67,27 @@ Stake.LabelParserSpec = JS.Test.describe(Stake.LabelParser, function() { with(th
                             ['label', 'letter',
                               ['char-class', '[a-z]']]]]]])
       
-      this.rest = {
-        textValue: ', b, c',
-        offset: 1,
-        elements: [
-          {
-            textValue: ', b',
-            offset: 1,
-            elements: [
-              {textValue: ', ', offset: 1, elements: []},
-              {textValue: 'b', offset: 3, elements: []}
-            ],
-            letter: {textValue: 'b', offset: 3, elements: []}
-          }, {
-            textValue: ', c',
-            offset: 4,
-            elements: [
-              {textValue: ', ', offset: 4, elements: []},
-              {textValue: 'c', offset: 6, elements: []}
-            ],
-            letter: {textValue: 'c', offset: 6, elements: []}
-          }
-        ]
-      }
+      this.rest = [', b, c', 1, [
+                    [', b', 1, [
+                      [', ', 1, []],
+                      ['b', 3, []]], {
+                      letter: ['b', 3, []]
+                    }],
+                    [', c', 4, [
+                      [', ', 4, []],
+                      ['c', 6, []]], {
+                      letter: ['c', 6, []]
+                    }]]]
     }})
     
     it('applies labels to nested nodes', function() { with(this) {
-      assertEqual( {
-          textValue: 'a, b, c',
-          offset: 0,
-          elements: [
-            {textValue: 'a', offset: 0, elements: []},
-            rest
-          ],
-          firstLetter: {textValue: 'a', offset: 0, elements: []},
-          restLetters: rest
-        },
+      assertParse(['a, b, c', 0, [
+                    ['a', 0, []],
+                    rest], {
+                    firstLetter: ['a', 0, []],
+                    restLetters: rest
+                  }],
+        
         parser.parse('a, b, c') )
     }})
   }})

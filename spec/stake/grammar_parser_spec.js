@@ -1,4 +1,6 @@
 Stake.GrammarParserSpec = JS.Test.describe(Stake.GrammarParser, function() { with(this) {
+  include(Stake.SpecHelper)
+  
   describe('with one rule', function() { with(this) {
     before(function() { with(this) {
       this.parser = Stake.Parser.fromSexp(
@@ -8,7 +10,7 @@ Stake.GrammarParserSpec = JS.Test.describe(Stake.GrammarParser, function() { wit
     }})
     
     it('parses strings matching the rule', function() { with(this) {
-      assertEqual( {textValue: 'foo', offset: 0, elements: []}, parser.parse('foo') )
+      assertParse( ['foo', 0, []], parser.parse('foo') )
     }})
     
     it('does not parse strings that do not match the rule', function() { with(this) {
@@ -28,7 +30,7 @@ Stake.GrammarParserSpec = JS.Test.describe(Stake.GrammarParser, function() { wit
       }})
       
       it('parses strings matching the referenced rule', function() { with(this) {
-        assertEqual( {textValue: 'bar', offset: 0, elements: []}, parser.parse('bar') )
+        assertParse( ['bar', 0, []], parser.parse('bar') )
       }})
       
       it('does not parse strings that do not match the referenced rule', function() { with(this) {
@@ -49,15 +51,12 @@ Stake.GrammarParserSpec = JS.Test.describe(Stake.GrammarParser, function() { wit
       }})
       
       it('presents the reference as a labelled element', function() { with(this) {
-        assertEqual( {
-            textValue: 'beginend',
-            offset: 0,
-            elements: [
-              {textValue: 'begin', offset: 0, elements: []},
-              {textValue: 'end', offset: 5, elements: []}
-            ],
-            second: {textValue: 'begin', offset: 0, elements: []}
-          },
+        assertParse(['beginend', 0, [
+                      ['begin', 0, []],
+                      ['end', 5, []]], {
+                      second: ['begin', 0, []]
+                    }],
+          
           parser.parse('beginend') )
       }})
     }})
@@ -77,22 +76,14 @@ Stake.GrammarParserSpec = JS.Test.describe(Stake.GrammarParser, function() { wit
       }})
       
       it('presents the reference as a labelled element in the subsequence', function() { with(this) {
-        assertEqual( {
-            textValue: 'beginsubend',
-            offset: 0,
-            elements: [
-              {
-                textValue: 'beginsub',
-                offset: 0,
-                elements: [
-                  {textValue: 'begin', offset: 0, elements: []},
-                  {textValue: 'sub', offset: 5, elements: []}
-                ],
-                second: {textValue: 'begin', offset: 0, elements: []}
-              },
-              {textValue: 'end', offset: 8, elements: []}
-            ]
-          },
+        assertParse(['beginsubend', 0, [
+                      ['beginsub', 0, [
+                        ['begin', 0, []],
+                        ['sub', 5, []]], {
+                        second: ['begin', 0, []]
+                      }],
+                      ['end', 8, []]]],
+          
           parser.parse('beginsubend') )
       }})
     }})
@@ -110,11 +101,11 @@ Stake.GrammarParserSpec = JS.Test.describe(Stake.GrammarParser, function() { wit
       }})
       
       it('parses the first branch of the choice', function() { with(this) {
-        assertEqual( {textValue: 'begin', offset: 0, elements: []}, parser.parse('begin') )
+        assertParse( ['begin', 0, []], parser.parse('begin') )
       }})
       
       it('parses the second branch of the choice', function() { with(this) {
-        assertEqual( {textValue: 'end', offset: 0, elements: []}, parser.parse('end') )
+        assertParse( ['end', 0, []], parser.parse('end') )
       }})
     }})
   }})

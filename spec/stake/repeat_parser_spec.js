@@ -1,4 +1,6 @@
 Stake.RepeatParserSpec = JS.Test.describe(Stake.RepeatParser, function() { with(this) {
+  include(Stake.SpecHelper)
+  
   describe('with zero minimum occurences', function() { with(this) {
     before(function() { with(this) {
       this.parser = Stake.Parser.fromSexp(
@@ -6,30 +8,22 @@ Stake.RepeatParserSpec = JS.Test.describe(Stake.RepeatParser, function() { with(
     }})
     
     it('matches zero occurences of the pattern', function() { with(this) {
-      assertEqual( {textValue: '', offset: 0, elements: []}, parser.parse('') )
+      assertParse( ['', 0, []], parser.parse('') )
     }})
     
     it('matches one occurence of the pattern', function() { with(this) {
-      assertEqual( {
-          textValue: 'foo',
-          offset: 0,
-          elements: [
-            {textValue: 'foo', offset: 0, elements: []}
-          ]
-        },
+      assertParse(['foo', 0, [
+                    ['foo', 0, []]]],
+        
         parser.parse('foo') )
     }})
     
     it('matches more than one occurence of the pattern', function() { with(this) {
-      assertEqual( {
-          textValue: 'foofoofoo',
-          offset: 0,
-          elements: [
-            {textValue: 'foo', offset: 0, elements: []},
-            {textValue: 'foo', offset: 3, elements: []},
-            {textValue: 'foo', offset: 6, elements: []}
-          ]
-        },
+      assertParse(['foofoofoo', 0, [
+                    ['foo', 0, []],
+                    ['foo', 3, []],
+                    ['foo', 6, []]]],
+        
         parser.parse('foofoofoo') )
     }})
     
@@ -64,26 +58,18 @@ Stake.RepeatParserSpec = JS.Test.describe(Stake.RepeatParser, function() { with(
     }})
     
     it('matches one occurence of the pattern', function() { with(this) {
-      assertEqual( {
-          textValue: 'foo',
-          offset: 0,
-          elements: [
-            {textValue: 'foo', offset: 0, elements: []}
-          ]
-        },
+      assertParse(['foo', 0, [
+                    ['foo', 0, []]]],
+        
         parser.parse('foo') )
     }})
     
     it('matches more than one occurence of the pattern', function() { with(this) {
-      assertEqual( {
-          textValue: 'foofoofoo',
-          offset: 0,
-          elements: [
-            {textValue: 'foo', offset: 0, elements: []},
-            {textValue: 'foo', offset: 3, elements: []},
-            {textValue: 'foo', offset: 6, elements: []}
-          ]
-        },
+      assertParse(['foofoofoo', 0, [
+                    ['foo', 0, []],
+                    ['foo', 3, []],
+                    ['foo', 6, []]]],
+        
         parser.parse('foofoofoo') )
     }})
     
