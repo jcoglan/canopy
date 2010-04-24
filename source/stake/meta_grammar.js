@@ -3,7 +3,7 @@ Stake.extend({
     ['grammar', 'MetaGrammar',
       
       ['rule', 'grammar',
-        ['type', 'Stake.MetaGrammar.Grammar',
+        ['type', 'Stake.Compiler.Grammar',
           ['sequence',
             ['repeat', 0, ['reference', 'space']],
             ['reference', 'grammar_name'],
@@ -19,7 +19,7 @@ Stake.extend({
           ['reference', 'identifier']]],
       
       ['rule', 'grammar_rule',
-        ['type', 'Stake.MetaGrammar.GrammarRule',
+        ['type', 'Stake.Compiler.GrammarRule',
           ['sequence',
             ['string', '#'],
             ['reference', 'identifier'],
@@ -38,7 +38,7 @@ Stake.extend({
           ['reference', 'string_expression']]],
       
       ['rule', 'sequence_expression',
-        ['type', 'Stake.MetaGrammar.SequenceExpression',
+        ['type', 'Stake.Compiler.SequenceExpression',
           ['sequence',
             ['label', 'first_expression',
               ['reference', 'atom']],
@@ -49,7 +49,7 @@ Stake.extend({
                   ['reference', 'atom']]]]]]],
       
       ['rule', 'string_expression',
-        ['type', 'Stake.MetaGrammar.StringExpression',
+        ['type', 'Stake.Compiler.StringExpression',
           ['sequence',
             ['string', '"'],
             ['repeat', 0, ['char-class', '[^"]']],
@@ -63,37 +63,5 @@ Stake.extend({
       
       ['rule', 'space',
         ['char-class', '[\\s\\n\\r\\t]']]])
-});
-
-Stake.MetaGrammar.Grammar = new JS.Module({
-  toSexp: function() {
-    var sexp = ['grammar', this.grammar_name.identifier.textValue];
-    this.elements[2].forEach(function(rule) {
-      sexp.push(rule.grammar_rule.toSexp());
-    });
-    return sexp;
-  }
-});
-
-Stake.MetaGrammar.GrammarRule = new JS.Module({
-  toSexp: function() {
-    return ['rule', this.identifier.textValue, this.parsing_expression.toSexp()];
-  }
-});
-
-Stake.MetaGrammar.SequenceExpression = new JS.Module({
-  toSexp: function() {
-    var sexp = ['sequence', this.first_expression.toSexp()];
-    this.rest_expressions.forEach(function(part) {
-      sexp.push(part.atom.toSexp());
-    });
-    return sexp;
-  }
-});
-
-Stake.MetaGrammar.StringExpression = new JS.Module({
-  toSexp: function() {
-    return ['string', this.elements[1].textValue];
-  }
 });
 
