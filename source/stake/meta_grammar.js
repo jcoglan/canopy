@@ -30,7 +30,23 @@ Stake.extend({
       
       ['rule', 'parsing_expression',
         ['choice',
+          ['reference', 'sequence_expression'],
+          ['reference', 'atom']]],
+      
+      ['rule', 'atom',
+        ['choice',
           ['reference', 'string_expression']]],
+      
+      ['rule', 'sequence_expression',
+        ['type', 'Stake.MetaGrammar.SequenceExpression',
+          ['sequence',
+            ['label', 'first_expression',
+              ['reference', 'atom']],
+            ['label', 'rest_expressions',
+              ['repeat', 1,
+                ['sequence',
+                  ['repeat', 1, ['reference', 'space']],
+                  ['reference', 'atom']]]]]]],
       
       ['rule', 'string_expression',
         ['type', 'Stake.MetaGrammar.StringExpression',
@@ -62,6 +78,16 @@ Stake.MetaGrammar.Grammar = new JS.Module({
 Stake.MetaGrammar.GrammarRule = new JS.Module({
   toSexp: function() {
     return ['rule', this.identifier.textValue, this.parsing_expression.toSexp()];
+  }
+});
+
+Stake.MetaGrammar.SequenceExpression = new JS.Module({
+  toSexp: function() {
+    var sexp = ['sequence', this.first_expression.toSexp()];
+    this.rest_expressions.forEach(function(part) {
+      sexp.push(part.atom.toSexp());
+    });
+    return sexp;
   }
 });
 
