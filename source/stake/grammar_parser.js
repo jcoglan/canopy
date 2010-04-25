@@ -13,8 +13,11 @@ Stake.extend({
         while (i--)
           (function(rule) {
             module.define('_consume_' + rule.label, function(input) {
-              var cache = this._cache[rule.label] = this._cache[rule.label] || {};
-              return cache[this.offset] = cache[this.offset] || rule.consume(input, this);
+              var cache = this._cache,
+                  label = rule.label,
+                  store = cache[label] = cache[label] || {};
+              
+              return store[this.offset] = store[this.offset] || rule.consume(input, this);
             });
           })(rules[i]);
         
