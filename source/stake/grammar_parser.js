@@ -13,7 +13,8 @@ Stake.extend({
         while (i--)
           (function(rule) {
             module.define('_consume_' + rule.label, function(input) {
-              return rule.consume(input, this);
+              var cache = this._cache[rule.label] = this._cache[rule.label] || {};
+              return cache[this.offset] = cache[this.offset] || rule.consume(input, this);
             });
           })(rules[i]);
         
@@ -31,6 +32,7 @@ Stake.extend({
       this._sessionClass = new JS.Class({
         initialize: function() {
           this.offset = 0;
+          this._cache = {};
         }
       });
       this._sessionClass.include(this._module);
