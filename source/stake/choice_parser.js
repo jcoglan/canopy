@@ -18,7 +18,7 @@ Stake.extend({
       for (i = 0; i < n; i++) {
         session.offset = offset;
         if (node = choices[i].consume(input, session))
-          return node;
+          return this._extendNode(node);
       }
       return null;
     }

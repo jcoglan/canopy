@@ -5,7 +5,7 @@ Stake.extend({
     },
     
     consume: function(input, session) {
-      return session['_consume_' + this._name](input, session);
+      return this._extendNode(session['_consume_' + this._name](input));
     }
   })
 });

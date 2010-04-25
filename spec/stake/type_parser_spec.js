@@ -39,6 +39,36 @@ Stake.TypeParserSpec = JS.Test.describe(Stake.TypeParser, function() { with(this
     }})
   }})
   
+  describe('when the underlying parser is a choice', function() { with(this) {
+    before(function() { with(this) {
+      NodeType = new JS.Module({ custom: function(){} })
+      
+      this.parser = Stake.Parser.fromSexp(
+                    ['type', 'NodeType',
+                      ['choice',
+                        ['string', 'content'],
+                        ['string', 'booya']]])
+    }})
+    
+    it('extends the chosen node with the mixin', function() { with(this) {
+      assertKindOf( NodeType, parser.parse('booya') )
+    }})
+  }})
+  
+  describe('when the underlying parser is a maybe', function() { with(this) {
+    before(function() { with(this) {
+      NodeType = new JS.Module({ custom: function(){} })
+      
+      this.parser = Stake.Parser.fromSexp(
+                    ['type', 'NodeType',
+                      ['maybe', ['string', 'content']]])
+    }})
+    
+    it('extends the chosen node with the mixin', function() { with(this) {
+      assertKindOf( NodeType, parser.parse('content') )
+    }})
+  }})
+  
   describe('when the node type is namespaced', function() { with(this) {
     before(function() { with(this) {
       NS = { NodeType : new JS.Class(Stake.SyntaxNode) }

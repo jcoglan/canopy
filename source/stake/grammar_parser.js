@@ -12,8 +12,8 @@ Stake.extend({
         
         while (i--)
           (function(rule) {
-            module.define('_consume_' + rule.label, function(input, session) {
-              return rule.consume(input, session);
+            module.define('_consume_' + rule.label, function(input) {
+              return rule.consume(input, this);
             });
           })(rules[i]);
         

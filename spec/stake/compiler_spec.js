@@ -198,5 +198,25 @@ Stake.CompilerSpec = JS.Test.describe(Stake.Compiler, function() { with(this) {
       }})
     }})
   }})
+  
+  describe('with a referencing rule', function() { with(this) {
+    before(function() { with(this) {
+      this.compiler = new Stake.Compiler('\
+        grammar References                \
+          #first <- second                \
+          #second <- "done"               \
+      ')
+    }})
+    
+    it('compiles a referencing-rule parser', function() { with(this) {
+      assertEqual(['grammar', 'References',
+                    ['rule', 'first',
+                      ['reference', 'second']],
+                    ['rule', 'second',
+                      ['string', 'done']]],
+          
+          compiler.toSexp() )
+    }})
+  }})
 }})
 

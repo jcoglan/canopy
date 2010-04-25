@@ -6,7 +6,7 @@ Stake.extend({
     
     consume: function(input, session) {
       var node = this._parser.consume(input, session);
-      return node || this._syntaxNode('', session.offset);
+      return this._extendNode(node) || this._syntaxNode('', session.offset);
     }
   })
 });

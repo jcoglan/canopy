@@ -61,6 +61,14 @@ Stake.extend({
       return node;
     },
     
+    _extendNode: function(node) {
+      if (!node) return node;
+      var custom = this.nodeClass && Stake.getObject(this.nodeClass);
+      if (custom instanceof Function) return node;
+      node.extend(custom);
+      return node;
+    },
+    
     parse: function(input) {
       var node = this.consume(input, this.createSession());
       if (!node) return null;
