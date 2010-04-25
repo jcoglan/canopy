@@ -67,14 +67,15 @@ Stake.extend({
               sexp  = exp.toSexp(),
               label;
           
-          if (label = this.elements[0].identifier)
-            sexp = ['label', label.textValue, sexp];
-          
           switch (this.elements[2].textValue) {
             case '?': sexp = ['maybe', sexp]; break;
             case '*': sexp = ['repeat', 0, sexp]; break;
             case '+': sexp = ['repeat', 1, sexp]; break;
           }
+          
+          if (label = this.elements[0].identifier)
+            sexp = ['label', label.textValue, sexp];
+          
           return sexp;
         }
       }),

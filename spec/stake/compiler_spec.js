@@ -365,5 +365,78 @@ Stake.CompilerSpec = JS.Test.describe(Stake.Compiler, function() { with(this) {
           compiler.toSexp() )
     }})
   }})
+  
+  describe('metagrammar', function() { with(this) {
+    it('has a choice rule', function() { with(this) {
+      assertEqual(['grammar', 'MetaGrammar',
+                    ['rule', 'choice_expression',
+                      ['type', 'Stake.Compiler.ChoiceExpression',
+                        ['sequence',
+                          ['label', 'first_expression',
+                            ['reference', 'choice_part']],
+                          ['label', 'rest_expressions',
+                            ['repeat', 1,
+                              ['sequence',
+                                ['repeat', 1, ['reference', 'space']],
+                                ['string', '/'],
+                                ['repeat', 1, ['reference', 'space']],
+                                ['label', 'expression',
+                                  ['reference', 'choice_part']]]]]]]]],
+          
+          new Stake.Compiler('\
+            grammar MetaGrammar\
+              choice_expression <- first_expression:choice_part\
+                                   rest_expressions:(space+ "/" space+ expression:choice_part)+\
+                                   <Stake.Compiler.ChoiceExpression>\
+          ').toSexp() )
+    }})
+    
+    it('has a choice part rule', function() { with(this) {
+      assertEqual(['grammar', 'MetaGrammar',
+                    ['rule', 'choice_part',
+                      ['type', 'Stake.Compiler.ChoicePart',
+                        ['sequence',
+                          ['choice',
+                            ['reference', 'sequence_expression'],
+                            ['reference', 'atom']],
+                          ['maybe',
+                            ['sequence',
+                              ['repeat', 1, ['reference', 'space']],
+                              ['reference', 'type_expression']]]]]]],
+          
+          new Stake.Compiler('\
+            grammar MetaGrammar\
+              choice_part <- (sequence_expression / atom) (space+ type_expression)? <Stake.Compiler.ChoicePart>\
+          ').toSexp() )
+    }})
+    
+    it('has an atom rule', function() { with(this) {
+      assertEqual(['grammar', 'MetaGrammar',
+                    ['rule', 'atom',
+                      ['type', 'Stake.Compiler.Atom',
+                        ['sequence',
+                          ['maybe', ['reference', 'label']],
+                          ['label', 'expression',
+                            ['choice',
+                              ['reference', 'parenthesised_expression'],
+                              ['reference', 'negated_atom'],
+                              ['reference', 'reference_expression'],
+                              ['reference', 'string_expression'],
+                              ['reference', 'any_char_expression'],
+                              ['reference', 'char_class_expression']]],
+                          ['maybe', ['reference', 'quantifier']]]]]],
+          
+          new Stake.Compiler('\
+            grammar MetaGrammar\
+              atom <- label? expression:( parenthesised_expression\
+                                        / negated_atom\
+                                        / reference_expression\
+                                        / string_expression\
+                                        / any_char_expression\
+                                        / char_class_expression ) quantifier?\
+                      <Stake.Compiler.Atom>\
+          ').toSexp() )
+    }})
+  }})
 }})
 
