@@ -28,7 +28,7 @@ require('JS.Test', 'Stake', function() {
       }
     })
     
-    require('Stake.CompilerSpec',
+    require('Stake.MetaGrammarSpec',
             'Stake.CharClassParserSpec',
             'Stake.ChoiceParserSpec',
             'Stake.GrammarParserSpec',
