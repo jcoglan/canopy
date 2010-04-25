@@ -94,7 +94,7 @@ Stake.extend({
       
       StringExpression: new JS.Module({
         toSexp: function() {
-          return ['string', this.elements[1].textValue];
+          return ['string', eval('"' + this.elements[1].textValue + '"')];
         }
       }),
       

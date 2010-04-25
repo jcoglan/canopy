@@ -31,6 +31,23 @@ Stake.CompilerSpec = JS.Test.describe(Stake.Compiler, function() { with(this) {
           
           compiler.toSexp() )
     }})
+    
+    describe('containing escaped characters', function() { with(this) {
+      before(function() { with(this) {
+        this.compiler = new Stake.Compiler('\
+          grammar CharClass                 \
+            string <- [\\^\\]\\$\\n]        \
+        ')
+      }})
+      
+      it('compiles a char-class-rule parser containing the characters', function() { with(this) {
+        assertEqual(['grammar', 'CharClass',
+                      ['rule', 'string',
+                        ['char-class', /[\^\]\$\n]/.source]]],
+            
+            compiler.toSexp() )
+      }})
+    }})
   }})
   
   describe('with a string rule', function() { with(this) {
@@ -47,6 +64,23 @@ Stake.CompilerSpec = JS.Test.describe(Stake.Compiler, function() { with(this) {
                       ['string', 'foo']]],
           
           compiler.toSexp() )
+    }})
+    
+    describe('containing escaped characters', function() { with(this) {
+      before(function() { with(this) {
+        this.compiler = new Stake.Compiler('\
+          grammar String                    \
+            string <- "\\"\\\\\\n"          \
+        ')
+      }})
+      
+      it('compiles a string-rule parser containing the escaped characters', function() { with(this) {
+        assertEqual(['grammar', 'String',
+                      ['rule', 'string',
+                        ['string', '"\\\n']]],
+            
+            compiler.toSexp() )
+      }})
     }})
   }})
   
@@ -435,6 +469,49 @@ Stake.CompilerSpec = JS.Test.describe(Stake.Compiler, function() { with(this) {
                                         / any_char_expression\
                                         / char_class_expression ) quantifier?\
                       <Stake.Compiler.Atom>\
+          ').toSexp() )
+    }})
+    
+    it('has a string rule', function() { with(this) {
+      assertEqual(['grammar', 'MetaGrammar',
+                    ['rule', 'string_expression',
+                      ['type', 'Stake.Compiler.StringExpression',
+                        ['sequence',
+                          ['string', '"'],
+                          ['repeat', 0,
+                            ['choice',
+                              ['sequence',
+                                ['string', '\\'],
+                                ['any-char']],
+                              ['char-class', '[^"]']]],
+                          ['string', '"']]]]],
+          
+          new Stake.Compiler('\
+            grammar MetaGrammar\
+              string_expression <- "\\"" ("\\\\" . / [^"])* "\\""\
+                                   <Stake.Compiler.StringExpression>\
+          ').toSexp() )
+    }})
+    
+    it('has a char-class rule', function() { with(this) {
+      assertEqual(['grammar', 'MetaGrammar',
+                    ['rule', 'char_class_expression',
+                      ['type', 'Stake.Compiler.CharClassExpression',
+                        ['sequence',
+                          ['string', '['],
+                          ['maybe', ['string', '^']],
+                          ['repeat', 1,
+                            ['choice',
+                              ['sequence',
+                                ['string', '\\'],
+                                ['any-char']],
+                              ['char-class', '[^\\]]']]],
+                          ['string', ']']]]]],
+          
+          new Stake.Compiler('\
+            grammar MetaGrammar\
+              char_class_expression <- "[" "^"? ("\\\\" . / [^\\]])+ "]"\
+                                       <Stake.Compiler.CharClassExpression>\
           ').toSexp() )
     }})
   }})
