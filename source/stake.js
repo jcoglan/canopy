@@ -1,6 +1,11 @@
 this.Stake = this.Stake || new JS.Module('Stake');
 
 Stake.extend({
+  compile: function(grammar) {
+    var compiler = new this.Compiler(grammar);
+    return this.Parser.fromSexp(compiler.toSexp());
+  },
+  
   map: function(list, block, context) {
     var results = [], n = list.length, i;
     for (i = 0; i < n; i++)
