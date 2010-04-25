@@ -238,6 +238,24 @@ Stake.CompilerSpec = JS.Test.describe(Stake.Compiler, function() { with(this) {
       }})
     }})
     
+    describe('with namespaced types', function() { with(this) {
+      before(function() { with(this) {
+        this.compiler = new Stake.Compiler('\
+          grammar TypedString               \
+            #string <- "foo" <NS.Mixin>     \
+        ')
+      }})
+      
+      it('wraps the node with a type', function() { with(this) {
+        assertEqual(['grammar', 'TypedString',
+                      ['rule', 'string',
+                        ['type', 'NS.Mixin',
+                          ['string', 'foo']]]],
+            
+            compiler.toSexp() )
+      }})
+    }})
+    
     describe('on sequences', function() { with(this) {
       before(function() { with(this) {
         this.compiler = new Stake.Compiler('\

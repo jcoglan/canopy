@@ -61,7 +61,7 @@ Stake.extend({
       ['rule', 'type_expression',
         ['sequence',
           ['string', '<'],
-          ['reference', 'identifier'],
+          ['reference', 'object_identifier'],
           ['string', '>']]],
       
       ['rule', 'sequence_expression',
@@ -124,6 +124,14 @@ Stake.extend({
         ['sequence',
           ['reference', 'identifier'],
           ['string', ':']]],
+      
+      ['rule', 'object_identifier',
+        ['sequence',
+          ['reference', 'identifier'],
+          ['repeat', 0,
+            ['sequence',
+              ['string', '.'],
+              ['reference', 'identifier']]]]],
       
       ['rule', 'identifier',
         ['sequence',

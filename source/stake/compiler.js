@@ -42,10 +42,10 @@ Stake.extend({
       
       ChoicePart: new JS.Module({
         toSexp: function() {
-          var sexp = this.elements[0].toSexp();
+          var sexp = this.elements[0].toSexp(), type;
           
-          if (this.elements[1].type_expression)
-            sexp = ['type', this.elements[1].type_expression.identifier.textValue, sexp];
+          if (type = this.elements[1].type_expression)
+            sexp = ['type', type.object_identifier.textValue, sexp];
           
           return sexp;
         }
@@ -63,10 +63,10 @@ Stake.extend({
       
       Atom: new JS.Module({
         toSexp: function() {
-          var sexp = this.expression.toSexp();
+          var sexp = this.expression.toSexp(), label;
           
-          if (this.elements[0].identifier)
-            sexp = ['label', this.elements[0].identifier.textValue, sexp];
+          if (label = this.elements[0].identifier)
+            sexp = ['label', label.textValue, sexp];
           
           switch (this.elements[2].textValue) {
             case '?': sexp = ['maybe', sexp]; break;
