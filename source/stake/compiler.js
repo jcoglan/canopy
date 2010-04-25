@@ -30,6 +30,37 @@ Stake.extend({
         }
       }),
       
+      ChoiceExpression: new JS.Module({
+        toSexp: function() {
+          var sexp = ['choice', this.first_expression.toSexp()];
+          this.rest_expressions.forEach(function(part) {
+            sexp.push(part.expression.toSexp());
+          });
+          return sexp;
+        }
+      }),
+      
+      ChoicePart: new JS.Module({
+        toSexp: function() {
+          var sexp = this.elements[0].toSexp();
+          
+          if (this.elements[1].type_expression)
+            sexp = ['type', this.elements[1].type_expression.identifier.textValue, sexp];
+          
+          return sexp;
+        }
+      }),
+      
+      SequenceExpression: new JS.Module({
+        toSexp: function() {
+          var sexp = ['sequence', this.first_expression.toSexp()];
+          this.rest_expressions.forEach(function(part) {
+            sexp.push(part.atom.toSexp());
+          });
+          return sexp;
+        }
+      }),
+      
       Atom: new JS.Module({
         toSexp: function() {
           var sexp = this.expression.toSexp();
@@ -49,26 +80,6 @@ Stake.extend({
       NegatedAtom: new JS.Module({
         toSexp: function() {
           return ['not', this.atom.toSexp()];
-        }
-      }),
-      
-      ChoiceExpression: new JS.Module({
-        toSexp: function() {
-          var sexp = ['choice', this.first_expression.toSexp()];
-          this.rest_expressions.forEach(function(part) {
-            sexp.push(part.expression.toSexp());
-          });
-          return sexp;
-        }
-      }),
-      
-      SequenceExpression: new JS.Module({
-        toSexp: function() {
-          var sexp = ['sequence', this.first_expression.toSexp()];
-          this.rest_expressions.forEach(function(part) {
-            sexp.push(part.atom.toSexp());
-          });
-          return sexp;
         }
       }),
       

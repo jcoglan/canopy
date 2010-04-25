@@ -218,5 +218,92 @@ Stake.CompilerSpec = JS.Test.describe(Stake.Compiler, function() { with(this) {
           compiler.toSexp() )
     }})
   }})
+  
+  describe('type annotation', function() { with(this) {
+    describe('on atomic nodes', function() { with(this) {
+      before(function() { with(this) {
+        this.compiler = new Stake.Compiler('\
+          grammar TypedString               \
+            #string <- "foo" <Mixin>        \
+        ')
+      }})
+      
+      it('wraps the node with a type', function() { with(this) {
+        assertEqual(['grammar', 'TypedString',
+                      ['rule', 'string',
+                        ['type', 'Mixin',
+                          ['string', 'foo']]]],
+            
+            compiler.toSexp() )
+      }})
+    }})
+    
+    describe('on sequences', function() { with(this) {
+      before(function() { with(this) {
+        this.compiler = new Stake.Compiler('\
+          grammar TypedSequence             \
+            #string <- "foo" "bar" <Mixin>  \
+        ')
+      }})
+      
+      it('wraps the sequence with a type', function() { with(this) {
+        assertEqual(['grammar', 'TypedSequence',
+                      ['rule', 'string',
+                        ['type', 'Mixin',
+                          ['sequence',
+                            ['string', 'foo'],
+                            ['string', 'bar']]]]],
+            
+            compiler.toSexp() )
+      }})
+    }})
+    
+    describe('on choices', function() { with(this) {
+      describe('containing atoms', function() { with(this) {
+        before(function() { with(this) {
+          this.compiler = new Stake.Compiler('  \
+            grammar TypedAtomChoice             \
+              #string <- "foo" / "bar" <Mixin>  \
+          ')
+        }})
+        
+        it('wraps one choice with a type', function() { with(this) {
+          assertEqual(['grammar', 'TypedAtomChoice',
+                        ['rule', 'string',
+                          ['choice',
+                            ['string', 'foo'],
+                            ['type', 'Mixin',
+                              ['string', 'bar']]]]],
+              
+              compiler.toSexp() )
+        }})
+      }})
+      
+      describe('containing sequences', function() { with(this) {
+        before(function() { with(this) {
+          this.compiler = new Stake.Compiler('                          \
+            grammar TypedSeqChoice                                      \
+              #string <- "foo" "bar" <Branch> / "first" "second" <Fork> \
+          ')
+        }})
+        
+        it('wraps each choice with a type', function() { with(this) {
+          assertEqual(['grammar', 'TypedSeqChoice',
+                        ['rule', 'string',
+                          ['choice',
+                            ['type', 'Branch',
+                              ['sequence',
+                                ['string', 'foo'],
+                                ['string', 'bar']]],
+                            ['type', 'Fork',
+                              ['sequence',
+                                ['string', 'first'],
+                                ['string', 'second']]]]]],
+              
+              compiler.toSexp() )
+        }})
+      }})
+    }})
+  }})
 }})
 
