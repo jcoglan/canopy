@@ -16,6 +16,23 @@ Stake.CompilerSpec = JS.Test.describe(Stake.Compiler, function() { with(this) {
     }})
   }})
   
+  describe('with a char-class rule', function() { with(this) {
+    before(function() { with(this) {
+      this.compiler = new Stake.Compiler('\
+        grammar CharClass                 \
+          #string <- [^0-9]               \
+      ')
+    }})
+    
+    it('compiles a char-class-rule parser', function() { with(this) {
+      assertEqual(['grammar', 'CharClass',
+                    ['rule', 'string',
+                      ['char-class', '[^0-9]']]],
+          
+          compiler.toSexp() )
+    }})
+  }})
+  
   describe('with a string rule', function() { with(this) {
     before(function() { with(this) {
       this.compiler = new Stake.Compiler('\
