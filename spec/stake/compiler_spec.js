@@ -3,7 +3,7 @@ Stake.CompilerSpec = JS.Test.describe(Stake.Compiler, function() { with(this) {
     before(function() { with(this) {
       this.compiler = new Stake.Compiler('\
         grammar AnyChar                   \
-          #any <- .                       \
+          any <- .                        \
       ')
     }})
     
@@ -20,7 +20,7 @@ Stake.CompilerSpec = JS.Test.describe(Stake.Compiler, function() { with(this) {
     before(function() { with(this) {
       this.compiler = new Stake.Compiler('\
         grammar CharClass                 \
-          #string <- [^0-9]               \
+          string <- [^0-9]                \
       ')
     }})
     
@@ -37,7 +37,7 @@ Stake.CompilerSpec = JS.Test.describe(Stake.Compiler, function() { with(this) {
     before(function() { with(this) {
       this.compiler = new Stake.Compiler('\
         grammar String                    \
-          #string <- "foo"                \
+          string <- "foo"                 \
       ')
     }})
     
@@ -54,7 +54,7 @@ Stake.CompilerSpec = JS.Test.describe(Stake.Compiler, function() { with(this) {
     before(function() { with(this) {
       this.compiler = new Stake.Compiler('\
         grammar MaybeString               \
-          #string <- "foo"?               \
+          string <- "foo"?                \
       ')
     }})
     
@@ -71,7 +71,7 @@ Stake.CompilerSpec = JS.Test.describe(Stake.Compiler, function() { with(this) {
     before(function() { with(this) {
       this.compiler = new Stake.Compiler('\
         grammar NotString                 \
-          #string <- !"foo"               \
+          string <- !"foo"                \
       ')
     }})
     
@@ -88,7 +88,7 @@ Stake.CompilerSpec = JS.Test.describe(Stake.Compiler, function() { with(this) {
     before(function() { with(this) {
       this.compiler = new Stake.Compiler('\
         grammar StarString                \
-          #string <- "foo"*               \
+          string <- "foo"*                \
       ')
     }})
     
@@ -105,7 +105,7 @@ Stake.CompilerSpec = JS.Test.describe(Stake.Compiler, function() { with(this) {
     before(function() { with(this) {
       this.compiler = new Stake.Compiler('\
         grammar PlusString                \
-          #string <- "foo"+               \
+          string <- "foo"+                \
       ')
     }})
     
@@ -123,7 +123,7 @@ Stake.CompilerSpec = JS.Test.describe(Stake.Compiler, function() { with(this) {
       before(function() { with(this) {
         this.compiler = new Stake.Compiler('\
           grammar Choice                    \
-            #choice <- "foo" / "bar"        \
+            choice <- "foo" / "bar"         \
         ')
       }})
       
@@ -142,7 +142,7 @@ Stake.CompilerSpec = JS.Test.describe(Stake.Compiler, function() { with(this) {
       before(function() { with(this) {
         this.compiler = new Stake.Compiler('  \
           grammar Choice                      \
-            #choice <- "foo" "middle" / "bar" \
+            choice <- "foo" "middle" / "bar"  \
         ')
       }})
       
@@ -164,7 +164,7 @@ Stake.CompilerSpec = JS.Test.describe(Stake.Compiler, function() { with(this) {
     before(function() { with(this) {
       this.compiler = new Stake.Compiler('\
         grammar Sequence                  \
-          #sequence <- "foo" "bar"        \
+          sequence <- "foo" "bar"         \
       ')
     }})
     
@@ -182,7 +182,7 @@ Stake.CompilerSpec = JS.Test.describe(Stake.Compiler, function() { with(this) {
       before(function() { with(this) {
         this.compiler = new Stake.Compiler('\
           grammar LabelledSequence          \
-            #labelled <- "foo" end:"bar"    \
+            labelled <- "foo" end:"bar"     \
         ')
       }})
       
@@ -203,8 +203,8 @@ Stake.CompilerSpec = JS.Test.describe(Stake.Compiler, function() { with(this) {
     before(function() { with(this) {
       this.compiler = new Stake.Compiler('\
         grammar References                \
-          #first <- second                \
-          #second <- "done"               \
+          first <- second                 \
+          second <- "done"                \
       ')
     }})
     
@@ -224,7 +224,7 @@ Stake.CompilerSpec = JS.Test.describe(Stake.Compiler, function() { with(this) {
       before(function() { with(this) {
         this.compiler = new Stake.Compiler('\
           grammar TypedString               \
-            #string <- "foo" <Mixin>        \
+            string <- "foo" <Mixin>         \
         ')
       }})
       
@@ -242,7 +242,7 @@ Stake.CompilerSpec = JS.Test.describe(Stake.Compiler, function() { with(this) {
       before(function() { with(this) {
         this.compiler = new Stake.Compiler('    \
           grammar TypedChoice                   \
-            #choice <- ("foo" / "bar") <Mixin>  \
+            choice <- ("foo" / "bar") <Mixin>   \
         ')
       }})
       
@@ -262,7 +262,7 @@ Stake.CompilerSpec = JS.Test.describe(Stake.Compiler, function() { with(this) {
       before(function() { with(this) {
         this.compiler = new Stake.Compiler('\
           grammar TypedString               \
-            #string <- "foo" <NS.Mixin>     \
+            string <- "foo" <NS.Mixin>      \
         ')
       }})
       
@@ -280,7 +280,7 @@ Stake.CompilerSpec = JS.Test.describe(Stake.Compiler, function() { with(this) {
       before(function() { with(this) {
         this.compiler = new Stake.Compiler('\
           grammar TypedSequence             \
-            #string <- "foo" "bar" <Mixin>  \
+            string <- "foo" "bar" <Mixin>   \
         ')
       }})
       
@@ -301,7 +301,7 @@ Stake.CompilerSpec = JS.Test.describe(Stake.Compiler, function() { with(this) {
         before(function() { with(this) {
           this.compiler = new Stake.Compiler('  \
             grammar TypedAtomChoice             \
-              #string <- "foo" / "bar" <Mixin>  \
+              string <- "foo" / "bar" <Mixin>   \
           ')
         }})
         
@@ -321,7 +321,7 @@ Stake.CompilerSpec = JS.Test.describe(Stake.Compiler, function() { with(this) {
         before(function() { with(this) {
           this.compiler = new Stake.Compiler('                          \
             grammar TypedSeqChoice                                      \
-              #string <- "foo" "bar" <Branch> / "first" "second" <Fork> \
+              string <- "foo" "bar" <Branch> / "first" "second" <Fork>  \
           ')
         }})
         
@@ -348,7 +348,7 @@ Stake.CompilerSpec = JS.Test.describe(Stake.Compiler, function() { with(this) {
     before(function() { with(this) {
       this.compiler = new Stake.Compiler('\
         grammar Parens                    \
-          #seq <- "foo" ("t" / .) "bar"   \
+          seq <- "foo" ("t" / .) "bar"    \
       ')
     }})
     

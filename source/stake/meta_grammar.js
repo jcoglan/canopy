@@ -21,12 +21,15 @@ Stake.extend({
       ['rule', 'grammar_rule',
         ['type', 'Stake.Compiler.GrammarRule',
           ['sequence',
-            ['string', '#'],
             ['reference', 'identifier'],
-            ['repeat', 1, ['reference', 'space']],
-            ['string', '<-'],
-            ['repeat', 1, ['reference', 'space']],
+            ['reference', 'assignment'],
             ['reference', 'parsing_expression']]]],
+      
+      ['rule', 'assignment',
+        ['sequence',
+          ['repeat', 1, ['reference', 'space']],
+          ['string', '<-'],
+          ['repeat', 1, ['reference', 'space']]]],
       
       ['rule', 'parsing_expression',
         ['choice',
@@ -105,7 +108,9 @@ Stake.extend({
       
       ['rule', 'reference_expression',
         ['type', 'Stake.Compiler.ReferenceExpression',
-          ['reference', 'identifier']]],
+          ['sequence',
+            ['reference', 'identifier'],
+            ['not', ['reference', 'assignment']]]]],
       
       ['rule', 'string_expression',
         ['type', 'Stake.Compiler.StringExpression',

@@ -87,7 +87,7 @@ Stake.extend({
       
       ReferenceExpression: new JS.Module({
         toSexp: function() {
-          return ['reference', this.textValue];
+          return ['reference', this.identifier.textValue];
         }
       }),
       
