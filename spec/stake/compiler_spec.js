@@ -238,6 +238,26 @@ Stake.CompilerSpec = JS.Test.describe(Stake.Compiler, function() { with(this) {
       }})
     }})
     
+    describe('on parenthesised choices', function() { with(this) {
+      before(function() { with(this) {
+        this.compiler = new Stake.Compiler('    \
+          grammar TypedChoice                   \
+            #choice <- ("foo" / "bar") <Mixin>  \
+        ')
+      }})
+      
+      it('wraps the choice node with a type', function() { with(this) {
+        assertEqual(['grammar', 'TypedChoice',
+                      ['rule', 'choice',
+                        ['type', 'Mixin',
+                          ['choice',
+                            ['string', 'foo'],
+                            ['string', 'bar']]]]],
+            
+            compiler.toSexp() )
+      }})
+    }})
+    
     describe('with namespaced types', function() { with(this) {
       before(function() { with(this) {
         this.compiler = new Stake.Compiler('\
@@ -321,6 +341,28 @@ Stake.CompilerSpec = JS.Test.describe(Stake.Compiler, function() { with(this) {
               compiler.toSexp() )
         }})
       }})
+    }})
+  }})
+  
+  describe('parentheses', function() { with(this) {
+    before(function() { with(this) {
+      this.compiler = new Stake.Compiler('\
+        grammar Parens                    \
+          #seq <- "foo" ("t" / .) "bar"   \
+      ')
+    }})
+    
+    it('creates nodes matching the parens content', function() { with(this) {
+      assertEqual(['grammar', 'Parens',
+                    ['rule', 'seq',
+                      ['sequence',
+                        ['string', 'foo'],
+                        ['choice',
+                          ['string', 't'],
+                          ['any-char']],
+                        ['string', 'bar']]]],
+          
+          compiler.toSexp() )
     }})
   }})
 }})

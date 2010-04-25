@@ -33,6 +33,14 @@ Stake.extend({
           ['reference', 'choice_expression'],
           ['reference', 'choice_part']]],
       
+      ['rule', 'parenthesised_expression',
+        ['sequence',
+          ['string', '('],
+          ['repeat', 0, ['reference', 'space']],
+          ['reference', 'parsing_expression'],
+          ['repeat', 0, ['reference', 'space']],
+          ['string', ')']]],
+      
       ['rule', 'choice_expression',
         ['type', 'Stake.Compiler.ChoiceExpression',
           ['sequence',
@@ -81,6 +89,7 @@ Stake.extend({
             ['maybe', ['reference', 'label']],
             ['label', 'expression',
               ['choice',
+                ['reference', 'parenthesised_expression'],
                 ['reference', 'negated_atom'],
                 ['reference', 'reference_expression'],
                 ['reference', 'string_expression'],

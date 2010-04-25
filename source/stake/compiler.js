@@ -63,7 +63,9 @@ Stake.extend({
       
       Atom: new JS.Module({
         toSexp: function() {
-          var sexp = this.expression.toSexp(), label;
+          var exp   = this.expression.parsing_expression || this.expression,
+              sexp  = exp.toSexp(),
+              label;
           
           if (label = this.elements[0].identifier)
             sexp = ['label', label.textValue, sexp];
