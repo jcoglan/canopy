@@ -1,4 +1,4 @@
-Stake.AndParserSpec = JS.Test.describe(Stake.AndParser, function() { with(this) {
+Stake.Parser.AndSpec = JS.Test.describe(Stake.Parser.And, function() { with(this) {
   include(Stake.SpecHelper)
   
   before(function() { with(this) {

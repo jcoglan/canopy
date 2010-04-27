@@ -1,4 +1,4 @@
-Stake.TypeParserSpec = JS.Test.describe(Stake.TypeParser, function() { with(this) {
+Stake.Parser.TypeSpec = JS.Test.describe(Stake.Parser.Type, function() { with(this) {
   include(Stake.SpecHelper)
   
   describe('when the node type is a class', function() { with(this) {

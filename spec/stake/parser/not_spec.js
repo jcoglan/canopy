@@ -1,4 +1,4 @@
-Stake.NotParserSpec = JS.Test.describe(Stake.NotParser, function() { with(this) {
+Stake.Parser.NotSpec = JS.Test.describe(Stake.Parser.Not, function() { with(this) {
   include(Stake.SpecHelper)
   
   before(function() { with(this) {

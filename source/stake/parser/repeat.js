@@ -1,5 +1,5 @@
-Stake.extend({
-  RepeatParser: new JS.Class(Stake.Parser, {
+Stake.Parser.extend({
+  Repeat: new JS.Class(Stake.Parser, {
     extend: {
       create: function(minimum, parser) {
         return new this(parser, minimum);

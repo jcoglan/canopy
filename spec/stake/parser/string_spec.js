@@ -1,4 +1,4 @@
-Stake.StringParserSpec = JS.Test.describe(Stake.StringParser, function() { with(this) {
+Stake.Parser.StringSpec = JS.Test.describe(Stake.Parser.String, function() { with(this) {
   include(Stake.SpecHelper)
   
   before(function() { with(this) {

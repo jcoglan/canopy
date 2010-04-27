@@ -1,4 +1,4 @@
-Stake.RepeatParserSpec = JS.Test.describe(Stake.RepeatParser, function() { with(this) {
+Stake.Parser.RepeatSpec = JS.Test.describe(Stake.Parser.Repeat, function() { with(this) {
   include(Stake.SpecHelper)
   
   describe('with zero minimum occurences', function() { with(this) {

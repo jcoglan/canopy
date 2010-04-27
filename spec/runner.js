@@ -1,4 +1,4 @@
-JSCLASS_PATH = 'vendor/js.class/build/min'
+JSCLASS_PATH = 'vendor/js.class/build/src'
 load(JSCLASS_PATH + '/loader.js')
 
 JS.Packages(function() { with(this) {
@@ -29,17 +29,17 @@ require('JS.Test', 'Stake', function() {
     })
     
     require('Stake.MetaGrammarSpec',
-            'Stake.CharClassParserSpec',
-            'Stake.ChoiceParserSpec',
-            'Stake.GrammarParserSpec',
-            'Stake.LabelParserSpec',
-            'Stake.MaybeParserSpec',
-            'Stake.AndParserSpec',
-            'Stake.NotParserSpec',
-            'Stake.RepeatParserSpec',
-            'Stake.SequenceParserSpec',
-            'Stake.StringParserSpec',
-            'Stake.TypeParserSpec',
+            'Stake.Parser.CharClassSpec',
+            'Stake.Parser.ChoiceSpec',
+            'Stake.Parser.GrammarSpec',
+            'Stake.Parser.LabelSpec',
+            'Stake.Parser.MaybeSpec',
+            'Stake.Parser.AndSpec',
+            'Stake.Parser.NotSpec',
+            'Stake.Parser.RepeatSpec',
+            'Stake.Parser.SequenceSpec',
+            'Stake.Parser.StringSpec',
+            'Stake.Parser.TypeSpec',
             
     JS.Test.method('autorun'))
 })

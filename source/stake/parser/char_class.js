@@ -1,5 +1,5 @@
-Stake.extend({
-  CharClassParser: new JS.Class(Stake.Parser, {
+Stake.Parser.extend({
+  CharClass: new JS.Class(Stake.Parser, {
     initialize: function(charClass) {
       this._charClass = charClass;
       this._pattern = new RegExp('^' + charClass);

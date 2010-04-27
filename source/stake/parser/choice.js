@@ -1,5 +1,5 @@
-Stake.extend({
-  ChoiceParser: new JS.Class(Stake.Parser, {
+Stake.Parser.extend({
+  Choice: new JS.Class(Stake.Parser, {
     extend: {
       create: function() {
         return new this(Array.prototype.slice.call(arguments));

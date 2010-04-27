@@ -1,4 +1,4 @@
-Stake.ChoiceParserSpec = JS.Test.describe(Stake.ChoiceParser, function() { with(this) {
+Stake.Parser.ChoiceSpec = JS.Test.describe(Stake.Parser.Choice, function() { with(this) {
   include(Stake.SpecHelper)
   
   before(function() { with(this) {

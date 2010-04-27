@@ -1,5 +1,5 @@
-Stake.extend({
-  GrammarParser: new JS.Class(Stake.Parser, {
+Stake.Parser.extend({
+  Grammar: new JS.Class(Stake.Parser, {
     extend: {
       create: function() {
         var args = Array.prototype.slice.call(arguments);

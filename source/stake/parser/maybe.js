@@ -1,5 +1,5 @@
-Stake.extend({
-  MaybeParser: new JS.Class(Stake.Parser, {
+Stake.Parser.extend({
+  Maybe: new JS.Class(Stake.Parser, {
     initialize: function(parser) {
       this._parser = parser;
     },

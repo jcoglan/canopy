@@ -1,4 +1,4 @@
-Stake.LabelParserSpec = JS.Test.describe(Stake.LabelParser, function() { with(this) {
+Stake.Parser.LabelSpec = JS.Test.describe(Stake.Parser.Label, function() { with(this) {
   include(Stake.SpecHelper)
   
   describe('labelling a terminal node', function() { with(this) {

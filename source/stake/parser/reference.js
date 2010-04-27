@@ -1,5 +1,5 @@
-Stake.extend({
-  ReferenceParser: new JS.Class(Stake.Parser, {
+Stake.Parser.extend({
+  Reference: new JS.Class(Stake.Parser, {
     initialize: function(name) {
       this._name = this.label = name;
     },

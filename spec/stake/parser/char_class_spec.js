@@ -1,4 +1,4 @@
-Stake.CharClassParserSpec = JS.Test.describe(Stake.CharClassParser,
+Stake.Parser.CharClassSpec = JS.Test.describe(Stake.Parser.CharClass,
 function() { with(this) {
   include(Stake.SpecHelper)
   

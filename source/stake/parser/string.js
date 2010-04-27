@@ -1,5 +1,5 @@
-Stake.extend({
-  StringParser: new JS.Class(Stake.Parser, {
+Stake.Parser.extend({
+  String: new JS.Class(Stake.Parser, {
     initialize: function(string) {
       this._string = string;
     },

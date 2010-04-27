@@ -1,4 +1,4 @@
-Stake.SequenceParserSpec = JS.Test.describe(Stake.SequenceParser, function() { with(this) {
+Stake.Parser.SequenceSpec = JS.Test.describe(Stake.Parser.Sequence, function() { with(this) {
   include(Stake.SpecHelper)
   
   before(function() { with(this) {

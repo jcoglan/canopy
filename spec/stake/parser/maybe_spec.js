@@ -1,4 +1,4 @@
-Stake.MaybeParserSpec = JS.Test.describe(Stake.MaybeParser, function() { with(this) {
+Stake.Parser.MaybeSpec = JS.Test.describe(Stake.Parser.Maybe, function() { with(this) {
   include(Stake.SpecHelper)
   
   before(function() { with(this) {

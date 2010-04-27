@@ -15,19 +15,19 @@ packages:
   stake:
     files:
       - stake
-      - stake/and_parser
-      - stake/any_char_parser
-      - stake/char_class_parser
-      - stake/choice_parser
-      - stake/grammar_parser
-      - stake/label_parser
-      - stake/maybe_parser
-      - stake/not_parser
-      - stake/reference_parser
-      - stake/repeat_parser
-      - stake/sequence_parser
-      - stake/string_parser
-      - stake/type_parser
+      - stake/parser/and
+      - stake/parser/any_char
+      - stake/parser/char_class
+      - stake/parser/choice
+      - stake/parser/grammar
+      - stake/parser/label
+      - stake/parser/maybe
+      - stake/parser/not
+      - stake/parser/reference
+      - stake/parser/repeat
+      - stake/parser/sequence
+      - stake/parser/string
+      - stake/parser/type
       - stake/meta_grammar
       - stake/compiler
     meta:

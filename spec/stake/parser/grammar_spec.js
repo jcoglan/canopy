@@ -1,4 +1,4 @@
-Stake.GrammarParserSpec = JS.Test.describe(Stake.GrammarParser, function() { with(this) {
+Stake.Parser.GrammarSpec = JS.Test.describe(Stake.Parser.Grammar, function() { with(this) {
   include(Stake.SpecHelper)
   
   describe('with one rule', function() { with(this) {

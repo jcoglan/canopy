@@ -39,11 +39,11 @@ Stake.extend({
         
         type = this.ALIASES[type] || type;
         
-        type = (type + '-parser').replace(/(^.|-.)/g, function(m) {
+        type = type.replace(/(^.|-.)/g, function(m) {
           return m.replace('-', '').toUpperCase();
         });
         
-        var klass = Stake[type];
+        var klass = this[type];
         return klass.create.apply(klass, components);
       },
       
