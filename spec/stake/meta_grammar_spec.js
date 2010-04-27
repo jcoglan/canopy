@@ -101,6 +101,23 @@ Stake.MetaGrammarSpec = JS.Test.describe(Stake.MetaGrammar, function() { with(th
     }})
   }})
   
+  describe('with an and string rule', function() { with(this) {
+    before(function() { with(this) {
+      this.compiler = new Stake.Compiler('\
+        grammar AndString                 \
+          string <- &"foo"                \
+      ')
+    }})
+    
+    it('compiles an and string-rule parser', function() { with(this) {
+      assertEqual(['grammar', 'AndString',
+                    ['rule', 'string',
+                      ['and', ['string', 'foo']]]],
+          
+          compiler.toSexp() )
+    }})
+  }})
+  
   describe('with a not string rule', function() { with(this) {
     before(function() { with(this) {
       this.compiler = new Stake.Compiler('\

@@ -15,6 +15,7 @@ packages:
   stake:
     files:
       - stake
+      - stake/and_parser
       - stake/any_char_parser
       - stake/char_class_parser
       - stake/choice_parser

@@ -80,9 +80,12 @@ Stake.extend({
         }
       }),
       
-      NegatedAtom: new JS.Module({
+      PredicatedAtom: new JS.Module({
         toSexp: function() {
-          return ['not', this.atom.toSexp()];
+          var table     = {'&': 'and', '!': 'not'},
+              predicate = table[this.predicate.textValue];
+          
+          return [predicate, this.atom.toSexp()];
         }
       }),
       

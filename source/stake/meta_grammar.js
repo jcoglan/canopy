@@ -101,7 +101,7 @@ Stake.extend({
                   ['reference', 'atom']]]]]]],
       
       // atom <- label? expression:( parenthesised_expression
-      //                           / negated_atom
+      //                           / predicated_atom
       //                           / reference_expression
       //                           / string_expression
       //                           / any_char_expression
@@ -114,18 +114,21 @@ Stake.extend({
             ['label', 'expression',
               ['choice',
                 ['reference', 'parenthesised_expression'],
-                ['reference', 'negated_atom'],
+                ['reference', 'predicated_atom'],
                 ['reference', 'reference_expression'],
                 ['reference', 'string_expression'],
                 ['reference', 'any_char_expression'],
                 ['reference', 'char_class_expression']]],
             ['maybe', ['reference', 'quantifier']]]]],
       
-      // negated_atom <- "!" atom <Stake.Compiler.NegatedAtom>
-      ['rule', 'negated_atom',
-        ['type', 'Stake.Compiler.NegatedAtom',
+      // predicated_atom <- predicate:("&" / "!") atom <Stake.Compiler.PredicatedAtom>
+      ['rule', 'predicated_atom',
+        ['type', 'Stake.Compiler.PredicatedAtom',
           ['sequence',
-            ['string', '!'],
+            ['label', 'predicate',
+              ['choice',
+                ['string', '&'],
+                ['string', '!']]],
             ['reference', 'atom']]]],
       
       // reference_expression <- identifier !assignment <Stake.Compiler.ReferenceExpression>

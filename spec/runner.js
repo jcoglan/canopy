@@ -34,6 +34,7 @@ require('JS.Test', 'Stake', function() {
             'Stake.GrammarParserSpec',
             'Stake.LabelParserSpec',
             'Stake.MaybeParserSpec',
+            'Stake.AndParserSpec',
             'Stake.NotParserSpec',
             'Stake.RepeatParserSpec',
             'Stake.SequenceParserSpec',
