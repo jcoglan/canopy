@@ -52,9 +52,9 @@ Stake.extend({
       
       // choice_expression <- first_expression:choice_part
       //                      rest_expressions:(space+ "/" space+ expression:choice_part)+
-      //                      <Stake.Compiler.ChoiceExpression>
+      //                      <Stake.Compiler.Choice>
       ['rule', 'choice_expression',
-        ['type', 'Stake.Compiler.ChoiceExpression',
+        ['type', 'Stake.Compiler.Choice',
           ['sequence',
             ['label', 'first_expression',
               ['reference', 'choice_part']],
@@ -88,9 +88,9 @@ Stake.extend({
       
       // sequence_expression <- first_expression:atom
       //                        rest_expressions:(space+ atom)+
-      //                        <Stake.Compiler.SequenceExpression>
+      //                        <Stake.Compiler.Sequence>
       ['rule', 'sequence_expression',
-        ['type', 'Stake.Compiler.SequenceExpression',
+        ['type', 'Stake.Compiler.Sequence',
           ['sequence',
             ['label', 'first_expression',
               ['reference', 'atom']],
@@ -131,17 +131,17 @@ Stake.extend({
                 ['string', '!']]],
             ['reference', 'atom']]]],
       
-      // reference_expression <- identifier !assignment <Stake.Compiler.ReferenceExpression>
+      // reference_expression <- identifier !assignment <Stake.Compiler.Reference>
       ['rule', 'reference_expression',
-        ['type', 'Stake.Compiler.ReferenceExpression',
+        ['type', 'Stake.Compiler.Reference',
           ['sequence',
             ['reference', 'identifier'],
             ['not', ['reference', 'assignment']]]]],
       
       // string_expression <- "\"" ("\\" . / [^"])* "\""
-      //                      <Stake.Compiler.StringExpression>
+      //                      <Stake.Compiler.String>
       ['rule', 'string_expression',
-        ['type', 'Stake.Compiler.StringExpression',
+        ['type', 'Stake.Compiler.String',
           ['sequence',
             ['string', '"'],
             ['repeat', 0,
@@ -152,15 +152,15 @@ Stake.extend({
                 ['char-class', '[^"]']]],
             ['string', '"']]]],
       
-      // any_char_expression <- "." <Stake.Compiler.AnyCharExpression>
+      // any_char_expression <- "." <Stake.Compiler.AnyChar>
       ['rule', 'any_char_expression',
-        ['type', 'Stake.Compiler.AnyCharExpression',
+        ['type', 'Stake.Compiler.AnyChar',
           ['string', '.']]],
       
       // char_class_expression <- "[" "^"? ("\\" . / [^\]])+ "]"
-      //                          <Stake.Compiler.CharClassExpression>
+      //                          <Stake.Compiler.CharClass>
       ['rule', 'char_class_expression',
-        ['type', 'Stake.Compiler.CharClassExpression',
+        ['type', 'Stake.Compiler.CharClass',
           ['sequence',
             ['string', '['],
             ['maybe', ['string', '^']],

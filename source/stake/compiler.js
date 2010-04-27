@@ -30,7 +30,7 @@ Stake.extend({
         }
       }),
       
-      ChoiceExpression: new JS.Module({
+      Choice: new JS.Module({
         toSexp: function() {
           var sexp = ['choice', this.first_expression.toSexp()];
           this.rest_expressions.forEach(function(part) {
@@ -51,7 +51,7 @@ Stake.extend({
         }
       }),
       
-      SequenceExpression: new JS.Module({
+      Sequence: new JS.Module({
         toSexp: function() {
           var sexp = ['sequence', this.first_expression.toSexp()];
           this.rest_expressions.forEach(function(part) {
@@ -89,25 +89,25 @@ Stake.extend({
         }
       }),
       
-      ReferenceExpression: new JS.Module({
+      Reference: new JS.Module({
         toSexp: function() {
           return ['reference', this.identifier.textValue];
         }
       }),
       
-      StringExpression: new JS.Module({
+      String: new JS.Module({
         toSexp: function() {
           return ['string', eval('"' + this.elements[1].textValue + '"')];
         }
       }),
       
-      CharClassExpression: new JS.Module({
+      CharClass: new JS.Module({
         toSexp: function() {
           return ['char-class', this.textValue];
         }
       }),
       
-      AnyCharExpression: new JS.Module({
+      AnyChar: new JS.Module({
         toSexp: function() {
           return ['any-char'];
         }
