@@ -42,6 +42,7 @@ require('JS.Test', 'Stake', function() {
             
             'Stake.MetaGrammarSpec',
             
+            'Stake.Compiler.CharClassSpec',
             'Stake.Compiler.StringSpec',
             
     JS.Test.method('autorun'))

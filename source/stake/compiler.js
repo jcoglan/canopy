@@ -55,12 +55,6 @@ Stake.extend({
         }
       }),
       
-      CharClass: new JS.Module({
-        toSexp: function() {
-          return ['char-class', this.textValue];
-        }
-      }),
-      
       AnyChar: new JS.Module({
         toSexp: function() {
           return ['any-char'];

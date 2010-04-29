@@ -5,7 +5,6 @@ Stake.extend({
     var compiler = new this.Compiler(grammar),
         source   = compiler.toSource();
     
-    print(source);
     eval(source);
     return source;
   },

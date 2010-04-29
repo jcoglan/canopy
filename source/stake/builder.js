@@ -9,6 +9,7 @@ Stake.extend({
         this._indentLevel = 0;
       }
       this._methodSeparator = '';
+      this._varIndex = {};
     },
     
     serialize: function() {
@@ -91,6 +92,7 @@ Stake.extend({
       this.delimitField_();
       this.newline_();
       this.write(name + ': function(' + args.join(', ') + ') {');
+      this._varIndex = {};
       this.indent_(block, context);
       this.newline_();
       this.write('}');
@@ -103,6 +105,14 @@ Stake.extend({
     vars_: function() {
       for (var i = 0, n = arguments.length; i < n; i += 2)
         this.line_('var ' + arguments[i] + ' = ' + arguments[i+1]);
+    },
+    
+    tempVar_: function(name) {
+      this._varIndex[name] = this._varIndex[name] || 0;
+      var varName = name + this._varIndex[name];
+      this._varIndex[name] += 1;
+      this.vars_(varName, 'null');
+      return varName;
     },
     
     if_: function(condition, block, context) {
