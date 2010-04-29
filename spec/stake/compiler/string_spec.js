@@ -1,22 +1,25 @@
-Stake.Compiler.StringSpec = JS.Test.describe(Stake.Compiler.String,
-function() { with(this) {
+Stake.Compiler.StringSpec = JS.Test.describe(Stake.Compiler.String, function() { with(this) {
   include(Stake.SpecHelper)
   
   before(function() { with(this) {
-    Stake.compile('grammar Test\
-      root <- "foo"')
+    Stake.compile('grammar StringTest\
+      string <- "foo"')
   }})
   
-  it('parses the specified string', function() { with(this) {
-    assertParse( ['foo', 0, []], TestParser.parse('foo') )
+  it('parses the string it contains', function() { with(this) {
+    assertParse( ['foo', 0, []], StringTestParser.parse('foo') )
   }})
   
-  it('does not parse different strings', function() { with(this) {
-    assertNull( TestParser.parse('bar') )
+  it('does not parse other strings', function() { with(this) {
+    assertNull( StringTestParser.parse('bar') )
   }})
   
-  it('does not parse strings beginning with the specified string', function() { with(this) {
-    assertNull( TestParser.parse('food') )
+  it('does not parse superstrings of itself', function() { with(this) {
+    assertNull( StringTestParser.parse('food') )
+  }})
+  
+  it('does not parse the empty string', function() { with(this) {
+    assertNull( StringTestParser.parse('') )
   }})
 }})
 
