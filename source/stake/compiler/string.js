@@ -11,11 +11,10 @@ Stake.Compiler.extend({
           offset = builder.offset_();
       
       builder.if_(input + '.substring(' + offset +',' + length + ') === ' + string, function(builder) {
-        builder.line_(address + ' = new Stake.SyntaxNode(' + string + ', ' + offset + ')');
-        builder.line_(offset + ' += ' + length);
+        builder.syntaxNode_(address, string, length);
       });
       builder.else_(function(builder) {
-        builder.line_(address + ' = null');
+        builder.failure_(address);
       });
     }
   })

@@ -5,15 +5,13 @@ Stake.Compiler.extend({
     },
     
     compile: function(builder, address) {
-      var input  = builder.input_(),
-          offset = builder.offset_();
+      var input  = builder.input_();
       
       builder.if_(input + ' === ""', function(builder) {
-        builder.line_(address + ' = null');
+        builder.failure_(address);
       });
       builder.else_(function(builder) {
-        builder.line_(address + ' = new Stake.SyntaxNode(' + input + '.substring(0,1), ' + offset + ')');
-        builder.line_(offset + ' += 1');
+        builder.syntaxNode_(address, input + '.substring(0,1)', 1);
       });
     }
   })

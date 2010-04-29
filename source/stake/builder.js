@@ -51,6 +51,15 @@ Stake.extend({
       return 'this._offset';
     },
     
+    syntaxNode_: function(address, expression, bump) {
+      this.line_(address + ' = new Stake.SyntaxNode(' + expression + ', ' + this.offset_() + ')');
+      this.line_(this.offset_() + ' += ' + bump);
+    },
+    
+    failure_: function(address) {
+      this.line_(address + ' = ' + address);
+    },
+    
     module_: function(name, block, context) {
       this.newline_();
       this.write(name + ' = new JS.Module("' + name + '", {');
