@@ -7,10 +7,12 @@ Stake.Compiler.extend({
     compile: function(builder, address) {
       var regex  = '/^' + this.textValue + '/',
           input  = builder.input_(),
-          temp   = builder.tempVar_('match');
+          offset = builder.offset_(),
+          text   = builder.tempVar_('text', input + '.substring(' + offset + ',1)'),
+          match  = builder.tempVar_('match');
       
-      builder.if_(temp + ' = ' + input + '.match(' + regex + ')', function(builder) {
-        builder.syntaxNode_(address, temp + '[0]', 1);
+      builder.if_(match + ' = ' + text + '.match(' + regex + ')', function(builder) {
+        builder.syntaxNode_(address, match + '[0]', 1);
       });
       builder.else_(function(builder) {
         builder.failure_(address);

@@ -57,7 +57,7 @@ Stake.extend({
     },
     
     failure_: function(address) {
-      this.line_(address + ' = ' + address);
+      this.line_(address + ' = null');
     },
     
     module_: function(name, block, context) {
@@ -116,11 +116,11 @@ Stake.extend({
         this.line_('var ' + arguments[i] + ' = ' + arguments[i+1]);
     },
     
-    tempVar_: function(name) {
+    tempVar_: function(name, value) {
       this._varIndex[name] = this._varIndex[name] || 0;
       var varName = name + this._varIndex[name];
       this._varIndex[name] += 1;
-      this.vars_(varName, 'null');
+      this.vars_(varName, value || 'null');
       return varName;
     },
     
