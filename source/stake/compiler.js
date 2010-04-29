@@ -53,12 +53,6 @@ Stake.extend({
         toSexp: function() {
           return ['reference', this.identifier.textValue];
         }
-      }),
-      
-      AnyChar: new JS.Module({
-        toSexp: function() {
-          return ['any-char'];
-        }
       })
     }
   })

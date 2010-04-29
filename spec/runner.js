@@ -42,6 +42,7 @@ require('JS.Test', 'Stake', function() {
             
             'Stake.MetaGrammarSpec',
             
+            'Stake.Compiler.AnyCharSpec',
             'Stake.Compiler.CharClassSpec',
             'Stake.Compiler.StringSpec',
             

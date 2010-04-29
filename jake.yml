@@ -35,6 +35,7 @@ packages:
       - stake/compiler/grammar_rule
       - stake/compiler/choice_part
       - stake/compiler/atom
+      - stake/compiler/any_char
       - stake/compiler/char_class
       - stake/compiler/string
     meta:
