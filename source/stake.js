@@ -2,8 +2,12 @@ this.Stake = this.Stake || new JS.Module('Stake');
 
 Stake.extend({
   compile: function(grammar) {
-    var compiler = new this.Compiler(grammar);
-    return this.Parser.fromSexp(compiler.toSexp());
+    var compiler = new this.Compiler(grammar),
+        source   = compiler.toSource();
+    
+    print(source);
+    eval(source);
+    return source;
   },
   
   map: function(list, block, context) {

@@ -13,23 +13,13 @@ Stake.extend({
       return this.parseTree().toSexp();
     },
     
+    toSource: function() {
+      var builder = new Stake.Builder();
+      this.parseTree().compile(builder);
+      return builder.serialize();
+    },
+    
     extend: {
-      Grammar: new JS.Module({
-        toSexp: function() {
-          var sexp = ['grammar', this.grammar_name.identifier.textValue];
-          this.elements[2].forEach(function(rule) {
-            sexp.push(rule.grammar_rule.toSexp());
-          });
-          return sexp;
-        }
-      }),
-      
-      GrammarRule: new JS.Module({
-        toSexp: function() {
-          return ['rule', this.identifier.textValue, this.parsing_expression.toSexp()];
-        }
-      }),
-      
       Choice: new JS.Module({
         toSexp: function() {
           var sexp = ['choice', this.first_expression.toSexp()];
@@ -40,42 +30,12 @@ Stake.extend({
         }
       }),
       
-      ChoicePart: new JS.Module({
-        toSexp: function() {
-          var sexp = this.elements[0].toSexp(), type;
-          
-          if (type = this.elements[1].type_expression)
-            sexp = ['type', type.object_identifier.textValue, sexp];
-          
-          return sexp;
-        }
-      }),
-      
       Sequence: new JS.Module({
         toSexp: function() {
           var sexp = ['sequence', this.first_expression.toSexp()];
           this.rest_expressions.forEach(function(part) {
             sexp.push(part.atom.toSexp());
           });
-          return sexp;
-        }
-      }),
-      
-      Atom: new JS.Module({
-        toSexp: function() {
-          var exp   = this.expression.parsing_expression || this.expression,
-              sexp  = exp.toSexp(),
-              label;
-          
-          switch (this.elements[2].textValue) {
-            case '?': sexp = ['maybe', sexp]; break;
-            case '*': sexp = ['repeat', 0, sexp]; break;
-            case '+': sexp = ['repeat', 1, sexp]; break;
-          }
-          
-          if (label = this.elements[0].identifier)
-            sexp = ['label', label.textValue, sexp];
-          
           return sexp;
         }
       }),
@@ -92,12 +52,6 @@ Stake.extend({
       Reference: new JS.Module({
         toSexp: function() {
           return ['reference', this.identifier.textValue];
-        }
-      }),
-      
-      String: new JS.Module({
-        toSexp: function() {
-          return ['string', eval('"' + this.elements[1].textValue + '"')];
         }
       }),
       

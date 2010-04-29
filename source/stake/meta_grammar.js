@@ -2,16 +2,17 @@ Stake.extend({
   MetaGrammar: Stake.Parser.fromSexp(
     ['grammar', 'MetaGrammar',
       
-      // grammar <- space* grammar_name (space* grammar_rule)+ space* <Stake.Compiler.Grammar>
+      // grammar <- space* grammar_name rules:(space* grammar_rule)+ space* <Stake.Compiler.Grammar>
       ['rule', 'grammar',
         ['type', 'Stake.Compiler.Grammar',
           ['sequence',
             ['repeat', 0, ['reference', 'space']],
             ['reference', 'grammar_name'],
-            ['repeat', 1,
-              ['sequence',
-                ['repeat', 0, ['reference', 'space']],
-                ['reference', 'grammar_rule']]],
+            ['label', 'rules',
+              ['repeat', 1,
+                ['sequence',
+                  ['repeat', 0, ['reference', 'space']],
+                  ['reference', 'grammar_rule']]]],
             ['repeat', 0, ['reference', 'space']]]]],
       
       // grammar_name <- "grammar " identifier

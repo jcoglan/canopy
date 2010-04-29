@@ -28,8 +28,7 @@ require('JS.Test', 'Stake', function() {
       }
     })
     
-    require('Stake.MetaGrammarSpec',
-            'Stake.Parser.CharClassSpec',
+    require('Stake.Parser.CharClassSpec',
             'Stake.Parser.ChoiceSpec',
             'Stake.Parser.GrammarSpec',
             'Stake.Parser.LabelSpec',
@@ -40,6 +39,10 @@ require('JS.Test', 'Stake', function() {
             'Stake.Parser.SequenceSpec',
             'Stake.Parser.StringSpec',
             'Stake.Parser.TypeSpec',
+            
+            'Stake.MetaGrammarSpec',
+            
+            'Stake.Compiler.StringSpec',
             
     JS.Test.method('autorun'))
 })

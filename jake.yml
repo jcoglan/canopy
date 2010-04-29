@@ -29,7 +29,13 @@ packages:
       - stake/parser/string
       - stake/parser/type
       - stake/meta_grammar
+      - stake/builder
       - stake/compiler
+      - stake/compiler/grammar
+      - stake/compiler/grammar_rule
+      - stake/compiler/choice_part
+      - stake/compiler/atom
+      - stake/compiler/string
     meta:
       provides:
         - Stake
