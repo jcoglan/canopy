@@ -111,16 +111,12 @@ Stake.extend({
                 ['reference', 'quantified_atom'],
                 ['reference', 'atom']]]]]],
       
-      // quantified_atom <- atom quantifier:("?" / "*" / "+") <Stake.Compiler.Repeat>
+      // quantified_atom <- atom quantifier <Stake.Compiler.Repeat>
       ['rule', 'quantified_atom',
         ['type', 'Stake.Compiler.Repeat',
           ['sequence',
             ['reference', 'atom'],
-            ['label', 'quantifier',
-              ['choice',
-                ['string', '?'],
-                ['string', '*'],
-                ['string', '+']]]]]],
+            ['reference', 'quantifier']]]],
       
       // atom <- parenthesised_expression
       //       / predicated_atom
