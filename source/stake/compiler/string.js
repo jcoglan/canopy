@@ -10,7 +10,7 @@ Stake.Compiler.extend({
           input  = builder.input_(),
           offset = builder.offset_();
       
-      builder.if_(input + '.substring(' + offset +',' + length + ') === ' + string, function(builder) {
+      builder.if_(builder.slice_(length) + ' === ' + string, function(builder) {
         builder.syntaxNode_(address, string, length);
       });
       builder.else_(function(builder) {

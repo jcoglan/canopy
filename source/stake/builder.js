@@ -30,7 +30,7 @@ Stake.extend({
     newline_: function() {
       this.write('\n');
       var i = this._indentLevel;
-      while (i--) this.write('  ');
+      while (i--) this.write('    ');
     },
     
     delimitField_: function() {
@@ -51,8 +51,16 @@ Stake.extend({
       return 'this._offset';
     },
     
-    syntaxNode_: function(address, expression, bump) {
-      this.line_(address + ' = new Stake.SyntaxNode(' + expression + ', ' + this.offset_() + ')');
+    slice_: function(length) {
+      var input = this.input_(), of = this.offset_();
+      return input + '.substring(' + of + ', ' + of + ' + ' + length + ')';
+    },
+    
+    syntaxNode_: function(address, expression, bump, elements) {
+      elements = elements || '[]';
+      var cons = 'new Stake.SyntaxNode', of = this.offset_();
+      
+      this.line_(address + ' = ' + cons + '(' + expression + ', ' + of + ', ' + elements + ')');
       this.line_(this.offset_() + ' += ' + bump);
     },
     
@@ -111,7 +119,7 @@ Stake.extend({
       this.line_('this._' + name + ' = ' + value);
     },
     
-    vars_: function() {
+    var_: function() {
       for (var i = 0, n = arguments.length; i < n; i += 2)
         this.line_('var ' + arguments[i] + ' = ' + arguments[i+1]);
     },
@@ -120,7 +128,7 @@ Stake.extend({
       this._varIndex[name] = this._varIndex[name] || 0;
       var varName = name + this._varIndex[name];
       this._varIndex[name] += 1;
-      this.vars_(varName, value || 'null');
+      this.var_(varName, value || 'null');
       return varName;
     },
     
@@ -133,8 +141,7 @@ Stake.extend({
     },
     
     else_: function(block, context) {
-      this.newline_();
-      this.write('else {');
+      this.write(' else {');
       this.indent_(block, context);
       this.newline_();
       this.write('}');

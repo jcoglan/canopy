@@ -27,12 +27,12 @@ Stake.Compiler.extend({
           builder.ivar_('nodeCache', '{}')
         });
         builder.method_('parse', [], function(builder) {
-          builder.vars_('result', 'this["__consume__" + this.root]()')
+          builder.var_('result', 'this["__consume__" + this.root]()')
           builder.return_(builder.offset_() + ' === ' + builder.input_() + '.length ? result : null');
         });
         builder.classMethods_(function(builder) {
           builder.method_('parse', ['input'], function(builder) {
-            builder.vars_('parser', 'new this(input)');
+            builder.var_('parser', 'new this(input)');
             builder.return_('parser.parse()');
           });
         });

@@ -5,10 +5,7 @@ Stake.Compiler.extend({
     },
     
     compile: function(builder, address) {
-      var input  = builder.input_(),
-          offset = builder.offset_();
-      
-      var temp = builder.tempVar_('text', input + '.substring(' + offset + ',1)');
+      var temp = builder.tempVar_('temp', builder.slice_(1));
       
       builder.if_(temp + ' === ""', function(builder) {
         builder.failure_(address);

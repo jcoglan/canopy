@@ -30,16 +30,6 @@ Stake.extend({
         }
       }),
       
-      Sequence: new JS.Module({
-        toSexp: function() {
-          var sexp = ['sequence', this.first_expression.toSexp()];
-          this.rest_expressions.forEach(function(part) {
-            sexp.push(part.atom.toSexp());
-          });
-          return sexp;
-        }
-      }),
-      
       PredicatedAtom: new JS.Module({
         toSexp: function() {
           var table     = {'&': 'and', '!': 'not'},
