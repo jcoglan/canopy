@@ -40,30 +40,30 @@ function() { with(this) {
     }})
   }})
   
-//  describe('with sequencing and repetition', function() { with(this) {
-//    before(function() { with(this) {
-//      Stake.compile('grammar RepeatCharClassTest\
-//        root <- [1-9] [0-9]*')
-//    }})
-//    
-//    it('parses integers', function() { with(this) {
-//      assertParse(['3718', 0, [
-//                    ['3', 0, []],
-//                    ['718', 1, [
-//                      ['7', 1, []],
-//                      ['1', 2, []],
-//                      ['8', 3, []]]]]],
-//        
-//        RepeatCharClassTestParser.parse('3718') )
-//    }})
-//    
-//    it('does not parse floats', function() { with(this) {
-//      assertNull( RepeatCharClassTestParser.parse('7.4') )
-//    }})
-//    
-//    it('does not parse octal', function() { with(this) {
-//      assertNull( RepeatCharClassTestParser.parse('0644') )
-//    }})
-//  }})
+  describe('with sequencing and repetition', function() { with(this) {
+    before(function() { with(this) {
+      Stake.compile('grammar RepeatCharClassTest\
+        root <- [1-9] [0-9]*')
+    }})
+    
+    it('parses integers', function() { with(this) {
+      assertParse(['3718', 0, [
+                    ['3', 0, []],
+                    ['718', 1, [
+                      ['7', 1, []],
+                      ['1', 2, []],
+                      ['8', 3, []]]]]],
+        
+        RepeatCharClassTestParser.parse('3718') )
+    }})
+    
+    it('does not parse floats', function() { with(this) {
+      assertNull( RepeatCharClassTestParser.parse('7.4') )
+    }})
+    
+    it('does not parse octal', function() { with(this) {
+      assertNull( RepeatCharClassTestParser.parse('0644') )
+    }})
+  }})
 }})
 

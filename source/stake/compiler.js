@@ -51,26 +51,6 @@ Stake.extend({
         }
       }),
       
-      Repeat: new JS.Module({
-        atomic: function() {
-          var expression = this.atom;
-          return expression.parsing_expression || expression;
-        },
-        
-        toSexp: function() {
-          var expression = this.atomic(),
-              sexp = expression.toSexp();
-          
-          sexp = expression.toSexp();
-          switch (this.quantifier.textValue) {
-            case '*': sexp = ['repeat', 0, sexp]; break;
-            case '+': sexp = ['repeat', 1, sexp]; break;
-            case '?': sexp = ['maybe', sexp]; break;
-          }
-          return sexp;
-        }
-      }),
-      
       PredicatedAtom: new JS.Module({
         atomic: function() {
           var expression = this.atom;

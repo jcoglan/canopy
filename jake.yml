@@ -37,6 +37,7 @@ packages:
       - stake/compiler/any_char
       - stake/compiler/char_class
       - stake/compiler/string
+      - stake/compiler/repeat
       - stake/compiler/sequence
     meta:
       provides:

@@ -46,6 +46,7 @@ require('JS.Test', 'Stake', function() {
             'Stake.Compiler.CharClassSpec',
             'Stake.Compiler.StringSpec',
             'Stake.Compiler.SequenceSpec',
+            'Stake.Compiler.RepeatSpec',
             
     JS.Test.method('autorun'))
 })

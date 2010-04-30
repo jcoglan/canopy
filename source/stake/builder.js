@@ -132,12 +132,20 @@ Stake.extend({
       return varName;
     },
     
-    if_: function(condition, block, context) {
+    conditional_: function(kwd, condition, block, context) {
       this.newline_();
-      this.write('if (' + condition + ') {');
+      this.write(kwd + ' (' + condition + ') {');
       this.indent_(block, context);
       this.newline_();
       this.write('}');
+    },
+    
+    while_: function(condition, block, context) {
+      this.conditional_('while', condition, block, context);
+    },
+    
+    if_: function(condition, block, context) {
+      this.conditional_('if', condition, block, context);
     },
     
     else_: function(block, context) {

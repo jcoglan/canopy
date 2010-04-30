@@ -21,7 +21,7 @@ Stake.Compiler.extend({
       var startOffset = builder.tempVar_('index', builder.offset_()),
           elements    = builder.tempVar_('elements', '[]'),
           textValue   = builder.tempVar_('text', '""');
-          
+      
       this._compileExpressions(builder, 0, startOffset, elements, textValue);
       builder.if_(elements, function(builder) {
         builder.line_(builder.offset_() + ' = ' + startOffset);
