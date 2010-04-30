@@ -461,34 +461,6 @@ Stake.MetaGrammarSpec = JS.Test.describe(Stake.MetaGrammar, function() { with(th
           ').toSexp() )
     }})
     
-    it('has an atom rule', function() { with(this) {
-      assertEqual(['grammar', 'MetaGrammar',
-                    ['rule', 'atom',
-                      ['type', 'Stake.Compiler.Atom',
-                        ['sequence',
-                          ['maybe', ['reference', 'label']],
-                          ['label', 'expression',
-                            ['choice',
-                              ['reference', 'parenthesised_expression'],
-                              ['reference', 'negated_atom'],
-                              ['reference', 'reference_expression'],
-                              ['reference', 'string_expression'],
-                              ['reference', 'any_char_expression'],
-                              ['reference', 'char_class_expression']]],
-                          ['maybe', ['reference', 'quantifier']]]]]],
-          
-          new Stake.Compiler('\
-            grammar MetaGrammar\
-              atom <- label? expression:( parenthesised_expression\
-                                        / negated_atom\
-                                        / reference_expression\
-                                        / string_expression\
-                                        / any_char_expression\
-                                        / char_class_expression ) quantifier?\
-                      <Stake.Compiler.Atom>\
-          ').toSexp() )
-    }})
-    
     it('has a string rule', function() { with(this) {
       assertEqual(['grammar', 'MetaGrammar',
                     ['rule', 'string_expression',
