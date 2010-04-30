@@ -68,13 +68,13 @@ Stake.extend({
                   ['label', 'expression',
                     ['reference', 'choice_part']]]]]]]],
       
-      // choice_part <- (sequence_expression / atom) (space+ type_expression)? <Stake.Compiler.ChoicePart>
+      // choice_part <- (sequence_expression / sequence_part) (space+ type_expression)? <Stake.Compiler.ChoicePart>
       ['rule', 'choice_part',
         ['type', 'Stake.Compiler.ChoicePart',
           ['sequence',
             ['choice',
               ['reference', 'sequence_expression'],
-              ['reference', 'atom']],
+              ['reference', 'sequence_part']],
             ['maybe',
               ['sequence',
                 ['repeat', 1, ['reference', 'space']],
@@ -87,40 +87,55 @@ Stake.extend({
           ['reference', 'object_identifier'],
           ['string', '>']]],
       
-      // sequence_expression <- first_expression:atom
-      //                        rest_expressions:(space+ atom)+
+      // sequence_expression <- first_expression:sequence_part
+      //                        rest_expressions:(space+ sequence_part)+
       //                        <Stake.Compiler.Sequence>
       ['rule', 'sequence_expression',
         ['type', 'Stake.Compiler.Sequence',
           ['sequence',
             ['label', 'first_expression',
-              ['reference', 'atom']],
+              ['reference', 'sequence_part']],
             ['label', 'rest_expressions',
               ['repeat', 1,
                 ['sequence',
                   ['repeat', 1, ['reference', 'space']],
-                  ['reference', 'atom']]]]]]],
+                  ['reference', 'sequence_part']]]]]]],
       
-      // atom <- label? expression:( parenthesised_expression
-      //                           / predicated_atom
-      //                           / reference_expression
-      //                           / string_expression
-      //                           / any_char_expression
-      //                           / char_class_expression ) quantifier?
-      //         <Stake.Compiler.Atom>
-      ['rule', 'atom',
-        ['type', 'Stake.Compiler.Atom',
+      // sequence_part <- label? expression:(quantified_atom / atom) <Stake.Compiler.SequencePart>
+      ['rule', 'sequence_part',
+        ['type', 'Stake.Compiler.SequencePart',
           ['sequence',
             ['maybe', ['reference', 'label']],
             ['label', 'expression',
               ['choice',
-                ['reference', 'parenthesised_expression'],
-                ['reference', 'predicated_atom'],
-                ['reference', 'reference_expression'],
-                ['reference', 'string_expression'],
-                ['reference', 'any_char_expression'],
-                ['reference', 'char_class_expression']]],
-            ['maybe', ['reference', 'quantifier']]]]],
+                ['reference', 'quantified_atom'],
+                ['reference', 'atom']]]]]],
+      
+      // quantified_atom <- atom quantifier:("?" / "*" / "+") <Stake.Compiler.Repeat>
+      ['rule', 'quantified_atom',
+        ['type', 'Stake.Compiler.Repeat',
+          ['sequence',
+            ['reference', 'atom'],
+            ['label', 'quantifier',
+              ['choice',
+                ['string', '?'],
+                ['string', '*'],
+                ['string', '+']]]]]],
+      
+      // atom <- parenthesised_expression
+      //       / predicated_atom
+      //       / reference_expression
+      //       / string_expression
+      //       / any_char_expression
+      //       / char_class_expression
+      ['rule', 'atom',
+        ['choice',
+          ['reference', 'parenthesised_expression'],
+          ['reference', 'predicated_atom'],
+          ['reference', 'reference_expression'],
+          ['reference', 'string_expression'],
+          ['reference', 'any_char_expression'],
+          ['reference', 'char_class_expression']]],
       
       // predicated_atom <- predicate:("&" / "!") atom <Stake.Compiler.PredicatedAtom>
       ['rule', 'predicated_atom',

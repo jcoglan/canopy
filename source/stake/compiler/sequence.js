@@ -4,7 +4,7 @@ Stake.Compiler.extend({
       if (this._expressions) return this._expressions;
       this._expressions = [this.first_expression];
       this.rest_expressions.forEach(function(part) {
-        this._expressions.push(part.atom);
+        this._expressions.push(part.sequence_part);
       }, this);
       return this._expressions;
     },

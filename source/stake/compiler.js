@@ -30,12 +30,59 @@ Stake.extend({
         }
       }),
       
-      PredicatedAtom: new JS.Module({
+      SequencePart: new JS.Module({
+        atomic: function() {
+          var expression = this.expression;
+          return expression.parsing_expression || expression;
+        },
+        
         toSexp: function() {
-          var table     = {'&': 'and', '!': 'not'},
-              predicate = table[this.predicate.textValue];
+          var expression = this.atomic(),
+              sexp = expression.toSexp();
           
-          return [predicate, this.atom.toSexp()];
+          if (this.elements[0].identifier)
+            sexp = ['label', this.elements[0].identifier.textValue, sexp];
+          
+          return sexp;
+        },
+        
+        compile: function(builder, address) {
+          return this.atomic().compile(builder, address);
+        }
+      }),
+      
+      Repeat: new JS.Module({
+        atomic: function() {
+          var expression = this.atom;
+          return expression.parsing_expression || expression;
+        },
+        
+        toSexp: function() {
+          var expression = this.atomic(),
+              sexp = expression.toSexp();
+          
+          sexp = expression.toSexp();
+          switch (this.quantifier.textValue) {
+            case '*': sexp = ['repeat', 0, sexp]; break;
+            case '+': sexp = ['repeat', 1, sexp]; break;
+            case '?': sexp = ['maybe', sexp]; break;
+          }
+          return sexp;
+        }
+      }),
+      
+      PredicatedAtom: new JS.Module({
+        atomic: function() {
+          var expression = this.atom;
+          return expression.parsing_expression || expression;
+        },
+        
+        toSexp: function() {
+          var expression = this.atomic(),
+              table      = {'&': 'and', '!': 'not'},
+              predicate  = table[this.predicate.textValue];
+          
+          return [predicate, expression.toSexp()];
         }
       }),
       
