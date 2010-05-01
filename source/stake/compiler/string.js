@@ -4,14 +4,14 @@ Stake.Compiler.extend({
       return ['string', eval(this.textValue)];
     },
     
-    compile: function(builder, address) {
+    compile: function(builder, address, nodeType) {
       var string = this.textValue,
           length = eval(this.textValue).length,
           input  = builder.input_(),
           offset = builder.offset_();
       
       builder.if_(builder.slice_(length) + ' === ' + string, function(builder) {
-        builder.syntaxNode_(address, string, length);
+        builder.syntaxNode_(address, nodeType, string, length);
       });
       builder.else_(function(builder) {
         builder.failure_(address);

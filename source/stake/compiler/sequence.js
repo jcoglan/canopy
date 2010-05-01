@@ -17,7 +17,7 @@ Stake.Compiler.extend({
       return sexp;
     },
     
-    compile: function(builder, address) {
+    compile: function(builder, address, nodeType) {
       var startOffset = builder.tempVar_('index', builder.offset_()),
           elements    = builder.tempVar_('elements', '[]'),
           labelled    = builder.tempVar_('labelled', '{}'),
@@ -26,7 +26,7 @@ Stake.Compiler.extend({
       this._compileExpressions(builder, 0, startOffset, elements, labelled, textValue);
       builder.if_(elements, function(builder) {
         builder.line_(builder.offset_() + ' = ' + startOffset);
-        builder.syntaxNode_(address, textValue, textValue + '.length', elements, labelled);
+        builder.syntaxNode_(address, nodeType, textValue, textValue + '.length', elements, labelled);
       });
       builder.else_(function(builder) {
         builder.line_(address + ' = null');

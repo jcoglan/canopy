@@ -20,10 +20,10 @@ Stake.Compiler.extend({
       return sexp;
     },
     
-    compile: function(builder, address) {
+    compile: function(builder, address, nodeType) {
       var quantifier  = this.quantifier.textValue;
       
-      if (quantifier === '?') return this._compileMaybe(builder, address);
+      if (quantifier === '?') return this._compileMaybe(builder, address, nodeType);
       
       var minimum     = this.QUANTITIES[quantifier],
           remaining   = builder.tempVar_('remaining', minimum),
@@ -43,21 +43,24 @@ Stake.Compiler.extend({
       
       builder.if_(remaining + ' <= 0', function(builder) {
         builder.line_(builder.offset_() + ' = ' + startOffset);
-        builder.syntaxNode_(address, textValue, textValue + '.length', elements);
+        builder.syntaxNode_(address, nodeType, textValue, textValue + '.length', elements);
       });
       builder.else_(function(builder) {
         builder.line_(address + ' = null');
       });
     },
     
-    _compileMaybe: function(builder, address) {
+    _compileMaybe: function(builder, address, nodeType) {
       var startOffset = builder.tempVar_('index', builder.offset_());
       
       this.atomic().compile(builder, address);
       
-      builder.unless_(address, function(builder) {
+      builder.if_(address, function(builder) {
+        builder.extendNode_(address, nodeType);
+      });
+      builder.else_(function(builder) {
         builder.line_(builder.offset_() + ' = ' + startOffset);
-        builder.syntaxNode_(address, '""', 0);
+        builder.syntaxNode_(address, nodeType, '""', 0);
       });
     }
   })

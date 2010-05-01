@@ -56,13 +56,33 @@ Stake.extend({
       return input + '.substring(' + of + ', ' + of + ' + ' + length + ')';
     },
     
-    syntaxNode_: function(address, expression, bump, elements, labelled) {
+    syntaxNode_: function(address, nodeType, expression, bump, elements, labelled) {
       elements = ', ' + (elements || '[]');
       labelled = ', ' + (labelled || '{}');
-      var cons = 'new Stake.SyntaxNode', of = ', ' + this.offset_();
+      var klass, of = ', ' + this.offset_();
       
-      this.line_(address + ' = ' + cons + '(' + expression + of + elements + labelled + ')');
+      if (nodeType) {
+        klass = this.tempVar_('klass');
+        this.if_(nodeType + ' instanceof Function', function(builder) {
+          builder.line_(klass + ' = ' + nodeType);
+        });
+        this.else_(function(builder) {
+          builder.line_(klass + ' = Stake.SyntaxNode');
+        });
+      } else {
+        klass = this.tempVar_('klass', 'Stake.SyntaxNode');
+      }
+      
+      this.line_(address + ' = new ' + klass + '(' + expression + of + elements + labelled + ')');
+      this.extendNode_(address, nodeType);
       this.line_(this.offset_() + ' += ' + bump);
+    },
+    
+    extendNode_: function(address, nodeType) {
+      if (!nodeType) return;
+      this.unless_(nodeType + ' instanceof Function', function(builder) {
+        builder.line_(address + '.extend(' + nodeType + ')');
+      });
     },
     
     failure_: function(address) {

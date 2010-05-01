@@ -17,20 +17,23 @@ Stake.Compiler.extend({
       return sexp;
     },
     
-    compile: function(builder, address) {
+    compile: function(builder, address, nodeType) {
       var startOffset = builder.tempVar_('index', builder.offset_());
-      this._compileChoices(builder, 0, address, startOffset);
+      this._compileChoices(builder, 0, address, nodeType, startOffset);
     },
     
-    _compileChoices: function(builder, index, address, startOffset) {
+    _compileChoices: function(builder, index, address, nodeType, startOffset) {
       var expressions = this.expressions();
       if (index === expressions.length) return;
       
       expressions[index].compile(builder, address);
       
-      builder.unless_(address, function(builder) {
+      builder.if_(address, function(builder) {
+        builder.extendNode_(address, nodeType);
+      });
+      builder.else_(function(builder) {
         builder.line_(builder.offset_() + ' = ' + startOffset);
-        this._compileChoices(builder, index + 1, address, startOffset);
+        this._compileChoices(builder, index + 1, address, nodeType, startOffset);
       }, this);
     }
   })

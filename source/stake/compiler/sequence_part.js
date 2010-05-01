@@ -19,8 +19,8 @@ Stake.Compiler.extend({
       return sexp;
     },
     
-    compile: function(builder, address) {
-      return this.atomic().compile(builder, address);
+    compile: function(builder, address, nodeType) {
+      return this.atomic().compile(builder, address, nodeType);
     }
   })
 });
