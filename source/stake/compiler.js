@@ -20,21 +20,6 @@ Stake.extend({
     },
     
     extend: {
-      PredicatedAtom: new JS.Module({
-        atomic: function() {
-          var expression = this.atom;
-          return expression.parsing_expression || expression;
-        },
-        
-        toSexp: function() {
-          var expression = this.atomic(),
-              table      = {'&': 'and', '!': 'not'},
-              predicate  = table[this.predicate.textValue];
-          
-          return [predicate, expression.toSexp()];
-        }
-      }),
-      
       Reference: new JS.Module({
         toSexp: function() {
           return ['reference', this.identifier.textValue];

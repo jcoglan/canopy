@@ -38,6 +38,7 @@ packages:
       - stake/compiler/any_char
       - stake/compiler/char_class
       - stake/compiler/string
+      - stake/compiler/predicated_atom
       - stake/compiler/repeat
       - stake/compiler/sequence
       - stake/compiler/sequence_part

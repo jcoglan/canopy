@@ -45,6 +45,7 @@ require('JS.Test', 'Stake', function() {
             'Stake.Compiler.AnyCharSpec',
             'Stake.Compiler.CharClassSpec',
             'Stake.Compiler.StringSpec',
+            'Stake.Compiler.PredicatedAtomSpec',
             'Stake.Compiler.RepeatSpec',
             'Stake.Compiler.SequenceSpec',
             'Stake.Compiler.ChoiceSpec',
