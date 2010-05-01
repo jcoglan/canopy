@@ -56,11 +56,12 @@ Stake.extend({
       return input + '.substring(' + of + ', ' + of + ' + ' + length + ')';
     },
     
-    syntaxNode_: function(address, expression, bump, elements) {
-      elements = elements || '[]';
-      var cons = 'new Stake.SyntaxNode', of = this.offset_();
+    syntaxNode_: function(address, expression, bump, elements, labelled) {
+      elements = ', ' + (elements || '[]');
+      labelled = ', ' + (labelled || '{}');
+      var cons = 'new Stake.SyntaxNode', of = ', ' + this.offset_();
       
-      this.line_(address + ' = ' + cons + '(' + expression + ', ' + of + ', ' + elements + ')');
+      this.line_(address + ' = ' + cons + '(' + expression + of + elements + labelled + ')');
       this.line_(this.offset_() + ' += ' + bump);
     },
     

@@ -30,27 +30,6 @@ Stake.extend({
         }
       }),
       
-      SequencePart: new JS.Module({
-        atomic: function() {
-          var expression = this.expression;
-          return expression.parsing_expression || expression;
-        },
-        
-        toSexp: function() {
-          var expression = this.atomic(),
-              sexp = expression.toSexp();
-          
-          if (this.elements[0].identifier)
-            sexp = ['label', this.elements[0].identifier.textValue, sexp];
-          
-          return sexp;
-        },
-        
-        compile: function(builder, address) {
-          return this.atomic().compile(builder, address);
-        }
-      }),
-      
       PredicatedAtom: new JS.Module({
         atomic: function() {
           var expression = this.atom;

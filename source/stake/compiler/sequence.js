@@ -20,29 +20,35 @@ Stake.Compiler.extend({
     compile: function(builder, address) {
       var startOffset = builder.tempVar_('index', builder.offset_()),
           elements    = builder.tempVar_('elements', '[]'),
+          labelled    = builder.tempVar_('labelled', '{}'),
           textValue   = builder.tempVar_('text', '""');
       
-      this._compileExpressions(builder, 0, startOffset, elements, textValue);
+      this._compileExpressions(builder, 0, startOffset, elements, labelled, textValue);
       builder.if_(elements, function(builder) {
         builder.line_(builder.offset_() + ' = ' + startOffset);
-        builder.syntaxNode_(address, textValue, textValue + '.length', elements);
+        builder.syntaxNode_(address, textValue, textValue + '.length', elements, labelled);
       });
       builder.else_(function(builder) {
         builder.line_(address + ' = null');
       });
     },
     
-    _compileExpressions: function(builder, index, startOffset, elements, textValue) {
+    _compileExpressions: function(builder, index, startOffset, elements, labelled, textValue) {
       var expressions = this.expressions();
       if (index === expressions.length) return;
       
-      var expAddr = builder.tempVar_('address');
+      var expAddr = builder.tempVar_('address'),
+          label   = expressions[index].label();
+      
       expressions[index].compile(builder, expAddr);
       
       builder.if_(expAddr, function(builder) {
         builder.line_(elements + '.push(' + expAddr + ')');
         builder.line_(textValue + ' += ' + expAddr + '.textValue');
-        this._compileExpressions(builder, index + 1, startOffset, elements, textValue);
+        if (label) builder.line_(labelled + '.' + label + ' = ' + expAddr);
+        
+        this._compileExpressions(builder, index + 1, startOffset, elements, labelled, textValue);
+        
       }, this);
       builder.else_(function(builder) {
         builder.line_(elements + ' = null');
