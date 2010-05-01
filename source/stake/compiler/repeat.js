@@ -21,8 +21,11 @@ Stake.Compiler.extend({
     },
     
     compile: function(builder, address) {
-      var quantifier  = this.quantifier.textValue,
-          minimum     = this.QUANTITIES[quantifier],
+      var quantifier  = this.quantifier.textValue;
+      
+      if (quantifier === '?') return this._compileMaybe(builder, address);
+      
+      var minimum     = this.QUANTITIES[quantifier],
           remaining   = builder.tempVar_('remaining', minimum),
           startOffset = builder.tempVar_('index', builder.offset_()),
           elements    = builder.tempVar_('elements', '[]'),
@@ -44,6 +47,17 @@ Stake.Compiler.extend({
       });
       builder.else_(function(builder) {
         builder.line_(address + ' = null');
+      });
+    },
+    
+    _compileMaybe: function(builder, address) {
+      var startOffset = builder.tempVar_('index', builder.offset_());
+      
+      this.atomic().compile(builder, address);
+      
+      builder.unless_(address, function(builder) {
+        builder.line_(builder.offset_() + ' = ' + startOffset);
+        builder.syntaxNode_(address, '""', 0);
       });
     }
   })

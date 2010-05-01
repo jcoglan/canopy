@@ -148,6 +148,10 @@ Stake.extend({
       this.conditional_('if', condition, block, context);
     },
     
+    unless_: function(condition, block, context) {
+      this.conditional_('if', '!(' + condition + ')', block, context);
+    },
+    
     else_: function(block, context) {
       this.write(' else {');
       this.indent_(block, context);

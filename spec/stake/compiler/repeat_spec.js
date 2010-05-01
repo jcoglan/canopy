@@ -1,6 +1,25 @@
 Stake.Compiler.RepeatSpec = JS.Test.describe(Stake.Compiler.Repeat, function() { with(this) {
   include(Stake.SpecHelper)
   
+  describe('maybe', function() { with(this) {
+    before(function() { with(this) {
+      Stake.compile('grammar MaybeTest\
+        maybe <- "jc"?')
+    }})
+    
+    it('parses if its pattern is present', function() { with(this) {
+      assertParse( ['jc', 0, []], MaybeTestParser.parse('jc') )
+    }})
+    
+    it('parses if no input is given', function() { with(this) {
+      assertParse( ['', 0, []], MaybeTestParser.parse('') )
+    }})
+    
+    it('does not parse if different input is given', function() { with(this) {
+      assertNull( MaybeTestParser.parse('gc') )
+    }})
+  }})
+  
   describe('with zero minimum occurences', function() { with(this) {
     before(function() { with(this) {
       Stake.compile('grammar ZeroOrMoreTest\
