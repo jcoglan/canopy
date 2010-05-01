@@ -1,8 +1,8 @@
 load('vendor/js.class/build/min/core.js');
 load('build/stake-min.js');
+load('examples/benchmark.js');
 
-LispParser = Stake.compile('                          \
-  grammar Lisp                                        \
+grammar = 'grammar CompiledLisp                       \
                                                       \
     program   <- cell+                                \
     cell      <- space* data:(list / atom) space*     \
@@ -14,6 +14,18 @@ LispParser = Stake.compile('                          \
     symbol    <- (!delimiter .)+                      \
     space     <- [\\s\\n\\r\\t]                       \
     paren     <- "(" / ")"                            \
-    delimiter <- paren / space                        \
-');
+    delimiter <- paren / space                        ';
+
+Stake.compile(grammar);
+CombinatorLispParser = Stake.generate(grammar);
+
+program = '(lambda (x y) (display "Hi.") (+ (* x y) 2))';
+
+benchmark('Compiled parser', 20, function() {
+  CompiledLispParser.parse(program);
+});
+
+benchmark('Combinator parser', 20, function() {
+  CombinatorLispParser.parse(program);
+});
 

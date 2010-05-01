@@ -9,6 +9,13 @@ Stake.extend({
     return source;
   },
   
+  generate: function(grammar) {
+    var compiler = new this.Compiler(grammar),
+        sexp     = compiler.toSexp();
+    
+    return this.Parser.fromSexp(sexp);
+  },
+  
   map: function(list, block, context) {
     var results = [], n = list.length, i;
     for (i = 0; i < n; i++)
