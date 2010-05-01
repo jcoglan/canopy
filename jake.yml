@@ -9,7 +9,7 @@ builds:
     suffix:         false
   min:
     shrink_vars:    true
-    private:        true
+    private:        false
 
 packages:
   stake:

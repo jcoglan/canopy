@@ -2,7 +2,7 @@ JSCLASS_PATH = 'vendor/js.class/build/src'
 load(JSCLASS_PATH + '/loader.js')
 
 JS.Packages(function() { with(this) {
-    file('build/stake.js').provides('Stake')
+    file('build/stake-min.js').provides('Stake')
     autoload(/^(.*)Spec$/, {from: 'spec', require: '$1'})
 }})
 

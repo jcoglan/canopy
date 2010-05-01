@@ -25,12 +25,12 @@ Stake.Compiler.extend({
       builder.class_(this.grammarName() + 'Parser', function(builder) {
         builder.include_(this.grammarName());
         builder.method_('initialize', ['input'], function(builder) {
-          builder.ivar_('input', 'input')
-          builder.ivar_('offset', '0')
-          builder.ivar_('nodeCache', '{}')
+          builder.ivar_('input', 'input');
+          builder.ivar_('offset', '0');
+          builder.ivar_('nodeCache', '{}');
         });
         builder.method_('parse', [], function(builder) {
-          builder.var_('result', 'this["__consume__" + this.root]()')
+          builder.var_('result', 'this["__consume__" + this.root]()');
           builder.return_(builder.offset_() + ' === ' + builder.input_() + '.length ? result : null');
         });
         builder.classMethods_(function(builder) {

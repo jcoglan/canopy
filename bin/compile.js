@@ -5,7 +5,7 @@ importPackage(java.io);
 importPackage(java.lang);
 
 load('vendor/js.class/build/min/core.js');
-load('build/stake.js');
+load('build/stake-min.js');
 
 function readFile(file) {
   var f = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
