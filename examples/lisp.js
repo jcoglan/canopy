@@ -18,7 +18,7 @@ grammar = 'grammar CompiledLisp                       \
     delimiter <- paren / space                        ';
 
 Canopy.compile(grammar);
-CombinatorLispParser = Canopy.generate(grammar);
+//CombinatorLispParser = Canopy.generate(grammar);
 
 program = '(lambda (x y) (display "Hi.") (+ (* x y) 2))';
 
@@ -26,9 +26,9 @@ benchmark('Compiled parser', 20, function() {
   CompiledLispParser.parse(program);
 });
 
-benchmark('Combinator parser', 20, function() {
-  CombinatorLispParser.parse(program);
-});
+//benchmark('Combinator parser', 20, function() {
+//  CombinatorLispParser.parse(program);
+//});
 
 benchmark('PEG.js parser', 20, function() {
   LispParser.parse(program);

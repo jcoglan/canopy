@@ -28,7 +28,9 @@ require('JS.Test', 'Canopy', function() {
       }
     })
     
-    require('Canopy.Parser.CharClassSpec',
+    require(/* Parser classes were used during bootstrapping
+            
+            'Canopy.Parser.CharClassSpec',
             'Canopy.Parser.ChoiceSpec',
             'Canopy.Parser.GrammarSpec',
             'Canopy.Parser.LabelSpec',
@@ -38,7 +40,7 @@ require('JS.Test', 'Canopy', function() {
             'Canopy.Parser.RepeatSpec',
             'Canopy.Parser.SequenceSpec',
             'Canopy.Parser.StringSpec',
-            'Canopy.Parser.TypeSpec',
+            'Canopy.Parser.TypeSpec',*/
             
             'Canopy.MetaGrammarParserSpec',
             

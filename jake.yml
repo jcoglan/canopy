@@ -15,19 +15,6 @@ packages:
   canopy:
     files:
       - canopy
-      - canopy/parser/and
-      - canopy/parser/any_char
-      - canopy/parser/char_class
-      - canopy/parser/choice
-      - canopy/parser/grammar
-      - canopy/parser/label
-      - canopy/parser/maybe
-      - canopy/parser/not
-      - canopy/parser/reference
-      - canopy/parser/repeat
-      - canopy/parser/sequence
-      - canopy/parser/string
-      - canopy/parser/type
       - canopy/meta_grammar
       - canopy/builder
       - canopy/compiler

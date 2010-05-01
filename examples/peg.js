@@ -61,15 +61,15 @@ grammar = 'grammar CompiledPEG\
   space               <- [\\s\\n\\r\\t]';
 
 Canopy.compile(grammar);
-CombinatorPEGParser = Canopy.generate(grammar);
+//CombinatorPEGParser = Canopy.generate(grammar);
 
 benchmark('Compiled parser', 1, function() {
   CompiledPEGParser.parse(grammar);
 });
 
-benchmark('Combinator parser', 1, function() {
-  CombinatorPEGParser.parse(grammar);
-});
+//benchmark('Combinator parser', 1, function() {
+//  CombinatorPEGParser.parse(grammar);
+//});
 
 benchmark('PEG.js parser', 1, function() {
   PEGParser.parse(grammar);
