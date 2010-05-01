@@ -2,16 +2,16 @@ JSCLASS_PATH = 'vendor/js.class/build/src'
 load(JSCLASS_PATH + '/loader.js')
 
 JS.Packages(function() { with(this) {
-    file('build/stake-min.js').provides('Stake')
+    file('build/canopy-min.js').provides('Canopy')
     autoload(/^(.*)Spec$/, {from: 'spec', require: '$1'})
 }})
 
-require('JS.Test', 'Stake', function() {
+require('JS.Test', 'Canopy', function() {
     
-    Stake.SpecHelper = new JS.Module({
+    Canopy.SpecHelper = new JS.Module({
       assertParse: function(tuple, actual) {
         this.__wrapAssertion__(function() {
-          this.assertKindOf( Stake.SyntaxNode, actual )
+          this.assertKindOf( Canopy.SyntaxNode, actual )
           
           this.assertEqual( tuple[0], actual.textValue )
           this.assertEqual( tuple[1], actual.offset )
@@ -28,29 +28,29 @@ require('JS.Test', 'Stake', function() {
       }
     })
     
-    require('Stake.Parser.CharClassSpec',
-            'Stake.Parser.ChoiceSpec',
-            'Stake.Parser.GrammarSpec',
-            'Stake.Parser.LabelSpec',
-            'Stake.Parser.MaybeSpec',
-            'Stake.Parser.AndSpec',
-            'Stake.Parser.NotSpec',
-            'Stake.Parser.RepeatSpec',
-            'Stake.Parser.SequenceSpec',
-            'Stake.Parser.StringSpec',
-            'Stake.Parser.TypeSpec',
+    require('Canopy.Parser.CharClassSpec',
+            'Canopy.Parser.ChoiceSpec',
+            'Canopy.Parser.GrammarSpec',
+            'Canopy.Parser.LabelSpec',
+            'Canopy.Parser.MaybeSpec',
+            'Canopy.Parser.AndSpec',
+            'Canopy.Parser.NotSpec',
+            'Canopy.Parser.RepeatSpec',
+            'Canopy.Parser.SequenceSpec',
+            'Canopy.Parser.StringSpec',
+            'Canopy.Parser.TypeSpec',
             
-            'Stake.MetaGrammarParserSpec',
+            'Canopy.MetaGrammarParserSpec',
             
-            'Stake.Compiler.AnyCharSpec',
-            'Stake.Compiler.CharClassSpec',
-            'Stake.Compiler.StringSpec',
-            'Stake.Compiler.PredicatedAtomSpec',
-            'Stake.Compiler.RepeatSpec',
-            'Stake.Compiler.SequenceSpec',
-            'Stake.Compiler.ChoiceSpec',
-            'Stake.Compiler.ChoicePartSpec',
-            'Stake.Compiler.ReferenceSpec',
+            'Canopy.Compiler.AnyCharSpec',
+            'Canopy.Compiler.CharClassSpec',
+            'Canopy.Compiler.StringSpec',
+            'Canopy.Compiler.PredicatedAtomSpec',
+            'Canopy.Compiler.RepeatSpec',
+            'Canopy.Compiler.SequenceSpec',
+            'Canopy.Compiler.ChoiceSpec',
+            'Canopy.Compiler.ChoicePartSpec',
+            'Canopy.Compiler.ReferenceSpec',
             
     JS.Test.method('autorun'))
 })

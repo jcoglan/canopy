@@ -1,5 +1,5 @@
 load('vendor/js.class/build/min/core.js');
-load('build/stake-min.js');
+load('build/canopy-min.js');
 load('examples/benchmark.js');
 load('examples/pegjs/lisp.js');
 
@@ -17,8 +17,8 @@ grammar = 'grammar CompiledLisp                       \
     paren     <- "(" / ")"                            \
     delimiter <- paren / space                        ';
 
-Stake.compile(grammar);
-CombinatorLispParser = Stake.generate(grammar);
+Canopy.compile(grammar);
+CombinatorLispParser = Canopy.generate(grammar);
 
 program = '(lambda (x y) (display "Hi.") (+ (* x y) 2))';
 

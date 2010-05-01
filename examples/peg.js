@@ -1,5 +1,5 @@
 load('vendor/js.class/build/min/core.js');
-load('build/stake-min.js');
+load('build/canopy-min.js');
 load('examples/benchmark.js');
 load('examples/pegjs/peg.js');
 
@@ -60,8 +60,8 @@ grammar = 'grammar CompiledPEG\
   \
   space               <- [\\s\\n\\r\\t]';
 
-Stake.compile(grammar);
-CombinatorPEGParser = Stake.generate(grammar);
+Canopy.compile(grammar);
+CombinatorPEGParser = Canopy.generate(grammar);
 
 benchmark('Compiled parser', 1, function() {
   CompiledPEGParser.parse(grammar);

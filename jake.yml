@@ -12,41 +12,41 @@ builds:
     private:        false
 
 packages:
-  stake:
+  canopy:
     files:
-      - stake
-      - stake/parser/and
-      - stake/parser/any_char
-      - stake/parser/char_class
-      - stake/parser/choice
-      - stake/parser/grammar
-      - stake/parser/label
-      - stake/parser/maybe
-      - stake/parser/not
-      - stake/parser/reference
-      - stake/parser/repeat
-      - stake/parser/sequence
-      - stake/parser/string
-      - stake/parser/type
-      - stake/meta_grammar
-      - stake/builder
-      - stake/compiler
-      - stake/compiler/grammar
-      - stake/compiler/grammar_rule
-      - stake/compiler/choice
-      - stake/compiler/choice_part
-      - stake/compiler/any_char
-      - stake/compiler/char_class
-      - stake/compiler/string
-      - stake/compiler/predicated_atom
-      - stake/compiler/repeat
-      - stake/compiler/sequence
-      - stake/compiler/sequence_part
-      - stake/compiler/reference
+      - canopy
+      - canopy/parser/and
+      - canopy/parser/any_char
+      - canopy/parser/char_class
+      - canopy/parser/choice
+      - canopy/parser/grammar
+      - canopy/parser/label
+      - canopy/parser/maybe
+      - canopy/parser/not
+      - canopy/parser/reference
+      - canopy/parser/repeat
+      - canopy/parser/sequence
+      - canopy/parser/string
+      - canopy/parser/type
+      - canopy/meta_grammar
+      - canopy/builder
+      - canopy/compiler
+      - canopy/compiler/grammar
+      - canopy/compiler/grammar_rule
+      - canopy/compiler/choice
+      - canopy/compiler/choice_part
+      - canopy/compiler/any_char
+      - canopy/compiler/char_class
+      - canopy/compiler/string
+      - canopy/compiler/predicated_atom
+      - canopy/compiler/repeat
+      - canopy/compiler/sequence
+      - canopy/compiler/sequence_part
+      - canopy/compiler/reference
     meta:
       provides:
-        - Stake
-        - Stake.Parser
+        - Canopy
+        - Canopy.Parser
       requires:
         - JS.Class
         - JS.Module

@@ -5,7 +5,7 @@ importPackage(java.io);
 importPackage(java.lang);
 
 load('vendor/js.class/build/min/core.js');
-load('build/stake-min.js');
+load('build/canopy-min.js');
 
 function readFile(file) {
   var f = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
@@ -29,7 +29,7 @@ var startTime  = Number(new Date()),
     inputFile  = arguments[0],
     outputFile = inputFile.replace(/\.peg$/, '.js'),
     grammar    = readFile(inputFile),
-    parser     = Stake.compile(grammar),
+    parser     = Canopy.compile(grammar),
     endTime    = Number(new Date());
 
 System.out.println('Completed in ' + ((endTime - startTime) / 1000) + 's');
