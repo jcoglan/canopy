@@ -1,6 +1,7 @@
 load('vendor/js.class/build/min/core.js');
 load('build/stake-min.js');
 load('examples/benchmark.js');
+load('examples/pegjs/lisp.js');
 
 grammar = 'grammar CompiledLisp                       \
                                                       \
@@ -27,5 +28,9 @@ benchmark('Compiled parser', 20, function() {
 
 benchmark('Combinator parser', 20, function() {
   CombinatorLispParser.parse(program);
+});
+
+benchmark('PEG.js parser', 20, function() {
+  LispParser.parse(program);
 });
 
