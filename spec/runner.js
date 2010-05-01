@@ -50,6 +50,7 @@ require('JS.Test', 'Stake', function() {
             'Stake.Compiler.SequenceSpec',
             'Stake.Compiler.ChoiceSpec',
             'Stake.Compiler.ChoicePartSpec',
+            'Stake.Compiler.ReferenceSpec',
             
     JS.Test.method('autorun'))
 })

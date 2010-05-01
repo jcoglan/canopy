@@ -42,6 +42,7 @@ packages:
       - stake/compiler/repeat
       - stake/compiler/sequence
       - stake/compiler/sequence_part
+      - stake/compiler/reference
     meta:
       provides:
         - Stake

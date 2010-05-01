@@ -6,8 +6,13 @@ Stake.Compiler.extend({
     },
     
     label: function() {
-      var element = this.elements[0].identifier;
-      return element ? element.textValue : null;
+      var element = this.elements[0].identifier,
+          expression = this.atomic();
+      
+      if (element) return element.textValue;
+      if (expression.referenceName) return expression.referenceName();
+      
+      return null;
     },
     
     toSexp: function() {
@@ -15,7 +20,9 @@ Stake.Compiler.extend({
           label = this.label(),
           sexp  = expression.toSexp();
       
-      if (label) sexp = ['label', label, sexp];
+      if (element = this.elements[0].identifier)
+        sexp = ['label', label, sexp];
+      
       return sexp;
     },
     

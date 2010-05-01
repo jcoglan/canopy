@@ -17,14 +17,6 @@ Stake.extend({
       var builder = new Stake.Builder();
       this.parseTree().compile(builder);
       return builder.serialize();
-    },
-    
-    extend: {
-      Reference: new JS.Module({
-        toSexp: function() {
-          return ['reference', this.identifier.textValue];
-        }
-      })
     }
   })
 });
