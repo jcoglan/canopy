@@ -4,10 +4,10 @@ function() { with(this) {
   
   describe('when the node type is a class', function() { with(this) {
     before(function() { with(this) {
-      NodeType = new JS.Class(Canopy.SyntaxNode)
-      
       Canopy.compile('grammar ClassTypeTest\
         rule <- "content" <NodeType>')
+      
+      NodeType = new JS.Class(ClassTypeTestParser.SyntaxNode)
     }})
     
     it('creates nodes using the named type', function() { with(this) {
@@ -66,10 +66,10 @@ function() { with(this) {
   
   describe('when the node type is namespaced', function() { with(this) {
     before(function() { with(this) {
-      NS = { NodeType : new JS.Class(Canopy.SyntaxNode) }
-      
       Canopy.compile('grammar NamespacedTypeTest\
         rule <- "content" <NS.NodeType>')
+      
+      NS = { NodeType : new JS.Class(NamespacedTypeTestParser.SyntaxNode) }
     }})
     
     it('creates nodes using the named type', function() { with(this) {

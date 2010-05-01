@@ -67,10 +67,10 @@ Canopy.extend({
           builder.line_(klass + ' = ' + nodeType);
         });
         this.else_(function(builder) {
-          builder.line_(klass + ' = Canopy.SyntaxNode');
+          builder.line_(klass + ' = this.klass.SyntaxNode');
         });
       } else {
-        klass = this.tempVar_('klass', 'Canopy.SyntaxNode');
+        klass = this.tempVar_('klass', 'this.klass.SyntaxNode');
       }
       
       this.line_(address + ' = new ' + klass + '(' + expression + of + elements + labelled + ')');

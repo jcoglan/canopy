@@ -15,6 +15,7 @@ Canopy.Compiler.extend({
     compile: function(builder) {
       builder.nameSpace_(this.grammarName());
       builder.newline_();
+      
       builder.module_(this.grammarName(), function(builder) {
         builder.field_('root', '"' + this.rules.elements[0].grammar_rule.name() + '"');
         this.rules.forEach(function(rule) {
@@ -22,6 +23,7 @@ Canopy.Compiler.extend({
         });
       }, this);
       builder.newline_();
+      
       builder.class_(this.grammarName() + 'Parser', function(builder) {
         builder.include_(this.grammarName());
         builder.method_('initialize', ['input'], function(builder) {
@@ -40,6 +42,28 @@ Canopy.Compiler.extend({
           });
         });
       }, this);
+      builder.newline_();
+      
+      builder.class_(this.grammarName() + 'Parser.SyntaxNode', function(builder) {
+        builder.include_('JS.Enumerable');
+        
+        builder.method_('initialize', ['textValue', 'offset', 'elements', 'properties'], function(builder) {
+          builder.line_('this.textValue = textValue');
+          builder.line_('this.offset    = offset');
+          builder.line_('this.elements  = elements || []');
+          
+          builder.line_('if (!properties) return');
+          builder.line_('for (var key in properties) this[key] = properties[key]');
+        });
+        
+        builder.method_('forEach', ['block', 'context'], function(builder) {
+          builder.newline_();
+          builder.write('for (var i = 0, n = this.elements.length; i < n; i++)');
+          builder.indent_(function(builder) {
+            builder.line_('block.call(context, this.elements[i], i)');
+          });
+        });
+      });
       builder.newline_();
     }
   })

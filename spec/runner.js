@@ -11,8 +11,6 @@ require('JS.Test', 'Canopy', function() {
     Canopy.SpecHelper = new JS.Module({
       assertParse: function(tuple, actual) {
         this.__wrapAssertion__(function() {
-          this.assertKindOf( Canopy.SyntaxNode, actual )
-          
           this.assertEqual( tuple[0], actual.textValue )
           this.assertEqual( tuple[1], actual.offset )
           
