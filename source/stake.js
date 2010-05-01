@@ -100,7 +100,9 @@ Stake.extend({
       this.textValue = textValue;
       this.offset    = offset;
       this.elements  = elements || [];
-      this.extend(properties);
+      
+      if (!properties) return;
+      for (var key in properties) this[key] = properties[key];
     },
     
     forEach: function(block, context) {

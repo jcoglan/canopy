@@ -58,7 +58,7 @@ Stake.extend({
     
     syntaxNode_: function(address, nodeType, expression, bump, elements, labelled) {
       elements = ', ' + (elements || '[]');
-      labelled = ', ' + (labelled || '{}');
+      labelled = labelled ? ', ' + labelled : '';
       var klass, of = ', ' + this.offset_();
       
       if (nodeType) {
