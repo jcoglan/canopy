@@ -8,18 +8,20 @@ Stake.MetaGrammar = new JS.Module("Stake.MetaGrammar", {
     root: "grammar",
     __consume__grammar: function(input) {
         var address0 = null;
+        var index0 = this._offset;
         this._nodeCache.grammar = this._nodeCache.grammar || {};
-        var cached = this._nodeCache.grammar[this._offset];
+        var cached = this._nodeCache.grammar[index0];
         if (cached) {
+            this._offset += cached.textValue.length;
             return cached;
         }
-        var index0 = this._offset;
+        var index1 = this._offset;
         var elements0 = [];
         var labelled0 = {};
         var text0 = "";
         var address1 = null;
         var remaining0 = null;
-        var index1 = this._offset;
+        var index2 = this._offset;
         var elements1 = [];
         var text1 = "";
         var address2 = true;
@@ -32,7 +34,7 @@ Stake.MetaGrammar = new JS.Module("Stake.MetaGrammar", {
             }
         }
         if (remaining0 <= 0) {
-            this._offset = index1;
+            this._offset = index2;
             var klass0 = Stake.SyntaxNode;
             address1 = new klass0(text1, this._offset, elements1, {});
             this._offset += text1.length;
@@ -50,18 +52,18 @@ Stake.MetaGrammar = new JS.Module("Stake.MetaGrammar", {
                 labelled0.grammar_name = address3;
                 var address4 = null;
                 var remaining1 = 1;
-                var index2 = this._offset;
+                var index3 = this._offset;
                 var elements2 = [];
                 var text2 = "";
                 var address5 = true;
                 while (address5) {
-                    var index3 = this._offset;
+                    var index4 = this._offset;
                     var elements3 = [];
                     var labelled1 = {};
                     var text3 = "";
                     var address6 = null;
                     var remaining2 = null;
-                    var index4 = this._offset;
+                    var index5 = this._offset;
                     var elements4 = [];
                     var text4 = "";
                     var address7 = true;
@@ -74,7 +76,7 @@ Stake.MetaGrammar = new JS.Module("Stake.MetaGrammar", {
                         }
                     }
                     if (remaining2 <= 0) {
-                        this._offset = index4;
+                        this._offset = index5;
                         var klass1 = Stake.SyntaxNode;
                         address6 = new klass1(text4, this._offset, elements4, {});
                         this._offset += text4.length;
@@ -92,14 +94,14 @@ Stake.MetaGrammar = new JS.Module("Stake.MetaGrammar", {
                             labelled1.grammar_rule = address8;
                         } else {
                             elements3 = null;
-                            this._offset = index3;
+                            this._offset = index4;
                         }
                     } else {
                         elements3 = null;
-                        this._offset = index3;
+                        this._offset = index4;
                     }
                     if (elements3) {
-                        this._offset = index3;
+                        this._offset = index4;
                         var klass2 = Stake.SyntaxNode;
                         address5 = new klass2(text3, this._offset, elements3, labelled1);
                         this._offset += text3.length;
@@ -113,7 +115,7 @@ Stake.MetaGrammar = new JS.Module("Stake.MetaGrammar", {
                     }
                 }
                 if (remaining1 <= 0) {
-                    this._offset = index2;
+                    this._offset = index3;
                     var klass3 = Stake.SyntaxNode;
                     address4 = new klass3(text2, this._offset, elements2, {});
                     this._offset += text2.length;
@@ -126,7 +128,7 @@ Stake.MetaGrammar = new JS.Module("Stake.MetaGrammar", {
                     labelled0.rules = address4;
                     var address9 = null;
                     var remaining3 = null;
-                    var index5 = this._offset;
+                    var index6 = this._offset;
                     var elements5 = [];
                     var text5 = "";
                     var address10 = true;
@@ -139,7 +141,7 @@ Stake.MetaGrammar = new JS.Module("Stake.MetaGrammar", {
                         }
                     }
                     if (remaining3 <= 0) {
-                        this._offset = index5;
+                        this._offset = index6;
                         var klass4 = Stake.SyntaxNode;
                         address9 = new klass4(text5, this._offset, elements5, {});
                         this._offset += text5.length;
@@ -151,22 +153,22 @@ Stake.MetaGrammar = new JS.Module("Stake.MetaGrammar", {
                         text0 += address9.textValue;
                     } else {
                         elements0 = null;
-                        this._offset = index0;
+                        this._offset = index1;
                     }
                 } else {
                     elements0 = null;
-                    this._offset = index0;
+                    this._offset = index1;
                 }
             } else {
                 elements0 = null;
-                this._offset = index0;
+                this._offset = index1;
             }
         } else {
             elements0 = null;
-            this._offset = index0;
+            this._offset = index1;
         }
         if (elements0) {
-            this._offset = index0;
+            this._offset = index1;
             var klass5 = null;
             if (Stake.Compiler.Grammar instanceof Function) {
                 klass5 = Stake.Compiler.Grammar;
@@ -181,16 +183,18 @@ Stake.MetaGrammar = new JS.Module("Stake.MetaGrammar", {
         } else {
             address0 = null;
         }
-        return address0;
+        return this._nodeCache.grammar[index0] = address0;
     },
     __consume__grammar_name: function(input) {
         var address0 = null;
+        var index0 = this._offset;
         this._nodeCache.grammar_name = this._nodeCache.grammar_name || {};
-        var cached = this._nodeCache.grammar_name[this._offset];
+        var cached = this._nodeCache.grammar_name[index0];
         if (cached) {
+            this._offset += cached.textValue.length;
             return cached;
         }
-        var index0 = this._offset;
+        var index1 = this._offset;
         var elements0 = [];
         var labelled0 = {};
         var text0 = "";
@@ -213,30 +217,32 @@ Stake.MetaGrammar = new JS.Module("Stake.MetaGrammar", {
                 labelled0.object_identifier = address2;
             } else {
                 elements0 = null;
-                this._offset = index0;
+                this._offset = index1;
             }
         } else {
             elements0 = null;
-            this._offset = index0;
+            this._offset = index1;
         }
         if (elements0) {
-            this._offset = index0;
+            this._offset = index1;
             var klass1 = Stake.SyntaxNode;
             address0 = new klass1(text0, this._offset, elements0, labelled0);
             this._offset += text0.length;
         } else {
             address0 = null;
         }
-        return address0;
+        return this._nodeCache.grammar_name[index0] = address0;
     },
     __consume__grammar_rule: function(input) {
         var address0 = null;
+        var index0 = this._offset;
         this._nodeCache.grammar_rule = this._nodeCache.grammar_rule || {};
-        var cached = this._nodeCache.grammar_rule[this._offset];
+        var cached = this._nodeCache.grammar_rule[index0];
         if (cached) {
+            this._offset += cached.textValue.length;
             return cached;
         }
-        var index0 = this._offset;
+        var index1 = this._offset;
         var elements0 = [];
         var labelled0 = {};
         var text0 = "";
@@ -260,18 +266,18 @@ Stake.MetaGrammar = new JS.Module("Stake.MetaGrammar", {
                     labelled0.parsing_expression = address3;
                 } else {
                     elements0 = null;
-                    this._offset = index0;
+                    this._offset = index1;
                 }
             } else {
                 elements0 = null;
-                this._offset = index0;
+                this._offset = index1;
             }
         } else {
             elements0 = null;
-            this._offset = index0;
+            this._offset = index1;
         }
         if (elements0) {
-            this._offset = index0;
+            this._offset = index1;
             var klass0 = null;
             if (Stake.Compiler.GrammarRule instanceof Function) {
                 klass0 = Stake.Compiler.GrammarRule;
@@ -286,22 +292,24 @@ Stake.MetaGrammar = new JS.Module("Stake.MetaGrammar", {
         } else {
             address0 = null;
         }
-        return address0;
+        return this._nodeCache.grammar_rule[index0] = address0;
     },
     __consume__assignment: function(input) {
         var address0 = null;
+        var index0 = this._offset;
         this._nodeCache.assignment = this._nodeCache.assignment || {};
-        var cached = this._nodeCache.assignment[this._offset];
+        var cached = this._nodeCache.assignment[index0];
         if (cached) {
+            this._offset += cached.textValue.length;
             return cached;
         }
-        var index0 = this._offset;
+        var index1 = this._offset;
         var elements0 = [];
         var labelled0 = {};
         var text0 = "";
         var address1 = null;
         var remaining0 = 1;
-        var index1 = this._offset;
+        var index2 = this._offset;
         var elements1 = [];
         var text1 = "";
         var address2 = true;
@@ -314,7 +322,7 @@ Stake.MetaGrammar = new JS.Module("Stake.MetaGrammar", {
             }
         }
         if (remaining0 <= 0) {
-            this._offset = index1;
+            this._offset = index2;
             var klass0 = Stake.SyntaxNode;
             address1 = new klass0(text1, this._offset, elements1, {});
             this._offset += text1.length;
@@ -337,7 +345,7 @@ Stake.MetaGrammar = new JS.Module("Stake.MetaGrammar", {
                 text0 += address3.textValue;
                 var address4 = null;
                 var remaining1 = 1;
-                var index2 = this._offset;
+                var index3 = this._offset;
                 var elements2 = [];
                 var text2 = "";
                 var address5 = true;
@@ -350,7 +358,7 @@ Stake.MetaGrammar = new JS.Module("Stake.MetaGrammar", {
                     }
                 }
                 if (remaining1 <= 0) {
-                    this._offset = index2;
+                    this._offset = index3;
                     var klass2 = Stake.SyntaxNode;
                     address4 = new klass2(text2, this._offset, elements2, {});
                     this._offset += text2.length;
@@ -362,54 +370,58 @@ Stake.MetaGrammar = new JS.Module("Stake.MetaGrammar", {
                     text0 += address4.textValue;
                 } else {
                     elements0 = null;
-                    this._offset = index0;
+                    this._offset = index1;
                 }
             } else {
                 elements0 = null;
-                this._offset = index0;
+                this._offset = index1;
             }
         } else {
             elements0 = null;
-            this._offset = index0;
+            this._offset = index1;
         }
         if (elements0) {
-            this._offset = index0;
+            this._offset = index1;
             var klass3 = Stake.SyntaxNode;
             address0 = new klass3(text0, this._offset, elements0, labelled0);
             this._offset += text0.length;
         } else {
             address0 = null;
         }
-        return address0;
+        return this._nodeCache.assignment[index0] = address0;
     },
     __consume__parsing_expression: function(input) {
         var address0 = null;
+        var index0 = this._offset;
         this._nodeCache.parsing_expression = this._nodeCache.parsing_expression || {};
-        var cached = this._nodeCache.parsing_expression[this._offset];
+        var cached = this._nodeCache.parsing_expression[index0];
         if (cached) {
+            this._offset += cached.textValue.length;
             return cached;
         }
-        var index0 = this._offset;
+        var index1 = this._offset;
         address0 = this.__consume__choice_expression();
         if (address0) {
         } else {
-            this._offset = index0;
+            this._offset = index1;
             address0 = this.__consume__choice_part();
             if (address0) {
             } else {
-                this._offset = index0;
+                this._offset = index1;
             }
         }
-        return address0;
+        return this._nodeCache.parsing_expression[index0] = address0;
     },
     __consume__parenthesised_expression: function(input) {
         var address0 = null;
+        var index0 = this._offset;
         this._nodeCache.parenthesised_expression = this._nodeCache.parenthesised_expression || {};
-        var cached = this._nodeCache.parenthesised_expression[this._offset];
+        var cached = this._nodeCache.parenthesised_expression[index0];
         if (cached) {
+            this._offset += cached.textValue.length;
             return cached;
         }
-        var index0 = this._offset;
+        var index1 = this._offset;
         var elements0 = [];
         var labelled0 = {};
         var text0 = "";
@@ -426,7 +438,7 @@ Stake.MetaGrammar = new JS.Module("Stake.MetaGrammar", {
             text0 += address1.textValue;
             var address2 = null;
             var remaining0 = null;
-            var index1 = this._offset;
+            var index2 = this._offset;
             var elements1 = [];
             var text1 = "";
             var address3 = true;
@@ -439,7 +451,7 @@ Stake.MetaGrammar = new JS.Module("Stake.MetaGrammar", {
                 }
             }
             if (remaining0 <= 0) {
-                this._offset = index1;
+                this._offset = index2;
                 var klass1 = Stake.SyntaxNode;
                 address2 = new klass1(text1, this._offset, elements1, {});
                 this._offset += text1.length;
@@ -457,7 +469,7 @@ Stake.MetaGrammar = new JS.Module("Stake.MetaGrammar", {
                     labelled0.parsing_expression = address4;
                     var address5 = null;
                     var remaining1 = null;
-                    var index2 = this._offset;
+                    var index3 = this._offset;
                     var elements2 = [];
                     var text2 = "";
                     var address6 = true;
@@ -470,7 +482,7 @@ Stake.MetaGrammar = new JS.Module("Stake.MetaGrammar", {
                         }
                     }
                     if (remaining1 <= 0) {
-                        this._offset = index2;
+                        this._offset = index3;
                         var klass2 = Stake.SyntaxNode;
                         address5 = new klass2(text2, this._offset, elements2, {});
                         this._offset += text2.length;
@@ -493,42 +505,44 @@ Stake.MetaGrammar = new JS.Module("Stake.MetaGrammar", {
                             text0 += address7.textValue;
                         } else {
                             elements0 = null;
-                            this._offset = index0;
+                            this._offset = index1;
                         }
                     } else {
                         elements0 = null;
-                        this._offset = index0;
+                        this._offset = index1;
                     }
                 } else {
                     elements0 = null;
-                    this._offset = index0;
+                    this._offset = index1;
                 }
             } else {
                 elements0 = null;
-                this._offset = index0;
+                this._offset = index1;
             }
         } else {
             elements0 = null;
-            this._offset = index0;
+            this._offset = index1;
         }
         if (elements0) {
-            this._offset = index0;
+            this._offset = index1;
             var klass4 = Stake.SyntaxNode;
             address0 = new klass4(text0, this._offset, elements0, labelled0);
             this._offset += text0.length;
         } else {
             address0 = null;
         }
-        return address0;
+        return this._nodeCache.parenthesised_expression[index0] = address0;
     },
     __consume__choice_expression: function(input) {
         var address0 = null;
+        var index0 = this._offset;
         this._nodeCache.choice_expression = this._nodeCache.choice_expression || {};
-        var cached = this._nodeCache.choice_expression[this._offset];
+        var cached = this._nodeCache.choice_expression[index0];
         if (cached) {
+            this._offset += cached.textValue.length;
             return cached;
         }
-        var index0 = this._offset;
+        var index1 = this._offset;
         var elements0 = [];
         var labelled0 = {};
         var text0 = "";
@@ -540,18 +554,18 @@ Stake.MetaGrammar = new JS.Module("Stake.MetaGrammar", {
             labelled0.first_expression = address1;
             var address2 = null;
             var remaining0 = 1;
-            var index1 = this._offset;
+            var index2 = this._offset;
             var elements1 = [];
             var text1 = "";
             var address3 = true;
             while (address3) {
-                var index2 = this._offset;
+                var index3 = this._offset;
                 var elements2 = [];
                 var labelled1 = {};
                 var text2 = "";
                 var address4 = null;
                 var remaining1 = 1;
-                var index3 = this._offset;
+                var index4 = this._offset;
                 var elements3 = [];
                 var text3 = "";
                 var address5 = true;
@@ -564,7 +578,7 @@ Stake.MetaGrammar = new JS.Module("Stake.MetaGrammar", {
                     }
                 }
                 if (remaining1 <= 0) {
-                    this._offset = index3;
+                    this._offset = index4;
                     var klass0 = Stake.SyntaxNode;
                     address4 = new klass0(text3, this._offset, elements3, {});
                     this._offset += text3.length;
@@ -587,7 +601,7 @@ Stake.MetaGrammar = new JS.Module("Stake.MetaGrammar", {
                         text2 += address6.textValue;
                         var address7 = null;
                         var remaining2 = 1;
-                        var index4 = this._offset;
+                        var index5 = this._offset;
                         var elements4 = [];
                         var text4 = "";
                         var address8 = true;
@@ -600,7 +614,7 @@ Stake.MetaGrammar = new JS.Module("Stake.MetaGrammar", {
                             }
                         }
                         if (remaining2 <= 0) {
-                            this._offset = index4;
+                            this._offset = index5;
                             var klass2 = Stake.SyntaxNode;
                             address7 = new klass2(text4, this._offset, elements4, {});
                             this._offset += text4.length;
@@ -618,22 +632,22 @@ Stake.MetaGrammar = new JS.Module("Stake.MetaGrammar", {
                                 labelled1.expression = address9;
                             } else {
                                 elements2 = null;
-                                this._offset = index2;
+                                this._offset = index3;
                             }
                         } else {
                             elements2 = null;
-                            this._offset = index2;
+                            this._offset = index3;
                         }
                     } else {
                         elements2 = null;
-                        this._offset = index2;
+                        this._offset = index3;
                     }
                 } else {
                     elements2 = null;
-                    this._offset = index2;
+                    this._offset = index3;
                 }
                 if (elements2) {
-                    this._offset = index2;
+                    this._offset = index3;
                     var klass3 = Stake.SyntaxNode;
                     address3 = new klass3(text2, this._offset, elements2, labelled1);
                     this._offset += text2.length;
@@ -647,7 +661,7 @@ Stake.MetaGrammar = new JS.Module("Stake.MetaGrammar", {
                 }
             }
             if (remaining0 <= 0) {
-                this._offset = index1;
+                this._offset = index2;
                 var klass4 = Stake.SyntaxNode;
                 address2 = new klass4(text1, this._offset, elements1, {});
                 this._offset += text1.length;
@@ -660,14 +674,14 @@ Stake.MetaGrammar = new JS.Module("Stake.MetaGrammar", {
                 labelled0.rest_expressions = address2;
             } else {
                 elements0 = null;
-                this._offset = index0;
+                this._offset = index1;
             }
         } else {
             elements0 = null;
-            this._offset = index0;
+            this._offset = index1;
         }
         if (elements0) {
-            this._offset = index0;
+            this._offset = index1;
             var klass5 = null;
             if (Stake.Compiler.Choice instanceof Function) {
                 klass5 = Stake.Compiler.Choice;
@@ -682,43 +696,45 @@ Stake.MetaGrammar = new JS.Module("Stake.MetaGrammar", {
         } else {
             address0 = null;
         }
-        return address0;
+        return this._nodeCache.choice_expression[index0] = address0;
     },
     __consume__choice_part: function(input) {
         var address0 = null;
+        var index0 = this._offset;
         this._nodeCache.choice_part = this._nodeCache.choice_part || {};
-        var cached = this._nodeCache.choice_part[this._offset];
+        var cached = this._nodeCache.choice_part[index0];
         if (cached) {
+            this._offset += cached.textValue.length;
             return cached;
         }
-        var index0 = this._offset;
+        var index1 = this._offset;
         var elements0 = [];
         var labelled0 = {};
         var text0 = "";
         var address1 = null;
-        var index1 = this._offset;
+        var index2 = this._offset;
         address1 = this.__consume__sequence_expression();
         if (address1) {
         } else {
-            this._offset = index1;
+            this._offset = index2;
             address1 = this.__consume__sequence_part();
             if (address1) {
             } else {
-                this._offset = index1;
+                this._offset = index2;
             }
         }
         if (address1) {
             elements0.push(address1);
             text0 += address1.textValue;
             var address2 = null;
-            var index2 = this._offset;
             var index3 = this._offset;
+            var index4 = this._offset;
             var elements1 = [];
             var labelled1 = {};
             var text1 = "";
             var address3 = null;
             var remaining0 = 1;
-            var index4 = this._offset;
+            var index5 = this._offset;
             var elements2 = [];
             var text2 = "";
             var address4 = true;
@@ -731,7 +747,7 @@ Stake.MetaGrammar = new JS.Module("Stake.MetaGrammar", {
                 }
             }
             if (remaining0 <= 0) {
-                this._offset = index4;
+                this._offset = index5;
                 var klass0 = Stake.SyntaxNode;
                 address3 = new klass0(text2, this._offset, elements2, {});
                 this._offset += text2.length;
@@ -749,14 +765,14 @@ Stake.MetaGrammar = new JS.Module("Stake.MetaGrammar", {
                     labelled1.type_expression = address5;
                 } else {
                     elements1 = null;
-                    this._offset = index3;
+                    this._offset = index4;
                 }
             } else {
                 elements1 = null;
-                this._offset = index3;
+                this._offset = index4;
             }
             if (elements1) {
-                this._offset = index3;
+                this._offset = index4;
                 var klass1 = Stake.SyntaxNode;
                 address2 = new klass1(text1, this._offset, elements1, labelled1);
                 this._offset += text1.length;
@@ -765,7 +781,7 @@ Stake.MetaGrammar = new JS.Module("Stake.MetaGrammar", {
             }
             if (address2) {
             } else {
-                this._offset = index2;
+                this._offset = index3;
                 var klass2 = Stake.SyntaxNode;
                 address2 = new klass2("", this._offset, [], {});
                 this._offset += 0;
@@ -775,14 +791,14 @@ Stake.MetaGrammar = new JS.Module("Stake.MetaGrammar", {
                 text0 += address2.textValue;
             } else {
                 elements0 = null;
-                this._offset = index0;
+                this._offset = index1;
             }
         } else {
             elements0 = null;
-            this._offset = index0;
+            this._offset = index1;
         }
         if (elements0) {
-            this._offset = index0;
+            this._offset = index1;
             var klass3 = null;
             if (Stake.Compiler.ChoicePart instanceof Function) {
                 klass3 = Stake.Compiler.ChoicePart;
@@ -797,16 +813,18 @@ Stake.MetaGrammar = new JS.Module("Stake.MetaGrammar", {
         } else {
             address0 = null;
         }
-        return address0;
+        return this._nodeCache.choice_part[index0] = address0;
     },
     __consume__type_expression: function(input) {
         var address0 = null;
+        var index0 = this._offset;
         this._nodeCache.type_expression = this._nodeCache.type_expression || {};
-        var cached = this._nodeCache.type_expression[this._offset];
+        var cached = this._nodeCache.type_expression[index0];
         if (cached) {
+            this._offset += cached.textValue.length;
             return cached;
         }
-        var index0 = this._offset;
+        var index1 = this._offset;
         var elements0 = [];
         var labelled0 = {};
         var text0 = "";
@@ -840,34 +858,36 @@ Stake.MetaGrammar = new JS.Module("Stake.MetaGrammar", {
                     text0 += address3.textValue;
                 } else {
                     elements0 = null;
-                    this._offset = index0;
+                    this._offset = index1;
                 }
             } else {
                 elements0 = null;
-                this._offset = index0;
+                this._offset = index1;
             }
         } else {
             elements0 = null;
-            this._offset = index0;
+            this._offset = index1;
         }
         if (elements0) {
-            this._offset = index0;
+            this._offset = index1;
             var klass2 = Stake.SyntaxNode;
             address0 = new klass2(text0, this._offset, elements0, labelled0);
             this._offset += text0.length;
         } else {
             address0 = null;
         }
-        return address0;
+        return this._nodeCache.type_expression[index0] = address0;
     },
     __consume__sequence_expression: function(input) {
         var address0 = null;
+        var index0 = this._offset;
         this._nodeCache.sequence_expression = this._nodeCache.sequence_expression || {};
-        var cached = this._nodeCache.sequence_expression[this._offset];
+        var cached = this._nodeCache.sequence_expression[index0];
         if (cached) {
+            this._offset += cached.textValue.length;
             return cached;
         }
-        var index0 = this._offset;
+        var index1 = this._offset;
         var elements0 = [];
         var labelled0 = {};
         var text0 = "";
@@ -879,18 +899,18 @@ Stake.MetaGrammar = new JS.Module("Stake.MetaGrammar", {
             labelled0.first_expression = address1;
             var address2 = null;
             var remaining0 = 1;
-            var index1 = this._offset;
+            var index2 = this._offset;
             var elements1 = [];
             var text1 = "";
             var address3 = true;
             while (address3) {
-                var index2 = this._offset;
+                var index3 = this._offset;
                 var elements2 = [];
                 var labelled1 = {};
                 var text2 = "";
                 var address4 = null;
                 var remaining1 = 1;
-                var index3 = this._offset;
+                var index4 = this._offset;
                 var elements3 = [];
                 var text3 = "";
                 var address5 = true;
@@ -903,7 +923,7 @@ Stake.MetaGrammar = new JS.Module("Stake.MetaGrammar", {
                     }
                 }
                 if (remaining1 <= 0) {
-                    this._offset = index3;
+                    this._offset = index4;
                     var klass0 = Stake.SyntaxNode;
                     address4 = new klass0(text3, this._offset, elements3, {});
                     this._offset += text3.length;
@@ -921,14 +941,14 @@ Stake.MetaGrammar = new JS.Module("Stake.MetaGrammar", {
                         labelled1.sequence_part = address6;
                     } else {
                         elements2 = null;
-                        this._offset = index2;
+                        this._offset = index3;
                     }
                 } else {
                     elements2 = null;
-                    this._offset = index2;
+                    this._offset = index3;
                 }
                 if (elements2) {
-                    this._offset = index2;
+                    this._offset = index3;
                     var klass1 = Stake.SyntaxNode;
                     address3 = new klass1(text2, this._offset, elements2, labelled1);
                     this._offset += text2.length;
@@ -942,7 +962,7 @@ Stake.MetaGrammar = new JS.Module("Stake.MetaGrammar", {
                 }
             }
             if (remaining0 <= 0) {
-                this._offset = index1;
+                this._offset = index2;
                 var klass2 = Stake.SyntaxNode;
                 address2 = new klass2(text1, this._offset, elements1, {});
                 this._offset += text1.length;
@@ -955,14 +975,14 @@ Stake.MetaGrammar = new JS.Module("Stake.MetaGrammar", {
                 labelled0.rest_expressions = address2;
             } else {
                 elements0 = null;
-                this._offset = index0;
+                this._offset = index1;
             }
         } else {
             elements0 = null;
-            this._offset = index0;
+            this._offset = index1;
         }
         if (elements0) {
-            this._offset = index0;
+            this._offset = index1;
             var klass3 = null;
             if (Stake.Compiler.Sequence instanceof Function) {
                 klass3 = Stake.Compiler.Sequence;
@@ -977,25 +997,27 @@ Stake.MetaGrammar = new JS.Module("Stake.MetaGrammar", {
         } else {
             address0 = null;
         }
-        return address0;
+        return this._nodeCache.sequence_expression[index0] = address0;
     },
     __consume__sequence_part: function(input) {
         var address0 = null;
+        var index0 = this._offset;
         this._nodeCache.sequence_part = this._nodeCache.sequence_part || {};
-        var cached = this._nodeCache.sequence_part[this._offset];
+        var cached = this._nodeCache.sequence_part[index0];
         if (cached) {
+            this._offset += cached.textValue.length;
             return cached;
         }
-        var index0 = this._offset;
+        var index1 = this._offset;
         var elements0 = [];
         var labelled0 = {};
         var text0 = "";
         var address1 = null;
-        var index1 = this._offset;
+        var index2 = this._offset;
         address1 = this.__consume__label();
         if (address1) {
         } else {
-            this._offset = index1;
+            this._offset = index2;
             var klass0 = Stake.SyntaxNode;
             address1 = new klass0("", this._offset, [], {});
             this._offset += 0;
@@ -1004,15 +1026,15 @@ Stake.MetaGrammar = new JS.Module("Stake.MetaGrammar", {
             elements0.push(address1);
             text0 += address1.textValue;
             var address2 = null;
-            var index2 = this._offset;
+            var index3 = this._offset;
             address2 = this.__consume__quantified_atom();
             if (address2) {
             } else {
-                this._offset = index2;
+                this._offset = index3;
                 address2 = this.__consume__atom();
                 if (address2) {
                 } else {
-                    this._offset = index2;
+                    this._offset = index3;
                 }
             }
             if (address2) {
@@ -1021,14 +1043,14 @@ Stake.MetaGrammar = new JS.Module("Stake.MetaGrammar", {
                 labelled0.expression = address2;
             } else {
                 elements0 = null;
-                this._offset = index0;
+                this._offset = index1;
             }
         } else {
             elements0 = null;
-            this._offset = index0;
+            this._offset = index1;
         }
         if (elements0) {
-            this._offset = index0;
+            this._offset = index1;
             var klass1 = null;
             if (Stake.Compiler.SequencePart instanceof Function) {
                 klass1 = Stake.Compiler.SequencePart;
@@ -1043,16 +1065,18 @@ Stake.MetaGrammar = new JS.Module("Stake.MetaGrammar", {
         } else {
             address0 = null;
         }
-        return address0;
+        return this._nodeCache.sequence_part[index0] = address0;
     },
     __consume__quantified_atom: function(input) {
         var address0 = null;
+        var index0 = this._offset;
         this._nodeCache.quantified_atom = this._nodeCache.quantified_atom || {};
-        var cached = this._nodeCache.quantified_atom[this._offset];
+        var cached = this._nodeCache.quantified_atom[index0];
         if (cached) {
+            this._offset += cached.textValue.length;
             return cached;
         }
-        var index0 = this._offset;
+        var index1 = this._offset;
         var elements0 = [];
         var labelled0 = {};
         var text0 = "";
@@ -1070,14 +1094,14 @@ Stake.MetaGrammar = new JS.Module("Stake.MetaGrammar", {
                 labelled0.quantifier = address2;
             } else {
                 elements0 = null;
-                this._offset = index0;
+                this._offset = index1;
             }
         } else {
             elements0 = null;
-            this._offset = index0;
+            this._offset = index1;
         }
         if (elements0) {
-            this._offset = index0;
+            this._offset = index1;
             var klass0 = null;
             if (Stake.Compiler.Repeat instanceof Function) {
                 klass0 = Stake.Compiler.Repeat;
@@ -1092,61 +1116,65 @@ Stake.MetaGrammar = new JS.Module("Stake.MetaGrammar", {
         } else {
             address0 = null;
         }
-        return address0;
+        return this._nodeCache.quantified_atom[index0] = address0;
     },
     __consume__atom: function(input) {
         var address0 = null;
+        var index0 = this._offset;
         this._nodeCache.atom = this._nodeCache.atom || {};
-        var cached = this._nodeCache.atom[this._offset];
+        var cached = this._nodeCache.atom[index0];
         if (cached) {
+            this._offset += cached.textValue.length;
             return cached;
         }
-        var index0 = this._offset;
+        var index1 = this._offset;
         address0 = this.__consume__parenthesised_expression();
         if (address0) {
         } else {
-            this._offset = index0;
+            this._offset = index1;
             address0 = this.__consume__predicated_atom();
             if (address0) {
             } else {
-                this._offset = index0;
+                this._offset = index1;
                 address0 = this.__consume__reference_expression();
                 if (address0) {
                 } else {
-                    this._offset = index0;
+                    this._offset = index1;
                     address0 = this.__consume__string_expression();
                     if (address0) {
                     } else {
-                        this._offset = index0;
+                        this._offset = index1;
                         address0 = this.__consume__any_char_expression();
                         if (address0) {
                         } else {
-                            this._offset = index0;
+                            this._offset = index1;
                             address0 = this.__consume__char_class_expression();
                             if (address0) {
                             } else {
-                                this._offset = index0;
+                                this._offset = index1;
                             }
                         }
                     }
                 }
             }
         }
-        return address0;
+        return this._nodeCache.atom[index0] = address0;
     },
     __consume__predicated_atom: function(input) {
         var address0 = null;
+        var index0 = this._offset;
         this._nodeCache.predicated_atom = this._nodeCache.predicated_atom || {};
-        var cached = this._nodeCache.predicated_atom[this._offset];
+        var cached = this._nodeCache.predicated_atom[index0];
         if (cached) {
+            this._offset += cached.textValue.length;
             return cached;
         }
-        var index0 = this._offset;
+        var index1 = this._offset;
         var elements0 = [];
         var labelled0 = {};
         var text0 = "";
         var address1 = null;
-        var index1 = this._offset;
+        var index2 = this._offset;
         if (this._input.substring(this._offset, this._offset + 1) === "&") {
             var klass0 = Stake.SyntaxNode;
             address1 = new klass0("&", this._offset, [], {});
@@ -1156,7 +1184,7 @@ Stake.MetaGrammar = new JS.Module("Stake.MetaGrammar", {
         }
         if (address1) {
         } else {
-            this._offset = index1;
+            this._offset = index2;
             if (this._input.substring(this._offset, this._offset + 1) === "!") {
                 var klass1 = Stake.SyntaxNode;
                 address1 = new klass1("!", this._offset, [], {});
@@ -1166,7 +1194,7 @@ Stake.MetaGrammar = new JS.Module("Stake.MetaGrammar", {
             }
             if (address1) {
             } else {
-                this._offset = index1;
+                this._offset = index2;
             }
         }
         if (address1) {
@@ -1181,14 +1209,14 @@ Stake.MetaGrammar = new JS.Module("Stake.MetaGrammar", {
                 labelled0.atom = address2;
             } else {
                 elements0 = null;
-                this._offset = index0;
+                this._offset = index1;
             }
         } else {
             elements0 = null;
-            this._offset = index0;
+            this._offset = index1;
         }
         if (elements0) {
-            this._offset = index0;
+            this._offset = index1;
             var klass2 = null;
             if (Stake.Compiler.PredicatedAtom instanceof Function) {
                 klass2 = Stake.Compiler.PredicatedAtom;
@@ -1203,16 +1231,18 @@ Stake.MetaGrammar = new JS.Module("Stake.MetaGrammar", {
         } else {
             address0 = null;
         }
-        return address0;
+        return this._nodeCache.predicated_atom[index0] = address0;
     },
     __consume__reference_expression: function(input) {
         var address0 = null;
+        var index0 = this._offset;
         this._nodeCache.reference_expression = this._nodeCache.reference_expression || {};
-        var cached = this._nodeCache.reference_expression[this._offset];
+        var cached = this._nodeCache.reference_expression[index0];
         if (cached) {
+            this._offset += cached.textValue.length;
             return cached;
         }
-        var index0 = this._offset;
+        var index1 = this._offset;
         var elements0 = [];
         var labelled0 = {};
         var text0 = "";
@@ -1223,9 +1253,9 @@ Stake.MetaGrammar = new JS.Module("Stake.MetaGrammar", {
             text0 += address1.textValue;
             labelled0.identifier = address1;
             var address2 = null;
-            var index1 = this._offset;
+            var index2 = this._offset;
             address2 = this.__consume__assignment();
-            this._offset = index1;
+            this._offset = index2;
             if (!(address2)) {
                 var klass0 = Stake.SyntaxNode;
                 address2 = new klass0("", this._offset, [], {});
@@ -1238,14 +1268,14 @@ Stake.MetaGrammar = new JS.Module("Stake.MetaGrammar", {
                 text0 += address2.textValue;
             } else {
                 elements0 = null;
-                this._offset = index0;
+                this._offset = index1;
             }
         } else {
             elements0 = null;
-            this._offset = index0;
+            this._offset = index1;
         }
         if (elements0) {
-            this._offset = index0;
+            this._offset = index1;
             var klass1 = null;
             if (Stake.Compiler.Reference instanceof Function) {
                 klass1 = Stake.Compiler.Reference;
@@ -1260,16 +1290,18 @@ Stake.MetaGrammar = new JS.Module("Stake.MetaGrammar", {
         } else {
             address0 = null;
         }
-        return address0;
+        return this._nodeCache.reference_expression[index0] = address0;
     },
     __consume__string_expression: function(input) {
         var address0 = null;
+        var index0 = this._offset;
         this._nodeCache.string_expression = this._nodeCache.string_expression || {};
-        var cached = this._nodeCache.string_expression[this._offset];
+        var cached = this._nodeCache.string_expression[index0];
         if (cached) {
+            this._offset += cached.textValue.length;
             return cached;
         }
-        var index0 = this._offset;
+        var index1 = this._offset;
         var elements0 = [];
         var labelled0 = {};
         var text0 = "";
@@ -1286,13 +1318,13 @@ Stake.MetaGrammar = new JS.Module("Stake.MetaGrammar", {
             text0 += address1.textValue;
             var address2 = null;
             var remaining0 = null;
-            var index1 = this._offset;
+            var index2 = this._offset;
             var elements1 = [];
             var text1 = "";
             var address3 = true;
             while (address3) {
-                var index2 = this._offset;
                 var index3 = this._offset;
+                var index4 = this._offset;
                 var elements2 = [];
                 var labelled1 = {};
                 var text2 = "";
@@ -1321,14 +1353,14 @@ Stake.MetaGrammar = new JS.Module("Stake.MetaGrammar", {
                         text2 += address5.textValue;
                     } else {
                         elements2 = null;
-                        this._offset = index3;
+                        this._offset = index4;
                     }
                 } else {
                     elements2 = null;
-                    this._offset = index3;
+                    this._offset = index4;
                 }
                 if (elements2) {
-                    this._offset = index3;
+                    this._offset = index4;
                     var klass3 = Stake.SyntaxNode;
                     address3 = new klass3(text2, this._offset, elements2, labelled1);
                     this._offset += text2.length;
@@ -1337,7 +1369,7 @@ Stake.MetaGrammar = new JS.Module("Stake.MetaGrammar", {
                 }
                 if (address3) {
                 } else {
-                    this._offset = index2;
+                    this._offset = index3;
                     var temp1 = this._input.substring(this._offset, this._offset + 1);
                     var match0 = null;
                     if (match0 = temp1.match(/^[^"]/)) {
@@ -1349,7 +1381,7 @@ Stake.MetaGrammar = new JS.Module("Stake.MetaGrammar", {
                     }
                     if (address3) {
                     } else {
-                        this._offset = index2;
+                        this._offset = index3;
                     }
                 }
                 if (address3) {
@@ -1359,7 +1391,7 @@ Stake.MetaGrammar = new JS.Module("Stake.MetaGrammar", {
                 }
             }
             if (remaining0 <= 0) {
-                this._offset = index1;
+                this._offset = index2;
                 var klass5 = Stake.SyntaxNode;
                 address2 = new klass5(text1, this._offset, elements1, {});
                 this._offset += text1.length;
@@ -1382,18 +1414,18 @@ Stake.MetaGrammar = new JS.Module("Stake.MetaGrammar", {
                     text0 += address6.textValue;
                 } else {
                     elements0 = null;
-                    this._offset = index0;
+                    this._offset = index1;
                 }
             } else {
                 elements0 = null;
-                this._offset = index0;
+                this._offset = index1;
             }
         } else {
             elements0 = null;
-            this._offset = index0;
+            this._offset = index1;
         }
         if (elements0) {
-            this._offset = index0;
+            this._offset = index1;
             var klass7 = null;
             if (Stake.Compiler.String instanceof Function) {
                 klass7 = Stake.Compiler.String;
@@ -1408,13 +1440,15 @@ Stake.MetaGrammar = new JS.Module("Stake.MetaGrammar", {
         } else {
             address0 = null;
         }
-        return address0;
+        return this._nodeCache.string_expression[index0] = address0;
     },
     __consume__any_char_expression: function(input) {
         var address0 = null;
+        var index0 = this._offset;
         this._nodeCache.any_char_expression = this._nodeCache.any_char_expression || {};
-        var cached = this._nodeCache.any_char_expression[this._offset];
+        var cached = this._nodeCache.any_char_expression[index0];
         if (cached) {
+            this._offset += cached.textValue.length;
             return cached;
         }
         if (this._input.substring(this._offset, this._offset + 1) === ".") {
@@ -1432,16 +1466,18 @@ Stake.MetaGrammar = new JS.Module("Stake.MetaGrammar", {
         } else {
             address0 = null;
         }
-        return address0;
+        return this._nodeCache.any_char_expression[index0] = address0;
     },
     __consume__char_class_expression: function(input) {
         var address0 = null;
+        var index0 = this._offset;
         this._nodeCache.char_class_expression = this._nodeCache.char_class_expression || {};
-        var cached = this._nodeCache.char_class_expression[this._offset];
+        var cached = this._nodeCache.char_class_expression[index0];
         if (cached) {
+            this._offset += cached.textValue.length;
             return cached;
         }
-        var index0 = this._offset;
+        var index1 = this._offset;
         var elements0 = [];
         var labelled0 = {};
         var text0 = "";
@@ -1457,7 +1493,7 @@ Stake.MetaGrammar = new JS.Module("Stake.MetaGrammar", {
             elements0.push(address1);
             text0 += address1.textValue;
             var address2 = null;
-            var index1 = this._offset;
+            var index2 = this._offset;
             if (this._input.substring(this._offset, this._offset + 1) === "^") {
                 var klass1 = Stake.SyntaxNode;
                 address2 = new klass1("^", this._offset, [], {});
@@ -1467,7 +1503,7 @@ Stake.MetaGrammar = new JS.Module("Stake.MetaGrammar", {
             }
             if (address2) {
             } else {
-                this._offset = index1;
+                this._offset = index2;
                 var klass2 = Stake.SyntaxNode;
                 address2 = new klass2("", this._offset, [], {});
                 this._offset += 0;
@@ -1477,13 +1513,13 @@ Stake.MetaGrammar = new JS.Module("Stake.MetaGrammar", {
                 text0 += address2.textValue;
                 var address3 = null;
                 var remaining0 = 1;
-                var index2 = this._offset;
+                var index3 = this._offset;
                 var elements1 = [];
                 var text1 = "";
                 var address4 = true;
                 while (address4) {
-                    var index3 = this._offset;
                     var index4 = this._offset;
+                    var index5 = this._offset;
                     var elements2 = [];
                     var labelled1 = {};
                     var text2 = "";
@@ -1512,14 +1548,14 @@ Stake.MetaGrammar = new JS.Module("Stake.MetaGrammar", {
                             text2 += address6.textValue;
                         } else {
                             elements2 = null;
-                            this._offset = index4;
+                            this._offset = index5;
                         }
                     } else {
                         elements2 = null;
-                        this._offset = index4;
+                        this._offset = index5;
                     }
                     if (elements2) {
-                        this._offset = index4;
+                        this._offset = index5;
                         var klass5 = Stake.SyntaxNode;
                         address4 = new klass5(text2, this._offset, elements2, labelled1);
                         this._offset += text2.length;
@@ -1528,7 +1564,7 @@ Stake.MetaGrammar = new JS.Module("Stake.MetaGrammar", {
                     }
                     if (address4) {
                     } else {
-                        this._offset = index3;
+                        this._offset = index4;
                         var temp1 = this._input.substring(this._offset, this._offset + 1);
                         var match0 = null;
                         if (match0 = temp1.match(/^[^\]]/)) {
@@ -1540,7 +1576,7 @@ Stake.MetaGrammar = new JS.Module("Stake.MetaGrammar", {
                         }
                         if (address4) {
                         } else {
-                            this._offset = index3;
+                            this._offset = index4;
                         }
                     }
                     if (address4) {
@@ -1550,7 +1586,7 @@ Stake.MetaGrammar = new JS.Module("Stake.MetaGrammar", {
                     }
                 }
                 if (remaining0 <= 0) {
-                    this._offset = index2;
+                    this._offset = index3;
                     var klass7 = Stake.SyntaxNode;
                     address3 = new klass7(text1, this._offset, elements1, {});
                     this._offset += text1.length;
@@ -1573,22 +1609,22 @@ Stake.MetaGrammar = new JS.Module("Stake.MetaGrammar", {
                         text0 += address7.textValue;
                     } else {
                         elements0 = null;
-                        this._offset = index0;
+                        this._offset = index1;
                     }
                 } else {
                     elements0 = null;
-                    this._offset = index0;
+                    this._offset = index1;
                 }
             } else {
                 elements0 = null;
-                this._offset = index0;
+                this._offset = index1;
             }
         } else {
             elements0 = null;
-            this._offset = index0;
+            this._offset = index1;
         }
         if (elements0) {
-            this._offset = index0;
+            this._offset = index1;
             var klass9 = null;
             if (Stake.Compiler.CharClass instanceof Function) {
                 klass9 = Stake.Compiler.CharClass;
@@ -1603,16 +1639,18 @@ Stake.MetaGrammar = new JS.Module("Stake.MetaGrammar", {
         } else {
             address0 = null;
         }
-        return address0;
+        return this._nodeCache.char_class_expression[index0] = address0;
     },
     __consume__label: function(input) {
         var address0 = null;
+        var index0 = this._offset;
         this._nodeCache.label = this._nodeCache.label || {};
-        var cached = this._nodeCache.label[this._offset];
+        var cached = this._nodeCache.label[index0];
         if (cached) {
+            this._offset += cached.textValue.length;
             return cached;
         }
-        var index0 = this._offset;
+        var index1 = this._offset;
         var elements0 = [];
         var labelled0 = {};
         var text0 = "";
@@ -1635,30 +1673,32 @@ Stake.MetaGrammar = new JS.Module("Stake.MetaGrammar", {
                 text0 += address2.textValue;
             } else {
                 elements0 = null;
-                this._offset = index0;
+                this._offset = index1;
             }
         } else {
             elements0 = null;
-            this._offset = index0;
+            this._offset = index1;
         }
         if (elements0) {
-            this._offset = index0;
+            this._offset = index1;
             var klass1 = Stake.SyntaxNode;
             address0 = new klass1(text0, this._offset, elements0, labelled0);
             this._offset += text0.length;
         } else {
             address0 = null;
         }
-        return address0;
+        return this._nodeCache.label[index0] = address0;
     },
     __consume__object_identifier: function(input) {
         var address0 = null;
+        var index0 = this._offset;
         this._nodeCache.object_identifier = this._nodeCache.object_identifier || {};
-        var cached = this._nodeCache.object_identifier[this._offset];
+        var cached = this._nodeCache.object_identifier[index0];
         if (cached) {
+            this._offset += cached.textValue.length;
             return cached;
         }
-        var index0 = this._offset;
+        var index1 = this._offset;
         var elements0 = [];
         var labelled0 = {};
         var text0 = "";
@@ -1670,12 +1710,12 @@ Stake.MetaGrammar = new JS.Module("Stake.MetaGrammar", {
             labelled0.identifier = address1;
             var address2 = null;
             var remaining0 = null;
-            var index1 = this._offset;
+            var index2 = this._offset;
             var elements1 = [];
             var text1 = "";
             var address3 = true;
             while (address3) {
-                var index2 = this._offset;
+                var index3 = this._offset;
                 var elements2 = [];
                 var labelled1 = {};
                 var text2 = "";
@@ -1698,14 +1738,14 @@ Stake.MetaGrammar = new JS.Module("Stake.MetaGrammar", {
                         labelled1.identifier = address5;
                     } else {
                         elements2 = null;
-                        this._offset = index2;
+                        this._offset = index3;
                     }
                 } else {
                     elements2 = null;
-                    this._offset = index2;
+                    this._offset = index3;
                 }
                 if (elements2) {
-                    this._offset = index2;
+                    this._offset = index3;
                     var klass1 = Stake.SyntaxNode;
                     address3 = new klass1(text2, this._offset, elements2, labelled1);
                     this._offset += text2.length;
@@ -1719,7 +1759,7 @@ Stake.MetaGrammar = new JS.Module("Stake.MetaGrammar", {
                 }
             }
             if (remaining0 <= 0) {
-                this._offset = index1;
+                this._offset = index2;
                 var klass2 = Stake.SyntaxNode;
                 address2 = new klass2(text1, this._offset, elements1, {});
                 this._offset += text1.length;
@@ -1731,30 +1771,32 @@ Stake.MetaGrammar = new JS.Module("Stake.MetaGrammar", {
                 text0 += address2.textValue;
             } else {
                 elements0 = null;
-                this._offset = index0;
+                this._offset = index1;
             }
         } else {
             elements0 = null;
-            this._offset = index0;
+            this._offset = index1;
         }
         if (elements0) {
-            this._offset = index0;
+            this._offset = index1;
             var klass3 = Stake.SyntaxNode;
             address0 = new klass3(text0, this._offset, elements0, labelled0);
             this._offset += text0.length;
         } else {
             address0 = null;
         }
-        return address0;
+        return this._nodeCache.object_identifier[index0] = address0;
     },
     __consume__identifier: function(input) {
         var address0 = null;
+        var index0 = this._offset;
         this._nodeCache.identifier = this._nodeCache.identifier || {};
-        var cached = this._nodeCache.identifier[this._offset];
+        var cached = this._nodeCache.identifier[index0];
         if (cached) {
+            this._offset += cached.textValue.length;
             return cached;
         }
-        var index0 = this._offset;
+        var index1 = this._offset;
         var elements0 = [];
         var labelled0 = {};
         var text0 = "";
@@ -1773,7 +1815,7 @@ Stake.MetaGrammar = new JS.Module("Stake.MetaGrammar", {
             text0 += address1.textValue;
             var address2 = null;
             var remaining0 = null;
-            var index1 = this._offset;
+            var index2 = this._offset;
             var elements1 = [];
             var text1 = "";
             var address3 = true;
@@ -1794,7 +1836,7 @@ Stake.MetaGrammar = new JS.Module("Stake.MetaGrammar", {
                 }
             }
             if (remaining0 <= 0) {
-                this._offset = index1;
+                this._offset = index2;
                 var klass2 = Stake.SyntaxNode;
                 address2 = new klass2(text1, this._offset, elements1, {});
                 this._offset += text1.length;
@@ -1806,30 +1848,32 @@ Stake.MetaGrammar = new JS.Module("Stake.MetaGrammar", {
                 text0 += address2.textValue;
             } else {
                 elements0 = null;
-                this._offset = index0;
+                this._offset = index1;
             }
         } else {
             elements0 = null;
-            this._offset = index0;
+            this._offset = index1;
         }
         if (elements0) {
-            this._offset = index0;
+            this._offset = index1;
             var klass3 = Stake.SyntaxNode;
             address0 = new klass3(text0, this._offset, elements0, labelled0);
             this._offset += text0.length;
         } else {
             address0 = null;
         }
-        return address0;
+        return this._nodeCache.identifier[index0] = address0;
     },
     __consume__quantifier: function(input) {
         var address0 = null;
+        var index0 = this._offset;
         this._nodeCache.quantifier = this._nodeCache.quantifier || {};
-        var cached = this._nodeCache.quantifier[this._offset];
+        var cached = this._nodeCache.quantifier[index0];
         if (cached) {
+            this._offset += cached.textValue.length;
             return cached;
         }
-        var index0 = this._offset;
+        var index1 = this._offset;
         if (this._input.substring(this._offset, this._offset + 1) === "?") {
             var klass0 = Stake.SyntaxNode;
             address0 = new klass0("?", this._offset, [], {});
@@ -1839,7 +1883,7 @@ Stake.MetaGrammar = new JS.Module("Stake.MetaGrammar", {
         }
         if (address0) {
         } else {
-            this._offset = index0;
+            this._offset = index1;
             if (this._input.substring(this._offset, this._offset + 1) === "*") {
                 var klass1 = Stake.SyntaxNode;
                 address0 = new klass1("*", this._offset, [], {});
@@ -1849,7 +1893,7 @@ Stake.MetaGrammar = new JS.Module("Stake.MetaGrammar", {
             }
             if (address0) {
             } else {
-                this._offset = index0;
+                this._offset = index1;
                 if (this._input.substring(this._offset, this._offset + 1) === "+") {
                     var klass2 = Stake.SyntaxNode;
                     address0 = new klass2("+", this._offset, [], {});
@@ -1859,17 +1903,19 @@ Stake.MetaGrammar = new JS.Module("Stake.MetaGrammar", {
                 }
                 if (address0) {
                 } else {
-                    this._offset = index0;
+                    this._offset = index1;
                 }
             }
         }
-        return address0;
+        return this._nodeCache.quantifier[index0] = address0;
     },
     __consume__space: function(input) {
         var address0 = null;
+        var index0 = this._offset;
         this._nodeCache.space = this._nodeCache.space || {};
-        var cached = this._nodeCache.space[this._offset];
+        var cached = this._nodeCache.space[index0];
         if (cached) {
+            this._offset += cached.textValue.length;
             return cached;
         }
         var temp0 = this._input.substring(this._offset, this._offset + 1);
@@ -1881,7 +1927,7 @@ Stake.MetaGrammar = new JS.Module("Stake.MetaGrammar", {
         } else {
             address0 = null;
         }
-        return address0;
+        return this._nodeCache.space[index0] = address0;
     }
 });
 

@@ -15,9 +15,14 @@ Stake.Parser.extend({
             module.define('_consume_' + rule.label, function(input) {
               var cache = this._cache,
                   label = rule.label,
-                  store = cache[label] = cache[label] || {};
+                  store = cache[label] = cache[label] || {},
+                  node  = store[this.offset];
               
-              return store[this.offset] = store[this.offset] || rule.consume(input, this);
+              if (node) {
+                this.offset += node.textValue.length;
+                return node;
+              }
+              return store[this.offset] = rule.consume(input, this);
             });
           })(rules[i]);
         
