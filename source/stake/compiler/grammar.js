@@ -1,7 +1,7 @@
 Stake.Compiler.extend({
   Grammar: new JS.Module({
     grammarName: function() {
-      return this.grammar_name.identifier.textValue
+      return this.grammar_name.object_identifier.textValue
     },
     
     toSexp: function() {
@@ -13,12 +13,15 @@ Stake.Compiler.extend({
     },
     
     compile: function(builder) {
+      builder.nameSpace_(this.grammarName());
+      builder.newline_();
       builder.module_(this.grammarName(), function(builder) {
         builder.field_('root', '"' + this.rules.elements[0].grammar_rule.name() + '"');
         this.rules.forEach(function(rule) {
           rule.grammar_rule.compile(builder);
         });
       }, this);
+      builder.newline_();
       builder.class_(this.grammarName() + 'Parser', function(builder) {
         builder.include_(this.grammarName());
         builder.method_('initialize', ['input'], function(builder) {
@@ -37,6 +40,7 @@ Stake.Compiler.extend({
           });
         });
       }, this);
+      builder.newline_();
     }
   })
 });

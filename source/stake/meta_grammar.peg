@@ -1,0 +1,49 @@
+grammar Stake.MetaGrammar
+  grammar <- space* grammar_name rules:(space* grammar_rule)+ space* <Stake.Compiler.Grammar>
+  grammar_name <- "grammar " object_identifier
+  grammar_rule <- identifier assignment parsing_expression <Stake.Compiler.GrammarRule>
+  assignment <- space+ "<-" space+
+  parsing_expression <- choice_expression / choice_part
+  parenthesised_expression <- "(" space* parsing_expression space* ")"
+  
+  choice_expression <- first_expression:choice_part
+                       rest_expressions:(space+ "/" space+ expression:choice_part)+
+                       <Stake.Compiler.Choice>
+  
+  choice_part <- (sequence_expression / sequence_part)
+                 (space+ type_expression)?
+                 <Stake.Compiler.ChoicePart>
+  
+  type_expression <- "<" object_identifier ">"
+  
+  sequence_expression <- first_expression:sequence_part
+                         rest_expressions:(space+ sequence_part)+
+                         <Stake.Compiler.Sequence>
+  
+  sequence_part <- label? expression:(quantified_atom / atom) <Stake.Compiler.SequencePart>
+  quantified_atom <- atom quantifier <Stake.Compiler.Repeat>
+  
+  atom <- parenthesised_expression
+        / predicated_atom
+        / reference_expression
+        / string_expression
+        / any_char_expression
+        / char_class_expression
+  
+  predicated_atom <- predicate:("&" / "!") atom <Stake.Compiler.PredicatedAtom>
+  reference_expression <- identifier !assignment <Stake.Compiler.Reference>
+  
+  string_expression <- "\"" ("\\" . / [^"])* "\""
+                       <Stake.Compiler.String>
+  
+  any_char_expression <- "." <Stake.Compiler.AnyChar>
+  
+  char_class_expression <- "[" "^"? ("\\" . / [^\]])+ "]"
+                           <Stake.Compiler.CharClass>
+  
+  label <- identifier ":"
+  object_identifier <- identifier ("." identifier)*
+  identifier <- [a-zA-Z_$] [a-zA-Z0-9_$]*
+  quantifier <- "?" / "*" / "+"
+  space <- [\s\n\r\t]
+

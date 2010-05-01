@@ -6,7 +6,7 @@ Stake.extend({
     
     parseTree: function() {
       return this._tree = this._tree ||
-                          Stake.MetaGrammar.parse(this._grammarText);
+                          Stake.MetaGrammarParser.parse(this._grammarText);
     },
     
     toSexp: function(tree) {

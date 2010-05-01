@@ -40,7 +40,7 @@ require('JS.Test', 'Stake', function() {
             'Stake.Parser.StringSpec',
             'Stake.Parser.TypeSpec',
             
-            'Stake.MetaGrammarSpec',
+            'Stake.MetaGrammarParserSpec',
             
             'Stake.Compiler.AnyCharSpec',
             'Stake.Compiler.CharClassSpec',

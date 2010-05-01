@@ -89,6 +89,17 @@ Stake.extend({
       this.line_(address + ' = null');
     },
     
+    nameSpace_: function(objectName) {
+      var parts = objectName.split('.');
+      this.line_('(function(global) {');
+      this.indent_(function() {
+        this.var_('namespace', 'global');
+        for (var i = 0, n = parts.length; i < n - 1; i++)
+          this.line_('namespace = namespace.' + parts[i] + ' = namespace.' + parts[i] + ' || {}');
+      }, this);
+      this.line_('})(this)');
+    },
+    
     module_: function(name, block, context) {
       this.newline_();
       this.write(name + ' = new JS.Module("' + name + '", {');

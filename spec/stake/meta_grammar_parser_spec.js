@@ -1,4 +1,5 @@
-Stake.MetaGrammarSpec = JS.Test.describe(Stake.MetaGrammar, function() { with(this) {
+Stake.MetaGrammarParserSpec = JS.Test.describe(Stake.MetaGrammarParser,
+function() { with(this) {
   describe('with an any-char rule', function() { with(this) {
     before(function() { with(this) {
       this.compiler = new Stake.Compiler('\
