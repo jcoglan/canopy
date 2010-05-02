@@ -26,21 +26,7 @@ require('JS.Test', 'Canopy', function() {
       }
     })
     
-    require(/* Parser classes were used during bootstrapping
-            
-            'Canopy.Parser.CharClassSpec',
-            'Canopy.Parser.ChoiceSpec',
-            'Canopy.Parser.GrammarSpec',
-            'Canopy.Parser.LabelSpec',
-            'Canopy.Parser.MaybeSpec',
-            'Canopy.Parser.AndSpec',
-            'Canopy.Parser.NotSpec',
-            'Canopy.Parser.RepeatSpec',
-            'Canopy.Parser.SequenceSpec',
-            'Canopy.Parser.StringSpec',
-            'Canopy.Parser.TypeSpec',*/
-            
-            'Canopy.MetaGrammarParserSpec',
+    require('Canopy.MetaGrammarParserSpec',
             
             'Canopy.Compiler.AnyCharSpec',
             'Canopy.Compiler.CharClassSpec',
