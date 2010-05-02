@@ -2,8 +2,8 @@ Canopy.Compiler.extend({
   Choice: new JS.Module({
     expressions: function() {
       if (this._expressions) return this._expressions;
-      this._expressions = [this.first_expression];
-      this.rest_expressions.forEach(function(choice) {
+      this._expressions = [this.first_part];
+      this.rest.forEach(function(choice) {
         this._expressions.push(choice.expression);
       }, this);
       return this._expressions;

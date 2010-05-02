@@ -1,3 +1,15 @@
+this.Canopy = this.Canopy || new JS.Module('Canopy');
+
+Canopy.extend({
+  compile: function(grammar) {
+    var compiler = new this.Compiler(grammar),
+        source   = compiler.toSource();
+    
+    eval(source);
+    return source;
+  }
+});
+
 
 (function(global) {;
     var namespace = global;
@@ -1963,4 +1975,679 @@ Canopy.MetaGrammarParser.SyntaxNode = new JS.Class("Canopy.MetaGrammarParser.Syn
         for (var i = 0, n = this.elements.length; i < n; i++)
             block.call(context, this.elements[i], i);
     }
+});
+
+
+Canopy.extend({
+  Builder: new JS.Class({
+    initialize: function(parent) {
+      if (parent) {
+        this._parent = parent;
+        this._indentLevel = parent._indentLevel;
+      } else {
+        this._buffer = '';
+        this._indentLevel = 0;
+      }
+      this._methodSeparator = '';
+      this._varIndex = {};
+    },
+    
+    serialize: function() {
+      return this._buffer;
+    },
+    
+    write: function(string) {
+      if (this._parent) return this._parent.write(string);
+      this._buffer += string;
+    },
+    
+    indent_: function(block, context) {
+      this._indentLevel += 1;
+      block.call(context, this);
+      this._indentLevel -= 1;
+    },
+    
+    newline_: function() {
+      this.write('\n');
+      var i = this._indentLevel;
+      while (i--) this.write('    ');
+    },
+    
+    delimitField_: function() {
+      this.write(this._methodSeparator);
+      this._methodSeparator = ',';
+    },
+    
+    line_: function(source) {
+      this.newline_();
+      this.write(source + ';');
+    },
+    
+    input_: function() {
+      return 'this._input';
+    },
+    
+    offset_: function() {
+      return 'this._offset';
+    },
+    
+    slice_: function(length) {
+      var input = this.input_(), of = this.offset_();
+      return input + '.substring(' + of + ', ' + of + ' + ' + length + ')';
+    },
+    
+    syntaxNode_: function(address, nodeType, expression, bump, elements, labelled) {
+      elements = ', ' + (elements || '[]');
+      labelled = labelled ? ', ' + labelled : '';
+      var klass, of = ', ' + this.offset_();
+      
+      if (nodeType) {
+        klass = this.tempVar_('klass');
+        this.if_(nodeType + ' instanceof Function', function(builder) {
+          builder.line_(klass + ' = ' + nodeType);
+        });
+        this.else_(function(builder) {
+          builder.line_(klass + ' = this.klass.SyntaxNode');
+        });
+      } else {
+        klass = this.tempVar_('klass', 'this.klass.SyntaxNode');
+      }
+      
+      this.line_(address + ' = new ' + klass + '(' + expression + of + elements + labelled + ')');
+      this.extendNode_(address, nodeType);
+      this.line_(this.offset_() + ' += ' + bump);
+    },
+    
+    extendNode_: function(address, nodeType) {
+      if (!nodeType) return;
+      this.unless_(nodeType + ' instanceof Function', function(builder) {
+        builder.line_(address + '.extend(' + nodeType + ')');
+      });
+    },
+    
+    failure_: function(address) {
+      this.line_(address + ' = null');
+    },
+    
+    nameSpace_: function(objectName) {
+      var parts = objectName.split('.');
+      this.line_('(function(global) {');
+      this.indent_(function() {
+        this.var_('namespace', 'global');
+        for (var i = 0, n = parts.length; i < n - 1; i++)
+          this.line_('namespace = namespace.' + parts[i] + ' = namespace.' + parts[i] + ' || {}');
+      }, this);
+      this.line_('})(this)');
+    },
+    
+    module_: function(name, block, context) {
+      this.newline_();
+      this.write(name + ' = new JS.Module("' + name + '", {');
+      new Canopy.Builder(this).indent_(block, context);
+      this.newline_();
+      this.write('});');
+    },
+    
+    class_: function(name, block, context) {
+      this.newline_();
+      this.write(name + ' = new JS.Class("' + name + '", {');
+      new Canopy.Builder(this).indent_(block, context);
+      this.newline_();
+      this.write('});');
+    },
+    
+    include_: function(name) {
+      this.delimitField_();
+      this.newline_();
+      this.write('include: ' + name);
+    },
+    
+    classMethods_: function(block, context) {
+      this.delimitField_();
+      this.newline_();
+      this.write('extend: {');
+      new Canopy.Builder(this).indent_(block, context);
+      this.newline_();
+      this.write('}');
+    },
+    
+    field_: function(name, value) {
+      this.delimitField_();
+      this.newline_();
+      this.write(name + ': ' + value);
+    },
+    
+    method_: function(name, args, block, context) {
+      this.delimitField_();
+      this.newline_();
+      this.write(name + ': function(' + args.join(', ') + ') {');
+      this._varIndex = {};
+      this.indent_(block, context);
+      this.newline_();
+      this.write('}');
+    },
+    
+    ivar_: function(name, value) {
+      this.line_('this._' + name + ' = ' + value);
+    },
+    
+    var_: function() {
+      for (var i = 0, n = arguments.length; i < n; i += 2)
+        this.line_('var ' + arguments[i] + ' = ' + arguments[i+1]);
+    },
+    
+    tempVar_: function(name, value) {
+      this._varIndex[name] = this._varIndex[name] || 0;
+      var varName = name + this._varIndex[name];
+      this._varIndex[name] += 1;
+      this.var_(varName, value || 'null');
+      return varName;
+    },
+    
+    conditional_: function(kwd, condition, block, context) {
+      this.newline_();
+      this.write(kwd + ' (' + condition + ') {');
+      this.indent_(block, context);
+      this.newline_();
+      this.write('}');
+    },
+    
+    while_: function(condition, block, context) {
+      this.conditional_('while', condition, block, context);
+    },
+    
+    if_: function(condition, block, context) {
+      this.conditional_('if', condition, block, context);
+    },
+    
+    unless_: function(condition, block, context) {
+      this.conditional_('if', '!(' + condition + ')', block, context);
+    },
+    
+    else_: function(block, context) {
+      this.write(' else {');
+      this.indent_(block, context);
+      this.newline_();
+      this.write('}');
+    },
+    
+    return_: function(expression) {
+      this.line_('return ' + expression);
+    }
+  })
+});
+
+
+Canopy.extend({
+  Compiler: new JS.Class({
+    initialize: function(grammarText) {
+      this._grammarText = grammarText;
+    },
+    
+    parseTree: function() {
+      return this._tree = this._tree ||
+                          Canopy.MetaGrammarParser.parse(this._grammarText);
+    },
+    
+    toSexp: function(tree) {
+      return this.parseTree().toSexp();
+    },
+    
+    toSource: function() {
+      var builder = new Canopy.Builder();
+      this.parseTree().compile(builder);
+      return builder.serialize();
+    }
+  })
+});
+
+
+Canopy.Compiler.extend({
+  Grammar: new JS.Module({
+    grammarName: function() {
+      return this.grammar_name.object_identifier.textValue
+    },
+    
+    toSexp: function() {
+      var sexp = ['grammar', this.grammarName()];
+      this.rules.forEach(function(rule) {
+        sexp.push(rule.grammar_rule.toSexp());
+      });
+      return sexp;
+    },
+    
+    compile: function(builder) {
+      builder.nameSpace_(this.grammarName());
+      builder.newline_();
+      
+      builder.module_(this.grammarName(), function(builder) {
+        builder.field_('root', '"' + this.rules.elements[0].grammar_rule.name() + '"');
+        this.rules.forEach(function(rule) {
+          rule.grammar_rule.compile(builder);
+        });
+      }, this);
+      builder.newline_();
+      
+      builder.class_(this.grammarName() + 'Parser', function(builder) {
+        builder.include_(this.grammarName());
+        builder.method_('initialize', ['input'], function(builder) {
+          builder.ivar_('input', 'input');
+          builder.ivar_('offset', '0');
+          builder.ivar_('nodeCache', '{}');
+        });
+        builder.method_('parse', [], function(builder) {
+          builder.var_('result', 'this["__consume__" + this.root]()');
+          builder.return_(builder.offset_() + ' === ' + builder.input_() + '.length ? result : null');
+        });
+        builder.classMethods_(function(builder) {
+          builder.method_('parse', ['input'], function(builder) {
+            builder.var_('parser', 'new this(input)');
+            builder.return_('parser.parse()');
+          });
+        });
+      }, this);
+      builder.newline_();
+      
+      builder.class_(this.grammarName() + 'Parser.SyntaxNode', function(builder) {
+        builder.include_('JS.Enumerable');
+        
+        builder.method_('initialize', ['textValue', 'offset', 'elements', 'properties'], function(builder) {
+          builder.line_('this.textValue = textValue');
+          builder.line_('this.offset    = offset');
+          builder.line_('this.elements  = elements || []');
+          
+          builder.line_('if (!properties) return');
+          builder.line_('for (var key in properties) this[key] = properties[key]');
+        });
+        
+        builder.method_('forEach', ['block', 'context'], function(builder) {
+          builder.newline_();
+          builder.write('for (var i = 0, n = this.elements.length; i < n; i++)');
+          builder.indent_(function(builder) {
+            builder.line_('block.call(context, this.elements[i], i)');
+          });
+        });
+      });
+      builder.newline_();
+    }
+  })
+});
+
+
+Canopy.Compiler.extend({
+  GrammarRule: new JS.Module({
+    name: function() {
+      return this.identifier.textValue;
+    },
+    
+    toSexp: function() {
+      return ['rule', this.name(), this.parsing_expression.toSexp()];
+    },
+    
+    compile: function(builder) {
+      var name = this.name();
+      
+      builder.method_('__consume__' + name, ['input'], function() {
+        var address   = builder.tempVar_('address'),
+            offset    = builder.tempVar_('index', builder.offset_());
+            cacheAddr = 'this._nodeCache.' + name + '[' + offset + ']';
+        
+        builder.line_('this._nodeCache.' + name + ' = this._nodeCache.' + name + ' || {}');
+        builder.var_('cached', cacheAddr);
+        
+        builder.if_('cached', function(builder) {
+          builder.line_(builder.offset_() + ' += cached.textValue.length');
+          builder.return_('cached');
+        }, this);
+        
+        this.parsing_expression.compile(builder, address);
+        
+        builder.return_(cacheAddr + ' = ' + address);
+      }, this);
+    }
+  })
+});
+
+
+Canopy.Compiler.extend({
+  Choice: new JS.Module({
+    expressions: function() {
+      if (this._expressions) return this._expressions;
+      this._expressions = [this.first_part];
+      this.rest.forEach(function(choice) {
+        this._expressions.push(choice.expression);
+      }, this);
+      return this._expressions;
+    },
+    
+    toSexp: function() {
+      var sexp = ['choice'];
+      this.expressions().forEach(function(expression) {
+        sexp.push(expression.toSexp());
+      });
+      return sexp;
+    },
+    
+    compile: function(builder, address, nodeType) {
+      var startOffset = builder.tempVar_('index', builder.offset_());
+      this._compileChoices(builder, 0, address, nodeType, startOffset);
+    },
+    
+    _compileChoices: function(builder, index, address, nodeType, startOffset) {
+      var expressions = this.expressions();
+      if (index === expressions.length) return;
+      
+      expressions[index].compile(builder, address);
+      
+      builder.if_(address, function(builder) {
+        builder.extendNode_(address, nodeType);
+      });
+      builder.else_(function(builder) {
+        builder.line_(builder.offset_() + ' = ' + startOffset);
+        this._compileChoices(builder, index + 1, address, nodeType, startOffset);
+      }, this);
+    }
+  })
+});
+
+
+Canopy.Compiler.extend({
+  ChoicePart: new JS.Module({
+    nodeType: function() {
+      var element = this.elements[1].type_expression;
+      return element ? element.object_identifier.textValue : null;
+    },
+    
+    toSexp: function() {
+      var sexp = this.elements[0].toSexp(), type;
+      if (type = this.nodeType()) sexp = ['type', type, sexp];
+      return sexp;
+    },
+    
+    compile: function(builder, address) {
+      this.elements[0].compile(builder, address, this.nodeType());
+    }
+  })
+});
+
+
+Canopy.Compiler.extend({
+  AnyChar: new JS.Module({
+    toSexp: function() {
+      return ['any-char'];
+    },
+    
+    compile: function(builder, address, nodeType) {
+      var temp = builder.tempVar_('temp', builder.slice_(1));
+      
+      builder.if_(temp + ' === ""', function(builder) {
+        builder.failure_(address);
+      });
+      builder.else_(function(builder) {
+        builder.syntaxNode_(address, nodeType, temp, 1);
+      });
+    }
+  })
+});
+
+
+Canopy.Compiler.extend({
+  CharClass: new JS.Module({
+    toSexp: function() {
+      return ['char-class', this.textValue];
+    },
+    
+    compile: function(builder, address, nodeType) {
+      var regex  = '/^' + this.textValue + '/',
+          temp   = builder.tempVar_('temp', builder.slice_(1)),
+          match  = builder.tempVar_('match');
+      
+      builder.if_(match + ' = ' + temp + '.match(' + regex + ')', function(builder) {
+        builder.syntaxNode_(address, nodeType, match + '[0]', 1);
+      });
+      builder.else_(function(builder) {
+        builder.failure_(address);
+      });
+    }
+  })
+});
+
+
+Canopy.Compiler.extend({
+  String: new JS.Module({
+    toSexp: function() {
+      return ['string', eval(this.textValue)];
+    },
+    
+    compile: function(builder, address, nodeType) {
+      var string = this.textValue,
+          length = eval(this.textValue).length,
+          input  = builder.input_(),
+          offset = builder.offset_();
+      
+      builder.if_(builder.slice_(length) + ' === ' + string, function(builder) {
+        builder.syntaxNode_(address, nodeType, string, length);
+      });
+      builder.else_(function(builder) {
+        builder.failure_(address);
+      });
+    }
+  })
+});
+
+
+Canopy.Compiler.extend({
+  PredicatedAtom: new JS.Module({
+    atomic: function() {
+      var expression = this.atom;
+      return expression.parsing_expression || expression;
+    },
+    
+    toSexp: function() {
+      var expression = this.atomic(),
+          table      = {'&': 'and', '!': 'not'},
+          predicate  = table[this.predicate.textValue];
+      
+      return [predicate, expression.toSexp()];
+    },
+    
+    compile: function(builder, address, nodeType) {
+      var startOffset = builder.tempVar_('index', builder.offset_()),
+          table       = {'&': 'if_', '!': 'unless_'},
+          branch      = table[this.predicate.textValue];
+      
+      this.atomic().compile(builder, address);
+      builder.line_(builder.offset_() + ' = ' + startOffset);
+      
+      builder[branch](address, function(builder) {
+        builder.syntaxNode_(address, nodeType, '""', 0);
+      });
+      builder.else_(function(builder) {
+        builder.line_(address + ' = null');
+      });
+    }
+  })
+});
+
+
+Canopy.Compiler.extend({
+  Repeat: new JS.Module({
+    QUANTITIES: {'*': 0, '+': 1},
+    
+    atomic: function() {
+      var expression = this.atom;
+      return expression.parsing_expression || expression;
+    },
+    
+    toSexp: function() {
+      var expression = this.atomic(),
+          sexp = expression.toSexp();
+      
+      sexp = expression.toSexp();
+      switch (this.quantifier.textValue) {
+        case '*': sexp = ['repeat', 0, sexp]; break;
+        case '+': sexp = ['repeat', 1, sexp]; break;
+        case '?': sexp = ['maybe', sexp]; break;
+      }
+      return sexp;
+    },
+    
+    compile: function(builder, address, nodeType) {
+      var quantifier  = this.quantifier.textValue;
+      
+      if (quantifier === '?') return this._compileMaybe(builder, address, nodeType);
+      
+      var minimum     = this.QUANTITIES[quantifier],
+          remaining   = builder.tempVar_('remaining', minimum),
+          startOffset = builder.tempVar_('index', builder.offset_()),
+          elements    = builder.tempVar_('elements', '[]'),
+          textValue   = builder.tempVar_('text', '""'),
+          elAddr      = builder.tempVar_('address', 'true');
+      
+      builder.while_(elAddr, function(builder) {
+        this.atomic().compile(builder, elAddr);
+        builder.if_(elAddr, function(builder) {
+          builder.line_(elements + '.push(' + elAddr + ')');
+          builder.line_(textValue + ' += ' + elAddr + '.textValue');
+          builder.line_(remaining + ' -= 1');
+        });
+      }, this);
+      
+      builder.if_(remaining + ' <= 0', function(builder) {
+        builder.line_(builder.offset_() + ' = ' + startOffset);
+        builder.syntaxNode_(address, nodeType, textValue, textValue + '.length', elements);
+      });
+      builder.else_(function(builder) {
+        builder.line_(address + ' = null');
+      });
+    },
+    
+    _compileMaybe: function(builder, address, nodeType) {
+      var startOffset = builder.tempVar_('index', builder.offset_());
+      
+      this.atomic().compile(builder, address);
+      
+      builder.if_(address, function(builder) {
+        builder.extendNode_(address, nodeType);
+      });
+      builder.else_(function(builder) {
+        builder.line_(builder.offset_() + ' = ' + startOffset);
+        builder.syntaxNode_(address, nodeType, '""', 0);
+      });
+    }
+  })
+});
+
+
+Canopy.Compiler.extend({
+  Sequence: new JS.Module({
+    expressions: function() {
+      if (this._expressions) return this._expressions;
+      this._expressions = [this.first_part];
+      this.rest.forEach(function(part) {
+        this._expressions.push(part.expression);
+      }, this);
+      return this._expressions;
+    },
+    
+    toSexp: function() {
+      var sexp = ['sequence'];
+      this.expressions().forEach(function(expression) {
+        sexp.push(expression.toSexp());
+      });
+      return sexp;
+    },
+    
+    compile: function(builder, address, nodeType) {
+      var startOffset = builder.tempVar_('index', builder.offset_()),
+          elements    = builder.tempVar_('elements', '[]'),
+          labelled    = builder.tempVar_('labelled', '{}'),
+          textValue   = builder.tempVar_('text', '""');
+      
+      this._compileExpressions(builder, 0, startOffset, elements, labelled, textValue);
+      builder.if_(elements, function(builder) {
+        builder.line_(builder.offset_() + ' = ' + startOffset);
+        builder.syntaxNode_(address, nodeType, textValue, textValue + '.length', elements, labelled);
+      });
+      builder.else_(function(builder) {
+        builder.line_(address + ' = null');
+      });
+    },
+    
+    _compileExpressions: function(builder, index, startOffset, elements, labelled, textValue) {
+      var expressions = this.expressions();
+      if (index === expressions.length) return;
+      
+      var expAddr = builder.tempVar_('address'),
+          label   = expressions[index].label();
+      
+      expressions[index].compile(builder, expAddr);
+      
+      builder.if_(expAddr, function(builder) {
+        builder.line_(elements + '.push(' + expAddr + ')');
+        builder.line_(textValue + ' += ' + expAddr + '.textValue');
+        if (label) builder.line_(labelled + '.' + label + ' = ' + expAddr);
+        
+        this._compileExpressions(builder, index + 1, startOffset, elements, labelled, textValue);
+        
+      }, this);
+      builder.else_(function(builder) {
+        builder.line_(elements + ' = null');
+        builder.line_(builder.offset_() + ' = ' + startOffset);
+      });
+    }
+  })
+});
+
+
+Canopy.Compiler.extend({
+  SequencePart: new JS.Module({
+    atomic: function() {
+      var expression = this.expression;
+      return expression.parsing_expression || expression;
+    },
+    
+    label: function() {
+      var element = this.elements[0].identifier,
+          expression = this.atomic();
+      
+      if (element) return element.textValue;
+      if (expression.referenceName) return expression.referenceName();
+      
+      return null;
+    },
+    
+    toSexp: function() {
+      var expression = this.atomic(),
+          label = this.label(),
+          sexp  = expression.toSexp();
+      
+      if (element = this.elements[0].identifier)
+        sexp = ['label', label, sexp];
+      
+      return sexp;
+    },
+    
+    compile: function(builder, address, nodeType) {
+      return this.atomic().compile(builder, address, nodeType);
+    }
+  })
+});
+
+
+Canopy.Compiler.extend({
+  Reference: new JS.Module({
+    referenceName: function() {
+      return this.identifier.textValue;
+    },
+    
+    toSexp: function() {
+      return ['reference', this.referenceName()];
+    },
+    
+    compile: function(builder, address, nodeType) {
+      builder.line_(address + ' = this.__consume__' + this.referenceName() + '()');
+      builder.extendNode_(address, nodeType);
+    }
+  })
 });

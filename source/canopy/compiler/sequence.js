@@ -2,9 +2,9 @@ Canopy.Compiler.extend({
   Sequence: new JS.Module({
     expressions: function() {
       if (this._expressions) return this._expressions;
-      this._expressions = [this.first_expression];
-      this.rest_expressions.forEach(function(part) {
-        this._expressions.push(part.sequence_part);
+      this._expressions = [this.first_part];
+      this.rest.forEach(function(part) {
+        this._expressions.push(part.expression);
       }, this);
       return this._expressions;
     },

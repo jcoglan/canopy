@@ -51,15 +51,15 @@ Canopy.extend({
           ['repeat', 0, ['reference', 'space']],
           ['string', ')']]],
       
-      // choice_expression <- first_expression:choice_part
-      //                      rest_expressions:(space+ "/" space+ expression:choice_part)+
+      // choice_expression <- first_part:choice_part
+      //                      rest:(space+ "/" space+ expression:choice_part)+
       //                      <Canopy.Compiler.Choice>
       ['rule', 'choice_expression',
         ['type', 'Canopy.Compiler.Choice',
           ['sequence',
-            ['label', 'first_expression',
+            ['label', 'first_part',
               ['reference', 'choice_part']],
-            ['label', 'rest_expressions',
+            ['label', 'rest',
               ['repeat', 1,
                 ['sequence',
                   ['repeat', 1, ['reference', 'space']],
@@ -87,19 +87,20 @@ Canopy.extend({
           ['reference', 'object_identifier'],
           ['string', '>']]],
       
-      // sequence_expression <- first_expression:sequence_part
-      //                        rest_expressions:(space+ sequence_part)+
+      // sequence_expression <- first_part:sequence_part
+      //                        rest:(space+ expression:sequence_part)+
       //                        <Canopy.Compiler.Sequence>
       ['rule', 'sequence_expression',
         ['type', 'Canopy.Compiler.Sequence',
           ['sequence',
-            ['label', 'first_expression',
+            ['label', 'first_part',
               ['reference', 'sequence_part']],
-            ['label', 'rest_expressions',
+            ['label', 'rest',
               ['repeat', 1,
                 ['sequence',
                   ['repeat', 1, ['reference', 'space']],
-                  ['reference', 'sequence_part']]]]]]],
+                  ['label', 'expression',
+                    ['reference', 'sequence_part']]]]]]]],
       
       // sequence_part <- label? expression:(quantified_atom / atom) <Canopy.Compiler.SequencePart>
       ['rule', 'sequence_part',
