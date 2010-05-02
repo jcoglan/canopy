@@ -8,25 +8,17 @@ Grammars][1] and heavily influenced by [Treetop][2].
 [2]: http://treetop.rubyforge.org/
 
 
-Installation
-------------
+Download
+--------
 
-Canopy requires [JS.Class][3] -- we're building on top of this in order
-to support the composition and node typing features of Treetop, to which
-Ruby's object system lends itself very well.
+Canopy and the parsers it generates require [JS.Class][3] -- we're building
+on top of this in order to support the composition and node typing features
+of Treetop, to which Ruby's object system lends itself very well.
 
-Also you need Rubygems and [Jake][4].
+You can grap a stable build of Canopy from `bin/canopy-stable.js`; this
+build is used to compile Canopy itself during development.
 
-    $ git clone git://github.com/jcoglan/canopy.git
-    $ cd canopy
-    $ jake
-    $ cp build/canopy-min.js path/to/your/project
-
-It is currently untested in browsers but it does run on SpiderMonkey and
-Rhino, which is a good sign.
-
-[3]: http://jsclass.jcoglan.com
-[4]: http://github.com/jcoglan/jake
+[3]: http://jsclass.jcoglan.com/
 
 
 Usage
