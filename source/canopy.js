@@ -1,3 +1,5 @@
+<%= license %>
+
 this.Canopy = this.Canopy || new JS.Module('Canopy');
 
 Canopy.extend({
