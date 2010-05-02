@@ -32,7 +32,7 @@ Canopy.MetaGrammar = new JS.Module("Canopy.MetaGrammar", {
         var labelled0 = {};
         var text0 = "";
         var address1 = null;
-        var remaining0 = null;
+        var remaining0 = 0;
         var index2 = this._offset;
         var elements1 = [];
         var text1 = "";
@@ -74,7 +74,7 @@ Canopy.MetaGrammar = new JS.Module("Canopy.MetaGrammar", {
                     var labelled1 = {};
                     var text3 = "";
                     var address6 = null;
-                    var remaining2 = null;
+                    var remaining2 = 0;
                     var index5 = this._offset;
                     var elements4 = [];
                     var text4 = "";
@@ -139,7 +139,7 @@ Canopy.MetaGrammar = new JS.Module("Canopy.MetaGrammar", {
                     text0 += address4.textValue;
                     labelled0.rules = address4;
                     var address9 = null;
-                    var remaining3 = null;
+                    var remaining3 = 0;
                     var index6 = this._offset;
                     var elements5 = [];
                     var text5 = "";
@@ -449,7 +449,7 @@ Canopy.MetaGrammar = new JS.Module("Canopy.MetaGrammar", {
             elements0.push(address1);
             text0 += address1.textValue;
             var address2 = null;
-            var remaining0 = null;
+            var remaining0 = 0;
             var index2 = this._offset;
             var elements1 = [];
             var text1 = "";
@@ -480,7 +480,7 @@ Canopy.MetaGrammar = new JS.Module("Canopy.MetaGrammar", {
                     text0 += address4.textValue;
                     labelled0.parsing_expression = address4;
                     var address5 = null;
-                    var remaining1 = null;
+                    var remaining1 = 0;
                     var index3 = this._offset;
                     var elements2 = [];
                     var text2 = "";
@@ -1329,7 +1329,7 @@ Canopy.MetaGrammar = new JS.Module("Canopy.MetaGrammar", {
             elements0.push(address1);
             text0 += address1.textValue;
             var address2 = null;
-            var remaining0 = null;
+            var remaining0 = 0;
             var index2 = this._offset;
             var elements1 = [];
             var text1 = "";
@@ -1721,7 +1721,7 @@ Canopy.MetaGrammar = new JS.Module("Canopy.MetaGrammar", {
             text0 += address1.textValue;
             labelled0.identifier = address1;
             var address2 = null;
-            var remaining0 = null;
+            var remaining0 = 0;
             var index2 = this._offset;
             var elements1 = [];
             var text1 = "";
@@ -1826,7 +1826,7 @@ Canopy.MetaGrammar = new JS.Module("Canopy.MetaGrammar", {
             elements0.push(address1);
             text0 += address1.textValue;
             var address2 = null;
-            var remaining0 = null;
+            var remaining0 = 0;
             var index2 = this._offset;
             var elements1 = [];
             var text1 = "";
@@ -2140,7 +2140,7 @@ Canopy.extend({
       this._varIndex[name] = this._varIndex[name] || 0;
       var varName = name + this._varIndex[name];
       this._varIndex[name] += 1;
-      this.var_(varName, value || 'null');
+      this.var_(varName, (value === undefined) ? 'null' : value);
       return varName;
     },
     

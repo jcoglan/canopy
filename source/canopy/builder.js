@@ -160,7 +160,7 @@ Canopy.extend({
       this._varIndex[name] = this._varIndex[name] || 0;
       var varName = name + this._varIndex[name];
       this._varIndex[name] += 1;
-      this.var_(varName, value || 'null');
+      this.var_(varName, (value === undefined) ? 'null' : value);
       return varName;
     },
     
