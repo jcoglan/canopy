@@ -11,7 +11,7 @@ Canopy.Compiler.extend({
     
     toSexp: function() {
       var sexp = ['sequence'];
-      this.expressions().forEach(function(expression) {
+      Canopy.forEach(this.expressions(), function(expression) {
         sexp.push(expression.toSexp());
       });
       return sexp;

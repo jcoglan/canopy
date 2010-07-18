@@ -37,6 +37,11 @@ Canopy.extend({
     
     eval(source);
     return source;
+  },
+  
+  forEach: function(list, block, context) {
+    for (var i = 0, n = list.length; i < n; i++)
+      block.call(context, list[i], i);
   }
 });
 
@@ -2352,7 +2357,7 @@ Canopy.Compiler.extend({
     
     toSexp: function() {
       var sexp = ['choice'];
-      this.expressions().forEach(function(expression) {
+      Canopy.forEach(this.expressions(), function(expression) {
         sexp.push(expression.toSexp());
       });
       return sexp;
@@ -2582,7 +2587,7 @@ Canopy.Compiler.extend({
     
     toSexp: function() {
       var sexp = ['sequence'];
-      this.expressions().forEach(function(expression) {
+      Canopy.forEach(this.expressions(), function(expression) {
         sexp.push(expression.toSexp());
       });
       return sexp;
