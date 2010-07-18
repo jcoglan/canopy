@@ -27,7 +27,8 @@
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  **/
 
-this.Canopy = this.Canopy || new JS.Module('Canopy');
+if (typeof Canopy === 'undefined')
+  Canopy = new JS.Module('Canopy');
 
 Canopy.extend({
   compile: function(grammar) {
@@ -40,10 +41,10 @@ Canopy.extend({
 });
 
 
-(function(global) {;
-    var namespace = global;
+(function() {;
+    var namespace = this;
     namespace = namespace.Canopy = namespace.Canopy || {};
-})(this);
+})();
 
 Canopy.MetaGrammar = new JS.Module("Canopy.MetaGrammar", {
     root: "grammar",
@@ -2100,13 +2101,13 @@ Canopy.extend({
     
     nameSpace_: function(objectName) {
       var parts = objectName.split('.');
-      this.line_('(function(global) {');
+      this.line_('(function() {');
       this.indent_(function() {
-        this.var_('namespace', 'global');
+        this.var_('namespace', 'this');
         for (var i = 0, n = parts.length; i < n - 1; i++)
           this.line_('namespace = namespace.' + parts[i] + ' = namespace.' + parts[i] + ' || {}');
       }, this);
-      this.line_('})(this)');
+      this.line_('})()');
     },
     
     module_: function(name, block, context) {

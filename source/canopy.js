@@ -1,6 +1,7 @@
 <%= license %>
 
-this.Canopy = this.Canopy || new JS.Module('Canopy');
+if (typeof Canopy === 'undefined')
+  Canopy = new JS.Module('Canopy');
 
 Canopy.extend({
   compile: function(grammar) {

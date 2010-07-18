@@ -1,8 +1,8 @@
 
-(function(global) {;
-    var namespace = global;
+(function() {;
+    var namespace = this;
     namespace = namespace.Canopy = namespace.Canopy || {};
-})(this);
+})();
 
 Canopy.MetaGrammar = new JS.Module("Canopy.MetaGrammar", {
     root: "grammar",

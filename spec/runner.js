@@ -1,12 +1,11 @@
-JSCLASS_PATH = 'vendor/js.class/build/src'
-load(JSCLASS_PATH + '/loader.js')
+if (typeof CWD === 'undefined') CWD = '.'
 
 JS.Packages(function() { with(this) {
-    file('build/canopy-min.js').provides('Canopy')
-    autoload(/^(.*)Spec$/, {from: 'spec', require: '$1'})
+    file(CWD + '/build/canopy-min.js').provides('Canopy')
+    autoload(/^(.*)Spec$/, {from: CWD + '/spec', require: '$1'})
 }})
 
-require('JS.Test', 'Canopy', function() {
+JS.require('JS.Test', 'Canopy', function() {
     
     Canopy.SpecHelper = new JS.Module({
       assertParse: function(tuple, actual) {
@@ -26,7 +25,7 @@ require('JS.Test', 'Canopy', function() {
       }
     })
     
-    require('Canopy.MetaGrammarParserSpec',
+    JS.require('Canopy.MetaGrammarParserSpec',
             
             'Canopy.Compiler.AnyCharSpec',
             'Canopy.Compiler.CharClassSpec',
