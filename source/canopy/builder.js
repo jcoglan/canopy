@@ -96,6 +96,9 @@ Canopy.extend({
         this.var_('namespace', 'this');
         for (var i = 0, n = parts.length; i < n - 1; i++)
           this.line_('namespace = namespace.' + parts[i] + ' = namespace.' + parts[i] + ' || {}');
+        this.if_('typeof exports === "object"', function(builder) {
+          builder.line_('exports.' + parts[0] + ' = this.' + parts[0]);
+        });
       }, this);
       this.line_('})()');
     },

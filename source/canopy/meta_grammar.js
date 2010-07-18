@@ -2,6 +2,9 @@
 (function() {;
     var namespace = this;
     namespace = namespace.Canopy = namespace.Canopy || {};
+    if (typeof exports === "object") {
+        exports.Canopy = this.Canopy;
+    }
 })();
 
 Canopy.MetaGrammar = new JS.Module("Canopy.MetaGrammar", {
