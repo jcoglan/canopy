@@ -1,25 +1,25 @@
-Canopy.Compiler.StringSpec = JS.Test.describe(Canopy.Compiler.String, function() { with(this) {
+Canopy.Compiler.StringSpec = JS.Test.describe(Canopy.Compiler.String, function() {
   include(Canopy.SpecHelper)
   
-  before(function() { with(this) {
+  before(function() {
     Canopy.compile('grammar StringTest\
       string <- "foo"')
-  }})
+  })
   
-  it('parses the string it contains', function() { with(this) {
+  it('parses the string it contains', function() {
     assertParse( ['foo', 0, []], StringTestParser.parse('foo') )
-  }})
+  })
   
-  it('does not parse other strings', function() { with(this) {
+  it('does not parse other strings', function() {
     assertNull( StringTestParser.parse('bar') )
-  }})
+  })
   
-  it('does not parse superstrings of itself', function() { with(this) {
+  it('does not parse superstrings of itself', function() {
     assertNull( StringTestParser.parse('food') )
-  }})
+  })
   
-  it('does not parse the empty string', function() { with(this) {
+  it('does not parse the empty string', function() {
     assertNull( StringTestParser.parse('') )
-  }})
-}})
+  })
+})
 
