@@ -1,6 +1,3 @@
-// Liberally borrowed from PEG.js
-// Copyright (c) 2010 David Majda
-
 require('./js.class');
 require('./canopy-stable');
 
@@ -12,10 +9,15 @@ var startTime  = Number(new Date()),
     outputFile = inputFile.replace(/\.peg$/, '.js');
 
 fs.readFile(inputFile, function(err, grammar) {
+  if (err) return sys.puts('Could not read source file: ' + inputFile);
+  
   var parser   = Canopy.compile(grammar.toString()),
       endTime  = Number(new Date());
   
   fs.writeFile(outputFile, parser, function(err) {
+    if (err) return sys.puts('Could not write to output file: ' + outputFile);
+    
+    sys.puts('Generated parser in ' + outputFile);
     sys.puts('Completed in ' + ((endTime - startTime) / 1000) + 's');
   });
 });
