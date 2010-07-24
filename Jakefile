@@ -6,3 +6,8 @@ jake_helper :license do
   "\n **/"
 end
 
+jake_hook :build_complete do
+  FileUtils.cp 'vendor/js.class/build/min/core.js',
+               'bin/js.class.js'
+end
+
