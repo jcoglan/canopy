@@ -38,6 +38,7 @@ grammar Canopy.MetaGrammar
                              / predicated_atom
                              / reference_expression
                              / string_expression
+                             / ci_string_expression
                              / any_char_expression
                              / char_class_expression
   
@@ -48,6 +49,9 @@ grammar Canopy.MetaGrammar
   
   string_expression         <- "\"" ("\\" . / [^"])* "\""
                                <Canopy.Compiler.String>
+  
+  ci_string_expression      <- "`" ("\\" . / [^`])* "`"
+                               <Canopy.Compiler.CIString>
   
   any_char_expression       <- "." <Canopy.Compiler.AnyChar>
   

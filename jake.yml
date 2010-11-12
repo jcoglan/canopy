@@ -25,6 +25,7 @@ packages:
       - canopy/compiler/any_char
       - canopy/compiler/char_class
       - canopy/compiler/string
+      - canopy/compiler/ci_string
       - canopy/compiler/predicated_atom
       - canopy/compiler/repeat
       - canopy/compiler/sequence

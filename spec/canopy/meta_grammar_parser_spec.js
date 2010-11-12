@@ -85,6 +85,23 @@ function() {
     })
   })
   
+  describe('with a case-insensitive string rule', function() {
+    before(function() {
+      this.compiler = new Canopy.Compiler('\
+        grammar String                    \
+          string <- `foo`                 \
+      ')
+    })
+    
+    it('compiles a ci-string-rule parser', function() {
+      assertEqual(['grammar', 'String',
+                    ['rule', 'string',
+                      ['ci-string', 'foo']]],
+          
+          compiler.toSexp() )
+    })
+  })
+  
   describe('with a maybe string rule', function() {
     before(function() {
       this.compiler = new Canopy.Compiler('\

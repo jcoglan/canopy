@@ -11,6 +11,7 @@ Canopy.Compiler.StringSpec = JS.Test.describe(Canopy.Compiler.String, function()
   })
   
   it('does not parse other strings', function() {
+    assertNull( StringTestParser.parse('FOO') )
     assertNull( StringTestParser.parse('bar') )
   })
   
@@ -20,6 +21,18 @@ Canopy.Compiler.StringSpec = JS.Test.describe(Canopy.Compiler.String, function()
   
   it('does not parse the empty string', function() {
     assertNull( StringTestParser.parse('') )
+  })
+  
+  describe('case-insensitive strings', function() {
+    before(function() {
+      Canopy.compile('grammar CIStringTest\
+        string <- `foo`')
+    })
+    
+    it('parses the string it contains', function() {
+      assertParse( ['foo', 0, []], CIStringTestParser.parse('foo') )
+      assertParse( ['FOO', 0, []], CIStringTestParser.parse('FOO') )
+    })
   })
 })
 
