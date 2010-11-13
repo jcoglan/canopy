@@ -17,6 +17,7 @@ packages:
       - canopy
       - canopy/meta_grammar
       - canopy/builder
+      - canopy/queries
       - canopy/compiler
       - canopy/compiler/grammar
       - canopy/compiler/grammar_rule
