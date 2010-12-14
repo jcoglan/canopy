@@ -41,6 +41,7 @@ Canopy.Compiler.extend({
       if (index === expressions.length) return;
       
       var expAddr = builder.tempVar_('address'),
+          isRef   = !!expressions[index].atomic().referenceName,
           label   = expressions[index].label();
       
       expressions[index].compile(builder, expAddr);
@@ -49,7 +50,7 @@ Canopy.Compiler.extend({
         builder.line_(this._elements + '.push(' + expAddr + ')');
         builder.line_(this._textValue + ' += ' + expAddr + '.textValue');
         if (label) {
-          builder.line_(expAddr + '.__name__ = "' + label + '"');
+          if (isRef) builder.line_(expAddr + '.__name__ = "' + label + '"');
           builder.line_(this._labelled + '.' + label + ' = ' + expAddr);
         }
         this._compileExpressions(builder, index + 1);

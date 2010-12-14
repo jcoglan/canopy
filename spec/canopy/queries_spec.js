@@ -2,14 +2,14 @@ Canopy.QueriesSpec = JS.Test.describe('queries', function() {
   include(Canopy.SpecHelper)
   
   before(function() {
-    Canopy.compile('grammar Query     \
-      value  <- mixup / nested        \
-      mixup  <- letter digit letter   \
-      nested <- digit (number digit)  \
-                                      \
-      letter <- [a-z]                 \
-      digit  <- [0-9]                 \
-      number <- digit digit digit     ')
+    Canopy.compile('grammar Query         \
+      value  <- mixup / nested            \
+      mixup  <- letter digit letter       \
+      nested <- digit foo:(number digit)  \
+                                          \
+      letter <- [a-z]                     \
+      digit  <- [0-9]                     \
+      number <- digit digit digit         ')
   })
   
   describe('select', function() {

@@ -130,7 +130,6 @@ Canopy.MetaGrammar = new JS.Module("Canopy.MetaGrammar", {
                 if (address4) {
                     elements0.push(address4);
                     text0 += address4.textValue;
-                    address4.__name__ = "rules";
                     labelled0.rules = address4;
                     var address9 = null;
                     var remaining3 = 0;
@@ -684,7 +683,6 @@ Canopy.MetaGrammar = new JS.Module("Canopy.MetaGrammar", {
             if (address2) {
                 elements0.push(address2);
                 text0 += address2.textValue;
-                address2.__name__ = "rest";
                 labelled0.rest = address2;
             } else {
                 elements0 = null;
@@ -990,7 +988,6 @@ Canopy.MetaGrammar = new JS.Module("Canopy.MetaGrammar", {
             if (address2) {
                 elements0.push(address2);
                 text0 += address2.textValue;
-                address2.__name__ = "rest";
                 labelled0.rest = address2;
             } else {
                 elements0 = null;
@@ -1059,7 +1056,6 @@ Canopy.MetaGrammar = new JS.Module("Canopy.MetaGrammar", {
             if (address2) {
                 elements0.push(address2);
                 text0 += address2.textValue;
-                address2.__name__ = "expression";
                 labelled0.expression = address2;
             } else {
                 elements0 = null;
@@ -1227,7 +1223,6 @@ Canopy.MetaGrammar = new JS.Module("Canopy.MetaGrammar", {
         if (address1) {
             elements0.push(address1);
             text0 += address1.textValue;
-            address1.__name__ = "predicate";
             labelled0.predicate = address1;
             var address2 = null;
             address2 = this.__consume__atom();
