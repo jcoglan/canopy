@@ -23,16 +23,13 @@ Canopy.Compiler.extend({
       this._labelled    = builder.tempVar_('labelled', '{}');
       this._textValue   = builder.tempVar_('text', '""');
       
-      builder.line_('namedNodeStack.push({})');
-      
       this._compileExpressions(builder, 0);
       builder.if_(this._elements, function(builder) {
         builder.line_(builder.offset_() + ' = ' + this._startOffset);
         builder.syntaxNode_(address, nodeType, this._textValue,
                                                this._textValue + '.length',
                                                this._elements,
-                                               this._labelled,
-                                               'namedNodeStack.pop()');
+                                               this._labelled);
       }, this);
       builder.else_(function(builder) {
         builder.line_(address + ' = null');
@@ -52,16 +49,9 @@ Canopy.Compiler.extend({
         builder.line_(this._elements + '.push(' + expAddr + ')');
         builder.line_(this._textValue + ' += ' + expAddr + '.textValue');
         if (label) {
+          builder.line_(expAddr + '.__name__ = "' + label + '"');
           builder.line_(this._labelled + '.' + label + ' = ' + expAddr);
-          
-          var i = builder.tempVar_('i', 'namedNodeStack.length');
-          builder.while_(i + '--', function() {
-            var list = 'namedNodeStack[' + i + '].' + label;
-            builder.line_(list + ' = ' + list + ' || []');
-            builder.line_(list + '.push(' + expAddr + ')');
-          }, this);
         }
-        
         this._compileExpressions(builder, index + 1);
         
       }, this);

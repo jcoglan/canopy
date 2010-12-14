@@ -56,10 +56,9 @@ Canopy.extend({
       return input + '.substring(' + of + ', ' + of + ' + ' + length + ')';
     },
     
-    syntaxNode_: function(address, nodeType, expression, bump, elements, labelled, named) {
+    syntaxNode_: function(address, nodeType, expression, bump, elements, labelled) {
       elements = ', ' + (elements || '[]');
       labelled = labelled ? ', ' + labelled : '';
-      named    = named ? ', ' + named : '';
       
       var klass, of = ', ' + this.offset_();
       
@@ -75,7 +74,7 @@ Canopy.extend({
         klass = this.tempVar_('klass', 'this.klass.SyntaxNode');
       }
       
-      this.line_(address + ' = new ' + klass + '(' + expression + of + elements + labelled + named + ')');
+      this.line_(address + ' = new ' + klass + '(' + expression + of + elements + labelled + ')');
       this.extendNode_(address, nodeType);
       this.line_(this.offset_() + ' += ' + bump);
     },

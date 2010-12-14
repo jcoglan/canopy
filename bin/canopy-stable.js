@@ -65,12 +65,10 @@ Canopy.MetaGrammar = new JS.Module("Canopy.MetaGrammar", {
             this._offset += cached.textValue.length;
             return cached;
         }
-        var namedNodeStack = [];
         var index1 = this._offset;
         var elements0 = [];
         var labelled0 = {};
         var text0 = "";
-        namedNodeStack.push({});
         var address1 = null;
         var remaining0 = 0;
         var index2 = this._offset;
@@ -101,12 +99,8 @@ Canopy.MetaGrammar = new JS.Module("Canopy.MetaGrammar", {
             if (address3) {
                 elements0.push(address3);
                 text0 += address3.textValue;
+                address3.__name__ = "grammar_name";
                 labelled0.grammar_name = address3;
-                var i0 = namedNodeStack.length;
-                while (i0--) {
-                    namedNodeStack[i0].grammar_name = namedNodeStack[i0].grammar_name || [];
-                    namedNodeStack[i0].grammar_name.push(address3);
-                }
                 var address4 = null;
                 var remaining1 = 1;
                 var index3 = this._offset;
@@ -118,7 +112,6 @@ Canopy.MetaGrammar = new JS.Module("Canopy.MetaGrammar", {
                     var elements3 = [];
                     var labelled1 = {};
                     var text3 = "";
-                    namedNodeStack.push({});
                     var address6 = null;
                     var remaining2 = 0;
                     var index5 = this._offset;
@@ -149,12 +142,8 @@ Canopy.MetaGrammar = new JS.Module("Canopy.MetaGrammar", {
                         if (address8) {
                             elements3.push(address8);
                             text3 += address8.textValue;
+                            address8.__name__ = "grammar_rule";
                             labelled1.grammar_rule = address8;
-                            var i1 = namedNodeStack.length;
-                            while (i1--) {
-                                namedNodeStack[i1].grammar_rule = namedNodeStack[i1].grammar_rule || [];
-                                namedNodeStack[i1].grammar_rule.push(address8);
-                            }
                         } else {
                             elements3 = null;
                             this._offset = index4;
@@ -166,7 +155,7 @@ Canopy.MetaGrammar = new JS.Module("Canopy.MetaGrammar", {
                     if (elements3) {
                         this._offset = index4;
                         var klass2 = this.klass.SyntaxNode;
-                        address5 = new klass2(text3, this._offset, elements3, labelled1, namedNodeStack.pop());
+                        address5 = new klass2(text3, this._offset, elements3, labelled1);
                         this._offset += text3.length;
                     } else {
                         address5 = null;
@@ -188,12 +177,8 @@ Canopy.MetaGrammar = new JS.Module("Canopy.MetaGrammar", {
                 if (address4) {
                     elements0.push(address4);
                     text0 += address4.textValue;
+                    address4.__name__ = "rules";
                     labelled0.rules = address4;
-                    var i2 = namedNodeStack.length;
-                    while (i2--) {
-                        namedNodeStack[i2].rules = namedNodeStack[i2].rules || [];
-                        namedNodeStack[i2].rules.push(address4);
-                    }
                     var address9 = null;
                     var remaining3 = 0;
                     var index6 = this._offset;
@@ -243,7 +228,7 @@ Canopy.MetaGrammar = new JS.Module("Canopy.MetaGrammar", {
             } else {
                 klass5 = this.klass.SyntaxNode;
             }
-            address0 = new klass5(text0, this._offset, elements0, labelled0, namedNodeStack.pop());
+            address0 = new klass5(text0, this._offset, elements0, labelled0);
             if (!(Canopy.Compiler.Grammar instanceof Function)) {
                 address0.extend(Canopy.Compiler.Grammar);
             }
@@ -262,12 +247,10 @@ Canopy.MetaGrammar = new JS.Module("Canopy.MetaGrammar", {
             this._offset += cached.textValue.length;
             return cached;
         }
-        var namedNodeStack = [];
         var index1 = this._offset;
         var elements0 = [];
         var labelled0 = {};
         var text0 = "";
-        namedNodeStack.push({});
         var address1 = null;
         if (this._input.substring(this._offset, this._offset + 8) === "grammar ") {
             var klass0 = this.klass.SyntaxNode;
@@ -284,12 +267,8 @@ Canopy.MetaGrammar = new JS.Module("Canopy.MetaGrammar", {
             if (address2) {
                 elements0.push(address2);
                 text0 += address2.textValue;
+                address2.__name__ = "object_identifier";
                 labelled0.object_identifier = address2;
-                var i0 = namedNodeStack.length;
-                while (i0--) {
-                    namedNodeStack[i0].object_identifier = namedNodeStack[i0].object_identifier || [];
-                    namedNodeStack[i0].object_identifier.push(address2);
-                }
             } else {
                 elements0 = null;
                 this._offset = index1;
@@ -301,7 +280,7 @@ Canopy.MetaGrammar = new JS.Module("Canopy.MetaGrammar", {
         if (elements0) {
             this._offset = index1;
             var klass1 = this.klass.SyntaxNode;
-            address0 = new klass1(text0, this._offset, elements0, labelled0, namedNodeStack.pop());
+            address0 = new klass1(text0, this._offset, elements0, labelled0);
             this._offset += text0.length;
         } else {
             address0 = null;
@@ -317,45 +296,31 @@ Canopy.MetaGrammar = new JS.Module("Canopy.MetaGrammar", {
             this._offset += cached.textValue.length;
             return cached;
         }
-        var namedNodeStack = [];
         var index1 = this._offset;
         var elements0 = [];
         var labelled0 = {};
         var text0 = "";
-        namedNodeStack.push({});
         var address1 = null;
         address1 = this.__consume__identifier();
         if (address1) {
             elements0.push(address1);
             text0 += address1.textValue;
+            address1.__name__ = "identifier";
             labelled0.identifier = address1;
-            var i0 = namedNodeStack.length;
-            while (i0--) {
-                namedNodeStack[i0].identifier = namedNodeStack[i0].identifier || [];
-                namedNodeStack[i0].identifier.push(address1);
-            }
             var address2 = null;
             address2 = this.__consume__assignment();
             if (address2) {
                 elements0.push(address2);
                 text0 += address2.textValue;
+                address2.__name__ = "assignment";
                 labelled0.assignment = address2;
-                var i1 = namedNodeStack.length;
-                while (i1--) {
-                    namedNodeStack[i1].assignment = namedNodeStack[i1].assignment || [];
-                    namedNodeStack[i1].assignment.push(address2);
-                }
                 var address3 = null;
                 address3 = this.__consume__parsing_expression();
                 if (address3) {
                     elements0.push(address3);
                     text0 += address3.textValue;
+                    address3.__name__ = "parsing_expression";
                     labelled0.parsing_expression = address3;
-                    var i2 = namedNodeStack.length;
-                    while (i2--) {
-                        namedNodeStack[i2].parsing_expression = namedNodeStack[i2].parsing_expression || [];
-                        namedNodeStack[i2].parsing_expression.push(address3);
-                    }
                 } else {
                     elements0 = null;
                     this._offset = index1;
@@ -376,7 +341,7 @@ Canopy.MetaGrammar = new JS.Module("Canopy.MetaGrammar", {
             } else {
                 klass0 = this.klass.SyntaxNode;
             }
-            address0 = new klass0(text0, this._offset, elements0, labelled0, namedNodeStack.pop());
+            address0 = new klass0(text0, this._offset, elements0, labelled0);
             if (!(Canopy.Compiler.GrammarRule instanceof Function)) {
                 address0.extend(Canopy.Compiler.GrammarRule);
             }
@@ -395,12 +360,10 @@ Canopy.MetaGrammar = new JS.Module("Canopy.MetaGrammar", {
             this._offset += cached.textValue.length;
             return cached;
         }
-        var namedNodeStack = [];
         var index1 = this._offset;
         var elements0 = [];
         var labelled0 = {};
         var text0 = "";
-        namedNodeStack.push({});
         var address1 = null;
         var remaining0 = 1;
         var index2 = this._offset;
@@ -477,7 +440,7 @@ Canopy.MetaGrammar = new JS.Module("Canopy.MetaGrammar", {
         if (elements0) {
             this._offset = index1;
             var klass3 = this.klass.SyntaxNode;
-            address0 = new klass3(text0, this._offset, elements0, labelled0, namedNodeStack.pop());
+            address0 = new klass3(text0, this._offset, elements0, labelled0);
             this._offset += text0.length;
         } else {
             address0 = null;
@@ -493,7 +456,6 @@ Canopy.MetaGrammar = new JS.Module("Canopy.MetaGrammar", {
             this._offset += cached.textValue.length;
             return cached;
         }
-        var namedNodeStack = [];
         var index1 = this._offset;
         address0 = this.__consume__choice_expression();
         if (address0) {
@@ -516,12 +478,10 @@ Canopy.MetaGrammar = new JS.Module("Canopy.MetaGrammar", {
             this._offset += cached.textValue.length;
             return cached;
         }
-        var namedNodeStack = [];
         var index1 = this._offset;
         var elements0 = [];
         var labelled0 = {};
         var text0 = "";
-        namedNodeStack.push({});
         var address1 = null;
         if (this._input.substring(this._offset, this._offset + 1) === "(") {
             var klass0 = this.klass.SyntaxNode;
@@ -563,12 +523,8 @@ Canopy.MetaGrammar = new JS.Module("Canopy.MetaGrammar", {
                 if (address4) {
                     elements0.push(address4);
                     text0 += address4.textValue;
+                    address4.__name__ = "parsing_expression";
                     labelled0.parsing_expression = address4;
-                    var i0 = namedNodeStack.length;
-                    while (i0--) {
-                        namedNodeStack[i0].parsing_expression = namedNodeStack[i0].parsing_expression || [];
-                        namedNodeStack[i0].parsing_expression.push(address4);
-                    }
                     var address5 = null;
                     var remaining1 = 0;
                     var index3 = this._offset;
@@ -628,7 +584,7 @@ Canopy.MetaGrammar = new JS.Module("Canopy.MetaGrammar", {
         if (elements0) {
             this._offset = index1;
             var klass4 = this.klass.SyntaxNode;
-            address0 = new klass4(text0, this._offset, elements0, labelled0, namedNodeStack.pop());
+            address0 = new klass4(text0, this._offset, elements0, labelled0);
             this._offset += text0.length;
         } else {
             address0 = null;
@@ -644,23 +600,17 @@ Canopy.MetaGrammar = new JS.Module("Canopy.MetaGrammar", {
             this._offset += cached.textValue.length;
             return cached;
         }
-        var namedNodeStack = [];
         var index1 = this._offset;
         var elements0 = [];
         var labelled0 = {};
         var text0 = "";
-        namedNodeStack.push({});
         var address1 = null;
         address1 = this.__consume__choice_part();
         if (address1) {
             elements0.push(address1);
             text0 += address1.textValue;
+            address1.__name__ = "first_part";
             labelled0.first_part = address1;
-            var i0 = namedNodeStack.length;
-            while (i0--) {
-                namedNodeStack[i0].first_part = namedNodeStack[i0].first_part || [];
-                namedNodeStack[i0].first_part.push(address1);
-            }
             var address2 = null;
             var remaining0 = 1;
             var index2 = this._offset;
@@ -672,7 +622,6 @@ Canopy.MetaGrammar = new JS.Module("Canopy.MetaGrammar", {
                 var elements2 = [];
                 var labelled1 = {};
                 var text2 = "";
-                namedNodeStack.push({});
                 var address4 = null;
                 var remaining1 = 1;
                 var index4 = this._offset;
@@ -739,12 +688,8 @@ Canopy.MetaGrammar = new JS.Module("Canopy.MetaGrammar", {
                             if (address9) {
                                 elements2.push(address9);
                                 text2 += address9.textValue;
+                                address9.__name__ = "expression";
                                 labelled1.expression = address9;
-                                var i1 = namedNodeStack.length;
-                                while (i1--) {
-                                    namedNodeStack[i1].expression = namedNodeStack[i1].expression || [];
-                                    namedNodeStack[i1].expression.push(address9);
-                                }
                             } else {
                                 elements2 = null;
                                 this._offset = index3;
@@ -764,7 +709,7 @@ Canopy.MetaGrammar = new JS.Module("Canopy.MetaGrammar", {
                 if (elements2) {
                     this._offset = index3;
                     var klass3 = this.klass.SyntaxNode;
-                    address3 = new klass3(text2, this._offset, elements2, labelled1, namedNodeStack.pop());
+                    address3 = new klass3(text2, this._offset, elements2, labelled1);
                     this._offset += text2.length;
                 } else {
                     address3 = null;
@@ -786,12 +731,8 @@ Canopy.MetaGrammar = new JS.Module("Canopy.MetaGrammar", {
             if (address2) {
                 elements0.push(address2);
                 text0 += address2.textValue;
+                address2.__name__ = "rest";
                 labelled0.rest = address2;
-                var i2 = namedNodeStack.length;
-                while (i2--) {
-                    namedNodeStack[i2].rest = namedNodeStack[i2].rest || [];
-                    namedNodeStack[i2].rest.push(address2);
-                }
             } else {
                 elements0 = null;
                 this._offset = index1;
@@ -808,7 +749,7 @@ Canopy.MetaGrammar = new JS.Module("Canopy.MetaGrammar", {
             } else {
                 klass5 = this.klass.SyntaxNode;
             }
-            address0 = new klass5(text0, this._offset, elements0, labelled0, namedNodeStack.pop());
+            address0 = new klass5(text0, this._offset, elements0, labelled0);
             if (!(Canopy.Compiler.Choice instanceof Function)) {
                 address0.extend(Canopy.Compiler.Choice);
             }
@@ -827,12 +768,10 @@ Canopy.MetaGrammar = new JS.Module("Canopy.MetaGrammar", {
             this._offset += cached.textValue.length;
             return cached;
         }
-        var namedNodeStack = [];
         var index1 = this._offset;
         var elements0 = [];
         var labelled0 = {};
         var text0 = "";
-        namedNodeStack.push({});
         var address1 = null;
         var index2 = this._offset;
         address1 = this.__consume__sequence_expression();
@@ -854,7 +793,6 @@ Canopy.MetaGrammar = new JS.Module("Canopy.MetaGrammar", {
             var elements1 = [];
             var labelled1 = {};
             var text1 = "";
-            namedNodeStack.push({});
             var address3 = null;
             var remaining0 = 1;
             var index5 = this._offset;
@@ -885,12 +823,8 @@ Canopy.MetaGrammar = new JS.Module("Canopy.MetaGrammar", {
                 if (address5) {
                     elements1.push(address5);
                     text1 += address5.textValue;
+                    address5.__name__ = "type_expression";
                     labelled1.type_expression = address5;
-                    var i0 = namedNodeStack.length;
-                    while (i0--) {
-                        namedNodeStack[i0].type_expression = namedNodeStack[i0].type_expression || [];
-                        namedNodeStack[i0].type_expression.push(address5);
-                    }
                 } else {
                     elements1 = null;
                     this._offset = index4;
@@ -902,7 +836,7 @@ Canopy.MetaGrammar = new JS.Module("Canopy.MetaGrammar", {
             if (elements1) {
                 this._offset = index4;
                 var klass1 = this.klass.SyntaxNode;
-                address2 = new klass1(text1, this._offset, elements1, labelled1, namedNodeStack.pop());
+                address2 = new klass1(text1, this._offset, elements1, labelled1);
                 this._offset += text1.length;
             } else {
                 address2 = null;
@@ -933,7 +867,7 @@ Canopy.MetaGrammar = new JS.Module("Canopy.MetaGrammar", {
             } else {
                 klass3 = this.klass.SyntaxNode;
             }
-            address0 = new klass3(text0, this._offset, elements0, labelled0, namedNodeStack.pop());
+            address0 = new klass3(text0, this._offset, elements0, labelled0);
             if (!(Canopy.Compiler.ChoicePart instanceof Function)) {
                 address0.extend(Canopy.Compiler.ChoicePart);
             }
@@ -952,12 +886,10 @@ Canopy.MetaGrammar = new JS.Module("Canopy.MetaGrammar", {
             this._offset += cached.textValue.length;
             return cached;
         }
-        var namedNodeStack = [];
         var index1 = this._offset;
         var elements0 = [];
         var labelled0 = {};
         var text0 = "";
-        namedNodeStack.push({});
         var address1 = null;
         if (this._input.substring(this._offset, this._offset + 1) === "<") {
             var klass0 = this.klass.SyntaxNode;
@@ -974,12 +906,8 @@ Canopy.MetaGrammar = new JS.Module("Canopy.MetaGrammar", {
             if (address2) {
                 elements0.push(address2);
                 text0 += address2.textValue;
+                address2.__name__ = "object_identifier";
                 labelled0.object_identifier = address2;
-                var i0 = namedNodeStack.length;
-                while (i0--) {
-                    namedNodeStack[i0].object_identifier = namedNodeStack[i0].object_identifier || [];
-                    namedNodeStack[i0].object_identifier.push(address2);
-                }
                 var address3 = null;
                 if (this._input.substring(this._offset, this._offset + 1) === ">") {
                     var klass1 = this.klass.SyntaxNode;
@@ -1006,7 +934,7 @@ Canopy.MetaGrammar = new JS.Module("Canopy.MetaGrammar", {
         if (elements0) {
             this._offset = index1;
             var klass2 = this.klass.SyntaxNode;
-            address0 = new klass2(text0, this._offset, elements0, labelled0, namedNodeStack.pop());
+            address0 = new klass2(text0, this._offset, elements0, labelled0);
             this._offset += text0.length;
         } else {
             address0 = null;
@@ -1022,23 +950,17 @@ Canopy.MetaGrammar = new JS.Module("Canopy.MetaGrammar", {
             this._offset += cached.textValue.length;
             return cached;
         }
-        var namedNodeStack = [];
         var index1 = this._offset;
         var elements0 = [];
         var labelled0 = {};
         var text0 = "";
-        namedNodeStack.push({});
         var address1 = null;
         address1 = this.__consume__sequence_part();
         if (address1) {
             elements0.push(address1);
             text0 += address1.textValue;
+            address1.__name__ = "first_part";
             labelled0.first_part = address1;
-            var i0 = namedNodeStack.length;
-            while (i0--) {
-                namedNodeStack[i0].first_part = namedNodeStack[i0].first_part || [];
-                namedNodeStack[i0].first_part.push(address1);
-            }
             var address2 = null;
             var remaining0 = 1;
             var index2 = this._offset;
@@ -1050,7 +972,6 @@ Canopy.MetaGrammar = new JS.Module("Canopy.MetaGrammar", {
                 var elements2 = [];
                 var labelled1 = {};
                 var text2 = "";
-                namedNodeStack.push({});
                 var address4 = null;
                 var remaining1 = 1;
                 var index4 = this._offset;
@@ -1081,12 +1002,8 @@ Canopy.MetaGrammar = new JS.Module("Canopy.MetaGrammar", {
                     if (address6) {
                         elements2.push(address6);
                         text2 += address6.textValue;
+                        address6.__name__ = "expression";
                         labelled1.expression = address6;
-                        var i1 = namedNodeStack.length;
-                        while (i1--) {
-                            namedNodeStack[i1].expression = namedNodeStack[i1].expression || [];
-                            namedNodeStack[i1].expression.push(address6);
-                        }
                     } else {
                         elements2 = null;
                         this._offset = index3;
@@ -1098,7 +1015,7 @@ Canopy.MetaGrammar = new JS.Module("Canopy.MetaGrammar", {
                 if (elements2) {
                     this._offset = index3;
                     var klass1 = this.klass.SyntaxNode;
-                    address3 = new klass1(text2, this._offset, elements2, labelled1, namedNodeStack.pop());
+                    address3 = new klass1(text2, this._offset, elements2, labelled1);
                     this._offset += text2.length;
                 } else {
                     address3 = null;
@@ -1120,12 +1037,8 @@ Canopy.MetaGrammar = new JS.Module("Canopy.MetaGrammar", {
             if (address2) {
                 elements0.push(address2);
                 text0 += address2.textValue;
+                address2.__name__ = "rest";
                 labelled0.rest = address2;
-                var i2 = namedNodeStack.length;
-                while (i2--) {
-                    namedNodeStack[i2].rest = namedNodeStack[i2].rest || [];
-                    namedNodeStack[i2].rest.push(address2);
-                }
             } else {
                 elements0 = null;
                 this._offset = index1;
@@ -1142,7 +1055,7 @@ Canopy.MetaGrammar = new JS.Module("Canopy.MetaGrammar", {
             } else {
                 klass3 = this.klass.SyntaxNode;
             }
-            address0 = new klass3(text0, this._offset, elements0, labelled0, namedNodeStack.pop());
+            address0 = new klass3(text0, this._offset, elements0, labelled0);
             if (!(Canopy.Compiler.Sequence instanceof Function)) {
                 address0.extend(Canopy.Compiler.Sequence);
             }
@@ -1161,12 +1074,10 @@ Canopy.MetaGrammar = new JS.Module("Canopy.MetaGrammar", {
             this._offset += cached.textValue.length;
             return cached;
         }
-        var namedNodeStack = [];
         var index1 = this._offset;
         var elements0 = [];
         var labelled0 = {};
         var text0 = "";
-        namedNodeStack.push({});
         var address1 = null;
         var index2 = this._offset;
         address1 = this.__consume__label();
@@ -1195,12 +1106,8 @@ Canopy.MetaGrammar = new JS.Module("Canopy.MetaGrammar", {
             if (address2) {
                 elements0.push(address2);
                 text0 += address2.textValue;
+                address2.__name__ = "expression";
                 labelled0.expression = address2;
-                var i0 = namedNodeStack.length;
-                while (i0--) {
-                    namedNodeStack[i0].expression = namedNodeStack[i0].expression || [];
-                    namedNodeStack[i0].expression.push(address2);
-                }
             } else {
                 elements0 = null;
                 this._offset = index1;
@@ -1217,7 +1124,7 @@ Canopy.MetaGrammar = new JS.Module("Canopy.MetaGrammar", {
             } else {
                 klass1 = this.klass.SyntaxNode;
             }
-            address0 = new klass1(text0, this._offset, elements0, labelled0, namedNodeStack.pop());
+            address0 = new klass1(text0, this._offset, elements0, labelled0);
             if (!(Canopy.Compiler.SequencePart instanceof Function)) {
                 address0.extend(Canopy.Compiler.SequencePart);
             }
@@ -1236,34 +1143,24 @@ Canopy.MetaGrammar = new JS.Module("Canopy.MetaGrammar", {
             this._offset += cached.textValue.length;
             return cached;
         }
-        var namedNodeStack = [];
         var index1 = this._offset;
         var elements0 = [];
         var labelled0 = {};
         var text0 = "";
-        namedNodeStack.push({});
         var address1 = null;
         address1 = this.__consume__atom();
         if (address1) {
             elements0.push(address1);
             text0 += address1.textValue;
+            address1.__name__ = "atom";
             labelled0.atom = address1;
-            var i0 = namedNodeStack.length;
-            while (i0--) {
-                namedNodeStack[i0].atom = namedNodeStack[i0].atom || [];
-                namedNodeStack[i0].atom.push(address1);
-            }
             var address2 = null;
             address2 = this.__consume__quantifier();
             if (address2) {
                 elements0.push(address2);
                 text0 += address2.textValue;
+                address2.__name__ = "quantifier";
                 labelled0.quantifier = address2;
-                var i1 = namedNodeStack.length;
-                while (i1--) {
-                    namedNodeStack[i1].quantifier = namedNodeStack[i1].quantifier || [];
-                    namedNodeStack[i1].quantifier.push(address2);
-                }
             } else {
                 elements0 = null;
                 this._offset = index1;
@@ -1280,7 +1177,7 @@ Canopy.MetaGrammar = new JS.Module("Canopy.MetaGrammar", {
             } else {
                 klass0 = this.klass.SyntaxNode;
             }
-            address0 = new klass0(text0, this._offset, elements0, labelled0, namedNodeStack.pop());
+            address0 = new klass0(text0, this._offset, elements0, labelled0);
             if (!(Canopy.Compiler.Repeat instanceof Function)) {
                 address0.extend(Canopy.Compiler.Repeat);
             }
@@ -1299,7 +1196,6 @@ Canopy.MetaGrammar = new JS.Module("Canopy.MetaGrammar", {
             this._offset += cached.textValue.length;
             return cached;
         }
-        var namedNodeStack = [];
         var index1 = this._offset;
         address0 = this.__consume__parenthesised_expression();
         if (address0) {
@@ -1347,12 +1243,10 @@ Canopy.MetaGrammar = new JS.Module("Canopy.MetaGrammar", {
             this._offset += cached.textValue.length;
             return cached;
         }
-        var namedNodeStack = [];
         var index1 = this._offset;
         var elements0 = [];
         var labelled0 = {};
         var text0 = "";
-        namedNodeStack.push({});
         var address1 = null;
         var index2 = this._offset;
         if (this._input.substring(this._offset, this._offset + 1) === "&") {
@@ -1380,23 +1274,15 @@ Canopy.MetaGrammar = new JS.Module("Canopy.MetaGrammar", {
         if (address1) {
             elements0.push(address1);
             text0 += address1.textValue;
+            address1.__name__ = "predicate";
             labelled0.predicate = address1;
-            var i0 = namedNodeStack.length;
-            while (i0--) {
-                namedNodeStack[i0].predicate = namedNodeStack[i0].predicate || [];
-                namedNodeStack[i0].predicate.push(address1);
-            }
             var address2 = null;
             address2 = this.__consume__atom();
             if (address2) {
                 elements0.push(address2);
                 text0 += address2.textValue;
+                address2.__name__ = "atom";
                 labelled0.atom = address2;
-                var i1 = namedNodeStack.length;
-                while (i1--) {
-                    namedNodeStack[i1].atom = namedNodeStack[i1].atom || [];
-                    namedNodeStack[i1].atom.push(address2);
-                }
             } else {
                 elements0 = null;
                 this._offset = index1;
@@ -1413,7 +1299,7 @@ Canopy.MetaGrammar = new JS.Module("Canopy.MetaGrammar", {
             } else {
                 klass2 = this.klass.SyntaxNode;
             }
-            address0 = new klass2(text0, this._offset, elements0, labelled0, namedNodeStack.pop());
+            address0 = new klass2(text0, this._offset, elements0, labelled0);
             if (!(Canopy.Compiler.PredicatedAtom instanceof Function)) {
                 address0.extend(Canopy.Compiler.PredicatedAtom);
             }
@@ -1432,23 +1318,17 @@ Canopy.MetaGrammar = new JS.Module("Canopy.MetaGrammar", {
             this._offset += cached.textValue.length;
             return cached;
         }
-        var namedNodeStack = [];
         var index1 = this._offset;
         var elements0 = [];
         var labelled0 = {};
         var text0 = "";
-        namedNodeStack.push({});
         var address1 = null;
         address1 = this.__consume__identifier();
         if (address1) {
             elements0.push(address1);
             text0 += address1.textValue;
+            address1.__name__ = "identifier";
             labelled0.identifier = address1;
-            var i0 = namedNodeStack.length;
-            while (i0--) {
-                namedNodeStack[i0].identifier = namedNodeStack[i0].identifier || [];
-                namedNodeStack[i0].identifier.push(address1);
-            }
             var address2 = null;
             var index2 = this._offset;
             address2 = this.__consume__assignment();
@@ -1479,7 +1359,7 @@ Canopy.MetaGrammar = new JS.Module("Canopy.MetaGrammar", {
             } else {
                 klass1 = this.klass.SyntaxNode;
             }
-            address0 = new klass1(text0, this._offset, elements0, labelled0, namedNodeStack.pop());
+            address0 = new klass1(text0, this._offset, elements0, labelled0);
             if (!(Canopy.Compiler.Reference instanceof Function)) {
                 address0.extend(Canopy.Compiler.Reference);
             }
@@ -1498,12 +1378,10 @@ Canopy.MetaGrammar = new JS.Module("Canopy.MetaGrammar", {
             this._offset += cached.textValue.length;
             return cached;
         }
-        var namedNodeStack = [];
         var index1 = this._offset;
         var elements0 = [];
         var labelled0 = {};
         var text0 = "";
-        namedNodeStack.push({});
         var address1 = null;
         if (this._input.substring(this._offset, this._offset + 1) === "\"") {
             var klass0 = this.klass.SyntaxNode;
@@ -1527,7 +1405,6 @@ Canopy.MetaGrammar = new JS.Module("Canopy.MetaGrammar", {
                 var elements2 = [];
                 var labelled1 = {};
                 var text2 = "";
-                namedNodeStack.push({});
                 var address4 = null;
                 if (this._input.substring(this._offset, this._offset + 1) === "\\") {
                     var klass1 = this.klass.SyntaxNode;
@@ -1562,7 +1439,7 @@ Canopy.MetaGrammar = new JS.Module("Canopy.MetaGrammar", {
                 if (elements2) {
                     this._offset = index4;
                     var klass3 = this.klass.SyntaxNode;
-                    address3 = new klass3(text2, this._offset, elements2, labelled1, namedNodeStack.pop());
+                    address3 = new klass3(text2, this._offset, elements2, labelled1);
                     this._offset += text2.length;
                 } else {
                     address3 = null;
@@ -1632,7 +1509,7 @@ Canopy.MetaGrammar = new JS.Module("Canopy.MetaGrammar", {
             } else {
                 klass7 = this.klass.SyntaxNode;
             }
-            address0 = new klass7(text0, this._offset, elements0, labelled0, namedNodeStack.pop());
+            address0 = new klass7(text0, this._offset, elements0, labelled0);
             if (!(Canopy.Compiler.String instanceof Function)) {
                 address0.extend(Canopy.Compiler.String);
             }
@@ -1651,12 +1528,10 @@ Canopy.MetaGrammar = new JS.Module("Canopy.MetaGrammar", {
             this._offset += cached.textValue.length;
             return cached;
         }
-        var namedNodeStack = [];
         var index1 = this._offset;
         var elements0 = [];
         var labelled0 = {};
         var text0 = "";
-        namedNodeStack.push({});
         var address1 = null;
         if (this._input.substring(this._offset, this._offset + 1) === "`") {
             var klass0 = this.klass.SyntaxNode;
@@ -1680,7 +1555,6 @@ Canopy.MetaGrammar = new JS.Module("Canopy.MetaGrammar", {
                 var elements2 = [];
                 var labelled1 = {};
                 var text2 = "";
-                namedNodeStack.push({});
                 var address4 = null;
                 if (this._input.substring(this._offset, this._offset + 1) === "\\") {
                     var klass1 = this.klass.SyntaxNode;
@@ -1715,7 +1589,7 @@ Canopy.MetaGrammar = new JS.Module("Canopy.MetaGrammar", {
                 if (elements2) {
                     this._offset = index4;
                     var klass3 = this.klass.SyntaxNode;
-                    address3 = new klass3(text2, this._offset, elements2, labelled1, namedNodeStack.pop());
+                    address3 = new klass3(text2, this._offset, elements2, labelled1);
                     this._offset += text2.length;
                 } else {
                     address3 = null;
@@ -1785,7 +1659,7 @@ Canopy.MetaGrammar = new JS.Module("Canopy.MetaGrammar", {
             } else {
                 klass7 = this.klass.SyntaxNode;
             }
-            address0 = new klass7(text0, this._offset, elements0, labelled0, namedNodeStack.pop());
+            address0 = new klass7(text0, this._offset, elements0, labelled0);
             if (!(Canopy.Compiler.CIString instanceof Function)) {
                 address0.extend(Canopy.Compiler.CIString);
             }
@@ -1804,7 +1678,6 @@ Canopy.MetaGrammar = new JS.Module("Canopy.MetaGrammar", {
             this._offset += cached.textValue.length;
             return cached;
         }
-        var namedNodeStack = [];
         if (this._input.substring(this._offset, this._offset + 1) === ".") {
             var klass0 = null;
             if (Canopy.Compiler.AnyChar instanceof Function) {
@@ -1831,12 +1704,10 @@ Canopy.MetaGrammar = new JS.Module("Canopy.MetaGrammar", {
             this._offset += cached.textValue.length;
             return cached;
         }
-        var namedNodeStack = [];
         var index1 = this._offset;
         var elements0 = [];
         var labelled0 = {};
         var text0 = "";
-        namedNodeStack.push({});
         var address1 = null;
         if (this._input.substring(this._offset, this._offset + 1) === "[") {
             var klass0 = this.klass.SyntaxNode;
@@ -1879,7 +1750,6 @@ Canopy.MetaGrammar = new JS.Module("Canopy.MetaGrammar", {
                     var elements2 = [];
                     var labelled1 = {};
                     var text2 = "";
-                    namedNodeStack.push({});
                     var address5 = null;
                     if (this._input.substring(this._offset, this._offset + 1) === "\\") {
                         var klass3 = this.klass.SyntaxNode;
@@ -1914,7 +1784,7 @@ Canopy.MetaGrammar = new JS.Module("Canopy.MetaGrammar", {
                     if (elements2) {
                         this._offset = index5;
                         var klass5 = this.klass.SyntaxNode;
-                        address4 = new klass5(text2, this._offset, elements2, labelled1, namedNodeStack.pop());
+                        address4 = new klass5(text2, this._offset, elements2, labelled1);
                         this._offset += text2.length;
                     } else {
                         address4 = null;
@@ -1988,7 +1858,7 @@ Canopy.MetaGrammar = new JS.Module("Canopy.MetaGrammar", {
             } else {
                 klass9 = this.klass.SyntaxNode;
             }
-            address0 = new klass9(text0, this._offset, elements0, labelled0, namedNodeStack.pop());
+            address0 = new klass9(text0, this._offset, elements0, labelled0);
             if (!(Canopy.Compiler.CharClass instanceof Function)) {
                 address0.extend(Canopy.Compiler.CharClass);
             }
@@ -2007,23 +1877,17 @@ Canopy.MetaGrammar = new JS.Module("Canopy.MetaGrammar", {
             this._offset += cached.textValue.length;
             return cached;
         }
-        var namedNodeStack = [];
         var index1 = this._offset;
         var elements0 = [];
         var labelled0 = {};
         var text0 = "";
-        namedNodeStack.push({});
         var address1 = null;
         address1 = this.__consume__identifier();
         if (address1) {
             elements0.push(address1);
             text0 += address1.textValue;
+            address1.__name__ = "identifier";
             labelled0.identifier = address1;
-            var i0 = namedNodeStack.length;
-            while (i0--) {
-                namedNodeStack[i0].identifier = namedNodeStack[i0].identifier || [];
-                namedNodeStack[i0].identifier.push(address1);
-            }
             var address2 = null;
             if (this._input.substring(this._offset, this._offset + 1) === ":") {
                 var klass0 = this.klass.SyntaxNode;
@@ -2046,7 +1910,7 @@ Canopy.MetaGrammar = new JS.Module("Canopy.MetaGrammar", {
         if (elements0) {
             this._offset = index1;
             var klass1 = this.klass.SyntaxNode;
-            address0 = new klass1(text0, this._offset, elements0, labelled0, namedNodeStack.pop());
+            address0 = new klass1(text0, this._offset, elements0, labelled0);
             this._offset += text0.length;
         } else {
             address0 = null;
@@ -2062,23 +1926,17 @@ Canopy.MetaGrammar = new JS.Module("Canopy.MetaGrammar", {
             this._offset += cached.textValue.length;
             return cached;
         }
-        var namedNodeStack = [];
         var index1 = this._offset;
         var elements0 = [];
         var labelled0 = {};
         var text0 = "";
-        namedNodeStack.push({});
         var address1 = null;
         address1 = this.__consume__identifier();
         if (address1) {
             elements0.push(address1);
             text0 += address1.textValue;
+            address1.__name__ = "identifier";
             labelled0.identifier = address1;
-            var i0 = namedNodeStack.length;
-            while (i0--) {
-                namedNodeStack[i0].identifier = namedNodeStack[i0].identifier || [];
-                namedNodeStack[i0].identifier.push(address1);
-            }
             var address2 = null;
             var remaining0 = 0;
             var index2 = this._offset;
@@ -2090,7 +1948,6 @@ Canopy.MetaGrammar = new JS.Module("Canopy.MetaGrammar", {
                 var elements2 = [];
                 var labelled1 = {};
                 var text2 = "";
-                namedNodeStack.push({});
                 var address4 = null;
                 if (this._input.substring(this._offset, this._offset + 1) === ".") {
                     var klass0 = this.klass.SyntaxNode;
@@ -2107,12 +1964,8 @@ Canopy.MetaGrammar = new JS.Module("Canopy.MetaGrammar", {
                     if (address5) {
                         elements2.push(address5);
                         text2 += address5.textValue;
+                        address5.__name__ = "identifier";
                         labelled1.identifier = address5;
-                        var i1 = namedNodeStack.length;
-                        while (i1--) {
-                            namedNodeStack[i1].identifier = namedNodeStack[i1].identifier || [];
-                            namedNodeStack[i1].identifier.push(address5);
-                        }
                     } else {
                         elements2 = null;
                         this._offset = index3;
@@ -2124,7 +1977,7 @@ Canopy.MetaGrammar = new JS.Module("Canopy.MetaGrammar", {
                 if (elements2) {
                     this._offset = index3;
                     var klass1 = this.klass.SyntaxNode;
-                    address3 = new klass1(text2, this._offset, elements2, labelled1, namedNodeStack.pop());
+                    address3 = new klass1(text2, this._offset, elements2, labelled1);
                     this._offset += text2.length;
                 } else {
                     address3 = null;
@@ -2157,7 +2010,7 @@ Canopy.MetaGrammar = new JS.Module("Canopy.MetaGrammar", {
         if (elements0) {
             this._offset = index1;
             var klass3 = this.klass.SyntaxNode;
-            address0 = new klass3(text0, this._offset, elements0, labelled0, namedNodeStack.pop());
+            address0 = new klass3(text0, this._offset, elements0, labelled0);
             this._offset += text0.length;
         } else {
             address0 = null;
@@ -2173,12 +2026,10 @@ Canopy.MetaGrammar = new JS.Module("Canopy.MetaGrammar", {
             this._offset += cached.textValue.length;
             return cached;
         }
-        var namedNodeStack = [];
         var index1 = this._offset;
         var elements0 = [];
         var labelled0 = {};
         var text0 = "";
-        namedNodeStack.push({});
         var address1 = null;
         var temp0 = this._input.substring(this._offset, this._offset + 1);
         var match0 = null;
@@ -2236,7 +2087,7 @@ Canopy.MetaGrammar = new JS.Module("Canopy.MetaGrammar", {
         if (elements0) {
             this._offset = index1;
             var klass3 = this.klass.SyntaxNode;
-            address0 = new klass3(text0, this._offset, elements0, labelled0, namedNodeStack.pop());
+            address0 = new klass3(text0, this._offset, elements0, labelled0);
             this._offset += text0.length;
         } else {
             address0 = null;
@@ -2252,7 +2103,6 @@ Canopy.MetaGrammar = new JS.Module("Canopy.MetaGrammar", {
             this._offset += cached.textValue.length;
             return cached;
         }
-        var namedNodeStack = [];
         var index1 = this._offset;
         if (this._input.substring(this._offset, this._offset + 1) === "?") {
             var klass0 = this.klass.SyntaxNode;
@@ -2298,7 +2148,6 @@ Canopy.MetaGrammar = new JS.Module("Canopy.MetaGrammar", {
             this._offset += cached.textValue.length;
             return cached;
         }
-        var namedNodeStack = [];
         var temp0 = this._input.substring(this._offset, this._offset + 1);
         var match0 = null;
         if (match0 = temp0.match(/^[\s\n\r\t]/)) {
@@ -2334,11 +2183,10 @@ Canopy.MetaGrammarParser = new JS.Class("Canopy.MetaGrammarParser", {
 Canopy.MetaGrammarParser.SyntaxNode = new JS.Class("Canopy.MetaGrammarParser.SyntaxNode", {
     include: JS.Enumerable,
     include: Canopy.Queries,
-    initialize: function(textValue, offset, elements, properties, named) {
+    initialize: function(textValue, offset, elements, properties) {
         this.textValue = textValue;
         this.offset    = offset;
         this.elements  = elements || [];
-        this.__named__ = named || {};
         if (!properties) return;
         for (var key in properties) this[key] = properties[key];
     },
@@ -2407,10 +2255,9 @@ Canopy.extend({
       return input + '.substring(' + of + ', ' + of + ' + ' + length + ')';
     },
     
-    syntaxNode_: function(address, nodeType, expression, bump, elements, labelled, named) {
+    syntaxNode_: function(address, nodeType, expression, bump, elements, labelled) {
       elements = ', ' + (elements || '[]');
       labelled = labelled ? ', ' + labelled : '';
-      named    = named ? ', ' + named : '';
       
       var klass, of = ', ' + this.offset_();
       
@@ -2426,7 +2273,7 @@ Canopy.extend({
         klass = this.tempVar_('klass', 'this.klass.SyntaxNode');
       }
       
-      this.line_(address + ' = new ' + klass + '(' + expression + of + elements + labelled + named + ')');
+      this.line_(address + ' = new ' + klass + '(' + expression + of + elements + labelled + ')');
       this.extendNode_(address, nodeType);
       this.line_(this.offset_() + ' += ' + bump);
     },
@@ -2556,8 +2403,18 @@ Canopy.extend({
 
 Canopy.extend({
   Queries: new JS.Module({
-    select: function(nodeType) {
-      return (this.__named__[nodeType] || []).slice();
+    select: function(nodeType, results) {
+      results = results || [];
+      
+      if (this.__name__ === nodeType) {
+        results.push(this);
+        
+      } else if (!this.__name__) {
+        this.forEach(function(childNode) {
+          childNode.select(nodeType, results);
+        });
+      }
+      return results;
     }
   })
 });
@@ -2637,11 +2494,10 @@ Canopy.Compiler.extend({
         builder.include_('JS.Enumerable');
         builder.include_('Canopy.Queries');
         
-        builder.method_('initialize', ['textValue', 'offset', 'elements', 'properties', 'named'], function(builder) {
+        builder.method_('initialize', ['textValue', 'offset', 'elements', 'properties'], function(builder) {
           builder.line_('this.textValue = textValue');
           builder.line_('this.offset    = offset');
           builder.line_('this.elements  = elements || []');
-          builder.line_('this.__named__ = named || {}');
           
           builder.line_('if (!properties) return');
           builder.line_('for (var key in properties) this[key] = properties[key]');
@@ -2687,7 +2543,6 @@ Canopy.Compiler.extend({
           builder.return_('cached');
         }, this);
         
-        builder.var_('namedNodeStack', '[]');
         this.parsing_expression.compile(builder, address);
         
         builder.return_(cacheAddr + ' = ' + address);
@@ -2978,16 +2833,13 @@ Canopy.Compiler.extend({
       this._labelled    = builder.tempVar_('labelled', '{}');
       this._textValue   = builder.tempVar_('text', '""');
       
-      builder.line_('namedNodeStack.push({})');
-      
       this._compileExpressions(builder, 0);
       builder.if_(this._elements, function(builder) {
         builder.line_(builder.offset_() + ' = ' + this._startOffset);
         builder.syntaxNode_(address, nodeType, this._textValue,
                                                this._textValue + '.length',
                                                this._elements,
-                                               this._labelled,
-                                               'namedNodeStack.pop()');
+                                               this._labelled);
       }, this);
       builder.else_(function(builder) {
         builder.line_(address + ' = null');
@@ -3007,16 +2859,9 @@ Canopy.Compiler.extend({
         builder.line_(this._elements + '.push(' + expAddr + ')');
         builder.line_(this._textValue + ' += ' + expAddr + '.textValue');
         if (label) {
+          builder.line_(expAddr + '.__name__ = "' + label + '"');
           builder.line_(this._labelled + '.' + label + ' = ' + expAddr);
-          
-          var i = builder.tempVar_('i', 'namedNodeStack.length');
-          builder.while_(i + '--', function() {
-            var list = 'namedNodeStack[' + i + '].' + label;
-            builder.line_(list + ' = ' + list + ' || []');
-            builder.line_(list + '.push(' + expAddr + ')');
-          }, this);
         }
-        
         this._compileExpressions(builder, index + 1);
         
       }, this);

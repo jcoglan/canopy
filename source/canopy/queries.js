@@ -1,7 +1,17 @@
 Canopy.extend({
   Queries: new JS.Module({
-    select: function(nodeType) {
-      return (this.__named__[nodeType] || []).slice();
+    select: function(nodeType, results) {
+      results = results || [];
+      
+      if (this.__name__ === nodeType) {
+        results.push(this);
+        
+      } else if (!this.__name__) {
+        this.forEach(function(childNode) {
+          childNode.select(nodeType, results);
+        });
+      }
+      return results;
     }
   })
 });
