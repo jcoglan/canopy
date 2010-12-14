@@ -24,6 +24,7 @@ Canopy.Compiler.extend({
           builder.return_('cached');
         }, this);
         
+        builder.var_('namedNodeStack', '[]');
         this.parsing_expression.compile(builder, address);
         
         builder.return_(cacheAddr + ' = ' + address);
