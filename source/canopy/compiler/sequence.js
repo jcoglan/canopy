@@ -18,22 +18,27 @@ Canopy.Compiler.extend({
     },
     
     compile: function(builder, address, nodeType) {
-      var startOffset = builder.tempVar_('index', builder.offset_()),
-          elements    = builder.tempVar_('elements', '[]'),
-          labelled    = builder.tempVar_('labelled', '{}'),
-          textValue   = builder.tempVar_('text', '""');
+      this._startOffset = builder.tempVar_('index', builder.offset_());
+      this._elements    = builder.tempVar_('elements', '[]');
+      this._labelled    = builder.tempVar_('labelled', '{}');
+      this._textValue   = builder.tempVar_('text', '""');
+      this._namedNodes  = builder.tempVar_('named', '{}');
       
-      this._compileExpressions(builder, 0, startOffset, elements, labelled, textValue);
-      builder.if_(elements, function(builder) {
-        builder.line_(builder.offset_() + ' = ' + startOffset);
-        builder.syntaxNode_(address, nodeType, textValue, textValue + '.length', elements, labelled);
-      });
+      this._compileExpressions(builder, 0);
+      builder.if_(this._elements, function(builder) {
+        builder.line_(builder.offset_() + ' = ' + this._startOffset);
+        builder.syntaxNode_(address, nodeType, this._textValue,
+                                               this._textValue + '.length',
+                                               this._elements,
+                                               this._labelled,
+                                               this._namedNodes);
+      }, this);
       builder.else_(function(builder) {
         builder.line_(address + ' = null');
       });
     },
     
-    _compileExpressions: function(builder, index, startOffset, elements, labelled, textValue) {
+    _compileExpressions: function(builder, index) {
       var expressions = this.expressions();
       if (index === expressions.length) return;
       
@@ -43,17 +48,21 @@ Canopy.Compiler.extend({
       expressions[index].compile(builder, expAddr);
       
       builder.if_(expAddr, function(builder) {
-        builder.line_(elements + '.push(' + expAddr + ')');
-        builder.line_(textValue + ' += ' + expAddr + '.textValue');
-        if (label) builder.line_(labelled + '.' + label + ' = ' + expAddr);
+        builder.line_(this._elements + '.push(' + expAddr + ')');
+        builder.line_(this._textValue + ' += ' + expAddr + '.textValue');
+        if (label) {
+          builder.line_(this._labelled + '.' + label + ' = ' + expAddr);
+          builder.line_(this._namedNodes + '.' + label + ' = ' + this._namedNodes + '.' + label + ' || []');
+          builder.line_(this._namedNodes + '.' + label + '.push(' + expAddr + ')');
+        }
         
-        this._compileExpressions(builder, index + 1, startOffset, elements, labelled, textValue);
+        this._compileExpressions(builder, index + 1);
         
       }, this);
       builder.else_(function(builder) {
-        builder.line_(elements + ' = null');
-        builder.line_(builder.offset_() + ' = ' + startOffset);
-      });
+        builder.line_(this._elements + ' = null');
+        builder.line_(builder.offset_() + ' = ' + this._startOffset);
+      }, this);
     }
   })
 });

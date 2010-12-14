@@ -46,11 +46,13 @@ Canopy.Compiler.extend({
       
       builder.class_(this.grammarName() + 'Parser.SyntaxNode', function(builder) {
         builder.include_('JS.Enumerable');
+        builder.include_('Canopy.Queries');
         
-        builder.method_('initialize', ['textValue', 'offset', 'elements', 'properties'], function(builder) {
+        builder.method_('initialize', ['textValue', 'offset', 'elements', 'properties', 'named'], function(builder) {
           builder.line_('this.textValue = textValue');
           builder.line_('this.offset    = offset');
           builder.line_('this.elements  = elements || []');
+          builder.line_('this.__named__ = named || {}');
           
           builder.line_('if (!properties) return');
           builder.line_('for (var key in properties) this[key] = properties[key]');
