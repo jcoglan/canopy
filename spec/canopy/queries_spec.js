@@ -5,7 +5,7 @@ Canopy.QueriesSpec = JS.Test.describe('queries', function() {
     Canopy.compile('grammar Query     \
       value  <- mixup / nested        \
       mixup  <- letter digit letter   \
-      nested <- digit number digit    \
+      nested <- digit (number digit)  \
                                       \
       letter <- [a-z]                 \
       digit  <- [0-9]                 \
