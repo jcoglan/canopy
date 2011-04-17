@@ -1,31 +1,31 @@
-Canopy.Compiler.ReferenceSpec = JS.Test.describe(Canopy.Compiler.Reference, function() {
+Canopy.Compiler.ReferenceSpec = JS.Test.describe(Canopy.Compiler.Reference, function() { with(this) {
   include(Canopy.SpecHelper)
   
-  describe('with two rules and a reference', function() {
-    describe('where the root only contains a reference', function() {
-      before(function() {
+  describe('with two rules and a reference', function() { with(this) {
+    describe('where the root only contains a reference', function() { with(this) {
+      before(function() { with(this) {
         Canopy.compile('grammar OneRefTest\
           first <- second\
           second <- "bar"')
-      })
+      }})
       
-      it('parses strings matching the referenced rule', function() {
+      it('parses strings matching the referenced rule', function() { with(this) {
         assertParse( ['bar', 0, []], OneRefTestParser.parse('bar') )
-      })
+      }})
       
-      it('does not parse strings that do not match the referenced rule', function() {
+      it('does not parse strings that do not match the referenced rule', function() { with(this) {
         assertNull( OneRefTestParser.parse('foo') )
-      })
-    })
+      }})
+    }})
     
-    describe('where the root contains the reference as part of a sequence', function() {
-      before(function() {
+    describe('where the root contains the reference as part of a sequence', function() { with(this) {
+      before(function() { with(this) {
         Canopy.compile('grammar OneRefWithSequenceTest\
           first <- second "end"\
           second <- "begin"')
-      })
+      }})
       
-      it('presents the reference as a labelled element', function() {
+      it('presents the reference as a labelled element', function() { with(this) {
         assertParse(['beginend', 0, [
                       ['begin', 0, []],
                       ['end', 5, []]], {
@@ -33,17 +33,17 @@ Canopy.Compiler.ReferenceSpec = JS.Test.describe(Canopy.Compiler.Reference, func
                     }],
           
           OneRefWithSequenceTestParser.parse('beginend') )
-      })
-    })
+      }})
+    }})
     
-    describe('where the root contains the reference as part of a sub-sequence', function() {
-      before(function() {
+    describe('where the root contains the reference as part of a sub-sequence', function() { with(this) {
+      before(function() { with(this) {
         Canopy.compile('grammar OneRefWithSubSequenceTest\
           first <- (second "sub") "end"\
           second <- "begin"')
-      })
+      }})
       
-      it('presents the reference as a labelled element in the subsequence', function() {
+      it('presents the reference as a labelled element in the subsequence', function() { with(this) {
         assertParse(['beginsubend', 0, [
                       ['beginsub', 0, [
                         ['begin', 0, []],
@@ -53,24 +53,24 @@ Canopy.Compiler.ReferenceSpec = JS.Test.describe(Canopy.Compiler.Reference, func
                       ['end', 8, []]]],
           
           OneRefWithSubSequenceTestParser.parse('beginsubend') )
-      })
-    })
+      }})
+    }})
     
-    describe('when the root contains the reference as part of a choice', function() {
-      before(function() {
+    describe('when the root contains the reference as part of a choice', function() { with(this) {
+      before(function() { with(this) {
         Canopy.compile('grammar OneRefWithChoice\
           first <- second / "end"\
           second <- "begin"')
-      })
+      }})
       
-      it('parses the first branch of the choice', function() {
+      it('parses the first branch of the choice', function() { with(this) {
         assertParse( ['begin', 0, []], OneRefWithChoiceParser.parse('begin') )
-      })
+      }})
       
-      it('parses the second branch of the choice', function() {
+      it('parses the second branch of the choice', function() { with(this) {
         assertParse( ['end', 0, []], OneRefWithChoiceParser.parse('end') )
-      })
-    })
-  })
-})
+      }})
+    }})
+  }})
+}})
 

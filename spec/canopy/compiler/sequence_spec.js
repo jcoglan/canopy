@@ -1,40 +1,40 @@
-Canopy.Compiler.SequenceSpec = JS.Test.describe(Canopy.Compiler.Sequence, function() {
+Canopy.Compiler.SequenceSpec = JS.Test.describe(Canopy.Compiler.Sequence, function() { with(this) {
   include(Canopy.SpecHelper)
   
-  before(function() {
+  before(function() { with(this) {
     Canopy.compile('grammar SequenceTest\
       sequence <- "foo" "bar"')
-  })
+  }})
   
-  it('parses sequences matching its content', function() {
+  it('parses sequences matching its content', function() { with(this) {
     assertParse(['foobar', 0, [
                   ['foo', 0, []],
                   ['bar', 3, []]]],
       
       SequenceTestParser.parse('foobar') )
-  })
+  }})
   
-  it('does not parse nonmatching sequences', function() {
+  it('does not parse nonmatching sequences', function() { with(this) {
     assertNull( SequenceTestParser.parse('foobaz') )
     assertNull( SequenceTestParser.parse('doobar') )
-  })
+  }})
   
-  it('does not parse if the first term is missing', function() {
+  it('does not parse if the first term is missing', function() { with(this) {
     assertNull( SequenceTestParser.parse('bar') )
-  })
+  }})
   
-  it('does not parse superstrings of itself', function() {
+  it('does not parse superstrings of itself', function() { with(this) {
     assertNull( SequenceTestParser.parse('foobart') )
-  })
+  }})
   
-  describe('labelling', function() {
-    describe('a terminal node', function() {
-      before(function() {
+  describe('labelling', function() { with(this) {
+    describe('a terminal node', function() { with(this) {
+      before(function() { with(this) {
         Canopy.compile('grammar LabelTestA\
           root <- "first" middle:"second" "third"')
-      })
+      }})
       
-      it('adds the label as an extra property to the parse tree', function() {
+      it('adds the label as an extra property to the parse tree', function() { with(this) {
         assertParse(['firstsecondthird', 0, [
                       ['first', 0, []],
                       ['second', 5, []],
@@ -43,16 +43,16 @@ Canopy.Compiler.SequenceSpec = JS.Test.describe(Canopy.Compiler.Sequence, functi
                     }],
           
           LabelTestAParser.parse('firstsecondthird') )
-      })
-    })
+      }})
+    }})
     
-    describe('a repetition node', function() {
-      before(function() {
+    describe('a repetition node', function() { with(this) {
+      before(function() { with(this) {
         Canopy.compile('grammar LabelTestB\
           root <- "first" middle:"a"+ "third"')
-      })
+      }})
       
-      it('labels the node containing the repetition', function() {
+      it('labels the node containing the repetition', function() { with(this) {
         assertParse(['firstaathird', 0, [
                       ['first', 0, []],
                       ['aa', 5, [
@@ -65,15 +65,15 @@ Canopy.Compiler.SequenceSpec = JS.Test.describe(Canopy.Compiler.Sequence, functi
                     }],
           
           LabelTestBParser.parse('firstaathird') )
-      })
+      }})
       
-      it('does not parse if the expression it labels does not parse', function() {
+      it('does not parse if the expression it labels does not parse', function() { with(this) {
         assertNull( LabelTestBParser.parse('firstthird') )
-      })
-    })
+      }})
+    }})
     
-    describe('nesting', function() {
-      before(function() {
+    describe('nesting', function() { with(this) {
+      before(function() { with(this) {
         Canopy.compile('grammar LabelTestC\
           root <- firstLetter:[a-z] restLetters:(", " letter:[a-z])*')
         
@@ -88,9 +88,9 @@ Canopy.Compiler.SequenceSpec = JS.Test.describe(Canopy.Compiler.Sequence, functi
                         ['c', 6, []]], {
                         letter: ['c', 6, []]
                       }]]]
-      })
+      }})
       
-      it('applies labels to nested nodes', function() {
+      it('applies labels to nested nodes', function() { with(this) {
         assertParse(['a, b, c', 0, [
                       ['a', 0, []],
                       rest], {
@@ -99,8 +99,8 @@ Canopy.Compiler.SequenceSpec = JS.Test.describe(Canopy.Compiler.Sequence, functi
                     }],
           
           LabelTestCParser.parse('a, b, c') )
-      })
-    })
-  })
-})
+      }})
+    }})
+  }})
+}})
 
