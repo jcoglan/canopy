@@ -65,6 +65,7 @@ Canopy.Compiler.extend({
         });
       });
       builder.newline_();
+      builder.line_(this.grammarName() + 'Parser.formatError = ' + Canopy.formatError.toString());
     }
   })
 });

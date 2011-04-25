@@ -98,7 +98,7 @@ Canopy.extend({
       this.if_('!this.error || this.error.offset < ' + of, function(builder) {
         builder.line_(error + ' = {input: ' + input +
                                 ', offset: ' + of +
-                                ', expected: "' + expected +
+                                ', expected: "' + (expected || '').replace(/"/g, '\\"') +
                                '", actual: ' + slice + ' || "<EOF>"}');
       });
     },
