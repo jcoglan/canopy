@@ -25,18 +25,18 @@ JS.require('JS.Test', 'Canopy', function() {
       }
     })
     
-    JS.require('Canopy.MetaGrammarParserSpec',
-            
-            'Canopy.Compiler.AnyCharSpec',
-            'Canopy.Compiler.CharClassSpec',
-            'Canopy.Compiler.StringSpec',
-            'Canopy.Compiler.PredicatedAtomSpec',
-            'Canopy.Compiler.RepeatSpec',
-            'Canopy.Compiler.SequenceSpec',
-            'Canopy.Compiler.ChoiceSpec',
-            'Canopy.Compiler.ChoicePartSpec',
-            'Canopy.Compiler.ReferenceSpec',
-            
-    JS.Test.method('autorun'))
+    JS.require( 'Canopy.MetaGrammarParserSpec',
+                'CanopySpec',
+                'Canopy.Compiler.AnyCharSpec',
+                'Canopy.Compiler.CharClassSpec',
+                'Canopy.Compiler.StringSpec',
+                'Canopy.Compiler.PredicatedAtomSpec',
+                'Canopy.Compiler.RepeatSpec',
+                'Canopy.Compiler.SequenceSpec',
+                'Canopy.Compiler.ChoiceSpec',
+                'Canopy.Compiler.ChoicePartSpec',
+                'Canopy.Compiler.ReferenceSpec',
+                
+                JS.Test.method('autorun'))
 })
 

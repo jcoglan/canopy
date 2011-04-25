@@ -9,12 +9,12 @@ Canopy.Compiler.extend({
           temp   = builder.tempVar_('temp', builder.slice_(1)),
           match  = builder.tempVar_('match');
       
-      builder.if_(match + ' = ' + temp + '.match(' + regex + ')', function(builder) {
+      builder.if_(match + ' = ' + temp + ' && ' + temp + '.match(' + regex + ')', function(builder) {
         builder.syntaxNode_(address, nodeType, match + '[0]', 1);
       });
       builder.else_(function(builder) {
-        builder.failure_(address);
-      });
+        builder.failure_(address, this.textValue);
+      }, this);
     }
   })
 });

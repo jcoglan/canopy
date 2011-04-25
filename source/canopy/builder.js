@@ -52,8 +52,14 @@ Canopy.extend({
     },
     
     slice_: function(length) {
-      var input = this.input_(), of = this.offset_();
-      return input + '.substring(' + of + ', ' + of + ' + ' + length + ')';
+      var slice = this.tempVar_('slice'), input = this.input_(), of = this.offset_();
+      this.if_(input + '.length > ' + of, function(builder) {
+        builder.line_(slice + ' = ' + input + '.substring(' + of + ', ' + of + ' + ' + length + ')');
+      });
+      this.else_(function(builder) {
+        builder.line_(slice + ' = null');
+      });
+      return slice;
     },
     
     syntaxNode_: function(address, nodeType, expression, bump, elements, labelled) {
@@ -85,8 +91,16 @@ Canopy.extend({
       });
     },
     
-    failure_: function(address) {
+    failure_: function(address, expected) {
       this.line_(address + ' = null');
+      var input = this.input_(), of = this.offset_(), slice = this.slice_(1);
+      var error = 'this.error = this.klass.lastError';
+      this.if_('!this.error || this.error.offset < ' + of, function(builder) {
+        builder.line_(error + ' = {input: ' + input +
+                                ', offset: ' + of +
+                                ', expected: "' + expected +
+                               '", actual: ' + slice + ' || "<EOF>"}');
+      });
     },
     
     nameSpace_: function(objectName) {

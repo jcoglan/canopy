@@ -12,6 +12,12 @@ Canopy.Compiler.AnyCharSpec = JS.Test.describe(Canopy.Compiler.AnyChar, function
   
   it('does not parse the empty string', function() { with(this) {
     assertNull( AnyCharTestParser.parse('') )
+    assertEqual({
+        input:    '',
+        offset:   0,
+        expected: '<any char>',
+        actual:   '<EOF>'
+      }, AnyCharTestParser.lastError)
   }})
 }})
 

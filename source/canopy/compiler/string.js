@@ -12,7 +12,7 @@ Canopy.Compiler.extend({
         builder.syntaxNode_(address, nodeType, string, length);
       });
       builder.else_(function(builder) {
-        builder.failure_(address);
+        builder.failure_(address, this.textValue);
       });
     }
   })

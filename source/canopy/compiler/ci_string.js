@@ -14,7 +14,7 @@ Canopy.Compiler.extend({
         builder.syntaxNode_(address, nodeType, temp, length);
       });
       builder.else_(function(builder) {
-        builder.failure_(address);
+        builder.failure_(address, this.textValue);
       });
     },
     
