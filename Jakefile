@@ -7,5 +7,5 @@ jake_helper :license do
 end
 
 jake_hook :build_complete do
-  FileUtils.cp 'node_modules/jsclass/min/core.js', 'bin/js.class.js'
+  FileUtils.cp 'node_modules/jsclass/min/core.js', 'lib/js.class.js'
 end

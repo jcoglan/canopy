@@ -1,7 +1,7 @@
 if (typeof CWD === 'undefined') CWD = '.'
 
 JS.Packages(function() { with(this) {
-    file(CWD + '/build/canopy-min.js').provides('Canopy')
+    file(CWD + '/lib/canopy-min.js').provides('Canopy')
     autoload(/^(.*)Spec$/, {from: CWD + '/spec', require: '$1'})
 }})
 

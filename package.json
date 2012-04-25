@@ -6,8 +6,8 @@
 
 , "version"         : "0.2.0"
 , "engines"         : {"node": ">=0.4.0"}
-, "main"            : "./bin/canopy-stable.js"
-, "bin"             : {"canopy": "./bin/compile"}
+, "main"            : "./lib/canopy.js"
+, "bin"             : {"canopy": "./bin/canopy"}
 , "devDependencies" : {"jsclass": ""}
 
 , "scripts"         : {"test": "node spec/console.js"}

@@ -1,6 +1,6 @@
 ---
 source_directory:   source
-build_directory:    build
+build_directory:    lib
 layout:             together
 
 builds:
