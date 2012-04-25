@@ -68,6 +68,7 @@ Canopy.extend({
 });
 
 
+
 (function() {;
     var namespace = this;
     namespace = namespace.Canopy = namespace.Canopy || {};
@@ -2708,14 +2709,14 @@ Canopy.MetaGrammarParser.formatError = function (error) {
         offset   = 0;
     
     while (offset < error.offset) {
-      offset += lines[lineNo].length;
+      offset += lines[lineNo].length + 1;
       lineNo += 1;
     }
     var message = 'Line ' + lineNo + ': expected ' + error.expected + '\n',
         line    = lines[lineNo - 1];
     
     message += line + '\n';
-    offset  -= line.length;
+    offset  -= line.length + 1;
     
     while (offset < error.offset) {
       message += ' ';
@@ -2723,8 +2724,6 @@ Canopy.MetaGrammarParser.formatError = function (error) {
     }
     return message + '^';
   };
-
-
 Canopy.extend({
   Builder: new JS.Class({
     initialize: function(parent) {
@@ -3442,3 +3441,4 @@ Canopy.Compiler.extend({
     }
   })
 });
+

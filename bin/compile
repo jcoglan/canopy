@@ -4,10 +4,10 @@ require('./js.class');
 require('./canopy-stable');
 
 var fs  = require('fs'),
-    sys = require('sys');
+    sys = require('util');
 
 var startTime  = Number(new Date()),
-    inputFile  = process.ARGV[2],
+    inputFile  = process.argv[2],
     outputFile = inputFile.replace(/\.peg$/, '.js');
 
 fs.readFile(inputFile, function(err, grammar) {
@@ -23,4 +23,3 @@ fs.readFile(inputFile, function(err, grammar) {
     sys.puts('Completed in ' + ((endTime - startTime) / 1000) + 's');
   });
 });
-

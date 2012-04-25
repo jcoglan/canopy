@@ -1,0 +1,8 @@
+.git
+.gitignore
+.npmignore
+Jakefile
+jake.yml
+node_modules
+source
+spec

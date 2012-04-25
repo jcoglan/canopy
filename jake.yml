@@ -10,6 +10,7 @@ builds:
   min:
     shrink_vars:    true
     private:        false
+    source_map:     src
 
 packages:
   canopy:

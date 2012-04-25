@@ -9,13 +9,13 @@ if (this.ActiveXObject) load = function(path) {
   }
 };
 
-JSCLASS_PATH = 'vendor/js.class/build/min/'
+JSCLASS_PATH = 'node_modules/jsclass/min'
 
 if (typeof require === 'function') {
-  require('../' + JSCLASS_PATH + 'loader')
+  require('../' + JSCLASS_PATH + '/loader')
   require('./runner')
 } else {
-  load(JSCLASS_PATH + 'loader.js')
+  load(JSCLASS_PATH + '/loader.js')
   load('spec/runner.js')
 }
 
