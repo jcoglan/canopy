@@ -1,16 +1,16 @@
-Canopy.Builder = new JS.Class({
-  initialize: function(parent) {
-    if (parent) {
-      this._parent = parent;
-      this._indentLevel = parent._indentLevel;
-    } else {
-      this._buffer = '';
-      this._indentLevel = 0;
-    }
-    this._methodSeparator = '';
-    this._varIndex = {};
-  },
-  
+Canopy.Builder = function(parent) {
+  if (parent) {
+    this._parent = parent;
+    this._indentLevel = parent._indentLevel;
+  } else {
+    this._buffer = '';
+    this._indentLevel = 0;
+  }
+  this._methodSeparator = '';
+  this._varIndex = {};
+};
+
+Canopy.extend(Canopy.Builder.prototype, {
   serialize: function() {
     return this._buffer;
   },

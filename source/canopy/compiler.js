@@ -1,8 +1,8 @@
-Canopy.Compiler = new JS.Class({
-  initialize: function(grammarText) {
-    this._grammarText = grammarText;
-  },
-  
+Canopy.Compiler = function(grammarText) {
+  this._grammarText = grammarText;
+};
+
+Canopy.extend(Canopy.Compiler.prototype, {
   parseTree: function() {
     return this._tree = this._tree ||
                         Canopy.MetaGrammarParser.parse(this._grammarText);
