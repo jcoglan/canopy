@@ -1,34 +1,32 @@
-Canopy.Compiler.extend({
-  SequencePart: new JS.Module({
-    atomic: function() {
-      var expression = this.expression;
-      return expression.parsing_expression || expression;
-    },
+Canopy.Compiler.SequencePart = {
+  atomic: function() {
+    var expression = this.expression;
+    return expression.parsing_expression || expression;
+  },
+  
+  label: function() {
+    var element = this.elements[0].identifier,
+        expression = this.atomic();
     
-    label: function() {
-      var element = this.elements[0].identifier,
-          expression = this.atomic();
-      
-      if (element) return element.textValue;
-      if (expression.referenceName) return expression.referenceName();
-      
-      return null;
-    },
+    if (element) return element.textValue;
+    if (expression.referenceName) return expression.referenceName();
     
-    toSexp: function() {
-      var expression = this.atomic(),
-          label = this.label(),
-          sexp  = expression.toSexp();
-      
-      if (element = this.elements[0].identifier)
-        sexp = ['label', label, sexp];
-      
-      return sexp;
-    },
+    return null;
+  },
+  
+  toSexp: function() {
+    var expression = this.atomic(),
+        label = this.label(),
+        sexp  = expression.toSexp();
     
-    compile: function(builder, address, nodeType) {
-      return this.atomic().compile(builder, address, nodeType);
-    }
-  })
-});
+    if (element = this.elements[0].identifier)
+      sexp = ['label', label, sexp];
+    
+    return sexp;
+  },
+  
+  compile: function(builder, address, nodeType) {
+    return this.atomic().compile(builder, address, nodeType);
+  }
+};
 
