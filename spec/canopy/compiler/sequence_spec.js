@@ -1,4 +1,5 @@
-Canopy.Compiler.SequenceSpec = JS.Test.describe(Canopy.Compiler.Sequence, function() { with(this) {
+Canopy.Compiler.SequenceSpec = JS.Test.describe("Canopy.Compiler.Sequence",
+function() { with(this) {
   include(Canopy.SpecHelper)
   
   before(function() { with(this) {

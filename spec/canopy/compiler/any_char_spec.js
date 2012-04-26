@@ -1,4 +1,5 @@
-Canopy.Compiler.AnyCharSpec = JS.Test.describe(Canopy.Compiler.AnyChar, function() { with(this) {
+Canopy.Compiler.AnyCharSpec = JS.Test.describe("Canopy.Compiler.AnyChar",
+function() { with(this) {
   include(Canopy.SpecHelper)
   
   before(function() { with(this) {

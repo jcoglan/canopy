@@ -1,4 +1,5 @@
-Canopy.Compiler.ChoiceSpec = JS.Test.describe(Canopy.Compiler.Choice, function() { with(this) {
+Canopy.Compiler.ChoiceSpec = JS.Test.describe("Canopy.Compiler.Choice",
+function() { with(this) {
   include(Canopy.SpecHelper)
   
   before(function() { with(this) {

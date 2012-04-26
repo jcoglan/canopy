@@ -1,4 +1,4 @@
-Canopy.Compiler.PredicatedAtomSpec = JS.Test.describe(Canopy.Compiler.PredicatedAtom,
+Canopy.Compiler.PredicatedAtomSpec = JS.Test.describe("Canopy.Compiler.PredicatedAtom",
 function() { with(this) {
   include(Canopy.SpecHelper)
   

@@ -1,11 +1,9 @@
-if (typeof CWD === 'undefined') CWD = '.'
-
 JS.Packages(function() { with(this) {
-    file(CWD + '/lib/canopy-min.js').provides('Canopy')
+    var CWD = JS.ENV.CWD || '.'
     autoload(/^(.*)Spec$/, {from: CWD + '/spec', require: '$1'})
 }})
 
-JS.require('JS.Test', 'Canopy', function() {
+JS.require('JS.Test', function() {
     
     Canopy.SpecHelper = new JS.Module({
       assertParse: function(tuple, actual) {

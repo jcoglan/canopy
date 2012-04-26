@@ -1,4 +1,5 @@
-Canopy.Compiler.RepeatSpec = JS.Test.describe(Canopy.Compiler.Repeat, function() { with(this) {
+Canopy.Compiler.RepeatSpec = JS.Test.describe("Canopy.Compiler.Repeat",
+function() { with(this) {
   include(Canopy.SpecHelper)
   
   describe('maybe', function() { with(this) {

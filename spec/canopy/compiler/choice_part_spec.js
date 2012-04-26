@@ -1,4 +1,4 @@
-Canopy.Compiler.ChoicePartSpec = JS.Test.describe(Canopy.Compiler.ChoicePart,
+Canopy.Compiler.ChoicePartSpec = JS.Test.describe("Canopy.Compiler.ChoicePart",
 function() { with(this) {
   include(Canopy.SpecHelper)
   

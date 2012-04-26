@@ -1,4 +1,4 @@
-CanopySpec = JS.Test.describe(Canopy, function() { with(this) {
+CanopySpec = JS.Test.describe("Canopy", function() { with(this) {
   describe('formatError', function() { with(this) {
     before(function() { with(this) {
       this.parseError = {

@@ -1,4 +1,5 @@
-Canopy.Compiler.ReferenceSpec = JS.Test.describe(Canopy.Compiler.Reference, function() { with(this) {
+Canopy.Compiler.ReferenceSpec = JS.Test.describe("Canopy.Compiler.Reference",
+function() { with(this) {
   include(Canopy.SpecHelper)
   
   describe('with two rules and a reference', function() { with(this) {

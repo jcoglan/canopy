@@ -1,9 +1,18 @@
 <%= license %>
 
-if (typeof Canopy === 'undefined')
-  Canopy = new JS.Module('Canopy');
+var Canopy = {};
+if (typeof module === 'object') module.exports = Canopy;
 
-Canopy.extend({
+Canopy.extend = function(destination, source) {
+  if (!destination || !source) return destination;
+  for (var key in source) {
+    if (destination[key] !== source[key])
+      destination[key] = source[key];
+  }
+  return destination;
+};
+
+Canopy.extend(Canopy, {
   compile: function(grammar) {
     var compiler = new this.Compiler(grammar),
         source   = compiler.toSource();
