@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 require('../lib/js.class');
-require('../lib/canopy');
+var Canopy = require('../lib/canopy');
 
 var fs  = require('fs'),
     sys = require('util');
@@ -23,3 +23,4 @@ fs.readFile(inputFile, function(err, grammar) {
     sys.puts('Completed in ' + ((endTime - startTime) / 1000) + 's');
   });
 });
+
