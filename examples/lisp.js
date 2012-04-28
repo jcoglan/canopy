@@ -1,5 +1,4 @@
-load('vendor/js.class/build/min/core.js');
-load('build/canopy-min.js');
+load('lib/canopy.js');
 load('examples/benchmark.js');
 load('examples/pegjs/lisp.js');
 
@@ -18,19 +17,14 @@ grammar = 'grammar CompiledLisp                       \
     delimiter <- paren / space                        ';
 
 Canopy.compile(grammar);
-//CombinatorLispParser = Canopy.generate(grammar);
 
 program = '(lambda (x y) (display "Hi.") (+ (* x y) 2))';
 
-benchmark('Compiled parser', 20, function() {
+benchmark('Canopy parser', 500, function() {
   CompiledLispParser.parse(program);
 });
 
-//benchmark('Combinator parser', 20, function() {
-//  CombinatorLispParser.parse(program);
-//});
-
-benchmark('PEG.js parser', 20, function() {
+benchmark('PEG.js parser', 500, function() {
   LispParser.parse(program);
 });
 

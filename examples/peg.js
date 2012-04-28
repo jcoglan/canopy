@@ -1,5 +1,4 @@
-load('vendor/js.class/build/min/core.js');
-load('build/canopy-min.js');
+load('lib/canopy.js');
 load('examples/benchmark.js');
 load('examples/pegjs/peg.js');
 
@@ -61,17 +60,12 @@ grammar = 'grammar CompiledPEG\
   space               <- [\\s\\n\\r\\t]';
 
 Canopy.compile(grammar);
-//CombinatorPEGParser = Canopy.generate(grammar);
 
-benchmark('Compiled parser', 1, function() {
+benchmark('Canopy parser', 20, function() {
   CompiledPEGParser.parse(grammar);
 });
 
-//benchmark('Combinator parser', 1, function() {
-//  CombinatorPEGParser.parse(grammar);
-//});
-
-benchmark('PEG.js parser', 1, function() {
+benchmark('PEG.js parser', 20, function() {
   PEGParser.parse(grammar);
 });
 
