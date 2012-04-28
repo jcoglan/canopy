@@ -34,6 +34,7 @@ Canopy.extend(Canopy.Builder.prototype, {
   
   delimitField_: function() {
     this.write(this._methodSeparator);
+    if (this._methodSeparator) this.newline_();
     this._methodSeparator = ',';
   },
   
@@ -72,10 +73,10 @@ Canopy.extend(Canopy.Builder.prototype, {
         builder.line_(klass + ' = ' + nodeType);
       });
       this.else_(function(builder) {
-        builder.line_(klass + ' = this.klass.SyntaxNode');
+        builder.line_(klass + ' = SyntaxNode');
       });
     } else {
-      klass = this.tempVar_('klass', 'this.klass.SyntaxNode');
+      klass = this.tempVar_('klass', 'SyntaxNode');
     }
     
     this.line_(address + ' = new ' + klass + '(' + expression + of + elements + labelled + ')');
@@ -86,14 +87,14 @@ Canopy.extend(Canopy.Builder.prototype, {
   extendNode_: function(address, nodeType) {
     if (!nodeType) return;
     this.unless_(nodeType + ' instanceof Function', function(builder) {
-      builder.line_(address + '.extend(' + nodeType + ')');
+      builder.line_('extend(' + address + ', ' + nodeType + ')');
     });
   },
   
   failure_: function(address, expected) {
     this.line_(address + ' = null');
     var input = this.input_(), of = this.offset_(), slice = this.slice_(1);
-    var error = 'this.error = this.klass.lastError';
+    var error = 'this.error = this.constructor.lastError';
     this.if_('!this.error || this.error.offset <= ' + of, function(builder) {
       builder.line_(error + ' = {input: ' + input +
                               ', offset: ' + of +
@@ -104,53 +105,35 @@ Canopy.extend(Canopy.Builder.prototype, {
   
   nameSpace_: function(objectName) {
     var parts = objectName.split('.');
-    this.line_('(function() {');
-    this.indent_(function() {
-      this.var_('namespace', 'this');
-      for (var i = 0, n = parts.length; i < n - 1; i++)
-        this.line_('namespace = namespace.' + parts[i] + ' = namespace.' + parts[i] + ' || {}');
-      this.if_('typeof exports === "object"', function(builder) {
-        builder.line_('exports.' + parts[0] + ' = this.' + parts[0]);
-      });
-    }, this);
-    this.line_('})()');
+    this.var_('namespace', 'this');
+    for (var i = 0, n = parts.length; i < n - 1; i++)
+      this.line_('namespace = namespace.' + parts[i] + ' = namespace.' + parts[i] + ' || {}');
+  },
+  
+  closure_: function(block, context) {
+    this.write('(function() {');
+    new Canopy.Builder(this).indent_(block, context);
+    this.newline_();
+    this.write('})();');
+    this.newline_();
+    this.newline_();
+  },
+  
+  function_: function(name, args, block, context) {
+    this.newline_();
+    this.write(name + ' = function(' + args.join(', ') + ') {');
+    new Canopy.Builder(this).indent_(block, context);
+    this.newline_();
+    this.write('};');
+    this.newline_();
   },
   
   module_: function(name, block, context) {
     this.newline_();
-    this.write(name + ' = new JS.Module("' + name + '", {');
+    this.write(name + ' = {');
     new Canopy.Builder(this).indent_(block, context);
     this.newline_();
-    this.write('});');
-  },
-  
-  class_: function(name, block, context) {
-    this.newline_();
-    this.write(name + ' = new JS.Class("' + name + '", {');
-    new Canopy.Builder(this).indent_(block, context);
-    this.newline_();
-    this.write('});');
-  },
-  
-  include_: function(name) {
-    this.delimitField_();
-    this.newline_();
-    this.write('include: ' + name);
-  },
-  
-  classMethods_: function(block, context) {
-    this.delimitField_();
-    this.newline_();
-    this.write('extend: {');
-    new Canopy.Builder(this).indent_(block, context);
-    this.newline_();
-    this.write('}');
-  },
-  
-  field_: function(name, value) {
-    this.delimitField_();
-    this.newline_();
-    this.write(name + ': ' + value);
+    this.write('};');
   },
   
   method_: function(name, args, block, context) {
@@ -186,6 +169,10 @@ Canopy.extend(Canopy.Builder.prototype, {
     this.indent_(block, context);
     this.newline_();
     this.write('}');
+  },
+  
+  for_: function(condition, block, context) {
+    this.conditional_('for', condition, block, context);
   },
   
   while_: function(condition, block, context) {

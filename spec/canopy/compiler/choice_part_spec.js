@@ -7,7 +7,11 @@ function() { with(this) {
       Canopy.compile('grammar ClassTypeTest\
         rule <- "content" <NodeType>')
       
-      NodeType = new JS.Class(ClassTypeTestParser.SyntaxNode)
+      NodeType = function(text, offset, children) {
+        this.textValue = text
+        this.offset    = 0
+        this.elements  = children
+      }
     }})
     
     it('creates nodes using the named type', function() { with(this) {
@@ -21,7 +25,7 @@ function() { with(this) {
   
   describe('when the node type is a mixin', function() { with(this) {
     before(function() { with(this) {
-      NodeType = new JS.Module({ custom: function(){} })
+      NodeType = { custom: function() { return 'pass!' } }
       
       Canopy.compile('grammar ModuleTypeTest\
         rule <- "content" <NodeType>')
@@ -29,7 +33,7 @@ function() { with(this) {
     
     it('creates nodes using the named type', function() { with(this) {
       var result = ModuleTypeTestParser.parse('content')
-      assertKindOf( NodeType, result )
+      assertEqual( 'pass!', result.custom() )
       assertRespondTo( result, 'custom' )
     }})
     
@@ -40,27 +44,27 @@ function() { with(this) {
   
   describe('when the underlying parser is a choice', function() { with(this) {
     before(function() { with(this) {
-      NodeType = new JS.Module({ custom: function(){} })
+      NodeType = { custom: function() { return 'pass!' } }
       
       Canopy.compile('grammar TypedChoiceTest\
         rule <- ("content" / "booya") <NodeType>')
     }})
     
     it('extends the chosen node with the mixin', function() { with(this) {
-      assertKindOf( NodeType, TypedChoiceTestParser.parse('booya') )
+      assertEqual( 'pass!', TypedChoiceTestParser.parse('content').custom() )
     }})
   }})
   
   describe('when the underlying parser is a maybe', function() { with(this) {
     before(function() { with(this) {
-      NodeType = new JS.Module({ custom: function(){} })
+      NodeType = { custom: function() { return 'pass!' } }
       
       Canopy.compile('grammar TypedMaybeTest\
         rule <- "content"? <NodeType>')
     }})
     
     it('extends the chosen node with the mixin', function() { with(this) {
-      assertKindOf( NodeType, TypedMaybeTestParser.parse('content') )
+      assertEqual( 'pass!', TypedMaybeTestParser.parse('content').custom() )
     }})
   }})
   

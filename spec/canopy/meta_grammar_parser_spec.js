@@ -1,4 +1,4 @@
-Canopy.MetaGrammarParserSpec = JS.Test.describe(Canopy.MetaGrammarParser,
+Canopy.MetaGrammarParserSpec = JS.Test.describe("Canopy.MetaGrammarParser",
 function() { with(this) {
   describe('with an any-char rule', function() { with(this) {
     before(function() { with(this) {

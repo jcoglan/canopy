@@ -14,12 +14,10 @@ JSCLASS_PATH = 'node_modules/jsclass/min'
 
 if (typeof require === 'function') {
   require('../' + JSCLASS_PATH + '/loader')
-  JS.require('JS.Class')
   Canopy = require('../lib/canopy-min')
   require('./runner')
 } else {
   load(JSCLASS_PATH + '/loader.js')
-  JS.require('JS.Class')
   load('lib/canopy-min.js')
   load('spec/runner.js')
 }
