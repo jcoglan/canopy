@@ -13,9 +13,9 @@ Canopy.Compiler.GrammarRule = {
     builder.method_('__consume__' + name, ['input'], function() {
       var address   = builder.tempVar_('address'),
           offset    = builder.tempVar_('index', builder.offset_());
-          cacheAddr = 'this._nodeCache.' + name + '[' + offset + ']';
+          cacheAddr = 'this._nodeCache["' + name + '"][' + offset + ']';
       
-      builder.line_('this._nodeCache.' + name + ' = this._nodeCache.' + name + ' || {}');
+      builder.line_('this._nodeCache["' + name + '"] = this._nodeCache["' + name + '"] || {}');
       builder.var_('cached', cacheAddr);
       
       builder.if_('cached', function(builder) {
