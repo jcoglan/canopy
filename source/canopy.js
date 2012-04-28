@@ -1,16 +1,15 @@
 <%= license %>
 
 var Canopy = {};
-if (typeof module === 'object') module.exports = Canopy;
 
 Canopy.extend = function(destination, source) {
-  if (!destination || !source) return destination;
-  for (var key in source) {
-    if (destination[key] !== source[key])
-      destination[key] = source[key];
-  }
-  return destination;
-};
+    if (!destination || !source) return destination;
+    for (var key in source) {
+      if (destination[key] !== source[key])
+        destination[key] = source[key];
+    }
+    return destination;
+  };
 
 Canopy.extend(Canopy, {
   compile: function(grammar) {
@@ -19,6 +18,18 @@ Canopy.extend(Canopy, {
     
     eval(source);
     return source;
+  },
+  
+  find: function(root, objectName) {
+    var parts = objectName.split('.'),
+        part;
+    
+    while (part = parts.shift()) {
+      root = root[part];
+      if (root === undefined)
+        throw new Error('Cannot find object named ' + objectName);
+    }
+    return root;
   },
   
   forEach: function(list, block, context) {

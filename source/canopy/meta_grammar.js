@@ -1,12 +1,23 @@
 (function() {
-  var extend = function(destination, source) {
-    if (!source) return destination;
+  var extend = function (destination, source) {
+    if (!destination || !source) return destination;
     for (var key in source) {
-      if (destination[key] !== source[key]) {
+      if (destination[key] !== source[key])
         destination[key] = source[key];
-      }
     }
     return destination;
+  };
+  
+  var find = function (root, objectName) {
+    var parts = objectName.split('.'),
+        part;
+    
+    while (part = parts.shift()) {
+      root = root[part];
+      if (root === undefined)
+        throw new Error('Cannot find object named ' + objectName);
+    }
+    return root;
   };
   
   var namespace = this;
@@ -177,14 +188,15 @@
       if (elements0) {
         this._offset = index1;
         var klass5 = null;
-        if (Canopy.Compiler.Grammar instanceof Function) {
-          klass5 = Canopy.Compiler.Grammar;
+        var type0 = find(this.constructor, "Grammar");
+        if (type0 instanceof Function) {
+          klass5 = type0;
         } else {
           klass5 = SyntaxNode;
         }
         address0 = new klass5(text0, this._offset, elements0, labelled0);
-        if (!(Canopy.Compiler.Grammar instanceof Function)) {
-          extend(address0, Canopy.Compiler.Grammar);
+        if (!(type0 instanceof Function)) {
+          extend(address0, type0);
         }
         this._offset += text0.length;
       } else {
@@ -303,14 +315,15 @@
       if (elements0) {
         this._offset = index1;
         var klass0 = null;
-        if (Canopy.Compiler.GrammarRule instanceof Function) {
-          klass0 = Canopy.Compiler.GrammarRule;
+        var type0 = find(this.constructor, "GrammarRule");
+        if (type0 instanceof Function) {
+          klass0 = type0;
         } else {
           klass0 = SyntaxNode;
         }
         address0 = new klass0(text0, this._offset, elements0, labelled0);
-        if (!(Canopy.Compiler.GrammarRule instanceof Function)) {
-          extend(address0, Canopy.Compiler.GrammarRule);
+        if (!(type0 instanceof Function)) {
+          extend(address0, type0);
         }
         this._offset += text0.length;
       } else {
@@ -771,14 +784,15 @@
       if (elements0) {
         this._offset = index1;
         var klass5 = null;
-        if (Canopy.Compiler.Choice instanceof Function) {
-          klass5 = Canopy.Compiler.Choice;
+        var type0 = find(this.constructor, "Choice");
+        if (type0 instanceof Function) {
+          klass5 = type0;
         } else {
           klass5 = SyntaxNode;
         }
         address0 = new klass5(text0, this._offset, elements0, labelled0);
-        if (!(Canopy.Compiler.Choice instanceof Function)) {
-          extend(address0, Canopy.Compiler.Choice);
+        if (!(type0 instanceof Function)) {
+          extend(address0, type0);
         }
         this._offset += text0.length;
       } else {
@@ -889,14 +903,15 @@
       if (elements0) {
         this._offset = index1;
         var klass3 = null;
-        if (Canopy.Compiler.ChoicePart instanceof Function) {
-          klass3 = Canopy.Compiler.ChoicePart;
+        var type0 = find(this.constructor, "ChoicePart");
+        if (type0 instanceof Function) {
+          klass3 = type0;
         } else {
           klass3 = SyntaxNode;
         }
         address0 = new klass3(text0, this._offset, elements0, labelled0);
-        if (!(Canopy.Compiler.ChoicePart instanceof Function)) {
-          extend(address0, Canopy.Compiler.ChoicePart);
+        if (!(type0 instanceof Function)) {
+          extend(address0, type0);
         }
         this._offset += text0.length;
       } else {
@@ -1105,14 +1120,15 @@
       if (elements0) {
         this._offset = index1;
         var klass3 = null;
-        if (Canopy.Compiler.Sequence instanceof Function) {
-          klass3 = Canopy.Compiler.Sequence;
+        var type0 = find(this.constructor, "Sequence");
+        if (type0 instanceof Function) {
+          klass3 = type0;
         } else {
           klass3 = SyntaxNode;
         }
         address0 = new klass3(text0, this._offset, elements0, labelled0);
-        if (!(Canopy.Compiler.Sequence instanceof Function)) {
-          extend(address0, Canopy.Compiler.Sequence);
+        if (!(type0 instanceof Function)) {
+          extend(address0, type0);
         }
         this._offset += text0.length;
       } else {
@@ -1174,14 +1190,15 @@
       if (elements0) {
         this._offset = index1;
         var klass1 = null;
-        if (Canopy.Compiler.SequencePart instanceof Function) {
-          klass1 = Canopy.Compiler.SequencePart;
+        var type0 = find(this.constructor, "SequencePart");
+        if (type0 instanceof Function) {
+          klass1 = type0;
         } else {
           klass1 = SyntaxNode;
         }
         address0 = new klass1(text0, this._offset, elements0, labelled0);
-        if (!(Canopy.Compiler.SequencePart instanceof Function)) {
-          extend(address0, Canopy.Compiler.SequencePart);
+        if (!(type0 instanceof Function)) {
+          extend(address0, type0);
         }
         this._offset += text0.length;
       } else {
@@ -1226,14 +1243,15 @@
       if (elements0) {
         this._offset = index1;
         var klass0 = null;
-        if (Canopy.Compiler.Repeat instanceof Function) {
-          klass0 = Canopy.Compiler.Repeat;
+        var type0 = find(this.constructor, "Repeat");
+        if (type0 instanceof Function) {
+          klass0 = type0;
         } else {
           klass0 = SyntaxNode;
         }
         address0 = new klass0(text0, this._offset, elements0, labelled0);
-        if (!(Canopy.Compiler.Repeat instanceof Function)) {
-          extend(address0, Canopy.Compiler.Repeat);
+        if (!(type0 instanceof Function)) {
+          extend(address0, type0);
         }
         this._offset += text0.length;
       } else {
@@ -1378,14 +1396,15 @@
       if (elements0) {
         this._offset = index1;
         var klass2 = null;
-        if (Canopy.Compiler.PredicatedAtom instanceof Function) {
-          klass2 = Canopy.Compiler.PredicatedAtom;
+        var type0 = find(this.constructor, "PredicatedAtom");
+        if (type0 instanceof Function) {
+          klass2 = type0;
         } else {
           klass2 = SyntaxNode;
         }
         address0 = new klass2(text0, this._offset, elements0, labelled0);
-        if (!(Canopy.Compiler.PredicatedAtom instanceof Function)) {
-          extend(address0, Canopy.Compiler.PredicatedAtom);
+        if (!(type0 instanceof Function)) {
+          extend(address0, type0);
         }
         this._offset += text0.length;
       } else {
@@ -1438,14 +1457,15 @@
       if (elements0) {
         this._offset = index1;
         var klass1 = null;
-        if (Canopy.Compiler.Reference instanceof Function) {
-          klass1 = Canopy.Compiler.Reference;
+        var type0 = find(this.constructor, "Reference");
+        if (type0 instanceof Function) {
+          klass1 = type0;
         } else {
           klass1 = SyntaxNode;
         }
         address0 = new klass1(text0, this._offset, elements0, labelled0);
-        if (!(Canopy.Compiler.Reference instanceof Function)) {
-          extend(address0, Canopy.Compiler.Reference);
+        if (!(type0 instanceof Function)) {
+          extend(address0, type0);
         }
         this._offset += text0.length;
       } else {
@@ -1664,14 +1684,15 @@
       if (elements0) {
         this._offset = index1;
         var klass7 = null;
-        if (Canopy.Compiler.String instanceof Function) {
-          klass7 = Canopy.Compiler.String;
+        var type0 = find(this.constructor, "String");
+        if (type0 instanceof Function) {
+          klass7 = type0;
         } else {
           klass7 = SyntaxNode;
         }
         address0 = new klass7(text0, this._offset, elements0, labelled0);
-        if (!(Canopy.Compiler.String instanceof Function)) {
-          extend(address0, Canopy.Compiler.String);
+        if (!(type0 instanceof Function)) {
+          extend(address0, type0);
         }
         this._offset += text0.length;
       } else {
@@ -1890,14 +1911,15 @@
       if (elements0) {
         this._offset = index1;
         var klass7 = null;
-        if (Canopy.Compiler.CIString instanceof Function) {
-          klass7 = Canopy.Compiler.CIString;
+        var type0 = find(this.constructor, "CIString");
+        if (type0 instanceof Function) {
+          klass7 = type0;
         } else {
           klass7 = SyntaxNode;
         }
         address0 = new klass7(text0, this._offset, elements0, labelled0);
-        if (!(Canopy.Compiler.CIString instanceof Function)) {
-          extend(address0, Canopy.Compiler.CIString);
+        if (!(type0 instanceof Function)) {
+          extend(address0, type0);
         }
         this._offset += text0.length;
       } else {
@@ -1923,14 +1945,15 @@
       }
       if (slice0 === ".") {
         var klass0 = null;
-        if (Canopy.Compiler.AnyChar instanceof Function) {
-          klass0 = Canopy.Compiler.AnyChar;
+        var type0 = find(this.constructor, "AnyChar");
+        if (type0 instanceof Function) {
+          klass0 = type0;
         } else {
           klass0 = SyntaxNode;
         }
         address0 = new klass0(".", this._offset, []);
-        if (!(Canopy.Compiler.AnyChar instanceof Function)) {
-          extend(address0, Canopy.Compiler.AnyChar);
+        if (!(type0 instanceof Function)) {
+          extend(address0, type0);
         }
         this._offset += 1;
       } else {
@@ -2196,14 +2219,15 @@
       if (elements0) {
         this._offset = index1;
         var klass9 = null;
-        if (Canopy.Compiler.CharClass instanceof Function) {
-          klass9 = Canopy.Compiler.CharClass;
+        var type0 = find(this.constructor, "CharClass");
+        if (type0 instanceof Function) {
+          klass9 = type0;
         } else {
           klass9 = SyntaxNode;
         }
         address0 = new klass9(text0, this._offset, elements0, labelled0);
-        if (!(Canopy.Compiler.CharClass instanceof Function)) {
-          extend(address0, Canopy.Compiler.CharClass);
+        if (!(type0 instanceof Function)) {
+          extend(address0, type0);
         }
         this._offset += text0.length;
       } else {

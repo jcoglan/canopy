@@ -51,11 +51,13 @@ Canopy.Compiler.Repeat = {
   
   _compileMaybe: function(builder, address, nodeType) {
     var startOffset = builder.tempVar_('index', builder.offset_());
-    
     this.atomic().compile(builder, address);
     
     builder.if_(address, function(builder) {
-      builder.extendNode_(address, nodeType);
+      if (nodeType) {
+        var type = builder.findType_(nodeType);
+        builder.extendNode_(address, type);
+      }
     });
     builder.else_(function(builder) {
       builder.line_(builder.offset_() + ' = ' + startOffset);

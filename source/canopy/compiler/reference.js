@@ -9,7 +9,10 @@ Canopy.Compiler.Reference = {
   
   compile: function(builder, address, nodeType) {
     builder.line_(address + ' = this.__consume__' + this.referenceName() + '()');
-    builder.extendNode_(address, nodeType);
+    if (nodeType) {
+      var type = builder.findType_(nodeType);
+      builder.extendNode_(address, type);
+    }
   }
 };
 

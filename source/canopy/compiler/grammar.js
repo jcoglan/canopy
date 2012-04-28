@@ -13,15 +13,10 @@ Canopy.Compiler.Grammar = {
   
   compile: function(builder) {
     builder.closure_(function(builder) {
-      builder.function_('var extend', ['destination', 'source'], function(builder) {
-        builder.line_('if (!source) return destination');
-        builder.for_('var key in source', function(builder) {
-          builder.if_('destination[key] !== source[key]', function(builder) {
-            builder.line_('destination[key] = source[key]');
-          });
-        });
-        builder.return_('destination');
-      });
+      builder.line_('var extend = ' + Canopy.extend.toString());
+      builder.newline_();
+      builder.line_('var find = ' + Canopy.find.toString());
+      builder.newline_();
       
       builder.nameSpace_(this.grammarName());
       builder.newline_();

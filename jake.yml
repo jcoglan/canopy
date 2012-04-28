@@ -32,13 +32,11 @@ packages:
       - canopy/compiler/sequence
       - canopy/compiler/sequence_part
       - canopy/compiler/reference
+      - bindings
     meta:
       provides:
         - Canopy
         - Canopy.MetaGrammarParser
         - Canopy.Compiler
         - Canopy.compile
-      requires:
-        - JS.Class
-        - JS.Module
 

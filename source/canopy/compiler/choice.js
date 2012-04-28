@@ -28,7 +28,10 @@ Canopy.Compiler.Choice = {
     expressions[index].compile(builder, address);
     
     builder.if_(address, function(builder) {
-      builder.extendNode_(address, nodeType);
+      if (nodeType) {
+        var type = builder.findType_(nodeType);
+        builder.extendNode_(address, type);
+      }
     });
     builder.else_(function(builder) {
       builder.line_(builder.offset_() + ' = ' + startOffset);
