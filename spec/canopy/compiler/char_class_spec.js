@@ -4,7 +4,7 @@ function() { with(this) {
   
   describe('positive', function() { with(this) {
     before(function() { with(this) {
-      Canopy.compile('grammar PositiveCharClassTest\
+      Canopy.compile('grammar JS.ENV.PositiveCharClassTest\
         charClass <- [a-z]')
     }})
     
@@ -35,7 +35,7 @@ function() { with(this) {
   
   describe('negative', function() { with(this) {
     before(function() { with(this) {
-      Canopy.compile('grammar NegativeCharClassTest\
+      Canopy.compile('grammar JS.ENV.NegativeCharClassTest\
         charClass <- [^a-z]')
     }})
     
@@ -54,7 +54,7 @@ function() { with(this) {
   
   describe('with sequencing and repetition', function() { with(this) {
     before(function() { with(this) {
-      Canopy.compile('grammar RepeatCharClassTest\
+      Canopy.compile('grammar JS.ENV.RepeatCharClassTest\
         root <- [1-9] [0-9]*')
     }})
     

@@ -17,34 +17,35 @@ Canopy.Compiler.Grammar = {
       builder.newline_();
       builder.line_('var find = ' + Canopy.find.toString());
       builder.newline_();
-      
-      builder.nameSpace_(this.grammarName());
+      builder.line_('var formatError = ' + Canopy.formatError.toString());
       builder.newline_();
       
-      builder.module_(this.grammarName(), function(builder) {
+      builder.module_('var Grammar', function(builder) {
         this.rules.forEach(function(rule) {
           rule.grammar_rule.compile(builder);
         });
       }, this);
       builder.newline_();
       
-      var parser = this.grammarName() + 'Parser',
-          root   = this.rules.elements[0].grammar_rule.name();
+      var grammar   = this.grammarName(),
+          parser    = this.grammarName() + 'Parser',
+          namespace = /\./.test(grammar) ? grammar.replace(/\.[^\.]+$/g, '').split('.') : [],
+          root      = this.rules.elements[0].grammar_rule.name();
       
-      builder.function_(parser, ['input'], function(builder) {
+      builder.function_('var Parser', ['input'], function(builder) {
         builder.ivar_('input', 'input');
         builder.ivar_('offset', '0');
         builder.ivar_('nodeCache', '{}');
       });
-      builder.function_(parser + '.prototype.parse', [], function(builder) {
+      builder.function_('Parser.prototype.parse', [], function(builder) {
         builder.var_('result', 'this.__consume__' + root + '()');
         builder.return_(builder.offset_() + ' === ' + builder.input_() + '.length ? result : null');
       });
-      builder.function_(parser + '.parse', ['input'], function(builder) {
+      builder.function_('Parser.parse', ['input'], function(builder) {
         builder.var_('parser', 'new this(input)');
         builder.return_('parser.parse()');
       });
-      builder.line_('extend(' + parser + '.prototype, ' + this.grammarName() + ')');
+      builder.line_('extend(Parser.prototype, Grammar)');
       builder.newline_();
       
       builder.function_('var SyntaxNode', ['textValue', 'offset', 'elements', 'properties'], function(builder) {
@@ -62,10 +63,38 @@ Canopy.Compiler.Grammar = {
           builder.line_('block.call(context, this.elements[i], i)');
         });
       });
-      builder.line_(parser + '.SyntaxNode = SyntaxNode');
+      builder.line_('Parser.SyntaxNode = SyntaxNode');
+      
+      var expose = function(builder) {
+        builder.line_(grammar + ' = Grammar');
+        builder.line_(parser  + ' = Parser');
+        builder.line_(parser  + '.formatError = formatError');
+      };
+      
+      var n = namespace.length, namespaceCondition;
+      if (n > 0) {
+        namespaceCondition = [];
+        for (var i = 0; i < n; i++)
+          namespaceCondition.push('typeof ' + namespace.slice(0,i+1).join('.') + ' !== "undefined"');
+        namespaceCondition = namespaceCondition.join(' && ');
+      }
       
       builder.newline_();
-      builder.line_(this.grammarName() + 'Parser.formatError = ' + Canopy.formatError.toString());
+      builder.if_('typeof require === "function" && typeof module === "object"', function(builder) {
+        builder.module_('module.exports', function(builder) {
+          builder.field_('Grammar',     'Grammar');
+          builder.field_('Parser',      'Parser');
+          builder.field_('SyntaxNode',  'SyntaxNode');
+          builder.field_('formatError', 'formatError');
+        });
+        builder.newline_();
+        if (namespaceCondition)
+          builder.if_(namespaceCondition, expose);
+      });
+      builder.else_(function(builder) {
+        builder.namespace_(grammar);
+        expose(builder);
+      });
     }, this);
   }
 };

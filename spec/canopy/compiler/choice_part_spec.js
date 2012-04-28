@@ -4,7 +4,7 @@ function() { with(this) {
   
   describe('when the node type is a class', function() { with(this) {
     before(function() { with(this) {
-      Canopy.compile('grammar ClassTypeTest\
+      Canopy.compile('grammar JS.ENV.ClassTypeTest\
         rule <- "content" <NodeType>')
       
       ClassTypeTestParser.NodeType = function(text, offset, children) {
@@ -26,7 +26,7 @@ function() { with(this) {
   
   describe('when the node type is a mixin', function() { with(this) {
     before(function() { with(this) {
-      Canopy.compile('grammar ModuleTypeTest\
+      Canopy.compile('grammar JS.ENV.ModuleTypeTest\
         rule <- "content" <NodeType>')
       
       ModuleTypeTestParser.NodeType = { custom: function() { return 'pass!' } }
@@ -45,7 +45,7 @@ function() { with(this) {
   
   describe('when the underlying parser is a choice', function() { with(this) {
     before(function() { with(this) {
-      Canopy.compile('grammar TypedChoiceTest\
+      Canopy.compile('grammar JS.ENV.TypedChoiceTest\
         rule <- ("content" / "booya") <NodeType>')
       
       TypedChoiceTestParser.NodeType = { custom: function() { return 'pass!' } }
@@ -58,7 +58,7 @@ function() { with(this) {
   
   describe('when the underlying parser is a maybe', function() { with(this) {
     before(function() { with(this) {
-      Canopy.compile('grammar TypedMaybeTest\
+      Canopy.compile('grammar JS.ENV.TypedMaybeTest\
         rule <- "content"? <NodeType>')
       
       TypedMaybeTestParser.NodeType = { custom: function() { return 'pass!' } }
@@ -71,7 +71,7 @@ function() { with(this) {
   
   describe('when the node type is namespaced', function() { with(this) {
     before(function() { with(this) {
-      Canopy.compile('grammar NamespacedTypeTest\
+      Canopy.compile('grammar JS.ENV.NamespacedTypeTest\
         rule <- "content" <NS.NodeType>')
       
       NamespacedTypeTestParser.NS = {

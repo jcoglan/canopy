@@ -3,7 +3,7 @@ function() { with(this) {
   include(Canopy.SpecHelper)
   
   before(function() { with(this) {
-    Canopy.compile('grammar StringTest\
+    Canopy.compile('grammar JS.ENV.StringTest\
       string <- "foo"')
   }})
   
@@ -26,7 +26,7 @@ function() { with(this) {
   
   describe('case-insensitive strings', function() { with(this) {
     before(function() { with(this) {
-      Canopy.compile('grammar CIStringTest\
+      Canopy.compile('grammar JS.ENV.CIStringTest\
         string <- `foo`')
     }})
     

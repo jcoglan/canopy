@@ -3,7 +3,7 @@ function() { with(this) {
   include(Canopy.SpecHelper)
   
   before(function() { with(this) {
-    Canopy.compile('grammar SequenceTest\
+    Canopy.compile('grammar JS.ENV.SequenceTest\
       sequence <- "foo" "bar"')
   }})
   
@@ -31,7 +31,7 @@ function() { with(this) {
   describe('labelling', function() { with(this) {
     describe('a terminal node', function() { with(this) {
       before(function() { with(this) {
-        Canopy.compile('grammar LabelTestA\
+        Canopy.compile('grammar JS.ENV.LabelTestA\
           root <- "first" middle:"second" "third"')
       }})
       
@@ -49,7 +49,7 @@ function() { with(this) {
     
     describe('a repetition node', function() { with(this) {
       before(function() { with(this) {
-        Canopy.compile('grammar LabelTestB\
+        Canopy.compile('grammar JS.ENV.LabelTestB\
           root <- "first" middle:"a"+ "third"')
       }})
       
@@ -75,7 +75,7 @@ function() { with(this) {
     
     describe('nesting', function() { with(this) {
       before(function() { with(this) {
-        Canopy.compile('grammar LabelTestC\
+        Canopy.compile('grammar JS.ENV.LabelTestC\
           root <- firstLetter:[a-z] restLetters:(", " letter:[a-z])*')
         
         this.rest = [', b, c', 1, [

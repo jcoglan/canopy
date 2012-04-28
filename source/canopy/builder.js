@@ -34,7 +34,6 @@ Canopy.extend(Canopy.Builder.prototype, {
   
   delimitField_: function() {
     this.write(this._methodSeparator);
-    if (this._methodSeparator) this.newline_();
     this._methodSeparator = ',';
   },
   
@@ -74,10 +73,10 @@ Canopy.extend(Canopy.Builder.prototype, {
         builder.line_(klass + ' = ' + type);
       });
       this.else_(function(builder) {
-        builder.line_(klass + ' = SyntaxNode');
+        builder.line_(klass + ' = this.constructor.SyntaxNode');
       });
     } else {
-      klass = this.tempVar_('klass', 'SyntaxNode');
+      klass = this.tempVar_('klass', 'this.constructor.SyntaxNode');
     }
     
     this.line_(address + ' = new ' + klass + '(' + expression + of + elements + labelled + ')');
@@ -111,7 +110,7 @@ Canopy.extend(Canopy.Builder.prototype, {
     });
   },
   
-  nameSpace_: function(objectName) {
+  namespace_: function(objectName) {
     var parts = objectName.split('.');
     this.var_('namespace', 'this');
     for (var i = 0, n = parts.length; i < n - 1; i++)
@@ -142,6 +141,12 @@ Canopy.extend(Canopy.Builder.prototype, {
     new Canopy.Builder(this).indent_(block, context);
     this.newline_();
     this.write('};');
+  },
+  
+  field_: function(name, value) {
+    this.delimitField_();
+    this.newline_();
+    this.write(name + ': ' + value);
   },
   
   method_: function(name, args, block, context) {
