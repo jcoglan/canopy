@@ -1,10 +1,8 @@
 #!/usr/bin/env node
 
-require('../lib/js.class');
-var Canopy = require('../lib/canopy');
-
-var fs  = require('fs'),
-    sys = require('util');
+var Canopy = require('../lib/canopy'),
+    fs     = require('fs'),
+    sys    = require('util');
 
 var startTime  = Number(new Date()),
     inputFile  = process.argv[2],

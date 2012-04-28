@@ -1,11 +1,8 @@
 jake_helper :license do
   "/**\n" +
-  File.read('LICENSE').strip.split(/\n/).map { |line|
+  File.read('LICENSE.txt').strip.split(/\n/).map { |line|
     " * " + line
   } * "\n" +
   "\n **/"
 end
 
-jake_hook :build_complete do
-  FileUtils.cp 'node_modules/jsclass/min/core.js', 'lib/js.class.js'
-end
