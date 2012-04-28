@@ -29,7 +29,7 @@ Canopy.extend(Canopy.Builder.prototype, {
   newline_: function() {
     this.write('\n');
     var i = this._indentLevel;
-    while (i--) this.write('    ');
+    while (i--) this.write('  ');
   },
   
   delimitField_: function() {
