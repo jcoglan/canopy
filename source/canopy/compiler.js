@@ -4,8 +4,14 @@ Canopy.Compiler = function(grammarText) {
 
 Canopy.extend(Canopy.Compiler.prototype, {
   parseTree: function() {
-    return this._tree = this._tree ||
-                        Canopy.MetaGrammarParser.parse(this._grammarText);
+    if (this._tree) return this._tree;
+    var P = Canopy.MetaGrammarParser, message;
+    
+    this._tree = P.parse(this._grammarText);
+    if (this._tree) return this._tree;
+    
+    message = P.formatError(P.lastError);
+    throw new Error(message);
   },
   
   toSexp: function(tree) {
