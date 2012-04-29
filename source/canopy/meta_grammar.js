@@ -2658,7 +2658,7 @@
   };
   
   Parser.parse = function(input) {
-    var parser = new this(input);
+    var parser = new Parser(input);
     return parser.parse();
   };
   
@@ -2673,8 +2673,9 @@
   };
   
   SyntaxNode.prototype.forEach = function(block, context) {
-    for (var i = 0, n = this.elements.length; i < n; i++)
+    for (var i = 0, n = this.elements.length; i < n; i++) {
       block.call(context, this.elements[i], i);
+    }
   };
   
   Parser.SyntaxNode = SyntaxNode;
@@ -2684,6 +2685,7 @@
       Grammar: Grammar,
       Parser: Parser,
       SyntaxNode: SyntaxNode,
+      parse: Parser.parse,
       formatError: formatError
     };
     

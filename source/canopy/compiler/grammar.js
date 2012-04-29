@@ -42,7 +42,7 @@ Canopy.Compiler.Grammar = {
         builder.return_(builder.offset_() + ' === ' + builder.input_() + '.length ? result : null');
       });
       builder.function_('Parser.parse', ['input'], function(builder) {
-        builder.var_('parser', 'new this(input)');
+        builder.var_('parser', 'new Parser(input)');
         builder.return_('parser.parse()');
       });
       builder.line_('extend(Parser.prototype, Grammar)');
@@ -57,9 +57,7 @@ Canopy.Compiler.Grammar = {
         builder.line_('for (var key in properties) this[key] = properties[key]');
       });
       builder.function_('SyntaxNode.prototype.forEach', ['block', 'context'], function(builder) {
-        builder.newline_();
-        builder.write('for (var i = 0, n = this.elements.length; i < n; i++)');
-        builder.indent_(function(builder) {
+        builder.for_('var i = 0, n = this.elements.length; i < n; i++', function(builder) {
           builder.line_('block.call(context, this.elements[i], i)');
         });
       });
@@ -85,6 +83,7 @@ Canopy.Compiler.Grammar = {
           builder.field_('Grammar',     'Grammar');
           builder.field_('Parser',      'Parser');
           builder.field_('SyntaxNode',  'SyntaxNode');
+          builder.field_('parse',       'Parser.parse');
           builder.field_('formatError', 'formatError');
         });
         builder.newline_();
