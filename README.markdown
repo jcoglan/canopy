@@ -8,17 +8,15 @@ Grammars][1] and heavily influenced by [Treetop][2].
 [2]: http://treetop.rubyforge.org/
 
 
-Download
---------
+Build
+-----
 
-Canopy and the parsers it generates require [JS.Class][3] -- we're building
-on top of this in order to support the composition and node typing features
-of Treetop, to which Ruby's object system lends itself very well.
-
-You can grap a stable build of Canopy from `bin/canopy-stable.js`; this
-build is used to compile Canopy itself during development.
-
-[3]: http://jsclass.jcoglan.com/
+    git clone git://github.com/jcoglan/canopy.git
+    cd canopy
+    gem install jake
+    npm install
+    jake
+    npm test
 
 
 Usage
@@ -46,11 +44,11 @@ For example:
 
 `Canopy.compile()` both evaluates and returns the source code for the
 parser it has generated, so you can take that source and save it in a
-file for later use. The `bin` directory contains a Rhino script that
+file for later use. The `bin` directory contains a Node script that
 generates parser files from grammar files, for example to compile
 Canopy's own grammar parser, I do this:
 
-    rhino bin/compile.js source/canopy/meta_grammar.peg
+    node bin/canopy source/canopy/meta_grammar.peg
 
 
 Grammar definitions
