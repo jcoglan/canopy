@@ -405,11 +405,9 @@
       } else {
         slice0 = null;
       }
-      var temp0 = slice0;
-      var match0 = null;
-      if (match0 = temp0 && temp0.match(/^[1-9]/)) {
+      if (slice0 && /^[1-9]/.test(slice0)) {
         var klass0 = this.constructor.SyntaxNode;
-        address1 = new klass0(match0[0], this._offset, []);
+        address1 = new klass0(slice0, this._offset, []);
         this._offset += 1;
       } else {
         address1 = null;
@@ -439,11 +437,9 @@
           } else {
             slice2 = null;
           }
-          var temp1 = slice2;
-          var match1 = null;
-          if (match1 = temp1 && temp1.match(/^[0-9]/)) {
+          if (slice2 && /^[0-9]/.test(slice2)) {
             var klass1 = this.constructor.SyntaxNode;
-            address3 = new klass1(match1[0], this._offset, []);
+            address3 = new klass1(slice2, this._offset, []);
             this._offset += 1;
           } else {
             address3 = null;
@@ -621,11 +617,9 @@
             } else {
               slice6 = null;
             }
-            var temp1 = slice6;
-            var match0 = null;
-            if (match0 = temp1 && temp1.match(/^[^"]/)) {
+            if (slice6 && /^[^"]/.test(slice6)) {
               var klass4 = this.constructor.SyntaxNode;
-              address3 = new klass4(match0[0], this._offset, []);
+              address3 = new klass4(slice6, this._offset, []);
               this._offset += 1;
             } else {
               address3 = null;
@@ -816,11 +810,9 @@
       } else {
         slice0 = null;
       }
-      var temp0 = slice0;
-      var match0 = null;
-      if (match0 = temp0 && temp0.match(/^[\s\n\r\t]/)) {
+      if (slice0 && /^[\s\n\r\t]/.test(slice0)) {
         var klass0 = this.constructor.SyntaxNode;
-        address0 = new klass0(match0[0], this._offset, []);
+        address0 = new klass0(slice0, this._offset, []);
         this._offset += 1;
       } else {
         address0 = null;
