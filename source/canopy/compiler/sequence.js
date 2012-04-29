@@ -17,10 +17,17 @@ Canopy.Compiler.Sequence = {
   },
   
   compile: function(builder, address, nodeType) {
-    var startOffset = builder.tempVar_('index', builder.offset_()),
-        elements    = builder.tempVar_('elements', '[]'),
-        labelled    = builder.tempVar_('labelled', '{}'),
-        textValue   = builder.tempVar_('text', '""');
+    var temp = builder.tempVars_({
+      index:    builder.offset_(),
+      elements: '[]',
+      labelled: '{}',
+      text:     '""'
+    });
+    
+    var startOffset = temp.index,
+        elements    = temp.elements,
+        labelled    = temp.labelled,
+        textValue   = temp.text;
     
     this._compileExpressions(builder, 0, startOffset, elements, labelled, textValue);
     builder.if_(elements, function(builder) {

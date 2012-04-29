@@ -11,8 +11,9 @@ Canopy.Compiler.GrammarRule = {
     var name = this.name();
     
     builder.method_('__consume__' + name, ['input'], function() {
-      var address   = builder.tempVar_('address'),
-          offset    = builder.tempVar_('index', builder.offset_());
+      var temp      = builder.tempVars_({address: 'null', index: builder.offset_()}),
+          address   = temp.address,
+          offset    = temp.index,
           cacheAddr = 'this._nodeCache["' + name + '"][' + offset + ']';
       
       builder.line_('this._nodeCache["' + name + '"] = this._nodeCache["' + name + '"] || {}');

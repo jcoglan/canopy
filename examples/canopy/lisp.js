@@ -44,19 +44,14 @@
   
   var Grammar = {
     __consume__program: function(input) {
-      var address0 = null;
-      var index0 = this._offset;
+      var address0 = null, index0 = this._offset;
       this._nodeCache["program"] = this._nodeCache["program"] || {};
       var cached = this._nodeCache["program"][index0];
       if (cached) {
         this._offset += cached.textValue.length;
         return cached;
       }
-      var remaining0 = 1;
-      var index1 = this._offset;
-      var elements0 = [];
-      var text0 = "";
-      var address1 = true;
+      var remaining0 = 1, index1 = this._offset, elements0 = [], text0 = "", address1 = true;
       while (address1) {
         address1 = this.__consume__cell();
         if (address1) {
@@ -76,24 +71,16 @@
       return this._nodeCache["program"][index0] = address0;
     },
     __consume__cell: function(input) {
-      var address0 = null;
-      var index0 = this._offset;
+      var address0 = null, index0 = this._offset;
       this._nodeCache["cell"] = this._nodeCache["cell"] || {};
       var cached = this._nodeCache["cell"][index0];
       if (cached) {
         this._offset += cached.textValue.length;
         return cached;
       }
-      var index1 = this._offset;
-      var elements0 = [];
-      var labelled0 = {};
-      var text0 = "";
+      var index1 = this._offset, elements0 = [], labelled0 = {}, text0 = "";
       var address1 = null;
-      var remaining0 = 0;
-      var index2 = this._offset;
-      var elements1 = [];
-      var text1 = "";
-      var address2 = true;
+      var remaining0 = 0, index2 = this._offset, elements1 = [], text1 = "", address2 = true;
       while (address2) {
         address2 = this.__consume__space();
         if (address2) {
@@ -130,11 +117,7 @@
           text0 += address3.textValue;
           labelled0.data = address3;
           var address4 = null;
-          var remaining1 = 0;
-          var index4 = this._offset;
-          var elements2 = [];
-          var text2 = "";
-          var address5 = true;
+          var remaining1 = 0, index4 = this._offset, elements2 = [], text2 = "", address5 = true;
           while (address5) {
             address5 = this.__consume__space();
             if (address5) {
@@ -177,18 +160,14 @@
       return this._nodeCache["cell"][index0] = address0;
     },
     __consume__list: function(input) {
-      var address0 = null;
-      var index0 = this._offset;
+      var address0 = null, index0 = this._offset;
       this._nodeCache["list"] = this._nodeCache["list"] || {};
       var cached = this._nodeCache["list"][index0];
       if (cached) {
         this._offset += cached.textValue.length;
         return cached;
       }
-      var index1 = this._offset;
-      var elements0 = [];
-      var labelled0 = {};
-      var text0 = "";
+      var index1 = this._offset, elements0 = [], labelled0 = {}, text0 = "";
       var address1 = null;
       var slice0 = null;
       if (this._input.length > this._offset) {
@@ -216,11 +195,7 @@
         elements0.push(address1);
         text0 += address1.textValue;
         var address2 = null;
-        var remaining0 = 1;
-        var index2 = this._offset;
-        var elements1 = [];
-        var text1 = "";
-        var address3 = true;
+        var remaining0 = 1, index2 = this._offset, elements1 = [], text1 = "", address3 = true;
         while (address3) {
           address3 = this.__consume__cell();
           if (address3) {
@@ -290,8 +265,7 @@
       return this._nodeCache["list"][index0] = address0;
     },
     __consume__atom: function(input) {
-      var address0 = null;
-      var index0 = this._offset;
+      var address0 = null, index0 = this._offset;
       this._nodeCache["atom"] = this._nodeCache["atom"] || {};
       var cached = this._nodeCache["atom"][index0];
       if (cached) {
@@ -322,8 +296,7 @@
       return this._nodeCache["atom"][index0] = address0;
     },
     __consume__boolean: function(input) {
-      var address0 = null;
-      var index0 = this._offset;
+      var address0 = null, index0 = this._offset;
       this._nodeCache["boolean"] = this._nodeCache["boolean"] || {};
       var cached = this._nodeCache["boolean"][index0];
       if (cached) {
@@ -386,18 +359,14 @@
       return this._nodeCache["boolean"][index0] = address0;
     },
     __consume__integer: function(input) {
-      var address0 = null;
-      var index0 = this._offset;
+      var address0 = null, index0 = this._offset;
       this._nodeCache["integer"] = this._nodeCache["integer"] || {};
       var cached = this._nodeCache["integer"][index0];
       if (cached) {
         this._offset += cached.textValue.length;
         return cached;
       }
-      var index1 = this._offset;
-      var elements0 = [];
-      var labelled0 = {};
-      var text0 = "";
+      var index1 = this._offset, elements0 = [], labelled0 = {}, text0 = "";
       var address1 = null;
       var slice0 = null;
       if (this._input.length > this._offset) {
@@ -425,11 +394,7 @@
         elements0.push(address1);
         text0 += address1.textValue;
         var address2 = null;
-        var remaining0 = 0;
-        var index2 = this._offset;
-        var elements1 = [];
-        var text1 = "";
-        var address3 = true;
+        var remaining0 = 0, index2 = this._offset, elements1 = [], text1 = "", address3 = true;
         while (address3) {
           var slice2 = null;
           if (this._input.length > this._offset) {
@@ -489,18 +454,14 @@
       return this._nodeCache["integer"][index0] = address0;
     },
     __consume__string: function(input) {
-      var address0 = null;
-      var index0 = this._offset;
+      var address0 = null, index0 = this._offset;
       this._nodeCache["string"] = this._nodeCache["string"] || {};
       var cached = this._nodeCache["string"][index0];
       if (cached) {
         this._offset += cached.textValue.length;
         return cached;
       }
-      var index1 = this._offset;
-      var elements0 = [];
-      var labelled0 = {};
-      var text0 = "";
+      var index1 = this._offset, elements0 = [], labelled0 = {}, text0 = "";
       var address1 = null;
       var slice0 = null;
       if (this._input.length > this._offset) {
@@ -528,17 +489,10 @@
         elements0.push(address1);
         text0 += address1.textValue;
         var address2 = null;
-        var remaining0 = 0;
-        var index2 = this._offset;
-        var elements1 = [];
-        var text1 = "";
-        var address3 = true;
+        var remaining0 = 0, index2 = this._offset, elements1 = [], text1 = "", address3 = true;
         while (address3) {
           var index3 = this._offset;
-          var index4 = this._offset;
-          var elements2 = [];
-          var labelled1 = {};
-          var text2 = "";
+          var index4 = this._offset, elements2 = [], labelled1 = {}, text2 = "";
           var address4 = null;
           var slice2 = null;
           if (this._input.length > this._offset) {
@@ -704,24 +658,16 @@
       return this._nodeCache["string"][index0] = address0;
     },
     __consume__symbol: function(input) {
-      var address0 = null;
-      var index0 = this._offset;
+      var address0 = null, index0 = this._offset;
       this._nodeCache["symbol"] = this._nodeCache["symbol"] || {};
       var cached = this._nodeCache["symbol"][index0];
       if (cached) {
         this._offset += cached.textValue.length;
         return cached;
       }
-      var remaining0 = 1;
-      var index1 = this._offset;
-      var elements0 = [];
-      var text0 = "";
-      var address1 = true;
+      var remaining0 = 1, index1 = this._offset, elements0 = [], text0 = "", address1 = true;
       while (address1) {
-        var index2 = this._offset;
-        var elements1 = [];
-        var labelled0 = {};
-        var text1 = "";
+        var index2 = this._offset, elements1 = [], labelled0 = {}, text1 = "";
         var address2 = null;
         var index3 = this._offset;
         address2 = this.__consume__delimiter();
@@ -796,8 +742,7 @@
       return this._nodeCache["symbol"][index0] = address0;
     },
     __consume__space: function(input) {
-      var address0 = null;
-      var index0 = this._offset;
+      var address0 = null, index0 = this._offset;
       this._nodeCache["space"] = this._nodeCache["space"] || {};
       var cached = this._nodeCache["space"][index0];
       if (cached) {
@@ -829,8 +774,7 @@
       return this._nodeCache["space"][index0] = address0;
     },
     __consume__paren: function(input) {
-      var address0 = null;
-      var index0 = this._offset;
+      var address0 = null, index0 = this._offset;
       this._nodeCache["paren"] = this._nodeCache["paren"] || {};
       var cached = this._nodeCache["paren"][index0];
       if (cached) {
@@ -893,8 +837,7 @@
       return this._nodeCache["paren"][index0] = address0;
     },
     __consume__delimiter: function(input) {
-      var address0 = null;
-      var index0 = this._offset;
+      var address0 = null, index0 = this._offset;
       this._nodeCache["delimiter"] = this._nodeCache["delimiter"] || {};
       var cached = this._nodeCache["delimiter"][index0];
       if (cached) {

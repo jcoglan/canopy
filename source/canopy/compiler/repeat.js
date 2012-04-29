@@ -24,12 +24,20 @@ Canopy.Compiler.Repeat = {
     
     if (quantifier === '?') return this._compileMaybe(builder, address, nodeType);
     
-    var minimum     = this.QUANTITIES[quantifier],
-        remaining   = builder.tempVar_('remaining', minimum),
-        startOffset = builder.tempVar_('index', builder.offset_()),
-        elements    = builder.tempVar_('elements', '[]'),
-        textValue   = builder.tempVar_('text', '""'),
-        elAddr      = builder.tempVar_('address', 'true');
+    var minimum = this.QUANTITIES[quantifier],
+        temp = builder.tempVars_({
+          remaining: minimum,
+          index:     builder.offset_(),
+          elements:  '[]',
+          text:      '""',
+          address:   'true'
+        }),
+        
+        remaining   = temp.remaining,
+        startOffset = temp.index,
+        elements    = temp.elements,
+        textValue   = temp.text,
+        elAddr      = temp.address;
     
     builder.while_(elAddr, function(builder) {
       this.atomic().compile(builder, elAddr);

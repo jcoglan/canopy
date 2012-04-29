@@ -176,6 +176,19 @@ Canopy.extend(Canopy.Builder.prototype, {
     return varName;
   },
   
+  tempVars_: function(vars) {
+    var names = {}, code = [], varName;
+    for (var name in vars) {
+      this._varIndex[name] = this._varIndex[name] || 0;
+      varName = name + this._varIndex[name];
+      this._varIndex[name] += 1;
+      code.push(varName + ' = ' + vars[name]);
+      names[name] = varName;
+    }
+    this.line_('var ' + code.join(', '));
+    return names;
+  },
+  
   conditional_: function(kwd, condition, block, context) {
     this.newline_();
     this.write(kwd + ' (' + condition + ') {');
