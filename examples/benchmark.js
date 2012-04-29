@@ -1,7 +1,7 @@
-benchmark = function(name, n, block) {
+module.exports = function(name, n, block) {
   var start = Number(new Date), i = n;
   while (i--) block();
-  var end = Number(new Date);
-  print(name + ': ' + n + 'x :: ' + ((end - start) / 1000) + 's');
+  var t = (Number(new Date) - start) / 1000;
+  console.log(name + ': ' + n + 'x :: ' + t + 's');
 };
 
