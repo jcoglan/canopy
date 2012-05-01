@@ -102,11 +102,11 @@ Canopy.extend(Canopy.Builder.prototype, {
     this.line_(address + ' = null');
     var input = this.input_(), of = this.offset_(), slice = this.slice_(1);
     var error = 'this.error = this.constructor.lastError';
+    expected = expected.replace(/\\/g, '\\\\').replace(/"/g, '\\"');
     this.if_('!this.error || this.error.offset <= ' + of, function(builder) {
       builder.line_(error + ' = {input: ' + input +
                               ', offset: ' + of +
-                              ', expected: "' + (expected || '').replace(/"/g, '\\"') +
-                             '", actual: ' + slice + ' || "<EOF>"}');
+                              ', expected: "' + expected + '"}');
     });
   },
   

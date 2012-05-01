@@ -15,7 +15,7 @@ function() { with(this) {
       }})
       
       it('does not parse strings that do not match the referenced rule', function() { with(this) {
-        assertNull( OneRefTestParser.parse('foo') )
+        assertThrows(Error, function() { OneRefTestParser.parse('foo') })
       }})
     }})
     

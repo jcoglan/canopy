@@ -38,8 +38,20 @@ Canopy.Compiler.Grammar = {
         builder.ivar_('nodeCache', '{}');
       });
       builder.function_('Parser.prototype.parse', [], function(builder) {
+        var input = builder.input_(),
+            of    = builder.offset_();
+        
         builder.var_('result', 'this.__consume__' + root + '()');
-        builder.return_(builder.offset_() + ' === ' + builder.input_() + '.length ? result : null');
+        
+        builder.if_('result && ' + of + ' === ' + input + '.length', function(builder) {
+          builder.return_('result');
+        });
+        builder.unless_('this.error', function(builder) {
+          builder.line_('this.error = {input: ' + input + ', offset :' + of + ', expected: "<EOF>"}');
+        });
+        builder.var_('message', 'formatError(this.error)');
+        builder.var_('error', 'new Error(message)');
+        builder.line_('throw error');
       });
       builder.function_('Parser.parse', ['input'], function(builder) {
         builder.var_('parser', 'new Parser(input)');

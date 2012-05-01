@@ -23,7 +23,7 @@ function() { with(this) {
     }})
     
     it('does not parse text that does not begin with the expected pattern', function() { with(this) {
-      assertNull( AndTestParser.parse('foobar') )
+      assertThrows(Error, function() { AndTestParser.parse('foobar') })
     }})
   }})
   
@@ -42,7 +42,7 @@ function() { with(this) {
     }})
     
     it('does not parse text beginning with the negated pattern', function() { with(this) {
-      assertNull( NotTestParser.parse('foobar') )
+      assertThrows(Error, function() { NotTestParser.parse('foobar') })
     }})
     
     describe('combined with repetition', function() { with(this) {
@@ -69,11 +69,11 @@ function() { with(this) {
       }})
       
       it('does not match a word with no space', function() { with(this) {
-        assertNull( RepeatNotTestParser.parse('chunky') )
+        assertThrows(Error, function() { RepeatNotTestParser.parse('chunky') })
       }})
       
       it('does not match multiple words', function() { with(this) {
-        assertNull( RepeatNotTestParser.parse('chunky bacon ') )
+        assertThrows(Error, function() { RepeatNotTestParser.parse('chunky bacon ') })
       }})
     }})
   }})

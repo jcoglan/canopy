@@ -16,16 +16,16 @@ function() { with(this) {
   }})
   
   it('does not parse nonmatching sequences', function() { with(this) {
-    assertNull( SequenceTestParser.parse('foobaz') )
-    assertNull( SequenceTestParser.parse('doobar') )
+    assertThrows(Error, function() { SequenceTestParser.parse('foobaz') })
+    assertThrows(Error, function() { SequenceTestParser.parse('doobar') })
   }})
   
   it('does not parse if the first term is missing', function() { with(this) {
-    assertNull( SequenceTestParser.parse('bar') )
+    assertThrows(Error, function() { SequenceTestParser.parse('bar') })
   }})
   
   it('does not parse superstrings of itself', function() { with(this) {
-    assertNull( SequenceTestParser.parse('foobart') )
+    assertThrows(Error, function() { SequenceTestParser.parse('foobart') })
   }})
   
   describe('labelling', function() { with(this) {
@@ -69,7 +69,7 @@ function() { with(this) {
       }})
       
       it('does not parse if the expression it labels does not parse', function() { with(this) {
-        assertNull( LabelTestBParser.parse('firstthird') )
+        assertThrows(Error, function() { LabelTestBParser.parse('firstthird') })
       }})
     }})
     

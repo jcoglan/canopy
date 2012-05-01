@@ -20,13 +20,13 @@ function() { with(this) {
   }})
   
   it('does not parse two choices together', function() { with(this) {
-    assertNull( ChoiceTestParser.parse('foobar') )
+    assertThrows(Error, function() { ChoiceTestParser.parse('foobar') })
   }})
   
   it('does not parse a superstring of any choice', function() { with(this) {
-    assertNull( ChoiceTestParser.parse('foob') )
-    assertNull( ChoiceTestParser.parse('barb') )
-    assertNull( ChoiceTestParser.parse('bazb') )
+    assertThrows(Error, function() { ChoiceTestParser.parse('foob') })
+    assertThrows(Error, function() { ChoiceTestParser.parse('barb') })
+    assertThrows(Error, function() { ChoiceTestParser.parse('bazb') })
   }})
   
   describe('when the choices are ambiguous', function() { with(this) {

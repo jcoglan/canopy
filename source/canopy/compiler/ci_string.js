@@ -14,7 +14,7 @@ Canopy.Compiler.CIString = {
     });
     builder.else_(function(builder) {
       builder.failure_(address, this.textValue);
-    });
+    }, this);
   },
   
   stringValue: function() {

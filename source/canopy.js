@@ -38,11 +38,11 @@ Canopy.extend(Canopy, {
   },
   
   formatError: function(error) {
-    var lines    = error.input.split(/\n/g),
-        lineNo   = 0,
-        offset   = 0;
+    var lines  = error.input.split(/\n/g),
+        lineNo = 0,
+        offset = 0;
     
-    while (offset < error.offset) {
+    while (offset < error.offset + 1) {
       offset += lines[lineNo].length + 1;
       lineNo += 1;
     }

@@ -17,7 +17,7 @@ function() { with(this) {
     }})
     
     it('does not parse if different input is given', function() { with(this) {
-      assertNull( MaybeTestParser.parse('gc') )
+      assertThrows(Error, function() { MaybeTestParser.parse('gc') })
     }})
   }})
   
@@ -48,7 +48,7 @@ function() { with(this) {
     }})
     
     it('does not match superstrings of the repeated pattern', function() { with(this) {
-      assertNull( ZeroOrMoreTestParser.parse('foofood') )
+      assertThrows(Error, function() { ZeroOrMoreTestParser.parse('foofood') })
     }})
     
     describe('followed by more of the repeated pattern', function() { with(this) {
@@ -58,9 +58,9 @@ function() { with(this) {
       }})
       
       it('does not parse any number of occurences', function() { with(this) {
-        assertNull( ZeroOrUnparsableParser.parse('') )
-        assertNull( ZeroOrUnparsableParser.parse('foo') )
-        assertNull( ZeroOrUnparsableParser.parse('foofoo') )
+        assertThrows(Error, function() { ZeroOrUnparsableParser.parse('') })
+        assertThrows(Error, function() { ZeroOrUnparsableParser.parse('foo') })
+        assertThrows(Error, function() { ZeroOrUnparsableParser.parse('foofoo') })
       }})
     }})
   }})
@@ -72,7 +72,7 @@ function() { with(this) {
     }})
     
     it('does not match zero occurences of the pattern', function() { with(this) {
-      assertNull( OneOrMoreTestParser.parse('') )
+      assertThrows(Error, function() { OneOrMoreTestParser.parse('') })
     }})
     
     it('matches one occurence of the pattern', function() { with(this) {
@@ -92,7 +92,7 @@ function() { with(this) {
     }})
     
     it('does not match superstrings of the repeated pattern', function() { with(this) {
-      assertNull( OneOrMoreTestParser.parse('foofood') )
+      assertThrows(Error, function() { OneOrMoreTestParser.parse('foofood') })
     }})
     
     describe('followed by more of the repeated pattern', function() { with(this) {
@@ -102,9 +102,9 @@ function() { with(this) {
       }})
       
       it('does not parse any number of occurences', function() { with(this) {
-        assertNull( OneOrUnparsableParser.parse('') )
-        assertNull( OneOrUnparsableParser.parse('foo') )
-        assertNull( OneOrUnparsableParser.parse('foofoo') )
+        assertThrows(Error, function() { OneOrUnparsableParser.parse('') })
+        assertThrows(Error, function() { OneOrUnparsableParser.parse('foo') })
+        assertThrows(Error, function() { OneOrUnparsableParser.parse('foofoo') })
       }})
     }})
   }})

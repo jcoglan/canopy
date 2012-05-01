@@ -12,16 +12,16 @@ function() { with(this) {
   }})
   
   it('does not parse other strings', function() { with(this) {
-    assertNull( StringTestParser.parse('FOO') )
-    assertNull( StringTestParser.parse('bar') )
+    assertThrows(Error, function() { StringTestParser.parse('FOO') })
+    assertThrows(Error, function() { StringTestParser.parse('bar') })
   }})
   
   it('does not parse superstrings of itself', function() { with(this) {
-    assertNull( StringTestParser.parse('food') )
+    assertThrows(Error, function() { StringTestParser.parse('food') })
   }})
   
   it('does not parse the empty string', function() { with(this) {
-    assertNull( StringTestParser.parse('') )
+    assertThrows(Error, function() { StringTestParser.parse('') })
   }})
   
   describe('case-insensitive strings', function() { with(this) {

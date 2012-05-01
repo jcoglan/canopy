@@ -12,12 +12,11 @@ function() { with(this) {
   }})
   
   it('does not parse the empty string', function() { with(this) {
-    assertNull( AnyCharTestParser.parse('') )
+    assertThrows(Error, function() { AnyCharTestParser.parse('') })
     assertEqual({
         input:    '',
         offset:   0,
-        expected: '<any char>',
-        actual:   '<EOF>'
+        expected: '<any char>'
       }, AnyCharTestParser.lastError)
   }})
 }})

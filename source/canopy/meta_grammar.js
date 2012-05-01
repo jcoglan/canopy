@@ -21,11 +21,11 @@
   };
   
   var formatError = function (error) {
-    var lines    = error.input.split(/\n/g),
-        lineNo   = 0,
-        offset   = 0;
+    var lines  = error.input.split(/\n/g),
+        lineNo = 0,
+        offset = 0;
     
-    while (offset < error.offset) {
+    while (offset < error.offset + 1) {
       offset += lines[lineNo].length + 1;
       lineNo += 1;
     }
@@ -229,7 +229,7 @@
           slice1 = null;
         }
         if (!this.error || this.error.offset <= this._offset) {
-          this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: "", actual: slice1 || "<EOF>"};
+          this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: "\"grammar \""};
         }
       }
       if (address1) {
@@ -367,7 +367,7 @@
             slice1 = null;
           }
           if (!this.error || this.error.offset <= this._offset) {
-            this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: "", actual: slice1 || "<EOF>"};
+            this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: "\"<-\""};
           }
         }
         if (address3) {
@@ -466,7 +466,7 @@
           slice1 = null;
         }
         if (!this.error || this.error.offset <= this._offset) {
-          this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: "", actual: slice1 || "<EOF>"};
+          this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: "\"(\""};
         }
       }
       if (address1) {
@@ -540,7 +540,7 @@
                   slice3 = null;
                 }
                 if (!this.error || this.error.offset <= this._offset) {
-                  this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: "", actual: slice3 || "<EOF>"};
+                  this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: "\")\""};
                 }
               }
               if (address7) {
@@ -636,7 +636,7 @@
                 slice1 = null;
               }
               if (!this.error || this.error.offset <= this._offset) {
-                this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: "", actual: slice1 || "<EOF>"};
+                this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: "\"/\""};
               }
             }
             if (address6) {
@@ -874,7 +874,7 @@
           slice1 = null;
         }
         if (!this.error || this.error.offset <= this._offset) {
-          this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: "", actual: slice1 || "<EOF>"};
+          this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: "\"<\""};
         }
       }
       if (address1) {
@@ -906,7 +906,7 @@
               slice3 = null;
             }
             if (!this.error || this.error.offset <= this._offset) {
-              this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: "", actual: slice3 || "<EOF>"};
+              this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: "\">\""};
             }
           }
           if (address3) {
@@ -1230,7 +1230,7 @@
           slice1 = null;
         }
         if (!this.error || this.error.offset <= this._offset) {
-          this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: "", actual: slice1 || "<EOF>"};
+          this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: "\"&\""};
         }
       }
       if (address1) {
@@ -1255,7 +1255,7 @@
             slice3 = null;
           }
           if (!this.error || this.error.offset <= this._offset) {
-            this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: "", actual: slice3 || "<EOF>"};
+            this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: "\"!\""};
           }
         }
         if (address1) {
@@ -1385,7 +1385,7 @@
           slice1 = null;
         }
         if (!this.error || this.error.offset <= this._offset) {
-          this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: "", actual: slice1 || "<EOF>"};
+          this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: "\"\\\"\""};
         }
       }
       if (address1) {
@@ -1416,7 +1416,7 @@
               slice3 = null;
             }
             if (!this.error || this.error.offset <= this._offset) {
-              this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: "", actual: slice3 || "<EOF>"};
+              this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: "\"\\\\\""};
             }
           }
           if (address4) {
@@ -1439,7 +1439,7 @@
                 slice5 = null;
               }
               if (!this.error || this.error.offset <= this._offset) {
-                this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: "<any char>", actual: slice5 || "<EOF>"};
+                this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: "<any char>"};
               }
             } else {
               var klass2 = this.constructor.SyntaxNode;
@@ -1487,7 +1487,7 @@
                 slice7 = null;
               }
               if (!this.error || this.error.offset <= this._offset) {
-                this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: "[^\"]", actual: slice7 || "<EOF>"};
+                this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: "[^\"]"};
               }
             }
             if (address3) {
@@ -1532,7 +1532,7 @@
               slice9 = null;
             }
             if (!this.error || this.error.offset <= this._offset) {
-              this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: "", actual: slice9 || "<EOF>"};
+              this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: "\"\\\"\""};
             }
           }
           if (address6) {
@@ -1598,7 +1598,7 @@
           slice1 = null;
         }
         if (!this.error || this.error.offset <= this._offset) {
-          this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: "", actual: slice1 || "<EOF>"};
+          this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: "\"`\""};
         }
       }
       if (address1) {
@@ -1629,7 +1629,7 @@
               slice3 = null;
             }
             if (!this.error || this.error.offset <= this._offset) {
-              this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: "", actual: slice3 || "<EOF>"};
+              this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: "\"\\\\\""};
             }
           }
           if (address4) {
@@ -1652,7 +1652,7 @@
                 slice5 = null;
               }
               if (!this.error || this.error.offset <= this._offset) {
-                this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: "<any char>", actual: slice5 || "<EOF>"};
+                this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: "<any char>"};
               }
             } else {
               var klass2 = this.constructor.SyntaxNode;
@@ -1700,7 +1700,7 @@
                 slice7 = null;
               }
               if (!this.error || this.error.offset <= this._offset) {
-                this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: "[^`]", actual: slice7 || "<EOF>"};
+                this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: "[^`]"};
               }
             }
             if (address3) {
@@ -1745,7 +1745,7 @@
               slice9 = null;
             }
             if (!this.error || this.error.offset <= this._offset) {
-              this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: "", actual: slice9 || "<EOF>"};
+              this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: "\"`\""};
             }
           }
           if (address6) {
@@ -1818,7 +1818,7 @@
           slice1 = null;
         }
         if (!this.error || this.error.offset <= this._offset) {
-          this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: "", actual: slice1 || "<EOF>"};
+          this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: "\".\""};
         }
       }
       return this._nodeCache["any_char_expression"][index0] = address0;
@@ -1852,7 +1852,7 @@
           slice1 = null;
         }
         if (!this.error || this.error.offset <= this._offset) {
-          this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: "", actual: slice1 || "<EOF>"};
+          this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: "\"[\""};
         }
       }
       if (address1) {
@@ -1879,7 +1879,7 @@
             slice3 = null;
           }
           if (!this.error || this.error.offset <= this._offset) {
-            this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: "", actual: slice3 || "<EOF>"};
+            this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: "\"^\""};
           }
         }
         if (address2) {
@@ -1917,7 +1917,7 @@
                 slice5 = null;
               }
               if (!this.error || this.error.offset <= this._offset) {
-                this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: "", actual: slice5 || "<EOF>"};
+                this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: "\"\\\\\""};
               }
             }
             if (address5) {
@@ -1940,7 +1940,7 @@
                   slice7 = null;
                 }
                 if (!this.error || this.error.offset <= this._offset) {
-                  this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: "<any char>", actual: slice7 || "<EOF>"};
+                  this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: "<any char>"};
                 }
               } else {
                 var klass4 = this.constructor.SyntaxNode;
@@ -1988,7 +1988,7 @@
                   slice9 = null;
                 }
                 if (!this.error || this.error.offset <= this._offset) {
-                  this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: "[^\]]", actual: slice9 || "<EOF>"};
+                  this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: "[^\\]]"};
                 }
               }
               if (address4) {
@@ -2033,7 +2033,7 @@
                 slice11 = null;
               }
               if (!this.error || this.error.offset <= this._offset) {
-                this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: "", actual: slice11 || "<EOF>"};
+                this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: "\"]\""};
               }
             }
             if (address7) {
@@ -2109,7 +2109,7 @@
             slice1 = null;
           }
           if (!this.error || this.error.offset <= this._offset) {
-            this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: "", actual: slice1 || "<EOF>"};
+            this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: "\":\""};
           }
         }
         if (address2) {
@@ -2172,7 +2172,7 @@
               slice1 = null;
             }
             if (!this.error || this.error.offset <= this._offset) {
-              this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: "", actual: slice1 || "<EOF>"};
+              this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: "\".\""};
             }
           }
           if (address4) {
@@ -2264,7 +2264,7 @@
           slice1 = null;
         }
         if (!this.error || this.error.offset <= this._offset) {
-          this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: "[a-zA-Z_$]", actual: slice1 || "<EOF>"};
+          this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: "[a-zA-Z_$]"};
         }
       }
       if (address1) {
@@ -2292,7 +2292,7 @@
               slice3 = null;
             }
             if (!this.error || this.error.offset <= this._offset) {
-              this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: "[a-zA-Z0-9_$]", actual: slice3 || "<EOF>"};
+              this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: "[a-zA-Z0-9_$]"};
             }
           }
           if (address3) {
@@ -2358,7 +2358,7 @@
           slice1 = null;
         }
         if (!this.error || this.error.offset <= this._offset) {
-          this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: "", actual: slice1 || "<EOF>"};
+          this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: "\"?\""};
         }
       }
       if (address0) {
@@ -2383,7 +2383,7 @@
             slice3 = null;
           }
           if (!this.error || this.error.offset <= this._offset) {
-            this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: "", actual: slice3 || "<EOF>"};
+            this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: "\"*\""};
           }
         }
         if (address0) {
@@ -2408,7 +2408,7 @@
               slice5 = null;
             }
             if (!this.error || this.error.offset <= this._offset) {
-              this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: "", actual: slice5 || "<EOF>"};
+              this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: "\"+\""};
             }
           }
           if (address0) {
@@ -2446,7 +2446,7 @@
           slice1 = null;
         }
         if (!this.error || this.error.offset <= this._offset) {
-          this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: "[\s\n\r\t]", actual: slice1 || "<EOF>"};
+          this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: "[\\s\\n\\r\\t]"};
         }
       }
       return this._nodeCache["space"][index0] = address0;
@@ -2461,7 +2461,15 @@
   
   Parser.prototype.parse = function() {
     var result = this.__consume__grammar();
-    return this._offset === this._input.length ? result : null;
+    if (result && this._offset === this._input.length) {
+      return result;
+    }
+    if (!(this.error)) {
+      this.error = {input: this._input, offset :this._offset, expected: "<EOF>"};
+    }
+    var message = formatError(this.error);
+    var error = new Error(message);
+    throw error;
   };
   
   Parser.parse = function(input) {
