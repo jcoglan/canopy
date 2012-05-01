@@ -3,25 +3,20 @@
 var Canopy = require('../lib/canopy'),
     fs     = require('fs');
 
-var startTime  = Number(new Date()),
-    inputFile  = process.argv[2],
-    outputFile = inputFile.replace(/\.peg$/, '.js');
-
-fs.readFile(inputFile, function(err, grammar) {
-  if (err) return console.error('Could not read source file: ' + inputFile);
-  
-  try {
-    var parser   = Canopy.compile(grammar.toString()),
-        endTime  = Number(new Date());
-    
-    fs.writeFile(outputFile, parser, function(err) {
-      if (err) return console.error('Could not write to output file: ' + outputFile);
+try {
+  var startTime  = new Date().getTime(),
+      inputFile  = process.argv[2],
+      outputFile = inputFile.replace(/\.peg$/, '.js'),
       
-      console.log('Generated parser in ' + outputFile);
-      console.log('Completed in ' + ((endTime - startTime) / 1000) + 's');
-    });
-  } catch (e) {
-    console.error(e.message);
-  }
-});
+      grammar    = fs.readFileSync(inputFile).toString(),
+      parser     = Canopy.compile(grammar),
+      endTime    = new Date().getTime();
+  
+  fs.writeFileSync(outputFile, parser);
+  console.log('Generated parser in ' + outputFile);
+  console.log('Completed in ' + ((endTime - startTime) / 1000) + 's');
+  
+} catch (e) {
+  console.error(e.message);
+}
 
