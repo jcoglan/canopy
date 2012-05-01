@@ -1284,7 +1284,7 @@
       if (elements0) {
         this._offset = index1;
         var klass2 = null;
-        var type0 = find(this.constructor, "PredicatedAtom");
+        var type0 = find(this.constructor, "Predicate");
         if (type0 instanceof Function) {
           klass2 = type0;
         } else {

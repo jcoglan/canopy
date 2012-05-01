@@ -43,7 +43,7 @@ grammar Canopy.MetaGrammar
                              / char_class_expression
   
   predicated_atom           <- predicate:("&" / "!") atom
-                               <PredicatedAtom>
+                               <Predicate>
   
   reference_expression      <- identifier !assignment <Reference>
   

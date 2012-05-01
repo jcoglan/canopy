@@ -1,4 +1,4 @@
-Canopy.Compiler.PredicatedAtom = {
+Canopy.Compiler.Predicate = {
   atomic: function() {
     var expression = this.atom;
     return expression.parsing_expression || expression;

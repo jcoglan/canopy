@@ -28,7 +28,7 @@ JS.require('JS.Test', function() {
                 'Canopy.Compiler.AnyCharSpec',
                 'Canopy.Compiler.CharClassSpec',
                 'Canopy.Compiler.StringSpec',
-                'Canopy.Compiler.PredicatedAtomSpec',
+                'Canopy.Compiler.PredicateSpec',
                 'Canopy.Compiler.RepeatSpec',
                 'Canopy.Compiler.SequenceSpec',
                 'Canopy.Compiler.ChoiceSpec',
