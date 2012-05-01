@@ -47,7 +47,7 @@ Canopy.Compiler.Grammar = {
           builder.return_('result');
         });
         builder.unless_('this.error', function(builder) {
-          builder.line_('this.error = {input: ' + input + ', offset :' + of + ', expected: "<EOF>"}');
+          builder.line_('this.error = {input: ' + input + ', offset: ' + of + ', expected: "<EOF>"}');
         });
         builder.var_('message', 'formatError(this.error)');
         builder.var_('error', 'new Error(message)');

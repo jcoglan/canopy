@@ -2465,7 +2465,7 @@
       return result;
     }
     if (!(this.error)) {
-      this.error = {input: this._input, offset :this._offset, expected: "<EOF>"};
+      this.error = {input: this._input, offset: this._offset, expected: "<EOF>"};
     }
     var message = formatError(this.error);
     var error = new Error(message);
