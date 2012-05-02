@@ -1,8 +1,10 @@
 .git
 .gitignore
 .npmignore
+examples
 Jakefile
 jake.yml
 node_modules
+site
 source
 spec

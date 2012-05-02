@@ -8,20 +8,19 @@
 , "engines"         : {"node": ">=0.4.0"}
 , "main"            : "./lib/canopy.js"
 , "bin"             : {"canopy": "./bin/canopy"}
+, "preferGlobal"    : true
 , "devDependencies" : {"jsclass": ""}
 
 , "scripts"         : {"test": "node spec/console.js"}
 
 , "bugs"            : {"url": "http://github.com/jcoglan/canopy/issues"}
 
-, "licenses"        : [ { "type"    : "MIT"
-                        , "url"     : "http://www.opensource.org/licenses/mit-license.php"
-                        }
-                      ]
+, "license"         : { "type"    : "MIT"
+                      , "url"     : "http://www.opensource.org/licenses/mit-license.php"
+                      }
 
-, "repositories"    : [ { "type"    : "git"
-                        , "url"     : "git://github.com/jcoglan/canopy.git"
-                        }
-                      ]
+, "repository"      : { "type"    : "git"
+                      , "url"     : "git://github.com/jcoglan/canopy.git"
+                      }
 }
 
