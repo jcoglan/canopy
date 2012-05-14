@@ -2,28 +2,6 @@ Canopy.Compiler.ChoicePartSpec = JS.Test.describe("Canopy.Compiler.ChoicePart",
 function() { with(this) {
   include(Canopy.SpecHelper)
   
-  describe('when the node type is a class', function() { with(this) {
-    before(function() { with(this) {
-      Canopy.compile('grammar JS.ENV.ClassTypeTest\
-        rule <- "content" <NodeType>')
-      
-      ClassTypeTestParser.NodeType = function(text, offset, children) {
-        this.textValue = text
-        this.offset    = 0
-        this.elements  = children
-      }
-    }})
-    
-    it('creates nodes using the named type', function() { with(this) {
-      assertKindOf( ClassTypeTestParser.NodeType,
-                    ClassTypeTestParser.parse('content') )
-    }})
-    
-    it('contains the parse results in the returned node', function() { with(this) {
-      assertParse( ['content', 0, []], ClassTypeTestParser.parse('content') )
-    }})
-  }})
-  
   describe('when the node type is a mixin', function() { with(this) {
     before(function() { with(this) {
       Canopy.compile('grammar JS.ENV.ModuleTypeTest\
@@ -75,13 +53,12 @@ function() { with(this) {
         rule <- "content" <NS.NodeType>')
       
       NamespacedTypeTestParser.NS = {
-        NodeType : new JS.Class(NamespacedTypeTestParser.SyntaxNode)
+        NodeType: { custom: function() { return 'pass!' } }
       }
     }})
     
     it('creates nodes using the named type', function() { with(this) {
-      assertKindOf( NamespacedTypeTestParser.NS.NodeType,
-                    NamespacedTypeTestParser.parse('content') )
+      assertEqual( 'pass!', NamespacedTypeTestParser.parse('content').custom() )
     }})
   }})
 }})

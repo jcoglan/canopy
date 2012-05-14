@@ -19,6 +19,25 @@ function() { with(this) {
       }})
     }})
     
+    describe('where the nodes are typed', function() { with(this) {
+      before(function() { with(this) {
+        Canopy.compile('grammar JS.ENV.OneRefTest\
+          first <- second <First>\
+          second <- "bar" <Second>')
+        
+          OneRefTestParser.First  = { first:  function() { return '1'} }
+          OneRefTestParser.Second = { second: function() { return '2'} }
+      }})
+      
+      it('extends the result with the root type', function() { with(this) {
+        assertEqual( '2', OneRefTestParser.parse('bar').second() )
+      }})
+      
+      it('extends the result with the reference type', function() { with(this) {
+        assertEqual( '1', OneRefTestParser.parse('bar').first() )
+      }})
+    }})
+    
     describe('where the root contains the reference as part of a sequence', function() { with(this) {
       before(function() { with(this) {
         Canopy.compile('grammar JS.ENV.OneRefWithSequenceTest\

@@ -64,20 +64,10 @@ Canopy.extend(Canopy.Builder.prototype, {
   syntaxNode_: function(address, nodeType, expression, bump, elements, labelled) {
     elements = ', ' + (elements || '[]');
     labelled = labelled ? ', ' + labelled : '';
-    var klass, type, of = ', ' + this.offset_();
     
-    if (nodeType) {
-      klass = this.tempVar_('klass');
-      type  = this.findType_(nodeType);
-      this.if_(type + ' instanceof Function', function(builder) {
-        builder.line_(klass + ' = ' + type);
-      });
-      this.else_(function(builder) {
-        builder.line_(klass + ' = this.constructor.SyntaxNode');
-      });
-    } else {
-      klass = this.tempVar_('klass', 'this.constructor.SyntaxNode');
-    }
+    var klass = this.tempVar_('klass', 'this.constructor.SyntaxNode'),
+        type  = this.findType_(nodeType),
+        of    = ', ' + this.offset_();
     
     this.line_(address + ' = new ' + klass + '(' + expression + of + elements + labelled + ')');
     this.extendNode_(address, type);
@@ -93,7 +83,7 @@ Canopy.extend(Canopy.Builder.prototype, {
   
   extendNode_: function(address, nodeType) {
     if (!nodeType) return;
-    this.unless_(nodeType + ' instanceof Function', function(builder) {
+    this.if_('typeof ' + nodeType + ' === "object"', function(builder) {
       builder.line_('extend(' + address + ', ' + nodeType + ')');
     });
   },
