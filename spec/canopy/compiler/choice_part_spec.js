@@ -34,6 +34,38 @@ function() { with(this) {
     }})
   }})
   
+  describe('where the underlying parser is a reference', function() { with(this) {
+    before(function() { with(this) {
+      Canopy.compile('grammar JS.ENV.TypedRefTest\
+        first <- second <First>\
+        second <- "bar" <Second>')
+        
+        TypedRefTestParser.First  = { first:  function() { return '1'} }
+        TypedRefTestParser.Second = { second: function() { return '2'} }
+    }})
+    
+    it('extends the chosen node with the root type', function() { with(this) {
+      assertEqual( '2', TypedRefTestParser.parse('bar').second() )
+    }})
+    
+    it('extends the chosen node with the reference type', function() { with(this) {
+      assertEqual( '1', TypedRefTestParser.parse('bar').first() )
+    }})
+  }})
+  
+  describe('when the underlying parser is a repetition', function() { with(this) {
+    before(function() { with(this) {
+      Canopy.compile('grammar JS.ENV.TypedRepeatTest\
+        rule <- "content"+ <NodeType>')
+      
+      TypedRepeatTestParser.NodeType = { custom: function() { return 'pass!' } }
+    }})
+    
+    it('extends the chosen node with the mixin', function() { with(this) {
+      assertEqual( 'pass!', TypedRepeatTestParser.parse('contentcontent').custom() )
+    }})
+  }})
+  
   describe('when the underlying parser is a maybe', function() { with(this) {
     before(function() { with(this) {
       Canopy.compile('grammar JS.ENV.TypedMaybeTest\
