@@ -2718,9 +2718,7 @@
     module.exports = {
       Grammar: Grammar,
       Parser: Parser,
-      SyntaxNode: SyntaxNode,
-      parse: Parser.parse,
-      formatError: formatError
+      parse: Parser.parse
     };
     
     if (typeof Canopy !== "undefined") {

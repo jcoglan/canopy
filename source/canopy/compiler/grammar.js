@@ -94,9 +94,7 @@ Canopy.Compiler.Grammar = {
         builder.module_('module.exports', function(builder) {
           builder.field_('Grammar',     'Grammar');
           builder.field_('Parser',      'Parser');
-          builder.field_('SyntaxNode',  'SyntaxNode');
           builder.field_('parse',       'Parser.parse');
-          builder.field_('formatError', 'formatError');
         });
         builder.newline_();
         if (namespaceCondition)
