@@ -1,6 +1,7 @@
 .git
 .gitignore
 .npmignore
+.redcar
 examples
 Jakefile
 jake.yml
