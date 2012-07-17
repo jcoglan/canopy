@@ -1,0 +1,21 @@
+:textile
+  h2. Lookaheads
+  
+  Lookaheads, denoted by the @&@ and @!@ characters, can be used to check the
+  next piece of input without consuming it. The expression @&expr@ matches if
+  the next piece of input matches @expr@, and @!expr@ matches if the input does
+  _not_ match @expr@.
+  
+  For example, this rule matches the word `television` followed by a colon, but
+  does not consume the colon:
+  
+  <pre>  tv   <-  "television" &":"</pre>
+  
+  This rule matches any number of non-space characters, by first checking the
+  next character using a negative lookahead and then consuming it with the
+  wildcard operator:
+  
+  <pre>  nonspace   <-  (!" " .)*</pre>
+  
+  The lookahead operators do not have to be followed by strings, they can be
+  used with any other type of parsing expression.
