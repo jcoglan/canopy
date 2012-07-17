@@ -6,7 +6,7 @@ Grammars][1] and heavily influenced by [Treetop][2].
 [1]: http://en.wikipedia.org/wiki/Parsing_expression_grammar
 [2]: http://treetop.rubyforge.org/
 
-For usage documentation see [canopy.jcoglan.com](http://canopy.jcoglan.com)
+For usage documentation see [canopy.jcoglan.com](http://canopy.jcoglan.com).
 
 
 ## Building and testing Canopy

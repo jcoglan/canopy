@@ -81,7 +81,7 @@
   
   Because type annotations bind to sequences rather than to choices, the
   following matches either the string @"abc"@ which gains the @Foo@ type, or
-  @"123"@ which gains the @Bar type@:
+  @"123"@ which gains the @Bar@ type:
   
   <pre>grammar Choice
     root  <-  "a" "b" "c" <Foo> / "1" "2" "3" <Bar></pre>
