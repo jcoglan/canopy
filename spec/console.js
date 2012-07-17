@@ -8,13 +8,16 @@ if (this.ActiveXObject)
     } finally {
       try { if (file) file.Close() } catch (e) {}
     }
-  }
+  };
 
-JSCLASS_PATH = 'node_modules/jsclass/min'
+(function() {
+  var $ = (typeof global === 'object') ? global : this
+  $.JSCLASS_PATH = 'node_modules/jsclass/min'
+})()
 
 if (typeof require === 'function') {
   require('../' + JSCLASS_PATH + '/loader')
-  Canopy = require('../lib/canopy-min')
+  JS.ENV.Canopy = require('../lib/canopy')
   require('./runner')
 } else {
   load(JSCLASS_PATH + '/loader.js')

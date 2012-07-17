@@ -2714,12 +2714,10 @@
   
   Parser.SyntaxNode = SyntaxNode;
   
-  if (typeof require === "function" && typeof module === "object") {
-    module.exports = {
-      Grammar: Grammar,
-      Parser: Parser,
-      parse: Parser.parse
-    };
+  if (typeof require === "function" && typeof exports === "object") {
+    exports.Grammar = Grammar;
+    exports.Parser  = Parser;
+    exports.parse   = Parser.parse;
     
     if (typeof Canopy !== "undefined") {
       Canopy.MetaGrammar = Grammar;

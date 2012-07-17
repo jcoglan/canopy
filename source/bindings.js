@@ -4,7 +4,10 @@
       Canopy.MetaGrammarParser[type] = Canopy.Compiler[type];
   }
   
-  if (typeof module === 'object')
-    module.exports = Canopy;
+  if (typeof exports === 'object') {
+    module.exports = exports;
+    Canopy.extend(exports, Canopy);
+    exports.compile = Canopy.compile;
+  }
 })();
 

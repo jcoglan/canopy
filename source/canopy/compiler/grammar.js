@@ -90,12 +90,10 @@ Canopy.Compiler.Grammar = {
       }
       
       builder.newline_();
-      builder.if_('typeof require === "function" && typeof module === "object"', function(builder) {
-        builder.module_('module.exports', function(builder) {
-          builder.field_('Grammar',     'Grammar');
-          builder.field_('Parser',      'Parser');
-          builder.field_('parse',       'Parser.parse');
-        });
+      builder.if_('typeof require === "function" && typeof exports === "object"', function(builder) {
+        builder.line_('exports.Grammar = Grammar');
+        builder.line_('exports.Parser  = Parser');
+        builder.line_('exports.parse   = Parser.parse');
         builder.newline_();
         if (namespaceCondition)
           builder.if_(namespaceCondition, expose);

@@ -1,4 +1,4 @@
-Canopy.Compiler.ReferenceSpec = JS.Test.describe("Canopy.Compiler.Reference",
+JS.ENV.Canopy.Compiler.ReferenceSpec = JS.Test.describe("Canopy.Compiler.Reference",
 function() { with(this) {
   include(Canopy.SpecHelper)
   

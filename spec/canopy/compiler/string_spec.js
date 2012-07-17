@@ -1,4 +1,4 @@
-Canopy.Compiler.StringSpec = JS.Test.describe("Canopy.Compiler.String",
+JS.ENV.Canopy.Compiler.StringSpec = JS.Test.describe("Canopy.Compiler.String",
 function() { with(this) {
   include(Canopy.SpecHelper)
   

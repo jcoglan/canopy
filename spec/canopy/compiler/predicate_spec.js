@@ -1,4 +1,4 @@
-Canopy.Compiler.PredicateSpec = JS.Test.describe("Canopy.Compiler.Predicate",
+JS.ENV.Canopy.Compiler.PredicateSpec = JS.Test.describe("Canopy.Compiler.Predicate",
 function() { with(this) {
   include(Canopy.SpecHelper)
   
