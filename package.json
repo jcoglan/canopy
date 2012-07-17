@@ -1,6 +1,6 @@
 { "name"            : "canopy"
 , "description"     : "PEG parser compiler for JavaScript"
-, "homepage"        : "https://github.com/jcoglan/canopy"
+, "homepage"        : "http://canopy.jcoglan.com"
 , "author"          : "James Coglan <jcoglan@gmail.com> (http://jcoglan.com/)"
 , "keywords"        : ["parser", "compiler", "peg"]
 
@@ -15,12 +15,12 @@
 
 , "bugs"            : {"url": "http://github.com/jcoglan/canopy/issues"}
 
-, "license"         : { "type"    : "MIT"
-                      , "url"     : "http://www.opensource.org/licenses/mit-license.php"
+, "license"         : { "type"  : "MIT"
+                      , "url"   : "http://www.opensource.org/licenses/mit-license.php"
                       }
 
-, "repository"      : { "type"    : "git"
-                      , "url"     : "git://github.com/jcoglan/canopy.git"
+, "repository"      : { "type"  : "git"
+                      , "url"   : "git://github.com/jcoglan/canopy.git"
                       }
 }
 
