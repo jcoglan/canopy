@@ -1,3 +1,4 @@
+[![build status](https://secure.travis-ci.org/jcoglan/canopy.png)](http://travis-ci.org/jcoglan/canopy)
 # Canopy
 
 Canopy is a parser compiler for JavaScript, based on [Parsing Expression
