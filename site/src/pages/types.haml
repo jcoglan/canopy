@@ -57,9 +57,9 @@
   annotation may only appear at the end of a sequence expression, and binds
   tighter than choice expressions.
   
-  For example the following means that a node matching the sequence @"foo"
-  "bar"@ will be augmented with the @Extension@ methods.
-  
+  For example the following means that a node matching the sequence
+  @"foo" "bar"@ will be augmented with the @Extension@ methods.
+   
   <h6>types.peg</h6>
   <pre>grammar Types
     root  <-  first:"foo" second:"bar" <Extension></pre>
