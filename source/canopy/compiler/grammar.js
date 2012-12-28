@@ -2,7 +2,7 @@ Canopy.Compiler.Grammar = {
   grammarName: function() {
     return this.grammar_name.object_identifier.textValue
   },
-  
+
   toSexp: function() {
     var sexp = ['grammar', this.grammarName()];
     this.rules.forEach(function(rule) {
@@ -10,7 +10,7 @@ Canopy.Compiler.Grammar = {
     });
     return sexp;
   },
-  
+
   compile: function(builder) {
     builder.closure_(function(builder) {
       builder.line_('var extend = ' + Canopy.extend.toString());
@@ -19,19 +19,19 @@ Canopy.Compiler.Grammar = {
       builder.newline_();
       builder.line_('var formatError = ' + Canopy.formatError.toString());
       builder.newline_();
-      
+
       builder.module_('var Grammar', function(builder) {
         this.rules.forEach(function(rule) {
           rule.grammar_rule.compile(builder);
         });
       }, this);
       builder.newline_();
-      
+
       var grammar   = this.grammarName(),
           parser    = this.grammarName() + 'Parser',
           namespace = /\./.test(grammar) ? grammar.replace(/\.[^\.]+$/g, '').split('.') : [],
           root      = this.rules.elements[0].grammar_rule.name();
-      
+
       builder.function_('var Parser', ['input'], function(builder) {
         builder.ivar_('input', 'input');
         builder.ivar_('offset', '0');
@@ -40,9 +40,9 @@ Canopy.Compiler.Grammar = {
       builder.function_('Parser.prototype.parse', [], function(builder) {
         var input = builder.input_(),
             of    = builder.offset_();
-        
+
         builder.var_('result', 'this.__consume__' + root + '()');
-        
+
         builder.if_('result && ' + of + ' === ' + input + '.length', function(builder) {
           builder.return_('result');
         });
@@ -59,12 +59,12 @@ Canopy.Compiler.Grammar = {
       });
       builder.line_('extend(Parser.prototype, Grammar)');
       builder.newline_();
-      
+
       builder.function_('var SyntaxNode', ['textValue', 'offset', 'elements', 'properties'], function(builder) {
         builder.line_('this.textValue = textValue');
         builder.line_('this.offset    = offset');
         builder.line_('this.elements  = elements || []');
-        
+
         builder.line_('if (!properties) return');
         builder.line_('for (var key in properties) this[key] = properties[key]');
       });
@@ -74,13 +74,13 @@ Canopy.Compiler.Grammar = {
         });
       });
       builder.line_('Parser.SyntaxNode = SyntaxNode');
-      
+
       var expose = function(builder) {
         builder.line_(grammar + ' = Grammar');
         builder.line_(parser  + ' = Parser');
         builder.line_(parser  + '.formatError = formatError');
       };
-      
+
       var n = namespace.length, namespaceCondition;
       if (n > 0) {
         namespaceCondition = [];
@@ -88,7 +88,7 @@ Canopy.Compiler.Grammar = {
           namespaceCondition.push('typeof ' + namespace.slice(0,i+1).join('.') + ' !== "undefined"');
         namespaceCondition = namespaceCondition.join(' && ');
       }
-      
+
       builder.newline_();
       builder.if_('typeof require === "function" && typeof exports === "object"', function(builder) {
         builder.line_('exports.Grammar = Grammar');

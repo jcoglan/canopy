@@ -7,16 +7,16 @@ function() { with(this) {
           any <- .                        \
       ')
     }})
-    
+
     it('compiles an any-char-rule parser', function() { with(this) {
       assertEqual(['grammar', 'AnyChar',
                     ['rule', 'any',
                       ['any-char']]],
-          
+
           compiler.toSexp() )
     }})
   }})
-  
+
   describe('with a char-class rule', function() { with(this) {
     before(function() { with(this) {
       this.compiler = new Canopy.Compiler('\
@@ -24,15 +24,15 @@ function() { with(this) {
           string <- [^0-9]                \
       ')
     }})
-    
+
     it('compiles a char-class-rule parser', function() { with(this) {
       assertEqual(['grammar', 'CharClass',
                     ['rule', 'string',
                       ['char-class', '[^0-9]']]],
-          
+
           compiler.toSexp() )
     }})
-    
+
     describe('containing escaped characters', function() { with(this) {
       before(function() { with(this) {
         this.compiler = new Canopy.Compiler('\
@@ -40,17 +40,17 @@ function() { with(this) {
             string <- [\\^\\]\\$\\n]        \
         ')
       }})
-      
+
       it('compiles a char-class-rule parser containing the characters', function() { with(this) {
         assertEqual(['grammar', 'CharClass',
                       ['rule', 'string',
                         ['char-class', /[\^\]\$\n]/.source]]],
-            
+
             compiler.toSexp() )
       }})
     }})
   }})
-  
+
   describe('with a string rule', function() { with(this) {
     before(function() { with(this) {
       this.compiler = new Canopy.Compiler('\
@@ -58,15 +58,15 @@ function() { with(this) {
           string <- "foo"                 \
       ')
     }})
-    
+
     it('compiles a string-rule parser', function() { with(this) {
       assertEqual(['grammar', 'String',
                     ['rule', 'string',
                       ['string', 'foo']]],
-          
+
           compiler.toSexp() )
     }})
-    
+
     describe('containing escaped characters', function() { with(this) {
       before(function() { with(this) {
         this.compiler = new Canopy.Compiler('\
@@ -74,17 +74,17 @@ function() { with(this) {
             string <- "\\"\\\\\\n"          \
         ')
       }})
-      
+
       it('compiles a string-rule parser containing the escaped characters', function() { with(this) {
         assertEqual(['grammar', 'String',
                       ['rule', 'string',
                         ['string', '"\\\n']]],
-            
+
             compiler.toSexp() )
       }})
     }})
   }})
-  
+
   describe('with a case-insensitive string rule', function() { with(this) {
     before(function() { with(this) {
       this.compiler = new Canopy.Compiler('\
@@ -92,16 +92,16 @@ function() { with(this) {
           string <- `foo`                 \
       ')
     }})
-    
+
     it('compiles a ci-string-rule parser', function() { with(this) {
       assertEqual(['grammar', 'String',
                     ['rule', 'string',
                       ['ci-string', 'foo']]],
-          
+
           compiler.toSexp() )
     }})
   }})
-  
+
   describe('with a maybe string rule', function() { with(this) {
     before(function() { with(this) {
       this.compiler = new Canopy.Compiler('\
@@ -109,16 +109,16 @@ function() { with(this) {
           string <- "foo"?                \
       ')
     }})
-    
+
     it('compiles a maybe string-rule parser', function() { with(this) {
       assertEqual(['grammar', 'MaybeString',
                     ['rule', 'string',
                       ['maybe', ['string', 'foo']]]],
-          
+
           compiler.toSexp() )
     }})
   }})
-  
+
   describe('with an and string rule', function() { with(this) {
     before(function() { with(this) {
       this.compiler = new Canopy.Compiler('\
@@ -126,16 +126,16 @@ function() { with(this) {
           string <- &"foo"                \
       ')
     }})
-    
+
     it('compiles an and string-rule parser', function() { with(this) {
       assertEqual(['grammar', 'AndString',
                     ['rule', 'string',
                       ['and', ['string', 'foo']]]],
-          
+
           compiler.toSexp() )
     }})
   }})
-  
+
   describe('with a not string rule', function() { with(this) {
     before(function() { with(this) {
       this.compiler = new Canopy.Compiler('\
@@ -143,16 +143,16 @@ function() { with(this) {
           string <- !"foo"                \
       ')
     }})
-    
+
     it('compiles a not string-rule parser', function() { with(this) {
       assertEqual(['grammar', 'NotString',
                     ['rule', 'string',
                       ['not', ['string', 'foo']]]],
-          
+
           compiler.toSexp() )
     }})
   }})
-  
+
   describe('with a repeat-0 string rule', function() { with(this) {
     before(function() { with(this) {
       this.compiler = new Canopy.Compiler('\
@@ -160,16 +160,16 @@ function() { with(this) {
           string <- "foo"*                \
       ')
     }})
-    
+
     it('compiles a repeat-0 string-rule parser', function() { with(this) {
       assertEqual(['grammar', 'StarString',
                     ['rule', 'string',
                       ['repeat', 0, ['string', 'foo']]]],
-          
+
           compiler.toSexp() )
     }})
   }})
-  
+
   describe('with a repeat-1 string rule', function() { with(this) {
     before(function() { with(this) {
       this.compiler = new Canopy.Compiler('\
@@ -177,16 +177,16 @@ function() { with(this) {
           string <- "foo"+                \
       ')
     }})
-    
+
     it('compiles a repeat-1 string-rule parser', function() { with(this) {
       assertEqual(['grammar', 'PlusString',
                     ['rule', 'string',
                       ['repeat', 1, ['string', 'foo']]]],
-          
+
           compiler.toSexp() )
     }})
   }})
-  
+
   describe('with a choice rule', function() { with(this) {
     describe('containing strings', function() { with(this) {
       before(function() { with(this) {
@@ -195,18 +195,18 @@ function() { with(this) {
             choice <- "foo" / "bar"         \
         ')
       }})
-      
+
       it('compiles a choice-rule parser', function() { with(this) {
         assertEqual(['grammar', 'Choice',
                       ['rule', 'choice',
                         ['choice',
                           ['string', 'foo'],
                           ['string', 'bar']]]],
-            
+
             compiler.toSexp() )
       }})
     }})
-    
+
     describe('containing sequences', function() { with(this) {
       before(function() { with(this) {
         this.compiler = new Canopy.Compiler('  \
@@ -214,7 +214,7 @@ function() { with(this) {
             choice <- "foo" "middle" / "bar"  \
         ')
       }})
-      
+
       it('compiles a choice-rule parser containing sequences', function() { with(this) {
         assertEqual(['grammar', 'Choice',
                       ['rule', 'choice',
@@ -223,12 +223,12 @@ function() { with(this) {
                             ['string', 'foo'],
                             ['string', 'middle']],
                           ['string', 'bar']]]],
-            
+
             compiler.toSexp() )
       }})
     }})
   }})
-  
+
   describe('with a sequence rule', function() { with(this) {
     before(function() { with(this) {
       this.compiler = new Canopy.Compiler('\
@@ -236,17 +236,17 @@ function() { with(this) {
           sequence <- "foo" "bar"         \
       ')
     }})
-    
+
     it('compiles a sequence-rule parser', function() { with(this) {
       assertEqual(['grammar', 'Sequence',
                     ['rule', 'sequence',
                       ['sequence',
                         ['string', 'foo'],
                         ['string', 'bar']]]],
-          
+
           compiler.toSexp() )
     }})
-    
+
     describe('containing a label', function() { with(this) {
       before(function() { with(this) {
         this.compiler = new Canopy.Compiler('\
@@ -254,7 +254,7 @@ function() { with(this) {
             labelled <- "foo" end:"bar"     \
         ')
       }})
-      
+
       it('includes the label in the parse tree', function() { with(this) {
         assertEqual(['grammar', 'LabelledSequence',
                       ['rule', 'labelled',
@@ -262,12 +262,12 @@ function() { with(this) {
                           ['string', 'foo'],
                           ['label', 'end',
                             ['string', 'bar']]]]],
-            
+
             compiler.toSexp() )
       }})
     }})
   }})
-  
+
   describe('with a referencing rule', function() { with(this) {
     before(function() { with(this) {
       this.compiler = new Canopy.Compiler('\
@@ -276,18 +276,18 @@ function() { with(this) {
           second <- "done"                \
       ')
     }})
-    
+
     it('compiles a referencing-rule parser', function() { with(this) {
       assertEqual(['grammar', 'References',
                     ['rule', 'first',
                       ['reference', 'second']],
                     ['rule', 'second',
                       ['string', 'done']]],
-          
+
           compiler.toSexp() )
     }})
   }})
-  
+
   describe('type annotation', function() { with(this) {
     describe('on atomic nodes', function() { with(this) {
       before(function() { with(this) {
@@ -296,17 +296,17 @@ function() { with(this) {
             string <- "foo" <Mixin>         \
         ')
       }})
-      
+
       it('wraps the node with a type', function() { with(this) {
         assertEqual(['grammar', 'TypedString',
                       ['rule', 'string',
                         ['type', 'Mixin',
                           ['string', 'foo']]]],
-            
+
             compiler.toSexp() )
       }})
     }})
-    
+
     describe('on parenthesised choices', function() { with(this) {
       before(function() { with(this) {
         this.compiler = new Canopy.Compiler('    \
@@ -314,7 +314,7 @@ function() { with(this) {
             choice <- ("foo" / "bar") <Mixin>   \
         ')
       }})
-      
+
       it('wraps the choice node with a type', function() { with(this) {
         assertEqual(['grammar', 'TypedChoice',
                       ['rule', 'choice',
@@ -322,11 +322,11 @@ function() { with(this) {
                           ['choice',
                             ['string', 'foo'],
                             ['string', 'bar']]]]],
-            
+
             compiler.toSexp() )
       }})
     }})
-    
+
     describe('with namespaced types', function() { with(this) {
       before(function() { with(this) {
         this.compiler = new Canopy.Compiler('\
@@ -334,17 +334,17 @@ function() { with(this) {
             string <- "foo" <NS.Mixin>      \
         ')
       }})
-      
+
       it('wraps the node with a type', function() { with(this) {
         assertEqual(['grammar', 'TypedString',
                       ['rule', 'string',
                         ['type', 'NS.Mixin',
                           ['string', 'foo']]]],
-            
+
             compiler.toSexp() )
       }})
     }})
-    
+
     describe('on sequences', function() { with(this) {
       before(function() { with(this) {
         this.compiler = new Canopy.Compiler('\
@@ -352,7 +352,7 @@ function() { with(this) {
             string <- "foo" "bar" <Mixin>   \
         ')
       }})
-      
+
       it('wraps the sequence with a type', function() { with(this) {
         assertEqual(['grammar', 'TypedSequence',
                       ['rule', 'string',
@@ -360,11 +360,11 @@ function() { with(this) {
                           ['sequence',
                             ['string', 'foo'],
                             ['string', 'bar']]]]],
-            
+
             compiler.toSexp() )
       }})
     }})
-    
+
     describe('on choices', function() { with(this) {
       describe('containing atoms', function() { with(this) {
         before(function() { with(this) {
@@ -373,7 +373,7 @@ function() { with(this) {
               string <- "foo" / "bar" <Mixin>   \
           ')
         }})
-        
+
         it('wraps one choice with a type', function() { with(this) {
           assertEqual(['grammar', 'TypedAtomChoice',
                         ['rule', 'string',
@@ -381,11 +381,11 @@ function() { with(this) {
                             ['string', 'foo'],
                             ['type', 'Mixin',
                               ['string', 'bar']]]]],
-              
+
               compiler.toSexp() )
         }})
       }})
-      
+
       describe('containing sequences', function() { with(this) {
         before(function() { with(this) {
           this.compiler = new Canopy.Compiler('                          \
@@ -393,7 +393,7 @@ function() { with(this) {
               string <- "foo" "bar" <Branch> / "first" "second" <Fork>  \
           ')
         }})
-        
+
         it('wraps each choice with a type', function() { with(this) {
           assertEqual(['grammar', 'TypedSeqChoice',
                         ['rule', 'string',
@@ -406,13 +406,13 @@ function() { with(this) {
                               ['sequence',
                                 ['string', 'first'],
                                 ['string', 'second']]]]]],
-              
+
               compiler.toSexp() )
         }})
       }})
     }})
   }})
-  
+
   describe('parentheses', function() { with(this) {
     before(function() { with(this) {
       this.compiler = new Canopy.Compiler('\
@@ -420,7 +420,7 @@ function() { with(this) {
           seq <- "foo" ("t" / .) "bar"    \
       ')
     }})
-    
+
     it('creates nodes matching the parens content', function() { with(this) {
       assertEqual(['grammar', 'Parens',
                     ['rule', 'seq',
@@ -430,11 +430,11 @@ function() { with(this) {
                           ['string', 't'],
                           ['any-char']],
                         ['string', 'bar']]]],
-          
+
           compiler.toSexp() )
     }})
   }})
-  
+
   describe('metagrammar', function() { with(this) {
     it('has a choice rule', function() { with(this) {
       assertEqual(['grammar', 'MetaGrammar',
@@ -451,7 +451,7 @@ function() { with(this) {
                                 ['repeat', 1, ['reference', 'space']],
                                 ['label', 'expression',
                                   ['reference', 'choice_part']]]]]]]]],
-          
+
           new Canopy.Compiler('\
             grammar MetaGrammar\
               choice_expression <- first_expression:choice_part\
@@ -459,7 +459,7 @@ function() { with(this) {
                                    <Canopy.Compiler.ChoiceExpression>\
           ').toSexp() )
     }})
-    
+
     it('has a choice part rule', function() { with(this) {
       assertEqual(['grammar', 'MetaGrammar',
                     ['rule', 'choice_part',
@@ -472,13 +472,13 @@ function() { with(this) {
                             ['sequence',
                               ['repeat', 1, ['reference', 'space']],
                               ['reference', 'type_expression']]]]]]],
-          
+
           new Canopy.Compiler('\
             grammar MetaGrammar\
               choice_part <- (sequence_expression / atom) (space+ type_expression)? <Canopy.Compiler.ChoicePart>\
           ').toSexp() )
     }})
-    
+
     it('has a string rule', function() { with(this) {
       assertEqual(['grammar', 'MetaGrammar',
                     ['rule', 'string_expression',
@@ -492,14 +492,14 @@ function() { with(this) {
                                 ['any-char']],
                               ['char-class', '[^"]']]],
                           ['string', '"']]]]],
-          
+
           new Canopy.Compiler('\
             grammar MetaGrammar\
               string_expression <- "\\"" ("\\\\" . / [^"])* "\\""\
                                    <Canopy.Compiler.StringExpression>\
           ').toSexp() )
     }})
-    
+
     it('has a char-class rule', function() { with(this) {
       assertEqual(['grammar', 'MetaGrammar',
                     ['rule', 'char_class_expression',
@@ -514,7 +514,7 @@ function() { with(this) {
                                 ['any-char']],
                               ['char-class', '[^\\]]']]],
                           ['string', ']']]]]],
-          
+
           new Canopy.Compiler('\
             grammar MetaGrammar\
               char_class_expression <- "[" "^"? ("\\\\" . / [^\\]])+ "]"\

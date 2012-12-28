@@ -7,11 +7,11 @@
     }
     return destination;
   };
-  
+
   var find = function (root, objectName) {
     var parts = objectName.split('.'),
         part;
-    
+
     while (part = parts.shift()) {
       root = root[part];
       if (root === undefined)
@@ -19,29 +19,29 @@
     }
     return root;
   };
-  
+
   var formatError = function (error) {
     var lines  = error.input.split(/\n/g),
         lineNo = 0,
         offset = 0;
-    
+
     while (offset < error.offset + 1) {
       offset += lines[lineNo].length + 1;
       lineNo += 1;
     }
     var message = 'Line ' + lineNo + ': expected ' + error.expected + '\n',
         line    = lines[lineNo - 1];
-    
+
     message += line + '\n';
     offset  -= line.length + 1;
-    
+
     while (offset < error.offset) {
       message += ' ';
       offset  += 1;
     }
     return message + '^';
   };
-  
+
   var Grammar = {
     __consume__program: function(input) {
       var address0 = null, index0 = this._offset;
@@ -974,13 +974,13 @@
       return this._nodeCache["delimiter"][index0] = address0;
     }
   };
-  
+
   var Parser = function(input) {
     this._input = input;
     this._offset = 0;
     this._nodeCache = {};
   };
-  
+
   Parser.prototype.parse = function() {
     var result = this.__consume__program();
     if (result && this._offset === this._input.length) {
@@ -993,14 +993,14 @@
     var error = new Error(message);
     throw error;
   };
-  
+
   Parser.parse = function(input) {
     var parser = new Parser(input);
     return parser.parse();
   };
-  
+
   extend(Parser.prototype, Grammar);
-  
+
   var SyntaxNode = function(textValue, offset, elements, properties) {
     this.textValue = textValue;
     this.offset    = offset;
@@ -1008,20 +1008,20 @@
     if (!properties) return;
     for (var key in properties) this[key] = properties[key];
   };
-  
+
   SyntaxNode.prototype.forEach = function(block, context) {
     for (var i = 0, n = this.elements.length; i < n; i++) {
       block.call(context, this.elements[i], i);
     }
   };
-  
+
   Parser.SyntaxNode = SyntaxNode;
-  
+
   if (typeof require === "function" && typeof exports === "object") {
     exports.Grammar = Grammar;
     exports.Parser  = Parser;
     exports.parse   = Parser.parse;
-    
+
   } else {
     var namespace = this;
     CanopyLisp = Grammar;

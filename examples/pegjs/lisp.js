@@ -4,7 +4,7 @@ module.exports = (function(){
    *
    * http://pegjs.majda.cz/
    */
-  
+
   function quote(s) {
     /*
      * ECMA-262, 5th ed., 7.8.4: All characters may appear literally in a
@@ -27,7 +27,7 @@ module.exports = (function(){
       .replace(/[\x00-\x07\x0B\x0E-\x1F\x80-\uFFFF]/g, escape)
       + '"';
   }
-  
+
   var result = {
     /*
      * Parses the input with a generated parser. If the parsing is successfull,
@@ -49,7 +49,7 @@ module.exports = (function(){
         "paren": parse_paren,
         "delimiter": parse_delimiter
       };
-      
+
       if (startRule !== undefined) {
         if (parseFunctions[startRule] === undefined) {
           throw new Error("Invalid rule name: " + quote(startRule) + ".");
@@ -57,29 +57,29 @@ module.exports = (function(){
       } else {
         startRule = "program";
       }
-      
+
       var pos = 0;
       var reportFailures = 0;
       var rightmostFailuresPos = 0;
       var rightmostFailuresExpected = [];
       var cache = {};
-      
+
       function padLeft(input, padding, length) {
         var result = input;
-        
+
         var padLength = length - input.length;
         for (var i = 0; i < padLength; i++) {
           result = padding + result;
         }
-        
+
         return result;
       }
-      
+
       function escape(ch) {
         var charCode = ch.charCodeAt(0);
         var escapeChar;
         var length;
-        
+
         if (charCode <= 0xFF) {
           escapeChar = 'x';
           length = 2;
@@ -87,23 +87,23 @@ module.exports = (function(){
           escapeChar = 'u';
           length = 4;
         }
-        
+
         return '\\' + escapeChar + padLeft(charCode.toString(16).toUpperCase(), '0', length);
       }
-      
+
       function matchFailed(failure) {
         if (pos < rightmostFailuresPos) {
           return;
         }
-        
+
         if (pos > rightmostFailuresPos) {
           rightmostFailuresPos = pos;
           rightmostFailuresExpected = [];
         }
-        
+
         rightmostFailuresExpected.push(failure);
       }
-      
+
       function parse_program() {
         var cacheKey = "program@" + pos;
         var cachedResult = cache[cacheKey];
@@ -111,9 +111,9 @@ module.exports = (function(){
           pos = cachedResult.nextPos;
           return cachedResult.result;
         }
-        
+
         var result0, result1;
-        
+
         result1 = parse_cell();
         if (result1 !== null) {
           result0 = [];
@@ -124,14 +124,14 @@ module.exports = (function(){
         } else {
           result0 = null;
         }
-        
+
         cache[cacheKey] = {
           nextPos: pos,
           result:  result0
         };
         return result0;
       }
-      
+
       function parse_cell() {
         var cacheKey = "cell@" + pos;
         var cachedResult = cache[cacheKey];
@@ -139,10 +139,10 @@ module.exports = (function(){
           pos = cachedResult.nextPos;
           return cachedResult.result;
         }
-        
+
         var result0, result1, result2, result3;
         var pos0;
-        
+
         pos0 = pos;
         result0 = [];
         result1 = parse_space();
@@ -176,14 +176,14 @@ module.exports = (function(){
           result0 = null;
           pos = pos0;
         }
-        
+
         cache[cacheKey] = {
           nextPos: pos,
           result:  result0
         };
         return result0;
       }
-      
+
       function parse_list() {
         var cacheKey = "list@" + pos;
         var cachedResult = cache[cacheKey];
@@ -191,10 +191,10 @@ module.exports = (function(){
           pos = cachedResult.nextPos;
           return cachedResult.result;
         }
-        
+
         var result0, result1, result2;
         var pos0;
-        
+
         pos0 = pos;
         if (input.charCodeAt(pos) === 40) {
           result0 = "(";
@@ -240,14 +240,14 @@ module.exports = (function(){
           result0 = null;
           pos = pos0;
         }
-        
+
         cache[cacheKey] = {
           nextPos: pos,
           result:  result0
         };
         return result0;
       }
-      
+
       function parse_atom() {
         var cacheKey = "atom@" + pos;
         var cachedResult = cache[cacheKey];
@@ -255,9 +255,9 @@ module.exports = (function(){
           pos = cachedResult.nextPos;
           return cachedResult.result;
         }
-        
+
         var result0;
-        
+
         result0 = parse_boolean();
         if (result0 === null) {
           result0 = parse_integer();
@@ -268,14 +268,14 @@ module.exports = (function(){
             }
           }
         }
-        
+
         cache[cacheKey] = {
           nextPos: pos,
           result:  result0
         };
         return result0;
       }
-      
+
       function parse_boolean() {
         var cacheKey = "boolean@" + pos;
         var cachedResult = cache[cacheKey];
@@ -283,9 +283,9 @@ module.exports = (function(){
           pos = cachedResult.nextPos;
           return cachedResult.result;
         }
-        
+
         var result0;
-        
+
         if (input.substr(pos, 2) === "#t") {
           result0 = "#t";
           pos += 2;
@@ -306,14 +306,14 @@ module.exports = (function(){
             }
           }
         }
-        
+
         cache[cacheKey] = {
           nextPos: pos,
           result:  result0
         };
         return result0;
       }
-      
+
       function parse_integer() {
         var cacheKey = "integer@" + pos;
         var cachedResult = cache[cacheKey];
@@ -321,10 +321,10 @@ module.exports = (function(){
           pos = cachedResult.nextPos;
           return cachedResult.result;
         }
-        
+
         var result0, result1, result2;
         var pos0;
-        
+
         pos0 = pos;
         if (/^[1-9]/.test(input.charAt(pos))) {
           result0 = input.charAt(pos);
@@ -368,14 +368,14 @@ module.exports = (function(){
           result0 = null;
           pos = pos0;
         }
-        
+
         cache[cacheKey] = {
           nextPos: pos,
           result:  result0
         };
         return result0;
       }
-      
+
       function parse_string() {
         var cacheKey = "string@" + pos;
         var cachedResult = cache[cacheKey];
@@ -383,10 +383,10 @@ module.exports = (function(){
           pos = cachedResult.nextPos;
           return cachedResult.result;
         }
-        
+
         var result0, result1, result2, result3;
         var pos0, pos1;
-        
+
         pos0 = pos;
         if (input.charCodeAt(pos) === 34) {
           result0 = "\"";
@@ -508,14 +508,14 @@ module.exports = (function(){
           result0 = null;
           pos = pos0;
         }
-        
+
         cache[cacheKey] = {
           nextPos: pos,
           result:  result0
         };
         return result0;
       }
-      
+
       function parse_symbol() {
         var cacheKey = "symbol@" + pos;
         var cachedResult = cache[cacheKey];
@@ -523,10 +523,10 @@ module.exports = (function(){
           pos = cachedResult.nextPos;
           return cachedResult.result;
         }
-        
+
         var result0, result1, result2;
         var pos0, pos1;
-        
+
         pos0 = pos;
         pos1 = pos;
         reportFailures++;
@@ -597,14 +597,14 @@ module.exports = (function(){
         } else {
           result0 = null;
         }
-        
+
         cache[cacheKey] = {
           nextPos: pos,
           result:  result0
         };
         return result0;
       }
-      
+
       function parse_space() {
         var cacheKey = "space@" + pos;
         var cachedResult = cache[cacheKey];
@@ -612,9 +612,9 @@ module.exports = (function(){
           pos = cachedResult.nextPos;
           return cachedResult.result;
         }
-        
+
         var result0;
-        
+
         if (/^[s\n\r\t]/.test(input.charAt(pos))) {
           result0 = input.charAt(pos);
           pos++;
@@ -624,14 +624,14 @@ module.exports = (function(){
             matchFailed("[s\\n\\r\\t]");
           }
         }
-        
+
         cache[cacheKey] = {
           nextPos: pos,
           result:  result0
         };
         return result0;
       }
-      
+
       function parse_paren() {
         var cacheKey = "paren@" + pos;
         var cachedResult = cache[cacheKey];
@@ -639,9 +639,9 @@ module.exports = (function(){
           pos = cachedResult.nextPos;
           return cachedResult.result;
         }
-        
+
         var result0;
-        
+
         if (input.charCodeAt(pos) === 40) {
           result0 = "(";
           pos++;
@@ -662,14 +662,14 @@ module.exports = (function(){
             }
           }
         }
-        
+
         cache[cacheKey] = {
           nextPos: pos,
           result:  result0
         };
         return result0;
       }
-      
+
       function parse_delimiter() {
         var cacheKey = "delimiter@" + pos;
         var cachedResult = cache[cacheKey];
@@ -677,25 +677,25 @@ module.exports = (function(){
           pos = cachedResult.nextPos;
           return cachedResult.result;
         }
-        
+
         var result0;
-        
+
         result0 = parse_paren();
         if (result0 === null) {
           result0 = parse_space();
         }
-        
+
         cache[cacheKey] = {
           nextPos: pos,
           result:  result0
         };
         return result0;
       }
-      
-      
+
+
       function cleanupExpected(expected) {
         expected.sort();
-        
+
         var lastExpected = null;
         var cleanExpected = [];
         for (var i = 0; i < expected.length; i++) {
@@ -706,7 +706,7 @@ module.exports = (function(){
         }
         return cleanExpected;
       }
-      
+
       function computeErrorPosition() {
         /*
          * The first idea was to use |String.split| to break the input up to the
@@ -714,11 +714,11 @@ module.exports = (function(){
          * there. However IE's |split| implementation is so broken that it was
          * enough to prevent it.
          */
-        
+
         var line = 1;
         var column = 1;
         var seenCR = false;
-        
+
         for (var i = 0; i < Math.max(pos, rightmostFailuresPos); i++) {
           var ch = input.charAt(i);
           if (ch === "\n") {
@@ -734,13 +734,13 @@ module.exports = (function(){
             seenCR = false;
           }
         }
-        
+
         return { line: line, column: column };
       }
-      
-      
+
+
       var result = parseFunctions[startRule]();
-      
+
       /*
        * The parser is now in one of the following three states:
        *
@@ -769,7 +769,7 @@ module.exports = (function(){
         var offset = Math.max(pos, rightmostFailuresPos);
         var found = offset < input.length ? input.charAt(offset) : null;
         var errorPosition = computeErrorPosition();
-        
+
         throw new this.SyntaxError(
           cleanupExpected(rightmostFailuresExpected),
           found,
@@ -778,20 +778,20 @@ module.exports = (function(){
           errorPosition.column
         );
       }
-      
+
       return result;
     },
-    
+
     /* Returns the parser source code. */
     toSource: function() { return this._source; }
   };
-  
+
   /* Thrown when a parser encounters a syntax error. */
-  
+
   result.SyntaxError = function(expected, found, offset, line, column) {
     function buildMessage(expected, found) {
       var expectedHumanized, foundHumanized;
-      
+
       switch (expected.length) {
         case 0:
           expectedHumanized = "end of input";
@@ -804,12 +804,12 @@ module.exports = (function(){
             + " or "
             + expected[expected.length - 1];
       }
-      
+
       foundHumanized = found ? quote(found) : "end of input";
-      
+
       return "Expected " + expectedHumanized + " but " + foundHumanized + " found.";
     }
-    
+
     this.name = "SyntaxError";
     this.expected = expected;
     this.found = found;
@@ -818,8 +818,8 @@ module.exports = (function(){
     this.line = line;
     this.column = column;
   };
-  
+
   result.SyntaxError.prototype = Error.prototype;
-  
+
   return result;
 })();

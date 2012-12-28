@@ -1,13 +1,13 @@
 JS.ENV.Canopy.Compiler.PredicateSpec = JS.Test.describe("Canopy.Compiler.Predicate",
 function() { with(this) {
   include(Canopy.SpecHelper)
-  
+
   describe('positive lookahead', function() { with(this) {
     before(function() { with(this) {
       Canopy.compile('grammar JS.ENV.AndTest\
         predicate <- &"foosball" "foo" .*')
     }})
-    
+
     it('parses text that begins with the expected pattern', function() { with(this) {
       assertParse(['foosball', 0, [
                     ['', 0, []],
@@ -18,39 +18,39 @@ function() { with(this) {
                       ['a', 5, []],
                       ['l', 6, []],
                       ['l', 7, []]]]]],
-        
+
         AndTestParser.parse('foosball') )
     }})
-    
+
     it('does not parse text that does not begin with the expected pattern', function() { with(this) {
       assertThrows(Error, function() { AndTestParser.parse('foobar') })
     }})
   }})
-  
+
   describe('negative lookahead', function() { with(this) {
     before(function() { with(this) {
       Canopy.compile('grammar JS.ENV.NotTest\
         predicate <- !"foo" "bar"')
     }})
-    
+
     it('parses text that does not begin with the negated pattern', function() { with(this) {
       assertParse(['bar', 0, [
                     ['', 0, []],
                     ['bar', 0, []]]],
-        
+
         NotTestParser.parse('bar') )
     }})
-    
+
     it('does not parse text beginning with the negated pattern', function() { with(this) {
       assertThrows(Error, function() { NotTestParser.parse('foobar') })
     }})
-    
+
     describe('combined with repetition', function() { with(this) {
       before(function() { with(this) {
         Canopy.compile('grammar JS.ENV.RepeatNotTest\
           predicate <- (!" " .)+ " "')
       }})
-      
+
       it('matches a word followed by a space', function() { with(this) {
         assertParse(['fun ', 0, [
                       ['fun', 0, [
@@ -64,14 +64,14 @@ function() { with(this) {
                           ['', 2, []],
                           ['n', 2, []]]]]],
                       [' ', 3, []]]],
-          
+
           RepeatNotTestParser.parse('fun ') )
       }})
-      
+
       it('does not match a word with no space', function() { with(this) {
         assertThrows(Error, function() { RepeatNotTestParser.parse('chunky') })
       }})
-      
+
       it('does not match multiple words', function() { with(this) {
         assertThrows(Error, function() { RepeatNotTestParser.parse('chunky bacon ') })
       }})

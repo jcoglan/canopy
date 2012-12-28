@@ -9,7 +9,7 @@ JS.ENV.CanopySpec = JS.Test.describe("Canopy", function() { with(this) {
                '  (print x))'
       }
     }})
-    
+
     it("produces a user-friendly error report", function() { with(this) {
       var report = Canopy.formatError(this.parseError)
       assertEqual ( 'Line 2: expected X\n' +

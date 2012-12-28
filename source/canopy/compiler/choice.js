@@ -7,7 +7,7 @@ Canopy.Compiler.Choice = {
     }, this);
     return this._expressions;
   },
-  
+
   toSexp: function() {
     var sexp = ['choice'];
     Canopy.forEach(this.expressions(), function(expression) {
@@ -15,18 +15,18 @@ Canopy.Compiler.Choice = {
     });
     return sexp;
   },
-  
+
   compile: function(builder, address, nodeType) {
     var startOffset = builder.tempVar_('index', builder.offset_());
     this._compileChoices(builder, 0, address, nodeType, startOffset);
   },
-  
+
   _compileChoices: function(builder, index, address, nodeType, startOffset) {
     var expressions = this.expressions();
     if (index === expressions.length) return;
-    
+
     expressions[index].compile(builder, address);
-    
+
     builder.if_(address, function(builder) {
       if (nodeType) {
         var type = builder.findType_(nodeType);

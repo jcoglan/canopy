@@ -11,7 +11,7 @@
   var find = function (root, objectName) {
     var parts = objectName.split('.'),
         part;
-    
+
     while (part = parts.shift()) {
       root = root[part];
       if (root === undefined)
@@ -24,17 +24,17 @@
     var lines  = error.input.split(/\n/g),
         lineNo = 0,
         offset = 0;
-    
+
     while (offset < error.offset + 1) {
       offset += lines[lineNo].length + 1;
       lineNo += 1;
     }
     var message = 'Line ' + lineNo + ': expected ' + error.expected + '\n',
         line    = lines[lineNo - 1];
-    
+
     message += line + '\n';
     offset  -= line.length + 1;
-    
+
     while (offset < error.offset) {
       message += ' ';
       offset  += 1;
