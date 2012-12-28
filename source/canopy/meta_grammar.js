@@ -43,7 +43,7 @@
   };
   
   var Grammar = {
-    __consume__grammar: function(input) {
+    __consume__grammar: function() {
       var address0 = null, index0 = this._offset;
       this._nodeCache["grammar"] = this._nodeCache["grammar"] || {};
       var cached = this._nodeCache["grammar"][index0];
@@ -215,7 +215,7 @@
       }
       return this._nodeCache["grammar"][index0] = address0;
     },
-    __consume__grammar_name: function(input) {
+    __consume__grammar_name: function() {
       var address0 = null, index0 = this._offset;
       this._nodeCache["grammar_name"] = this._nodeCache["grammar_name"] || {};
       var cached = this._nodeCache["grammar_name"][index0];
@@ -282,7 +282,7 @@
       }
       return this._nodeCache["grammar_name"][index0] = address0;
     },
-    __consume__grammar_rule: function(input) {
+    __consume__grammar_rule: function() {
       var address0 = null, index0 = this._offset;
       this._nodeCache["grammar_rule"] = this._nodeCache["grammar_rule"] || {};
       var cached = this._nodeCache["grammar_rule"][index0];
@@ -335,7 +335,7 @@
       }
       return this._nodeCache["grammar_rule"][index0] = address0;
     },
-    __consume__assignment: function(input) {
+    __consume__assignment: function() {
       var address0 = null, index0 = this._offset;
       this._nodeCache["assignment"] = this._nodeCache["assignment"] || {};
       var cached = this._nodeCache["assignment"][index0];
@@ -450,7 +450,7 @@
       }
       return this._nodeCache["assignment"][index0] = address0;
     },
-    __consume__parsing_expression: function(input) {
+    __consume__parsing_expression: function() {
       var address0 = null, index0 = this._offset;
       this._nodeCache["parsing_expression"] = this._nodeCache["parsing_expression"] || {};
       var cached = this._nodeCache["parsing_expression"][index0];
@@ -471,7 +471,7 @@
       }
       return this._nodeCache["parsing_expression"][index0] = address0;
     },
-    __consume__parenthesised_expression: function(input) {
+    __consume__parenthesised_expression: function() {
       var address0 = null, index0 = this._offset;
       this._nodeCache["parenthesised_expression"] = this._nodeCache["parenthesised_expression"] || {};
       var cached = this._nodeCache["parenthesised_expression"][index0];
@@ -630,7 +630,7 @@
       }
       return this._nodeCache["parenthesised_expression"][index0] = address0;
     },
-    __consume__choice_expression: function(input) {
+    __consume__choice_expression: function() {
       var address0 = null, index0 = this._offset;
       this._nodeCache["choice_expression"] = this._nodeCache["choice_expression"] || {};
       var cached = this._nodeCache["choice_expression"][index0];
@@ -807,7 +807,7 @@
       }
       return this._nodeCache["choice_expression"][index0] = address0;
     },
-    __consume__choice_part: function(input) {
+    __consume__choice_part: function() {
       var address0 = null, index0 = this._offset;
       this._nodeCache["choice_part"] = this._nodeCache["choice_part"] || {};
       var cached = this._nodeCache["choice_part"][index0];
@@ -921,7 +921,7 @@
       }
       return this._nodeCache["choice_part"][index0] = address0;
     },
-    __consume__type_expression: function(input) {
+    __consume__type_expression: function() {
       var address0 = null, index0 = this._offset;
       this._nodeCache["type_expression"] = this._nodeCache["type_expression"] || {};
       var cached = this._nodeCache["type_expression"][index0];
@@ -1022,7 +1022,7 @@
       }
       return this._nodeCache["type_expression"][index0] = address0;
     },
-    __consume__sequence_expression: function(input) {
+    __consume__sequence_expression: function() {
       var address0 = null, index0 = this._offset;
       this._nodeCache["sequence_expression"] = this._nodeCache["sequence_expression"] || {};
       var cached = this._nodeCache["sequence_expression"][index0];
@@ -1136,7 +1136,7 @@
       }
       return this._nodeCache["sequence_expression"][index0] = address0;
     },
-    __consume__sequence_part: function(input) {
+    __consume__sequence_part: function() {
       var address0 = null, index0 = this._offset;
       this._nodeCache["sequence_part"] = this._nodeCache["sequence_part"] || {};
       var cached = this._nodeCache["sequence_part"][index0];
@@ -1200,7 +1200,7 @@
       }
       return this._nodeCache["sequence_part"][index0] = address0;
     },
-    __consume__quantified_atom: function(input) {
+    __consume__quantified_atom: function() {
       var address0 = null, index0 = this._offset;
       this._nodeCache["quantified_atom"] = this._nodeCache["quantified_atom"] || {};
       var cached = this._nodeCache["quantified_atom"][index0];
@@ -1243,7 +1243,7 @@
       }
       return this._nodeCache["quantified_atom"][index0] = address0;
     },
-    __consume__atom: function(input) {
+    __consume__atom: function() {
       var address0 = null, index0 = this._offset;
       this._nodeCache["atom"] = this._nodeCache["atom"] || {};
       var cached = this._nodeCache["atom"][index0];
@@ -1289,7 +1289,7 @@
       }
       return this._nodeCache["atom"][index0] = address0;
     },
-    __consume__predicated_atom: function(input) {
+    __consume__predicated_atom: function() {
       var address0 = null, index0 = this._offset;
       this._nodeCache["predicated_atom"] = this._nodeCache["predicated_atom"] || {};
       var cached = this._nodeCache["predicated_atom"][index0];
@@ -1392,7 +1392,7 @@
       }
       return this._nodeCache["predicated_atom"][index0] = address0;
     },
-    __consume__reference_expression: function(input) {
+    __consume__reference_expression: function() {
       var address0 = null, index0 = this._offset;
       this._nodeCache["reference_expression"] = this._nodeCache["reference_expression"] || {};
       var cached = this._nodeCache["reference_expression"][index0];
@@ -1447,7 +1447,7 @@
       }
       return this._nodeCache["reference_expression"][index0] = address0;
     },
-    __consume__string_expression: function(input) {
+    __consume__string_expression: function() {
       var address0 = null, index0 = this._offset;
       this._nodeCache["string_expression"] = this._nodeCache["string_expression"] || {};
       var cached = this._nodeCache["string_expression"][index0];
@@ -1683,7 +1683,7 @@
       }
       return this._nodeCache["string_expression"][index0] = address0;
     },
-    __consume__ci_string_expression: function(input) {
+    __consume__ci_string_expression: function() {
       var address0 = null, index0 = this._offset;
       this._nodeCache["ci_string_expression"] = this._nodeCache["ci_string_expression"] || {};
       var cached = this._nodeCache["ci_string_expression"][index0];
@@ -1919,7 +1919,7 @@
       }
       return this._nodeCache["ci_string_expression"][index0] = address0;
     },
-    __consume__any_char_expression: function(input) {
+    __consume__any_char_expression: function() {
       var address0 = null, index0 = this._offset;
       this._nodeCache["any_char_expression"] = this._nodeCache["any_char_expression"] || {};
       var cached = this._nodeCache["any_char_expression"][index0];
@@ -1955,7 +1955,7 @@
       }
       return this._nodeCache["any_char_expression"][index0] = address0;
     },
-    __consume__char_class_expression: function(input) {
+    __consume__char_class_expression: function() {
       var address0 = null, index0 = this._offset;
       this._nodeCache["char_class_expression"] = this._nodeCache["char_class_expression"] || {};
       var cached = this._nodeCache["char_class_expression"][index0];
@@ -2237,7 +2237,7 @@
       }
       return this._nodeCache["char_class_expression"][index0] = address0;
     },
-    __consume__label: function(input) {
+    __consume__label: function() {
       var address0 = null, index0 = this._offset;
       this._nodeCache["label"] = this._nodeCache["label"] || {};
       var cached = this._nodeCache["label"][index0];
@@ -2304,7 +2304,7 @@
       }
       return this._nodeCache["label"][index0] = address0;
     },
-    __consume__object_identifier: function(input) {
+    __consume__object_identifier: function() {
       var address0 = null, index0 = this._offset;
       this._nodeCache["object_identifier"] = this._nodeCache["object_identifier"] || {};
       var cached = this._nodeCache["object_identifier"][index0];
@@ -2422,7 +2422,7 @@
       }
       return this._nodeCache["object_identifier"][index0] = address0;
     },
-    __consume__identifier: function(input) {
+    __consume__identifier: function() {
       var address0 = null, index0 = this._offset;
       this._nodeCache["identifier"] = this._nodeCache["identifier"] || {};
       var cached = this._nodeCache["identifier"][index0];
@@ -2533,7 +2533,7 @@
       }
       return this._nodeCache["identifier"][index0] = address0;
     },
-    __consume__quantifier: function(input) {
+    __consume__quantifier: function() {
       var address0 = null, index0 = this._offset;
       this._nodeCache["quantifier"] = this._nodeCache["quantifier"] || {};
       var cached = this._nodeCache["quantifier"][index0];
@@ -2634,7 +2634,7 @@
       }
       return this._nodeCache["quantifier"][index0] = address0;
     },
-    __consume__space: function(input) {
+    __consume__space: function() {
       var address0 = null, index0 = this._offset;
       this._nodeCache["space"] = this._nodeCache["space"] || {};
       var cached = this._nodeCache["space"][index0];

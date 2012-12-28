@@ -10,7 +10,7 @@ Canopy.Compiler.GrammarRule = {
   compile: function(builder) {
     var name = this.name();
     
-    builder.method_('__consume__' + name, ['input'], function() {
+    builder.method_('__consume__' + name, [], function() {
       var temp      = builder.tempVars_({address: 'null', index: builder.offset_()}),
           address   = temp.address,
           offset    = temp.index,
