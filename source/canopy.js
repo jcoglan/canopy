@@ -1,5 +1,3 @@
-<%= license %>
-
 var Canopy = {};
 
 Canopy.extend = function(destination, source) {

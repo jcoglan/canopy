@@ -10,17 +10,12 @@ if (this.ActiveXObject)
     }
   };
 
-(function() {
-  var $ = (typeof global === 'object') ? global : this
-  $.JSCLASS_PATH = 'node_modules/jsclass/min'
-})()
-
 if (typeof require === 'function') {
-  require('../' + JSCLASS_PATH + '/loader')
+  JS = require('../node_modules/jstest/jstest')
   JS.ENV.Canopy = require('../lib/canopy')
   require('./runner')
 } else {
-  load(JSCLASS_PATH + '/loader.js')
+  load('node_modules/jstest/jstest.js')
   load('lib/canopy-min.js')
   load('spec/runner.js')
 }

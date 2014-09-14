@@ -9,7 +9,7 @@
 , "main"            : "./lib/canopy.js"
 , "bin"             : {"canopy": "./bin/canopy"}
 , "preferGlobal"    : true
-, "devDependencies" : {"jsclass": ""}
+, "devDependencies" : {"jstest": "", "wake": ""}
 
 , "scripts"         : {"test": "node spec/console.js"}
 
@@ -22,5 +22,35 @@
 , "repository"      : { "type"  : "git"
                       , "url"   : "git://github.com/jcoglan/canopy.git"
                       }
-}
 
+, "wake": {
+    "javascript": {
+      "sourceDirectory": "source",
+      "targetDirectory": "lib",
+      "builds": {
+        "src": {"digest": false, "minify": false},
+        "min": {"digest": false, "minify": true, "tag": "suffix", "sourceMap": "src"}
+      },
+      "targets": {
+        "canopy": [ "canopy.js",
+                    "canopy/meta_grammar",
+                    "canopy/builder",
+                    "canopy/compiler.js",
+                    "canopy/compiler/grammar",
+                    "canopy/compiler/grammar_rule",
+                    "canopy/compiler/choice",
+                    "canopy/compiler/choice_part",
+                    "canopy/compiler/any_char",
+                    "canopy/compiler/char_class",
+                    "canopy/compiler/string",
+                    "canopy/compiler/ci_string",
+                    "canopy/compiler/predicate",
+                    "canopy/compiler/repeat",
+                    "canopy/compiler/sequence",
+                    "canopy/compiler/sequence_part",
+                    "canopy/compiler/reference",
+                    "bindings" ]
+      }
+    }
+  }
+}
