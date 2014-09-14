@@ -7,7 +7,7 @@
     }
     return destination;
   };
-
+  
   var find = function (root, objectName) {
     var parts = objectName.split('.'),
         part;
@@ -19,7 +19,7 @@
     }
     return root;
   };
-
+  
   var formatError = function (error) {
     var lines  = error.input.split(/\n/g),
         lineNo = 0,
@@ -41,9 +41,9 @@
     }
     return message + '^';
   };
-
+  
   var Grammar = {
-    __consume__program: function(input) {
+    __consume__program: function() {
       var address0 = null, index0 = this._offset;
       this._nodeCache["program"] = this._nodeCache["program"] || {};
       var cached = this._nodeCache["program"][index0];
@@ -74,7 +74,7 @@
       }
       return this._nodeCache["program"][index0] = address0;
     },
-    __consume__cell: function(input) {
+    __consume__cell: function() {
       var address0 = null, index0 = this._offset;
       this._nodeCache["cell"] = this._nodeCache["cell"] || {};
       var cached = this._nodeCache["cell"][index0];
@@ -175,7 +175,7 @@
       }
       return this._nodeCache["cell"][index0] = address0;
     },
-    __consume__list: function(input) {
+    __consume__list: function() {
       var address0 = null, index0 = this._offset;
       this._nodeCache["list"] = this._nodeCache["list"] || {};
       var cached = this._nodeCache["list"][index0];
@@ -296,7 +296,7 @@
       }
       return this._nodeCache["list"][index0] = address0;
     },
-    __consume__atom: function(input) {
+    __consume__atom: function() {
       var address0 = null, index0 = this._offset;
       this._nodeCache["atom"] = this._nodeCache["atom"] || {};
       var cached = this._nodeCache["atom"][index0];
@@ -327,7 +327,7 @@
       }
       return this._nodeCache["atom"][index0] = address0;
     },
-    __consume__boolean: function(input) {
+    __consume__boolean: function() {
       var address0 = null, index0 = this._offset;
       this._nodeCache["boolean"] = this._nodeCache["boolean"] || {};
       var cached = this._nodeCache["boolean"][index0];
@@ -398,7 +398,7 @@
       }
       return this._nodeCache["boolean"][index0] = address0;
     },
-    __consume__integer: function(input) {
+    __consume__integer: function() {
       var address0 = null, index0 = this._offset;
       this._nodeCache["integer"] = this._nodeCache["integer"] || {};
       var cached = this._nodeCache["integer"][index0];
@@ -509,7 +509,7 @@
       }
       return this._nodeCache["integer"][index0] = address0;
     },
-    __consume__string: function(input) {
+    __consume__string: function() {
       var address0 = null, index0 = this._offset;
       this._nodeCache["string"] = this._nodeCache["string"] || {};
       var cached = this._nodeCache["string"][index0];
@@ -745,7 +745,7 @@
       }
       return this._nodeCache["string"][index0] = address0;
     },
-    __consume__symbol: function(input) {
+    __consume__symbol: function() {
       var address0 = null, index0 = this._offset;
       this._nodeCache["symbol"] = this._nodeCache["symbol"] || {};
       var cached = this._nodeCache["symbol"][index0];
@@ -845,7 +845,7 @@
       }
       return this._nodeCache["symbol"][index0] = address0;
     },
-    __consume__space: function(input) {
+    __consume__space: function() {
       var address0 = null, index0 = this._offset;
       this._nodeCache["space"] = this._nodeCache["space"] || {};
       var cached = this._nodeCache["space"][index0];
@@ -881,7 +881,7 @@
       }
       return this._nodeCache["space"][index0] = address0;
     },
-    __consume__paren: function(input) {
+    __consume__paren: function() {
       var address0 = null, index0 = this._offset;
       this._nodeCache["paren"] = this._nodeCache["paren"] || {};
       var cached = this._nodeCache["paren"][index0];
@@ -952,7 +952,7 @@
       }
       return this._nodeCache["paren"][index0] = address0;
     },
-    __consume__delimiter: function(input) {
+    __consume__delimiter: function() {
       var address0 = null, index0 = this._offset;
       this._nodeCache["delimiter"] = this._nodeCache["delimiter"] || {};
       var cached = this._nodeCache["delimiter"][index0];
@@ -974,13 +974,13 @@
       return this._nodeCache["delimiter"][index0] = address0;
     }
   };
-
+  
   var Parser = function(input) {
     this._input = input;
     this._offset = 0;
     this._nodeCache = {};
   };
-
+  
   Parser.prototype.parse = function() {
     var result = this.__consume__program();
     if (result && this._offset === this._input.length) {
@@ -993,14 +993,14 @@
     var error = new Error(message);
     throw error;
   };
-
+  
   Parser.parse = function(input) {
     var parser = new Parser(input);
     return parser.parse();
   };
-
+  
   extend(Parser.prototype, Grammar);
-
+  
   var SyntaxNode = function(textValue, offset, elements, properties) {
     this.textValue = textValue;
     this.offset    = offset;
@@ -1008,20 +1008,20 @@
     if (!properties) return;
     for (var key in properties) this[key] = properties[key];
   };
-
+  
   SyntaxNode.prototype.forEach = function(block, context) {
     for (var i = 0, n = this.elements.length; i < n; i++) {
       block.call(context, this.elements[i], i);
     }
   };
-
+  
   Parser.SyntaxNode = SyntaxNode;
-
+  
   if (typeof require === "function" && typeof exports === "object") {
     exports.Grammar = Grammar;
     exports.Parser  = Parser;
     exports.parse   = Parser.parse;
-
+    
   } else {
     var namespace = this;
     CanopyLisp = Grammar;
