@@ -13,9 +13,8 @@ For usage documentation see [canopy.jcoglan.com](http://canopy.jcoglan.com).
 
     git clone git://github.com/jcoglan/canopy.git
     cd canopy
-    gem install jake
     npm install
-    jake
+    wake
     npm test
 
 Canopy should work on a wide range of JavaScript runtimes, for example:
