@@ -3,8 +3,6 @@
 .npmignore
 .redcar
 examples
-Jakefile
-jake.yml
 node_modules
 site
 source
