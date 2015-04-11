@@ -13,8 +13,6 @@ try {
       endTime    = new Date().getTime();
 
   fs.writeFileSync(outputFile, parser);
-  console.log('Generated parser in ' + outputFile);
-  console.log('Completed in ' + ((endTime - startTime) / 1000) + 's');
 
 } catch (e) {
   console.error(e.message);
