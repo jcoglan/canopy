@@ -39,4 +39,3 @@ Canopy.Compiler.Choice = {
     }, this);
   }
 };
-

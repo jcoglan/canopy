@@ -15,4 +15,3 @@ Canopy.Compiler.Reference = {
     }
   }
 };
-

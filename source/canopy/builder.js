@@ -214,4 +214,3 @@ Canopy.extend(Canopy.Builder.prototype, {
     this.line_('return ' + expression);
   }
 });
-

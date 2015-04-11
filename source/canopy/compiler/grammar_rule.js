@@ -30,4 +30,3 @@ Canopy.Compiler.GrammarRule = {
     }, this);
   }
 };
-

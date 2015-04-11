@@ -105,4 +105,3 @@ Canopy.Compiler.Grammar = {
     }, this);
   }
 };
-

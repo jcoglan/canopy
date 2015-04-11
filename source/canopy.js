@@ -1,3 +1,5 @@
+'use strict';
+
 var Canopy = {};
 
 Canopy.extend = function(destination, source) {
@@ -57,4 +59,3 @@ Canopy.extend(Canopy, {
     return message + '^';
   }
 });
-

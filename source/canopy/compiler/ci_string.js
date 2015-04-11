@@ -22,4 +22,3 @@ Canopy.Compiler.CIString = {
     return eval(string);
   }
 };
-

@@ -14,4 +14,3 @@ Canopy.Compiler.AnyChar = {
     });
   }
 };
-

@@ -14,4 +14,3 @@ Canopy.Compiler.ChoicePart = {
     this.elements[0].compile(builder, address, this.nodeType());
   }
 };
-

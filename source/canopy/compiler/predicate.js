@@ -28,4 +28,3 @@ Canopy.Compiler.Predicate = {
     });
   }
 };
-

@@ -10,4 +10,3 @@
     exports.compile = Canopy.compile;
   }
 })();
-

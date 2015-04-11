@@ -19,8 +19,7 @@ Canopy.Compiler.SequencePart = {
         label = this.label(),
         sexp  = expression.toSexp();
 
-    if (element = this.elements[0].identifier)
-      sexp = ['label', label, sexp];
+    if (this.elements[0].identifier) sexp = ['label', label, sexp];
 
     return sexp;
   },
@@ -29,4 +28,3 @@ Canopy.Compiler.SequencePart = {
     return this.atomic().compile(builder, address, nodeType);
   }
 };
-

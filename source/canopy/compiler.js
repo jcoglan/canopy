@@ -24,4 +24,3 @@ Canopy.extend(Canopy.Compiler.prototype, {
     return builder.serialize();
   }
 });
-

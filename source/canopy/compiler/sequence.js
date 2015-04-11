@@ -62,4 +62,3 @@ Canopy.Compiler.Sequence = {
     });
   }
 };
-
