@@ -1,4 +1,6 @@
 (function() {
+  'use strict';
+  
   var extend = function (destination, source) {
     if (!destination || !source) return destination;
     for (var key in source) {
@@ -42,6 +44,289 @@
     return message + '^';
   };
   
+  var SyntaxNode = function(textValue, offset, elements) {
+    this.textValue = textValue;
+    this.offset = offset;
+    this.elements = elements || [];
+  };
+  
+  SyntaxNode.prototype.forEach = function(block, context) {
+    for (var el = this.elements, i = 0, n = el.length; i < n; i++)
+      block.call(context, el[i], i, el);
+  };
+  
+  var SyntaxNode1 = function(textValue, offset, elements) {
+    SyntaxNode.apply(this, arguments);
+    this.grammar_name = elements[1];
+    this.rules = elements[2];
+  };
+  (function() {
+    var parent = function() {};
+    parent.prototype = SyntaxNode.prototype;
+    SyntaxNode1.prototype = new parent();
+  })();
+  
+  var SyntaxNode2 = function(textValue, offset, elements) {
+    SyntaxNode.apply(this, arguments);
+    this.grammar_rule = elements[1];
+  };
+  (function() {
+    var parent = function() {};
+    parent.prototype = SyntaxNode.prototype;
+    SyntaxNode2.prototype = new parent();
+  })();
+  
+  var SyntaxNode3 = function(textValue, offset, elements) {
+    SyntaxNode.apply(this, arguments);
+    this.object_identifier = elements[1];
+  };
+  (function() {
+    var parent = function() {};
+    parent.prototype = SyntaxNode.prototype;
+    SyntaxNode3.prototype = new parent();
+  })();
+  
+  var SyntaxNode4 = function(textValue, offset, elements) {
+    SyntaxNode.apply(this, arguments);
+    this.identifier = elements[0];
+    this.assignment = elements[1];
+    this.parsing_expression = elements[2];
+  };
+  (function() {
+    var parent = function() {};
+    parent.prototype = SyntaxNode.prototype;
+    SyntaxNode4.prototype = new parent();
+  })();
+  
+  var SyntaxNode5 = function(textValue, offset, elements) {
+    SyntaxNode.apply(this, arguments);
+  };
+  (function() {
+    var parent = function() {};
+    parent.prototype = SyntaxNode.prototype;
+    SyntaxNode5.prototype = new parent();
+  })();
+  
+  var SyntaxNode6 = function(textValue, offset, elements) {
+    SyntaxNode.apply(this, arguments);
+    this.parsing_expression = elements[2];
+  };
+  (function() {
+    var parent = function() {};
+    parent.prototype = SyntaxNode.prototype;
+    SyntaxNode6.prototype = new parent();
+  })();
+  
+  var SyntaxNode7 = function(textValue, offset, elements) {
+    SyntaxNode.apply(this, arguments);
+    this.first_part = elements[0];
+    this.choice_part = elements[0];
+    this.rest = elements[1];
+  };
+  (function() {
+    var parent = function() {};
+    parent.prototype = SyntaxNode.prototype;
+    SyntaxNode7.prototype = new parent();
+  })();
+  
+  var SyntaxNode8 = function(textValue, offset, elements) {
+    SyntaxNode.apply(this, arguments);
+    this.expression = elements[3];
+    this.choice_part = elements[3];
+  };
+  (function() {
+    var parent = function() {};
+    parent.prototype = SyntaxNode.prototype;
+    SyntaxNode8.prototype = new parent();
+  })();
+  
+  var SyntaxNode9 = function(textValue, offset, elements) {
+    SyntaxNode.apply(this, arguments);
+  };
+  (function() {
+    var parent = function() {};
+    parent.prototype = SyntaxNode.prototype;
+    SyntaxNode9.prototype = new parent();
+  })();
+  
+  var SyntaxNode10 = function(textValue, offset, elements) {
+    SyntaxNode.apply(this, arguments);
+    this.type_expression = elements[1];
+  };
+  (function() {
+    var parent = function() {};
+    parent.prototype = SyntaxNode.prototype;
+    SyntaxNode10.prototype = new parent();
+  })();
+  
+  var SyntaxNode11 = function(textValue, offset, elements) {
+    SyntaxNode.apply(this, arguments);
+    this.object_identifier = elements[1];
+  };
+  (function() {
+    var parent = function() {};
+    parent.prototype = SyntaxNode.prototype;
+    SyntaxNode11.prototype = new parent();
+  })();
+  
+  var SyntaxNode12 = function(textValue, offset, elements) {
+    SyntaxNode.apply(this, arguments);
+    this.first_part = elements[0];
+    this.sequence_part = elements[0];
+    this.rest = elements[1];
+  };
+  (function() {
+    var parent = function() {};
+    parent.prototype = SyntaxNode.prototype;
+    SyntaxNode12.prototype = new parent();
+  })();
+  
+  var SyntaxNode13 = function(textValue, offset, elements) {
+    SyntaxNode.apply(this, arguments);
+    this.expression = elements[1];
+    this.sequence_part = elements[1];
+  };
+  (function() {
+    var parent = function() {};
+    parent.prototype = SyntaxNode.prototype;
+    SyntaxNode13.prototype = new parent();
+  })();
+  
+  var SyntaxNode14 = function(textValue, offset, elements) {
+    SyntaxNode.apply(this, arguments);
+    this.expression = elements[1];
+  };
+  (function() {
+    var parent = function() {};
+    parent.prototype = SyntaxNode.prototype;
+    SyntaxNode14.prototype = new parent();
+  })();
+  
+  var SyntaxNode15 = function(textValue, offset, elements) {
+    SyntaxNode.apply(this, arguments);
+    this.atom = elements[0];
+    this.quantifier = elements[1];
+  };
+  (function() {
+    var parent = function() {};
+    parent.prototype = SyntaxNode.prototype;
+    SyntaxNode15.prototype = new parent();
+  })();
+  
+  var SyntaxNode16 = function(textValue, offset, elements) {
+    SyntaxNode.apply(this, arguments);
+    this.predicate = elements[0];
+    this.atom = elements[1];
+  };
+  (function() {
+    var parent = function() {};
+    parent.prototype = SyntaxNode.prototype;
+    SyntaxNode16.prototype = new parent();
+  })();
+  
+  var SyntaxNode17 = function(textValue, offset, elements) {
+    SyntaxNode.apply(this, arguments);
+    this.identifier = elements[0];
+  };
+  (function() {
+    var parent = function() {};
+    parent.prototype = SyntaxNode.prototype;
+    SyntaxNode17.prototype = new parent();
+  })();
+  
+  var SyntaxNode18 = function(textValue, offset, elements) {
+    SyntaxNode.apply(this, arguments);
+  };
+  (function() {
+    var parent = function() {};
+    parent.prototype = SyntaxNode.prototype;
+    SyntaxNode18.prototype = new parent();
+  })();
+  
+  var SyntaxNode19 = function(textValue, offset, elements) {
+    SyntaxNode.apply(this, arguments);
+  };
+  (function() {
+    var parent = function() {};
+    parent.prototype = SyntaxNode.prototype;
+    SyntaxNode19.prototype = new parent();
+  })();
+  
+  var SyntaxNode20 = function(textValue, offset, elements) {
+    SyntaxNode.apply(this, arguments);
+  };
+  (function() {
+    var parent = function() {};
+    parent.prototype = SyntaxNode.prototype;
+    SyntaxNode20.prototype = new parent();
+  })();
+  
+  var SyntaxNode21 = function(textValue, offset, elements) {
+    SyntaxNode.apply(this, arguments);
+  };
+  (function() {
+    var parent = function() {};
+    parent.prototype = SyntaxNode.prototype;
+    SyntaxNode21.prototype = new parent();
+  })();
+  
+  var SyntaxNode22 = function(textValue, offset, elements) {
+    SyntaxNode.apply(this, arguments);
+  };
+  (function() {
+    var parent = function() {};
+    parent.prototype = SyntaxNode.prototype;
+    SyntaxNode22.prototype = new parent();
+  })();
+  
+  var SyntaxNode23 = function(textValue, offset, elements) {
+    SyntaxNode.apply(this, arguments);
+  };
+  (function() {
+    var parent = function() {};
+    parent.prototype = SyntaxNode.prototype;
+    SyntaxNode23.prototype = new parent();
+  })();
+  
+  var SyntaxNode24 = function(textValue, offset, elements) {
+    SyntaxNode.apply(this, arguments);
+    this.identifier = elements[0];
+  };
+  (function() {
+    var parent = function() {};
+    parent.prototype = SyntaxNode.prototype;
+    SyntaxNode24.prototype = new parent();
+  })();
+  
+  var SyntaxNode25 = function(textValue, offset, elements) {
+    SyntaxNode.apply(this, arguments);
+    this.identifier = elements[0];
+  };
+  (function() {
+    var parent = function() {};
+    parent.prototype = SyntaxNode.prototype;
+    SyntaxNode25.prototype = new parent();
+  })();
+  
+  var SyntaxNode26 = function(textValue, offset, elements) {
+    SyntaxNode.apply(this, arguments);
+    this.identifier = elements[1];
+  };
+  (function() {
+    var parent = function() {};
+    parent.prototype = SyntaxNode.prototype;
+    SyntaxNode26.prototype = new parent();
+  })();
+  
+  var SyntaxNode27 = function(textValue, offset, elements) {
+    SyntaxNode.apply(this, arguments);
+  };
+  (function() {
+    var parent = function() {};
+    parent.prototype = SyntaxNode.prototype;
+    SyntaxNode27.prototype = new parent();
+  })();
+  
   var Grammar = {
     _read_grammar: function() {
       var address0 = null, index0 = this._offset;
@@ -51,7 +336,7 @@
         this._offset += cached.textValue.length;
         return cached;
       }
-      var index1 = this._offset, elements0 = [], labelled0 = {}, text0 = '';
+      var index1 = this._offset, elements0 = [], text0 = '';
       var address1 = null;
       var remaining0 = 0, index2 = this._offset, elements1 = [], text1 = '', address2 = true;
       while (address2) {
@@ -64,7 +349,7 @@
       }
       if (remaining0 <= 0) {
         this._offset = index2;
-        var klass0 = this.constructor.SyntaxNode;
+        var klass0 = SyntaxNode;
         var type0 = null;
         address1 = new klass0(text1, this._offset, elements1);
         if (typeof type0 === "object") {
@@ -82,11 +367,10 @@
         if (address3) {
           elements0.push(address3);
           text0 += address3.textValue;
-          labelled0.grammar_name = address3;
           var address4 = null;
           var remaining1 = 1, index3 = this._offset, elements2 = [], text2 = '', address5 = true;
           while (address5) {
-            var index4 = this._offset, elements3 = [], labelled1 = {}, text3 = '';
+            var index4 = this._offset, elements3 = [], text3 = '';
             var address6 = null;
             var remaining2 = 0, index5 = this._offset, elements4 = [], text4 = '', address7 = true;
             while (address7) {
@@ -99,7 +383,7 @@
             }
             if (remaining2 <= 0) {
               this._offset = index5;
-              var klass1 = this.constructor.SyntaxNode;
+              var klass1 = SyntaxNode;
               var type1 = null;
               address6 = new klass1(text4, this._offset, elements4);
               if (typeof type1 === "object") {
@@ -117,7 +401,6 @@
               if (address8) {
                 elements3.push(address8);
                 text3 += address8.textValue;
-                labelled1.grammar_rule = address8;
               } else {
                 elements3 = null;
                 this._offset = index4;
@@ -128,9 +411,9 @@
             }
             if (elements3) {
               this._offset = index4;
-              var klass2 = this.constructor.SyntaxNode;
+              var klass2 = SyntaxNode2;
               var type2 = null;
-              address5 = new klass2(text3, this._offset, elements3, labelled1);
+              address5 = new klass2(text3, this._offset, elements3);
               if (typeof type2 === "object") {
                 extend(address5, type2);
               }
@@ -146,7 +429,7 @@
           }
           if (remaining1 <= 0) {
             this._offset = index3;
-            var klass3 = this.constructor.SyntaxNode;
+            var klass3 = SyntaxNode;
             var type3 = null;
             address4 = new klass3(text2, this._offset, elements2);
             if (typeof type3 === "object") {
@@ -159,7 +442,6 @@
           if (address4) {
             elements0.push(address4);
             text0 += address4.textValue;
-            labelled0.rules = address4;
             var address9 = null;
             var remaining3 = 0, index6 = this._offset, elements5 = [], text5 = '', address10 = true;
             while (address10) {
@@ -172,7 +454,7 @@
             }
             if (remaining3 <= 0) {
               this._offset = index6;
-              var klass4 = this.constructor.SyntaxNode;
+              var klass4 = SyntaxNode;
               var type4 = null;
               address9 = new klass4(text5, this._offset, elements5);
               if (typeof type4 === "object") {
@@ -203,9 +485,9 @@
       }
       if (elements0) {
         this._offset = index1;
-        var klass5 = this.constructor.SyntaxNode;
+        var klass5 = SyntaxNode1;
         var type5 = find(this.constructor, "Grammar");
-        address0 = new klass5(text0, this._offset, elements0, labelled0);
+        address0 = new klass5(text0, this._offset, elements0);
         if (typeof type5 === "object") {
           extend(address0, type5);
         }
@@ -223,7 +505,7 @@
         this._offset += cached.textValue.length;
         return cached;
       }
-      var index1 = this._offset, elements0 = [], labelled0 = {}, text0 = '';
+      var index1 = this._offset, elements0 = [], text0 = '';
       var address1 = null;
       var chunk0 = null;
       if (this._input.length > this._offset) {
@@ -232,7 +514,7 @@
         chunk0 = null;
       }
       if (chunk0 === 'grammar ') {
-        var klass0 = this.constructor.SyntaxNode;
+        var klass0 = SyntaxNode;
         var type0 = null;
         address1 = new klass0(chunk0, this._offset, []);
         if (typeof type0 === "object") {
@@ -253,7 +535,6 @@
         if (address2) {
           elements0.push(address2);
           text0 += address2.textValue;
-          labelled0.object_identifier = address2;
         } else {
           elements0 = null;
           this._offset = index1;
@@ -264,9 +545,9 @@
       }
       if (elements0) {
         this._offset = index1;
-        var klass1 = this.constructor.SyntaxNode;
+        var klass1 = SyntaxNode3;
         var type1 = null;
-        address0 = new klass1(text0, this._offset, elements0, labelled0);
+        address0 = new klass1(text0, this._offset, elements0);
         if (typeof type1 === "object") {
           extend(address0, type1);
         }
@@ -284,25 +565,22 @@
         this._offset += cached.textValue.length;
         return cached;
       }
-      var index1 = this._offset, elements0 = [], labelled0 = {}, text0 = '';
+      var index1 = this._offset, elements0 = [], text0 = '';
       var address1 = null;
       address1 = this._read_identifier();
       if (address1) {
         elements0.push(address1);
         text0 += address1.textValue;
-        labelled0.identifier = address1;
         var address2 = null;
         address2 = this._read_assignment();
         if (address2) {
           elements0.push(address2);
           text0 += address2.textValue;
-          labelled0.assignment = address2;
           var address3 = null;
           address3 = this._read_parsing_expression();
           if (address3) {
             elements0.push(address3);
             text0 += address3.textValue;
-            labelled0.parsing_expression = address3;
           } else {
             elements0 = null;
             this._offset = index1;
@@ -317,9 +595,9 @@
       }
       if (elements0) {
         this._offset = index1;
-        var klass0 = this.constructor.SyntaxNode;
+        var klass0 = SyntaxNode4;
         var type0 = find(this.constructor, "GrammarRule");
-        address0 = new klass0(text0, this._offset, elements0, labelled0);
+        address0 = new klass0(text0, this._offset, elements0);
         if (typeof type0 === "object") {
           extend(address0, type0);
         }
@@ -337,7 +615,7 @@
         this._offset += cached.textValue.length;
         return cached;
       }
-      var index1 = this._offset, elements0 = [], labelled0 = {}, text0 = '';
+      var index1 = this._offset, elements0 = [], text0 = '';
       var address1 = null;
       var remaining0 = 1, index2 = this._offset, elements1 = [], text1 = '', address2 = true;
       while (address2) {
@@ -350,7 +628,7 @@
       }
       if (remaining0 <= 0) {
         this._offset = index2;
-        var klass0 = this.constructor.SyntaxNode;
+        var klass0 = SyntaxNode;
         var type0 = null;
         address1 = new klass0(text1, this._offset, elements1);
         if (typeof type0 === "object") {
@@ -371,7 +649,7 @@
           chunk0 = null;
         }
         if (chunk0 === '<-') {
-          var klass1 = this.constructor.SyntaxNode;
+          var klass1 = SyntaxNode;
           var type1 = null;
           address3 = new klass1(chunk0, this._offset, []);
           if (typeof type1 === "object") {
@@ -399,7 +677,7 @@
           }
           if (remaining1 <= 0) {
             this._offset = index3;
-            var klass2 = this.constructor.SyntaxNode;
+            var klass2 = SyntaxNode;
             var type2 = null;
             address4 = new klass2(text2, this._offset, elements2);
             if (typeof type2 === "object") {
@@ -426,9 +704,9 @@
       }
       if (elements0) {
         this._offset = index1;
-        var klass3 = this.constructor.SyntaxNode;
+        var klass3 = SyntaxNode5;
         var type3 = null;
-        address0 = new klass3(text0, this._offset, elements0, labelled0);
+        address0 = new klass3(text0, this._offset, elements0);
         if (typeof type3 === "object") {
           extend(address0, type3);
         }
@@ -467,7 +745,7 @@
         this._offset += cached.textValue.length;
         return cached;
       }
-      var index1 = this._offset, elements0 = [], labelled0 = {}, text0 = '';
+      var index1 = this._offset, elements0 = [], text0 = '';
       var address1 = null;
       var chunk0 = null;
       if (this._input.length > this._offset) {
@@ -476,7 +754,7 @@
         chunk0 = null;
       }
       if (chunk0 === '(') {
-        var klass0 = this.constructor.SyntaxNode;
+        var klass0 = SyntaxNode;
         var type0 = null;
         address1 = new klass0(chunk0, this._offset, []);
         if (typeof type0 === "object") {
@@ -504,7 +782,7 @@
         }
         if (remaining0 <= 0) {
           this._offset = index2;
-          var klass1 = this.constructor.SyntaxNode;
+          var klass1 = SyntaxNode;
           var type1 = null;
           address2 = new klass1(text1, this._offset, elements1);
           if (typeof type1 === "object") {
@@ -522,7 +800,6 @@
           if (address4) {
             elements0.push(address4);
             text0 += address4.textValue;
-            labelled0.parsing_expression = address4;
             var address5 = null;
             var remaining1 = 0, index3 = this._offset, elements2 = [], text2 = '', address6 = true;
             while (address6) {
@@ -535,7 +812,7 @@
             }
             if (remaining1 <= 0) {
               this._offset = index3;
-              var klass2 = this.constructor.SyntaxNode;
+              var klass2 = SyntaxNode;
               var type2 = null;
               address5 = new klass2(text2, this._offset, elements2);
               if (typeof type2 === "object") {
@@ -556,7 +833,7 @@
                 chunk1 = null;
               }
               if (chunk1 === ')') {
-                var klass3 = this.constructor.SyntaxNode;
+                var klass3 = SyntaxNode;
                 var type3 = null;
                 address7 = new klass3(chunk1, this._offset, []);
                 if (typeof type3 === "object") {
@@ -594,9 +871,9 @@
       }
       if (elements0) {
         this._offset = index1;
-        var klass4 = this.constructor.SyntaxNode;
+        var klass4 = SyntaxNode6;
         var type4 = null;
-        address0 = new klass4(text0, this._offset, elements0, labelled0);
+        address0 = new klass4(text0, this._offset, elements0);
         if (typeof type4 === "object") {
           extend(address0, type4);
         }
@@ -614,17 +891,16 @@
         this._offset += cached.textValue.length;
         return cached;
       }
-      var index1 = this._offset, elements0 = [], labelled0 = {}, text0 = '';
+      var index1 = this._offset, elements0 = [], text0 = '';
       var address1 = null;
       address1 = this._read_choice_part();
       if (address1) {
         elements0.push(address1);
         text0 += address1.textValue;
-        labelled0.first_part = address1;
         var address2 = null;
         var remaining0 = 1, index2 = this._offset, elements1 = [], text1 = '', address3 = true;
         while (address3) {
-          var index3 = this._offset, elements2 = [], labelled1 = {}, text2 = '';
+          var index3 = this._offset, elements2 = [], text2 = '';
           var address4 = null;
           var remaining1 = 1, index4 = this._offset, elements3 = [], text3 = '', address5 = true;
           while (address5) {
@@ -637,7 +913,7 @@
           }
           if (remaining1 <= 0) {
             this._offset = index4;
-            var klass0 = this.constructor.SyntaxNode;
+            var klass0 = SyntaxNode;
             var type0 = null;
             address4 = new klass0(text3, this._offset, elements3);
             if (typeof type0 === "object") {
@@ -658,7 +934,7 @@
               chunk0 = null;
             }
             if (chunk0 === '/') {
-              var klass1 = this.constructor.SyntaxNode;
+              var klass1 = SyntaxNode;
               var type1 = null;
               address6 = new klass1(chunk0, this._offset, []);
               if (typeof type1 === "object") {
@@ -686,7 +962,7 @@
               }
               if (remaining2 <= 0) {
                 this._offset = index5;
-                var klass2 = this.constructor.SyntaxNode;
+                var klass2 = SyntaxNode;
                 var type2 = null;
                 address7 = new klass2(text4, this._offset, elements4);
                 if (typeof type2 === "object") {
@@ -704,7 +980,6 @@
                 if (address9) {
                   elements2.push(address9);
                   text2 += address9.textValue;
-                  labelled1.expression = address9;
                 } else {
                   elements2 = null;
                   this._offset = index3;
@@ -723,9 +998,9 @@
           }
           if (elements2) {
             this._offset = index3;
-            var klass3 = this.constructor.SyntaxNode;
+            var klass3 = SyntaxNode8;
             var type3 = null;
-            address3 = new klass3(text2, this._offset, elements2, labelled1);
+            address3 = new klass3(text2, this._offset, elements2);
             if (typeof type3 === "object") {
               extend(address3, type3);
             }
@@ -741,7 +1016,7 @@
         }
         if (remaining0 <= 0) {
           this._offset = index2;
-          var klass4 = this.constructor.SyntaxNode;
+          var klass4 = SyntaxNode;
           var type4 = null;
           address2 = new klass4(text1, this._offset, elements1);
           if (typeof type4 === "object") {
@@ -754,7 +1029,6 @@
         if (address2) {
           elements0.push(address2);
           text0 += address2.textValue;
-          labelled0.rest = address2;
         } else {
           elements0 = null;
           this._offset = index1;
@@ -765,9 +1039,9 @@
       }
       if (elements0) {
         this._offset = index1;
-        var klass5 = this.constructor.SyntaxNode;
+        var klass5 = SyntaxNode7;
         var type5 = find(this.constructor, "Choice");
-        address0 = new klass5(text0, this._offset, elements0, labelled0);
+        address0 = new klass5(text0, this._offset, elements0);
         if (typeof type5 === "object") {
           extend(address0, type5);
         }
@@ -785,7 +1059,7 @@
         this._offset += cached.textValue.length;
         return cached;
       }
-      var index1 = this._offset, elements0 = [], labelled0 = {}, text0 = '';
+      var index1 = this._offset, elements0 = [], text0 = '';
       var address1 = null;
       var index2 = this._offset;
       address1 = this._read_sequence_expression();
@@ -803,7 +1077,7 @@
         text0 += address1.textValue;
         var address2 = null;
         var index3 = this._offset;
-        var index4 = this._offset, elements1 = [], labelled1 = {}, text1 = '';
+        var index4 = this._offset, elements1 = [], text1 = '';
         var address3 = null;
         var remaining0 = 1, index5 = this._offset, elements2 = [], text2 = '', address4 = true;
         while (address4) {
@@ -816,7 +1090,7 @@
         }
         if (remaining0 <= 0) {
           this._offset = index5;
-          var klass0 = this.constructor.SyntaxNode;
+          var klass0 = SyntaxNode;
           var type0 = null;
           address3 = new klass0(text2, this._offset, elements2);
           if (typeof type0 === "object") {
@@ -834,7 +1108,6 @@
           if (address5) {
             elements1.push(address5);
             text1 += address5.textValue;
-            labelled1.type_expression = address5;
           } else {
             elements1 = null;
             this._offset = index4;
@@ -845,9 +1118,9 @@
         }
         if (elements1) {
           this._offset = index4;
-          var klass1 = this.constructor.SyntaxNode;
+          var klass1 = SyntaxNode10;
           var type1 = null;
-          address2 = new klass1(text1, this._offset, elements1, labelled1);
+          address2 = new klass1(text1, this._offset, elements1);
           if (typeof type1 === "object") {
             extend(address2, type1);
           }
@@ -858,7 +1131,7 @@
         if (address2) {
         } else {
           this._offset = index3;
-          var klass2 = this.constructor.SyntaxNode;
+          var klass2 = SyntaxNode;
           var type2 = null;
           address2 = new klass2('', this._offset, []);
           if (typeof type2 === "object") {
@@ -879,9 +1152,9 @@
       }
       if (elements0) {
         this._offset = index1;
-        var klass3 = this.constructor.SyntaxNode;
+        var klass3 = SyntaxNode9;
         var type3 = find(this.constructor, "ChoicePart");
-        address0 = new klass3(text0, this._offset, elements0, labelled0);
+        address0 = new klass3(text0, this._offset, elements0);
         if (typeof type3 === "object") {
           extend(address0, type3);
         }
@@ -899,7 +1172,7 @@
         this._offset += cached.textValue.length;
         return cached;
       }
-      var index1 = this._offset, elements0 = [], labelled0 = {}, text0 = '';
+      var index1 = this._offset, elements0 = [], text0 = '';
       var address1 = null;
       var chunk0 = null;
       if (this._input.length > this._offset) {
@@ -908,7 +1181,7 @@
         chunk0 = null;
       }
       if (chunk0 === '<') {
-        var klass0 = this.constructor.SyntaxNode;
+        var klass0 = SyntaxNode;
         var type0 = null;
         address1 = new klass0(chunk0, this._offset, []);
         if (typeof type0 === "object") {
@@ -929,7 +1202,6 @@
         if (address2) {
           elements0.push(address2);
           text0 += address2.textValue;
-          labelled0.object_identifier = address2;
           var address3 = null;
           var chunk1 = null;
           if (this._input.length > this._offset) {
@@ -938,7 +1210,7 @@
             chunk1 = null;
           }
           if (chunk1 === '>') {
-            var klass1 = this.constructor.SyntaxNode;
+            var klass1 = SyntaxNode;
             var type1 = null;
             address3 = new klass1(chunk1, this._offset, []);
             if (typeof type1 === "object") {
@@ -968,9 +1240,9 @@
       }
       if (elements0) {
         this._offset = index1;
-        var klass2 = this.constructor.SyntaxNode;
+        var klass2 = SyntaxNode11;
         var type2 = null;
-        address0 = new klass2(text0, this._offset, elements0, labelled0);
+        address0 = new klass2(text0, this._offset, elements0);
         if (typeof type2 === "object") {
           extend(address0, type2);
         }
@@ -988,17 +1260,16 @@
         this._offset += cached.textValue.length;
         return cached;
       }
-      var index1 = this._offset, elements0 = [], labelled0 = {}, text0 = '';
+      var index1 = this._offset, elements0 = [], text0 = '';
       var address1 = null;
       address1 = this._read_sequence_part();
       if (address1) {
         elements0.push(address1);
         text0 += address1.textValue;
-        labelled0.first_part = address1;
         var address2 = null;
         var remaining0 = 1, index2 = this._offset, elements1 = [], text1 = '', address3 = true;
         while (address3) {
-          var index3 = this._offset, elements2 = [], labelled1 = {}, text2 = '';
+          var index3 = this._offset, elements2 = [], text2 = '';
           var address4 = null;
           var remaining1 = 1, index4 = this._offset, elements3 = [], text3 = '', address5 = true;
           while (address5) {
@@ -1011,7 +1282,7 @@
           }
           if (remaining1 <= 0) {
             this._offset = index4;
-            var klass0 = this.constructor.SyntaxNode;
+            var klass0 = SyntaxNode;
             var type0 = null;
             address4 = new klass0(text3, this._offset, elements3);
             if (typeof type0 === "object") {
@@ -1029,7 +1300,6 @@
             if (address6) {
               elements2.push(address6);
               text2 += address6.textValue;
-              labelled1.expression = address6;
             } else {
               elements2 = null;
               this._offset = index3;
@@ -1040,9 +1310,9 @@
           }
           if (elements2) {
             this._offset = index3;
-            var klass1 = this.constructor.SyntaxNode;
+            var klass1 = SyntaxNode13;
             var type1 = null;
-            address3 = new klass1(text2, this._offset, elements2, labelled1);
+            address3 = new klass1(text2, this._offset, elements2);
             if (typeof type1 === "object") {
               extend(address3, type1);
             }
@@ -1058,7 +1328,7 @@
         }
         if (remaining0 <= 0) {
           this._offset = index2;
-          var klass2 = this.constructor.SyntaxNode;
+          var klass2 = SyntaxNode;
           var type2 = null;
           address2 = new klass2(text1, this._offset, elements1);
           if (typeof type2 === "object") {
@@ -1071,7 +1341,6 @@
         if (address2) {
           elements0.push(address2);
           text0 += address2.textValue;
-          labelled0.rest = address2;
         } else {
           elements0 = null;
           this._offset = index1;
@@ -1082,9 +1351,9 @@
       }
       if (elements0) {
         this._offset = index1;
-        var klass3 = this.constructor.SyntaxNode;
+        var klass3 = SyntaxNode12;
         var type3 = find(this.constructor, "Sequence");
-        address0 = new klass3(text0, this._offset, elements0, labelled0);
+        address0 = new klass3(text0, this._offset, elements0);
         if (typeof type3 === "object") {
           extend(address0, type3);
         }
@@ -1102,14 +1371,14 @@
         this._offset += cached.textValue.length;
         return cached;
       }
-      var index1 = this._offset, elements0 = [], labelled0 = {}, text0 = '';
+      var index1 = this._offset, elements0 = [], text0 = '';
       var address1 = null;
       var index2 = this._offset;
       address1 = this._read_label();
       if (address1) {
       } else {
         this._offset = index2;
-        var klass0 = this.constructor.SyntaxNode;
+        var klass0 = SyntaxNode;
         var type0 = null;
         address1 = new klass0('', this._offset, []);
         if (typeof type0 === "object") {
@@ -1135,7 +1404,6 @@
         if (address2) {
           elements0.push(address2);
           text0 += address2.textValue;
-          labelled0.expression = address2;
         } else {
           elements0 = null;
           this._offset = index1;
@@ -1146,9 +1414,9 @@
       }
       if (elements0) {
         this._offset = index1;
-        var klass1 = this.constructor.SyntaxNode;
+        var klass1 = SyntaxNode14;
         var type1 = find(this.constructor, "SequencePart");
-        address0 = new klass1(text0, this._offset, elements0, labelled0);
+        address0 = new klass1(text0, this._offset, elements0);
         if (typeof type1 === "object") {
           extend(address0, type1);
         }
@@ -1166,19 +1434,17 @@
         this._offset += cached.textValue.length;
         return cached;
       }
-      var index1 = this._offset, elements0 = [], labelled0 = {}, text0 = '';
+      var index1 = this._offset, elements0 = [], text0 = '';
       var address1 = null;
       address1 = this._read_atom();
       if (address1) {
         elements0.push(address1);
         text0 += address1.textValue;
-        labelled0.atom = address1;
         var address2 = null;
         address2 = this._read_quantifier();
         if (address2) {
           elements0.push(address2);
           text0 += address2.textValue;
-          labelled0.quantifier = address2;
         } else {
           elements0 = null;
           this._offset = index1;
@@ -1189,9 +1455,9 @@
       }
       if (elements0) {
         this._offset = index1;
-        var klass0 = this.constructor.SyntaxNode;
+        var klass0 = SyntaxNode15;
         var type0 = find(this.constructor, "Repeat");
-        address0 = new klass0(text0, this._offset, elements0, labelled0);
+        address0 = new klass0(text0, this._offset, elements0);
         if (typeof type0 === "object") {
           extend(address0, type0);
         }
@@ -1255,7 +1521,7 @@
         this._offset += cached.textValue.length;
         return cached;
       }
-      var index1 = this._offset, elements0 = [], labelled0 = {}, text0 = '';
+      var index1 = this._offset, elements0 = [], text0 = '';
       var address1 = null;
       var index2 = this._offset;
       var chunk0 = null;
@@ -1265,7 +1531,7 @@
         chunk0 = null;
       }
       if (chunk0 === '&') {
-        var klass0 = this.constructor.SyntaxNode;
+        var klass0 = SyntaxNode;
         var type0 = null;
         address1 = new klass0(chunk0, this._offset, []);
         if (typeof type0 === "object") {
@@ -1288,7 +1554,7 @@
           chunk1 = null;
         }
         if (chunk1 === '!') {
-          var klass1 = this.constructor.SyntaxNode;
+          var klass1 = SyntaxNode;
           var type1 = null;
           address1 = new klass1(chunk1, this._offset, []);
           if (typeof type1 === "object") {
@@ -1309,13 +1575,11 @@
       if (address1) {
         elements0.push(address1);
         text0 += address1.textValue;
-        labelled0.predicate = address1;
         var address2 = null;
         address2 = this._read_atom();
         if (address2) {
           elements0.push(address2);
           text0 += address2.textValue;
-          labelled0.atom = address2;
         } else {
           elements0 = null;
           this._offset = index1;
@@ -1326,9 +1590,9 @@
       }
       if (elements0) {
         this._offset = index1;
-        var klass2 = this.constructor.SyntaxNode;
+        var klass2 = SyntaxNode16;
         var type2 = find(this.constructor, "Predicate");
-        address0 = new klass2(text0, this._offset, elements0, labelled0);
+        address0 = new klass2(text0, this._offset, elements0);
         if (typeof type2 === "object") {
           extend(address0, type2);
         }
@@ -1346,19 +1610,18 @@
         this._offset += cached.textValue.length;
         return cached;
       }
-      var index1 = this._offset, elements0 = [], labelled0 = {}, text0 = '';
+      var index1 = this._offset, elements0 = [], text0 = '';
       var address1 = null;
       address1 = this._read_identifier();
       if (address1) {
         elements0.push(address1);
         text0 += address1.textValue;
-        labelled0.identifier = address1;
         var address2 = null;
         var index2 = this._offset;
         address2 = this._read_assignment();
         this._offset = index2;
         if (!(address2)) {
-          var klass0 = this.constructor.SyntaxNode;
+          var klass0 = SyntaxNode;
           var type0 = null;
           address2 = new klass0('', this._offset, []);
           if (typeof type0 === "object") {
@@ -1381,9 +1644,9 @@
       }
       if (elements0) {
         this._offset = index1;
-        var klass1 = this.constructor.SyntaxNode;
+        var klass1 = SyntaxNode17;
         var type1 = find(this.constructor, "Reference");
-        address0 = new klass1(text0, this._offset, elements0, labelled0);
+        address0 = new klass1(text0, this._offset, elements0);
         if (typeof type1 === "object") {
           extend(address0, type1);
         }
@@ -1401,7 +1664,7 @@
         this._offset += cached.textValue.length;
         return cached;
       }
-      var index1 = this._offset, elements0 = [], labelled0 = {}, text0 = '';
+      var index1 = this._offset, elements0 = [], text0 = '';
       var address1 = null;
       var chunk0 = null;
       if (this._input.length > this._offset) {
@@ -1410,7 +1673,7 @@
         chunk0 = null;
       }
       if (chunk0 === '"') {
-        var klass0 = this.constructor.SyntaxNode;
+        var klass0 = SyntaxNode;
         var type0 = null;
         address1 = new klass0(chunk0, this._offset, []);
         if (typeof type0 === "object") {
@@ -1430,7 +1693,7 @@
         var remaining0 = 0, index2 = this._offset, elements1 = [], text1 = '', address3 = true;
         while (address3) {
           var index3 = this._offset;
-          var index4 = this._offset, elements2 = [], labelled1 = {}, text2 = '';
+          var index4 = this._offset, elements2 = [], text2 = '';
           var address4 = null;
           var chunk1 = null;
           if (this._input.length > this._offset) {
@@ -1439,7 +1702,7 @@
             chunk1 = null;
           }
           if (chunk1 === '\\') {
-            var klass1 = this.constructor.SyntaxNode;
+            var klass1 = SyntaxNode;
             var type1 = null;
             address4 = new klass1(chunk1, this._offset, []);
             if (typeof type1 === "object") {
@@ -1469,7 +1732,7 @@
                 this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: "<any char>"};
               }
             } else {
-              var klass2 = this.constructor.SyntaxNode;
+              var klass2 = SyntaxNode;
               var type2 = null;
               address5 = new klass2(nextChar0, this._offset, []);
               if (typeof type2 === "object") {
@@ -1490,9 +1753,9 @@
           }
           if (elements2) {
             this._offset = index4;
-            var klass3 = this.constructor.SyntaxNode;
+            var klass3 = SyntaxNode19;
             var type3 = null;
-            address3 = new klass3(text2, this._offset, elements2, labelled1);
+            address3 = new klass3(text2, this._offset, elements2);
             if (typeof type3 === "object") {
               extend(address3, type3);
             }
@@ -1510,7 +1773,7 @@
               chunk3 = null;
             }
             if (chunk3 && /^[^"]/.test(chunk3)) {
-              var klass4 = this.constructor.SyntaxNode;
+              var klass4 = SyntaxNode;
               var type4 = null;
               address3 = new klass4(chunk3, this._offset, []);
               if (typeof type4 === "object") {
@@ -1536,7 +1799,7 @@
         }
         if (remaining0 <= 0) {
           this._offset = index2;
-          var klass5 = this.constructor.SyntaxNode;
+          var klass5 = SyntaxNode;
           var type5 = null;
           address2 = new klass5(text1, this._offset, elements1);
           if (typeof type5 === "object") {
@@ -1557,7 +1820,7 @@
             chunk4 = null;
           }
           if (chunk4 === '"') {
-            var klass6 = this.constructor.SyntaxNode;
+            var klass6 = SyntaxNode;
             var type6 = null;
             address6 = new klass6(chunk4, this._offset, []);
             if (typeof type6 === "object") {
@@ -1587,9 +1850,9 @@
       }
       if (elements0) {
         this._offset = index1;
-        var klass7 = this.constructor.SyntaxNode;
+        var klass7 = SyntaxNode18;
         var type7 = find(this.constructor, "String");
-        address0 = new klass7(text0, this._offset, elements0, labelled0);
+        address0 = new klass7(text0, this._offset, elements0);
         if (typeof type7 === "object") {
           extend(address0, type7);
         }
@@ -1607,7 +1870,7 @@
         this._offset += cached.textValue.length;
         return cached;
       }
-      var index1 = this._offset, elements0 = [], labelled0 = {}, text0 = '';
+      var index1 = this._offset, elements0 = [], text0 = '';
       var address1 = null;
       var chunk0 = null;
       if (this._input.length > this._offset) {
@@ -1616,7 +1879,7 @@
         chunk0 = null;
       }
       if (chunk0 === '`') {
-        var klass0 = this.constructor.SyntaxNode;
+        var klass0 = SyntaxNode;
         var type0 = null;
         address1 = new klass0(chunk0, this._offset, []);
         if (typeof type0 === "object") {
@@ -1636,7 +1899,7 @@
         var remaining0 = 0, index2 = this._offset, elements1 = [], text1 = '', address3 = true;
         while (address3) {
           var index3 = this._offset;
-          var index4 = this._offset, elements2 = [], labelled1 = {}, text2 = '';
+          var index4 = this._offset, elements2 = [], text2 = '';
           var address4 = null;
           var chunk1 = null;
           if (this._input.length > this._offset) {
@@ -1645,7 +1908,7 @@
             chunk1 = null;
           }
           if (chunk1 === '\\') {
-            var klass1 = this.constructor.SyntaxNode;
+            var klass1 = SyntaxNode;
             var type1 = null;
             address4 = new klass1(chunk1, this._offset, []);
             if (typeof type1 === "object") {
@@ -1675,7 +1938,7 @@
                 this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: "<any char>"};
               }
             } else {
-              var klass2 = this.constructor.SyntaxNode;
+              var klass2 = SyntaxNode;
               var type2 = null;
               address5 = new klass2(nextChar0, this._offset, []);
               if (typeof type2 === "object") {
@@ -1696,9 +1959,9 @@
           }
           if (elements2) {
             this._offset = index4;
-            var klass3 = this.constructor.SyntaxNode;
+            var klass3 = SyntaxNode21;
             var type3 = null;
-            address3 = new klass3(text2, this._offset, elements2, labelled1);
+            address3 = new klass3(text2, this._offset, elements2);
             if (typeof type3 === "object") {
               extend(address3, type3);
             }
@@ -1716,7 +1979,7 @@
               chunk3 = null;
             }
             if (chunk3 && /^[^`]/.test(chunk3)) {
-              var klass4 = this.constructor.SyntaxNode;
+              var klass4 = SyntaxNode;
               var type4 = null;
               address3 = new klass4(chunk3, this._offset, []);
               if (typeof type4 === "object") {
@@ -1742,7 +2005,7 @@
         }
         if (remaining0 <= 0) {
           this._offset = index2;
-          var klass5 = this.constructor.SyntaxNode;
+          var klass5 = SyntaxNode;
           var type5 = null;
           address2 = new klass5(text1, this._offset, elements1);
           if (typeof type5 === "object") {
@@ -1763,7 +2026,7 @@
             chunk4 = null;
           }
           if (chunk4 === '`') {
-            var klass6 = this.constructor.SyntaxNode;
+            var klass6 = SyntaxNode;
             var type6 = null;
             address6 = new klass6(chunk4, this._offset, []);
             if (typeof type6 === "object") {
@@ -1793,9 +2056,9 @@
       }
       if (elements0) {
         this._offset = index1;
-        var klass7 = this.constructor.SyntaxNode;
+        var klass7 = SyntaxNode20;
         var type7 = find(this.constructor, "CIString");
-        address0 = new klass7(text0, this._offset, elements0, labelled0);
+        address0 = new klass7(text0, this._offset, elements0);
         if (typeof type7 === "object") {
           extend(address0, type7);
         }
@@ -1820,7 +2083,7 @@
         chunk0 = null;
       }
       if (chunk0 === '.') {
-        var klass0 = this.constructor.SyntaxNode;
+        var klass0 = SyntaxNode;
         var type0 = find(this.constructor, "AnyChar");
         address0 = new klass0(chunk0, this._offset, []);
         if (typeof type0 === "object") {
@@ -1843,7 +2106,7 @@
         this._offset += cached.textValue.length;
         return cached;
       }
-      var index1 = this._offset, elements0 = [], labelled0 = {}, text0 = '';
+      var index1 = this._offset, elements0 = [], text0 = '';
       var address1 = null;
       var chunk0 = null;
       if (this._input.length > this._offset) {
@@ -1852,7 +2115,7 @@
         chunk0 = null;
       }
       if (chunk0 === '[') {
-        var klass0 = this.constructor.SyntaxNode;
+        var klass0 = SyntaxNode;
         var type0 = null;
         address1 = new klass0(chunk0, this._offset, []);
         if (typeof type0 === "object") {
@@ -1877,7 +2140,7 @@
           chunk1 = null;
         }
         if (chunk1 === '^') {
-          var klass1 = this.constructor.SyntaxNode;
+          var klass1 = SyntaxNode;
           var type1 = null;
           address2 = new klass1(chunk1, this._offset, []);
           if (typeof type1 === "object") {
@@ -1893,7 +2156,7 @@
         if (address2) {
         } else {
           this._offset = index2;
-          var klass2 = this.constructor.SyntaxNode;
+          var klass2 = SyntaxNode;
           var type2 = null;
           address2 = new klass2('', this._offset, []);
           if (typeof type2 === "object") {
@@ -1908,7 +2171,7 @@
           var remaining0 = 1, index3 = this._offset, elements1 = [], text1 = '', address4 = true;
           while (address4) {
             var index4 = this._offset;
-            var index5 = this._offset, elements2 = [], labelled1 = {}, text2 = '';
+            var index5 = this._offset, elements2 = [], text2 = '';
             var address5 = null;
             var chunk2 = null;
             if (this._input.length > this._offset) {
@@ -1917,7 +2180,7 @@
               chunk2 = null;
             }
             if (chunk2 === '\\') {
-              var klass3 = this.constructor.SyntaxNode;
+              var klass3 = SyntaxNode;
               var type3 = null;
               address5 = new klass3(chunk2, this._offset, []);
               if (typeof type3 === "object") {
@@ -1947,7 +2210,7 @@
                   this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: "<any char>"};
                 }
               } else {
-                var klass4 = this.constructor.SyntaxNode;
+                var klass4 = SyntaxNode;
                 var type4 = null;
                 address6 = new klass4(nextChar0, this._offset, []);
                 if (typeof type4 === "object") {
@@ -1968,9 +2231,9 @@
             }
             if (elements2) {
               this._offset = index5;
-              var klass5 = this.constructor.SyntaxNode;
+              var klass5 = SyntaxNode23;
               var type5 = null;
-              address4 = new klass5(text2, this._offset, elements2, labelled1);
+              address4 = new klass5(text2, this._offset, elements2);
               if (typeof type5 === "object") {
                 extend(address4, type5);
               }
@@ -1988,7 +2251,7 @@
                 chunk4 = null;
               }
               if (chunk4 && /^[^\]]/.test(chunk4)) {
-                var klass6 = this.constructor.SyntaxNode;
+                var klass6 = SyntaxNode;
                 var type6 = null;
                 address4 = new klass6(chunk4, this._offset, []);
                 if (typeof type6 === "object") {
@@ -2014,7 +2277,7 @@
           }
           if (remaining0 <= 0) {
             this._offset = index3;
-            var klass7 = this.constructor.SyntaxNode;
+            var klass7 = SyntaxNode;
             var type7 = null;
             address3 = new klass7(text1, this._offset, elements1);
             if (typeof type7 === "object") {
@@ -2035,7 +2298,7 @@
               chunk5 = null;
             }
             if (chunk5 === ']') {
-              var klass8 = this.constructor.SyntaxNode;
+              var klass8 = SyntaxNode;
               var type8 = null;
               address7 = new klass8(chunk5, this._offset, []);
               if (typeof type8 === "object") {
@@ -2069,9 +2332,9 @@
       }
       if (elements0) {
         this._offset = index1;
-        var klass9 = this.constructor.SyntaxNode;
+        var klass9 = SyntaxNode22;
         var type9 = find(this.constructor, "CharClass");
-        address0 = new klass9(text0, this._offset, elements0, labelled0);
+        address0 = new klass9(text0, this._offset, elements0);
         if (typeof type9 === "object") {
           extend(address0, type9);
         }
@@ -2089,13 +2352,12 @@
         this._offset += cached.textValue.length;
         return cached;
       }
-      var index1 = this._offset, elements0 = [], labelled0 = {}, text0 = '';
+      var index1 = this._offset, elements0 = [], text0 = '';
       var address1 = null;
       address1 = this._read_identifier();
       if (address1) {
         elements0.push(address1);
         text0 += address1.textValue;
-        labelled0.identifier = address1;
         var address2 = null;
         var chunk0 = null;
         if (this._input.length > this._offset) {
@@ -2104,7 +2366,7 @@
           chunk0 = null;
         }
         if (chunk0 === ':') {
-          var klass0 = this.constructor.SyntaxNode;
+          var klass0 = SyntaxNode;
           var type0 = null;
           address2 = new klass0(chunk0, this._offset, []);
           if (typeof type0 === "object") {
@@ -2130,9 +2392,9 @@
       }
       if (elements0) {
         this._offset = index1;
-        var klass1 = this.constructor.SyntaxNode;
+        var klass1 = SyntaxNode24;
         var type1 = null;
-        address0 = new klass1(text0, this._offset, elements0, labelled0);
+        address0 = new klass1(text0, this._offset, elements0);
         if (typeof type1 === "object") {
           extend(address0, type1);
         }
@@ -2150,17 +2412,16 @@
         this._offset += cached.textValue.length;
         return cached;
       }
-      var index1 = this._offset, elements0 = [], labelled0 = {}, text0 = '';
+      var index1 = this._offset, elements0 = [], text0 = '';
       var address1 = null;
       address1 = this._read_identifier();
       if (address1) {
         elements0.push(address1);
         text0 += address1.textValue;
-        labelled0.identifier = address1;
         var address2 = null;
         var remaining0 = 0, index2 = this._offset, elements1 = [], text1 = '', address3 = true;
         while (address3) {
-          var index3 = this._offset, elements2 = [], labelled1 = {}, text2 = '';
+          var index3 = this._offset, elements2 = [], text2 = '';
           var address4 = null;
           var chunk0 = null;
           if (this._input.length > this._offset) {
@@ -2169,7 +2430,7 @@
             chunk0 = null;
           }
           if (chunk0 === '.') {
-            var klass0 = this.constructor.SyntaxNode;
+            var klass0 = SyntaxNode;
             var type0 = null;
             address4 = new klass0(chunk0, this._offset, []);
             if (typeof type0 === "object") {
@@ -2190,7 +2451,6 @@
             if (address5) {
               elements2.push(address5);
               text2 += address5.textValue;
-              labelled1.identifier = address5;
             } else {
               elements2 = null;
               this._offset = index3;
@@ -2201,9 +2461,9 @@
           }
           if (elements2) {
             this._offset = index3;
-            var klass1 = this.constructor.SyntaxNode;
+            var klass1 = SyntaxNode26;
             var type1 = null;
-            address3 = new klass1(text2, this._offset, elements2, labelled1);
+            address3 = new klass1(text2, this._offset, elements2);
             if (typeof type1 === "object") {
               extend(address3, type1);
             }
@@ -2219,7 +2479,7 @@
         }
         if (remaining0 <= 0) {
           this._offset = index2;
-          var klass2 = this.constructor.SyntaxNode;
+          var klass2 = SyntaxNode;
           var type2 = null;
           address2 = new klass2(text1, this._offset, elements1);
           if (typeof type2 === "object") {
@@ -2242,9 +2502,9 @@
       }
       if (elements0) {
         this._offset = index1;
-        var klass3 = this.constructor.SyntaxNode;
+        var klass3 = SyntaxNode25;
         var type3 = null;
-        address0 = new klass3(text0, this._offset, elements0, labelled0);
+        address0 = new klass3(text0, this._offset, elements0);
         if (typeof type3 === "object") {
           extend(address0, type3);
         }
@@ -2262,7 +2522,7 @@
         this._offset += cached.textValue.length;
         return cached;
       }
-      var index1 = this._offset, elements0 = [], labelled0 = {}, text0 = '';
+      var index1 = this._offset, elements0 = [], text0 = '';
       var address1 = null;
       var chunk0 = null;
       if (this._input.length > this._offset) {
@@ -2271,7 +2531,7 @@
         chunk0 = null;
       }
       if (chunk0 && /^[a-zA-Z_$]/.test(chunk0)) {
-        var klass0 = this.constructor.SyntaxNode;
+        var klass0 = SyntaxNode;
         var type0 = null;
         address1 = new klass0(chunk0, this._offset, []);
         if (typeof type0 === "object") {
@@ -2297,7 +2557,7 @@
             chunk1 = null;
           }
           if (chunk1 && /^[a-zA-Z0-9_$]/.test(chunk1)) {
-            var klass1 = this.constructor.SyntaxNode;
+            var klass1 = SyntaxNode;
             var type1 = null;
             address3 = new klass1(chunk1, this._offset, []);
             if (typeof type1 === "object") {
@@ -2318,7 +2578,7 @@
         }
         if (remaining0 <= 0) {
           this._offset = index2;
-          var klass2 = this.constructor.SyntaxNode;
+          var klass2 = SyntaxNode;
           var type2 = null;
           address2 = new klass2(text1, this._offset, elements1);
           if (typeof type2 === "object") {
@@ -2341,9 +2601,9 @@
       }
       if (elements0) {
         this._offset = index1;
-        var klass3 = this.constructor.SyntaxNode;
+        var klass3 = SyntaxNode27;
         var type3 = null;
-        address0 = new klass3(text0, this._offset, elements0, labelled0);
+        address0 = new klass3(text0, this._offset, elements0);
         if (typeof type3 === "object") {
           extend(address0, type3);
         }
@@ -2369,7 +2629,7 @@
         chunk0 = null;
       }
       if (chunk0 === '?') {
-        var klass0 = this.constructor.SyntaxNode;
+        var klass0 = SyntaxNode;
         var type0 = null;
         address0 = new klass0(chunk0, this._offset, []);
         if (typeof type0 === "object") {
@@ -2392,7 +2652,7 @@
           chunk1 = null;
         }
         if (chunk1 === '*') {
-          var klass1 = this.constructor.SyntaxNode;
+          var klass1 = SyntaxNode;
           var type1 = null;
           address0 = new klass1(chunk1, this._offset, []);
           if (typeof type1 === "object") {
@@ -2415,7 +2675,7 @@
             chunk2 = null;
           }
           if (chunk2 === '+') {
-            var klass2 = this.constructor.SyntaxNode;
+            var klass2 = SyntaxNode;
             var type2 = null;
             address0 = new klass2(chunk2, this._offset, []);
             if (typeof type2 === "object") {
@@ -2451,7 +2711,7 @@
         chunk0 = null;
       }
       if (chunk0 && /^[\s\n\r\t]/.test(chunk0)) {
-        var klass0 = this.constructor.SyntaxNode;
+        var klass0 = SyntaxNode;
         var type0 = null;
         address0 = new klass0(chunk0, this._offset, []);
         if (typeof type0 === "object") {
@@ -2494,20 +2754,6 @@
   
   extend(Parser.prototype, Grammar);
   
-  var SyntaxNode = function(textValue, offset, elements, properties) {
-    this.textValue = textValue;
-    this.offset    = offset;
-    this.elements  = elements || [];
-    if (!properties) return;
-    for (var key in properties) this[key] = properties[key];
-  };
-  
-  SyntaxNode.prototype.forEach = function(block, context) {
-    for (var i = 0, n = this.elements.length; i < n; i++) {
-      block.call(context, this.elements[i], i);
-    }
-  };
-  
   Parser.SyntaxNode = SyntaxNode;
   
   if (typeof require === "function" && typeof exports === "object") {
@@ -2528,4 +2774,3 @@
     Canopy.MetaGrammarParser.formatError = formatError;
   }
 })();
-

@@ -66,6 +66,26 @@ function() { with(this) {
       }})
     }})
 
+    describe('a labelled reference', function() { with(this) {
+      before(function() { with(this) {
+        Canopy.compile('grammar JS.ENV.LabelTestR\
+          root   <- "first" alias:middle "third"\
+          middle <- "second"')
+      }})
+
+      it('uses the name of the label and reference', function() { with(this) {
+        assertParse(['firstsecondthird', 0, [
+                      ['first', 0, []],
+                      ['second', 5, []],
+                      ['third', 11, []]], {
+                      alias: ['second', 5, []],
+                      middle: ['second', 5, []]
+                    }],
+
+          LabelTestRParser.parse('firstsecondthird') )
+      }})
+    }})
+
     describe('a repetition node', function() { with(this) {
       before(function() { with(this) {
         Canopy.compile('grammar JS.ENV.LabelTestB\

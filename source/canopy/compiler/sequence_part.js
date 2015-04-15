@@ -4,22 +4,23 @@ Canopy.Compiler.SequencePart = {
     return expression.parsing_expression || expression;
   },
 
-  label: function() {
-    var element = this.elements[0].identifier,
-        expression = this.atomic();
+  labels: function() {
+    var element    = this.elements[0].identifier,
+        expression = this.atomic(),
+        labels     = [];
 
-    if (element) return element.textValue;
-    if (expression.referenceName) return expression.referenceName();
+    if (element) labels.push(element.textValue);
+    if (expression.referenceName) labels.push(expression.referenceName());
 
-    return null;
+    return labels;
   },
 
   toSexp: function() {
     var expression = this.atomic(),
-        label = this.label(),
-        sexp  = expression.toSexp();
+        labels     = this.labels(),
+        sexp       = expression.toSexp();
 
-    if (this.elements[0].identifier) sexp = ['label', label, sexp];
+    if (this.elements[0].identifier) sexp = ['label', labels[0], sexp];
 
     return sexp;
   },

@@ -1,4 +1,4 @@
-Canopy.Builder = function(parent) {
+Canopy.Builder = function(parent, name, parentName) {
   if (parent) {
     this._parent = parent;
     this._indentLevel = parent._indentLevel;
@@ -6,6 +6,8 @@ Canopy.Builder = function(parent) {
     this._buffer = '';
     this._indentLevel = 0;
   }
+  this._name = name;
+  this._parentName = parentName;
   this._methodSeparator = '';
   this._varIndex = {};
 };
@@ -18,6 +20,73 @@ Canopy.extend(Canopy.Builder.prototype, {
   write: function(string) {
     if (this._parent) return this._parent.write(string);
     this._buffer += string;
+  },
+
+  package_: function(name, block, context) {
+    this.write('(function() {');
+    this.indent_(function(builder) {
+      builder.line_("'use strict'");
+
+      builder.newline_();
+      builder.line_('var extend = ' + Canopy.extend.toString());
+      builder.newline_();
+      builder.line_('var find = ' + Canopy.find.toString());
+      builder.newline_();
+      builder.line_('var formatError = ' + Canopy.formatError.toString());
+      builder.newline_();
+
+      block.call(context, this);
+    }, this);
+    this.newline_();
+    this.write('})();');
+    this.newline_();
+  },
+
+  syntaxNodeClass_: function() {
+    var name = 'SyntaxNode';
+    this.function_('var ' + name, ['textValue', 'offset', 'elements'], function(builder) {
+      builder.line_('this.textValue = textValue');
+      builder.line_('this.offset = offset');
+      builder.line_('this.elements = elements || []');
+    });
+    this.function_(name + '.prototype.forEach', ['block', 'context'], function(builder) {
+      builder.newline_();
+      builder.write('for (var el = this.elements, i = 0, n = el.length; i < n; i++)');
+      builder.indent_(function(builder) {
+        builder.line_('block.call(context, el[i], i, el)');
+      });
+    });
+    return name;
+  },
+
+  class_: function(name, parent, block, context) {
+    var builder = new Canopy.Builder(this, name, parent);
+    block.call(context, builder);
+  },
+
+  constructor_: function(args, block, context) {
+    this.function_('var ' + this._name, args, function(builder) {
+      if (this._parentName) builder.line_(this._parentName + '.apply(this, arguments)');
+      block.call(context, builder);
+    }, this);
+    if (this._parentName) {
+      this.write('(function() {');
+      this.indent_(function(builder) {
+        builder.assign_('var parent', 'function() {}');
+        builder.assign_('parent.prototype', this._parentName + '.prototype');
+        builder.assign_(this._name + '.prototype', 'new parent()');
+      }, this);
+      this.line_('})()');
+    }
+    this.newline_();
+  },
+
+  attribute_: function(name, value) {
+    this.assign_('this.' + name, value);
+  },
+
+  arrayLookup_: function(expression, offset) {
+    return expression + '[' + offset + ']';
   },
 
   indent_: function(block, context) {
@@ -61,15 +130,14 @@ Canopy.extend(Canopy.Builder.prototype, {
     return chunk;
   },
 
-  syntaxNode_: function(address, nodeType, expression, bump, elements, labelled) {
+  syntaxNode_: function(address, nodeType, expression, bump, elements, nodeClass) {
     elements = ', ' + (elements || '[]');
-    labelled = labelled ? ', ' + labelled : '';
 
-    var klass = this.localVar_('klass', 'this.constructor.SyntaxNode'),
+    var klass = this.localVar_('klass', nodeClass || 'SyntaxNode'),
         type  = this.findType_(nodeType),
         of    = ', ' + this.offset_();
 
-    this.line_(address + ' = new ' + klass + '(' + expression + of + elements + labelled + ')');
+    this.line_(address + ' = new ' + klass + '(' + expression + of + elements + ')');
     this.extendNode_(address, type);
     this.line_(this.offset_() + ' += ' + bump);
   },
@@ -107,19 +175,10 @@ Canopy.extend(Canopy.Builder.prototype, {
       this.line_('namespace = namespace.' + parts[i] + ' = namespace.' + parts[i] + ' || {}');
   },
 
-  closure_: function(block, context) {
-    this.write('(function() {');
-    new Canopy.Builder(this).indent_(block, context);
-    this.newline_();
-    this.write('})();');
-    this.newline_();
-    this.newline_();
-  },
-
   function_: function(name, args, block, context) {
     this.newline_();
     this.write(name + ' = function(' + args.join(', ') + ') {');
-    new Canopy.Builder(this).indent_(block, context);
+    new Canopy.Builder(this, this._name, this._parentName).indent_(block, context);
     this.newline_();
     this.write('};');
     this.newline_();
@@ -143,8 +202,7 @@ Canopy.extend(Canopy.Builder.prototype, {
     this.delimitField_();
     this.newline_();
     this.write(name + ': function(' + args.join(', ') + ') {');
-    this._varIndex = {};
-    this.indent_(block, context);
+    new Canopy.Builder(this).indent_(block, context);
     this.newline_();
     this.write('}');
   },

@@ -16,49 +16,64 @@ Canopy.Compiler.Sequence = {
     return sexp;
   },
 
+  compileNodeClasses: function(builder, nodeClassName, subclassIndex) {
+    var subclassName = nodeClassName + subclassIndex,
+        expressions  = this.expressions(),
+        i, n, j, m, labels;
+
+    builder.class_(subclassName, nodeClassName, function(builder) {
+      builder.constructor_(['textValue', 'offset', 'elements'], function(builder) {
+        for (i = 0, n = expressions.length; i < n; i++) {
+          labels = expressions[i].labels();
+          if (labels.length > 0) {
+            for (j = 0, m = labels.length; j < m; j++)
+              builder.attribute_(labels[j], builder.arrayLookup_('elements', i));
+          }
+        }
+      });
+    });
+    this._nodeClassName = subclassName;
+  },
+
   compile: function(builder, address, nodeType) {
     var temp = builder.localVars_({
       index:    builder.offset_(),
       elements: builder.emptyList_(),
-      labelled: '{}',
       text:     builder.emptyString_()
     });
 
     var startOffset = temp.index,
         elements    = temp.elements,
-        labelled    = temp.labelled,
         textValue   = temp.text;
 
-    this._compileExpressions(builder, 0, startOffset, elements, labelled, textValue);
+    this._compileExpressions(builder, 0, startOffset, elements, textValue);
     builder.if_(elements, function(builder) {
       builder.assign_(builder.offset_(), startOffset);
-      builder.syntaxNode_(address, nodeType, textValue, textValue + '.length', elements, labelled);
-    });
+      builder.syntaxNode_(address, nodeType, textValue, builder.stringLength_(textValue), elements, this._nodeClassName);
+    }, this);
     builder.else_(function(builder) {
       builder.assign_(address, builder.null_());
     });
   },
 
-  _compileExpressions: function(builder, index, startOffset, elements, labelled, textValue) {
+  _compileExpressions: function(builder, index, startOffset, elements, textValue) {
     var expressions = this.expressions();
     if (index === expressions.length) return;
 
-    var expAddr = builder.localVar_('address'),
-        label   = expressions[index].label();
+    var expAddr = builder.localVar_('address');
 
     expressions[index].compile(builder, expAddr);
 
     builder.if_(expAddr, function(builder) {
-      builder.line_(elements + '.push(' + expAddr + ')');
-      builder.line_(textValue + ' += ' + expAddr + '.textValue');
-      if (label) builder.line_(labelled + '.' + label + ' = ' + expAddr);
+      builder.append_(elements, expAddr);
+      builder.concatText_(textValue, expAddr);
 
-      this._compileExpressions(builder, index + 1, startOffset, elements, labelled, textValue);
+      this._compileExpressions(builder, index + 1, startOffset, elements, textValue);
 
     }, this);
     builder.else_(function(builder) {
-      builder.line_(elements + ' = null');
-      builder.line_(builder.offset_() + ' = ' + startOffset);
+      builder.assign_(elements, builder.null_());
+      builder.assign_(builder.offset_(), startOffset);
     });
   }
 };

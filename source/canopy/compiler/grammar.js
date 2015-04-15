@@ -12,13 +12,15 @@ Canopy.Compiler.Grammar = {
   },
 
   compile: function(builder) {
-    builder.closure_(function(builder) {
-      builder.line_('var extend = ' + Canopy.extend.toString());
-      builder.newline_();
-      builder.line_('var find = ' + Canopy.find.toString());
-      builder.newline_();
-      builder.line_('var formatError = ' + Canopy.formatError.toString());
-      builder.newline_();
+    builder.package_(this.grammarName(), function(builder) {
+      var nodeClassName = builder.syntaxNodeClass_(),
+          subclassIndex = 0;
+
+      var scan = function(node) {
+        if (node.compileNodeClasses) node.compileNodeClasses(builder, nodeClassName, ++subclassIndex);
+        node.forEach(scan, this);
+      };
+      scan.call(this, this);
 
       builder.module_('var Grammar', function(builder) {
         this.rules.forEach(function(rule) {
@@ -60,20 +62,7 @@ Canopy.Compiler.Grammar = {
       builder.line_('extend(Parser.prototype, Grammar)');
       builder.newline_();
 
-      builder.function_('var SyntaxNode', ['textValue', 'offset', 'elements', 'properties'], function(builder) {
-        builder.line_('this.textValue = textValue');
-        builder.line_('this.offset    = offset');
-        builder.line_('this.elements  = elements || []');
-
-        builder.line_('if (!properties) return');
-        builder.line_('for (var key in properties) this[key] = properties[key]');
-      });
-      builder.function_('SyntaxNode.prototype.forEach', ['block', 'context'], function(builder) {
-        builder.for_('var i = 0, n = this.elements.length; i < n; i++', function(builder) {
-          builder.line_('block.call(context, this.elements[i], i)');
-        });
-      });
-      builder.line_('Parser.SyntaxNode = SyntaxNode');
+      builder.assign_('Parser.' + nodeClassName, nodeClassName);
 
       var expose = function(builder) {
         builder.line_(grammar + ' = Grammar');
