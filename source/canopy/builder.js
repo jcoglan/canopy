@@ -133,7 +133,7 @@ Canopy.extend(Canopy.Builder.prototype, {
   syntaxNode_: function(address, nodeType, expression, bump, elements, nodeClass) {
     elements = ', ' + (elements || '[]');
 
-    var klass = this.localVar_('klass', nodeClass || 'SyntaxNode'),
+    var klass = nodeClass || 'SyntaxNode',
         type  = this.findType_(nodeType),
         of    = ', ' + this.offset_();
 
