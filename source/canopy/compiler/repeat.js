@@ -61,15 +61,19 @@ Canopy.Compiler.Repeat = {
     var startOffset = builder.localVar_('index', builder.offset_());
     this.atomic().compile(builder, address);
 
-    builder.if_(address, function(builder) {
-      if (nodeType) {
-        var type = builder.findType_(nodeType);
-        builder.extendNode_(address, type);
-      }
-    });
-    builder.else_(function(builder) {
+    var onFail = function(builder) {
       builder.assign_(builder.offset_(), startOffset);
       builder.syntaxNode_(address, nodeType, builder.emptyString_(), 0);
-    });
+    };
+
+    if (nodeType) {
+      builder.if_(address, function(builder) {
+        var type = builder.findType_(nodeType);
+        builder.extendNode_(address, type);
+      });
+      builder.else_(onFail);
+    } else {
+      builder.unless_(address, onFail);
+    }
   }
 };

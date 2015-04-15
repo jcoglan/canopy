@@ -1102,8 +1102,7 @@
         } else {
           address2 = null;
         }
-        if (address2) {
-        } else {
+        if (!(address2)) {
           this._offset = index3;
           var type2 = null;
           address2 = new SyntaxNode('', this._offset, []);
@@ -1340,8 +1339,7 @@
       var address1 = null;
       var index2 = this._offset;
       address1 = this._read_label();
-      if (address1) {
-      } else {
+      if (!(address1)) {
         this._offset = index2;
         var type0 = null;
         address1 = new SyntaxNode('', this._offset, []);
@@ -2091,8 +2089,7 @@
             this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: "\"^\""};
           }
         }
-        if (address2) {
-        } else {
+        if (!(address2)) {
           this._offset = index2;
           var type2 = null;
           address2 = new SyntaxNode('', this._offset, []);
