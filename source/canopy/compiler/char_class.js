@@ -5,10 +5,10 @@ Canopy.Compiler.CharClass = {
 
   compile: function(builder, address, nodeType) {
     var regex = new RegExp('^' + this.textValue),
-        slice = builder.slice_(1);
+        chunk = builder.chunk_(1);
 
-    builder.if_(builder.and_(slice, builder.regexMatch_(regex, slice)), function(builder) {
-      builder.syntaxNode_(address, nodeType, slice, 1);
+    builder.if_(builder.and_(chunk, builder.regexMatch_(regex, chunk)), function(builder) {
+      builder.syntaxNode_(address, nodeType, chunk, 1);
     });
     builder.else_(function(builder) {
       builder.failure_(address, this.textValue);

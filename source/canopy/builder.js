@@ -50,15 +50,15 @@ Canopy.extend(Canopy.Builder.prototype, {
     return 'this._offset';
   },
 
-  slice_: function(length) {
-    var slice = this.localVar_('slice'), input = this.input_(), of = this.offset_();
+  chunk_: function(length) {
+    var chunk = this.localVar_('chunk'), input = this.input_(), of = this.offset_();
     this.if_(input + '.length > ' + of, function(builder) {
-      builder.line_(slice + ' = ' + input + '.substring(' + of + ', ' + of + ' + ' + length + ')');
+      builder.line_(chunk + ' = ' + input + '.substring(' + of + ', ' + of + ' + ' + length + ')');
     });
     this.else_(function(builder) {
-      builder.line_(slice + ' = null');
+      builder.line_(chunk + ' = null');
     });
-    return slice;
+    return chunk;
   },
 
   syntaxNode_: function(address, nodeType, expression, bump, elements, labelled) {
@@ -90,7 +90,7 @@ Canopy.extend(Canopy.Builder.prototype, {
 
   failure_: function(address, expected) {
     this.line_(address + ' = null');
-    var input = this.input_(), of = this.offset_(), slice = this.slice_(1);
+    var input = this.input_(), of = this.offset_();
     var error = 'this.error = this.constructor.lastError';
     expected = expected.replace(/\\/g, '\\\\').replace(/"/g, '\\"');
     this.if_('!this.error || this.error.offset <= ' + of, function(builder) {

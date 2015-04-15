@@ -6,7 +6,7 @@ Canopy.Compiler.CIString = {
   compile: function(builder, address, nodeType) {
     var string = this.stringValue(),
         length = string.length,
-        chunk  = builder.localVar_('chunk', builder.slice_(length));
+        chunk  = builder.chunk_(length);
 
     builder.if_(builder.stringMatchCI_(chunk, string), function(builder) {
       builder.syntaxNode_(address, nodeType, chunk, length);
