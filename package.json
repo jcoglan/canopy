@@ -11,7 +11,7 @@
 , "preferGlobal"    : true
 , "devDependencies" : {"jstest": "", "wake": ""}
 
-, "scripts"         : { "build" : "./bin/canopy source/canopy/meta_grammar.peg && wake"
+, "scripts"         : { "build" : "wake && ./bin/canopy source/canopy/meta_grammar.peg"
                       , "test"  : "node spec/console.js"}
 
 , "bugs"            : {"url": "http://github.com/jcoglan/canopy/issues"}

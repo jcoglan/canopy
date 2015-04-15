@@ -17,11 +17,11 @@ Canopy.Compiler.Sequence = {
   },
 
   compile: function(builder, address, nodeType) {
-    var temp = builder.tempVars_({
+    var temp = builder.localVars_({
       index:    builder.offset_(),
-      elements: '[]',
+      elements: builder.emptyList_(),
       labelled: '{}',
-      text:     '""'
+      text:     builder.emptyString_()
     });
 
     var startOffset = temp.index,
@@ -31,11 +31,11 @@ Canopy.Compiler.Sequence = {
 
     this._compileExpressions(builder, 0, startOffset, elements, labelled, textValue);
     builder.if_(elements, function(builder) {
-      builder.line_(builder.offset_() + ' = ' + startOffset);
+      builder.assign_(builder.offset_(), startOffset);
       builder.syntaxNode_(address, nodeType, textValue, textValue + '.length', elements, labelled);
     });
     builder.else_(function(builder) {
-      builder.line_(address + ' = null');
+      builder.assign_(address, builder.null_());
     });
   },
 
@@ -43,7 +43,7 @@ Canopy.Compiler.Sequence = {
     var expressions = this.expressions();
     if (index === expressions.length) return;
 
-    var expAddr = builder.tempVar_('address'),
+    var expAddr = builder.localVar_('address'),
         label   = expressions[index].label();
 
     expressions[index].compile(builder, expAddr);

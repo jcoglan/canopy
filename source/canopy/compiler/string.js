@@ -4,11 +4,12 @@ Canopy.Compiler.String = {
   },
 
   compile: function(builder, address, nodeType) {
-    var string = this.textValue,
-        length = eval(this.textValue).length;
+    var string = eval(this.textValue),
+        length = string.length,
+        chunk  = builder.localVar_('chunk', builder.slice_(length));
 
-    builder.if_(builder.slice_(length) + ' === ' + string, function(builder) {
-      builder.syntaxNode_(address, nodeType, string, length);
+    builder.if_(builder.stringMatch_(chunk, string), function(builder) {
+      builder.syntaxNode_(address, nodeType, chunk, length);
     });
     builder.else_(function(builder) {
       builder.failure_(address, this.textValue);

@@ -41,7 +41,7 @@ Canopy.Compiler.Grammar = {
         var input = builder.input_(),
             of    = builder.offset_();
 
-        builder.var_('result', 'this.__consume__' + root + '()');
+        builder.var_('result', 'this._read_' + root + '()');
 
         builder.if_('result && ' + of + ' === ' + input + '.length', function(builder) {
           builder.return_('result');

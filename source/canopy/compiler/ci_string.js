@@ -6,11 +6,10 @@ Canopy.Compiler.CIString = {
   compile: function(builder, address, nodeType) {
     var string = this.stringValue(),
         length = string.length,
-        temp   = builder.tempVar_('temp', builder.slice_(length)),
-        tlc    = '.toLowerCase()';
+        chunk  = builder.localVar_('chunk', builder.slice_(length));
 
-    builder.if_(temp + tlc + ' === "' + string + '"' + tlc, function(builder) {
-      builder.syntaxNode_(address, nodeType, temp, length);
+    builder.if_(builder.stringMatchCI_(chunk, string), function(builder) {
+      builder.syntaxNode_(address, nodeType, chunk, length);
     });
     builder.else_(function(builder) {
       builder.failure_(address, this.textValue);

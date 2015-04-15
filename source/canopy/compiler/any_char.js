@@ -4,13 +4,13 @@ Canopy.Compiler.AnyChar = {
   },
 
   compile: function(builder, address, nodeType) {
-    var temp = builder.tempVar_('temp', builder.slice_(1));
+    var nextChar = builder.localVar_('nextChar', builder.slice_(1));
 
-    builder.if_(temp + ' === null', function(builder) {
+    builder.if_(builder.isNull_(nextChar), function(builder) {
       builder.failure_(address, '<any char>');
     });
     builder.else_(function(builder) {
-      builder.syntaxNode_(address, nodeType, temp, 1);
+      builder.syntaxNode_(address, nodeType, nextChar, 1);
     });
   }
 };

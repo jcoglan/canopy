@@ -13,18 +13,18 @@ Canopy.Compiler.Predicate = {
   },
 
   compile: function(builder, address, nodeType) {
-    var startOffset = builder.tempVar_('index', builder.offset_()),
+    var startOffset = builder.localVar_('index', builder.offset_()),
         table       = {'&': 'if_', '!': 'unless_'},
         branch      = table[this.predicate.textValue];
 
     this.atomic().compile(builder, address);
-    builder.line_(builder.offset_() + ' = ' + startOffset);
+    builder.assign_(builder.offset_(), startOffset);
 
     builder[branch](address, function(builder) {
-      builder.syntaxNode_(address, nodeType, '""', 0);
+      builder.syntaxNode_(address, nodeType, builder.emptyString_(), 0);
     });
     builder.else_(function(builder) {
-      builder.line_(address + ' = null');
+      builder.assign_(address, builder.null_());
     });
   }
 };

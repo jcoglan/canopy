@@ -51,7 +51,7 @@ Canopy.extend(Canopy.Builder.prototype, {
   },
 
   slice_: function(length) {
-    var slice = this.tempVar_('slice'), input = this.input_(), of = this.offset_();
+    var slice = this.localVar_('slice'), input = this.input_(), of = this.offset_();
     this.if_(input + '.length > ' + of, function(builder) {
       builder.line_(slice + ' = ' + input + '.substring(' + of + ', ' + of + ' + ' + length + ')');
     });
@@ -65,7 +65,7 @@ Canopy.extend(Canopy.Builder.prototype, {
     elements = ', ' + (elements || '[]');
     labelled = labelled ? ', ' + labelled : '';
 
-    var klass = this.tempVar_('klass', 'this.constructor.SyntaxNode'),
+    var klass = this.localVar_('klass', 'this.constructor.SyntaxNode'),
         type  = this.findType_(nodeType),
         of    = ', ' + this.offset_();
 
@@ -76,9 +76,9 @@ Canopy.extend(Canopy.Builder.prototype, {
 
   findType_: function(nodeType) {
     if (nodeType)
-      return this.tempVar_('type', 'find(this.constructor, "' + nodeType + '")');
+      return this.localVar_('type', 'find(this.constructor, "' + nodeType + '")');
     else
-      return this.tempVar_('type', 'null');
+      return this.localVar_('type', 'null');
   },
 
   extendNode_: function(address, nodeType) {
@@ -149,8 +149,16 @@ Canopy.extend(Canopy.Builder.prototype, {
     this.write('}');
   },
 
+  assign_: function(name, value) {
+    this.line_(name + ' = ' + value);
+  },
+
+  jump_: function(address, rule) {
+    this.assign_(address, 'this._read_' + rule + '()');
+  },
+
   ivar_: function(name, value) {
-    this.line_('this._' + name + ' = ' + value);
+    this.assign_('this._' + name, value);
   },
 
   var_: function() {
@@ -158,7 +166,7 @@ Canopy.extend(Canopy.Builder.prototype, {
       this.line_('var ' + arguments[i] + ' = ' + arguments[i+1]);
   },
 
-  tempVar_: function(name, value) {
+  localVar_: function(name, value) {
     this._varIndex[name] = this._varIndex[name] || 0;
     var varName = name + this._varIndex[name];
     this._varIndex[name] += 1;
@@ -166,7 +174,7 @@ Canopy.extend(Canopy.Builder.prototype, {
     return varName;
   },
 
-  tempVars_: function(vars) {
+  localVars_: function(vars) {
     var names = {}, code = [], varName;
     for (var name in vars) {
       this._varIndex[name] = this._varIndex[name] || 0;
@@ -212,5 +220,63 @@ Canopy.extend(Canopy.Builder.prototype, {
 
   return_: function(expression) {
     this.line_('return ' + expression);
+  },
+
+  append_: function(list, value) {
+    this.line_(list + '.push(' + value + ')');
+  },
+
+  concatText_: function(buffer, value) {
+    this.line_(buffer + ' += ' + value + '.textValue');
+  },
+
+  decrement_: function(variable) {
+    this.line_('--' + variable);
+  },
+
+  and_: function(left, right) {
+    return left + ' && ' + right;
+  },
+
+  regexMatch_: function(regex, expression) {
+    return '/' + regex.source + '/.test(' + expression + ')';
+  },
+
+  stringMatch_: function(expression, string) {
+    var quoted = "'" + string.replace(/\\/g, '\\\\').replace(/'/g, "\\'") + "'";
+    return expression + ' === ' + quoted;
+  },
+
+  stringMatchCI_: function(expression, string) {
+    var quoted = "'" + string.replace(/\\/g, '\\\\').replace(/'/g, "\\'") + "'";
+    return expression + '.toLowerCase() === ' + quoted + '.toLowerCase()';
+  },
+
+  stringLength_: function(expression) {
+    return expression + '.length';
+  },
+
+  isZero_: function(expression) {
+    return expression + ' <= 0';
+  },
+
+  isNull_: function(expression) {
+    return expression + ' === null';
+  },
+
+  emptyList_: function() {
+    return '[]';
+  },
+
+  emptyString_: function() {
+    return "''";
+  },
+
+  true_: function() {
+    return 'true';
+  },
+
+  null_: function() {
+    return 'null';
   }
 });

@@ -17,7 +17,7 @@ Canopy.Compiler.Choice = {
   },
 
   compile: function(builder, address, nodeType) {
-    var startOffset = builder.tempVar_('index', builder.offset_());
+    var startOffset = builder.localVar_('index', builder.offset_());
     this._compileChoices(builder, 0, address, nodeType, startOffset);
   },
 
@@ -34,7 +34,7 @@ Canopy.Compiler.Choice = {
       }
     });
     builder.else_(function(builder) {
-      builder.line_(builder.offset_() + ' = ' + startOffset);
+      builder.assign_(builder.offset_(), startOffset);
       this._compileChoices(builder, index + 1, address, nodeType, startOffset);
     }, this);
   }
