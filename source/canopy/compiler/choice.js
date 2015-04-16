@@ -27,14 +27,18 @@ Canopy.Compiler.Choice = {
 
     expressions[index].compile(builder, address);
 
-    builder.if_(address, function(builder) {
-      if (nodeType) {
-        var type = builder.findType_(nodeType);
-        builder.extendNode_(address, type);
-      }
-    }, function(builder) {
+    var onFail = function(builder) {
       builder.assign_(builder.offset_(), startOffset);
       this._compileChoices(builder, index + 1, address, nodeType, startOffset);
-    }, this);
+    };
+
+    if (nodeType) {
+      builder.if_(address, function(builder) {
+        var type = builder.findType_(nodeType);
+        builder.extendNode_(address, type);
+      }, onFail, this);
+    } else {
+      builder.unless_(address, onFail, this);
+    }
   }
 };

@@ -632,12 +632,10 @@
       }
       var index1 = this._offset;
       address0 = this._read_choice_expression();
-      if (address0) {
-      } else {
+      if (!address0) {
         this._offset = index1;
         address0 = this._read_choice_part();
-        if (address0) {
-        } else {
+        if (!address0) {
           this._offset = index1;
         }
       }
@@ -958,12 +956,10 @@
       var address1 = null;
       var index2 = this._offset;
       address1 = this._read_sequence_expression();
-      if (address1) {
-      } else {
+      if (!address1) {
         this._offset = index2;
         address1 = this._read_sequence_part();
-        if (address1) {
-        } else {
+        if (!address1) {
           this._offset = index2;
         }
       }
@@ -1273,12 +1269,10 @@
         var address2 = null;
         var index3 = this._offset;
         address2 = this._read_quantified_atom();
-        if (address2) {
-        } else {
+        if (!address2) {
           this._offset = index3;
           address2 = this._read_atom();
-          if (address2) {
-          } else {
+          if (!address2) {
             this._offset = index3;
           }
         }
@@ -1356,32 +1350,25 @@
       }
       var index1 = this._offset;
       address0 = this._read_parenthesised_expression();
-      if (address0) {
-      } else {
+      if (!address0) {
         this._offset = index1;
         address0 = this._read_predicated_atom();
-        if (address0) {
-        } else {
+        if (!address0) {
           this._offset = index1;
           address0 = this._read_reference_expression();
-          if (address0) {
-          } else {
+          if (!address0) {
             this._offset = index1;
             address0 = this._read_string_expression();
-            if (address0) {
-            } else {
+            if (!address0) {
               this._offset = index1;
               address0 = this._read_ci_string_expression();
-              if (address0) {
-              } else {
+              if (!address0) {
                 this._offset = index1;
                 address0 = this._read_any_char_expression();
-                if (address0) {
-                } else {
+                if (!address0) {
                   this._offset = index1;
                   address0 = this._read_char_class_expression();
-                  if (address0) {
-                  } else {
+                  if (!address0) {
                     this._offset = index1;
                   }
                 }
@@ -1422,8 +1409,7 @@
           this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: "\"&\""};
         }
       }
-      if (address1) {
-      } else {
+      if (!address1) {
         this._offset = index2;
         var chunk1 = null;
         if (this._input.length > this._offset) {
@@ -1444,8 +1430,7 @@
             this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: "\"!\""};
           }
         }
-        if (address1) {
-        } else {
+        if (!address1) {
           this._offset = index2;
         }
       }
@@ -1633,8 +1618,7 @@
           } else {
             address3 = null;
           }
-          if (address3) {
-          } else {
+          if (!address3) {
             this._offset = index3;
             var chunk3 = null;
             if (this._input.length > this._offset) {
@@ -1655,8 +1639,7 @@
                 this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: "[^\"]"};
               }
             }
-            if (address3) {
-            } else {
+            if (!address3) {
               this._offset = index3;
             }
           }
@@ -1831,8 +1814,7 @@
           } else {
             address3 = null;
           }
-          if (address3) {
-          } else {
+          if (!address3) {
             this._offset = index3;
             var chunk3 = null;
             if (this._input.length > this._offset) {
@@ -1853,8 +1835,7 @@
                 this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: "[^`]"};
               }
             }
-            if (address3) {
-            } else {
+            if (!address3) {
               this._offset = index3;
             }
           }
@@ -2091,8 +2072,7 @@
             } else {
               address4 = null;
             }
-            if (address4) {
-            } else {
+            if (!address4) {
               this._offset = index4;
               var chunk4 = null;
               if (this._input.length > this._offset) {
@@ -2113,8 +2093,7 @@
                   this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: "[^\\]]"};
                 }
               }
-              if (address4) {
-              } else {
+              if (!address4) {
                 this._offset = index4;
               }
             }
@@ -2477,8 +2456,7 @@
           this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: "\"?\""};
         }
       }
-      if (address0) {
-      } else {
+      if (!address0) {
         this._offset = index1;
         var chunk1 = null;
         if (this._input.length > this._offset) {
@@ -2499,8 +2477,7 @@
             this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: "\"*\""};
           }
         }
-        if (address0) {
-        } else {
+        if (!address0) {
           this._offset = index1;
           var chunk2 = null;
           if (this._input.length > this._offset) {
@@ -2521,8 +2498,7 @@
               this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: "\"+\""};
             }
           }
-          if (address0) {
-          } else {
+          if (!address0) {
             this._offset = index1;
           }
         }
