@@ -100,6 +100,7 @@
   
   var SyntaxNode5 = function(textValue, offset, elements) {
     SyntaxNode.apply(this, arguments);
+    this.parsing_expression = elements[2];
   };
   (function() {
     var parent = function() {};
@@ -109,7 +110,9 @@
   
   var SyntaxNode6 = function(textValue, offset, elements) {
     SyntaxNode.apply(this, arguments);
-    this.parsing_expression = elements[2];
+    this.first_part = elements[0];
+    this.choice_part = elements[0];
+    this.rest = elements[1];
   };
   (function() {
     var parent = function() {};
@@ -119,9 +122,8 @@
   
   var SyntaxNode7 = function(textValue, offset, elements) {
     SyntaxNode.apply(this, arguments);
-    this.first_part = elements[0];
-    this.choice_part = elements[0];
-    this.rest = elements[1];
+    this.expression = elements[3];
+    this.choice_part = elements[3];
   };
   (function() {
     var parent = function() {};
@@ -131,8 +133,7 @@
   
   var SyntaxNode8 = function(textValue, offset, elements) {
     SyntaxNode.apply(this, arguments);
-    this.expression = elements[3];
-    this.choice_part = elements[3];
+    this.type_expression = elements[1];
   };
   (function() {
     var parent = function() {};
@@ -142,6 +143,7 @@
   
   var SyntaxNode9 = function(textValue, offset, elements) {
     SyntaxNode.apply(this, arguments);
+    this.object_identifier = elements[1];
   };
   (function() {
     var parent = function() {};
@@ -151,7 +153,9 @@
   
   var SyntaxNode10 = function(textValue, offset, elements) {
     SyntaxNode.apply(this, arguments);
-    this.type_expression = elements[1];
+    this.first_part = elements[0];
+    this.sequence_part = elements[0];
+    this.rest = elements[1];
   };
   (function() {
     var parent = function() {};
@@ -161,7 +165,8 @@
   
   var SyntaxNode11 = function(textValue, offset, elements) {
     SyntaxNode.apply(this, arguments);
-    this.object_identifier = elements[1];
+    this.expression = elements[1];
+    this.sequence_part = elements[1];
   };
   (function() {
     var parent = function() {};
@@ -171,9 +176,7 @@
   
   var SyntaxNode12 = function(textValue, offset, elements) {
     SyntaxNode.apply(this, arguments);
-    this.first_part = elements[0];
-    this.sequence_part = elements[0];
-    this.rest = elements[1];
+    this.expression = elements[1];
   };
   (function() {
     var parent = function() {};
@@ -183,8 +186,8 @@
   
   var SyntaxNode13 = function(textValue, offset, elements) {
     SyntaxNode.apply(this, arguments);
-    this.expression = elements[1];
-    this.sequence_part = elements[1];
+    this.atom = elements[0];
+    this.quantifier = elements[1];
   };
   (function() {
     var parent = function() {};
@@ -194,7 +197,8 @@
   
   var SyntaxNode14 = function(textValue, offset, elements) {
     SyntaxNode.apply(this, arguments);
-    this.expression = elements[1];
+    this.predicate = elements[0];
+    this.atom = elements[1];
   };
   (function() {
     var parent = function() {};
@@ -204,8 +208,7 @@
   
   var SyntaxNode15 = function(textValue, offset, elements) {
     SyntaxNode.apply(this, arguments);
-    this.atom = elements[0];
-    this.quantifier = elements[1];
+    this.identifier = elements[0];
   };
   (function() {
     var parent = function() {};
@@ -215,8 +218,7 @@
   
   var SyntaxNode16 = function(textValue, offset, elements) {
     SyntaxNode.apply(this, arguments);
-    this.predicate = elements[0];
-    this.atom = elements[1];
+    this.identifier = elements[0];
   };
   (function() {
     var parent = function() {};
@@ -236,95 +238,12 @@
   
   var SyntaxNode18 = function(textValue, offset, elements) {
     SyntaxNode.apply(this, arguments);
-  };
-  (function() {
-    var parent = function() {};
-    parent.prototype = SyntaxNode.prototype;
-    SyntaxNode18.prototype = new parent();
-  })();
-  
-  var SyntaxNode19 = function(textValue, offset, elements) {
-    SyntaxNode.apply(this, arguments);
-  };
-  (function() {
-    var parent = function() {};
-    parent.prototype = SyntaxNode.prototype;
-    SyntaxNode19.prototype = new parent();
-  })();
-  
-  var SyntaxNode20 = function(textValue, offset, elements) {
-    SyntaxNode.apply(this, arguments);
-  };
-  (function() {
-    var parent = function() {};
-    parent.prototype = SyntaxNode.prototype;
-    SyntaxNode20.prototype = new parent();
-  })();
-  
-  var SyntaxNode21 = function(textValue, offset, elements) {
-    SyntaxNode.apply(this, arguments);
-  };
-  (function() {
-    var parent = function() {};
-    parent.prototype = SyntaxNode.prototype;
-    SyntaxNode21.prototype = new parent();
-  })();
-  
-  var SyntaxNode22 = function(textValue, offset, elements) {
-    SyntaxNode.apply(this, arguments);
-  };
-  (function() {
-    var parent = function() {};
-    parent.prototype = SyntaxNode.prototype;
-    SyntaxNode22.prototype = new parent();
-  })();
-  
-  var SyntaxNode23 = function(textValue, offset, elements) {
-    SyntaxNode.apply(this, arguments);
-  };
-  (function() {
-    var parent = function() {};
-    parent.prototype = SyntaxNode.prototype;
-    SyntaxNode23.prototype = new parent();
-  })();
-  
-  var SyntaxNode24 = function(textValue, offset, elements) {
-    SyntaxNode.apply(this, arguments);
-    this.identifier = elements[0];
-  };
-  (function() {
-    var parent = function() {};
-    parent.prototype = SyntaxNode.prototype;
-    SyntaxNode24.prototype = new parent();
-  })();
-  
-  var SyntaxNode25 = function(textValue, offset, elements) {
-    SyntaxNode.apply(this, arguments);
-    this.identifier = elements[0];
-  };
-  (function() {
-    var parent = function() {};
-    parent.prototype = SyntaxNode.prototype;
-    SyntaxNode25.prototype = new parent();
-  })();
-  
-  var SyntaxNode26 = function(textValue, offset, elements) {
-    SyntaxNode.apply(this, arguments);
     this.identifier = elements[1];
   };
   (function() {
     var parent = function() {};
     parent.prototype = SyntaxNode.prototype;
-    SyntaxNode26.prototype = new parent();
-  })();
-  
-  var SyntaxNode27 = function(textValue, offset, elements) {
-    SyntaxNode.apply(this, arguments);
-  };
-  (function() {
-    var parent = function() {};
-    parent.prototype = SyntaxNode.prototype;
-    SyntaxNode27.prototype = new parent();
+    SyntaxNode18.prototype = new parent();
   })();
   
   var Grammar = {
@@ -693,7 +612,7 @@
       if (elements0) {
         this._offset = index1;
         var type3 = null;
-        address0 = new SyntaxNode5(text0, this._offset, elements0);
+        address0 = new SyntaxNode(text0, this._offset, elements0);
         if (typeof type3 === "object") {
           extend(address0, type3);
         }
@@ -855,7 +774,7 @@
       if (elements0) {
         this._offset = index1;
         var type4 = null;
-        address0 = new SyntaxNode6(text0, this._offset, elements0);
+        address0 = new SyntaxNode5(text0, this._offset, elements0);
         if (typeof type4 === "object") {
           extend(address0, type4);
         }
@@ -978,7 +897,7 @@
           if (elements2) {
             this._offset = index3;
             var type3 = null;
-            address3 = new SyntaxNode8(text2, this._offset, elements2);
+            address3 = new SyntaxNode7(text2, this._offset, elements2);
             if (typeof type3 === "object") {
               extend(address3, type3);
             }
@@ -1017,7 +936,7 @@
       if (elements0) {
         this._offset = index1;
         var type5 = find(this.constructor, "Choice");
-        address0 = new SyntaxNode7(text0, this._offset, elements0);
+        address0 = new SyntaxNode6(text0, this._offset, elements0);
         if (typeof type5 === "object") {
           extend(address0, type5);
         }
@@ -1094,7 +1013,7 @@
         if (elements1) {
           this._offset = index4;
           var type1 = null;
-          address2 = new SyntaxNode10(text1, this._offset, elements1);
+          address2 = new SyntaxNode8(text1, this._offset, elements1);
           if (typeof type1 === "object") {
             extend(address2, type1);
           }
@@ -1125,7 +1044,7 @@
       if (elements0) {
         this._offset = index1;
         var type3 = find(this.constructor, "ChoicePart");
-        address0 = new SyntaxNode9(text0, this._offset, elements0);
+        address0 = new SyntaxNode(text0, this._offset, elements0);
         if (typeof type3 === "object") {
           extend(address0, type3);
         }
@@ -1210,7 +1129,7 @@
       if (elements0) {
         this._offset = index1;
         var type2 = null;
-        address0 = new SyntaxNode11(text0, this._offset, elements0);
+        address0 = new SyntaxNode9(text0, this._offset, elements0);
         if (typeof type2 === "object") {
           extend(address0, type2);
         }
@@ -1278,7 +1197,7 @@
           if (elements2) {
             this._offset = index3;
             var type1 = null;
-            address3 = new SyntaxNode13(text2, this._offset, elements2);
+            address3 = new SyntaxNode11(text2, this._offset, elements2);
             if (typeof type1 === "object") {
               extend(address3, type1);
             }
@@ -1317,7 +1236,7 @@
       if (elements0) {
         this._offset = index1;
         var type3 = find(this.constructor, "Sequence");
-        address0 = new SyntaxNode12(text0, this._offset, elements0);
+        address0 = new SyntaxNode10(text0, this._offset, elements0);
         if (typeof type3 === "object") {
           extend(address0, type3);
         }
@@ -1377,7 +1296,7 @@
       if (elements0) {
         this._offset = index1;
         var type1 = find(this.constructor, "SequencePart");
-        address0 = new SyntaxNode14(text0, this._offset, elements0);
+        address0 = new SyntaxNode12(text0, this._offset, elements0);
         if (typeof type1 === "object") {
           extend(address0, type1);
         }
@@ -1417,7 +1336,7 @@
       if (elements0) {
         this._offset = index1;
         var type0 = find(this.constructor, "Repeat");
-        address0 = new SyntaxNode15(text0, this._offset, elements0);
+        address0 = new SyntaxNode13(text0, this._offset, elements0);
         if (typeof type0 === "object") {
           extend(address0, type0);
         }
@@ -1549,7 +1468,7 @@
       if (elements0) {
         this._offset = index1;
         var type2 = find(this.constructor, "Predicate");
-        address0 = new SyntaxNode16(text0, this._offset, elements0);
+        address0 = new SyntaxNode14(text0, this._offset, elements0);
         if (typeof type2 === "object") {
           extend(address0, type2);
         }
@@ -1601,7 +1520,7 @@
       if (elements0) {
         this._offset = index1;
         var type1 = find(this.constructor, "Reference");
-        address0 = new SyntaxNode17(text0, this._offset, elements0);
+        address0 = new SyntaxNode15(text0, this._offset, elements0);
         if (typeof type1 === "object") {
           extend(address0, type1);
         }
@@ -1706,7 +1625,7 @@
           if (elements2) {
             this._offset = index4;
             var type3 = null;
-            address3 = new SyntaxNode19(text2, this._offset, elements2);
+            address3 = new SyntaxNode(text2, this._offset, elements2);
             if (typeof type3 === "object") {
               extend(address3, type3);
             }
@@ -1799,7 +1718,7 @@
       if (elements0) {
         this._offset = index1;
         var type7 = find(this.constructor, "String");
-        address0 = new SyntaxNode18(text0, this._offset, elements0);
+        address0 = new SyntaxNode(text0, this._offset, elements0);
         if (typeof type7 === "object") {
           extend(address0, type7);
         }
@@ -1904,7 +1823,7 @@
           if (elements2) {
             this._offset = index4;
             var type3 = null;
-            address3 = new SyntaxNode21(text2, this._offset, elements2);
+            address3 = new SyntaxNode(text2, this._offset, elements2);
             if (typeof type3 === "object") {
               extend(address3, type3);
             }
@@ -1997,7 +1916,7 @@
       if (elements0) {
         this._offset = index1;
         var type7 = find(this.constructor, "CIString");
-        address0 = new SyntaxNode20(text0, this._offset, elements0);
+        address0 = new SyntaxNode(text0, this._offset, elements0);
         if (typeof type7 === "object") {
           extend(address0, type7);
         }
@@ -2164,7 +2083,7 @@
             if (elements2) {
               this._offset = index5;
               var type5 = null;
-              address4 = new SyntaxNode23(text2, this._offset, elements2);
+              address4 = new SyntaxNode(text2, this._offset, elements2);
               if (typeof type5 === "object") {
                 extend(address4, type5);
               }
@@ -2261,7 +2180,7 @@
       if (elements0) {
         this._offset = index1;
         var type9 = find(this.constructor, "CharClass");
-        address0 = new SyntaxNode22(text0, this._offset, elements0);
+        address0 = new SyntaxNode(text0, this._offset, elements0);
         if (typeof type9 === "object") {
           extend(address0, type9);
         }
@@ -2319,7 +2238,7 @@
       if (elements0) {
         this._offset = index1;
         var type1 = null;
-        address0 = new SyntaxNode24(text0, this._offset, elements0);
+        address0 = new SyntaxNode16(text0, this._offset, elements0);
         if (typeof type1 === "object") {
           extend(address0, type1);
         }
@@ -2386,7 +2305,7 @@
           if (elements2) {
             this._offset = index3;
             var type1 = null;
-            address3 = new SyntaxNode26(text2, this._offset, elements2);
+            address3 = new SyntaxNode18(text2, this._offset, elements2);
             if (typeof type1 === "object") {
               extend(address3, type1);
             }
@@ -2425,7 +2344,7 @@
       if (elements0) {
         this._offset = index1;
         var type3 = null;
-        address0 = new SyntaxNode25(text0, this._offset, elements0);
+        address0 = new SyntaxNode17(text0, this._offset, elements0);
         if (typeof type3 === "object") {
           extend(address0, type3);
         }
@@ -2520,7 +2439,7 @@
       if (elements0) {
         this._offset = index1;
         var type3 = null;
-        address0 = new SyntaxNode27(text0, this._offset, elements0);
+        address0 = new SyntaxNode(text0, this._offset, elements0);
         if (typeof type3 === "object") {
           extend(address0, type3);
         }

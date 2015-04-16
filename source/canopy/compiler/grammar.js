@@ -14,10 +14,13 @@ Canopy.Compiler.Grammar = {
   compile: function(builder) {
     builder.package_(this.grammarName(), function(builder) {
       var nodeClassName = builder.syntaxNodeClass_(),
-          subclassIndex = 0;
+          subclassIndex = 1;
 
       var scan = function(node) {
-        if (node.compileNodeClasses) node.compileNodeClasses(builder, nodeClassName, ++subclassIndex);
+        if (node.compileNodeClasses) {
+          if (node.compileNodeClasses(builder, nodeClassName, subclassIndex))
+            subclassIndex += 1;
+        }
         node.forEach(scan, this);
       };
       scan.call(this, this);

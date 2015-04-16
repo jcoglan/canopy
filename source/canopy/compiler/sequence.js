@@ -19,20 +19,28 @@ Canopy.Compiler.Sequence = {
   compileNodeClasses: function(builder, nodeClassName, subclassIndex) {
     var subclassName = nodeClassName + subclassIndex,
         expressions  = this.expressions(),
-        i, n, j, m, labels;
+        labels       = {},
+        anyLabels    = false,
+        exprLabels, i, j, m, n;
+
+    for (i = 0, n = expressions.length; i < n; i++) {
+      exprLabels = expressions[i].labels();
+      if (exprLabels.length === 0) continue;
+      anyLabels = true;
+      for (j = 0, m = exprLabels.length; j < m; j++)
+        labels[exprLabels[j]] = i;
+    }
+
+    if (!anyLabels) return false;
 
     builder.class_(subclassName, nodeClassName, function(builder) {
       builder.constructor_(['textValue', 'offset', 'elements'], function(builder) {
-        for (i = 0, n = expressions.length; i < n; i++) {
-          labels = expressions[i].labels();
-          if (labels.length > 0) {
-            for (j = 0, m = labels.length; j < m; j++)
-              builder.attribute_(labels[j], builder.arrayLookup_('elements', i));
-          }
-        }
+        for (var key in labels)
+          builder.attribute_(key, builder.arrayLookup_('elements', labels[key]));
       });
     });
     this._nodeClassName = subclassName;
+    return true;
   },
 
   compile: function(builder, address, nodeType) {
