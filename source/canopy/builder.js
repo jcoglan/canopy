@@ -123,8 +123,7 @@ Canopy.extend(Canopy.Builder.prototype, {
     var chunk = this.localVar_('chunk'), input = this.input_(), of = this.offset_();
     this.if_(input + '.length > ' + of, function(builder) {
       builder.line_(chunk + ' = ' + input + '.substring(' + of + ', ' + of + ' + ' + length + ')');
-    });
-    this.else_(function(builder) {
+    }, function(builder) {
       builder.line_(chunk + ' = null');
     });
     return chunk;
@@ -261,19 +260,21 @@ Canopy.extend(Canopy.Builder.prototype, {
     this.conditional_('while', condition, block, context);
   },
 
-  if_: function(condition, block, context) {
+  if_: function(condition, block, else_, context) {
+    if (typeof else_ !== 'function') {
+      context = else_;
+      else_   = null;
+    }
     this.conditional_('if', condition, block, context);
-  },
-
-  unless_: function(condition, block, context) {
-    this.conditional_('if', '!(' + condition + ')', block, context);
-  },
-
-  else_: function(block, context) {
+    if (!else_) return;
     this.write(' else {');
-    this.indent_(block, context);
+    this.indent_(else_, context);
     this.newline_();
     this.write('}');
+  },
+
+  unless_: function(condition, block, else_, context) {
+    this.if_('!' + condition, block, else_, context);
   },
 
   return_: function(expression) {

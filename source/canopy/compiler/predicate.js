@@ -22,8 +22,7 @@ Canopy.Compiler.Predicate = {
 
     builder[branch](address, function(builder) {
       builder.syntaxNode_(address, nodeType, builder.emptyString_(), 0);
-    });
-    builder.else_(function(builder) {
+    }, function(builder) {
       builder.assign_(address, builder.null_());
     });
   }

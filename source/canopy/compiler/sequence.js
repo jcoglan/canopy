@@ -58,10 +58,9 @@ Canopy.Compiler.Sequence = {
     builder.if_(elements, function(builder) {
       builder.assign_(builder.offset_(), startOffset);
       builder.syntaxNode_(address, nodeType, textValue, builder.stringLength_(textValue), elements, this._nodeClassName);
-    }, this);
-    builder.else_(function(builder) {
+    }, function(builder) {
       builder.assign_(address, builder.null_());
-    });
+    }, this);
   },
 
   _compileExpressions: function(builder, index, startOffset, elements, textValue) {
@@ -78,10 +77,9 @@ Canopy.Compiler.Sequence = {
 
       this._compileExpressions(builder, index + 1, startOffset, elements, textValue);
 
-    }, this);
-    builder.else_(function(builder) {
+    }, function(builder) {
       builder.assign_(elements, builder.null_());
       builder.assign_(builder.offset_(), startOffset);
-    });
+    }, this);
   }
 };

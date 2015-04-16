@@ -1021,7 +1021,7 @@
         } else {
           address2 = null;
         }
-        if (!(address2)) {
+        if (!address2) {
           this._offset = index3;
           var type2 = null;
           address2 = new SyntaxNode('', this._offset, []);
@@ -1258,7 +1258,7 @@
       var address1 = null;
       var index2 = this._offset;
       address1 = this._read_label();
-      if (!(address1)) {
+      if (!address1) {
         this._offset = index2;
         var type0 = null;
         address1 = new SyntaxNode('', this._offset, []);
@@ -1496,7 +1496,7 @@
         var index2 = this._offset;
         address2 = this._read_assignment();
         this._offset = index2;
-        if (!(address2)) {
+        if (!address2) {
           var type0 = null;
           address2 = new SyntaxNode('', this._offset, []);
           if (typeof type0 === "object") {
@@ -2008,7 +2008,7 @@
             this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: "\"^\""};
           }
         }
-        if (!(address2)) {
+        if (!address2) {
           this._offset = index2;
           var type2 = null;
           address2 = new SyntaxNode('', this._offset, []);
@@ -2571,7 +2571,7 @@
     if (result && this._offset === this._input.length) {
       return result;
     }
-    if (!(this.error)) {
+    if (!this.error) {
       this.error = {input: this._input, offset: this._offset, expected: "<EOF>"};
     }
     var message = formatError(this.error);

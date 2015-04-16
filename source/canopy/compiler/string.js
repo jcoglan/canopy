@@ -10,8 +10,7 @@ Canopy.Compiler.String = {
 
     builder.if_(builder.stringMatch_(chunk, string), function(builder) {
       builder.syntaxNode_(address, nodeType, chunk, length);
-    });
-    builder.else_(function(builder) {
+    }, function(builder) {
       builder.failure_(address, this.textValue);
     }, this);
   }

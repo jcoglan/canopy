@@ -51,8 +51,7 @@ Canopy.Compiler.Repeat = {
     builder.if_(builder.isZero_(remaining), function(builder) {
       builder.assign_(builder.offset_(), startOffset);
       builder.syntaxNode_(address, nodeType, textValue, builder.stringLength_(textValue), elements);
-    });
-    builder.else_(function(builder) {
+    }, function(builder) {
       builder.assign_(address, builder.null_());
     });
   },
@@ -70,8 +69,7 @@ Canopy.Compiler.Repeat = {
       builder.if_(address, function(builder) {
         var type = builder.findType_(nodeType);
         builder.extendNode_(address, type);
-      });
-      builder.else_(onFail);
+      }, onFail);
     } else {
       builder.unless_(address, onFail);
     }

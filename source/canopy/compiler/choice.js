@@ -32,8 +32,7 @@ Canopy.Compiler.Choice = {
         var type = builder.findType_(nodeType);
         builder.extendNode_(address, type);
       }
-    });
-    builder.else_(function(builder) {
+    }, function(builder) {
       builder.assign_(builder.offset_(), startOffset);
       this._compileChoices(builder, index + 1, address, nodeType, startOffset);
     }, this);

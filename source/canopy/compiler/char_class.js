@@ -9,8 +9,7 @@ Canopy.Compiler.CharClass = {
 
     builder.if_(builder.and_(chunk, builder.regexMatch_(regex, chunk)), function(builder) {
       builder.syntaxNode_(address, nodeType, chunk, 1);
-    });
-    builder.else_(function(builder) {
+    }, function(builder) {
       builder.failure_(address, this.textValue);
     }, this);
   }

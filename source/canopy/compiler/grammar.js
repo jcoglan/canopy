@@ -89,8 +89,7 @@ Canopy.Compiler.Grammar = {
         builder.newline_();
         if (namespaceCondition)
           builder.if_(namespaceCondition, expose);
-      });
-      builder.else_(function(builder) {
+      }, function(builder) {
         builder.namespace_(grammar);
         expose(builder);
       });

@@ -8,8 +8,7 @@ Canopy.Compiler.AnyChar = {
 
     builder.if_(builder.isNull_(nextChar), function(builder) {
       builder.failure_(address, '<any char>');
-    });
-    builder.else_(function(builder) {
+    }, function(builder) {
       builder.syntaxNode_(address, nodeType, nextChar, 1);
     });
   }
