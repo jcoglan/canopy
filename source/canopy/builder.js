@@ -45,6 +45,8 @@ Canopy.extend(Canopy.Builder.prototype, {
       builder.newline_();
       builder.line_('var formatError = ' + Canopy.formatError.toString());
       builder.newline_();
+      builder.line_('var inherit = ' + Canopy.inherit.toString());
+      builder.newline_();
 
       block.call(context, this);
     }, this);
@@ -77,18 +79,10 @@ Canopy.extend(Canopy.Builder.prototype, {
 
   constructor_: function(args, block, context) {
     this.function_('var ' + this._name, args, function(builder) {
-      if (this._parentName) builder.line_(this._parentName + '.apply(this, arguments)');
+      builder.line_(this._parentName + '.apply(this, arguments)');
       block.call(context, builder);
     }, this);
-    if (this._parentName) {
-      this._write('(function() {');
-      this.indent_(function(builder) {
-        builder.assign_('var parent', 'function() {}');
-        builder.assign_('parent.prototype', this._parentName + '.prototype');
-        builder.assign_(this._name + '.prototype', 'new parent()');
-      }, this);
-      this.line_('})()');
-    }
+    this._write('inherit(' + this._name + ', ' + this._parentName + ');');
     this.newline_();
   },
 

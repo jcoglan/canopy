@@ -32,6 +32,13 @@
     return message + '^';
   };
   
+  var inherit = function (subclass, parent) {
+    var chain = function() {};
+    chain.prototype = parent.prototype;
+    subclass.prototype = new chain();
+    subclass.prototype.constructor = subclass;
+  };
+  
   var SyntaxNode = function(textValue, offset, elements) {
     this.textValue = textValue;
     this.offset = offset;
@@ -48,31 +55,19 @@
     this.grammar_name = elements[1];
     this.rules = elements[2];
   };
-  (function() {
-    var parent = function() {};
-    parent.prototype = SyntaxNode.prototype;
-    SyntaxNode1.prototype = new parent();
-  })();
+  inherit(SyntaxNode1, SyntaxNode);
   
   var SyntaxNode2 = function(textValue, offset, elements) {
     SyntaxNode.apply(this, arguments);
     this.grammar_rule = elements[1];
   };
-  (function() {
-    var parent = function() {};
-    parent.prototype = SyntaxNode.prototype;
-    SyntaxNode2.prototype = new parent();
-  })();
+  inherit(SyntaxNode2, SyntaxNode);
   
   var SyntaxNode3 = function(textValue, offset, elements) {
     SyntaxNode.apply(this, arguments);
     this.object_identifier = elements[1];
   };
-  (function() {
-    var parent = function() {};
-    parent.prototype = SyntaxNode.prototype;
-    SyntaxNode3.prototype = new parent();
-  })();
+  inherit(SyntaxNode3, SyntaxNode);
   
   var SyntaxNode4 = function(textValue, offset, elements) {
     SyntaxNode.apply(this, arguments);
@@ -80,21 +75,13 @@
     this.assignment = elements[1];
     this.parsing_expression = elements[2];
   };
-  (function() {
-    var parent = function() {};
-    parent.prototype = SyntaxNode.prototype;
-    SyntaxNode4.prototype = new parent();
-  })();
+  inherit(SyntaxNode4, SyntaxNode);
   
   var SyntaxNode5 = function(textValue, offset, elements) {
     SyntaxNode.apply(this, arguments);
     this.parsing_expression = elements[2];
   };
-  (function() {
-    var parent = function() {};
-    parent.prototype = SyntaxNode.prototype;
-    SyntaxNode5.prototype = new parent();
-  })();
+  inherit(SyntaxNode5, SyntaxNode);
   
   var SyntaxNode6 = function(textValue, offset, elements) {
     SyntaxNode.apply(this, arguments);
@@ -102,42 +89,26 @@
     this.choice_part = elements[0];
     this.rest = elements[1];
   };
-  (function() {
-    var parent = function() {};
-    parent.prototype = SyntaxNode.prototype;
-    SyntaxNode6.prototype = new parent();
-  })();
+  inherit(SyntaxNode6, SyntaxNode);
   
   var SyntaxNode7 = function(textValue, offset, elements) {
     SyntaxNode.apply(this, arguments);
     this.expression = elements[3];
     this.choice_part = elements[3];
   };
-  (function() {
-    var parent = function() {};
-    parent.prototype = SyntaxNode.prototype;
-    SyntaxNode7.prototype = new parent();
-  })();
+  inherit(SyntaxNode7, SyntaxNode);
   
   var SyntaxNode8 = function(textValue, offset, elements) {
     SyntaxNode.apply(this, arguments);
     this.type_expression = elements[1];
   };
-  (function() {
-    var parent = function() {};
-    parent.prototype = SyntaxNode.prototype;
-    SyntaxNode8.prototype = new parent();
-  })();
+  inherit(SyntaxNode8, SyntaxNode);
   
   var SyntaxNode9 = function(textValue, offset, elements) {
     SyntaxNode.apply(this, arguments);
     this.object_identifier = elements[1];
   };
-  (function() {
-    var parent = function() {};
-    parent.prototype = SyntaxNode.prototype;
-    SyntaxNode9.prototype = new parent();
-  })();
+  inherit(SyntaxNode9, SyntaxNode);
   
   var SyntaxNode10 = function(textValue, offset, elements) {
     SyntaxNode.apply(this, arguments);
@@ -145,94 +116,58 @@
     this.sequence_part = elements[0];
     this.rest = elements[1];
   };
-  (function() {
-    var parent = function() {};
-    parent.prototype = SyntaxNode.prototype;
-    SyntaxNode10.prototype = new parent();
-  })();
+  inherit(SyntaxNode10, SyntaxNode);
   
   var SyntaxNode11 = function(textValue, offset, elements) {
     SyntaxNode.apply(this, arguments);
     this.expression = elements[1];
     this.sequence_part = elements[1];
   };
-  (function() {
-    var parent = function() {};
-    parent.prototype = SyntaxNode.prototype;
-    SyntaxNode11.prototype = new parent();
-  })();
+  inherit(SyntaxNode11, SyntaxNode);
   
   var SyntaxNode12 = function(textValue, offset, elements) {
     SyntaxNode.apply(this, arguments);
     this.expression = elements[1];
   };
-  (function() {
-    var parent = function() {};
-    parent.prototype = SyntaxNode.prototype;
-    SyntaxNode12.prototype = new parent();
-  })();
+  inherit(SyntaxNode12, SyntaxNode);
   
   var SyntaxNode13 = function(textValue, offset, elements) {
     SyntaxNode.apply(this, arguments);
     this.atom = elements[0];
     this.quantifier = elements[1];
   };
-  (function() {
-    var parent = function() {};
-    parent.prototype = SyntaxNode.prototype;
-    SyntaxNode13.prototype = new parent();
-  })();
+  inherit(SyntaxNode13, SyntaxNode);
   
   var SyntaxNode14 = function(textValue, offset, elements) {
     SyntaxNode.apply(this, arguments);
     this.predicate = elements[0];
     this.atom = elements[1];
   };
-  (function() {
-    var parent = function() {};
-    parent.prototype = SyntaxNode.prototype;
-    SyntaxNode14.prototype = new parent();
-  })();
+  inherit(SyntaxNode14, SyntaxNode);
   
   var SyntaxNode15 = function(textValue, offset, elements) {
     SyntaxNode.apply(this, arguments);
     this.identifier = elements[0];
   };
-  (function() {
-    var parent = function() {};
-    parent.prototype = SyntaxNode.prototype;
-    SyntaxNode15.prototype = new parent();
-  })();
+  inherit(SyntaxNode15, SyntaxNode);
   
   var SyntaxNode16 = function(textValue, offset, elements) {
     SyntaxNode.apply(this, arguments);
     this.identifier = elements[0];
   };
-  (function() {
-    var parent = function() {};
-    parent.prototype = SyntaxNode.prototype;
-    SyntaxNode16.prototype = new parent();
-  })();
+  inherit(SyntaxNode16, SyntaxNode);
   
   var SyntaxNode17 = function(textValue, offset, elements) {
     SyntaxNode.apply(this, arguments);
     this.identifier = elements[0];
   };
-  (function() {
-    var parent = function() {};
-    parent.prototype = SyntaxNode.prototype;
-    SyntaxNode17.prototype = new parent();
-  })();
+  inherit(SyntaxNode17, SyntaxNode);
   
   var SyntaxNode18 = function(textValue, offset, elements) {
     SyntaxNode.apply(this, arguments);
     this.identifier = elements[1];
   };
-  (function() {
-    var parent = function() {};
-    parent.prototype = SyntaxNode.prototype;
-    SyntaxNode18.prototype = new parent();
-  })();
+  inherit(SyntaxNode18, SyntaxNode);
   
   var Grammar = {
     _read_grammar: function() {

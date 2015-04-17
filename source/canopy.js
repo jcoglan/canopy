@@ -45,5 +45,12 @@ Canopy.extend(Canopy, {
       offset  += 1;
     }
     return message + '^';
+  },
+
+  inherit: function(subclass, parent) {
+    var chain = function() {};
+    chain.prototype = parent.prototype;
+    subclass.prototype = new chain();
+    subclass.prototype.constructor = subclass;
   }
 });
