@@ -10,18 +10,6 @@
     return destination;
   };
   
-  var find = function (root, objectName) {
-    var parts = objectName.split('.'),
-        part;
-
-    while (part = parts.shift()) {
-      root = root[part];
-      if (root === undefined)
-        throw new Error('Cannot find object named ' + objectName);
-    }
-    return root;
-  };
-  
   var formatError = function (error) {
     var lines  = error.input.split(/\n/g),
         lineNo = 0,
@@ -399,7 +387,7 @@
       }
       if (elements0) {
         this._offset = index1;
-        var type5 = find(this.constructor, 'Grammar');
+        var type5 = this.constructor.Grammar;
         address0 = new SyntaxNode1(text0, this._offset, elements0);
         if (typeof type5 === 'object') {
           extend(address0, type5);
@@ -506,7 +494,7 @@
       }
       if (elements0) {
         this._offset = index1;
-        var type0 = find(this.constructor, 'GrammarRule');
+        var type0 = this.constructor.GrammarRule;
         address0 = new SyntaxNode4(text0, this._offset, elements0);
         if (typeof type0 === 'object') {
           extend(address0, type0);
@@ -929,7 +917,7 @@
       }
       if (elements0) {
         this._offset = index1;
-        var type5 = find(this.constructor, 'Choice');
+        var type5 = this.constructor.Choice;
         address0 = new SyntaxNode6(text0, this._offset, elements0);
         if (typeof type5 === 'object') {
           extend(address0, type5);
@@ -1036,7 +1024,7 @@
       }
       if (elements0) {
         this._offset = index1;
-        var type3 = find(this.constructor, 'ChoicePart');
+        var type3 = this.constructor.ChoicePart;
         address0 = new SyntaxNode(text0, this._offset, elements0);
         if (typeof type3 === 'object') {
           extend(address0, type3);
@@ -1226,7 +1214,7 @@
       }
       if (elements0) {
         this._offset = index1;
-        var type3 = find(this.constructor, 'Sequence');
+        var type3 = this.constructor.Sequence;
         address0 = new SyntaxNode10(text0, this._offset, elements0);
         if (typeof type3 === 'object') {
           extend(address0, type3);
@@ -1285,7 +1273,7 @@
       }
       if (elements0) {
         this._offset = index1;
-        var type1 = find(this.constructor, 'SequencePart');
+        var type1 = this.constructor.SequencePart;
         address0 = new SyntaxNode12(text0, this._offset, elements0);
         if (typeof type1 === 'object') {
           extend(address0, type1);
@@ -1326,7 +1314,7 @@
       }
       if (elements0) {
         this._offset = index1;
-        var type0 = find(this.constructor, 'Repeat');
+        var type0 = this.constructor.Repeat;
         address0 = new SyntaxNode13(text0, this._offset, elements0);
         if (typeof type0 === 'object') {
           extend(address0, type0);
@@ -1447,7 +1435,7 @@
       }
       if (elements0) {
         this._offset = index1;
-        var type2 = find(this.constructor, 'Predicate');
+        var type2 = this.constructor.Predicate;
         address0 = new SyntaxNode14(text0, this._offset, elements0);
         if (typeof type2 === 'object') {
           extend(address0, type2);
@@ -1500,7 +1488,7 @@
       }
       if (elements0) {
         this._offset = index1;
-        var type1 = find(this.constructor, 'Reference');
+        var type1 = this.constructor.Reference;
         address0 = new SyntaxNode15(text0, this._offset, elements0);
         if (typeof type1 === 'object') {
           extend(address0, type1);
@@ -1686,7 +1674,7 @@
       }
       if (elements0) {
         this._offset = index1;
-        var type7 = find(this.constructor, 'String');
+        var type7 = this.constructor.String;
         address0 = new SyntaxNode(text0, this._offset, elements0);
         if (typeof type7 === 'object') {
           extend(address0, type7);
@@ -1872,7 +1860,7 @@
       }
       if (elements0) {
         this._offset = index1;
-        var type7 = find(this.constructor, 'CIString');
+        var type7 = this.constructor.CIString;
         address0 = new SyntaxNode(text0, this._offset, elements0);
         if (typeof type7 === 'object') {
           extend(address0, type7);
@@ -1897,7 +1885,7 @@
         chunk0 = this._input.substring(this._offset, this._offset + 1);
       }
       if (chunk0 === '.') {
-        var type0 = find(this.constructor, 'AnyChar');
+        var type0 = this.constructor.AnyChar;
         address0 = new SyntaxNode(chunk0, this._offset, []);
         if (typeof type0 === 'object') {
           extend(address0, type0);
@@ -2121,7 +2109,7 @@
       }
       if (elements0) {
         this._offset = index1;
-        var type9 = find(this.constructor, 'CharClass');
+        var type9 = this.constructor.CharClass;
         address0 = new SyntaxNode(text0, this._offset, elements0);
         if (typeof type9 === 'object') {
           extend(address0, type9);

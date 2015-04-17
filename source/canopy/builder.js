@@ -43,8 +43,6 @@ Canopy.extend(Canopy.Builder.prototype, {
       builder.newline_();
       builder.line_('var extend = ' + Canopy.extend.toString());
       builder.newline_();
-      builder.line_('var find = ' + Canopy.find.toString());
-      builder.newline_();
       builder.line_('var formatError = ' + Canopy.formatError.toString());
       builder.newline_();
 
@@ -154,7 +152,7 @@ Canopy.extend(Canopy.Builder.prototype, {
 
   findType_: function(nodeType) {
     if (nodeType)
-      return this.localVar_('type', "find(this.constructor, '" + nodeType + "')");
+      return this.localVar_('type', 'this.constructor.' + nodeType);
     else
       return this.localVar_('type',this.null_());
   },

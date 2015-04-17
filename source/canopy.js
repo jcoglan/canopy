@@ -20,18 +20,6 @@ Canopy.extend(Canopy, {
     return source;
   },
 
-  find: function(root, objectName) {
-    var parts = objectName.split('.'),
-        part;
-
-    while (part = parts.shift()) {
-      root = root[part];
-      if (root === undefined)
-        throw new Error('Cannot find object named ' + objectName);
-    }
-    return root;
-  },
-
   forEach: function(list, block, context) {
     for (var i = 0, n = list.length; i < n; i++)
       block.call(context, list[i], i);
