@@ -270,7 +270,7 @@
         this._offset = index2;
         var type0 = null;
         address1 = new SyntaxNode(text1, this._offset, elements1);
-        if (typeof type0 === "object") {
+        if (typeof type0 === 'object') {
           extend(address1, type0);
         }
         this._offset += text1.length;
@@ -303,7 +303,7 @@
               this._offset = index5;
               var type1 = null;
               address6 = new SyntaxNode(text4, this._offset, elements4);
-              if (typeof type1 === "object") {
+              if (typeof type1 === 'object') {
                 extend(address6, type1);
               }
               this._offset += text4.length;
@@ -330,7 +330,7 @@
               this._offset = index4;
               var type2 = null;
               address5 = new SyntaxNode2(text3, this._offset, elements3);
-              if (typeof type2 === "object") {
+              if (typeof type2 === 'object') {
                 extend(address5, type2);
               }
               this._offset += text3.length;
@@ -347,7 +347,7 @@
             this._offset = index3;
             var type3 = null;
             address4 = new SyntaxNode(text2, this._offset, elements2);
-            if (typeof type3 === "object") {
+            if (typeof type3 === 'object') {
               extend(address4, type3);
             }
             this._offset += text2.length;
@@ -371,7 +371,7 @@
               this._offset = index6;
               var type4 = null;
               address9 = new SyntaxNode(text5, this._offset, elements5);
-              if (typeof type4 === "object") {
+              if (typeof type4 === 'object') {
                 extend(address9, type4);
               }
               this._offset += text5.length;
@@ -399,9 +399,9 @@
       }
       if (elements0) {
         this._offset = index1;
-        var type5 = find(this.constructor, "Grammar");
+        var type5 = find(this.constructor, 'Grammar');
         address0 = new SyntaxNode1(text0, this._offset, elements0);
-        if (typeof type5 === "object") {
+        if (typeof type5 === 'object') {
           extend(address0, type5);
         }
         this._offset += text0.length;
@@ -428,14 +428,14 @@
       if (chunk0 === 'grammar ') {
         var type0 = null;
         address1 = new SyntaxNode(chunk0, this._offset, []);
-        if (typeof type0 === "object") {
+        if (typeof type0 === 'object') {
           extend(address1, type0);
         }
         this._offset += 8;
       } else {
         address1 = null;
         if (!this.error || this.error.offset <= this._offset) {
-          this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: "\"grammar \""};
+          this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: '"grammar "'};
         }
       }
       if (address1) {
@@ -458,7 +458,7 @@
         this._offset = index1;
         var type1 = null;
         address0 = new SyntaxNode3(text0, this._offset, elements0);
-        if (typeof type1 === "object") {
+        if (typeof type1 === 'object') {
           extend(address0, type1);
         }
         this._offset += text0.length;
@@ -506,9 +506,9 @@
       }
       if (elements0) {
         this._offset = index1;
-        var type0 = find(this.constructor, "GrammarRule");
+        var type0 = find(this.constructor, 'GrammarRule');
         address0 = new SyntaxNode4(text0, this._offset, elements0);
-        if (typeof type0 === "object") {
+        if (typeof type0 === 'object') {
           extend(address0, type0);
         }
         this._offset += text0.length;
@@ -541,7 +541,7 @@
         this._offset = index2;
         var type0 = null;
         address1 = new SyntaxNode(text1, this._offset, elements1);
-        if (typeof type0 === "object") {
+        if (typeof type0 === 'object') {
           extend(address1, type0);
         }
         this._offset += text1.length;
@@ -559,14 +559,14 @@
         if (chunk0 === '<-') {
           var type1 = null;
           address3 = new SyntaxNode(chunk0, this._offset, []);
-          if (typeof type1 === "object") {
+          if (typeof type1 === 'object') {
             extend(address3, type1);
           }
           this._offset += 2;
         } else {
           address3 = null;
           if (!this.error || this.error.offset <= this._offset) {
-            this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: "\"<-\""};
+            this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: '"<-"'};
           }
         }
         if (address3) {
@@ -586,7 +586,7 @@
             this._offset = index3;
             var type2 = null;
             address4 = new SyntaxNode(text2, this._offset, elements2);
-            if (typeof type2 === "object") {
+            if (typeof type2 === 'object') {
               extend(address4, type2);
             }
             this._offset += text2.length;
@@ -612,7 +612,7 @@
         this._offset = index1;
         var type3 = null;
         address0 = new SyntaxNode(text0, this._offset, elements0);
-        if (typeof type3 === "object") {
+        if (typeof type3 === 'object') {
           extend(address0, type3);
         }
         this._offset += text0.length;
@@ -659,14 +659,14 @@
       if (chunk0 === '(') {
         var type0 = null;
         address1 = new SyntaxNode(chunk0, this._offset, []);
-        if (typeof type0 === "object") {
+        if (typeof type0 === 'object') {
           extend(address1, type0);
         }
         this._offset += 1;
       } else {
         address1 = null;
         if (!this.error || this.error.offset <= this._offset) {
-          this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: "\"(\""};
+          this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: '"("'};
         }
       }
       if (address1) {
@@ -686,7 +686,7 @@
           this._offset = index2;
           var type1 = null;
           address2 = new SyntaxNode(text1, this._offset, elements1);
-          if (typeof type1 === "object") {
+          if (typeof type1 === 'object') {
             extend(address2, type1);
           }
           this._offset += text1.length;
@@ -715,7 +715,7 @@
               this._offset = index3;
               var type2 = null;
               address5 = new SyntaxNode(text2, this._offset, elements2);
-              if (typeof type2 === "object") {
+              if (typeof type2 === 'object') {
                 extend(address5, type2);
               }
               this._offset += text2.length;
@@ -733,14 +733,14 @@
               if (chunk1 === ')') {
                 var type3 = null;
                 address7 = new SyntaxNode(chunk1, this._offset, []);
-                if (typeof type3 === "object") {
+                if (typeof type3 === 'object') {
                   extend(address7, type3);
                 }
                 this._offset += 1;
               } else {
                 address7 = null;
                 if (!this.error || this.error.offset <= this._offset) {
-                  this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: "\")\""};
+                  this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: '")"'};
                 }
               }
               if (address7) {
@@ -770,7 +770,7 @@
         this._offset = index1;
         var type4 = null;
         address0 = new SyntaxNode5(text0, this._offset, elements0);
-        if (typeof type4 === "object") {
+        if (typeof type4 === 'object') {
           extend(address0, type4);
         }
         this._offset += text0.length;
@@ -812,7 +812,7 @@
             this._offset = index4;
             var type0 = null;
             address4 = new SyntaxNode(text3, this._offset, elements3);
-            if (typeof type0 === "object") {
+            if (typeof type0 === 'object') {
               extend(address4, type0);
             }
             this._offset += text3.length;
@@ -830,14 +830,14 @@
             if (chunk0 === '/') {
               var type1 = null;
               address6 = new SyntaxNode(chunk0, this._offset, []);
-              if (typeof type1 === "object") {
+              if (typeof type1 === 'object') {
                 extend(address6, type1);
               }
               this._offset += 1;
             } else {
               address6 = null;
               if (!this.error || this.error.offset <= this._offset) {
-                this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: "\"/\""};
+                this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: '"/"'};
               }
             }
             if (address6) {
@@ -857,7 +857,7 @@
                 this._offset = index5;
                 var type2 = null;
                 address7 = new SyntaxNode(text4, this._offset, elements4);
-                if (typeof type2 === "object") {
+                if (typeof type2 === 'object') {
                   extend(address7, type2);
                 }
                 this._offset += text4.length;
@@ -892,7 +892,7 @@
             this._offset = index3;
             var type3 = null;
             address3 = new SyntaxNode7(text2, this._offset, elements2);
-            if (typeof type3 === "object") {
+            if (typeof type3 === 'object') {
               extend(address3, type3);
             }
             this._offset += text2.length;
@@ -909,7 +909,7 @@
           this._offset = index2;
           var type4 = null;
           address2 = new SyntaxNode(text1, this._offset, elements1);
-          if (typeof type4 === "object") {
+          if (typeof type4 === 'object') {
             extend(address2, type4);
           }
           this._offset += text1.length;
@@ -929,9 +929,9 @@
       }
       if (elements0) {
         this._offset = index1;
-        var type5 = find(this.constructor, "Choice");
+        var type5 = find(this.constructor, 'Choice');
         address0 = new SyntaxNode6(text0, this._offset, elements0);
-        if (typeof type5 === "object") {
+        if (typeof type5 === 'object') {
           extend(address0, type5);
         }
         this._offset += text0.length;
@@ -980,7 +980,7 @@
           this._offset = index5;
           var type0 = null;
           address3 = new SyntaxNode(text2, this._offset, elements2);
-          if (typeof type0 === "object") {
+          if (typeof type0 === 'object') {
             extend(address3, type0);
           }
           this._offset += text2.length;
@@ -1007,7 +1007,7 @@
           this._offset = index4;
           var type1 = null;
           address2 = new SyntaxNode8(text1, this._offset, elements1);
-          if (typeof type1 === "object") {
+          if (typeof type1 === 'object') {
             extend(address2, type1);
           }
           this._offset += text1.length;
@@ -1018,7 +1018,7 @@
           this._offset = index3;
           var type2 = null;
           address2 = new SyntaxNode('', this._offset, []);
-          if (typeof type2 === "object") {
+          if (typeof type2 === 'object') {
             extend(address2, type2);
           }
           this._offset += 0;
@@ -1036,9 +1036,9 @@
       }
       if (elements0) {
         this._offset = index1;
-        var type3 = find(this.constructor, "ChoicePart");
+        var type3 = find(this.constructor, 'ChoicePart');
         address0 = new SyntaxNode(text0, this._offset, elements0);
-        if (typeof type3 === "object") {
+        if (typeof type3 === 'object') {
           extend(address0, type3);
         }
         this._offset += text0.length;
@@ -1065,14 +1065,14 @@
       if (chunk0 === '<') {
         var type0 = null;
         address1 = new SyntaxNode(chunk0, this._offset, []);
-        if (typeof type0 === "object") {
+        if (typeof type0 === 'object') {
           extend(address1, type0);
         }
         this._offset += 1;
       } else {
         address1 = null;
         if (!this.error || this.error.offset <= this._offset) {
-          this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: "\"<\""};
+          this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: '"<"'};
         }
       }
       if (address1) {
@@ -1091,14 +1091,14 @@
           if (chunk1 === '>') {
             var type1 = null;
             address3 = new SyntaxNode(chunk1, this._offset, []);
-            if (typeof type1 === "object") {
+            if (typeof type1 === 'object') {
               extend(address3, type1);
             }
             this._offset += 1;
           } else {
             address3 = null;
             if (!this.error || this.error.offset <= this._offset) {
-              this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: "\">\""};
+              this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: '">"'};
             }
           }
           if (address3) {
@@ -1120,7 +1120,7 @@
         this._offset = index1;
         var type2 = null;
         address0 = new SyntaxNode9(text0, this._offset, elements0);
-        if (typeof type2 === "object") {
+        if (typeof type2 === 'object') {
           extend(address0, type2);
         }
         this._offset += text0.length;
@@ -1162,7 +1162,7 @@
             this._offset = index4;
             var type0 = null;
             address4 = new SyntaxNode(text3, this._offset, elements3);
-            if (typeof type0 === "object") {
+            if (typeof type0 === 'object') {
               extend(address4, type0);
             }
             this._offset += text3.length;
@@ -1189,7 +1189,7 @@
             this._offset = index3;
             var type1 = null;
             address3 = new SyntaxNode11(text2, this._offset, elements2);
-            if (typeof type1 === "object") {
+            if (typeof type1 === 'object') {
               extend(address3, type1);
             }
             this._offset += text2.length;
@@ -1206,7 +1206,7 @@
           this._offset = index2;
           var type2 = null;
           address2 = new SyntaxNode(text1, this._offset, elements1);
-          if (typeof type2 === "object") {
+          if (typeof type2 === 'object') {
             extend(address2, type2);
           }
           this._offset += text1.length;
@@ -1226,9 +1226,9 @@
       }
       if (elements0) {
         this._offset = index1;
-        var type3 = find(this.constructor, "Sequence");
+        var type3 = find(this.constructor, 'Sequence');
         address0 = new SyntaxNode10(text0, this._offset, elements0);
-        if (typeof type3 === "object") {
+        if (typeof type3 === 'object') {
           extend(address0, type3);
         }
         this._offset += text0.length;
@@ -1254,7 +1254,7 @@
         this._offset = index2;
         var type0 = null;
         address1 = new SyntaxNode('', this._offset, []);
-        if (typeof type0 === "object") {
+        if (typeof type0 === 'object') {
           extend(address1, type0);
         }
         this._offset += 0;
@@ -1285,9 +1285,9 @@
       }
       if (elements0) {
         this._offset = index1;
-        var type1 = find(this.constructor, "SequencePart");
+        var type1 = find(this.constructor, 'SequencePart');
         address0 = new SyntaxNode12(text0, this._offset, elements0);
-        if (typeof type1 === "object") {
+        if (typeof type1 === 'object') {
           extend(address0, type1);
         }
         this._offset += text0.length;
@@ -1326,9 +1326,9 @@
       }
       if (elements0) {
         this._offset = index1;
-        var type0 = find(this.constructor, "Repeat");
+        var type0 = find(this.constructor, 'Repeat');
         address0 = new SyntaxNode13(text0, this._offset, elements0);
-        if (typeof type0 === "object") {
+        if (typeof type0 === 'object') {
           extend(address0, type0);
         }
         this._offset += text0.length;
@@ -1396,14 +1396,14 @@
       if (chunk0 === '&') {
         var type0 = null;
         address1 = new SyntaxNode(chunk0, this._offset, []);
-        if (typeof type0 === "object") {
+        if (typeof type0 === 'object') {
           extend(address1, type0);
         }
         this._offset += 1;
       } else {
         address1 = null;
         if (!this.error || this.error.offset <= this._offset) {
-          this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: "\"&\""};
+          this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: '"&"'};
         }
       }
       if (!address1) {
@@ -1415,14 +1415,14 @@
         if (chunk1 === '!') {
           var type1 = null;
           address1 = new SyntaxNode(chunk1, this._offset, []);
-          if (typeof type1 === "object") {
+          if (typeof type1 === 'object') {
             extend(address1, type1);
           }
           this._offset += 1;
         } else {
           address1 = null;
           if (!this.error || this.error.offset <= this._offset) {
-            this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: "\"!\""};
+            this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: '"!"'};
           }
         }
         if (!address1) {
@@ -1447,9 +1447,9 @@
       }
       if (elements0) {
         this._offset = index1;
-        var type2 = find(this.constructor, "Predicate");
+        var type2 = find(this.constructor, 'Predicate');
         address0 = new SyntaxNode14(text0, this._offset, elements0);
-        if (typeof type2 === "object") {
+        if (typeof type2 === 'object') {
           extend(address0, type2);
         }
         this._offset += text0.length;
@@ -1480,7 +1480,7 @@
         if (!address2) {
           var type0 = null;
           address2 = new SyntaxNode('', this._offset, []);
-          if (typeof type0 === "object") {
+          if (typeof type0 === 'object') {
             extend(address2, type0);
           }
           this._offset += 0;
@@ -1500,9 +1500,9 @@
       }
       if (elements0) {
         this._offset = index1;
-        var type1 = find(this.constructor, "Reference");
+        var type1 = find(this.constructor, 'Reference');
         address0 = new SyntaxNode15(text0, this._offset, elements0);
-        if (typeof type1 === "object") {
+        if (typeof type1 === 'object') {
           extend(address0, type1);
         }
         this._offset += text0.length;
@@ -1529,14 +1529,14 @@
       if (chunk0 === '"') {
         var type0 = null;
         address1 = new SyntaxNode(chunk0, this._offset, []);
-        if (typeof type0 === "object") {
+        if (typeof type0 === 'object') {
           extend(address1, type0);
         }
         this._offset += 1;
       } else {
         address1 = null;
         if (!this.error || this.error.offset <= this._offset) {
-          this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: "\"\\\"\""};
+          this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: '"\\""'};
         }
       }
       if (address1) {
@@ -1555,14 +1555,14 @@
           if (chunk1 === '\\') {
             var type1 = null;
             address4 = new SyntaxNode(chunk1, this._offset, []);
-            if (typeof type1 === "object") {
+            if (typeof type1 === 'object') {
               extend(address4, type1);
             }
             this._offset += 1;
           } else {
             address4 = null;
             if (!this.error || this.error.offset <= this._offset) {
-              this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: "\"\\\\\""};
+              this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: '"\\\\"'};
             }
           }
           if (address4) {
@@ -1576,12 +1576,12 @@
             if (chunk2 === null) {
               address5 = null;
               if (!this.error || this.error.offset <= this._offset) {
-                this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: "<any char>"};
+                this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: '<any char>'};
               }
             } else {
               var type2 = null;
               address5 = new SyntaxNode(chunk2, this._offset, []);
-              if (typeof type2 === "object") {
+              if (typeof type2 === 'object') {
                 extend(address5, type2);
               }
               this._offset += 1;
@@ -1601,7 +1601,7 @@
             this._offset = index4;
             var type3 = null;
             address3 = new SyntaxNode(text2, this._offset, elements2);
-            if (typeof type3 === "object") {
+            if (typeof type3 === 'object') {
               extend(address3, type3);
             }
             this._offset += text2.length;
@@ -1617,14 +1617,14 @@
             if (chunk3 && /^[^"]/.test(chunk3)) {
               var type4 = null;
               address3 = new SyntaxNode(chunk3, this._offset, []);
-              if (typeof type4 === "object") {
+              if (typeof type4 === 'object') {
                 extend(address3, type4);
               }
               this._offset += 1;
             } else {
               address3 = null;
               if (!this.error || this.error.offset <= this._offset) {
-                this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: "[^\"]"};
+                this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: '[^"]'};
               }
             }
             if (!address3) {
@@ -1641,7 +1641,7 @@
           this._offset = index2;
           var type5 = null;
           address2 = new SyntaxNode(text1, this._offset, elements1);
-          if (typeof type5 === "object") {
+          if (typeof type5 === 'object') {
             extend(address2, type5);
           }
           this._offset += text1.length;
@@ -1659,14 +1659,14 @@
           if (chunk4 === '"') {
             var type6 = null;
             address6 = new SyntaxNode(chunk4, this._offset, []);
-            if (typeof type6 === "object") {
+            if (typeof type6 === 'object') {
               extend(address6, type6);
             }
             this._offset += 1;
           } else {
             address6 = null;
             if (!this.error || this.error.offset <= this._offset) {
-              this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: "\"\\\"\""};
+              this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: '"\\""'};
             }
           }
           if (address6) {
@@ -1686,9 +1686,9 @@
       }
       if (elements0) {
         this._offset = index1;
-        var type7 = find(this.constructor, "String");
+        var type7 = find(this.constructor, 'String');
         address0 = new SyntaxNode(text0, this._offset, elements0);
-        if (typeof type7 === "object") {
+        if (typeof type7 === 'object') {
           extend(address0, type7);
         }
         this._offset += text0.length;
@@ -1715,14 +1715,14 @@
       if (chunk0 === '`') {
         var type0 = null;
         address1 = new SyntaxNode(chunk0, this._offset, []);
-        if (typeof type0 === "object") {
+        if (typeof type0 === 'object') {
           extend(address1, type0);
         }
         this._offset += 1;
       } else {
         address1 = null;
         if (!this.error || this.error.offset <= this._offset) {
-          this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: "\"`\""};
+          this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: '"`"'};
         }
       }
       if (address1) {
@@ -1741,14 +1741,14 @@
           if (chunk1 === '\\') {
             var type1 = null;
             address4 = new SyntaxNode(chunk1, this._offset, []);
-            if (typeof type1 === "object") {
+            if (typeof type1 === 'object') {
               extend(address4, type1);
             }
             this._offset += 1;
           } else {
             address4 = null;
             if (!this.error || this.error.offset <= this._offset) {
-              this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: "\"\\\\\""};
+              this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: '"\\\\"'};
             }
           }
           if (address4) {
@@ -1762,12 +1762,12 @@
             if (chunk2 === null) {
               address5 = null;
               if (!this.error || this.error.offset <= this._offset) {
-                this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: "<any char>"};
+                this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: '<any char>'};
               }
             } else {
               var type2 = null;
               address5 = new SyntaxNode(chunk2, this._offset, []);
-              if (typeof type2 === "object") {
+              if (typeof type2 === 'object') {
                 extend(address5, type2);
               }
               this._offset += 1;
@@ -1787,7 +1787,7 @@
             this._offset = index4;
             var type3 = null;
             address3 = new SyntaxNode(text2, this._offset, elements2);
-            if (typeof type3 === "object") {
+            if (typeof type3 === 'object') {
               extend(address3, type3);
             }
             this._offset += text2.length;
@@ -1803,14 +1803,14 @@
             if (chunk3 && /^[^`]/.test(chunk3)) {
               var type4 = null;
               address3 = new SyntaxNode(chunk3, this._offset, []);
-              if (typeof type4 === "object") {
+              if (typeof type4 === 'object') {
                 extend(address3, type4);
               }
               this._offset += 1;
             } else {
               address3 = null;
               if (!this.error || this.error.offset <= this._offset) {
-                this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: "[^`]"};
+                this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: '[^`]'};
               }
             }
             if (!address3) {
@@ -1827,7 +1827,7 @@
           this._offset = index2;
           var type5 = null;
           address2 = new SyntaxNode(text1, this._offset, elements1);
-          if (typeof type5 === "object") {
+          if (typeof type5 === 'object') {
             extend(address2, type5);
           }
           this._offset += text1.length;
@@ -1845,14 +1845,14 @@
           if (chunk4 === '`') {
             var type6 = null;
             address6 = new SyntaxNode(chunk4, this._offset, []);
-            if (typeof type6 === "object") {
+            if (typeof type6 === 'object') {
               extend(address6, type6);
             }
             this._offset += 1;
           } else {
             address6 = null;
             if (!this.error || this.error.offset <= this._offset) {
-              this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: "\"`\""};
+              this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: '"`"'};
             }
           }
           if (address6) {
@@ -1872,9 +1872,9 @@
       }
       if (elements0) {
         this._offset = index1;
-        var type7 = find(this.constructor, "CIString");
+        var type7 = find(this.constructor, 'CIString');
         address0 = new SyntaxNode(text0, this._offset, elements0);
-        if (typeof type7 === "object") {
+        if (typeof type7 === 'object') {
           extend(address0, type7);
         }
         this._offset += text0.length;
@@ -1897,16 +1897,16 @@
         chunk0 = this._input.substring(this._offset, this._offset + 1);
       }
       if (chunk0 === '.') {
-        var type0 = find(this.constructor, "AnyChar");
+        var type0 = find(this.constructor, 'AnyChar');
         address0 = new SyntaxNode(chunk0, this._offset, []);
-        if (typeof type0 === "object") {
+        if (typeof type0 === 'object') {
           extend(address0, type0);
         }
         this._offset += 1;
       } else {
         address0 = null;
         if (!this.error || this.error.offset <= this._offset) {
-          this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: "\".\""};
+          this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: '"."'};
         }
       }
       return this._cache.any_char_expression[index0] = address0;
@@ -1929,14 +1929,14 @@
       if (chunk0 === '[') {
         var type0 = null;
         address1 = new SyntaxNode(chunk0, this._offset, []);
-        if (typeof type0 === "object") {
+        if (typeof type0 === 'object') {
           extend(address1, type0);
         }
         this._offset += 1;
       } else {
         address1 = null;
         if (!this.error || this.error.offset <= this._offset) {
-          this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: "\"[\""};
+          this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: '"["'};
         }
       }
       if (address1) {
@@ -1951,21 +1951,21 @@
         if (chunk1 === '^') {
           var type1 = null;
           address2 = new SyntaxNode(chunk1, this._offset, []);
-          if (typeof type1 === "object") {
+          if (typeof type1 === 'object') {
             extend(address2, type1);
           }
           this._offset += 1;
         } else {
           address2 = null;
           if (!this.error || this.error.offset <= this._offset) {
-            this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: "\"^\""};
+            this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: '"^"'};
           }
         }
         if (!address2) {
           this._offset = index2;
           var type2 = null;
           address2 = new SyntaxNode('', this._offset, []);
-          if (typeof type2 === "object") {
+          if (typeof type2 === 'object') {
             extend(address2, type2);
           }
           this._offset += 0;
@@ -1986,14 +1986,14 @@
             if (chunk2 === '\\') {
               var type3 = null;
               address5 = new SyntaxNode(chunk2, this._offset, []);
-              if (typeof type3 === "object") {
+              if (typeof type3 === 'object') {
                 extend(address5, type3);
               }
               this._offset += 1;
             } else {
               address5 = null;
               if (!this.error || this.error.offset <= this._offset) {
-                this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: "\"\\\\\""};
+                this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: '"\\\\"'};
               }
             }
             if (address5) {
@@ -2007,12 +2007,12 @@
               if (chunk3 === null) {
                 address6 = null;
                 if (!this.error || this.error.offset <= this._offset) {
-                  this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: "<any char>"};
+                  this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: '<any char>'};
                 }
               } else {
                 var type4 = null;
                 address6 = new SyntaxNode(chunk3, this._offset, []);
-                if (typeof type4 === "object") {
+                if (typeof type4 === 'object') {
                   extend(address6, type4);
                 }
                 this._offset += 1;
@@ -2032,7 +2032,7 @@
               this._offset = index5;
               var type5 = null;
               address4 = new SyntaxNode(text2, this._offset, elements2);
-              if (typeof type5 === "object") {
+              if (typeof type5 === 'object') {
                 extend(address4, type5);
               }
               this._offset += text2.length;
@@ -2048,14 +2048,14 @@
               if (chunk4 && /^[^\]]/.test(chunk4)) {
                 var type6 = null;
                 address4 = new SyntaxNode(chunk4, this._offset, []);
-                if (typeof type6 === "object") {
+                if (typeof type6 === 'object') {
                   extend(address4, type6);
                 }
                 this._offset += 1;
               } else {
                 address4 = null;
                 if (!this.error || this.error.offset <= this._offset) {
-                  this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: "[^\\]]"};
+                  this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: '[^\\]]'};
                 }
               }
               if (!address4) {
@@ -2072,7 +2072,7 @@
             this._offset = index3;
             var type7 = null;
             address3 = new SyntaxNode(text1, this._offset, elements1);
-            if (typeof type7 === "object") {
+            if (typeof type7 === 'object') {
               extend(address3, type7);
             }
             this._offset += text1.length;
@@ -2090,14 +2090,14 @@
             if (chunk5 === ']') {
               var type8 = null;
               address7 = new SyntaxNode(chunk5, this._offset, []);
-              if (typeof type8 === "object") {
+              if (typeof type8 === 'object') {
                 extend(address7, type8);
               }
               this._offset += 1;
             } else {
               address7 = null;
               if (!this.error || this.error.offset <= this._offset) {
-                this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: "\"]\""};
+                this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: '"]"'};
               }
             }
             if (address7) {
@@ -2121,9 +2121,9 @@
       }
       if (elements0) {
         this._offset = index1;
-        var type9 = find(this.constructor, "CharClass");
+        var type9 = find(this.constructor, 'CharClass');
         address0 = new SyntaxNode(text0, this._offset, elements0);
-        if (typeof type9 === "object") {
+        if (typeof type9 === 'object') {
           extend(address0, type9);
         }
         this._offset += text0.length;
@@ -2155,14 +2155,14 @@
         if (chunk0 === ':') {
           var type0 = null;
           address2 = new SyntaxNode(chunk0, this._offset, []);
-          if (typeof type0 === "object") {
+          if (typeof type0 === 'object') {
             extend(address2, type0);
           }
           this._offset += 1;
         } else {
           address2 = null;
           if (!this.error || this.error.offset <= this._offset) {
-            this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: "\":\""};
+            this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: '":"'};
           }
         }
         if (address2) {
@@ -2180,7 +2180,7 @@
         this._offset = index1;
         var type1 = null;
         address0 = new SyntaxNode16(text0, this._offset, elements0);
-        if (typeof type1 === "object") {
+        if (typeof type1 === 'object') {
           extend(address0, type1);
         }
         this._offset += text0.length;
@@ -2216,14 +2216,14 @@
           if (chunk0 === '.') {
             var type0 = null;
             address4 = new SyntaxNode(chunk0, this._offset, []);
-            if (typeof type0 === "object") {
+            if (typeof type0 === 'object') {
               extend(address4, type0);
             }
             this._offset += 1;
           } else {
             address4 = null;
             if (!this.error || this.error.offset <= this._offset) {
-              this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: "\".\""};
+              this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: '"."'};
             }
           }
           if (address4) {
@@ -2246,7 +2246,7 @@
             this._offset = index3;
             var type1 = null;
             address3 = new SyntaxNode18(text2, this._offset, elements2);
-            if (typeof type1 === "object") {
+            if (typeof type1 === 'object') {
               extend(address3, type1);
             }
             this._offset += text2.length;
@@ -2263,7 +2263,7 @@
           this._offset = index2;
           var type2 = null;
           address2 = new SyntaxNode(text1, this._offset, elements1);
-          if (typeof type2 === "object") {
+          if (typeof type2 === 'object') {
             extend(address2, type2);
           }
           this._offset += text1.length;
@@ -2285,7 +2285,7 @@
         this._offset = index1;
         var type3 = null;
         address0 = new SyntaxNode17(text0, this._offset, elements0);
-        if (typeof type3 === "object") {
+        if (typeof type3 === 'object') {
           extend(address0, type3);
         }
         this._offset += text0.length;
@@ -2312,14 +2312,14 @@
       if (chunk0 && /^[a-zA-Z_$]/.test(chunk0)) {
         var type0 = null;
         address1 = new SyntaxNode(chunk0, this._offset, []);
-        if (typeof type0 === "object") {
+        if (typeof type0 === 'object') {
           extend(address1, type0);
         }
         this._offset += 1;
       } else {
         address1 = null;
         if (!this.error || this.error.offset <= this._offset) {
-          this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: "[a-zA-Z_$]"};
+          this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: '[a-zA-Z_$]'};
         }
       }
       if (address1) {
@@ -2335,14 +2335,14 @@
           if (chunk1 && /^[a-zA-Z0-9_$]/.test(chunk1)) {
             var type1 = null;
             address3 = new SyntaxNode(chunk1, this._offset, []);
-            if (typeof type1 === "object") {
+            if (typeof type1 === 'object') {
               extend(address3, type1);
             }
             this._offset += 1;
           } else {
             address3 = null;
             if (!this.error || this.error.offset <= this._offset) {
-              this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: "[a-zA-Z0-9_$]"};
+              this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: '[a-zA-Z0-9_$]'};
             }
           }
           if (address3) {
@@ -2355,7 +2355,7 @@
           this._offset = index2;
           var type2 = null;
           address2 = new SyntaxNode(text1, this._offset, elements1);
-          if (typeof type2 === "object") {
+          if (typeof type2 === 'object') {
             extend(address2, type2);
           }
           this._offset += text1.length;
@@ -2377,7 +2377,7 @@
         this._offset = index1;
         var type3 = null;
         address0 = new SyntaxNode(text0, this._offset, elements0);
-        if (typeof type3 === "object") {
+        if (typeof type3 === 'object') {
           extend(address0, type3);
         }
         this._offset += text0.length;
@@ -2403,14 +2403,14 @@
       if (chunk0 === '?') {
         var type0 = null;
         address0 = new SyntaxNode(chunk0, this._offset, []);
-        if (typeof type0 === "object") {
+        if (typeof type0 === 'object') {
           extend(address0, type0);
         }
         this._offset += 1;
       } else {
         address0 = null;
         if (!this.error || this.error.offset <= this._offset) {
-          this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: "\"?\""};
+          this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: '"?"'};
         }
       }
       if (!address0) {
@@ -2422,14 +2422,14 @@
         if (chunk1 === '*') {
           var type1 = null;
           address0 = new SyntaxNode(chunk1, this._offset, []);
-          if (typeof type1 === "object") {
+          if (typeof type1 === 'object') {
             extend(address0, type1);
           }
           this._offset += 1;
         } else {
           address0 = null;
           if (!this.error || this.error.offset <= this._offset) {
-            this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: "\"*\""};
+            this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: '"*"'};
           }
         }
         if (!address0) {
@@ -2441,14 +2441,14 @@
           if (chunk2 === '+') {
             var type2 = null;
             address0 = new SyntaxNode(chunk2, this._offset, []);
-            if (typeof type2 === "object") {
+            if (typeof type2 === 'object') {
               extend(address0, type2);
             }
             this._offset += 1;
           } else {
             address0 = null;
             if (!this.error || this.error.offset <= this._offset) {
-              this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: "\"+\""};
+              this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: '"+"'};
             }
           }
           if (!address0) {
@@ -2474,14 +2474,14 @@
       if (chunk0 && /^[\s\n\r\t]/.test(chunk0)) {
         var type0 = null;
         address0 = new SyntaxNode(chunk0, this._offset, []);
-        if (typeof type0 === "object") {
+        if (typeof type0 === 'object') {
           extend(address0, type0);
         }
         this._offset += 1;
       } else {
         address0 = null;
         if (!this.error || this.error.offset <= this._offset) {
-          this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: "[\\s\\n\\r\\t]"};
+          this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: '[\\s\\n\\r\\t]'};
         }
       }
       return this._cache.space[index0] = address0;

@@ -22,6 +22,19 @@ Canopy.extend(Canopy.Builder.prototype, {
     this._buffer += string;
   },
 
+  quote: function(string) {
+    string = string.replace(/\\/g, '\\\\')
+                   .replace(/\x08/g, '\\b')
+                   .replace(/\t/g, '\\t')
+                   .replace(/\n/g, '\\n')
+                   .replace(/\v/g, '\\v')
+                   .replace(/\f/g, '\\f')
+                   .replace(/\r/g, '\\r')
+                   .replace(/'/g, "\\'");
+
+    return "'" + string + "'";
+  },
+
   package_: function(name, block, context) {
     this.write('(function() {');
     this.indent_(function(builder) {
@@ -141,14 +154,14 @@ Canopy.extend(Canopy.Builder.prototype, {
 
   findType_: function(nodeType) {
     if (nodeType)
-      return this.localVar_('type', 'find(this.constructor, "' + nodeType + '")');
+      return this.localVar_('type', "find(this.constructor, '" + nodeType + "')");
     else
       return this.localVar_('type',this.null_());
   },
 
   extendNode_: function(address, nodeType) {
     if (!nodeType) return;
-    this.if_('typeof ' + nodeType + ' === "object"', function(builder) {
+    this.if_('typeof ' + nodeType + " === 'object'", function(builder) {
       builder.line_('extend(' + address + ', ' + nodeType + ')');
     });
   },
@@ -157,11 +170,10 @@ Canopy.extend(Canopy.Builder.prototype, {
     this.assign_(address, this.null_());
     var input = this.input_(), of = this.offset_();
     var error = 'this.error = this.constructor.lastError';
-    expected = expected.replace(/\\/g, '\\\\').replace(/"/g, '\\"');
     this.if_('!this.error || this.error.offset <= ' + of, function(builder) {
       builder.line_(error + ' = {input: ' + input +
                               ', offset: ' + of +
-                              ', expected: "' + expected + '"}');
+                              ', expected: ' + builder.quote(expected) + '}');
     });
   },
 
@@ -318,13 +330,11 @@ Canopy.extend(Canopy.Builder.prototype, {
   },
 
   stringMatch_: function(expression, string) {
-    var quoted = "'" + string.replace(/\\/g, '\\\\').replace(/'/g, "\\'") + "'";
-    return expression + ' === ' + quoted;
+    return expression + ' === ' + this.quote(string);
   },
 
   stringMatchCI_: function(expression, string) {
-    var quoted = "'" + string.replace(/\\/g, '\\\\').replace(/'/g, "\\'") + "'";
-    return expression + '.toLowerCase() === ' + quoted + '.toLowerCase()';
+    return expression + '.toLowerCase() === ' + this.quote(string) + '.toLowerCase()';
   },
 
   stringLength_: function(expression) {
