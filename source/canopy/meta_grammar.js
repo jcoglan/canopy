@@ -424,8 +424,6 @@
       var chunk0 = null;
       if (this._input.length > this._offset) {
         chunk0 = this._input.substring(this._offset, this._offset + 8);
-      } else {
-        chunk0 = null;
       }
       if (chunk0 === 'grammar ') {
         var type0 = null;
@@ -557,8 +555,6 @@
         var chunk0 = null;
         if (this._input.length > this._offset) {
           chunk0 = this._input.substring(this._offset, this._offset + 2);
-        } else {
-          chunk0 = null;
         }
         if (chunk0 === '<-') {
           var type1 = null;
@@ -659,8 +655,6 @@
       var chunk0 = null;
       if (this._input.length > this._offset) {
         chunk0 = this._input.substring(this._offset, this._offset + 1);
-      } else {
-        chunk0 = null;
       }
       if (chunk0 === '(') {
         var type0 = null;
@@ -735,8 +729,6 @@
               var chunk1 = null;
               if (this._input.length > this._offset) {
                 chunk1 = this._input.substring(this._offset, this._offset + 1);
-              } else {
-                chunk1 = null;
               }
               if (chunk1 === ')') {
                 var type3 = null;
@@ -834,8 +826,6 @@
             var chunk0 = null;
             if (this._input.length > this._offset) {
               chunk0 = this._input.substring(this._offset, this._offset + 1);
-            } else {
-              chunk0 = null;
             }
             if (chunk0 === '/') {
               var type1 = null;
@@ -1071,8 +1061,6 @@
       var chunk0 = null;
       if (this._input.length > this._offset) {
         chunk0 = this._input.substring(this._offset, this._offset + 1);
-      } else {
-        chunk0 = null;
       }
       if (chunk0 === '<') {
         var type0 = null;
@@ -1099,8 +1087,6 @@
           var chunk1 = null;
           if (this._input.length > this._offset) {
             chunk1 = this._input.substring(this._offset, this._offset + 1);
-          } else {
-            chunk1 = null;
           }
           if (chunk1 === '>') {
             var type1 = null;
@@ -1406,8 +1392,6 @@
       var chunk0 = null;
       if (this._input.length > this._offset) {
         chunk0 = this._input.substring(this._offset, this._offset + 1);
-      } else {
-        chunk0 = null;
       }
       if (chunk0 === '&') {
         var type0 = null;
@@ -1427,8 +1411,6 @@
         var chunk1 = null;
         if (this._input.length > this._offset) {
           chunk1 = this._input.substring(this._offset, this._offset + 1);
-        } else {
-          chunk1 = null;
         }
         if (chunk1 === '!') {
           var type1 = null;
@@ -1543,8 +1525,6 @@
       var chunk0 = null;
       if (this._input.length > this._offset) {
         chunk0 = this._input.substring(this._offset, this._offset + 1);
-      } else {
-        chunk0 = null;
       }
       if (chunk0 === '"') {
         var type0 = null;
@@ -1571,8 +1551,6 @@
           var chunk1 = null;
           if (this._input.length > this._offset) {
             chunk1 = this._input.substring(this._offset, this._offset + 1);
-          } else {
-            chunk1 = null;
           }
           if (chunk1 === '\\') {
             var type1 = null;
@@ -1594,8 +1572,6 @@
             var chunk2 = null;
             if (this._input.length > this._offset) {
               chunk2 = this._input.substring(this._offset, this._offset + 1);
-            } else {
-              chunk2 = null;
             }
             if (chunk2 === null) {
               address5 = null;
@@ -1637,8 +1613,6 @@
             var chunk3 = null;
             if (this._input.length > this._offset) {
               chunk3 = this._input.substring(this._offset, this._offset + 1);
-            } else {
-              chunk3 = null;
             }
             if (chunk3 && /^[^"]/.test(chunk3)) {
               var type4 = null;
@@ -1681,8 +1655,6 @@
           var chunk4 = null;
           if (this._input.length > this._offset) {
             chunk4 = this._input.substring(this._offset, this._offset + 1);
-          } else {
-            chunk4 = null;
           }
           if (chunk4 === '"') {
             var type6 = null;
@@ -1739,8 +1711,6 @@
       var chunk0 = null;
       if (this._input.length > this._offset) {
         chunk0 = this._input.substring(this._offset, this._offset + 1);
-      } else {
-        chunk0 = null;
       }
       if (chunk0 === '`') {
         var type0 = null;
@@ -1767,8 +1737,6 @@
           var chunk1 = null;
           if (this._input.length > this._offset) {
             chunk1 = this._input.substring(this._offset, this._offset + 1);
-          } else {
-            chunk1 = null;
           }
           if (chunk1 === '\\') {
             var type1 = null;
@@ -1790,8 +1758,6 @@
             var chunk2 = null;
             if (this._input.length > this._offset) {
               chunk2 = this._input.substring(this._offset, this._offset + 1);
-            } else {
-              chunk2 = null;
             }
             if (chunk2 === null) {
               address5 = null;
@@ -1833,8 +1799,6 @@
             var chunk3 = null;
             if (this._input.length > this._offset) {
               chunk3 = this._input.substring(this._offset, this._offset + 1);
-            } else {
-              chunk3 = null;
             }
             if (chunk3 && /^[^`]/.test(chunk3)) {
               var type4 = null;
@@ -1877,8 +1841,6 @@
           var chunk4 = null;
           if (this._input.length > this._offset) {
             chunk4 = this._input.substring(this._offset, this._offset + 1);
-          } else {
-            chunk4 = null;
           }
           if (chunk4 === '`') {
             var type6 = null;
@@ -1933,8 +1895,6 @@
       var chunk0 = null;
       if (this._input.length > this._offset) {
         chunk0 = this._input.substring(this._offset, this._offset + 1);
-      } else {
-        chunk0 = null;
       }
       if (chunk0 === '.') {
         var type0 = find(this.constructor, "AnyChar");
@@ -1965,8 +1925,6 @@
       var chunk0 = null;
       if (this._input.length > this._offset) {
         chunk0 = this._input.substring(this._offset, this._offset + 1);
-      } else {
-        chunk0 = null;
       }
       if (chunk0 === '[') {
         var type0 = null;
@@ -1989,8 +1947,6 @@
         var chunk1 = null;
         if (this._input.length > this._offset) {
           chunk1 = this._input.substring(this._offset, this._offset + 1);
-        } else {
-          chunk1 = null;
         }
         if (chunk1 === '^') {
           var type1 = null;
@@ -2026,8 +1982,6 @@
             var chunk2 = null;
             if (this._input.length > this._offset) {
               chunk2 = this._input.substring(this._offset, this._offset + 1);
-            } else {
-              chunk2 = null;
             }
             if (chunk2 === '\\') {
               var type3 = null;
@@ -2049,8 +2003,6 @@
               var chunk3 = null;
               if (this._input.length > this._offset) {
                 chunk3 = this._input.substring(this._offset, this._offset + 1);
-              } else {
-                chunk3 = null;
               }
               if (chunk3 === null) {
                 address6 = null;
@@ -2092,8 +2044,6 @@
               var chunk4 = null;
               if (this._input.length > this._offset) {
                 chunk4 = this._input.substring(this._offset, this._offset + 1);
-              } else {
-                chunk4 = null;
               }
               if (chunk4 && /^[^\]]/.test(chunk4)) {
                 var type6 = null;
@@ -2136,8 +2086,6 @@
             var chunk5 = null;
             if (this._input.length > this._offset) {
               chunk5 = this._input.substring(this._offset, this._offset + 1);
-            } else {
-              chunk5 = null;
             }
             if (chunk5 === ']') {
               var type8 = null;
@@ -2203,8 +2151,6 @@
         var chunk0 = null;
         if (this._input.length > this._offset) {
           chunk0 = this._input.substring(this._offset, this._offset + 1);
-        } else {
-          chunk0 = null;
         }
         if (chunk0 === ':') {
           var type0 = null;
@@ -2266,8 +2212,6 @@
           var chunk0 = null;
           if (this._input.length > this._offset) {
             chunk0 = this._input.substring(this._offset, this._offset + 1);
-          } else {
-            chunk0 = null;
           }
           if (chunk0 === '.') {
             var type0 = null;
@@ -2364,8 +2308,6 @@
       var chunk0 = null;
       if (this._input.length > this._offset) {
         chunk0 = this._input.substring(this._offset, this._offset + 1);
-      } else {
-        chunk0 = null;
       }
       if (chunk0 && /^[a-zA-Z_$]/.test(chunk0)) {
         var type0 = null;
@@ -2389,8 +2331,6 @@
           var chunk1 = null;
           if (this._input.length > this._offset) {
             chunk1 = this._input.substring(this._offset, this._offset + 1);
-          } else {
-            chunk1 = null;
           }
           if (chunk1 && /^[a-zA-Z0-9_$]/.test(chunk1)) {
             var type1 = null;
@@ -2459,8 +2399,6 @@
       var chunk0 = null;
       if (this._input.length > this._offset) {
         chunk0 = this._input.substring(this._offset, this._offset + 1);
-      } else {
-        chunk0 = null;
       }
       if (chunk0 === '?') {
         var type0 = null;
@@ -2480,8 +2418,6 @@
         var chunk1 = null;
         if (this._input.length > this._offset) {
           chunk1 = this._input.substring(this._offset, this._offset + 1);
-        } else {
-          chunk1 = null;
         }
         if (chunk1 === '*') {
           var type1 = null;
@@ -2501,8 +2437,6 @@
           var chunk2 = null;
           if (this._input.length > this._offset) {
             chunk2 = this._input.substring(this._offset, this._offset + 1);
-          } else {
-            chunk2 = null;
           }
           if (chunk2 === '+') {
             var type2 = null;
@@ -2536,8 +2470,6 @@
       var chunk0 = null;
       if (this._input.length > this._offset) {
         chunk0 = this._input.substring(this._offset, this._offset + 1);
-      } else {
-        chunk0 = null;
       }
       if (chunk0 && /^[\s\n\r\t]/.test(chunk0)) {
         var type0 = null;

@@ -120,11 +120,9 @@ Canopy.extend(Canopy.Builder.prototype, {
   },
 
   chunk_: function(length) {
-    var chunk = this.localVar_('chunk'), input = this.input_(), of = this.offset_();
+    var chunk = this.localVar_('chunk', this.null_()), input = this.input_(), of = this.offset_();
     this.if_(input + '.length > ' + of, function(builder) {
       builder.line_(chunk + ' = ' + input + '.substring(' + of + ', ' + of + ' + ' + length + ')');
-    }, function(builder) {
-      builder.line_(chunk + ' = null');
     });
     return chunk;
   },
@@ -145,7 +143,7 @@ Canopy.extend(Canopy.Builder.prototype, {
     if (nodeType)
       return this.localVar_('type', 'find(this.constructor, "' + nodeType + '")');
     else
-      return this.localVar_('type', 'null');
+      return this.localVar_('type',this.null_());
   },
 
   extendNode_: function(address, nodeType) {
@@ -156,7 +154,7 @@ Canopy.extend(Canopy.Builder.prototype, {
   },
 
   failure_: function(address, expected) {
-    this.line_(address + ' = null');
+    this.assign_(address, this.null_());
     var input = this.input_(), of = this.offset_();
     var error = 'this.error = this.constructor.lastError';
     expected = expected.replace(/\\/g, '\\\\').replace(/"/g, '\\"');
@@ -245,7 +243,7 @@ Canopy.extend(Canopy.Builder.prototype, {
     this._varIndex[name] = this._varIndex[name] || 0;
     var varName = name + this._varIndex[name];
     this._varIndex[name] += 1;
-    this.var_(varName, (value === undefined) ? 'null' : value);
+    this.var_(varName, (value === undefined) ? this.null_(): value);
     return varName;
   },
 
@@ -338,7 +336,7 @@ Canopy.extend(Canopy.Builder.prototype, {
   },
 
   isNull_: function(expression) {
-    return expression + ' === null';
+    return expression + ' === ' + this.null_();
   },
 
   emptyList_: function() {
