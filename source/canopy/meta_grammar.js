@@ -1941,13 +1941,13 @@
       if (this._input.length > this._offset) {
         chunk0 = this._input.substring(this._offset, this._offset + 1);
       }
-      if (chunk0 && /^[a-zA-Z_$]/.test(chunk0)) {
+      if (chunk0 && /^[a-zA-Z_]/.test(chunk0)) {
         address1 = new SyntaxNode(chunk0, this._offset, []);
         this._offset += 1;
       } else {
         address1 = null;
         if (!this.error || this.error.offset <= this._offset) {
-          this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: '[a-zA-Z_$]'};
+          this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: '[a-zA-Z_]'};
         }
       }
       if (address1) {
@@ -1960,13 +1960,13 @@
           if (this._input.length > this._offset) {
             chunk1 = this._input.substring(this._offset, this._offset + 1);
           }
-          if (chunk1 && /^[a-zA-Z0-9_$]/.test(chunk1)) {
+          if (chunk1 && /^[a-zA-Z0-9_]/.test(chunk1)) {
             address3 = new SyntaxNode(chunk1, this._offset, []);
             this._offset += 1;
           } else {
             address3 = null;
             if (!this.error || this.error.offset <= this._offset) {
-              this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: '[a-zA-Z0-9_$]'};
+              this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: '[a-zA-Z0-9_]'};
             }
           }
           if (address3) {
@@ -2075,13 +2075,13 @@
       if (this._input.length > this._offset) {
         chunk0 = this._input.substring(this._offset, this._offset + 1);
       }
-      if (chunk0 && /^[\s\n\r\t]/.test(chunk0)) {
+      if (chunk0 && /^[\s]/.test(chunk0)) {
         address0 = new SyntaxNode(chunk0, this._offset, []);
         this._offset += 1;
       } else {
         address0 = null;
         if (!this.error || this.error.offset <= this._offset) {
-          this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: '[\\s\\n\\r\\t]'};
+          this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: '[\\s]'};
         }
       }
       return this._cache.space[index0] = address0;
