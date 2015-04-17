@@ -103,7 +103,7 @@ Canopy.extend(Canopy.Builder.prototype, {
 
   delimitField_: function() {
     this.write(this._methodSeparator);
-    this._methodSeparator = ',';
+    this._methodSeparator = ',\n';
   },
 
   line_: function(source) {
@@ -204,6 +204,24 @@ Canopy.extend(Canopy.Builder.prototype, {
     new Canopy.Builder(this).indent_(block, context);
     this.newline_();
     this.write('}');
+  },
+
+  cache_: function(name, block, context) {
+    var temp      = this.localVars_({address: this.null_(), index: this.offset_()}),
+        address   = temp.address,
+        offset    = temp.index,
+        cacheAddr = 'this._cache.' + name + '[' + offset + ']';
+
+    this.assign_('this._cache.' + name, 'this._cache.' + name + ' || {}');
+    this.var_('cached', cacheAddr);
+
+    this.if_('cached', function(builder) {
+      builder.line_(builder.offset_() + ' += cached.textValue.length');
+      builder.return_('cached');
+    }, this);
+
+    block.call(context, this, address);
+    this.return_(cacheAddr + ' = ' + address);
   },
 
   assign_: function(name, value) {

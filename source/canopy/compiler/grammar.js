@@ -40,7 +40,7 @@ Canopy.Compiler.Grammar = {
       builder.function_('var Parser', ['input'], function(builder) {
         builder.ivar_('input', 'input');
         builder.ivar_('offset', '0');
-        builder.ivar_('nodeCache', '{}');
+        builder.ivar_('cache', '{}');
       });
       builder.function_('Parser.prototype.parse', [], function(builder) {
         var input = builder.input_(),
