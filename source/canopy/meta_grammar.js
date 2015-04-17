@@ -1597,15 +1597,14 @@
             } else {
               chunk2 = null;
             }
-            var nextChar0 = chunk2;
-            if (nextChar0 === null) {
+            if (chunk2 === null) {
               address5 = null;
               if (!this.error || this.error.offset <= this._offset) {
                 this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: "<any char>"};
               }
             } else {
               var type2 = null;
-              address5 = new SyntaxNode(nextChar0, this._offset, []);
+              address5 = new SyntaxNode(chunk2, this._offset, []);
               if (typeof type2 === "object") {
                 extend(address5, type2);
               }
@@ -1794,15 +1793,14 @@
             } else {
               chunk2 = null;
             }
-            var nextChar0 = chunk2;
-            if (nextChar0 === null) {
+            if (chunk2 === null) {
               address5 = null;
               if (!this.error || this.error.offset <= this._offset) {
                 this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: "<any char>"};
               }
             } else {
               var type2 = null;
-              address5 = new SyntaxNode(nextChar0, this._offset, []);
+              address5 = new SyntaxNode(chunk2, this._offset, []);
               if (typeof type2 === "object") {
                 extend(address5, type2);
               }
@@ -2054,15 +2052,14 @@
               } else {
                 chunk3 = null;
               }
-              var nextChar0 = chunk3;
-              if (nextChar0 === null) {
+              if (chunk3 === null) {
                 address6 = null;
                 if (!this.error || this.error.offset <= this._offset) {
                   this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: "<any char>"};
                 }
               } else {
                 var type4 = null;
-                address6 = new SyntaxNode(nextChar0, this._offset, []);
+                address6 = new SyntaxNode(chunk3, this._offset, []);
                 if (typeof type4 === "object") {
                   extend(address6, type4);
                 }
