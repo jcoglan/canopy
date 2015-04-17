@@ -136,26 +136,16 @@ Canopy.extend(Canopy.Builder.prototype, {
     elements = ', ' + (elements || '[]');
 
     var klass = nodeClass || 'SyntaxNode',
-        type  = this.findType_(nodeType),
         of    = ', ' + this.offset_();
 
     this.line_(address + ' = new ' + klass + '(' + expression + of + elements + ')');
-    this.extendNode_(address, type);
+    this.extendNode_(address, nodeType);
     this.line_(this.offset_() + ' += ' + bump);
-  },
-
-  findType_: function(nodeType) {
-    if (nodeType)
-      return this.localVar_('type', 'this.constructor.' + nodeType);
-    else
-      return this.localVar_('type',this.null_());
   },
 
   extendNode_: function(address, nodeType) {
     if (!nodeType) return;
-    this.if_('typeof ' + nodeType + " === 'object'", function(builder) {
-      builder.line_('extend(' + address + ', ' + nodeType + ')');
-    });
+    this.line_('extend(' + address + ', this.constructor.' + nodeType + ')');
   },
 
   failure_: function(address, expected) {

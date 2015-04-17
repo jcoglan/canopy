@@ -67,8 +67,7 @@ Canopy.Compiler.Repeat = {
 
     if (nodeType) {
       builder.if_(address, function(builder) {
-        var type = builder.findType_(nodeType);
-        builder.extendNode_(address, type);
+        builder.extendNode_(address, nodeType);
       }, onFail);
     } else {
       builder.unless_(address, onFail);
