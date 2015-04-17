@@ -17,12 +17,12 @@ Canopy.extend(Canopy.Builder.prototype, {
     return this._buffer;
   },
 
-  write: function(string) {
-    if (this._parent) return this._parent.write(string);
+  _write: function(string) {
+    if (this._parent) return this._parent._write(string);
     this._buffer += string;
   },
 
-  quote: function(string) {
+  _quote: function(string) {
     string = string.replace(/\\/g, '\\\\')
                    .replace(/\x08/g, '\\b')
                    .replace(/\t/g, '\\t')
@@ -36,7 +36,7 @@ Canopy.extend(Canopy.Builder.prototype, {
   },
 
   package_: function(name, block, context) {
-    this.write('(function() {');
+    this._write('(function() {');
     this.indent_(function(builder) {
       builder.line_("'use strict'");
 
@@ -51,7 +51,7 @@ Canopy.extend(Canopy.Builder.prototype, {
       block.call(context, this);
     }, this);
     this.newline_();
-    this.write('})();');
+    this._write('})();');
     this.newline_();
   },
 
@@ -64,7 +64,7 @@ Canopy.extend(Canopy.Builder.prototype, {
     });
     this.function_(name + '.prototype.forEach', ['block', 'context'], function(builder) {
       builder.newline_();
-      builder.write('for (var el = this.elements, i = 0, n = el.length; i < n; i++)');
+      builder._write('for (var el = this.elements, i = 0, n = el.length; i < n; i++)');
       builder.indent_(function(builder) {
         builder.line_('block.call(context, el[i], i, el)');
       });
@@ -83,7 +83,7 @@ Canopy.extend(Canopy.Builder.prototype, {
       block.call(context, builder);
     }, this);
     if (this._parentName) {
-      this.write('(function() {');
+      this._write('(function() {');
       this.indent_(function(builder) {
         builder.assign_('var parent', 'function() {}');
         builder.assign_('parent.prototype', this._parentName + '.prototype');
@@ -109,19 +109,19 @@ Canopy.extend(Canopy.Builder.prototype, {
   },
 
   newline_: function() {
-    this.write('\n');
+    this._write('\n');
     var i = this._indentLevel;
-    while (i--) this.write('  ');
+    while (i--) this._write('  ');
   },
 
   delimitField_: function() {
-    this.write(this._methodSeparator);
+    this._write(this._methodSeparator);
     this._methodSeparator = ',\n';
   },
 
   line_: function(source) {
     this.newline_();
-    this.write(source + ';');
+    this._write(source + ';');
   },
 
   input_: function() {
@@ -173,7 +173,7 @@ Canopy.extend(Canopy.Builder.prototype, {
     this.if_('!this.error || this.error.offset <= ' + of, function(builder) {
       builder.line_(error + ' = {input: ' + input +
                               ', offset: ' + of +
-                              ', expected: ' + builder.quote(expected) + '}');
+                              ', expected: ' + builder._quote(expected) + '}');
     });
   },
 
@@ -186,34 +186,34 @@ Canopy.extend(Canopy.Builder.prototype, {
 
   function_: function(name, args, block, context) {
     this.newline_();
-    this.write(name + ' = function(' + args.join(', ') + ') {');
+    this._write(name + ' = function(' + args.join(', ') + ') {');
     new Canopy.Builder(this, this._name, this._parentName).indent_(block, context);
     this.newline_();
-    this.write('};');
+    this._write('};');
     this.newline_();
   },
 
   module_: function(name, block, context) {
     this.newline_();
-    this.write(name + ' = {');
+    this._write(name + ' = {');
     new Canopy.Builder(this).indent_(block, context);
     this.newline_();
-    this.write('};');
+    this._write('};');
   },
 
   field_: function(name, value) {
     this.delimitField_();
     this.newline_();
-    this.write(name + ': ' + value);
+    this._write(name + ': ' + value);
   },
 
   method_: function(name, args, block, context) {
     this.delimitField_();
     this.newline_();
-    this.write(name + ': function(' + args.join(', ') + ') {');
+    this._write(name + ': function(' + args.join(', ') + ') {');
     new Canopy.Builder(this).indent_(block, context);
     this.newline_();
-    this.write('}');
+    this._write('}');
   },
 
   cache_: function(name, block, context) {
@@ -274,10 +274,10 @@ Canopy.extend(Canopy.Builder.prototype, {
 
   conditional_: function(kwd, condition, block, context) {
     this.newline_();
-    this.write(kwd + ' (' + condition + ') {');
+    this._write(kwd + ' (' + condition + ') {');
     this.indent_(block, context);
     this.newline_();
-    this.write('}');
+    this._write('}');
   },
 
   for_: function(condition, block, context) {
@@ -295,10 +295,10 @@ Canopy.extend(Canopy.Builder.prototype, {
     }
     this.conditional_('if', condition, block, context);
     if (!else_) return;
-    this.write(' else {');
+    this._write(' else {');
     this.indent_(else_, context);
     this.newline_();
-    this.write('}');
+    this._write('}');
   },
 
   unless_: function(condition, block, else_, context) {
@@ -330,11 +330,11 @@ Canopy.extend(Canopy.Builder.prototype, {
   },
 
   stringMatch_: function(expression, string) {
-    return expression + ' === ' + this.quote(string);
+    return expression + ' === ' + this._quote(string);
   },
 
   stringMatchCI_: function(expression, string) {
-    return expression + '.toLowerCase() === ' + this.quote(string) + '.toLowerCase()';
+    return expression + '.toLowerCase() === ' + this._quote(string) + '.toLowerCase()';
   },
 
   stringLength_: function(expression) {
