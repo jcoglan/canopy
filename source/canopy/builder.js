@@ -117,16 +117,12 @@ Canopy.extend(Canopy.Builder.prototype, {
     this._write(source + ';');
   },
 
-  input_: function() {
-    return 'this._input';
-  },
-
   offset_: function() {
     return 'this._offset';
   },
 
   chunk_: function(length) {
-    var chunk = this.localVar_('chunk', this.null_()), input = this.input_(), of = this.offset_();
+    var chunk = this.localVar_('chunk', this.null_()), input = 'this._input', of = 'this._offset';
     this.if_(input + '.length > ' + of, function(builder) {
       builder.line_(chunk + ' = ' + input + '.substring(' + of + ', ' + of + ' + ' + length + ')');
     });
@@ -137,11 +133,11 @@ Canopy.extend(Canopy.Builder.prototype, {
     elements = ', ' + (elements || '[]');
 
     var klass = nodeClass || 'SyntaxNode',
-        of    = ', ' + this.offset_();
+        of    = ', this._offset';
 
     this.line_(address + ' = new ' + klass + '(' + expression + of + elements + ')');
     this.extendNode_(address, nodeType);
-    this.line_(this.offset_() + ' += ' + bump);
+    this.line_('this._offset += ' + bump);
   },
 
   extendNode_: function(address, nodeType) {
@@ -151,7 +147,7 @@ Canopy.extend(Canopy.Builder.prototype, {
 
   failure_: function(address, expected) {
     this.assign_(address, this.null_());
-    var input = this.input_(), of = this.offset_();
+    var input = 'this._input', of = 'this._offset';
     var error = 'this.error = this.constructor.lastError';
     this.if_('!this.error || this.error.offset <= ' + of, function(builder) {
       builder.line_(error + ' = {input: ' + input +
@@ -188,7 +184,7 @@ Canopy.extend(Canopy.Builder.prototype, {
       builder.assign_('this._cache', '{}');
     });
     this.function_('Parser.prototype.parse', [], function(builder) {
-      var input = builder.input_(), of = builder.offset_();
+      var input = 'this._input', of = 'this._offset';
 
       builder.line_('var result = this._read_' + root + '()');
 
@@ -252,7 +248,7 @@ Canopy.extend(Canopy.Builder.prototype, {
   },
 
   cache_: function(name, block, context) {
-    var temp      = this.localVars_({address: this.null_(), index: this.offset_()}),
+    var temp      = this.localVars_({address: this.null_(), index: 'this._offset'}),
         address   = temp.address,
         offset    = temp.index,
         cacheMap  = 'this._cache._' + name,
@@ -262,7 +258,7 @@ Canopy.extend(Canopy.Builder.prototype, {
     this.line_('var cached = ' + cacheAddr);
 
     this.if_('cached', function(builder) {
-      builder.line_(builder.offset_() + ' += cached.textValue.length');
+      builder.line_('this._offset += cached.textValue.length');
       builder.return_('cached');
     }, this);
 
