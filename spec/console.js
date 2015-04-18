@@ -19,4 +19,3 @@ if (typeof require === 'function') {
   load('lib/canopy-min.js')
   load('spec/runner.js')
 }
-

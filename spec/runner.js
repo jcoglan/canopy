@@ -37,4 +37,3 @@ JS.require('JS.Test', function() {
 
               function() { JS.Test.autorun() })
 })
-

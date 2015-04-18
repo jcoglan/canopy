@@ -20,4 +20,3 @@ function() { with(this) {
       }, AnyCharTest.Parser.lastError)
   }})
 }})
-

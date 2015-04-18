@@ -2120,6 +2120,8 @@
       Canopy.MetaGrammar = exported;
     }
   } else {
-    Canopy.MetaGrammar = exported;
+    var namespace = window;
+    namespace = namespace.Canopy = namespace.Canopy || {};
+    namespace.MetaGrammar = exported;
   }
 })();

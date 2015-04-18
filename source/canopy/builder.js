@@ -206,9 +206,9 @@ Canopy.extend(Canopy.Builder.prototype, {
 
   exports_: function() {
     var grammar   = this._grammarName,
-        namespace = /\./.test(grammar) ? grammar.replace(/\.[^\.]+$/g, '').split('.') : [],
+        namespace = grammar.split('.'),
+        last      = namespace.pop(),
         n         = namespace.length,
-        last      = namespace[n - 1],
         condition = [];
 
     for (var i = 0; i < n; i++)
@@ -223,12 +223,11 @@ Canopy.extend(Canopy.Builder.prototype, {
         builder.assign_(grammar, 'exported');
       });
     }, function(builder) {
-      if (n > 0) {
-        builder.assign_('var namespace', 'this');
-        for (var i = 0, n = namespace.length; i < n - 1; i++)
-          builder.assign_('namespace', 'namespace.' + namespace[i] + ' = namespace.' + namespace[i] + ' || {}');
+      builder.assign_('var namespace', 'window');
+      for (var i = 0; i < n; i++) {
+        builder.assign_('namespace', 'namespace.' + namespace[i] + ' = namespace.' + namespace[i] + ' || {}');
       }
-      builder.assign_(grammar, 'exported');
+      builder.assign_('namespace.' + last, 'exported');
     });
   },
 
