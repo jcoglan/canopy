@@ -37,7 +37,7 @@
       "targets": {
         "canopy": [ "canopy.js",
                     "canopy/meta_grammar",
-                    "canopy/builder",
+                    "canopy/builders/javascript",
                     "canopy/compiler.js",
                     "canopy/compiler/grammar",
                     "canopy/compiler/grammar_rule",

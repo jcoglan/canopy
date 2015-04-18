@@ -19,7 +19,7 @@ Canopy.extend(Canopy.Compiler.prototype, {
   },
 
   toSource: function() {
-    var builder = new Canopy.Builder();
+    var builder = new Canopy.Builders.JavaScript();
     this.parseTree().compile(builder);
     return builder.serialize();
   }

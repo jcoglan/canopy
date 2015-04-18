@@ -12,6 +12,8 @@ Canopy.extend = function(destination, source) {
   };
 
 Canopy.extend(Canopy, {
+  Builders: {},
+
   compile: function(grammar) {
     var compiler = new this.Compiler(grammar),
         source   = compiler.toSource();
