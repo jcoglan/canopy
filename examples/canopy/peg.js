@@ -329,8 +329,8 @@
         this._offset += 8;
       } else {
         address1 = null;
-        if (!this.error || this.error.offset <= this._offset) {
-          this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: '"grammar "'};
+        if (!this._error || this._error.offset <= this._offset) {
+          this._error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: '"grammar "'};
         }
       }
       if (address1) {
@@ -444,8 +444,8 @@
           this._offset += 2;
         } else {
           address3 = null;
-          if (!this.error || this.error.offset <= this._offset) {
-            this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: '"<-"'};
+          if (!this._error || this._error.offset <= this._offset) {
+            this._error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: '"<-"'};
           }
         }
         if (address3) {
@@ -532,8 +532,8 @@
         this._offset += 1;
       } else {
         address1 = null;
-        if (!this.error || this.error.offset <= this._offset) {
-          this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: '"("'};
+        if (!this._error || this._error.offset <= this._offset) {
+          this._error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: '"("'};
         }
       }
       if (address1) {
@@ -594,8 +594,8 @@
                 this._offset += 1;
               } else {
                 address7 = null;
-                if (!this.error || this.error.offset <= this._offset) {
-                  this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: '")"'};
+                if (!this._error || this._error.offset <= this._offset) {
+                  this._error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: '")"'};
                 }
               }
               if (address7) {
@@ -679,8 +679,8 @@
               this._offset += 1;
             } else {
               address6 = null;
-              if (!this.error || this.error.offset <= this._offset) {
-                this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: '"/"'};
+              if (!this._error || this._error.offset <= this._offset) {
+                this._error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: '"/"'};
               }
             }
             if (address6) {
@@ -878,8 +878,8 @@
         this._offset += 1;
       } else {
         address1 = null;
-        if (!this.error || this.error.offset <= this._offset) {
-          this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: '"<"'};
+        if (!this._error || this._error.offset <= this._offset) {
+          this._error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: '"<"'};
         }
       }
       if (address1) {
@@ -900,8 +900,8 @@
             this._offset += 1;
           } else {
             address3 = null;
-            if (!this.error || this.error.offset <= this._offset) {
-              this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: '">"'};
+            if (!this._error || this._error.offset <= this._offset) {
+              this._error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: '">"'};
             }
           }
           if (address3) {
@@ -1169,8 +1169,8 @@
         this._offset += 1;
       } else {
         address1 = null;
-        if (!this.error || this.error.offset <= this._offset) {
-          this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: '"&"'};
+        if (!this._error || this._error.offset <= this._offset) {
+          this._error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: '"&"'};
         }
       }
       if (!address1) {
@@ -1184,8 +1184,8 @@
           this._offset += 1;
         } else {
           address1 = null;
-          if (!this.error || this.error.offset <= this._offset) {
-            this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: '"!"'};
+          if (!this._error || this._error.offset <= this._offset) {
+            this._error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: '"!"'};
           }
         }
         if (!address1) {
@@ -1282,8 +1282,8 @@
         this._offset += 1;
       } else {
         address1 = null;
-        if (!this.error || this.error.offset <= this._offset) {
-          this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: '"\\""'};
+        if (!this._error || this._error.offset <= this._offset) {
+          this._error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: '"\\""'};
         }
       }
       if (address1) {
@@ -1304,8 +1304,8 @@
             this._offset += 1;
           } else {
             address4 = null;
-            if (!this.error || this.error.offset <= this._offset) {
-              this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: '"\\\\"'};
+            if (!this._error || this._error.offset <= this._offset) {
+              this._error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: '"\\\\"'};
             }
           }
           if (address4) {
@@ -1318,8 +1318,8 @@
             }
             if (chunk2 === null) {
               address5 = null;
-              if (!this.error || this.error.offset <= this._offset) {
-                this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: '<any char>'};
+              if (!this._error || this._error.offset <= this._offset) {
+                this._error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: '<any char>'};
               }
             } else {
               address5 = new SyntaxNode(chunk2, this._offset, []);
@@ -1354,8 +1354,8 @@
               this._offset += 1;
             } else {
               address3 = null;
-              if (!this.error || this.error.offset <= this._offset) {
-                this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: '[^"]'};
+              if (!this._error || this._error.offset <= this._offset) {
+                this._error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: '[^"]'};
               }
             }
             if (!address3) {
@@ -1388,8 +1388,8 @@
             this._offset += 1;
           } else {
             address6 = null;
-            if (!this.error || this.error.offset <= this._offset) {
-              this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: '"\\""'};
+            if (!this._error || this._error.offset <= this._offset) {
+              this._error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: '"\\""'};
             }
           }
           if (address6) {
@@ -1436,8 +1436,8 @@
         this._offset += 1;
       } else {
         address1 = null;
-        if (!this.error || this.error.offset <= this._offset) {
-          this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: '"`"'};
+        if (!this._error || this._error.offset <= this._offset) {
+          this._error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: '"`"'};
         }
       }
       if (address1) {
@@ -1458,8 +1458,8 @@
             this._offset += 1;
           } else {
             address4 = null;
-            if (!this.error || this.error.offset <= this._offset) {
-              this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: '"\\\\"'};
+            if (!this._error || this._error.offset <= this._offset) {
+              this._error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: '"\\\\"'};
             }
           }
           if (address4) {
@@ -1472,8 +1472,8 @@
             }
             if (chunk2 === null) {
               address5 = null;
-              if (!this.error || this.error.offset <= this._offset) {
-                this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: '<any char>'};
+              if (!this._error || this._error.offset <= this._offset) {
+                this._error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: '<any char>'};
               }
             } else {
               address5 = new SyntaxNode(chunk2, this._offset, []);
@@ -1508,8 +1508,8 @@
               this._offset += 1;
             } else {
               address3 = null;
-              if (!this.error || this.error.offset <= this._offset) {
-                this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: '[^`]'};
+              if (!this._error || this._error.offset <= this._offset) {
+                this._error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: '[^`]'};
               }
             }
             if (!address3) {
@@ -1542,8 +1542,8 @@
             this._offset += 1;
           } else {
             address6 = null;
-            if (!this.error || this.error.offset <= this._offset) {
-              this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: '"`"'};
+            if (!this._error || this._error.offset <= this._offset) {
+              this._error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: '"`"'};
             }
           }
           if (address6) {
@@ -1588,8 +1588,8 @@
         this._offset += 1;
       } else {
         address0 = null;
-        if (!this.error || this.error.offset <= this._offset) {
-          this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: '"."'};
+        if (!this._error || this._error.offset <= this._offset) {
+          this._error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: '"."'};
         }
       }
       return this._cache._any_char_expression[index0] = address0;
@@ -1614,8 +1614,8 @@
         this._offset += 1;
       } else {
         address1 = null;
-        if (!this.error || this.error.offset <= this._offset) {
-          this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: '"["'};
+        if (!this._error || this._error.offset <= this._offset) {
+          this._error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: '"["'};
         }
       }
       if (address1) {
@@ -1632,8 +1632,8 @@
           this._offset += 1;
         } else {
           address2 = null;
-          if (!this.error || this.error.offset <= this._offset) {
-            this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: '"^"'};
+          if (!this._error || this._error.offset <= this._offset) {
+            this._error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: '"^"'};
           }
         }
         if (!address2) {
@@ -1659,8 +1659,8 @@
               this._offset += 1;
             } else {
               address5 = null;
-              if (!this.error || this.error.offset <= this._offset) {
-                this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: '"\\\\"'};
+              if (!this._error || this._error.offset <= this._offset) {
+                this._error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: '"\\\\"'};
               }
             }
             if (address5) {
@@ -1673,8 +1673,8 @@
               }
               if (chunk3 === null) {
                 address6 = null;
-                if (!this.error || this.error.offset <= this._offset) {
-                  this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: '<any char>'};
+                if (!this._error || this._error.offset <= this._offset) {
+                  this._error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: '<any char>'};
                 }
               } else {
                 address6 = new SyntaxNode(chunk3, this._offset, []);
@@ -1709,8 +1709,8 @@
                 this._offset += 1;
               } else {
                 address4 = null;
-                if (!this.error || this.error.offset <= this._offset) {
-                  this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: '[^\\]]'};
+                if (!this._error || this._error.offset <= this._offset) {
+                  this._error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: '[^\\]]'};
                 }
               }
               if (!address4) {
@@ -1743,8 +1743,8 @@
               this._offset += 1;
             } else {
               address7 = null;
-              if (!this.error || this.error.offset <= this._offset) {
-                this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: '"]"'};
+              if (!this._error || this._error.offset <= this._offset) {
+                this._error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: '"]"'};
               }
             }
             if (address7) {
@@ -1800,8 +1800,8 @@
           this._offset += 1;
         } else {
           address2 = null;
-          if (!this.error || this.error.offset <= this._offset) {
-            this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: '":"'};
+          if (!this._error || this._error.offset <= this._offset) {
+            this._error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: '":"'};
           }
         }
         if (address2) {
@@ -1853,8 +1853,8 @@
             this._offset += 1;
           } else {
             address4 = null;
-            if (!this.error || this.error.offset <= this._offset) {
-              this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: '"."'};
+            if (!this._error || this._error.offset <= this._offset) {
+              this._error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: '"."'};
             }
           }
           if (address4) {
@@ -1933,8 +1933,8 @@
         this._offset += 1;
       } else {
         address1 = null;
-        if (!this.error || this.error.offset <= this._offset) {
-          this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: '[a-zA-Z_$]'};
+        if (!this._error || this._error.offset <= this._offset) {
+          this._error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: '[a-zA-Z_$]'};
         }
       }
       if (address1) {
@@ -1952,8 +1952,8 @@
             this._offset += 1;
           } else {
             address3 = null;
-            if (!this.error || this.error.offset <= this._offset) {
-              this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: '[a-zA-Z0-9_$]'};
+            if (!this._error || this._error.offset <= this._offset) {
+              this._error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: '[a-zA-Z0-9_$]'};
             }
           }
           if (address3) {
@@ -2008,8 +2008,8 @@
         this._offset += 1;
       } else {
         address0 = null;
-        if (!this.error || this.error.offset <= this._offset) {
-          this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: '"?"'};
+        if (!this._error || this._error.offset <= this._offset) {
+          this._error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: '"?"'};
         }
       }
       if (!address0) {
@@ -2023,8 +2023,8 @@
           this._offset += 1;
         } else {
           address0 = null;
-          if (!this.error || this.error.offset <= this._offset) {
-            this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: '"*"'};
+          if (!this._error || this._error.offset <= this._offset) {
+            this._error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: '"*"'};
           }
         }
         if (!address0) {
@@ -2038,8 +2038,8 @@
             this._offset += 1;
           } else {
             address0 = null;
-            if (!this.error || this.error.offset <= this._offset) {
-              this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: '"+"'};
+            if (!this._error || this._error.offset <= this._offset) {
+              this._error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: '"+"'};
             }
           }
           if (!address0) {
@@ -2067,8 +2067,8 @@
         this._offset += 1;
       } else {
         address0 = null;
-        if (!this.error || this.error.offset <= this._offset) {
-          this.error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: '[\\s\\n\\r\\t]'};
+        if (!this._error || this._error.offset <= this._offset) {
+          this._error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: '[\\s\\n\\r\\t]'};
         }
       }
       return this._cache._space[index0] = address0;
@@ -2086,10 +2086,10 @@
     if (result && this._offset === this._input.length) {
       return result;
     }
-    if (!this.error) {
-      this.error = {input: this._input, offset: this._offset, expected: "<EOF>"};
+    if (!this._error) {
+      this._error = {input: this._input, offset: this._offset, expected: '<EOF>'};
     }
-    throw new Error(formatError(this.error));
+    throw new Error(formatError(this._error));
   };
   
   Parser.parse = function(input) {

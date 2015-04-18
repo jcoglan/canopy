@@ -148,8 +148,8 @@ Canopy.extend(Canopy.Builder.prototype, {
   failure_: function(address, expected) {
     this.assign_(address, this.null_());
     var input = 'this._input', of = 'this._offset';
-    var error = 'this.error = this.constructor.lastError';
-    this.if_('!this.error || this.error.offset <= ' + of, function(builder) {
+    var error = 'this._error = this.constructor.lastError';
+    this.if_('!this._error || this._error.offset <= ' + of, function(builder) {
       builder.line_(error + ' = {input: ' + input +
                               ', offset: ' + of +
                               ', expected: ' + builder._quote(expected) + '}');
@@ -186,18 +186,18 @@ Canopy.extend(Canopy.Builder.prototype, {
     this.function_('Parser.prototype.parse', [], function(builder) {
       var input = 'this._input', of = 'this._offset';
 
-      builder.line_('var result = this._read_' + root + '()');
+      builder.assign_('var result', 'this._read_' + root + '()');
 
       builder.if_('result && this._offset === this._input.length', function(builder) {
         builder.return_('result');
       });
-      builder.unless_('this.error', function(builder) {
-        builder.line_('this.error = {input: this._input, offset: this._offset, expected: "<EOF>"}');
+      builder.unless_('this._error', function(builder) {
+        builder.assign_('this._error', "{input: this._input, offset: this._offset, expected: '<EOF>'}");
       });
-      builder.line_('throw new Error(formatError(this.error))');
+      builder.line_('throw new Error(formatError(this._error))');
     });
     this.function_('Parser.parse', ['input'], function(builder) {
-      builder.line_('var parser = new Parser(input)');
+      builder.assign_('var parser', 'new Parser(input)');
       builder.return_('parser.parse()');
     });
     this.line_('extend(Parser.prototype, Grammar)');
