@@ -87,7 +87,7 @@ Canopy.extend(Canopy.Builder.prototype, {
   },
 
   attribute_: function(name, value) {
-    this.assign_('this.' + name, value);
+    this.assign_("this['" + name + "']", value);
   },
 
   arrayLookup_: function(expression, offset) {
@@ -202,9 +202,10 @@ Canopy.extend(Canopy.Builder.prototype, {
     var temp      = this.localVars_({address: this.null_(), index: this.offset_()}),
         address   = temp.address,
         offset    = temp.index,
-        cacheAddr = 'this._cache.' + name + '[' + offset + ']';
+        cacheMap  = 'this._cache._' + name,
+        cacheAddr = cacheMap + '[' + offset + ']';
 
-    this.assign_('this._cache.' + name, 'this._cache.' + name + ' || {}');
+    this.assign_(cacheMap, cacheMap + ' || {}');
     this.var_('cached', cacheAddr);
 
     this.if_('cached', function(builder) {
