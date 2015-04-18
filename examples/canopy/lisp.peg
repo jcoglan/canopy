@@ -11,4 +11,3 @@ symbol    <- (!delimiter .)+
 space     <- [\s\n\r\t]
 paren     <- "(" / ")"
 delimiter <- paren / space
-

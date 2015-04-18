@@ -57,4 +57,3 @@ grammar Canopy.PEG
   quantifier                <- "?" / "*" / "+"
 
   space                     <- [\s\n\r\t]
-

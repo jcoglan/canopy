@@ -55,4 +55,3 @@
   quantifier                 = "?" / "*" / "+"
 
   space                      = " " / [\n\r\t]
-

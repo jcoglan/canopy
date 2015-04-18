@@ -1,14 +1,16 @@
 var canopyPEG = require('./canopy/peg'),
     pegjsPEG  = require('./pegjs/peg'),
-    benchmark = require('./benchmark');
+    benchmark = require('benchmark');
 
-program = require('fs').readFileSync(__dirname + '/canopy/peg.peg').toString();
+var program = require('fs').readFileSync(__dirname + '/canopy/peg.peg').toString(),
+    suite   = new benchmark.Suite();
 
-benchmark('PEG.js parser', 200, function() {
-  pegjsPEG.parse(program);
+suite.add('Canopy', function() { canopyPEG.parse(program) });
+
+suite.add('PEG.js', function() { pegjsPEG.parse(program) });
+
+suite.on('complete', function() {
+  this.forEach(function(result) { console.log(result.toString()) });
 });
 
-benchmark('Canopy parser', 200, function() {
-  canopyPEG.parse(program);
-});
-
+suite.run();

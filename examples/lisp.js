@@ -1,14 +1,16 @@
 var canopyLisp = require('./canopy/lisp'),
     pegjsLisp  = require('./pegjs/lisp'),
-    benchmark  = require('./benchmark');
+    benchmark  = require('benchmark');
 
-program = '(lambda (x y) (display "Hi.") (+ (* x y) 2))';
+var program = '(lambda (x y) (display "Hi.") (+ (* x y) 2))',
+    suite   = new benchmark.Suite();
 
-benchmark('PEG.js parser', 5000, function() {
-  pegjsLisp.parse(program);
+suite.add('Canopy', function() { canopyLisp.parse(program) });
+
+suite.add('PEG.js', function() { pegjsLisp.parse(program) });
+
+suite.on('complete', function() {
+  this.forEach(function(result) { console.log(result.toString()) });
 });
 
-benchmark('Canopy parser', 5000, function() {
-  canopyLisp.parse(program);
-});
-
+suite.run();
