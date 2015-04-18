@@ -15,7 +15,7 @@
         lineNo = 0,
         offset = 0;
 
-    while (offset < error.offset + 1) {
+    while (offset <= error.offset) {
       offset += lines[lineNo].length + 1;
       lineNo += 1;
     }
@@ -736,9 +736,7 @@
     if (!this.error) {
       this.error = {input: this._input, offset: this._offset, expected: "<EOF>"};
     }
-    var message = formatError(this.error);
-    var error = new Error(message);
-    throw error;
+    throw new Error(formatError(this.error));
   };
   
   Parser.parse = function(input) {
@@ -748,17 +746,12 @@
   
   extend(Parser.prototype, Grammar);
   
-  Parser.SyntaxNode = SyntaxNode;
+  var exported = {Grammar: Grammar, Parser: Parser, parse: Parser.parse, formatError: formatError};
   
-  if (typeof require === "function" && typeof exports === "object") {
-    exports.Grammar = Grammar;
-    exports.Parser  = Parser;
-    exports.parse   = Parser.parse;
-    
+  if (typeof require === 'function' && typeof exports === 'object') {
+    extend(exports, exported);
   } else {
-    var namespace = this;
-    CanopyLisp = Grammar;
-    CanopyLispParser = Parser;
-    CanopyLispParser.formatError = formatError;
+    var namespace = window;
+    namespace.CanopyLisp = exported;
   }
 })();
