@@ -8,16 +8,16 @@ function() { with(this) {
   }})
 
   it('parses a single character', function() { with(this) {
-    assertParse( ['x', 0, []], AnyCharTestParser.parse('x') )
+    assertParse( ['x', 0, []], AnyCharTest.parse('x') )
   }})
 
   it('does not parse the empty string', function() { with(this) {
-    assertThrows(Error, function() { AnyCharTestParser.parse('') })
+    assertThrows(Error, function() { AnyCharTest.parse('') })
     assertEqual({
         input:    '',
         offset:   0,
         expected: '<any char>'
-      }, AnyCharTestParser.lastError)
+      }, AnyCharTest.Parser.lastError)
   }})
 }})
 

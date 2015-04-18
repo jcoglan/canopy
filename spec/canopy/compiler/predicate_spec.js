@@ -19,11 +19,11 @@ function() { with(this) {
                       ['l', 6, []],
                       ['l', 7, []]]]]],
 
-        AndTestParser.parse('foosball') )
+        AndTest.parse('foosball') )
     }})
 
     it('does not parse text that does not begin with the expected pattern', function() { with(this) {
-      assertThrows(Error, function() { AndTestParser.parse('foobar') })
+      assertThrows(Error, function() { AndTest.parse('foobar') })
     }})
   }})
 
@@ -38,11 +38,11 @@ function() { with(this) {
                     ['', 0, []],
                     ['bar', 0, []]]],
 
-        NotTestParser.parse('bar') )
+        NotTest.parse('bar') )
     }})
 
     it('does not parse text beginning with the negated pattern', function() { with(this) {
-      assertThrows(Error, function() { NotTestParser.parse('foobar') })
+      assertThrows(Error, function() { NotTest.parse('foobar') })
     }})
 
     describe('combined with repetition', function() { with(this) {
@@ -65,15 +65,15 @@ function() { with(this) {
                           ['n', 2, []]]]]],
                       [' ', 3, []]]],
 
-          RepeatNotTestParser.parse('fun ') )
+          RepeatNotTest.parse('fun ') )
       }})
 
       it('does not match a word with no space', function() { with(this) {
-        assertThrows(Error, function() { RepeatNotTestParser.parse('chunky') })
+        assertThrows(Error, function() { RepeatNotTest.parse('chunky') })
       }})
 
       it('does not match multiple words', function() { with(this) {
-        assertThrows(Error, function() { RepeatNotTestParser.parse('chunky bacon ') })
+        assertThrows(Error, function() { RepeatNotTest.parse('chunky bacon ') })
       }})
     }})
   }})

@@ -23,7 +23,7 @@ JS.require('JS.Test', function() {
     }
   })
 
-  JS.require( 'Canopy.MetaGrammarParserSpec',
+  JS.require( 'Canopy.MetaGrammarSpec',
               'CanopySpec',
               'Canopy.Compiler.AnyCharSpec',
               'Canopy.Compiler.CharClassSpec',

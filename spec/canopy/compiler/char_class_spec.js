@@ -9,25 +9,25 @@ function() { with(this) {
     }})
 
     it('parses characters within the class', function() { with(this) {
-      assertParse( ['a', 0, []], PositiveCharClassTestParser.parse('a') )
+      assertParse( ['a', 0, []], PositiveCharClassTest.parse('a') )
     }})
 
     it('does not parse characters outside the class', function() { with(this) {
-      assertThrows(Error, function() { PositiveCharClassTestParser.parse('7') })
+      assertThrows(Error, function() { PositiveCharClassTest.parse('7') })
       assertEqual({
           input:    '7',
           offset:   0,
           expected: '[a-z]'
-        }, PositiveCharClassTestParser.lastError)
+        }, PositiveCharClassTest.Parser.lastError)
     }})
 
     it('does not parse characters within the class appearing too late', function() { with(this) {
-      assertThrows(Error, function() { PositiveCharClassTestParser.parse('7a') })
+      assertThrows(Error, function() { PositiveCharClassTest.parse('7a') })
       assertEqual({
           input:    '7a',
           offset:   0,
           expected: '[a-z]'
-        }, PositiveCharClassTestParser.lastError)
+        }, PositiveCharClassTest.Parser.lastError)
     }})
   }})
 
@@ -38,15 +38,15 @@ function() { with(this) {
     }})
 
     it('parses characters within the class', function() { with(this) {
-      assertParse( ['7', 0, []], NegativeCharClassTestParser.parse('7') )
+      assertParse( ['7', 0, []], NegativeCharClassTest.parse('7') )
     }})
 
     it('does not parse characters outside the class', function() { with(this) {
-      assertThrows(Error, function() { NegativeCharClassTestParser.parse('a') })
+      assertThrows(Error, function() { NegativeCharClassTest.parse('a') })
     }})
 
     it('does not parse characters within the class appearing too late', function() { with(this) {
-      assertThrows(Error, function() { NegativeCharClassTestParser.parse('a7') })
+      assertThrows(Error, function() { NegativeCharClassTest.parse('a7') })
     }})
   }})
 
@@ -64,20 +64,20 @@ function() { with(this) {
                       ['1', 2, []],
                       ['8', 3, []]]]]],
 
-        RepeatCharClassTestParser.parse('3718') )
+        RepeatCharClassTest.parse('3718') )
     }})
 
     it('does not parse floats', function() { with(this) {
-      assertThrows(Error, function() { RepeatCharClassTestParser.parse('7.4') })
+      assertThrows(Error, function() { RepeatCharClassTest.parse('7.4') })
       assertEqual({
           input:    '7.4',
           offset:   1,
           expected: '[0-9]'
-        }, RepeatCharClassTestParser.lastError)
+        }, RepeatCharClassTest.Parser.lastError)
     }})
 
     it('does not parse octal', function() { with(this) {
-      assertThrows(Error, function() { RepeatCharClassTestParser.parse('0644') })
+      assertThrows(Error, function() { RepeatCharClassTest.parse('0644') })
     }})
   }})
 }})

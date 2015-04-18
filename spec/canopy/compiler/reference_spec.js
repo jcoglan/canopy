@@ -11,11 +11,11 @@ function() { with(this) {
       }})
 
       it('parses strings matching the referenced rule', function() { with(this) {
-        assertParse( ['bar', 0, []], OneRefTestParser.parse('bar') )
+        assertParse( ['bar', 0, []], OneRefTest.parse('bar') )
       }})
 
       it('does not parse strings that do not match the referenced rule', function() { with(this) {
-        assertThrows(Error, function() { OneRefTestParser.parse('foo') })
+        assertThrows(Error, function() { OneRefTest.parse('foo') })
       }})
     }})
 
@@ -33,7 +33,7 @@ function() { with(this) {
                       second: ['begin', 0, []]
                     }],
 
-          OneRefWithSequenceTestParser.parse('beginend') )
+          OneRefWithSequenceTest.parse('beginend') )
       }})
     }})
 
@@ -53,7 +53,7 @@ function() { with(this) {
                       }],
                       ['end', 8, []]]],
 
-          OneRefWithSubSequenceTestParser.parse('beginsubend') )
+          OneRefWithSubSequenceTest.parse('beginsubend') )
       }})
     }})
 
@@ -65,11 +65,11 @@ function() { with(this) {
       }})
 
       it('parses the first branch of the choice', function() { with(this) {
-        assertParse( ['begin', 0, []], OneRefWithChoiceParser.parse('begin') )
+        assertParse( ['begin', 0, []], OneRefWithChoice.parse('begin') )
       }})
 
       it('parses the second branch of the choice', function() { with(this) {
-        assertParse( ['end', 0, []], OneRefWithChoiceParser.parse('end') )
+        assertParse( ['end', 0, []], OneRefWithChoice.parse('end') )
       }})
     }})
   }})

@@ -12,20 +12,20 @@ function() { with(this) {
                   ['foo', 0, []],
                   ['bar', 3, []]]],
 
-      SequenceTestParser.parse('foobar') )
+      SequenceTest.parse('foobar') )
   }})
 
   it('does not parse nonmatching sequences', function() { with(this) {
-    assertThrows(Error, function() { SequenceTestParser.parse('foobaz') })
-    assertThrows(Error, function() { SequenceTestParser.parse('doobar') })
+    assertThrows(Error, function() { SequenceTest.parse('foobaz') })
+    assertThrows(Error, function() { SequenceTest.parse('doobar') })
   }})
 
   it('does not parse if the first term is missing', function() { with(this) {
-    assertThrows(Error, function() { SequenceTestParser.parse('bar') })
+    assertThrows(Error, function() { SequenceTest.parse('bar') })
   }})
 
   it('does not parse superstrings of itself', function() { with(this) {
-    assertThrows(Error, function() { SequenceTestParser.parse('foobart') })
+    assertThrows(Error, function() { SequenceTest.parse('foobart') })
   }})
 
   describe('labelling', function() { with(this) {
@@ -43,7 +43,7 @@ function() { with(this) {
                       middle: ['second', 5, []]
                     }],
 
-          LabelTestAParser.parse('firstsecondthird') )
+          LabelTestA.parse('firstsecondthird') )
       }})
     }})
 
@@ -62,7 +62,7 @@ function() { with(this) {
                       middle: ['second', 5, []]
                     }],
 
-          LabelTestRParser.parse('firstsecondthird') )
+          LabelTestR.parse('firstsecondthird') )
       }})
     }})
 
@@ -82,7 +82,7 @@ function() { with(this) {
                       middle: ['second', 5, []]
                     }],
 
-          LabelTestRParser.parse('firstsecondthird') )
+          LabelTestR.parse('firstsecondthird') )
       }})
     }})
 
@@ -104,11 +104,11 @@ function() { with(this) {
                         ['a', 6, []]]]
                     }],
 
-          LabelTestBParser.parse('firstaathird') )
+          LabelTestB.parse('firstaathird') )
       }})
 
       it('does not parse if the expression it labels does not parse', function() { with(this) {
-        assertThrows(Error, function() { LabelTestBParser.parse('firstthird') })
+        assertThrows(Error, function() { LabelTestB.parse('firstthird') })
       }})
     }})
 
@@ -138,7 +138,7 @@ function() { with(this) {
                       restLetters: rest
                     }],
 
-          LabelTestCParser.parse('a, b, c') )
+          LabelTestC.parse('a, b, c') )
       }})
     }})
   }})

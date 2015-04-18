@@ -48,6 +48,7 @@ Canopy.extend(Canopy.Builder.prototype, {
       builder.line_('var inherit = ' + Canopy.inherit.toString());
       builder.newline_();
 
+      this._grammarName = name;
       block.call(context, this);
     }, this);
     this.newline_();
@@ -160,10 +161,6 @@ Canopy.extend(Canopy.Builder.prototype, {
   },
 
   namespace_: function(objectName) {
-    var parts = objectName.split('.');
-    this.var_('namespace', 'this');
-    for (var i = 0, n = parts.length; i < n - 1; i++)
-      this.line_('namespace = namespace.' + parts[i] + ' = namespace.' + parts[i] + ' || {}');
   },
 
   function_: function(name, args, block, context) {
@@ -175,12 +172,68 @@ Canopy.extend(Canopy.Builder.prototype, {
     this.newline_();
   },
 
-  module_: function(name, block, context) {
+  grammarModule_: function(block, context) {
     this.newline_();
-    this._write(name + ' = {');
+    this._write('var Grammar = {');
     new Canopy.Builder(this).indent_(block, context);
     this.newline_();
     this._write('};');
+    this.newline_();
+  },
+
+  parserClass_: function(root) {
+    this.function_('var Parser', ['input'], function(builder) {
+      builder.assign_('this._input', 'input');
+      builder.assign_('this._offset', '0');
+      builder.assign_('this._cache', '{}');
+    });
+    this.function_('Parser.prototype.parse', [], function(builder) {
+      var input = builder.input_(), of = builder.offset_();
+
+      builder.line_('var result = this._read_' + root + '()');
+
+      builder.if_('result && this._offset === this._input.length', function(builder) {
+        builder.return_('result');
+      });
+      builder.unless_('this.error', function(builder) {
+        builder.line_('this.error = {input: this._input, offset: this._offset, expected: "<EOF>"}');
+      });
+      builder.line_('throw new Error(formatError(this.error))');
+    });
+    this.function_('Parser.parse', ['input'], function(builder) {
+      builder.line_('var parser = new Parser(input)');
+      builder.return_('parser.parse()');
+    });
+    this.line_('extend(Parser.prototype, Grammar)');
+    this.newline_();
+  },
+
+  exports_: function() {
+    var grammar   = this._grammarName,
+        namespace = /\./.test(grammar) ? grammar.replace(/\.[^\.]+$/g, '').split('.') : [],
+        n         = namespace.length,
+        last      = namespace[n - 1],
+        condition = [];
+
+    for (var i = 0; i < n; i++)
+      condition.push('typeof ' + namespace.slice(0,i+1).join('.') + " !== 'undefined'");
+
+    this.assign_('var exported', '{Grammar: Grammar, Parser: Parser, parse: Parser.parse, formatError: formatError}');
+    this.newline_();
+
+    this.if_("typeof require === 'function' && typeof exports === 'object'", function(builder) {
+      builder.line_('extend(exports, exported)');
+      if (condition.length > 0) builder.if_(condition.join(' &&' ), function(builder) {
+        builder.assign_(grammar, 'exported');
+      });
+    }, function(builder) {
+      if (n > 0) {
+        builder.assign_('var namespace', 'this');
+        for (var i = 0, n = namespace.length; i < n - 1; i++)
+          builder.assign_('namespace', 'namespace.' + namespace[i] + ' = namespace.' + namespace[i] + ' || {}');
+      }
+      builder.assign_(grammar, 'exported');
+    });
   },
 
   field_: function(name, value) {
@@ -206,7 +259,7 @@ Canopy.extend(Canopy.Builder.prototype, {
         cacheAddr = cacheMap + '[' + offset + ']';
 
     this.assign_(cacheMap, cacheMap + ' || {}');
-    this.var_('cached', cacheAddr);
+    this.line_('var cached = ' + cacheAddr);
 
     this.if_('cached', function(builder) {
       builder.line_(builder.offset_() + ' += cached.textValue.length');
@@ -229,16 +282,11 @@ Canopy.extend(Canopy.Builder.prototype, {
     this.assign_('this._' + name, value);
   },
 
-  var_: function() {
-    for (var i = 0, n = arguments.length; i < n; i += 2)
-      this.line_('var ' + arguments[i] + ' = ' + arguments[i+1]);
-  },
-
   localVar_: function(name, value) {
     this._varIndex[name] = this._varIndex[name] || 0;
     var varName = name + this._varIndex[name];
     this._varIndex[name] += 1;
-    this.var_(varName, (value === undefined) ? this.null_(): value);
+    this.assign_('var ' + varName, (value === undefined) ? this.null_(): value);
     return varName;
   },
 

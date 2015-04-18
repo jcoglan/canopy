@@ -5,7 +5,7 @@ Canopy.Compiler = function(grammarText) {
 Canopy.extend(Canopy.Compiler.prototype, {
   parseTree: function() {
     if (this._tree) return this._tree;
-    var P = Canopy.MetaGrammarParser, message;
+    var P = Canopy.MetaGrammar, message;
 
     this._tree = P.parse(this._grammarText);
     if (this._tree) return this._tree;

@@ -30,7 +30,7 @@ Canopy.extend(Canopy, {
         lineNo = 0,
         offset = 0;
 
-    while (offset < error.offset + 1) {
+    while (offset <= error.offset) {
       offset += lines[lineNo].length + 1;
       lineNo += 1;
     }

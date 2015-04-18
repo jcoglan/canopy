@@ -25,74 +25,16 @@ Canopy.Compiler.Grammar = {
       };
       scan.call(this, this);
 
-      builder.module_('var Grammar', function(builder) {
+      builder.grammarModule_(function(builder) {
         this.rules.forEach(function(rule) {
           rule.grammar_rule.compile(builder);
         });
       }, this);
-      builder.newline_();
 
-      var grammar   = this.grammarName(),
-          parser    = this.grammarName() + 'Parser',
-          namespace = /\./.test(grammar) ? grammar.replace(/\.[^\.]+$/g, '').split('.') : [],
-          root      = this.rules.elements[0].grammar_rule.name();
+      var root = this.rules.elements[0].grammar_rule.name();
 
-      builder.function_('var Parser', ['input'], function(builder) {
-        builder.ivar_('input', 'input');
-        builder.ivar_('offset', '0');
-        builder.ivar_('cache', '{}');
-      });
-      builder.function_('Parser.prototype.parse', [], function(builder) {
-        var input = builder.input_(),
-            of    = builder.offset_();
-
-        builder.var_('result', 'this._read_' + root + '()');
-
-        builder.if_('result && ' + of + ' === ' + input + '.length', function(builder) {
-          builder.return_('result');
-        });
-        builder.unless_('this.error', function(builder) {
-          builder.line_('this.error = {input: ' + input + ', offset: ' + of + ', expected: "<EOF>"}');
-        });
-        builder.var_('message', 'formatError(this.error)');
-        builder.var_('error', 'new Error(message)');
-        builder.line_('throw error');
-      });
-      builder.function_('Parser.parse', ['input'], function(builder) {
-        builder.var_('parser', 'new Parser(input)');
-        builder.return_('parser.parse()');
-      });
-      builder.line_('extend(Parser.prototype, Grammar)');
-      builder.newline_();
-
-      builder.assign_('Parser.' + nodeClassName, nodeClassName);
-
-      var expose = function(builder) {
-        builder.line_(grammar + ' = Grammar');
-        builder.line_(parser  + ' = Parser');
-        builder.line_(parser  + '.formatError = formatError');
-      };
-
-      var n = namespace.length, namespaceCondition;
-      if (n > 0) {
-        namespaceCondition = [];
-        for (var i = 0; i < n; i++)
-          namespaceCondition.push('typeof ' + namespace.slice(0,i+1).join('.') + ' !== "undefined"');
-        namespaceCondition = namespaceCondition.join(' && ');
-      }
-
-      builder.newline_();
-      builder.if_('typeof require === "function" && typeof exports === "object"', function(builder) {
-        builder.line_('exports.Grammar = Grammar');
-        builder.line_('exports.Parser  = Parser');
-        builder.line_('exports.parse   = Parser.parse');
-        builder.newline_();
-        if (namespaceCondition)
-          builder.if_(namespaceCondition, expose);
-      }, function(builder) {
-        builder.namespace_(grammar);
-        expose(builder);
-      });
+      builder.parserClass_(root);
+      builder.exports_();
     }, this);
   }
 };
