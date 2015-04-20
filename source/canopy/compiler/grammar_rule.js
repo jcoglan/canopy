@@ -1,6 +1,6 @@
 Canopy.Compiler.GrammarRule = {
   name: function() {
-    return this.identifier.textValue;
+    return this.identifier.text;
   },
 
   toSexp: function() {

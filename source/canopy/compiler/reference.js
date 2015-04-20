@@ -1,6 +1,6 @@
 Canopy.Compiler.Reference = {
   referenceName: function() {
-    return this.identifier.textValue;
+    return this.identifier.text;
   },
 
   toSexp: function() {
@@ -9,8 +9,6 @@ Canopy.Compiler.Reference = {
 
   compile: function(builder, address, nodeType) {
     builder.jump_(address, this.referenceName());
-    if (nodeType) {
-      builder.extendNode_(address, nodeType);
-    }
+    builder.extendNode_(address, nodeType);
   }
 };

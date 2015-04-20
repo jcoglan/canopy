@@ -8,7 +8,7 @@ JS.require('JS.Test', function() {
   Canopy.SpecHelper = new JS.Module({
     assertParse: function(tuple, actual) {
       this.__wrapAssertion__(function() {
-        this.assertEqual( tuple[0], actual.textValue )
+        this.assertEqual( tuple[0], actual.text )
         this.assertEqual( tuple[1], actual.offset )
 
         if (!tuple[2]) return;
@@ -22,6 +22,15 @@ JS.require('JS.Test', function() {
       })
     }
   })
+
+  var compile = Canopy.compile
+
+  Canopy.compile = function(grammar) {
+    var builder = new Canopy.Builders.JavaScript()
+    var source = compile.call(this, grammar, builder)
+    eval(source)
+    return source
+  }
 
   JS.require( 'Canopy.MetaGrammarSpec',
               'CanopySpec',

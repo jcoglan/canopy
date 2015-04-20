@@ -34,7 +34,10 @@ Canopy.Compiler.Sequence = {
     if (!anyLabels) return false;
 
     builder.class_(subclassName, nodeClassName, function(builder) {
-      builder.constructor_(['textValue', 'offset', 'elements'], function(builder) {
+      var keys = [];
+      for (var key in labels) keys.push(key);
+      builder.attributes_(keys);
+      builder.constructor_(['text', 'offset', 'elements'], function(builder) {
         for (var key in labels)
           builder.attribute_(key, builder.arrayLookup_('elements', labels[key]));
       });
@@ -52,18 +55,18 @@ Canopy.Compiler.Sequence = {
 
     var startOffset = temp.index,
         elements    = temp.elements,
-        textValue   = temp.text;
+        text   = temp.text;
 
-    this._compileExpressions(builder, 0, startOffset, elements, textValue);
+    this._compileExpressions(builder, 0, startOffset, elements, text);
     builder.if_(elements, function(builder) {
       builder.assign_(builder.offset_(), startOffset);
-      builder.syntaxNode_(address, nodeType, textValue, builder.stringLength_(textValue), elements, this._nodeClassName);
+      builder.syntaxNode_(address, nodeType, text, builder.stringLength_(text), elements, this._nodeClassName);
     }, function(builder) {
       builder.assign_(address, builder.null_());
     }, this);
   },
 
-  _compileExpressions: function(builder, index, startOffset, elements, textValue) {
+  _compileExpressions: function(builder, index, startOffset, elements, text) {
     var expressions = this.expressions();
     if (index === expressions.length) return;
 
@@ -73,9 +76,9 @@ Canopy.Compiler.Sequence = {
 
     builder.if_(expAddr, function(builder) {
       builder.append_(elements, expAddr);
-      builder.concatText_(textValue, expAddr);
+      builder.concatText_(text, expAddr);
 
-      this._compileExpressions(builder, index + 1, startOffset, elements, textValue);
+      this._compileExpressions(builder, index + 1, startOffset, elements, text);
 
     }, function(builder) {
       builder.assign_(elements, builder.null_());

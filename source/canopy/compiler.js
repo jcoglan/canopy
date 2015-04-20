@@ -1,5 +1,6 @@
-Canopy.Compiler = function(grammarText) {
+Canopy.Compiler = function(grammarText, builder) {
   this._grammarText = grammarText;
+  this._builder = builder;
 };
 
 Canopy.extend(Canopy.Compiler.prototype, {
@@ -19,8 +20,7 @@ Canopy.extend(Canopy.Compiler.prototype, {
   },
 
   toSource: function() {
-    var builder = new Canopy.Builders.JavaScript();
-    this.parseTree().compile(builder);
-    return builder.serialize();
+    this.parseTree().compile(this._builder);
+    return this._builder.serialize();
   }
 });

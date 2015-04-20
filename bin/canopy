@@ -1,20 +1,30 @@
 #!/usr/bin/env node
 
 var Canopy = require('../lib/canopy'),
-    fs     = require('fs');
+    fs     = require('fs'),
+    nopt   = require('nopt');
+
+var BUILDERS = {};
+BUILDERS.js = BUILDERS.javascript = Canopy.Builders.JavaScript;
+BUILDERS.rb = BUILDERS.ruby = Canopy.Builders.Ruby;
 
 try {
-  var startTime  = new Date().getTime(),
-      inputFile  = process.argv[2],
-      outputFile = inputFile.replace(/\.peg$/, '.js'),
+  var options   = nopt({lang: String, output: String}, {l: '--lang', o: '--output'}),
+      lang      = options.lang || 'js',
+      inputFile = options.argv.remain[0];
 
-      grammar    = fs.readFileSync(inputFile).toString(),
-      parser     = Canopy.compile(grammar),
-      endTime    = new Date().getTime();
+  if (!BUILDERS.hasOwnProperty(lang))
+    throw new Error('Unrecognised target language: ' + lang);
+
+  var grammar    = fs.readFileSync(inputFile).toString(),
+      builder    = new BUILDERS[lang](),
+      parser     = Canopy.compile(grammar, builder),
+      outputFile = options.output || builder.outputPathname(inputFile);
 
   fs.writeFileSync(outputFile, parser);
 
 } catch (e) {
   console.error(e.message);
+  console.error(e.stack);
+  process.exit(1);
 }
-

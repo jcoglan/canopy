@@ -1,3 +1,5 @@
+
+
   grammar                    = space* grammar_name
                                rules:(space* grammar_rule)+ space*
 
@@ -50,7 +52,7 @@
 
   object_identifier          = identifier ("." identifier)*
 
-  identifier                 = [a-zA-Z_$] [a-zA-Z0-9_$]*
+  identifier                 = [a-zA-Z_] [a-zA-Z0-9_]*
 
   quantifier                 = "?" / "*" / "+"
 

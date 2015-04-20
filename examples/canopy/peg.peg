@@ -3,7 +3,7 @@ grammar Canopy.PEG
   grammar                   <- space* grammar_name
                                rules:(space* grammar_rule)+ space*
 
-  grammar_name              <- "grammar " object_identifier
+  grammar_name              <- `grammar ` object_identifier
 
   grammar_rule              <- identifier assignment parsing_expression
 
@@ -52,8 +52,8 @@ grammar Canopy.PEG
 
   object_identifier         <- identifier ("." identifier)*
 
-  identifier                <- [a-zA-Z_$] [a-zA-Z0-9_$]*
+  identifier                <- [a-zA-Z_] [a-zA-Z0-9_]*
 
   quantifier                <- "?" / "*" / "+"
 
-  space                     <- [\s\n\r\t]
+  space                     <- [\s]

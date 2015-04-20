@@ -39,24 +39,25 @@
     subclass.prototype.constructor = subclass;
   };
   
-  var SyntaxNode = function(textValue, offset, elements) {
-    this.textValue = textValue;
+  var SyntaxNode = function(text, offset, elements) {
+    this.text = text;
     this.offset = offset;
     this.elements = elements || [];
   };
   
   SyntaxNode.prototype.forEach = function(block, context) {
-    for (var el = this.elements, i = 0, n = el.length; i < n; i++)
+    for (var el = this.elements, i = 0, n = el.length; i < n; i++) {
       block.call(context, el[i], i, el);
+    }
   };
   
-  var SyntaxNode1 = function(textValue, offset, elements) {
+  var SyntaxNode1 = function(text, offset, elements) {
     SyntaxNode.apply(this, arguments);
     this['data'] = elements[1];
   };
   inherit(SyntaxNode1, SyntaxNode);
   
-  var SyntaxNode2 = function(textValue, offset, elements) {
+  var SyntaxNode2 = function(text, offset, elements) {
     SyntaxNode.apply(this, arguments);
     this['cells'] = elements[1];
   };
@@ -68,15 +69,15 @@
       this._cache._program = this._cache._program || {};
       var cached = this._cache._program[index0];
       if (cached) {
-        this._offset += cached.textValue.length;
+        this._offset += cached.text.length;
         return cached;
       }
       var remaining0 = 1, index1 = this._offset, elements0 = [], text0 = '', address1 = true;
-      while (address1) {
+      while (address1 !== null) {
         address1 = this._read_cell();
         if (address1) {
           elements0.push(address1);
-          text0 += address1.textValue;
+          text0 += address1.text;
           --remaining0;
         }
       }
@@ -95,17 +96,17 @@
       this._cache._cell = this._cache._cell || {};
       var cached = this._cache._cell[index0];
       if (cached) {
-        this._offset += cached.textValue.length;
+        this._offset += cached.text.length;
         return cached;
       }
       var index1 = this._offset, elements0 = [], text0 = '';
       var address1 = null;
       var remaining0 = 0, index2 = this._offset, elements1 = [], text1 = '', address2 = true;
-      while (address2) {
+      while (address2 !== null) {
         address2 = this._read_space();
         if (address2) {
           elements1.push(address2);
-          text1 += address2.textValue;
+          text1 += address2.text;
           --remaining0;
         }
       }
@@ -118,7 +119,7 @@
       }
       if (address1) {
         elements0.push(address1);
-        text0 += address1.textValue;
+        text0 += address1.text;
         var address3 = null;
         var index3 = this._offset;
         address3 = this._read_list();
@@ -131,14 +132,14 @@
         }
         if (address3) {
           elements0.push(address3);
-          text0 += address3.textValue;
+          text0 += address3.text;
           var address4 = null;
           var remaining1 = 0, index4 = this._offset, elements2 = [], text2 = '', address5 = true;
-          while (address5) {
+          while (address5 !== null) {
             address5 = this._read_space();
             if (address5) {
               elements2.push(address5);
-              text2 += address5.textValue;
+              text2 += address5.text;
               --remaining1;
             }
           }
@@ -151,7 +152,7 @@
           }
           if (address4) {
             elements0.push(address4);
-            text0 += address4.textValue;
+            text0 += address4.text;
           } else {
             elements0 = null;
             this._offset = index1;
@@ -179,7 +180,7 @@
       this._cache._list = this._cache._list || {};
       var cached = this._cache._list[index0];
       if (cached) {
-        this._offset += cached.textValue.length;
+        this._offset += cached.text.length;
         return cached;
       }
       var index1 = this._offset, elements0 = [], text0 = '';
@@ -199,14 +200,14 @@
       }
       if (address1) {
         elements0.push(address1);
-        text0 += address1.textValue;
+        text0 += address1.text;
         var address2 = null;
         var remaining0 = 1, index2 = this._offset, elements1 = [], text1 = '', address3 = true;
-        while (address3) {
+        while (address3 !== null) {
           address3 = this._read_cell();
           if (address3) {
             elements1.push(address3);
-            text1 += address3.textValue;
+            text1 += address3.text;
             --remaining0;
           }
         }
@@ -219,7 +220,7 @@
         }
         if (address2) {
           elements0.push(address2);
-          text0 += address2.textValue;
+          text0 += address2.text;
           var address4 = null;
           var chunk1 = null;
           if (this._input.length > this._offset) {
@@ -236,7 +237,7 @@
           }
           if (address4) {
             elements0.push(address4);
-            text0 += address4.textValue;
+            text0 += address4.text;
           } else {
             elements0 = null;
             this._offset = index1;
@@ -264,7 +265,7 @@
       this._cache._atom = this._cache._atom || {};
       var cached = this._cache._atom[index0];
       if (cached) {
-        this._offset += cached.textValue.length;
+        this._offset += cached.text.length;
         return cached;
       }
       var index1 = this._offset;
@@ -292,7 +293,7 @@
       this._cache._boolean = this._cache._boolean || {};
       var cached = this._cache._boolean[index0];
       if (cached) {
-        this._offset += cached.textValue.length;
+        this._offset += cached.text.length;
         return cached;
       }
       var index1 = this._offset;
@@ -336,7 +337,7 @@
       this._cache._integer = this._cache._integer || {};
       var cached = this._cache._integer[index0];
       if (cached) {
-        this._offset += cached.textValue.length;
+        this._offset += cached.text.length;
         return cached;
       }
       var index1 = this._offset, elements0 = [], text0 = '';
@@ -356,10 +357,10 @@
       }
       if (address1) {
         elements0.push(address1);
-        text0 += address1.textValue;
+        text0 += address1.text;
         var address2 = null;
         var remaining0 = 0, index2 = this._offset, elements1 = [], text1 = '', address3 = true;
-        while (address3) {
+        while (address3 !== null) {
           var chunk1 = null;
           if (this._input.length > this._offset) {
             chunk1 = this._input.substring(this._offset, this._offset + 1);
@@ -375,7 +376,7 @@
           }
           if (address3) {
             elements1.push(address3);
-            text1 += address3.textValue;
+            text1 += address3.text;
             --remaining0;
           }
         }
@@ -388,7 +389,7 @@
         }
         if (address2) {
           elements0.push(address2);
-          text0 += address2.textValue;
+          text0 += address2.text;
         } else {
           elements0 = null;
           this._offset = index1;
@@ -412,7 +413,7 @@
       this._cache._string = this._cache._string || {};
       var cached = this._cache._string[index0];
       if (cached) {
-        this._offset += cached.textValue.length;
+        this._offset += cached.text.length;
         return cached;
       }
       var index1 = this._offset, elements0 = [], text0 = '';
@@ -432,10 +433,10 @@
       }
       if (address1) {
         elements0.push(address1);
-        text0 += address1.textValue;
+        text0 += address1.text;
         var address2 = null;
         var remaining0 = 0, index2 = this._offset, elements1 = [], text1 = '', address3 = true;
-        while (address3) {
+        while (address3 !== null) {
           var index3 = this._offset;
           var index4 = this._offset, elements2 = [], text2 = '';
           var address4 = null;
@@ -454,7 +455,7 @@
           }
           if (address4) {
             elements2.push(address4);
-            text2 += address4.textValue;
+            text2 += address4.text;
             var address5 = null;
             var chunk2 = null;
             if (this._input.length > this._offset) {
@@ -471,7 +472,7 @@
             }
             if (address5) {
               elements2.push(address5);
-              text2 += address5.textValue;
+              text2 += address5.text;
             } else {
               elements2 = null;
               this._offset = index4;
@@ -508,7 +509,7 @@
           }
           if (address3) {
             elements1.push(address3);
-            text1 += address3.textValue;
+            text1 += address3.text;
             --remaining0;
           }
         }
@@ -521,7 +522,7 @@
         }
         if (address2) {
           elements0.push(address2);
-          text0 += address2.textValue;
+          text0 += address2.text;
           var address6 = null;
           var chunk4 = null;
           if (this._input.length > this._offset) {
@@ -538,7 +539,7 @@
           }
           if (address6) {
             elements0.push(address6);
-            text0 += address6.textValue;
+            text0 += address6.text;
           } else {
             elements0 = null;
             this._offset = index1;
@@ -566,11 +567,11 @@
       this._cache._symbol = this._cache._symbol || {};
       var cached = this._cache._symbol[index0];
       if (cached) {
-        this._offset += cached.textValue.length;
+        this._offset += cached.text.length;
         return cached;
       }
       var remaining0 = 1, index1 = this._offset, elements0 = [], text0 = '', address1 = true;
-      while (address1) {
+      while (address1 !== null) {
         var index2 = this._offset, elements1 = [], text1 = '';
         var address2 = null;
         var index3 = this._offset;
@@ -584,7 +585,7 @@
         }
         if (address2) {
           elements1.push(address2);
-          text1 += address2.textValue;
+          text1 += address2.text;
           var address3 = null;
           var chunk0 = null;
           if (this._input.length > this._offset) {
@@ -601,7 +602,7 @@
           }
           if (address3) {
             elements1.push(address3);
-            text1 += address3.textValue;
+            text1 += address3.text;
           } else {
             elements1 = null;
             this._offset = index2;
@@ -619,7 +620,7 @@
         }
         if (address1) {
           elements0.push(address1);
-          text0 += address1.textValue;
+          text0 += address1.text;
           --remaining0;
         }
       }
@@ -638,20 +639,20 @@
       this._cache._space = this._cache._space || {};
       var cached = this._cache._space[index0];
       if (cached) {
-        this._offset += cached.textValue.length;
+        this._offset += cached.text.length;
         return cached;
       }
       var chunk0 = null;
       if (this._input.length > this._offset) {
         chunk0 = this._input.substring(this._offset, this._offset + 1);
       }
-      if (chunk0 && /^[\s\n\r\t]/.test(chunk0)) {
+      if (chunk0 && /^[\s]/.test(chunk0)) {
         address0 = new SyntaxNode(chunk0, this._offset, []);
         this._offset += 1;
       } else {
         address0 = null;
         if (!this._error || this._error.offset <= this._offset) {
-          this._error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: '[\\s\\n\\r\\t]'};
+          this._error = this.constructor.lastError = {input: this._input, offset: this._offset, expected: '[\\s]'};
         }
       }
       return this._cache._space[index0] = address0;
@@ -662,7 +663,7 @@
       this._cache._paren = this._cache._paren || {};
       var cached = this._cache._paren[index0];
       if (cached) {
-        this._offset += cached.textValue.length;
+        this._offset += cached.text.length;
         return cached;
       }
       var index1 = this._offset;
@@ -706,7 +707,7 @@
       this._cache._delimiter = this._cache._delimiter || {};
       var cached = this._cache._delimiter[index0];
       if (cached) {
-        this._offset += cached.textValue.length;
+        this._offset += cached.text.length;
         return cached;
       }
       var index1 = this._offset;
@@ -729,14 +730,14 @@
   };
   
   Parser.prototype.parse = function() {
-    var result = this._read_program();
-    if (result && this._offset === this._input.length) {
-      return result;
+    var tree = this._read_program();
+    if (tree && this._offset === this._input.length) {
+      return tree;
     }
     if (!this._error) {
       this._error = {input: this._input, offset: this._offset, expected: '<EOF>'};
     }
-    throw new Error(formatError(this._error));
+    throw new SyntaxError(formatError(this._error));
   };
   
   Parser.parse = function(input) {

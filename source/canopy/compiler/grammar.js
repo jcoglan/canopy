@@ -1,6 +1,6 @@
 Canopy.Compiler.Grammar = {
   grammarName: function() {
-    return this.grammar_name.object_identifier.textValue
+    return this.grammar_name.object_identifier.text
   },
 
   toSexp: function() {

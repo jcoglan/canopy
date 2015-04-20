@@ -8,6 +8,6 @@ boolean   <- "#t" / "#f"
 integer   <- [1-9] [0-9]*
 string    <- "\"" ("\\" . / [^"])* "\""
 symbol    <- (!delimiter .)+
-space     <- [\s\n\r\t]
+space     <- [\s]
 paren     <- "(" / ")"
 delimiter <- paren / space

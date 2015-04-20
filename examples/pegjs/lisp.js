@@ -54,8 +54,10 @@ module.exports = (function() {
         peg$c19 = /^[^"]/,
         peg$c20 = { type: "class", value: "[^\"]", description: "[^\"]" },
         peg$c21 = void 0,
-        peg$c22 = /^[s\n\r\t]/,
-        peg$c23 = { type: "class", value: "[s\\n\\r\\t]", description: "[s\\n\\r\\t]" },
+        peg$c22 = " ",
+        peg$c23 = { type: "literal", value: " ", description: "\" \"" },
+        peg$c24 = /^[\n\r\t]/,
+        peg$c25 = { type: "class", value: "[\\n\\r\\t]", description: "[\\n\\r\\t]" },
 
         peg$currPos          = 0,
         peg$reportedPos      = 0,
@@ -697,12 +699,21 @@ module.exports = (function() {
         return cached.result;
       }
 
-      if (peg$c22.test(input.charAt(peg$currPos))) {
-        s0 = input.charAt(peg$currPos);
+      if (input.charCodeAt(peg$currPos) === 32) {
+        s0 = peg$c22;
         peg$currPos++;
       } else {
         s0 = peg$FAILED;
         if (peg$silentFails === 0) { peg$fail(peg$c23); }
+      }
+      if (s0 === peg$FAILED) {
+        if (peg$c24.test(input.charAt(peg$currPos))) {
+          s0 = input.charAt(peg$currPos);
+          peg$currPos++;
+        } else {
+          s0 = peg$FAILED;
+          if (peg$silentFails === 0) { peg$fail(peg$c25); }
+        }
       }
 
       peg$cache[key] = { nextPos: peg$currPos, result: s0 };

@@ -1,7 +1,7 @@
 Canopy.Compiler.ChoicePart = {
   nodeType: function() {
     var element = this.elements[1].type_expression;
-    return element ? element.object_identifier.textValue : null;
+    return element ? element.object_identifier.text : null;
   },
 
   toSexp: function() {

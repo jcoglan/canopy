@@ -11,7 +11,7 @@ Canopy.Compiler.Repeat = {
         sexp = expression.toSexp();
 
     sexp = expression.toSexp();
-    switch (this.quantifier.textValue) {
+    switch (this.quantifier.text) {
       case '*': sexp = ['repeat', 0, sexp]; break;
       case '+': sexp = ['repeat', 1, sexp]; break;
       case '?': sexp = ['maybe', sexp]; break;
@@ -20,7 +20,7 @@ Canopy.Compiler.Repeat = {
   },
 
   compile: function(builder, address, nodeType) {
-    var quantifier = this.quantifier.textValue;
+    var quantifier = this.quantifier.text;
 
     if (quantifier === '?') return this._compileMaybe(builder, address, nodeType);
 
@@ -36,21 +36,21 @@ Canopy.Compiler.Repeat = {
         remaining   = temp.remaining,
         startOffset = temp.index,
         elements    = temp.elements,
-        textValue   = temp.text,
+        text   = temp.text,
         elAddr      = temp.address;
 
-    builder.while_(elAddr, function(builder) {
+    builder.whileNotNull_(elAddr, function(builder) {
       this.atomic().compile(builder, elAddr);
       builder.if_(elAddr, function(builder) {
         builder.append_(elements, elAddr);
-        builder.concatText_(textValue, elAddr);
+        builder.concatText_(text, elAddr);
         builder.decrement_(remaining);
       });
     }, this);
 
     builder.if_(builder.isZero_(remaining), function(builder) {
       builder.assign_(builder.offset_(), startOffset);
-      builder.syntaxNode_(address, nodeType, textValue, builder.stringLength_(textValue), elements);
+      builder.syntaxNode_(address, nodeType, text, builder.stringLength_(text), elements);
     }, function(builder) {
       builder.assign_(address, builder.null_());
     });

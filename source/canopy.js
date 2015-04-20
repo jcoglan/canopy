@@ -14,12 +14,9 @@ Canopy.extend = function(destination, source) {
 Canopy.extend(Canopy, {
   Builders: {},
 
-  compile: function(grammar) {
-    var compiler = new this.Compiler(grammar),
-        source   = compiler.toSource();
-
-    eval(source);
-    return source;
+  compile: function(grammar, builder) {
+    var compiler = new this.Compiler(grammar, builder);
+    return compiler.toSource();
   },
 
   forEach: function(list, block, context) {

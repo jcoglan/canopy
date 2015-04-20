@@ -11,12 +11,12 @@ Canopy.Compiler.CIString = {
     builder.if_(builder.stringMatchCI_(chunk, string), function(builder) {
       builder.syntaxNode_(address, nodeType, chunk, length);
     }, function(builder) {
-      builder.failure_(address, this.textValue);
+      builder.failure_(address, this.text);
     }, this);
   },
 
   stringValue: function() {
-    var string = '"' + this.elements[1].textValue + '"';
+    var string = '"' + this.elements[1].text + '"';
     return eval(string);
   }
 };

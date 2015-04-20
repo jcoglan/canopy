@@ -9,7 +9,7 @@ Canopy.Compiler.SequencePart = {
         expression = this.atomic(),
         labels     = [];
 
-    if (element) labels.push(element.textValue);
+    if (element) labels.push(element.text);
     if (expression.referenceName) labels.push(expression.referenceName());
 
     return labels;

@@ -7,7 +7,7 @@ Canopy.Compiler.Predicate = {
   toSexp: function() {
     var expression = this.atomic(),
         table      = {'&': 'and', '!': 'not'},
-        predicate  = table[this.predicate.textValue];
+        predicate  = table[this.predicate.text];
 
     return [predicate, expression.toSexp()];
   },
@@ -15,7 +15,7 @@ Canopy.Compiler.Predicate = {
   compile: function(builder, address, nodeType) {
     var startOffset = builder.localVar_('index', builder.offset_()),
         table       = {'&': 'if_', '!': 'unless_'},
-        branch      = table[this.predicate.textValue];
+        branch      = table[this.predicate.text];
 
     this.atomic().compile(builder, address);
     builder.assign_(builder.offset_(), startOffset);

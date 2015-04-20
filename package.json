@@ -10,12 +10,14 @@
 , "main"            : "./lib/canopy.js"
 , "bin"             : {"canopy": "./bin/canopy"}
 , "preferGlobal"    : true
+, "dependencies"    : {"nopt": ""}
 , "devDependencies" : {"benchmark": "", "jstest": "", "pegjs": "", "wake": ""}
 
-, "scripts"         : { "build"   : "wake && ./bin/canopy source/canopy/meta_grammar.peg"
-                      , "canopy"  : "find examples/canopy -name '*.peg' -exec ./bin/canopy {} \\;"
-                      , "pegjs"   : "find examples/pegjs -name '*.peg' -exec pegjs --cache {} \\;"
-                      , "test"    : "node spec/console.js"}
+, "scripts"         : { "build" : "wake && ./bin/canopy source/canopy/meta_grammar.peg"
+                      , "js"    : "find examples/canopy -name '*.peg' -exec ./bin/canopy --lang js {} \\;"
+                      , "ruby"  : "find examples/canopy -name '*.peg' -exec ./bin/canopy --lang rb {} \\;"
+                      , "pegjs" : "find examples/pegjs -name '*.peg' -exec pegjs --cache {} \\;"
+                      , "test"  : "node spec/console.js"}
 
 , "bugs"            : {"url": "http://github.com/jcoglan/canopy/issues"}
 
@@ -35,6 +37,7 @@
         "canopy": [ "canopy.js",
                     "canopy/meta_grammar",
                     "canopy/builders/javascript",
+                    "canopy/builders/ruby",
                     "canopy/compiler.js",
                     "canopy/compiler/grammar",
                     "canopy/compiler/grammar_rule",
