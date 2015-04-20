@@ -1,5 +1,5 @@
 (function() {
-  var Builder = function(parent) {
+  var Builder = function(parent, name) {
     if (parent) {
       this._parent = parent;
       this._indentLevel = parent._indentLevel;
@@ -7,6 +7,7 @@
       this._buffer = '';
       this._indentLevel = 0;
     }
+    this._name = name;
     this._methodSeparator = '';
     this._varIndex = {};
   };
@@ -17,7 +18,7 @@
     },
 
     outputPathname: function(inputPathname) {
-      return inputPathname.replace(/\.peg$/, '.rb');
+      return inputPathname.replace(/\.peg$/, '.py');
     },
 
     _write: function(string) {
@@ -34,7 +35,7 @@
     _newline: function() {
       this._write('\n');
       var i = this._indentLevel;
-      while (i--) this._write('  ');
+      while (i--) this._write('    ');
     },
 
     _line: function(source) {
@@ -44,7 +45,7 @@
 
     _quote: function(string) {
       string = string.replace(/\\/g, '\\\\')
-                     .replace(/"/g, '\\"')
+                     .replace(/'/g, "\\'")
                      .replace(/\x07/g, '\\a')
                      .replace(/\x08/g, '\\b')
                      .replace(/\t/g, '\\t')
@@ -54,142 +55,118 @@
                      .replace(/\r/g, '\\r')
                      .replace(/\x1b/g, '\\e');
 
-      return '"' + string + '"';
+      return "'" + string + "'";
     },
 
     package_: function(name, block, context) {
-      this._write('module ' + name.replace(/\./g, '::'));
-      this._indent(block, context);
-      this._line('end');
+      this._write('from collections import defaultdict');
+      this._line('import re');
+      this._newline();
+      this._newline();
+      block.call(context, this);
     },
 
     syntaxNodeClass_: function() {
       var name = 'SyntaxNode';
-      this._line('class ' + name);
-      this._indent(function(builder) {
-        builder._line('include Enumerable');
-        builder.attributes_(['text', 'offset', 'elements']);
-        builder.method_('initialize', ['text', 'offset', 'elements'], function(builder) {
+      this.class_(name, 'object', function(builder) {
+        builder.method_('__init__', ['text', 'offset', 'elements'], function(builder) {
           builder.attribute_('text', 'text');
           builder.attribute_('offset', 'offset');
-          builder.attribute_('elements', 'elements || []');
+          builder.attribute_('elements', 'elements or []');
         });
-        builder.method_('each', ['&block'], function(builder) {
-          builder._line('@elements.each(&block)');
+        builder.method_('__iter__', [], function(builder) {
+          builder._line('for el in self.elements:');
+          builder._indent(function(builder) {
+            builder._line('yield el');
+          });
         });
       });
-      this._line('end');
-      this._newline();
       return name;
     },
 
     grammarModule_: function(block, context) {
-      this.assign_('ParseError', 'Struct.new(:input, :offset, :expected)');
-      this._newline();
-      this._line('module Grammar');
-      new Builder(this)._indent(block, context);
-      this._line('end');
-      this._newline();
+      this.class_('ParseError', 'SyntaxError', function(builder) {
+        builder._line('pass');
+      });
+      this.class_('Grammar', 'object', block, context);
     },
 
     parserClass_: function(root) {
-      this._line('class Parser');
-      this._indent(function(builder) {
-        builder._line('include Grammar');
-        builder._methodSeparator = '\n';
-
-        builder.method_('initialize', ['input'], function(builder) {
-          builder.attribute_('input', 'input');
-          builder.attribute_('offset', '0');
-          builder.attribute_('cache', 'Hash.new { |h,k| h[k] = {} }');
+      this.class_('Parser', 'Grammar', function(builder) {
+        builder.method_('__init__', ['input'], function(builder) {
+          builder.attribute_('_input', 'input');
+          builder.attribute_('_offset', '0');
+          builder.attribute_('_cache', 'defaultdict(dict)');
+          builder.attribute_('_error', 'None');
         });
 
         builder.method_('parse', [], function(builder) {
           builder.jump_('tree', root);
-          builder.if_('tree and @offset == @input.size', function(builder) {
+          builder.if_('tree and self._offset == len(self._input)', function(builder) {
             builder.return_('tree');
           });
-          builder._line('@error ||= ParseError.new(@input, @offset, "<EOF>")');
-          builder._line('raise SyntaxError, Parser.format_error(@error)');
-        });
-
-        builder.method_('self.format_error', ['error'], function(builder) {
-          builder._line('lines, line_no, offset = error.input.split(/\\n/), 0, 0');
-          builder._line('while offset <= error.offset');
-          builder._indent(function(builder) {
-            builder._line('offset += lines[line_no].size + 1');
-            builder._line('line_no += 1');
+          builder.unless_('self._error', function(builder) {
+            builder.assign_('self._error', "(self._input, self._offset, '<EOF>')");
           });
-          builder._line('end');
-          builder._line('message, line = "Line #{line_no}: expected #{error.expected}\\n", lines[line_no - 1]');
-          builder._line('message += "#{line}\\n"');
-          builder._line('offset -= line.size + 1');
-          builder._line('message += " " * (error.offset - offset)');
-          builder.return_('message + "^"');
+          builder._line('raise ParseError(format_error(self._error))');
         });
       });
-      this._line('end');
-      this._newline();
     },
 
     exports_: function() {
-      this._line('def self.parse(input)');
+      this._line('def parse(input):');
       this._indent(function(builder) {
-        builder.assign_('parser', 'Parser.new(input)');
-        builder._line('parser.parse');
+        builder.assign_('parser', 'Parser(input)');
+        builder.return_('parser.parse()');
       });
-      this._line('end');
     },
 
     class_: function(name, parent, block, context) {
-      this._line('class ' + name + ' < ' + parent);
-      new Builder(this)._indent(block, context);
-      this._line('end');
+      this._line('class ' + name + '(' + parent + '):');
+      new Builder(this, name, parent)._indent(block, context);
+      this._newline();
       this._newline();
     },
 
     constructor_: function(args, block, context) {
-      this.method_('initialize', args, function(builder) {
-        builder._line('super');
+      this.method_('__init__', args, function(builder) {
+        builder._line('super(' + this._name + ', self).__init__(' + args.join(', ') + ')');
         block.call(context, builder);
-      });
+      }, this);
     },
 
     method_: function(name, args, block, context) {
       this._write(this._methodSeparator);
       this._methodSeparator = '\n';
-      args = (args.length > 0) ? '(' + args.join(', ') + ')' : '';
-      this._line('def ' + name + args);
+      args = ['self'].concat(args).join(', ');
+      this._line('def ' + name + '(' + args + '):');
       new Builder(this)._indent(block, context);
-      this._line('end');
     },
 
     cache_: function(name, block, context) {
-      var temp      = this.localVars_({address: this.null_(), index: '@offset'}),
+      var temp      = this.localVars_({address: this.null_(), index: 'self._offset'}),
           address   = temp.address,
           offset    = temp.index,
-          cacheMap  = '@cache[:' + name + ']',
+          cacheMap  = "self._cache['" + name + "']",
           cacheAddr = cacheMap + '[' + offset + ']';
 
-      this.if_(cacheMap + '.has_key?(' + offset + ')', function(builder) {
+      this.if_(offset + ' in ' + cacheMap, function(builder) {
         builder.assign_('cached', cacheAddr);
-        builder._line('@offset += cached.text.size if cached');
+        builder.if_('cached', function(builder) {
+          builder._line('self._offset += len(cached.text)');
+        });
         builder.return_('cached');
       }, this);
 
       block.call(context, this, address);
-      this.return_(cacheAddr + ' = ' + address);
+      this.assign_(cacheAddr, address);
+      this.return_(address);
     },
 
-    attributes_: function(names) {
-      var keys = [];
-      for (var i = 0, n = names.length; i < n; i++) keys.push(':' + names[i]);
-      this._line('attr_reader ' + keys.join(', '));
-      this._methodSeparator = '\n';
-    },
+    attributes_: function(names) {},
 
     attribute_: function(name, value) {
-      this.assign_('@' + name, value);
+      this.assign_('self.' + name, value);
     },
 
     localVars_: function(vars) {
@@ -215,9 +192,9 @@
     },
 
     chunk_: function(length) {
-      var chunk = this.localVar_('chunk', this.null_()), input = '@input', of = '@offset';
-      this.if_(input + '.size > ' + of, function(builder) {
-        builder.assign_(chunk, input + '[' + of + '...(' + of + ' + ' + length + ')]');
+      var chunk = this.localVar_('chunk', this.null_()), input = 'self._input', of = 'self._offset';
+      this.if_('len(' + input + ') > ' + of, function(builder) {
+        builder.assign_(chunk, input + '[' + of + ':(' + of + ' + ' + length + ')]');
       });
       return chunk;
     },
@@ -226,22 +203,23 @@
       elements = ', ' + (elements || '[]');
 
       var klass = nodeClass || 'SyntaxNode',
-          of    = ', @offset';
+          of    = ', self._offset';
 
-      this.assign_(address, klass + '.new(' + expression + of + elements + ')');
+      this.assign_(address, klass + '(' + expression + of + elements + ')');
       this.extendNode_(address, nodeType);
-      this._line('@offset += ' + bump);
+      this._line('self._offset += ' + bump);
     },
 
     extendNode_: function(address, nodeType) {
       if (!nodeType) return;
-      this._line(address + '.extend(' + nodeType.replace(/\./g, '::') + ')');
+      var cls = this.localVar_('cls', 'type(' + address + ')');
+      this.assign_(address + '.__class__', "type(" + cls + ".__name__ + '" + nodeType + "', (" + cls + ", type(self)." + nodeType + "), {})");
     },
 
     failure_: function(address, expected) {
       this.assign_(address, this.null_());
-      this.unless_('@error and @error.offset > @offset', function(builder) {
-        builder.assign_('@error', 'ParseError.new(@input, @offset, ' + builder._quote(expected) + ')');
+      this.if_('not self._error or self._error[1] <= self._offset', function(builder) {
+        builder.assign_('self._error', '(self._input, self._offset, ' + builder._quote(expected) + ')');
       });
     },
 
@@ -250,7 +228,7 @@
     },
 
     jump_: function(address, name) {
-      this.assign_(address, '_read_' + name);
+      this.assign_(address, 'self._read_' + name + '()');
     },
 
     if_: function(condition, block, else_, context) {
@@ -258,33 +236,21 @@
         context = else_;
         else_   = null;
       }
-      this._line('if ' + condition);
+      this._line('if ' + condition + ':');
       this._indent(block, context);
       if (else_) {
-        this._line('else');
+        this._line('else:');
         this._indent(else_, context);
       }
-      this._line('end');
     },
 
     unless_: function(condition, block, else_, context) {
-      if (typeof else_ !== 'function') {
-        context = else_;
-        else_   = null;
-      }
-      this._line('unless ' + condition);
-      this._indent(block, context);
-      if (else_) {
-        this._line('else');
-        this._indent(else_, context);
-      }
-      this._line('end');
+      this.if_('not ' + condition, block, else_, context);
     },
 
     whileNotNull_: function(expression, block, context) {
-      this._line('until ' + expression + ' == ' + this.null_());
+      this._line('while ' + expression + ' is not None:');
       this._indent(block, context);
-      this._line('end');
     },
 
     stringMatch_: function(expression, string) {
@@ -292,11 +258,11 @@
     },
 
     stringMatchCI_: function(expression, string) {
-      return expression + '.downcase == ' + this._quote(string) + '.downcase';
+      return expression + '.lower() == ' + this._quote(string) + '.lower()';
     },
 
     regexMatch_: function(regex, string) {
-      return string + ' =~ /' + regex.source + '/';
+      return "re.match('" + regex.source + "', " + string + ")";
     },
 
     return_: function(expression) {
@@ -308,11 +274,11 @@
     },
 
     append_: function(list, value) {
-      this._line(list + ' << ' + value);
+      this._line(list + '.append(' + value + ')');
     },
 
     concatText_: function(string, value) {
-      this._line(string + ' << ' + value + '.text');
+      this._line(string + ' += ' + value + '.text');
     },
 
     decrement_: function(variable) {
@@ -320,7 +286,7 @@
     },
 
     stringLength_: function(string) {
-      return string + '.size';
+      return 'len(' + string + ')';
     },
 
     and_: function(left, right) {
@@ -328,7 +294,7 @@
     },
 
     isNull_: function(expression) {
-      return expression + '.nil?';
+      return expression + ' is None';
     },
 
     isZero_: function(expression) {
@@ -336,7 +302,7 @@
     },
 
     offset_: function() {
-      return '@offset';
+      return 'self._offset';
     },
 
     emptyList_: function() {
@@ -344,17 +310,17 @@
     },
 
     emptyString_: function() {
-      return '""';
+      return "''";
     },
 
     true_: function() {
-      return 'true';
+      return 'True';
     },
 
     null_: function() {
-      return 'nil';
+      return 'None';
     }
   });
 
-  Canopy.Builders.Ruby = Builder;
+  Canopy.Builders.Python = Builder;
 })();

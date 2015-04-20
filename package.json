@@ -15,6 +15,7 @@
 
 , "scripts"         : { "build" : "wake && ./bin/canopy source/canopy/meta_grammar.peg"
                       , "js"    : "find examples/canopy -name '*.peg' -exec ./bin/canopy --lang js {} \\;"
+                      , "python"  : "find examples/canopy -name '*.peg' -exec ./bin/canopy --lang py {} \\;"
                       , "ruby"  : "find examples/canopy -name '*.peg' -exec ./bin/canopy --lang rb {} \\;"
                       , "pegjs" : "find examples/pegjs -name '*.peg' -exec pegjs --cache {} \\;"
                       , "test"  : "node spec/console.js"}
@@ -37,6 +38,7 @@
         "canopy": [ "canopy.js",
                     "canopy/meta_grammar",
                     "canopy/builders/javascript",
+                    "canopy/builders/python",
                     "canopy/builders/ruby",
                     "canopy/compiler.js",
                     "canopy/compiler/grammar",

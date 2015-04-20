@@ -192,9 +192,9 @@ module Canopy::PEG
   module Grammar
     def _read_grammar
       address0, index0 = nil, @offset
-      cached = @cache[:grammar][index0]
-      if cached
-        @offset += cached.text.size
+      if @cache[:grammar].has_key?(index0)
+        cached = @cache[:grammar][index0]
+        @offset += cached.text.size if cached
         return cached
       end
       index1, elements0, text0 = @offset, [], ""
@@ -331,9 +331,9 @@ module Canopy::PEG
 
     def _read_grammar_name
       address0, index0 = nil, @offset
-      cached = @cache[:grammar_name][index0]
-      if cached
-        @offset += cached.text.size
+      if @cache[:grammar_name].has_key?(index0)
+        cached = @cache[:grammar_name][index0]
+        @offset += cached.text.size if cached
         return cached
       end
       index1, elements0, text0 = @offset, [], ""
@@ -379,9 +379,9 @@ module Canopy::PEG
 
     def _read_grammar_rule
       address0, index0 = nil, @offset
-      cached = @cache[:grammar_rule][index0]
-      if cached
-        @offset += cached.text.size
+      if @cache[:grammar_rule].has_key?(index0)
+        cached = @cache[:grammar_rule][index0]
+        @offset += cached.text.size if cached
         return cached
       end
       index1, elements0, text0 = @offset, [], ""
@@ -424,9 +424,9 @@ module Canopy::PEG
 
     def _read_assignment
       address0, index0 = nil, @offset
-      cached = @cache[:assignment][index0]
-      if cached
-        @offset += cached.text.size
+      if @cache[:assignment].has_key?(index0)
+        cached = @cache[:assignment][index0]
+        @offset += cached.text.size if cached
         return cached
       end
       index1, elements0, text0 = @offset, [], ""
@@ -511,9 +511,9 @@ module Canopy::PEG
 
     def _read_parsing_expression
       address0, index0 = nil, @offset
-      cached = @cache[:parsing_expression][index0]
-      if cached
-        @offset += cached.text.size
+      if @cache[:parsing_expression].has_key?(index0)
+        cached = @cache[:parsing_expression][index0]
+        @offset += cached.text.size if cached
         return cached
       end
       index1 = @offset
@@ -530,9 +530,9 @@ module Canopy::PEG
 
     def _read_parenthesised_expression
       address0, index0 = nil, @offset
-      cached = @cache[:parenthesised_expression][index0]
-      if cached
-        @offset += cached.text.size
+      if @cache[:parenthesised_expression].has_key?(index0)
+        cached = @cache[:parenthesised_expression][index0]
+        @offset += cached.text.size if cached
         return cached
       end
       index1, elements0, text0 = @offset, [], ""
@@ -647,9 +647,9 @@ module Canopy::PEG
 
     def _read_choice_expression
       address0, index0 = nil, @offset
-      cached = @cache[:choice_expression][index0]
-      if cached
-        @offset += cached.text.size
+      if @cache[:choice_expression].has_key?(index0)
+        cached = @cache[:choice_expression][index0]
+        @offset += cached.text.size if cached
         return cached
       end
       index1, elements0, text0 = @offset, [], ""
@@ -783,9 +783,9 @@ module Canopy::PEG
 
     def _read_choice_part
       address0, index0 = nil, @offset
-      cached = @cache[:choice_part][index0]
-      if cached
-        @offset += cached.text.size
+      if @cache[:choice_part].has_key?(index0)
+        cached = @cache[:choice_part][index0]
+        @offset += cached.text.size if cached
         return cached
       end
       index1, elements0, text0 = @offset, [], ""
@@ -873,9 +873,9 @@ module Canopy::PEG
 
     def _read_type_expression
       address0, index0 = nil, @offset
-      cached = @cache[:type_expression][index0]
-      if cached
-        @offset += cached.text.size
+      if @cache[:type_expression].has_key?(index0)
+        cached = @cache[:type_expression][index0]
+        @offset += cached.text.size if cached
         return cached
       end
       index1, elements0, text0 = @offset, [], ""
@@ -942,9 +942,9 @@ module Canopy::PEG
 
     def _read_sequence_expression
       address0, index0 = nil, @offset
-      cached = @cache[:sequence_expression][index0]
-      if cached
-        @offset += cached.text.size
+      if @cache[:sequence_expression].has_key?(index0)
+        cached = @cache[:sequence_expression][index0]
+        @offset += cached.text.size if cached
         return cached
       end
       index1, elements0, text0 = @offset, [], ""
@@ -1033,9 +1033,9 @@ module Canopy::PEG
 
     def _read_sequence_part
       address0, index0 = nil, @offset
-      cached = @cache[:sequence_part][index0]
-      if cached
-        @offset += cached.text.size
+      if @cache[:sequence_part].has_key?(index0)
+        cached = @cache[:sequence_part][index0]
+        @offset += cached.text.size if cached
         return cached
       end
       index1, elements0, text0 = @offset, [], ""
@@ -1083,9 +1083,9 @@ module Canopy::PEG
 
     def _read_quantified_atom
       address0, index0 = nil, @offset
-      cached = @cache[:quantified_atom][index0]
-      if cached
-        @offset += cached.text.size
+      if @cache[:quantified_atom].has_key?(index0)
+        cached = @cache[:quantified_atom][index0]
+        @offset += cached.text.size if cached
         return cached
       end
       index1, elements0, text0 = @offset, [], ""
@@ -1119,9 +1119,9 @@ module Canopy::PEG
 
     def _read_atom
       address0, index0 = nil, @offset
-      cached = @cache[:atom][index0]
-      if cached
-        @offset += cached.text.size
+      if @cache[:atom].has_key?(index0)
+        cached = @cache[:atom][index0]
+        @offset += cached.text.size if cached
         return cached
       end
       index1 = @offset
@@ -1158,9 +1158,9 @@ module Canopy::PEG
 
     def _read_predicated_atom
       address0, index0 = nil, @offset
-      cached = @cache[:predicated_atom][index0]
-      if cached
-        @offset += cached.text.size
+      if @cache[:predicated_atom].has_key?(index0)
+        cached = @cache[:predicated_atom][index0]
+        @offset += cached.text.size if cached
         return cached
       end
       index1, elements0, text0 = @offset, [], ""
@@ -1226,9 +1226,9 @@ module Canopy::PEG
 
     def _read_reference_expression
       address0, index0 = nil, @offset
-      cached = @cache[:reference_expression][index0]
-      if cached
-        @offset += cached.text.size
+      if @cache[:reference_expression].has_key?(index0)
+        cached = @cache[:reference_expression][index0]
+        @offset += cached.text.size if cached
         return cached
       end
       index1, elements0, text0 = @offset, [], ""
@@ -1270,9 +1270,9 @@ module Canopy::PEG
 
     def _read_string_expression
       address0, index0 = nil, @offset
-      cached = @cache[:string_expression][index0]
-      if cached
-        @offset += cached.text.size
+      if @cache[:string_expression].has_key?(index0)
+        cached = @cache[:string_expression][index0]
+        @offset += cached.text.size if cached
         return cached
       end
       index1, elements0, text0 = @offset, [], ""
@@ -1423,9 +1423,9 @@ module Canopy::PEG
 
     def _read_ci_string_expression
       address0, index0 = nil, @offset
-      cached = @cache[:ci_string_expression][index0]
-      if cached
-        @offset += cached.text.size
+      if @cache[:ci_string_expression].has_key?(index0)
+        cached = @cache[:ci_string_expression][index0]
+        @offset += cached.text.size if cached
         return cached
       end
       index1, elements0, text0 = @offset, [], ""
@@ -1576,9 +1576,9 @@ module Canopy::PEG
 
     def _read_any_char_expression
       address0, index0 = nil, @offset
-      cached = @cache[:any_char_expression][index0]
-      if cached
-        @offset += cached.text.size
+      if @cache[:any_char_expression].has_key?(index0)
+        cached = @cache[:any_char_expression][index0]
+        @offset += cached.text.size if cached
         return cached
       end
       chunk0 = nil
@@ -1599,9 +1599,9 @@ module Canopy::PEG
 
     def _read_char_class_expression
       address0, index0 = nil, @offset
-      cached = @cache[:char_class_expression][index0]
-      if cached
-        @offset += cached.text.size
+      if @cache[:char_class_expression].has_key?(index0)
+        cached = @cache[:char_class_expression][index0]
+        @offset += cached.text.size if cached
         return cached
       end
       index1, elements0, text0 = @offset, [], ""
@@ -1779,9 +1779,9 @@ module Canopy::PEG
 
     def _read_label
       address0, index0 = nil, @offset
-      cached = @cache[:label][index0]
-      if cached
-        @offset += cached.text.size
+      if @cache[:label].has_key?(index0)
+        cached = @cache[:label][index0]
+        @offset += cached.text.size if cached
         return cached
       end
       index1, elements0, text0 = @offset, [], ""
@@ -1827,9 +1827,9 @@ module Canopy::PEG
 
     def _read_object_identifier
       address0, index0 = nil, @offset
-      cached = @cache[:object_identifier][index0]
-      if cached
-        @offset += cached.text.size
+      if @cache[:object_identifier].has_key?(index0)
+        cached = @cache[:object_identifier][index0]
+        @offset += cached.text.size if cached
         return cached
       end
       index1, elements0, text0 = @offset, [], ""
@@ -1915,9 +1915,9 @@ module Canopy::PEG
 
     def _read_identifier
       address0, index0 = nil, @offset
-      cached = @cache[:identifier][index0]
-      if cached
-        @offset += cached.text.size
+      if @cache[:identifier].has_key?(index0)
+        cached = @cache[:identifier][index0]
+        @offset += cached.text.size if cached
         return cached
       end
       index1, elements0, text0 = @offset, [], ""
@@ -1990,9 +1990,9 @@ module Canopy::PEG
 
     def _read_quantifier
       address0, index0 = nil, @offset
-      cached = @cache[:quantifier][index0]
-      if cached
-        @offset += cached.text.size
+      if @cache[:quantifier].has_key?(index0)
+        cached = @cache[:quantifier][index0]
+        @offset += cached.text.size if cached
         return cached
       end
       index1 = @offset
@@ -2049,9 +2049,9 @@ module Canopy::PEG
 
     def _read_space
       address0, index0 = nil, @offset
-      cached = @cache[:space][index0]
-      if cached
-        @offset += cached.text.size
+      if @cache[:space].has_key?(index0)
+        cached = @cache[:space][index0]
+        @offset += cached.text.size if cached
         return cached
       end
       chunk0 = nil

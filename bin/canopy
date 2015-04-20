@@ -6,6 +6,7 @@ var Canopy = require('../lib/canopy'),
 
 var BUILDERS = {};
 BUILDERS.js = BUILDERS.javascript = Canopy.Builders.JavaScript;
+BUILDERS.py = BUILDERS.python = Canopy.Builders.Python;
 BUILDERS.rb = BUILDERS.ruby = Canopy.Builders.Ruby;
 
 try {

@@ -115,7 +115,7 @@
       this.function_('Parser.prototype.parse', [], function(builder) {
         var input = 'this._input', of = 'this._offset';
 
-        builder.assign_('var tree', 'this._read_' + root + '()');
+        builder.jump_('var tree', root);
 
         builder.if_('tree && ' + of + ' === this._input.length', function(builder) {
           builder.return_('tree');
@@ -201,10 +201,12 @@
           cacheAddr = cacheMap + '[' + offset + ']';
 
       this.assign_(cacheMap, cacheMap + ' || {}');
-      this.assign_('var cached', cacheAddr);
 
-      this.if_('cached', function(builder) {
-        builder._line('this._offset += cached.text.length');
+      this.if_(offset + ' in ' + cacheMap, function(builder) {
+        builder.assign_('var cached', cacheAddr);
+        builder.if_('cached', function(builder) {
+          builder._line('this._offset += cached.text.length');
+        });
         builder.return_('cached');
       }, this);
 
