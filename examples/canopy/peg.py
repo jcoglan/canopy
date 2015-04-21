@@ -1430,7 +1430,7 @@ class Grammar(object):
                         chunk4 = None
                         if len(self._input) > self._offset:
                             chunk4 = self._input[self._offset:(self._offset + 1)]
-                        if chunk4 and re.match('^[^\]]', chunk4):
+                        if chunk4 and re.match('^[^\\]]', chunk4):
                             address4 = SyntaxNode(chunk4, self._offset, [])
                             self._offset += 1
                         else:
@@ -1725,7 +1725,7 @@ class Grammar(object):
         chunk0 = None
         if len(self._input) > self._offset:
             chunk0 = self._input[self._offset:(self._offset + 1)]
-        if chunk0 and re.match('^[\s]', chunk0):
+        if chunk0 and re.match('^[\\s]', chunk0):
             address0 = SyntaxNode(chunk0, self._offset, [])
             self._offset += 1
         else:

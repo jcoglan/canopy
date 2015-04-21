@@ -262,7 +262,7 @@
     },
 
     regexMatch_: function(regex, string) {
-      return "re.match('" + regex.source + "', " + string + ")";
+      return 're.match(' + this._quote(regex.source) + ', ' + string + ')';
     },
 
     return_: function(expression) {
