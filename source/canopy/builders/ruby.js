@@ -45,6 +45,7 @@
     _quote: function(string) {
       string = string.replace(/\\/g, '\\\\')
                      .replace(/"/g, '\\"')
+                     .replace(/#\{/g, '\\#{')
                      .replace(/\x07/g, '\\a')
                      .replace(/\x08/g, '\\b')
                      .replace(/\t/g, '\\t')
