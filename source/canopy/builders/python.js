@@ -34,13 +34,13 @@
 
     _newline: function() {
       this._write('\n');
-      var i = this._indentLevel;
-      while (i--) this._write('    ');
     },
 
     _line: function(source) {
-      this._newline();
+      var i = this._indentLevel;
+      while (i--) this._write('    ');
       this._write(source);
+      this._newline();
     },
 
     _quote: function(string) {
@@ -59,7 +59,7 @@
     },
 
     package_: function(name, block, context) {
-      this._write('from collections import defaultdict');
+      this._line('from collections import defaultdict');
       this._line('import re');
       this._newline();
       this._newline();

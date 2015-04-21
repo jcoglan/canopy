@@ -13,7 +13,7 @@ module CanopyLisp
       @elements.each(&block)
     end
   end
-  
+
   class SyntaxNode1 < SyntaxNode
     attr_reader :data
 
@@ -22,7 +22,7 @@ module CanopyLisp
       @data = elements[1]
     end
   end
-  
+
   class SyntaxNode2 < SyntaxNode
     attr_reader :cells
 
@@ -31,9 +31,9 @@ module CanopyLisp
       @cells = elements[1]
     end
   end
-  
+
   ParseError = Struct.new(:input, :offset, :expected)
-  
+
   module Grammar
     def _read_program
       address0, index0 = nil, @offset
@@ -682,7 +682,7 @@ module CanopyLisp
       return @cache[:delimiter][index0] = address0
     end
   end
-  
+
   class Parser
     include Grammar
 
@@ -714,7 +714,7 @@ module CanopyLisp
       return message + "^"
     end
   end
-  
+
   def self.parse(input)
     parser = Parser.new(input)
     parser.parse

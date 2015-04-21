@@ -13,7 +13,7 @@ module Canopy::PEG
       @elements.each(&block)
     end
   end
-  
+
   class SyntaxNode1 < SyntaxNode
     attr_reader :grammar_name, :rules
 
@@ -23,7 +23,7 @@ module Canopy::PEG
       @rules = elements[2]
     end
   end
-  
+
   class SyntaxNode2 < SyntaxNode
     attr_reader :grammar_rule
 
@@ -32,7 +32,7 @@ module Canopy::PEG
       @grammar_rule = elements[1]
     end
   end
-  
+
   class SyntaxNode3 < SyntaxNode
     attr_reader :object_identifier
 
@@ -41,7 +41,7 @@ module Canopy::PEG
       @object_identifier = elements[1]
     end
   end
-  
+
   class SyntaxNode4 < SyntaxNode
     attr_reader :identifier, :assignment, :parsing_expression
 
@@ -52,7 +52,7 @@ module Canopy::PEG
       @parsing_expression = elements[2]
     end
   end
-  
+
   class SyntaxNode5 < SyntaxNode
     attr_reader :parsing_expression
 
@@ -61,7 +61,7 @@ module Canopy::PEG
       @parsing_expression = elements[2]
     end
   end
-  
+
   class SyntaxNode6 < SyntaxNode
     attr_reader :first_part, :choice_part, :rest
 
@@ -72,7 +72,7 @@ module Canopy::PEG
       @rest = elements[1]
     end
   end
-  
+
   class SyntaxNode7 < SyntaxNode
     attr_reader :expression, :choice_part
 
@@ -82,7 +82,7 @@ module Canopy::PEG
       @choice_part = elements[3]
     end
   end
-  
+
   class SyntaxNode8 < SyntaxNode
     attr_reader :type_expression
 
@@ -91,7 +91,7 @@ module Canopy::PEG
       @type_expression = elements[1]
     end
   end
-  
+
   class SyntaxNode9 < SyntaxNode
     attr_reader :object_identifier
 
@@ -100,7 +100,7 @@ module Canopy::PEG
       @object_identifier = elements[1]
     end
   end
-  
+
   class SyntaxNode10 < SyntaxNode
     attr_reader :first_part, :sequence_part, :rest
 
@@ -111,7 +111,7 @@ module Canopy::PEG
       @rest = elements[1]
     end
   end
-  
+
   class SyntaxNode11 < SyntaxNode
     attr_reader :expression, :sequence_part
 
@@ -121,7 +121,7 @@ module Canopy::PEG
       @sequence_part = elements[1]
     end
   end
-  
+
   class SyntaxNode12 < SyntaxNode
     attr_reader :expression
 
@@ -130,7 +130,7 @@ module Canopy::PEG
       @expression = elements[1]
     end
   end
-  
+
   class SyntaxNode13 < SyntaxNode
     attr_reader :atom, :quantifier
 
@@ -140,7 +140,7 @@ module Canopy::PEG
       @quantifier = elements[1]
     end
   end
-  
+
   class SyntaxNode14 < SyntaxNode
     attr_reader :predicate, :atom
 
@@ -150,7 +150,7 @@ module Canopy::PEG
       @atom = elements[1]
     end
   end
-  
+
   class SyntaxNode15 < SyntaxNode
     attr_reader :identifier
 
@@ -159,7 +159,7 @@ module Canopy::PEG
       @identifier = elements[0]
     end
   end
-  
+
   class SyntaxNode16 < SyntaxNode
     attr_reader :identifier
 
@@ -168,7 +168,7 @@ module Canopy::PEG
       @identifier = elements[0]
     end
   end
-  
+
   class SyntaxNode17 < SyntaxNode
     attr_reader :identifier
 
@@ -177,7 +177,7 @@ module Canopy::PEG
       @identifier = elements[0]
     end
   end
-  
+
   class SyntaxNode18 < SyntaxNode
     attr_reader :identifier
 
@@ -186,9 +186,9 @@ module Canopy::PEG
       @identifier = elements[1]
     end
   end
-  
+
   ParseError = Struct.new(:input, :offset, :expected)
-  
+
   module Grammar
     def _read_grammar
       address0, index0 = nil, @offset
@@ -2070,7 +2070,7 @@ module Canopy::PEG
       return @cache[:space][index0] = address0
     end
   end
-  
+
   class Parser
     include Grammar
 
@@ -2102,7 +2102,7 @@ module Canopy::PEG
       return message + "^"
     end
   end
-  
+
   def self.parse(input)
     parser = Parser.new(input)
     parser.parse
