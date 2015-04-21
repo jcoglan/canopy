@@ -1,0 +1,2 @@
+parsimonious
+pytest-benchmark
