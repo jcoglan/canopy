@@ -297,7 +297,8 @@
     },
 
     regexMatch_: function(regex, string) {
-      return string + ' =~ /' + regex.source + '/';
+      var source = regex.source.replace(/^\^/g, '\\A');
+      return string + ' =~ /' + source + '/';
     },
 
     return_: function(expression) {

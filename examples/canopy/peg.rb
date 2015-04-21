@@ -1353,7 +1353,7 @@ module Canopy::PEG
             if @input.size > @offset
               chunk3 = @input[@offset...(@offset + 1)]
             end
-            if chunk3 and chunk3 =~ /^[^"]/
+            if chunk3 and chunk3 =~ /\A[^"]/
               address3 = SyntaxNode.new(chunk3, @offset, [])
               @offset += 1
             else
@@ -1506,7 +1506,7 @@ module Canopy::PEG
             if @input.size > @offset
               chunk3 = @input[@offset...(@offset + 1)]
             end
-            if chunk3 and chunk3 =~ /^[^`]/
+            if chunk3 and chunk3 =~ /\A[^`]/
               address3 = SyntaxNode.new(chunk3, @offset, [])
               @offset += 1
             else
@@ -1705,7 +1705,7 @@ module Canopy::PEG
               if @input.size > @offset
                 chunk4 = @input[@offset...(@offset + 1)]
               end
-              if chunk4 and chunk4 =~ /^[^\]]/
+              if chunk4 and chunk4 =~ /\A[^\]]/
                 address4 = SyntaxNode.new(chunk4, @offset, [])
                 @offset += 1
               else
@@ -1926,7 +1926,7 @@ module Canopy::PEG
       if @input.size > @offset
         chunk0 = @input[@offset...(@offset + 1)]
       end
-      if chunk0 and chunk0 =~ /^[a-zA-Z_]/
+      if chunk0 and chunk0 =~ /\A[a-zA-Z_]/
         address1 = SyntaxNode.new(chunk0, @offset, [])
         @offset += 1
       else
@@ -1945,7 +1945,7 @@ module Canopy::PEG
           if @input.size > @offset
             chunk1 = @input[@offset...(@offset + 1)]
           end
-          if chunk1 and chunk1 =~ /^[a-zA-Z0-9_]/
+          if chunk1 and chunk1 =~ /\A[a-zA-Z0-9_]/
             address3 = SyntaxNode.new(chunk1, @offset, [])
             @offset += 1
           else
@@ -2058,7 +2058,7 @@ module Canopy::PEG
       if @input.size > @offset
         chunk0 = @input[@offset...(@offset + 1)]
       end
-      if chunk0 and chunk0 =~ /^[\s]/
+      if chunk0 and chunk0 =~ /\A[\s]/
         address0 = SyntaxNode.new(chunk0, @offset, [])
         @offset += 1
       else
