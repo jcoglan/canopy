@@ -113,6 +113,22 @@
           builder._line('raise ParseError(format_error(self._input, self._failure, self._expected))');
         });
       });
+
+      this._line('def format_error(input, offset, expected):');
+      this._indent(function(builder) {
+       builder._line("lines, line_no, position = input.split('\\n'), 0, 0");
+        builder._line('while position <= offset:');
+        builder._indent(function(builder) {
+          builder._line('position += len(lines[line_no]) + 1');
+          builder._line('line_no += 1');
+        });
+        builder._line("message, line = 'Line ' + str(line_no) + ': expected ' + ', '.join(expected) + '\\n', lines[line_no - 1]");
+        builder._line("message += line + '\\n'");
+        builder._line('position -= len(line) + 1');
+        builder._line("message += ' ' * (offset - position)");
+        builder.return_("message + '^'");
+      });
+      this._newline();
     },
 
     exports_: function() {

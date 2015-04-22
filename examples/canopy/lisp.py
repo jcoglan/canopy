@@ -639,6 +639,17 @@ class Parser(Grammar):
         raise ParseError(format_error(self._input, self._failure, self._expected))
 
 
+def format_error(input, offset, expected):
+    lines, line_no, position = input.split('\n'), 0, 0
+    while position <= offset:
+        position += len(lines[line_no]) + 1
+        line_no += 1
+    message, line = 'Line ' + str(line_no) + ': expected ' + ', '.join(expected) + '\n', lines[line_no - 1]
+    message += line + '\n'
+    position -= len(line) + 1
+    message += ' ' * (offset - position)
+    return message + '^'
+
 def parse(input):
     parser = Parser(input)
     return parser.parse()
