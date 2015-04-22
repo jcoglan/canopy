@@ -162,8 +162,12 @@ module CanopyLisp
         @offset += 1
       else
         address1 = nil
-        unless @error and @error.offset > @offset
-          @error = ParseError.new(@input, @offset, "\"(\"")
+        if @offset > @failure
+          @failure = @offset
+          @expected = []
+        end
+        if @offset == @failure
+          @expected << "\"(\""
         end
       end
       if address1
@@ -199,8 +203,12 @@ module CanopyLisp
             @offset += 1
           else
             address4 = nil
-            unless @error and @error.offset > @offset
-              @error = ParseError.new(@input, @offset, "\")\"")
+            if @offset > @failure
+              @failure = @offset
+              @expected = []
+            end
+            if @offset == @failure
+              @expected << "\")\""
             end
           end
           if address4
@@ -272,8 +280,12 @@ module CanopyLisp
         @offset += 2
       else
         address0 = nil
-        unless @error and @error.offset > @offset
-          @error = ParseError.new(@input, @offset, "\"#t\"")
+        if @offset > @failure
+          @failure = @offset
+          @expected = []
+        end
+        if @offset == @failure
+          @expected << "\"#t\""
         end
       end
       unless address0
@@ -287,8 +299,12 @@ module CanopyLisp
           @offset += 2
         else
           address0 = nil
-          unless @error and @error.offset > @offset
-            @error = ParseError.new(@input, @offset, "\"#f\"")
+          if @offset > @failure
+            @failure = @offset
+            @expected = []
+          end
+          if @offset == @failure
+            @expected << "\"#f\""
           end
         end
         unless address0
@@ -316,8 +332,12 @@ module CanopyLisp
         @offset += 1
       else
         address1 = nil
-        unless @error and @error.offset > @offset
-          @error = ParseError.new(@input, @offset, "[1-9]")
+        if @offset > @failure
+          @failure = @offset
+          @expected = []
+        end
+        if @offset == @failure
+          @expected << "[1-9]"
         end
       end
       if address1
@@ -335,8 +355,12 @@ module CanopyLisp
             @offset += 1
           else
             address3 = nil
-            unless @error and @error.offset > @offset
-              @error = ParseError.new(@input, @offset, "[0-9]")
+            if @offset > @failure
+              @failure = @offset
+              @expected = []
+            end
+            if @offset == @failure
+              @expected << "[0-9]"
             end
           end
           if address3
@@ -391,8 +415,12 @@ module CanopyLisp
         @offset += 1
       else
         address1 = nil
-        unless @error and @error.offset > @offset
-          @error = ParseError.new(@input, @offset, "\"\\\"\"")
+        if @offset > @failure
+          @failure = @offset
+          @expected = []
+        end
+        if @offset == @failure
+          @expected << "\"\\\"\""
         end
       end
       if address1
@@ -413,8 +441,12 @@ module CanopyLisp
             @offset += 1
           else
             address4 = nil
-            unless @error and @error.offset > @offset
-              @error = ParseError.new(@input, @offset, "\"\\\\\"")
+            if @offset > @failure
+              @failure = @offset
+              @expected = []
+            end
+            if @offset == @failure
+              @expected << "\"\\\\\""
             end
           end
           if address4
@@ -427,8 +459,12 @@ module CanopyLisp
             end
             if chunk2.nil?
               address5 = nil
-              unless @error and @error.offset > @offset
-                @error = ParseError.new(@input, @offset, "<any char>")
+              if @offset > @failure
+                @failure = @offset
+                @expected = []
+              end
+              if @offset == @failure
+                @expected << "<any char>"
               end
             else
               address5 = SyntaxNode.new(chunk2, @offset, [])
@@ -463,8 +499,12 @@ module CanopyLisp
               @offset += 1
             else
               address3 = nil
-              unless @error and @error.offset > @offset
-                @error = ParseError.new(@input, @offset, "[^\"]")
+              if @offset > @failure
+                @failure = @offset
+                @expected = []
+              end
+              if @offset == @failure
+                @expected << "[^\"]"
               end
             end
             unless address3
@@ -497,8 +537,12 @@ module CanopyLisp
             @offset += 1
           else
             address6 = nil
-            unless @error and @error.offset > @offset
-              @error = ParseError.new(@input, @offset, "\"\\\"\"")
+            if @offset > @failure
+              @failure = @offset
+              @expected = []
+            end
+            if @offset == @failure
+              @expected << "\"\\\"\""
             end
           end
           if address6
@@ -556,8 +600,12 @@ module CanopyLisp
           end
           if chunk0.nil?
             address3 = nil
-            unless @error and @error.offset > @offset
-              @error = ParseError.new(@input, @offset, "<any char>")
+            if @offset > @failure
+              @failure = @offset
+              @expected = []
+            end
+            if @offset == @failure
+              @expected << "<any char>"
             end
           else
             address3 = SyntaxNode.new(chunk0, @offset, [])
@@ -613,8 +661,12 @@ module CanopyLisp
         @offset += 1
       else
         address0 = nil
-        unless @error and @error.offset > @offset
-          @error = ParseError.new(@input, @offset, "[\\s]")
+        if @offset > @failure
+          @failure = @offset
+          @expected = []
+        end
+        if @offset == @failure
+          @expected << "[\\s]"
         end
       end
       return @cache[:space][index0] = address0
@@ -637,8 +689,12 @@ module CanopyLisp
         @offset += 1
       else
         address0 = nil
-        unless @error and @error.offset > @offset
-          @error = ParseError.new(@input, @offset, "\"(\"")
+        if @offset > @failure
+          @failure = @offset
+          @expected = []
+        end
+        if @offset == @failure
+          @expected << "\"(\""
         end
       end
       unless address0
@@ -652,8 +708,12 @@ module CanopyLisp
           @offset += 1
         else
           address0 = nil
-          unless @error and @error.offset > @offset
-            @error = ParseError.new(@input, @offset, "\")\"")
+          if @offset > @failure
+            @failure = @offset
+            @expected = []
+          end
+          if @offset == @failure
+            @expected << "\")\""
           end
         end
         unless address0
@@ -690,6 +750,8 @@ module CanopyLisp
       @input = input
       @offset = 0
       @cache = Hash.new { |h,k| h[k] = {} }
+      @failure = 0
+      @expected = []
     end
 
     def parse
@@ -697,20 +759,23 @@ module CanopyLisp
       if tree and @offset == @input.size
         return tree
       end
-      @error ||= ParseError.new(@input, @offset, "<EOF>")
-      raise SyntaxError, Parser.format_error(@error)
+      if @expected.empty?
+        @failure = @offset
+        @expected << "<EOF>"
+      end
+      raise SyntaxError, Parser.format_error(@input, @failure, @expected)
     end
 
-    def self.format_error(error)
-      lines, line_no, offset = error.input.split(/\n/), 0, 0
-      while offset <= error.offset
-        offset += lines[line_no].size + 1
+    def self.format_error(input, offset, expected)
+      lines, line_no, position = input.split(/\n/), 0, 0
+      while position <= offset
+        position += lines[line_no].size + 1
         line_no += 1
       end
-      message, line = "Line #{line_no}: expected #{error.expected}\n", lines[line_no - 1]
+      message, line = "Line #{line_no}: expected #{expected * ", "}\n", lines[line_no - 1]
       message += "#{line}\n"
-      offset -= line.size + 1
-      message += " " * (error.offset - offset)
+      position -= line.size + 1
+      message += " " * (offset - position)
       return message + "^"
     end
   end

@@ -14,20 +14,12 @@ function() { with(this) {
 
     it('does not parse characters outside the class', function() { with(this) {
       assertThrows(Error, function() { PositiveCharClassTest.parse('7') })
-      assertEqual({
-          input:    '7',
-          offset:   0,
-          expected: '[a-z]'
-        }, PositiveCharClassTest.Parser.lastError)
+      assertEqual( {offset: 0, expected: ['[a-z]']}, PositiveCharClassTest.Parser.lastError )
     }})
 
     it('does not parse characters within the class appearing too late', function() { with(this) {
       assertThrows(Error, function() { PositiveCharClassTest.parse('7a') })
-      assertEqual({
-          input:    '7a',
-          offset:   0,
-          expected: '[a-z]'
-        }, PositiveCharClassTest.Parser.lastError)
+      assertEqual( {offset: 0, expected: ['[a-z]']}, PositiveCharClassTest.Parser.lastError )
     }})
   }})
 
@@ -69,11 +61,7 @@ function() { with(this) {
 
     it('does not parse floats', function() { with(this) {
       assertThrows(Error, function() { RepeatCharClassTest.parse('7.4') })
-      assertEqual({
-          input:    '7.4',
-          offset:   1,
-          expected: '[0-9]'
-        }, RepeatCharClassTest.Parser.lastError)
+      assertEqual( {offset: 1, expected: ['[0-9]']}, RepeatCharClassTest.Parser.lastError )
     }})
 
     it('does not parse octal', function() { with(this) {

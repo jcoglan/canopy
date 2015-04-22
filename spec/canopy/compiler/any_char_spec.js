@@ -13,10 +13,6 @@ function() { with(this) {
 
   it('does not parse the empty string', function() { with(this) {
     assertThrows(Error, function() { AnyCharTest.parse('') })
-    assertEqual({
-        input:    '',
-        offset:   0,
-        expected: '<any char>'
-      }, AnyCharTest.Parser.lastError)
+    assertEqual( {offset: 0, expected: ['<any char>']}, AnyCharTest.Parser.lastError )
   }})
 }})

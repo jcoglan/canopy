@@ -103,6 +103,8 @@
           builder.attribute_('input', 'input');
           builder.attribute_('offset', '0');
           builder.attribute_('cache', 'Hash.new { |h,k| h[k] = {} }');
+          builder.attribute_('failure', '0');
+          builder.attribute_('expected', '[]');
         });
 
         builder.method_('parse', [], function(builder) {
@@ -110,22 +112,25 @@
           builder.if_('tree and @offset == @input.size', function(builder) {
             builder.return_('tree');
           });
-          builder._line('@error ||= ParseError.new(@input, @offset, "<EOF>")');
-          builder._line('raise SyntaxError, Parser.format_error(@error)');
+          builder.if_('@expected.empty?', function(builder) {
+            builder.assign_('@failure', '@offset');
+            builder.append_('@expected', '"<EOF>"');
+          });
+          builder._line('raise SyntaxError, Parser.format_error(@input, @failure, @expected)');
         });
 
-        builder.method_('self.format_error', ['error'], function(builder) {
-          builder._line('lines, line_no, offset = error.input.split(/\\n/), 0, 0');
-          builder._line('while offset <= error.offset');
+        builder.method_('self.format_error', ['input', 'offset', 'expected'], function(builder) {
+          builder._line('lines, line_no, position = input.split(/\\n/), 0, 0');
+          builder._line('while position <= offset');
           builder._indent(function(builder) {
-            builder._line('offset += lines[line_no].size + 1');
+            builder._line('position += lines[line_no].size + 1');
             builder._line('line_no += 1');
           });
           builder._line('end');
-          builder._line('message, line = "Line #{line_no}: expected #{error.expected}\\n", lines[line_no - 1]');
+          builder._line('message, line = "Line #{line_no}: expected #{expected * ", "}\\n", lines[line_no - 1]');
           builder._line('message += "#{line}\\n"');
-          builder._line('offset -= line.size + 1');
-          builder._line('message += " " * (error.offset - offset)');
+          builder._line('position -= line.size + 1');
+          builder._line('message += " " * (offset - position)');
           builder.return_('message + "^"');
         });
       });
@@ -240,9 +245,15 @@
     },
 
     failure_: function(address, expected) {
+      expected = this._quote(expected);
       this.assign_(address, this.null_());
-      this.unless_('@error and @error.offset > @offset', function(builder) {
-        builder.assign_('@error', 'ParseError.new(@input, @offset, ' + builder._quote(expected) + ')');
+
+      this.if_('@offset > @failure', function(builder) {
+        builder.assign_('@failure', '@offset');
+        builder.assign_('@expected', '[]');
+      });
+      this.if_('@offset == @failure', function(builder) {
+        builder.append_('@expected', expected);
       });
     },
 

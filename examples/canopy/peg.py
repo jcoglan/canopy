@@ -273,8 +273,11 @@ class Grammar(object):
             self._offset += 8
         else:
             address1 = None
-            if not self._error or self._error[1] <= self._offset:
-                self._error = (self._input, self._offset, '`grammar `')
+            if self._offset > self._failure:
+                self._failure = self._offset
+                self._expected = []
+            if self._offset == self._failure:
+                self._expected.append('`grammar `')
         if address1:
             elements0.append(address1)
             text0 += address1.text
@@ -373,8 +376,11 @@ class Grammar(object):
                 self._offset += 2
             else:
                 address3 = None
-                if not self._error or self._error[1] <= self._offset:
-                    self._error = (self._input, self._offset, '"<-"')
+                if self._offset > self._failure:
+                    self._failure = self._offset
+                    self._expected = []
+                if self._offset == self._failure:
+                    self._expected.append('"<-"')
             if address3:
                 elements0.append(address3)
                 text0 += address3.text
@@ -447,8 +453,11 @@ class Grammar(object):
             self._offset += 1
         else:
             address1 = None
-            if not self._error or self._error[1] <= self._offset:
-                self._error = (self._input, self._offset, '"("')
+            if self._offset > self._failure:
+                self._failure = self._offset
+                self._expected = []
+            if self._offset == self._failure:
+                self._expected.append('"("')
         if address1:
             elements0.append(address1)
             text0 += address1.text
@@ -500,8 +509,11 @@ class Grammar(object):
                             self._offset += 1
                         else:
                             address7 = None
-                            if not self._error or self._error[1] <= self._offset:
-                                self._error = (self._input, self._offset, '")"')
+                            if self._offset > self._failure:
+                                self._failure = self._offset
+                                self._expected = []
+                            if self._offset == self._failure:
+                                self._expected.append('")"')
                         if address7:
                             elements0.append(address7)
                             text0 += address7.text
@@ -572,8 +584,11 @@ class Grammar(object):
                         self._offset += 1
                     else:
                         address6 = None
-                        if not self._error or self._error[1] <= self._offset:
-                            self._error = (self._input, self._offset, '"/"')
+                        if self._offset > self._failure:
+                            self._failure = self._offset
+                            self._expected = []
+                        if self._offset == self._failure:
+                            self._expected.append('"/"')
                     if address6:
                         elements2.append(address6)
                         text2 += address6.text
@@ -740,8 +755,11 @@ class Grammar(object):
             self._offset += 1
         else:
             address1 = None
-            if not self._error or self._error[1] <= self._offset:
-                self._error = (self._input, self._offset, '"<"')
+            if self._offset > self._failure:
+                self._failure = self._offset
+                self._expected = []
+            if self._offset == self._failure:
+                self._expected.append('"<"')
         if address1:
             elements0.append(address1)
             text0 += address1.text
@@ -759,8 +777,11 @@ class Grammar(object):
                     self._offset += 1
                 else:
                     address3 = None
-                    if not self._error or self._error[1] <= self._offset:
-                        self._error = (self._input, self._offset, '">"')
+                    if self._offset > self._failure:
+                        self._failure = self._offset
+                        self._expected = []
+                    if self._offset == self._failure:
+                        self._expected.append('">"')
                 if address3:
                     elements0.append(address3)
                     text0 += address3.text
@@ -988,8 +1009,11 @@ class Grammar(object):
             self._offset += 1
         else:
             address1 = None
-            if not self._error or self._error[1] <= self._offset:
-                self._error = (self._input, self._offset, '"&"')
+            if self._offset > self._failure:
+                self._failure = self._offset
+                self._expected = []
+            if self._offset == self._failure:
+                self._expected.append('"&"')
         if not address1:
             self._offset = index2
             chunk1 = None
@@ -1000,8 +1024,11 @@ class Grammar(object):
                 self._offset += 1
             else:
                 address1 = None
-                if not self._error or self._error[1] <= self._offset:
-                    self._error = (self._input, self._offset, '"!"')
+                if self._offset > self._failure:
+                    self._failure = self._offset
+                    self._expected = []
+                if self._offset == self._failure:
+                    self._expected.append('"!"')
             if not address1:
                 self._offset = index2
         if address1:
@@ -1084,8 +1111,11 @@ class Grammar(object):
             self._offset += 1
         else:
             address1 = None
-            if not self._error or self._error[1] <= self._offset:
-                self._error = (self._input, self._offset, '"\\""')
+            if self._offset > self._failure:
+                self._failure = self._offset
+                self._expected = []
+            if self._offset == self._failure:
+                self._expected.append('"\\""')
         if address1:
             elements0.append(address1)
             text0 += address1.text
@@ -1103,8 +1133,11 @@ class Grammar(object):
                     self._offset += 1
                 else:
                     address4 = None
-                    if not self._error or self._error[1] <= self._offset:
-                        self._error = (self._input, self._offset, '"\\\\"')
+                    if self._offset > self._failure:
+                        self._failure = self._offset
+                        self._expected = []
+                    if self._offset == self._failure:
+                        self._expected.append('"\\\\"')
                 if address4:
                     elements2.append(address4)
                     text2 += address4.text
@@ -1114,8 +1147,11 @@ class Grammar(object):
                         chunk2 = self._input[self._offset:(self._offset + 1)]
                     if chunk2 is None:
                         address5 = None
-                        if not self._error or self._error[1] <= self._offset:
-                            self._error = (self._input, self._offset, '<any char>')
+                        if self._offset > self._failure:
+                            self._failure = self._offset
+                            self._expected = []
+                        if self._offset == self._failure:
+                            self._expected.append('<any char>')
                     else:
                         address5 = SyntaxNode(chunk2, self._offset, [])
                         self._offset += 1
@@ -1144,8 +1180,11 @@ class Grammar(object):
                         self._offset += 1
                     else:
                         address3 = None
-                        if not self._error or self._error[1] <= self._offset:
-                            self._error = (self._input, self._offset, '[^"]')
+                        if self._offset > self._failure:
+                            self._failure = self._offset
+                            self._expected = []
+                        if self._offset == self._failure:
+                            self._expected.append('[^"]')
                     if not address3:
                         self._offset = index3
                 if address3:
@@ -1170,8 +1209,11 @@ class Grammar(object):
                     self._offset += 1
                 else:
                     address6 = None
-                    if not self._error or self._error[1] <= self._offset:
-                        self._error = (self._input, self._offset, '"\\""')
+                    if self._offset > self._failure:
+                        self._failure = self._offset
+                        self._expected = []
+                    if self._offset == self._failure:
+                        self._expected.append('"\\""')
                 if address6:
                     elements0.append(address6)
                     text0 += address6.text
@@ -1210,8 +1252,11 @@ class Grammar(object):
             self._offset += 1
         else:
             address1 = None
-            if not self._error or self._error[1] <= self._offset:
-                self._error = (self._input, self._offset, '"`"')
+            if self._offset > self._failure:
+                self._failure = self._offset
+                self._expected = []
+            if self._offset == self._failure:
+                self._expected.append('"`"')
         if address1:
             elements0.append(address1)
             text0 += address1.text
@@ -1229,8 +1274,11 @@ class Grammar(object):
                     self._offset += 1
                 else:
                     address4 = None
-                    if not self._error or self._error[1] <= self._offset:
-                        self._error = (self._input, self._offset, '"\\\\"')
+                    if self._offset > self._failure:
+                        self._failure = self._offset
+                        self._expected = []
+                    if self._offset == self._failure:
+                        self._expected.append('"\\\\"')
                 if address4:
                     elements2.append(address4)
                     text2 += address4.text
@@ -1240,8 +1288,11 @@ class Grammar(object):
                         chunk2 = self._input[self._offset:(self._offset + 1)]
                     if chunk2 is None:
                         address5 = None
-                        if not self._error or self._error[1] <= self._offset:
-                            self._error = (self._input, self._offset, '<any char>')
+                        if self._offset > self._failure:
+                            self._failure = self._offset
+                            self._expected = []
+                        if self._offset == self._failure:
+                            self._expected.append('<any char>')
                     else:
                         address5 = SyntaxNode(chunk2, self._offset, [])
                         self._offset += 1
@@ -1270,8 +1321,11 @@ class Grammar(object):
                         self._offset += 1
                     else:
                         address3 = None
-                        if not self._error or self._error[1] <= self._offset:
-                            self._error = (self._input, self._offset, '[^`]')
+                        if self._offset > self._failure:
+                            self._failure = self._offset
+                            self._expected = []
+                        if self._offset == self._failure:
+                            self._expected.append('[^`]')
                     if not address3:
                         self._offset = index3
                 if address3:
@@ -1296,8 +1350,11 @@ class Grammar(object):
                     self._offset += 1
                 else:
                     address6 = None
-                    if not self._error or self._error[1] <= self._offset:
-                        self._error = (self._input, self._offset, '"`"')
+                    if self._offset > self._failure:
+                        self._failure = self._offset
+                        self._expected = []
+                    if self._offset == self._failure:
+                        self._expected.append('"`"')
                 if address6:
                     elements0.append(address6)
                     text0 += address6.text
@@ -1334,8 +1391,11 @@ class Grammar(object):
             self._offset += 1
         else:
             address0 = None
-            if not self._error or self._error[1] <= self._offset:
-                self._error = (self._input, self._offset, '"."')
+            if self._offset > self._failure:
+                self._failure = self._offset
+                self._expected = []
+            if self._offset == self._failure:
+                self._expected.append('"."')
         self._cache['any_char_expression'][index0] = address0
         return address0
 
@@ -1356,8 +1416,11 @@ class Grammar(object):
             self._offset += 1
         else:
             address1 = None
-            if not self._error or self._error[1] <= self._offset:
-                self._error = (self._input, self._offset, '"["')
+            if self._offset > self._failure:
+                self._failure = self._offset
+                self._expected = []
+            if self._offset == self._failure:
+                self._expected.append('"["')
         if address1:
             elements0.append(address1)
             text0 += address1.text
@@ -1371,8 +1434,11 @@ class Grammar(object):
                 self._offset += 1
             else:
                 address2 = None
-                if not self._error or self._error[1] <= self._offset:
-                    self._error = (self._input, self._offset, '"^"')
+                if self._offset > self._failure:
+                    self._failure = self._offset
+                    self._expected = []
+                if self._offset == self._failure:
+                    self._expected.append('"^"')
             if not address2:
                 self._offset = index2
                 address2 = SyntaxNode('', self._offset, [])
@@ -1394,8 +1460,11 @@ class Grammar(object):
                         self._offset += 1
                     else:
                         address5 = None
-                        if not self._error or self._error[1] <= self._offset:
-                            self._error = (self._input, self._offset, '"\\\\"')
+                        if self._offset > self._failure:
+                            self._failure = self._offset
+                            self._expected = []
+                        if self._offset == self._failure:
+                            self._expected.append('"\\\\"')
                     if address5:
                         elements2.append(address5)
                         text2 += address5.text
@@ -1405,8 +1474,11 @@ class Grammar(object):
                             chunk3 = self._input[self._offset:(self._offset + 1)]
                         if chunk3 is None:
                             address6 = None
-                            if not self._error or self._error[1] <= self._offset:
-                                self._error = (self._input, self._offset, '<any char>')
+                            if self._offset > self._failure:
+                                self._failure = self._offset
+                                self._expected = []
+                            if self._offset == self._failure:
+                                self._expected.append('<any char>')
                         else:
                             address6 = SyntaxNode(chunk3, self._offset, [])
                             self._offset += 1
@@ -1435,8 +1507,11 @@ class Grammar(object):
                             self._offset += 1
                         else:
                             address4 = None
-                            if not self._error or self._error[1] <= self._offset:
-                                self._error = (self._input, self._offset, '[^\\]]')
+                            if self._offset > self._failure:
+                                self._failure = self._offset
+                                self._expected = []
+                            if self._offset == self._failure:
+                                self._expected.append('[^\\]]')
                         if not address4:
                             self._offset = index4
                     if address4:
@@ -1461,8 +1536,11 @@ class Grammar(object):
                         self._offset += 1
                     else:
                         address7 = None
-                        if not self._error or self._error[1] <= self._offset:
-                            self._error = (self._input, self._offset, '"]"')
+                        if self._offset > self._failure:
+                            self._failure = self._offset
+                            self._expected = []
+                        if self._offset == self._failure:
+                            self._expected.append('"]"')
                     if address7:
                         elements0.append(address7)
                         text0 += address7.text
@@ -1509,8 +1587,11 @@ class Grammar(object):
                 self._offset += 1
             else:
                 address2 = None
-                if not self._error or self._error[1] <= self._offset:
-                    self._error = (self._input, self._offset, '":"')
+                if self._offset > self._failure:
+                    self._failure = self._offset
+                    self._expected = []
+                if self._offset == self._failure:
+                    self._expected.append('":"')
             if address2:
                 elements0.append(address2)
                 text0 += address2.text
@@ -1555,8 +1636,11 @@ class Grammar(object):
                     self._offset += 1
                 else:
                     address4 = None
-                    if not self._error or self._error[1] <= self._offset:
-                        self._error = (self._input, self._offset, '"."')
+                    if self._offset > self._failure:
+                        self._failure = self._offset
+                        self._expected = []
+                    if self._offset == self._failure:
+                        self._expected.append('"."')
                 if address4:
                     elements2.append(address4)
                     text2 += address4.text
@@ -1622,8 +1706,11 @@ class Grammar(object):
             self._offset += 1
         else:
             address1 = None
-            if not self._error or self._error[1] <= self._offset:
-                self._error = (self._input, self._offset, '[a-zA-Z_]')
+            if self._offset > self._failure:
+                self._failure = self._offset
+                self._expected = []
+            if self._offset == self._failure:
+                self._expected.append('[a-zA-Z_]')
         if address1:
             elements0.append(address1)
             text0 += address1.text
@@ -1638,8 +1725,11 @@ class Grammar(object):
                     self._offset += 1
                 else:
                     address3 = None
-                    if not self._error or self._error[1] <= self._offset:
-                        self._error = (self._input, self._offset, '[a-zA-Z0-9_]')
+                    if self._offset > self._failure:
+                        self._failure = self._offset
+                        self._expected = []
+                    if self._offset == self._failure:
+                        self._expected.append('[a-zA-Z0-9_]')
                 if address3:
                     elements1.append(address3)
                     text1 += address3.text
@@ -1684,8 +1774,11 @@ class Grammar(object):
             self._offset += 1
         else:
             address0 = None
-            if not self._error or self._error[1] <= self._offset:
-                self._error = (self._input, self._offset, '"?"')
+            if self._offset > self._failure:
+                self._failure = self._offset
+                self._expected = []
+            if self._offset == self._failure:
+                self._expected.append('"?"')
         if not address0:
             self._offset = index1
             chunk1 = None
@@ -1696,8 +1789,11 @@ class Grammar(object):
                 self._offset += 1
             else:
                 address0 = None
-                if not self._error or self._error[1] <= self._offset:
-                    self._error = (self._input, self._offset, '"*"')
+                if self._offset > self._failure:
+                    self._failure = self._offset
+                    self._expected = []
+                if self._offset == self._failure:
+                    self._expected.append('"*"')
             if not address0:
                 self._offset = index1
                 chunk2 = None
@@ -1708,8 +1804,11 @@ class Grammar(object):
                     self._offset += 1
                 else:
                     address0 = None
-                    if not self._error or self._error[1] <= self._offset:
-                        self._error = (self._input, self._offset, '"+"')
+                    if self._offset > self._failure:
+                        self._failure = self._offset
+                        self._expected = []
+                    if self._offset == self._failure:
+                        self._expected.append('"+"')
                 if not address0:
                     self._offset = index1
         self._cache['quantifier'][index0] = address0
@@ -1730,8 +1829,11 @@ class Grammar(object):
             self._offset += 1
         else:
             address0 = None
-            if not self._error or self._error[1] <= self._offset:
-                self._error = (self._input, self._offset, '[\\s]')
+            if self._offset > self._failure:
+                self._failure = self._offset
+                self._expected = []
+            if self._offset == self._failure:
+                self._expected.append('[\\s]')
         self._cache['space'][index0] = address0
         return address0
 
@@ -1741,15 +1843,17 @@ class Parser(Grammar):
         self._input = input
         self._offset = 0
         self._cache = defaultdict(dict)
-        self._error = None
+        self._failure = 0
+        self._expected = []
 
     def parse(self):
         tree = self._read_grammar()
         if tree and self._offset == len(self._input):
             return tree
-        if not self._error:
-            self._error = (self._input, self._offset, '<EOF>')
-        raise ParseError(format_error(self._error))
+        if not self._expected:
+            self._failure = self._offset
+            self._expected.append('<EOF>')
+        raise ParseError(format_error(self._input, self._failure, self._expected))
 
 
 def parse(input):

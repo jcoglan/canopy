@@ -347,8 +347,12 @@ module Canopy::PEG
         @offset += 8
       else
         address1 = nil
-        unless @error and @error.offset > @offset
-          @error = ParseError.new(@input, @offset, "`grammar `")
+        if @offset > @failure
+          @failure = @offset
+          @expected = []
+        end
+        if @offset == @failure
+          @expected << "`grammar `"
         end
       end
       if address1
@@ -460,8 +464,12 @@ module Canopy::PEG
           @offset += 2
         else
           address3 = nil
-          unless @error and @error.offset > @offset
-            @error = ParseError.new(@input, @offset, "\"<-\"")
+          if @offset > @failure
+            @failure = @offset
+            @expected = []
+          end
+          if @offset == @failure
+            @expected << "\"<-\""
           end
         end
         if address3
@@ -546,8 +554,12 @@ module Canopy::PEG
         @offset += 1
       else
         address1 = nil
-        unless @error and @error.offset > @offset
-          @error = ParseError.new(@input, @offset, "\"(\"")
+        if @offset > @failure
+          @failure = @offset
+          @expected = []
+        end
+        if @offset == @failure
+          @expected << "\"(\""
         end
       end
       if address1
@@ -608,8 +620,12 @@ module Canopy::PEG
                 @offset += 1
               else
                 address7 = nil
-                unless @error and @error.offset > @offset
-                  @error = ParseError.new(@input, @offset, "\")\"")
+                if @offset > @failure
+                  @failure = @offset
+                  @expected = []
+                end
+                if @offset == @failure
+                  @expected << "\")\""
                 end
               end
               if address7
@@ -692,8 +708,12 @@ module Canopy::PEG
               @offset += 1
             else
               address6 = nil
-              unless @error and @error.offset > @offset
-                @error = ParseError.new(@input, @offset, "\"/\"")
+              if @offset > @failure
+                @failure = @offset
+                @expected = []
+              end
+              if @offset == @failure
+                @expected << "\"/\""
               end
             end
             if address6
@@ -889,8 +909,12 @@ module Canopy::PEG
         @offset += 1
       else
         address1 = nil
-        unless @error and @error.offset > @offset
-          @error = ParseError.new(@input, @offset, "\"<\"")
+        if @offset > @failure
+          @failure = @offset
+          @expected = []
+        end
+        if @offset == @failure
+          @expected << "\"<\""
         end
       end
       if address1
@@ -911,8 +935,12 @@ module Canopy::PEG
             @offset += 1
           else
             address3 = nil
-            unless @error and @error.offset > @offset
-              @error = ParseError.new(@input, @offset, "\">\"")
+            if @offset > @failure
+              @failure = @offset
+              @expected = []
+            end
+            if @offset == @failure
+              @expected << "\">\""
             end
           end
           if address3
@@ -1175,8 +1203,12 @@ module Canopy::PEG
         @offset += 1
       else
         address1 = nil
-        unless @error and @error.offset > @offset
-          @error = ParseError.new(@input, @offset, "\"&\"")
+        if @offset > @failure
+          @failure = @offset
+          @expected = []
+        end
+        if @offset == @failure
+          @expected << "\"&\""
         end
       end
       unless address1
@@ -1190,8 +1222,12 @@ module Canopy::PEG
           @offset += 1
         else
           address1 = nil
-          unless @error and @error.offset > @offset
-            @error = ParseError.new(@input, @offset, "\"!\"")
+          if @offset > @failure
+            @failure = @offset
+            @expected = []
+          end
+          if @offset == @failure
+            @expected << "\"!\""
           end
         end
         unless address1
@@ -1286,8 +1322,12 @@ module Canopy::PEG
         @offset += 1
       else
         address1 = nil
-        unless @error and @error.offset > @offset
-          @error = ParseError.new(@input, @offset, "\"\\\"\"")
+        if @offset > @failure
+          @failure = @offset
+          @expected = []
+        end
+        if @offset == @failure
+          @expected << "\"\\\"\""
         end
       end
       if address1
@@ -1308,8 +1348,12 @@ module Canopy::PEG
             @offset += 1
           else
             address4 = nil
-            unless @error and @error.offset > @offset
-              @error = ParseError.new(@input, @offset, "\"\\\\\"")
+            if @offset > @failure
+              @failure = @offset
+              @expected = []
+            end
+            if @offset == @failure
+              @expected << "\"\\\\\""
             end
           end
           if address4
@@ -1322,8 +1366,12 @@ module Canopy::PEG
             end
             if chunk2.nil?
               address5 = nil
-              unless @error and @error.offset > @offset
-                @error = ParseError.new(@input, @offset, "<any char>")
+              if @offset > @failure
+                @failure = @offset
+                @expected = []
+              end
+              if @offset == @failure
+                @expected << "<any char>"
               end
             else
               address5 = SyntaxNode.new(chunk2, @offset, [])
@@ -1358,8 +1406,12 @@ module Canopy::PEG
               @offset += 1
             else
               address3 = nil
-              unless @error and @error.offset > @offset
-                @error = ParseError.new(@input, @offset, "[^\"]")
+              if @offset > @failure
+                @failure = @offset
+                @expected = []
+              end
+              if @offset == @failure
+                @expected << "[^\"]"
               end
             end
             unless address3
@@ -1392,8 +1444,12 @@ module Canopy::PEG
             @offset += 1
           else
             address6 = nil
-            unless @error and @error.offset > @offset
-              @error = ParseError.new(@input, @offset, "\"\\\"\"")
+            if @offset > @failure
+              @failure = @offset
+              @expected = []
+            end
+            if @offset == @failure
+              @expected << "\"\\\"\""
             end
           end
           if address6
@@ -1439,8 +1495,12 @@ module Canopy::PEG
         @offset += 1
       else
         address1 = nil
-        unless @error and @error.offset > @offset
-          @error = ParseError.new(@input, @offset, "\"`\"")
+        if @offset > @failure
+          @failure = @offset
+          @expected = []
+        end
+        if @offset == @failure
+          @expected << "\"`\""
         end
       end
       if address1
@@ -1461,8 +1521,12 @@ module Canopy::PEG
             @offset += 1
           else
             address4 = nil
-            unless @error and @error.offset > @offset
-              @error = ParseError.new(@input, @offset, "\"\\\\\"")
+            if @offset > @failure
+              @failure = @offset
+              @expected = []
+            end
+            if @offset == @failure
+              @expected << "\"\\\\\""
             end
           end
           if address4
@@ -1475,8 +1539,12 @@ module Canopy::PEG
             end
             if chunk2.nil?
               address5 = nil
-              unless @error and @error.offset > @offset
-                @error = ParseError.new(@input, @offset, "<any char>")
+              if @offset > @failure
+                @failure = @offset
+                @expected = []
+              end
+              if @offset == @failure
+                @expected << "<any char>"
               end
             else
               address5 = SyntaxNode.new(chunk2, @offset, [])
@@ -1511,8 +1579,12 @@ module Canopy::PEG
               @offset += 1
             else
               address3 = nil
-              unless @error and @error.offset > @offset
-                @error = ParseError.new(@input, @offset, "[^`]")
+              if @offset > @failure
+                @failure = @offset
+                @expected = []
+              end
+              if @offset == @failure
+                @expected << "[^`]"
               end
             end
             unless address3
@@ -1545,8 +1617,12 @@ module Canopy::PEG
             @offset += 1
           else
             address6 = nil
-            unless @error and @error.offset > @offset
-              @error = ParseError.new(@input, @offset, "\"`\"")
+            if @offset > @failure
+              @failure = @offset
+              @expected = []
+            end
+            if @offset == @failure
+              @expected << "\"`\""
             end
           end
           if address6
@@ -1590,8 +1666,12 @@ module Canopy::PEG
         @offset += 1
       else
         address0 = nil
-        unless @error and @error.offset > @offset
-          @error = ParseError.new(@input, @offset, "\".\"")
+        if @offset > @failure
+          @failure = @offset
+          @expected = []
+        end
+        if @offset == @failure
+          @expected << "\".\""
         end
       end
       return @cache[:any_char_expression][index0] = address0
@@ -1615,8 +1695,12 @@ module Canopy::PEG
         @offset += 1
       else
         address1 = nil
-        unless @error and @error.offset > @offset
-          @error = ParseError.new(@input, @offset, "\"[\"")
+        if @offset > @failure
+          @failure = @offset
+          @expected = []
+        end
+        if @offset == @failure
+          @expected << "\"[\""
         end
       end
       if address1
@@ -1633,8 +1717,12 @@ module Canopy::PEG
           @offset += 1
         else
           address2 = nil
-          unless @error and @error.offset > @offset
-            @error = ParseError.new(@input, @offset, "\"^\"")
+          if @offset > @failure
+            @failure = @offset
+            @expected = []
+          end
+          if @offset == @failure
+            @expected << "\"^\""
           end
         end
         unless address2
@@ -1660,8 +1748,12 @@ module Canopy::PEG
               @offset += 1
             else
               address5 = nil
-              unless @error and @error.offset > @offset
-                @error = ParseError.new(@input, @offset, "\"\\\\\"")
+              if @offset > @failure
+                @failure = @offset
+                @expected = []
+              end
+              if @offset == @failure
+                @expected << "\"\\\\\""
               end
             end
             if address5
@@ -1674,8 +1766,12 @@ module Canopy::PEG
               end
               if chunk3.nil?
                 address6 = nil
-                unless @error and @error.offset > @offset
-                  @error = ParseError.new(@input, @offset, "<any char>")
+                if @offset > @failure
+                  @failure = @offset
+                  @expected = []
+                end
+                if @offset == @failure
+                  @expected << "<any char>"
                 end
               else
                 address6 = SyntaxNode.new(chunk3, @offset, [])
@@ -1710,8 +1806,12 @@ module Canopy::PEG
                 @offset += 1
               else
                 address4 = nil
-                unless @error and @error.offset > @offset
-                  @error = ParseError.new(@input, @offset, "[^\\]]")
+                if @offset > @failure
+                  @failure = @offset
+                  @expected = []
+                end
+                if @offset == @failure
+                  @expected << "[^\\]]"
                 end
               end
               unless address4
@@ -1744,8 +1844,12 @@ module Canopy::PEG
               @offset += 1
             else
               address7 = nil
-              unless @error and @error.offset > @offset
-                @error = ParseError.new(@input, @offset, "\"]\"")
+              if @offset > @failure
+                @failure = @offset
+                @expected = []
+              end
+              if @offset == @failure
+                @expected << "\"]\""
               end
             end
             if address7
@@ -1800,8 +1904,12 @@ module Canopy::PEG
           @offset += 1
         else
           address2 = nil
-          unless @error and @error.offset > @offset
-            @error = ParseError.new(@input, @offset, "\":\"")
+          if @offset > @failure
+            @failure = @offset
+            @expected = []
+          end
+          if @offset == @failure
+            @expected << "\":\""
           end
         end
         if address2
@@ -1852,8 +1960,12 @@ module Canopy::PEG
             @offset += 1
           else
             address4 = nil
-            unless @error and @error.offset > @offset
-              @error = ParseError.new(@input, @offset, "\".\"")
+            if @offset > @failure
+              @failure = @offset
+              @expected = []
+            end
+            if @offset == @failure
+              @expected << "\".\""
             end
           end
           if address4
@@ -1931,8 +2043,12 @@ module Canopy::PEG
         @offset += 1
       else
         address1 = nil
-        unless @error and @error.offset > @offset
-          @error = ParseError.new(@input, @offset, "[a-zA-Z_]")
+        if @offset > @failure
+          @failure = @offset
+          @expected = []
+        end
+        if @offset == @failure
+          @expected << "[a-zA-Z_]"
         end
       end
       if address1
@@ -1950,8 +2066,12 @@ module Canopy::PEG
             @offset += 1
           else
             address3 = nil
-            unless @error and @error.offset > @offset
-              @error = ParseError.new(@input, @offset, "[a-zA-Z0-9_]")
+            if @offset > @failure
+              @failure = @offset
+              @expected = []
+            end
+            if @offset == @failure
+              @expected << "[a-zA-Z0-9_]"
             end
           end
           if address3
@@ -2005,8 +2125,12 @@ module Canopy::PEG
         @offset += 1
       else
         address0 = nil
-        unless @error and @error.offset > @offset
-          @error = ParseError.new(@input, @offset, "\"?\"")
+        if @offset > @failure
+          @failure = @offset
+          @expected = []
+        end
+        if @offset == @failure
+          @expected << "\"?\""
         end
       end
       unless address0
@@ -2020,8 +2144,12 @@ module Canopy::PEG
           @offset += 1
         else
           address0 = nil
-          unless @error and @error.offset > @offset
-            @error = ParseError.new(@input, @offset, "\"*\"")
+          if @offset > @failure
+            @failure = @offset
+            @expected = []
+          end
+          if @offset == @failure
+            @expected << "\"*\""
           end
         end
         unless address0
@@ -2035,8 +2163,12 @@ module Canopy::PEG
             @offset += 1
           else
             address0 = nil
-            unless @error and @error.offset > @offset
-              @error = ParseError.new(@input, @offset, "\"+\"")
+            if @offset > @failure
+              @failure = @offset
+              @expected = []
+            end
+            if @offset == @failure
+              @expected << "\"+\""
             end
           end
           unless address0
@@ -2063,8 +2195,12 @@ module Canopy::PEG
         @offset += 1
       else
         address0 = nil
-        unless @error and @error.offset > @offset
-          @error = ParseError.new(@input, @offset, "[\\s]")
+        if @offset > @failure
+          @failure = @offset
+          @expected = []
+        end
+        if @offset == @failure
+          @expected << "[\\s]"
         end
       end
       return @cache[:space][index0] = address0
@@ -2078,6 +2214,8 @@ module Canopy::PEG
       @input = input
       @offset = 0
       @cache = Hash.new { |h,k| h[k] = {} }
+      @failure = 0
+      @expected = []
     end
 
     def parse
@@ -2085,20 +2223,23 @@ module Canopy::PEG
       if tree and @offset == @input.size
         return tree
       end
-      @error ||= ParseError.new(@input, @offset, "<EOF>")
-      raise SyntaxError, Parser.format_error(@error)
+      if @expected.empty?
+        @failure = @offset
+        @expected << "<EOF>"
+      end
+      raise SyntaxError, Parser.format_error(@input, @failure, @expected)
     end
 
-    def self.format_error(error)
-      lines, line_no, offset = error.input.split(/\n/), 0, 0
-      while offset <= error.offset
-        offset += lines[line_no].size + 1
+    def self.format_error(input, offset, expected)
+      lines, line_no, position = input.split(/\n/), 0, 0
+      while position <= offset
+        position += lines[line_no].size + 1
         line_no += 1
       end
-      message, line = "Line #{line_no}: expected #{error.expected}\n", lines[line_no - 1]
+      message, line = "Line #{line_no}: expected #{expected * ", "}\n", lines[line_no - 1]
       message += "#{line}\n"
-      offset -= line.size + 1
-      message += " " * (error.offset - offset)
+      position -= line.size + 1
+      message += " " * (offset - position)
       return message + "^"
     end
   end

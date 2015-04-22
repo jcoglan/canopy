@@ -111,21 +111,23 @@
         builder.assign_('this._input', 'input');
         builder.assign_('this._offset', '0');
         builder.assign_('this._cache', '{}');
+        builder.assign_('this._failure', '0');
+        builder.assign_('this._expected', '[]');
       });
       this.function_('Parser.prototype.parse', [], function(builder) {
-        var input = 'this._input', of = 'this._offset';
-
         builder.jump_('var tree', root);
 
-        builder.if_('tree && ' + of + ' === this._input.length', function(builder) {
+        builder.if_('tree && this._offset === this._input.length', function(builder) {
           builder.return_('tree');
         });
-        builder.unless_('this._error', function(builder) {
-          builder.assign_('this._error', '{input: ' + input + ', offset: ' + of + ", expected: '<EOF>'}");
+        builder.if_('this._expected.length === 0', function(builder) {
+          builder.assign_('this._failure', 'this._offset');
+          builder.append_('this._expected', "'<EOF>'");
         });
-        builder._line('throw new SyntaxError(formatError(this._error))');
+        builder.assign_('this.constructor.lastError', '{offset: this._offset, expected: this._expected}');
+        builder._line('throw new SyntaxError(formatError(this._input, this._failure, this._expected))');
       });
-      this.function_('Parser.parse', ['input'], function(builder) {
+      this.function_('var parse', ['input'], function(builder) {
         builder.assign_('var parser', 'new Parser(input)');
         builder.return_('parser.parse()');
       });
@@ -143,7 +145,7 @@
       for (var i = 0; i < n; i++)
         condition.push('typeof ' + namespace.slice(0,i+1).join('.') + " !== 'undefined'");
 
-      this.assign_('var exported', '{Grammar: Grammar, Parser: Parser, parse: Parser.parse, formatError: formatError}');
+      this.assign_('var exported', '{Grammar: Grammar, Parser: Parser, parse: parse}');
       this._newline();
 
       this.if_("typeof require === 'function' && typeof exports === 'object'", function(builder) {
@@ -266,13 +268,15 @@
     },
 
     failure_: function(address, expected) {
+      expected = this._quote(expected);
       this.assign_(address, this.null_());
-      var input = 'this._input', of = 'this._offset';
-      var error = 'this._error = this.constructor.lastError';
-      this.if_('!this._error || this._error.offset <= ' + of, function(builder) {
-        builder.assign_(error, '{input: ' + input +
-                              ', offset: ' + of +
-                              ', expected: ' + builder._quote(expected) + '}');
+
+      this.if_('this._offset > this._failure', function(builder) {
+        builder.assign_('this._failure', 'this._offset');
+        builder.assign_('this._expected', '[]');
+      });
+      this.if_('this._offset === this._failure', function(builder) {
+        builder.append_('this._expected', expected);
       });
     },
 

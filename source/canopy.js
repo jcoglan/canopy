@@ -24,24 +24,24 @@ Canopy.extend(Canopy, {
       block.call(context, list[i], i);
   },
 
-  formatError: function(error) {
-    var lines  = error.input.split(/\n/g),
+  formatError: function(input, offset, expected) {
+    var lines = input.split(/\n/g),
         lineNo = 0,
-        offset = 0;
+        position = 0;
 
-    while (offset <= error.offset) {
-      offset += lines[lineNo].length + 1;
+    while (position <= offset) {
+      position += lines[lineNo].length + 1;
       lineNo += 1;
     }
-    var message = 'Line ' + lineNo + ': expected ' + error.expected + '\n',
-        line    = lines[lineNo - 1];
+    var message = 'Line ' + lineNo + ': expected ' + expected.join(', ') + '\n',
+        line = lines[lineNo - 1];
 
     message += line + '\n';
-    offset  -= line.length + 1;
+    position -= line.length + 1;
 
-    while (offset < error.offset) {
+    while (position < offset) {
       message += ' ';
-      offset  += 1;
+      position += 1;
     }
     return message + '^';
   },

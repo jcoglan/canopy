@@ -22,6 +22,11 @@ function() { with(this) {
   it('does not parse two choices together', function() { with(this) {
     assertThrows(Error, function() { ChoiceTest.parse('foobar') })
   }})
+  
+  it('records all possible options in the error', function() { with(this) {
+    assertThrows(Error, function() { ChoiceTest.parse('') })
+    assertEqual( {offset: 0, expected: ['"foo"', '"bar"', '"baz"']}, ChoiceTest.Parser.lastError )
+  }})
 
   it('does not parse a superstring of any choice', function() { with(this) {
     assertThrows(Error, function() { ChoiceTest.parse('foob') })

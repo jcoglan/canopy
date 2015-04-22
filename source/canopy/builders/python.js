@@ -97,7 +97,8 @@
           builder.attribute_('_input', 'input');
           builder.attribute_('_offset', '0');
           builder.attribute_('_cache', 'defaultdict(dict)');
-          builder.attribute_('_error', 'None');
+          builder.attribute_('_failure', '0');
+          builder.attribute_('_expected', '[]');
         });
 
         builder.method_('parse', [], function(builder) {
@@ -105,10 +106,11 @@
           builder.if_('tree and self._offset == len(self._input)', function(builder) {
             builder.return_('tree');
           });
-          builder.unless_('self._error', function(builder) {
-            builder.assign_('self._error', "(self._input, self._offset, '<EOF>')");
+          builder.unless_('self._expected', function(builder) {
+            builder.assign_('self._failure', 'self._offset');
+            builder.append_('self._expected', "'<EOF>'");
           });
-          builder._line('raise ParseError(format_error(self._error))');
+          builder._line('raise ParseError(format_error(self._input, self._failure, self._expected))');
         });
       });
     },
@@ -217,9 +219,15 @@
     },
 
     failure_: function(address, expected) {
+      expected = this._quote(expected);
       this.assign_(address, this.null_());
-      this.if_('not self._error or self._error[1] <= self._offset', function(builder) {
-        builder.assign_('self._error', '(self._input, self._offset, ' + builder._quote(expected) + ')');
+
+      this.if_('self._offset > self._failure', function(builder) {
+        builder.assign_('self._failure', 'self._offset');
+        builder.assign_('self._expected', '[]');
+      });
+      this.if_('self._offset == self._failure', function(builder) {
+        builder.append_('self._expected', expected);
       });
     },
 
