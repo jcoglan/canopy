@@ -24,6 +24,17 @@ function() { with(this) {
     assertThrows(Error, function() { StringTest.parse('') })
   }})
 
+  describe('single-quoted strings', function() { with(this) {
+    before(function() { with(this) {
+      Canopy.compile("grammar JS.ENV.SingleQuoteTest\
+        string <- 'foo'")
+    }})
+
+    it('parses the string it contains', function() { with(this) {
+      assertParse( ['foo', 0, []], SingleQuoteTest.parse('foo') )
+    }})
+  }})
+
   describe('case-insensitive strings', function() { with(this) {
     before(function() { with(this) {
       Canopy.compile('grammar JS.ENV.CIStringTest\

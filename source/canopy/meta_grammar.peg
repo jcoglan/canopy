@@ -44,7 +44,7 @@ grammar Canopy.MetaGrammar
 
   reference_expression      <- identifier !assignment <Reference>
 
-  string_expression         <- "\"" ("\\" . / [^"])* "\"" <String>
+  string_expression         <- ('"' ("\\" . / [^"])* '"' / "'" ("\\" . / [^'])* "'") <String>
 
   ci_string_expression      <- "`" ("\\" . / [^`])* "`" <CIString>
 
