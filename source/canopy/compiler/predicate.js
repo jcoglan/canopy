@@ -21,7 +21,8 @@ Canopy.Compiler.Predicate = {
     builder.assign_(builder.offset_(), startOffset);
 
     builder[branch](address, function(builder) {
-      builder.syntaxNode_(address, nodeType, builder.emptyString_(), 0);
+      var of = builder.offset_();
+      builder.syntaxNode_(address, nodeType, of, of);
     }, function(builder) {
       builder.assign_(address, builder.null_());
     });

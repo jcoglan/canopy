@@ -37,17 +37,15 @@ class Grammar(object):
             if cached:
                 self._offset += len(cached.text)
             return cached
-        remaining0, index1, elements0, text0, address1 = 1, self._offset, [], '', True
+        remaining0, index1, elements0, address1 = 1, self._offset, [], True
         while address1 is not None:
             address1 = self._read_cell()
             if address1:
                 elements0.append(address1)
-                text0 += address1.text
                 remaining0 -= 1
         if remaining0 <= 0:
-            self._offset = index1
-            address0 = SyntaxNode(text0, self._offset, elements0)
-            self._offset += len(text0)
+            address0 = SyntaxNode(self._input[index1:self._offset], index1, elements0)
+            self._offset = self._offset
         else:
             address0 = None
         self._cache['program'][index0] = address0
@@ -60,24 +58,21 @@ class Grammar(object):
             if cached:
                 self._offset += len(cached.text)
             return cached
-        index1, elements0, text0 = self._offset, [], ''
+        index1, elements0 = self._offset, []
         address1 = None
-        remaining0, index2, elements1, text1, address2 = 0, self._offset, [], '', True
+        remaining0, index2, elements1, address2 = 0, self._offset, [], True
         while address2 is not None:
             address2 = self._read_space()
             if address2:
                 elements1.append(address2)
-                text1 += address2.text
                 remaining0 -= 1
         if remaining0 <= 0:
-            self._offset = index2
-            address1 = SyntaxNode(text1, self._offset, elements1)
-            self._offset += len(text1)
+            address1 = SyntaxNode(self._input[index2:self._offset], index2, elements1)
+            self._offset = self._offset
         else:
             address1 = None
         if address1:
             elements0.append(address1)
-            text0 += address1.text
             address3 = None
             index3 = self._offset
             address3 = self._read_list()
@@ -88,24 +83,20 @@ class Grammar(object):
                     self._offset = index3
             if address3:
                 elements0.append(address3)
-                text0 += address3.text
                 address4 = None
-                remaining1, index4, elements2, text2, address5 = 0, self._offset, [], '', True
+                remaining1, index4, elements2, address5 = 0, self._offset, [], True
                 while address5 is not None:
                     address5 = self._read_space()
                     if address5:
                         elements2.append(address5)
-                        text2 += address5.text
                         remaining1 -= 1
                 if remaining1 <= 0:
-                    self._offset = index4
-                    address4 = SyntaxNode(text2, self._offset, elements2)
-                    self._offset += len(text2)
+                    address4 = SyntaxNode(self._input[index4:self._offset], index4, elements2)
+                    self._offset = self._offset
                 else:
                     address4 = None
                 if address4:
                     elements0.append(address4)
-                    text0 += address4.text
                 else:
                     elements0 = None
                     self._offset = index1
@@ -116,9 +107,8 @@ class Grammar(object):
             elements0 = None
             self._offset = index1
         if elements0:
-            self._offset = index1
-            address0 = SyntaxNode1(text0, self._offset, elements0)
-            self._offset += len(text0)
+            address0 = SyntaxNode1(self._input[index1:self._offset], index1, elements0)
+            self._offset = self._offset
         else:
             address0 = None
         self._cache['cell'][index0] = address0
@@ -131,14 +121,14 @@ class Grammar(object):
             if cached:
                 self._offset += len(cached.text)
             return cached
-        index1, elements0, text0 = self._offset, [], ''
+        index1, elements0 = self._offset, []
         address1 = None
         chunk0 = None
         if len(self._input) > self._offset:
             chunk0 = self._input[self._offset:(self._offset + 1)]
         if chunk0 == '(':
-            address1 = SyntaxNode(chunk0, self._offset, [])
-            self._offset += 1
+            address1 = SyntaxNode(self._input[self._offset:self._offset + 1], self._offset, [])
+            self._offset = self._offset + 1
         else:
             address1 = None
             if self._offset > self._failure:
@@ -148,31 +138,27 @@ class Grammar(object):
                 self._expected.append('"("')
         if address1:
             elements0.append(address1)
-            text0 += address1.text
             address2 = None
-            remaining0, index2, elements1, text1, address3 = 1, self._offset, [], '', True
+            remaining0, index2, elements1, address3 = 1, self._offset, [], True
             while address3 is not None:
                 address3 = self._read_cell()
                 if address3:
                     elements1.append(address3)
-                    text1 += address3.text
                     remaining0 -= 1
             if remaining0 <= 0:
-                self._offset = index2
-                address2 = SyntaxNode(text1, self._offset, elements1)
-                self._offset += len(text1)
+                address2 = SyntaxNode(self._input[index2:self._offset], index2, elements1)
+                self._offset = self._offset
             else:
                 address2 = None
             if address2:
                 elements0.append(address2)
-                text0 += address2.text
                 address4 = None
                 chunk1 = None
                 if len(self._input) > self._offset:
                     chunk1 = self._input[self._offset:(self._offset + 1)]
                 if chunk1 == ')':
-                    address4 = SyntaxNode(chunk1, self._offset, [])
-                    self._offset += 1
+                    address4 = SyntaxNode(self._input[self._offset:self._offset + 1], self._offset, [])
+                    self._offset = self._offset + 1
                 else:
                     address4 = None
                     if self._offset > self._failure:
@@ -182,7 +168,6 @@ class Grammar(object):
                         self._expected.append('")"')
                 if address4:
                     elements0.append(address4)
-                    text0 += address4.text
                 else:
                     elements0 = None
                     self._offset = index1
@@ -193,9 +178,8 @@ class Grammar(object):
             elements0 = None
             self._offset = index1
         if elements0:
-            self._offset = index1
-            address0 = SyntaxNode2(text0, self._offset, elements0)
-            self._offset += len(text0)
+            address0 = SyntaxNode2(self._input[index1:self._offset], index1, elements0)
+            self._offset = self._offset
         else:
             address0 = None
         self._cache['list'][index0] = address0
@@ -236,8 +220,8 @@ class Grammar(object):
         if len(self._input) > self._offset:
             chunk0 = self._input[self._offset:(self._offset + 2)]
         if chunk0 == '#t':
-            address0 = SyntaxNode(chunk0, self._offset, [])
-            self._offset += 2
+            address0 = SyntaxNode(self._input[self._offset:self._offset + 2], self._offset, [])
+            self._offset = self._offset + 2
         else:
             address0 = None
             if self._offset > self._failure:
@@ -251,8 +235,8 @@ class Grammar(object):
             if len(self._input) > self._offset:
                 chunk1 = self._input[self._offset:(self._offset + 2)]
             if chunk1 == '#f':
-                address0 = SyntaxNode(chunk1, self._offset, [])
-                self._offset += 2
+                address0 = SyntaxNode(self._input[self._offset:self._offset + 2], self._offset, [])
+                self._offset = self._offset + 2
             else:
                 address0 = None
                 if self._offset > self._failure:
@@ -272,14 +256,14 @@ class Grammar(object):
             if cached:
                 self._offset += len(cached.text)
             return cached
-        index1, elements0, text0 = self._offset, [], ''
+        index1, elements0 = self._offset, []
         address1 = None
         chunk0 = None
         if len(self._input) > self._offset:
             chunk0 = self._input[self._offset:(self._offset + 1)]
         if chunk0 and re.match('^[1-9]', chunk0):
-            address1 = SyntaxNode(chunk0, self._offset, [])
-            self._offset += 1
+            address1 = SyntaxNode(self._input[self._offset:self._offset + 1], self._offset, [])
+            self._offset = self._offset + 1
         else:
             address1 = None
             if self._offset > self._failure:
@@ -289,16 +273,15 @@ class Grammar(object):
                 self._expected.append('[1-9]')
         if address1:
             elements0.append(address1)
-            text0 += address1.text
             address2 = None
-            remaining0, index2, elements1, text1, address3 = 0, self._offset, [], '', True
+            remaining0, index2, elements1, address3 = 0, self._offset, [], True
             while address3 is not None:
                 chunk1 = None
                 if len(self._input) > self._offset:
                     chunk1 = self._input[self._offset:(self._offset + 1)]
                 if chunk1 and re.match('^[0-9]', chunk1):
-                    address3 = SyntaxNode(chunk1, self._offset, [])
-                    self._offset += 1
+                    address3 = SyntaxNode(self._input[self._offset:self._offset + 1], self._offset, [])
+                    self._offset = self._offset + 1
                 else:
                     address3 = None
                     if self._offset > self._failure:
@@ -308,17 +291,14 @@ class Grammar(object):
                         self._expected.append('[0-9]')
                 if address3:
                     elements1.append(address3)
-                    text1 += address3.text
                     remaining0 -= 1
             if remaining0 <= 0:
-                self._offset = index2
-                address2 = SyntaxNode(text1, self._offset, elements1)
-                self._offset += len(text1)
+                address2 = SyntaxNode(self._input[index2:self._offset], index2, elements1)
+                self._offset = self._offset
             else:
                 address2 = None
             if address2:
                 elements0.append(address2)
-                text0 += address2.text
             else:
                 elements0 = None
                 self._offset = index1
@@ -326,9 +306,8 @@ class Grammar(object):
             elements0 = None
             self._offset = index1
         if elements0:
-            self._offset = index1
-            address0 = SyntaxNode(text0, self._offset, elements0)
-            self._offset += len(text0)
+            address0 = SyntaxNode(self._input[index1:self._offset], index1, elements0)
+            self._offset = self._offset
         else:
             address0 = None
         self._cache['integer'][index0] = address0
@@ -341,14 +320,14 @@ class Grammar(object):
             if cached:
                 self._offset += len(cached.text)
             return cached
-        index1, elements0, text0 = self._offset, [], ''
+        index1, elements0 = self._offset, []
         address1 = None
         chunk0 = None
         if len(self._input) > self._offset:
             chunk0 = self._input[self._offset:(self._offset + 1)]
         if chunk0 == '"':
-            address1 = SyntaxNode(chunk0, self._offset, [])
-            self._offset += 1
+            address1 = SyntaxNode(self._input[self._offset:self._offset + 1], self._offset, [])
+            self._offset = self._offset + 1
         else:
             address1 = None
             if self._offset > self._failure:
@@ -358,19 +337,18 @@ class Grammar(object):
                 self._expected.append('"\\""')
         if address1:
             elements0.append(address1)
-            text0 += address1.text
             address2 = None
-            remaining0, index2, elements1, text1, address3 = 0, self._offset, [], '', True
+            remaining0, index2, elements1, address3 = 0, self._offset, [], True
             while address3 is not None:
                 index3 = self._offset
-                index4, elements2, text2 = self._offset, [], ''
+                index4, elements2 = self._offset, []
                 address4 = None
                 chunk1 = None
                 if len(self._input) > self._offset:
                     chunk1 = self._input[self._offset:(self._offset + 1)]
                 if chunk1 == '\\':
-                    address4 = SyntaxNode(chunk1, self._offset, [])
-                    self._offset += 1
+                    address4 = SyntaxNode(self._input[self._offset:self._offset + 1], self._offset, [])
+                    self._offset = self._offset + 1
                 else:
                     address4 = None
                     if self._offset > self._failure:
@@ -380,7 +358,6 @@ class Grammar(object):
                         self._expected.append('"\\\\"')
                 if address4:
                     elements2.append(address4)
-                    text2 += address4.text
                     address5 = None
                     chunk2 = None
                     if len(self._input) > self._offset:
@@ -393,11 +370,10 @@ class Grammar(object):
                         if self._offset == self._failure:
                             self._expected.append('<any char>')
                     else:
-                        address5 = SyntaxNode(chunk2, self._offset, [])
-                        self._offset += 1
+                        address5 = SyntaxNode(self._input[self._offset:self._offset + 1], self._offset, [])
+                        self._offset = self._offset + 1
                     if address5:
                         elements2.append(address5)
-                        text2 += address5.text
                     else:
                         elements2 = None
                         self._offset = index4
@@ -405,9 +381,8 @@ class Grammar(object):
                     elements2 = None
                     self._offset = index4
                 if elements2:
-                    self._offset = index4
-                    address3 = SyntaxNode(text2, self._offset, elements2)
-                    self._offset += len(text2)
+                    address3 = SyntaxNode(self._input[index4:self._offset], index4, elements2)
+                    self._offset = self._offset
                 else:
                     address3 = None
                 if not address3:
@@ -416,8 +391,8 @@ class Grammar(object):
                     if len(self._input) > self._offset:
                         chunk3 = self._input[self._offset:(self._offset + 1)]
                     if chunk3 and re.match('^[^"]', chunk3):
-                        address3 = SyntaxNode(chunk3, self._offset, [])
-                        self._offset += 1
+                        address3 = SyntaxNode(self._input[self._offset:self._offset + 1], self._offset, [])
+                        self._offset = self._offset + 1
                     else:
                         address3 = None
                         if self._offset > self._failure:
@@ -429,24 +404,21 @@ class Grammar(object):
                         self._offset = index3
                 if address3:
                     elements1.append(address3)
-                    text1 += address3.text
                     remaining0 -= 1
             if remaining0 <= 0:
-                self._offset = index2
-                address2 = SyntaxNode(text1, self._offset, elements1)
-                self._offset += len(text1)
+                address2 = SyntaxNode(self._input[index2:self._offset], index2, elements1)
+                self._offset = self._offset
             else:
                 address2 = None
             if address2:
                 elements0.append(address2)
-                text0 += address2.text
                 address6 = None
                 chunk4 = None
                 if len(self._input) > self._offset:
                     chunk4 = self._input[self._offset:(self._offset + 1)]
                 if chunk4 == '"':
-                    address6 = SyntaxNode(chunk4, self._offset, [])
-                    self._offset += 1
+                    address6 = SyntaxNode(self._input[self._offset:self._offset + 1], self._offset, [])
+                    self._offset = self._offset + 1
                 else:
                     address6 = None
                     if self._offset > self._failure:
@@ -456,7 +428,6 @@ class Grammar(object):
                         self._expected.append('"\\""')
                 if address6:
                     elements0.append(address6)
-                    text0 += address6.text
                 else:
                     elements0 = None
                     self._offset = index1
@@ -467,9 +438,8 @@ class Grammar(object):
             elements0 = None
             self._offset = index1
         if elements0:
-            self._offset = index1
-            address0 = SyntaxNode(text0, self._offset, elements0)
-            self._offset += len(text0)
+            address0 = SyntaxNode(self._input[index1:self._offset], index1, elements0)
+            self._offset = self._offset
         else:
             address0 = None
         self._cache['string'][index0] = address0
@@ -482,21 +452,20 @@ class Grammar(object):
             if cached:
                 self._offset += len(cached.text)
             return cached
-        remaining0, index1, elements0, text0, address1 = 1, self._offset, [], '', True
+        remaining0, index1, elements0, address1 = 1, self._offset, [], True
         while address1 is not None:
-            index2, elements1, text1 = self._offset, [], ''
+            index2, elements1 = self._offset, []
             address2 = None
             index3 = self._offset
             address2 = self._read_delimiter()
             self._offset = index3
             if not address2:
-                address2 = SyntaxNode('', self._offset, [])
-                self._offset += 0
+                address2 = SyntaxNode(self._input[self._offset:self._offset], self._offset, [])
+                self._offset = self._offset
             else:
                 address2 = None
             if address2:
                 elements1.append(address2)
-                text1 += address2.text
                 address3 = None
                 chunk0 = None
                 if len(self._input) > self._offset:
@@ -509,11 +478,10 @@ class Grammar(object):
                     if self._offset == self._failure:
                         self._expected.append('<any char>')
                 else:
-                    address3 = SyntaxNode(chunk0, self._offset, [])
-                    self._offset += 1
+                    address3 = SyntaxNode(self._input[self._offset:self._offset + 1], self._offset, [])
+                    self._offset = self._offset + 1
                 if address3:
                     elements1.append(address3)
-                    text1 += address3.text
                 else:
                     elements1 = None
                     self._offset = index2
@@ -521,19 +489,16 @@ class Grammar(object):
                 elements1 = None
                 self._offset = index2
             if elements1:
-                self._offset = index2
-                address1 = SyntaxNode(text1, self._offset, elements1)
-                self._offset += len(text1)
+                address1 = SyntaxNode(self._input[index2:self._offset], index2, elements1)
+                self._offset = self._offset
             else:
                 address1 = None
             if address1:
                 elements0.append(address1)
-                text0 += address1.text
                 remaining0 -= 1
         if remaining0 <= 0:
-            self._offset = index1
-            address0 = SyntaxNode(text0, self._offset, elements0)
-            self._offset += len(text0)
+            address0 = SyntaxNode(self._input[index1:self._offset], index1, elements0)
+            self._offset = self._offset
         else:
             address0 = None
         self._cache['symbol'][index0] = address0
@@ -550,8 +515,8 @@ class Grammar(object):
         if len(self._input) > self._offset:
             chunk0 = self._input[self._offset:(self._offset + 1)]
         if chunk0 and re.match('^[\\s]', chunk0):
-            address0 = SyntaxNode(chunk0, self._offset, [])
-            self._offset += 1
+            address0 = SyntaxNode(self._input[self._offset:self._offset + 1], self._offset, [])
+            self._offset = self._offset + 1
         else:
             address0 = None
             if self._offset > self._failure:
@@ -574,8 +539,8 @@ class Grammar(object):
         if len(self._input) > self._offset:
             chunk0 = self._input[self._offset:(self._offset + 1)]
         if chunk0 == '(':
-            address0 = SyntaxNode(chunk0, self._offset, [])
-            self._offset += 1
+            address0 = SyntaxNode(self._input[self._offset:self._offset + 1], self._offset, [])
+            self._offset = self._offset + 1
         else:
             address0 = None
             if self._offset > self._failure:
@@ -589,8 +554,8 @@ class Grammar(object):
             if len(self._input) > self._offset:
                 chunk1 = self._input[self._offset:(self._offset + 1)]
             if chunk1 == ')':
-                address0 = SyntaxNode(chunk1, self._offset, [])
-                self._offset += 1
+                address0 = SyntaxNode(self._input[self._offset:self._offset + 1], self._offset, [])
+                self._offset = self._offset + 1
             else:
                 address0 = None
                 if self._offset > self._failure:

@@ -6,10 +6,12 @@ Canopy.Compiler.AnyChar = {
   compile: function(builder, address, nodeType) {
     var nextChar = builder.chunk_(1);
 
+    // TODO just check the length, don't make a substring
     builder.if_(builder.isNull_(nextChar), function(builder) {
       builder.failure_(address, '<any char>');
     }, function(builder) {
-      builder.syntaxNode_(address, nodeType, nextChar, 1);
+      var of = builder.offset_();
+      builder.syntaxNode_(address, nodeType, of, of + ' + 1');
     });
   }
 };

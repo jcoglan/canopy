@@ -29,28 +29,24 @@ Canopy.Compiler.Repeat = {
           remaining: minimum,
           index:     builder.offset_(),
           elements:  builder.emptyList_(),
-          text:      builder.emptyString_(),
           address:   builder.true_()
         }),
 
         remaining   = temp.remaining,
         startOffset = temp.index,
         elements    = temp.elements,
-        text   = temp.text,
         elAddr      = temp.address;
 
     builder.whileNotNull_(elAddr, function(builder) {
       this.atomic().compile(builder, elAddr);
       builder.if_(elAddr, function(builder) {
         builder.append_(elements, elAddr);
-        builder.concatText_(text, elAddr);
         builder.decrement_(remaining);
       });
     }, this);
 
     builder.if_(builder.isZero_(remaining), function(builder) {
-      builder.assign_(builder.offset_(), startOffset);
-      builder.syntaxNode_(address, nodeType, text, builder.stringLength_(text), elements);
+      builder.syntaxNode_(address, nodeType, startOffset, builder.offset_(), elements);
     }, function(builder) {
       builder.assign_(address, builder.null_());
     });
@@ -61,8 +57,7 @@ Canopy.Compiler.Repeat = {
     this.atomic().compile(builder, address);
 
     var onFail = function(builder) {
-      builder.assign_(builder.offset_(), startOffset);
-      builder.syntaxNode_(address, nodeType, builder.emptyString_(), 0);
+      builder.syntaxNode_(address, nodeType, startOffset, startOffset);
     };
 
     if (nodeType) {

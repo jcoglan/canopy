@@ -228,15 +228,15 @@
       return chunk;
     },
 
-    syntaxNode_: function(address, nodeType, expression, bump, elements, nodeClass) {
-      elements = ', ' + (elements || '[]');
+    syntaxNode_: function(address, nodeType, start, end, elements, nodeClass) {
+      elements = elements || '[]';
 
       var klass = nodeClass || 'SyntaxNode',
-          of    = ', @offset';
+          text  = '@input[' + start + '...' + end + ']';
 
-      this.assign_(address, klass + '.new(' + expression + of + elements + ')');
+      this.assign_(address, klass + '.new(' + [text, start, elements].join(', ') + ')');
       this.extendNode_(address, nodeType);
-      this._line('@offset += ' + bump);
+      this.assign_('@offset', end);
     },
 
     extendNode_: function(address, nodeType) {
@@ -330,10 +330,6 @@
 
     decrement_: function(variable) {
       this._line(variable + ' -= 1');
-    },
-
-    stringLength_: function(string) {
-      return string + '.size';
     },
 
     and_: function(left, right) {

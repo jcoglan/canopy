@@ -9,7 +9,8 @@ Canopy.Compiler.CIString = {
         chunk  = builder.chunk_(length);
 
     builder.if_(builder.stringMatchCI_(chunk, string), function(builder) {
-      builder.syntaxNode_(address, nodeType, chunk, length);
+      var of = builder.offset_();
+      builder.syntaxNode_(address, nodeType, of, of + ' + ' + length);
     }, function(builder) {
       builder.failure_(address, this.text);
     }, this);
