@@ -145,7 +145,7 @@ module CanopyLisp
       address1 = nil
       chunk0 = nil
       if @input.size > @offset
-        chunk0 = @input[@offset...(@offset + 1)]
+        chunk0 = @input[@offset...@offset + 1]
       end
       if chunk0 == "("
         address1 = SyntaxNode.new(@input[@offset...@offset + 1], @offset, [])
@@ -182,7 +182,7 @@ module CanopyLisp
           address4 = nil
           chunk1 = nil
           if @input.size > @offset
-            chunk1 = @input[@offset...(@offset + 1)]
+            chunk1 = @input[@offset...@offset + 1]
           end
           if chunk1 == ")"
             address4 = SyntaxNode.new(@input[@offset...@offset + 1], @offset, [])
@@ -257,7 +257,7 @@ module CanopyLisp
       index1 = @offset
       chunk0 = nil
       if @input.size > @offset
-        chunk0 = @input[@offset...(@offset + 2)]
+        chunk0 = @input[@offset...@offset + 2]
       end
       if chunk0 == "#t"
         address0 = SyntaxNode.new(@input[@offset...@offset + 2], @offset, [])
@@ -276,7 +276,7 @@ module CanopyLisp
         @offset = index1
         chunk1 = nil
         if @input.size > @offset
-          chunk1 = @input[@offset...(@offset + 2)]
+          chunk1 = @input[@offset...@offset + 2]
         end
         if chunk1 == "#f"
           address0 = SyntaxNode.new(@input[@offset...@offset + 2], @offset, [])
@@ -309,7 +309,7 @@ module CanopyLisp
       address1 = nil
       chunk0 = nil
       if @input.size > @offset
-        chunk0 = @input[@offset...(@offset + 1)]
+        chunk0 = @input[@offset...@offset + 1]
       end
       if chunk0 and chunk0 =~ /\A[1-9]/
         address1 = SyntaxNode.new(@input[@offset...@offset + 1], @offset, [])
@@ -331,7 +331,7 @@ module CanopyLisp
         until address3 == nil
           chunk1 = nil
           if @input.size > @offset
-            chunk1 = @input[@offset...(@offset + 1)]
+            chunk1 = @input[@offset...@offset + 1]
           end
           if chunk1 and chunk1 =~ /\A[0-9]/
             address3 = SyntaxNode.new(@input[@offset...@offset + 1], @offset, [])
@@ -387,7 +387,7 @@ module CanopyLisp
       address1 = nil
       chunk0 = nil
       if @input.size > @offset
-        chunk0 = @input[@offset...(@offset + 1)]
+        chunk0 = @input[@offset...@offset + 1]
       end
       if chunk0 == "\""
         address1 = SyntaxNode.new(@input[@offset...@offset + 1], @offset, [])
@@ -412,7 +412,7 @@ module CanopyLisp
           address4 = nil
           chunk1 = nil
           if @input.size > @offset
-            chunk1 = @input[@offset...(@offset + 1)]
+            chunk1 = @input[@offset...@offset + 1]
           end
           if chunk1 == "\\"
             address4 = SyntaxNode.new(@input[@offset...@offset + 1], @offset, [])
@@ -432,7 +432,7 @@ module CanopyLisp
             address5 = nil
             chunk2 = nil
             if @input.size > @offset
-              chunk2 = @input[@offset...(@offset + 1)]
+              chunk2 = @input[@offset...@offset + 1]
             end
             if chunk2.nil?
               address5 = nil
@@ -467,7 +467,7 @@ module CanopyLisp
             @offset = index3
             chunk3 = nil
             if @input.size > @offset
-              chunk3 = @input[@offset...(@offset + 1)]
+              chunk3 = @input[@offset...@offset + 1]
             end
             if chunk3 and chunk3 =~ /\A[^"]/
               address3 = SyntaxNode.new(@input[@offset...@offset + 1], @offset, [])
@@ -502,7 +502,7 @@ module CanopyLisp
           address6 = nil
           chunk4 = nil
           if @input.size > @offset
-            chunk4 = @input[@offset...(@offset + 1)]
+            chunk4 = @input[@offset...@offset + 1]
           end
           if chunk4 == "\""
             address6 = SyntaxNode.new(@input[@offset...@offset + 1], @offset, [])
@@ -565,7 +565,7 @@ module CanopyLisp
           address3 = nil
           chunk0 = nil
           if @input.size > @offset
-            chunk0 = @input[@offset...(@offset + 1)]
+            chunk0 = @input[@offset...@offset + 1]
           end
           if chunk0.nil?
             address3 = nil
@@ -619,7 +619,7 @@ module CanopyLisp
       end
       chunk0 = nil
       if @input.size > @offset
-        chunk0 = @input[@offset...(@offset + 1)]
+        chunk0 = @input[@offset...@offset + 1]
       end
       if chunk0 and chunk0 =~ /\A[\s]/
         address0 = SyntaxNode.new(@input[@offset...@offset + 1], @offset, [])
@@ -647,7 +647,7 @@ module CanopyLisp
       index1 = @offset
       chunk0 = nil
       if @input.size > @offset
-        chunk0 = @input[@offset...(@offset + 1)]
+        chunk0 = @input[@offset...@offset + 1]
       end
       if chunk0 == "("
         address0 = SyntaxNode.new(@input[@offset...@offset + 1], @offset, [])
@@ -666,7 +666,7 @@ module CanopyLisp
         @offset = index1
         chunk1 = nil
         if @input.size > @offset
-          chunk1 = @input[@offset...(@offset + 1)]
+          chunk1 = @input[@offset...@offset + 1]
         end
         if chunk1 == ")"
           address0 = SyntaxNode.new(@input[@offset...@offset + 1], @offset, [])

@@ -212,7 +212,7 @@
     chunk_: function(length) {
       var chunk = this.localVar_('chunk', this.null_()), input = 'self._input', of = 'self._offset';
       this.if_('len(' + input + ') > ' + of, function(builder) {
-        builder.assign_(chunk, input + '[' + of + ':(' + of + ' + ' + length + ')]');
+        builder.assign_(chunk, input + '[' + of + ':' + of + ' + ' + length + ']');
       });
       return chunk;
     },

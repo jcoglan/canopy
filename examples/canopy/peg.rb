@@ -324,7 +324,7 @@ module Canopy::PEG
       address1 = nil
       chunk0 = nil
       if @input.size > @offset
-        chunk0 = @input[@offset...(@offset + 8)]
+        chunk0 = @input[@offset...@offset + 8]
       end
       if chunk0.downcase == "grammar ".downcase
         address1 = SyntaxNode.new(@input[@offset...@offset + 8], @offset, [])
@@ -431,7 +431,7 @@ module Canopy::PEG
         address3 = nil
         chunk0 = nil
         if @input.size > @offset
-          chunk0 = @input[@offset...(@offset + 2)]
+          chunk0 = @input[@offset...@offset + 2]
         end
         if chunk0 == "<-"
           address3 = SyntaxNode.new(@input[@offset...@offset + 2], @offset, [])
@@ -516,7 +516,7 @@ module Canopy::PEG
       address1 = nil
       chunk0 = nil
       if @input.size > @offset
-        chunk0 = @input[@offset...(@offset + 1)]
+        chunk0 = @input[@offset...@offset + 1]
       end
       if chunk0 == "("
         address1 = SyntaxNode.new(@input[@offset...@offset + 1], @offset, [])
@@ -574,7 +574,7 @@ module Canopy::PEG
               address7 = nil
               chunk1 = nil
               if @input.size > @offset
-                chunk1 = @input[@offset...(@offset + 1)]
+                chunk1 = @input[@offset...@offset + 1]
               end
               if chunk1 == ")"
                 address7 = SyntaxNode.new(@input[@offset...@offset + 1], @offset, [])
@@ -656,7 +656,7 @@ module Canopy::PEG
             address6 = nil
             chunk0 = nil
             if @input.size > @offset
-              chunk0 = @input[@offset...(@offset + 1)]
+              chunk0 = @input[@offset...@offset + 1]
             end
             if chunk0 == "/"
               address6 = SyntaxNode.new(@input[@offset...@offset + 1], @offset, [])
@@ -838,7 +838,7 @@ module Canopy::PEG
       address1 = nil
       chunk0 = nil
       if @input.size > @offset
-        chunk0 = @input[@offset...(@offset + 1)]
+        chunk0 = @input[@offset...@offset + 1]
       end
       if chunk0 == "<"
         address1 = SyntaxNode.new(@input[@offset...@offset + 1], @offset, [])
@@ -862,7 +862,7 @@ module Canopy::PEG
           address3 = nil
           chunk1 = nil
           if @input.size > @offset
-            chunk1 = @input[@offset...(@offset + 1)]
+            chunk1 = @input[@offset...@offset + 1]
           end
           if chunk1 == ">"
             address3 = SyntaxNode.new(@input[@offset...@offset + 1], @offset, [])
@@ -1111,7 +1111,7 @@ module Canopy::PEG
       index2 = @offset
       chunk0 = nil
       if @input.size > @offset
-        chunk0 = @input[@offset...(@offset + 1)]
+        chunk0 = @input[@offset...@offset + 1]
       end
       if chunk0 == "&"
         address1 = SyntaxNode.new(@input[@offset...@offset + 1], @offset, [])
@@ -1130,7 +1130,7 @@ module Canopy::PEG
         @offset = index2
         chunk1 = nil
         if @input.size > @offset
-          chunk1 = @input[@offset...(@offset + 1)]
+          chunk1 = @input[@offset...@offset + 1]
         end
         if chunk1 == "!"
           address1 = SyntaxNode.new(@input[@offset...@offset + 1], @offset, [])
@@ -1224,7 +1224,7 @@ module Canopy::PEG
       address1 = nil
       chunk0 = nil
       if @input.size > @offset
-        chunk0 = @input[@offset...(@offset + 1)]
+        chunk0 = @input[@offset...@offset + 1]
       end
       if chunk0 == "\""
         address1 = SyntaxNode.new(@input[@offset...@offset + 1], @offset, [])
@@ -1249,7 +1249,7 @@ module Canopy::PEG
           address4 = nil
           chunk1 = nil
           if @input.size > @offset
-            chunk1 = @input[@offset...(@offset + 1)]
+            chunk1 = @input[@offset...@offset + 1]
           end
           if chunk1 == "\\"
             address4 = SyntaxNode.new(@input[@offset...@offset + 1], @offset, [])
@@ -1269,7 +1269,7 @@ module Canopy::PEG
             address5 = nil
             chunk2 = nil
             if @input.size > @offset
-              chunk2 = @input[@offset...(@offset + 1)]
+              chunk2 = @input[@offset...@offset + 1]
             end
             if chunk2.nil?
               address5 = nil
@@ -1304,7 +1304,7 @@ module Canopy::PEG
             @offset = index3
             chunk3 = nil
             if @input.size > @offset
-              chunk3 = @input[@offset...(@offset + 1)]
+              chunk3 = @input[@offset...@offset + 1]
             end
             if chunk3 and chunk3 =~ /\A[^"]/
               address3 = SyntaxNode.new(@input[@offset...@offset + 1], @offset, [])
@@ -1339,7 +1339,7 @@ module Canopy::PEG
           address6 = nil
           chunk4 = nil
           if @input.size > @offset
-            chunk4 = @input[@offset...(@offset + 1)]
+            chunk4 = @input[@offset...@offset + 1]
           end
           if chunk4 == "\""
             address6 = SyntaxNode.new(@input[@offset...@offset + 1], @offset, [])
@@ -1388,7 +1388,7 @@ module Canopy::PEG
       address1 = nil
       chunk0 = nil
       if @input.size > @offset
-        chunk0 = @input[@offset...(@offset + 1)]
+        chunk0 = @input[@offset...@offset + 1]
       end
       if chunk0 == "`"
         address1 = SyntaxNode.new(@input[@offset...@offset + 1], @offset, [])
@@ -1413,7 +1413,7 @@ module Canopy::PEG
           address4 = nil
           chunk1 = nil
           if @input.size > @offset
-            chunk1 = @input[@offset...(@offset + 1)]
+            chunk1 = @input[@offset...@offset + 1]
           end
           if chunk1 == "\\"
             address4 = SyntaxNode.new(@input[@offset...@offset + 1], @offset, [])
@@ -1433,7 +1433,7 @@ module Canopy::PEG
             address5 = nil
             chunk2 = nil
             if @input.size > @offset
-              chunk2 = @input[@offset...(@offset + 1)]
+              chunk2 = @input[@offset...@offset + 1]
             end
             if chunk2.nil?
               address5 = nil
@@ -1468,7 +1468,7 @@ module Canopy::PEG
             @offset = index3
             chunk3 = nil
             if @input.size > @offset
-              chunk3 = @input[@offset...(@offset + 1)]
+              chunk3 = @input[@offset...@offset + 1]
             end
             if chunk3 and chunk3 =~ /\A[^`]/
               address3 = SyntaxNode.new(@input[@offset...@offset + 1], @offset, [])
@@ -1503,7 +1503,7 @@ module Canopy::PEG
           address6 = nil
           chunk4 = nil
           if @input.size > @offset
-            chunk4 = @input[@offset...(@offset + 1)]
+            chunk4 = @input[@offset...@offset + 1]
           end
           if chunk4 == "`"
             address6 = SyntaxNode.new(@input[@offset...@offset + 1], @offset, [])
@@ -1550,7 +1550,7 @@ module Canopy::PEG
       end
       chunk0 = nil
       if @input.size > @offset
-        chunk0 = @input[@offset...(@offset + 1)]
+        chunk0 = @input[@offset...@offset + 1]
       end
       if chunk0 == "."
         address0 = SyntaxNode.new(@input[@offset...@offset + 1], @offset, [])
@@ -1579,7 +1579,7 @@ module Canopy::PEG
       address1 = nil
       chunk0 = nil
       if @input.size > @offset
-        chunk0 = @input[@offset...(@offset + 1)]
+        chunk0 = @input[@offset...@offset + 1]
       end
       if chunk0 == "["
         address1 = SyntaxNode.new(@input[@offset...@offset + 1], @offset, [])
@@ -1600,7 +1600,7 @@ module Canopy::PEG
         index2 = @offset
         chunk1 = nil
         if @input.size > @offset
-          chunk1 = @input[@offset...(@offset + 1)]
+          chunk1 = @input[@offset...@offset + 1]
         end
         if chunk1 == "^"
           address2 = SyntaxNode.new(@input[@offset...@offset + 1], @offset, [])
@@ -1629,7 +1629,7 @@ module Canopy::PEG
             address5 = nil
             chunk2 = nil
             if @input.size > @offset
-              chunk2 = @input[@offset...(@offset + 1)]
+              chunk2 = @input[@offset...@offset + 1]
             end
             if chunk2 == "\\"
               address5 = SyntaxNode.new(@input[@offset...@offset + 1], @offset, [])
@@ -1649,7 +1649,7 @@ module Canopy::PEG
               address6 = nil
               chunk3 = nil
               if @input.size > @offset
-                chunk3 = @input[@offset...(@offset + 1)]
+                chunk3 = @input[@offset...@offset + 1]
               end
               if chunk3.nil?
                 address6 = nil
@@ -1684,7 +1684,7 @@ module Canopy::PEG
               @offset = index4
               chunk4 = nil
               if @input.size > @offset
-                chunk4 = @input[@offset...(@offset + 1)]
+                chunk4 = @input[@offset...@offset + 1]
               end
               if chunk4 and chunk4 =~ /\A[^\]]/
                 address4 = SyntaxNode.new(@input[@offset...@offset + 1], @offset, [])
@@ -1719,7 +1719,7 @@ module Canopy::PEG
             address7 = nil
             chunk5 = nil
             if @input.size > @offset
-              chunk5 = @input[@offset...(@offset + 1)]
+              chunk5 = @input[@offset...@offset + 1]
             end
             if chunk5 == "]"
               address7 = SyntaxNode.new(@input[@offset...@offset + 1], @offset, [])
@@ -1776,7 +1776,7 @@ module Canopy::PEG
         address2 = nil
         chunk0 = nil
         if @input.size > @offset
-          chunk0 = @input[@offset...(@offset + 1)]
+          chunk0 = @input[@offset...@offset + 1]
         end
         if chunk0 == ":"
           address2 = SyntaxNode.new(@input[@offset...@offset + 1], @offset, [])
@@ -1829,7 +1829,7 @@ module Canopy::PEG
           address4 = nil
           chunk0 = nil
           if @input.size > @offset
-            chunk0 = @input[@offset...(@offset + 1)]
+            chunk0 = @input[@offset...@offset + 1]
           end
           if chunk0 == "."
             address4 = SyntaxNode.new(@input[@offset...@offset + 1], @offset, [])
@@ -1905,7 +1905,7 @@ module Canopy::PEG
       address1 = nil
       chunk0 = nil
       if @input.size > @offset
-        chunk0 = @input[@offset...(@offset + 1)]
+        chunk0 = @input[@offset...@offset + 1]
       end
       if chunk0 and chunk0 =~ /\A[a-zA-Z_]/
         address1 = SyntaxNode.new(@input[@offset...@offset + 1], @offset, [])
@@ -1927,7 +1927,7 @@ module Canopy::PEG
         until address3 == nil
           chunk1 = nil
           if @input.size > @offset
-            chunk1 = @input[@offset...(@offset + 1)]
+            chunk1 = @input[@offset...@offset + 1]
           end
           if chunk1 and chunk1 =~ /\A[a-zA-Z0-9_]/
             address3 = SyntaxNode.new(@input[@offset...@offset + 1], @offset, [])
@@ -1982,7 +1982,7 @@ module Canopy::PEG
       index1 = @offset
       chunk0 = nil
       if @input.size > @offset
-        chunk0 = @input[@offset...(@offset + 1)]
+        chunk0 = @input[@offset...@offset + 1]
       end
       if chunk0 == "?"
         address0 = SyntaxNode.new(@input[@offset...@offset + 1], @offset, [])
@@ -2001,7 +2001,7 @@ module Canopy::PEG
         @offset = index1
         chunk1 = nil
         if @input.size > @offset
-          chunk1 = @input[@offset...(@offset + 1)]
+          chunk1 = @input[@offset...@offset + 1]
         end
         if chunk1 == "*"
           address0 = SyntaxNode.new(@input[@offset...@offset + 1], @offset, [])
@@ -2020,7 +2020,7 @@ module Canopy::PEG
           @offset = index1
           chunk2 = nil
           if @input.size > @offset
-            chunk2 = @input[@offset...(@offset + 1)]
+            chunk2 = @input[@offset...@offset + 1]
           end
           if chunk2 == "+"
             address0 = SyntaxNode.new(@input[@offset...@offset + 1], @offset, [])
@@ -2052,7 +2052,7 @@ module Canopy::PEG
       end
       chunk0 = nil
       if @input.size > @offset
-        chunk0 = @input[@offset...(@offset + 1)]
+        chunk0 = @input[@offset...@offset + 1]
       end
       if chunk0 and chunk0 =~ /\A[\s]/
         address0 = SyntaxNode.new(@input[@offset...@offset + 1], @offset, [])
