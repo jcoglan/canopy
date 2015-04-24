@@ -203,17 +203,16 @@
           cacheAddr = cacheMap + '[' + offset + ']';
 
       this.assign_(cacheMap, cacheMap + ' || {}');
+      this.assign_('var cached', cacheAddr);
 
-      this.if_(offset + ' in ' + cacheMap, function(builder) {
-        builder.assign_('var cached', cacheAddr);
-        builder.if_('cached', function(builder) {
-          builder._line('this._offset += cached.text.length');
-        });
-        builder.return_('cached');
-      }, this);
+      this.if_('cached', function(builder) {
+        builder.assign_('this._offset', 'cached[1]');
+        builder.return_('cached[0]');
+      });
 
       block.call(context, this, address);
-      this.return_(cacheAddr + ' = ' + address);
+      this.assign_(cacheAddr,  '[' + address + ', this._offset]');
+      this.return_(address);
     },
 
     attributes_: function() {},

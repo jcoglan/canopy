@@ -177,14 +177,16 @@
           cacheMap  = '@cache[:' + name + ']',
           cacheAddr = cacheMap + '[' + offset + ']';
 
-      this.if_(cacheMap + '.has_key?(' + offset + ')', function(builder) {
-        builder.assign_('cached', cacheAddr);
-        builder._line('@offset += cached.text.size if cached');
-        builder.return_('cached');
+      this.assign_('cached', cacheAddr);
+
+      this.if_('cached', function(builder) {
+        builder._line('@offset = cached[1]');
+        builder.return_('cached[0]');
       }, this);
 
       block.call(context, this, address);
-      this.return_(cacheAddr + ' = ' + address);
+      this.assign_(cacheAddr, '[' + address + ', @offset]');
+      this.return_(address);
     },
 
     attributes_: function(names) {

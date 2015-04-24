@@ -139,11 +139,10 @@ class ParseError(SyntaxError):
 class Grammar(object):
     def _read_grammar(self):
         address0, index0 = None, self._offset
-        if index0 in self._cache['grammar']:
-            cached = self._cache['grammar'][index0]
-            if cached:
-                self._offset += len(cached.text)
-            return cached
+        cached = self._cache['grammar'].get(index0)
+        if cached:
+            self._offset = cached[1]
+            return cached[0]
         index1, elements0 = self._offset, []
         address1 = None
         remaining0, index2, elements1, address2 = 0, self._offset, [], True
@@ -237,16 +236,15 @@ class Grammar(object):
             self._offset = self._offset
         else:
             address0 = None
-        self._cache['grammar'][index0] = address0
+        self._cache['grammar'][index0] = (address0, self._offset)
         return address0
 
     def _read_grammar_name(self):
         address0, index0 = None, self._offset
-        if index0 in self._cache['grammar_name']:
-            cached = self._cache['grammar_name'][index0]
-            if cached:
-                self._offset += len(cached.text)
-            return cached
+        cached = self._cache['grammar_name'].get(index0)
+        if cached:
+            self._offset = cached[1]
+            return cached[0]
         index1, elements0 = self._offset, []
         address1 = None
         chunk0 = None
@@ -279,16 +277,15 @@ class Grammar(object):
             self._offset = self._offset
         else:
             address0 = None
-        self._cache['grammar_name'][index0] = address0
+        self._cache['grammar_name'][index0] = (address0, self._offset)
         return address0
 
     def _read_grammar_rule(self):
         address0, index0 = None, self._offset
-        if index0 in self._cache['grammar_rule']:
-            cached = self._cache['grammar_rule'][index0]
-            if cached:
-                self._offset += len(cached.text)
-            return cached
+        cached = self._cache['grammar_rule'].get(index0)
+        if cached:
+            self._offset = cached[1]
+            return cached[0]
         index1, elements0 = self._offset, []
         address1 = None
         address1 = self._read_identifier()
@@ -316,16 +313,15 @@ class Grammar(object):
             self._offset = self._offset
         else:
             address0 = None
-        self._cache['grammar_rule'][index0] = address0
+        self._cache['grammar_rule'][index0] = (address0, self._offset)
         return address0
 
     def _read_assignment(self):
         address0, index0 = None, self._offset
-        if index0 in self._cache['assignment']:
-            cached = self._cache['assignment'][index0]
-            if cached:
-                self._offset += len(cached.text)
-            return cached
+        cached = self._cache['assignment'].get(index0)
+        if cached:
+            self._offset = cached[1]
+            return cached[0]
         index1, elements0 = self._offset, []
         address1 = None
         remaining0, index2, elements1, address2 = 1, self._offset, [], True
@@ -385,16 +381,15 @@ class Grammar(object):
             self._offset = self._offset
         else:
             address0 = None
-        self._cache['assignment'][index0] = address0
+        self._cache['assignment'][index0] = (address0, self._offset)
         return address0
 
     def _read_parsing_expression(self):
         address0, index0 = None, self._offset
-        if index0 in self._cache['parsing_expression']:
-            cached = self._cache['parsing_expression'][index0]
-            if cached:
-                self._offset += len(cached.text)
-            return cached
+        cached = self._cache['parsing_expression'].get(index0)
+        if cached:
+            self._offset = cached[1]
+            return cached[0]
         index1 = self._offset
         address0 = self._read_choice_expression()
         if not address0:
@@ -402,16 +397,15 @@ class Grammar(object):
             address0 = self._read_choice_part()
             if not address0:
                 self._offset = index1
-        self._cache['parsing_expression'][index0] = address0
+        self._cache['parsing_expression'][index0] = (address0, self._offset)
         return address0
 
     def _read_parenthesised_expression(self):
         address0, index0 = None, self._offset
-        if index0 in self._cache['parenthesised_expression']:
-            cached = self._cache['parenthesised_expression'][index0]
-            if cached:
-                self._offset += len(cached.text)
-            return cached
+        cached = self._cache['parenthesised_expression'].get(index0)
+        if cached:
+            self._offset = cached[1]
+            return cached[0]
         index1, elements0 = self._offset, []
         address1 = None
         chunk0 = None
@@ -497,16 +491,15 @@ class Grammar(object):
             self._offset = self._offset
         else:
             address0 = None
-        self._cache['parenthesised_expression'][index0] = address0
+        self._cache['parenthesised_expression'][index0] = (address0, self._offset)
         return address0
 
     def _read_choice_expression(self):
         address0, index0 = None, self._offset
-        if index0 in self._cache['choice_expression']:
-            cached = self._cache['choice_expression'][index0]
-            if cached:
-                self._offset += len(cached.text)
-            return cached
+        cached = self._cache['choice_expression'].get(index0)
+        if cached:
+            self._offset = cached[1]
+            return cached[0]
         index1, elements0 = self._offset, []
         address1 = None
         address1 = self._read_choice_part()
@@ -602,16 +595,15 @@ class Grammar(object):
             self._offset = self._offset
         else:
             address0 = None
-        self._cache['choice_expression'][index0] = address0
+        self._cache['choice_expression'][index0] = (address0, self._offset)
         return address0
 
     def _read_choice_part(self):
         address0, index0 = None, self._offset
-        if index0 in self._cache['choice_part']:
-            cached = self._cache['choice_part'][index0]
-            if cached:
-                self._offset += len(cached.text)
-            return cached
+        cached = self._cache['choice_part'].get(index0)
+        if cached:
+            self._offset = cached[1]
+            return cached[0]
         index1, elements0 = self._offset, []
         address1 = None
         index2 = self._offset
@@ -671,16 +663,15 @@ class Grammar(object):
             self._offset = self._offset
         else:
             address0 = None
-        self._cache['choice_part'][index0] = address0
+        self._cache['choice_part'][index0] = (address0, self._offset)
         return address0
 
     def _read_type_expression(self):
         address0, index0 = None, self._offset
-        if index0 in self._cache['type_expression']:
-            cached = self._cache['type_expression'][index0]
-            if cached:
-                self._offset += len(cached.text)
-            return cached
+        cached = self._cache['type_expression'].get(index0)
+        if cached:
+            self._offset = cached[1]
+            return cached[0]
         index1, elements0 = self._offset, []
         address1 = None
         chunk0 = None
@@ -732,16 +723,15 @@ class Grammar(object):
             self._offset = self._offset
         else:
             address0 = None
-        self._cache['type_expression'][index0] = address0
+        self._cache['type_expression'][index0] = (address0, self._offset)
         return address0
 
     def _read_sequence_expression(self):
         address0, index0 = None, self._offset
-        if index0 in self._cache['sequence_expression']:
-            cached = self._cache['sequence_expression'][index0]
-            if cached:
-                self._offset += len(cached.text)
-            return cached
+        cached = self._cache['sequence_expression'].get(index0)
+        if cached:
+            self._offset = cached[1]
+            return cached[0]
         index1, elements0 = self._offset, []
         address1 = None
         address1 = self._read_sequence_part()
@@ -801,16 +791,15 @@ class Grammar(object):
             self._offset = self._offset
         else:
             address0 = None
-        self._cache['sequence_expression'][index0] = address0
+        self._cache['sequence_expression'][index0] = (address0, self._offset)
         return address0
 
     def _read_sequence_part(self):
         address0, index0 = None, self._offset
-        if index0 in self._cache['sequence_part']:
-            cached = self._cache['sequence_part'][index0]
-            if cached:
-                self._offset += len(cached.text)
-            return cached
+        cached = self._cache['sequence_part'].get(index0)
+        if cached:
+            self._offset = cached[1]
+            return cached[0]
         index1, elements0 = self._offset, []
         address1 = None
         index2 = self._offset
@@ -841,16 +830,15 @@ class Grammar(object):
             self._offset = self._offset
         else:
             address0 = None
-        self._cache['sequence_part'][index0] = address0
+        self._cache['sequence_part'][index0] = (address0, self._offset)
         return address0
 
     def _read_quantified_atom(self):
         address0, index0 = None, self._offset
-        if index0 in self._cache['quantified_atom']:
-            cached = self._cache['quantified_atom'][index0]
-            if cached:
-                self._offset += len(cached.text)
-            return cached
+        cached = self._cache['quantified_atom'].get(index0)
+        if cached:
+            self._offset = cached[1]
+            return cached[0]
         index1, elements0 = self._offset, []
         address1 = None
         address1 = self._read_atom()
@@ -871,16 +859,15 @@ class Grammar(object):
             self._offset = self._offset
         else:
             address0 = None
-        self._cache['quantified_atom'][index0] = address0
+        self._cache['quantified_atom'][index0] = (address0, self._offset)
         return address0
 
     def _read_atom(self):
         address0, index0 = None, self._offset
-        if index0 in self._cache['atom']:
-            cached = self._cache['atom'][index0]
-            if cached:
-                self._offset += len(cached.text)
-            return cached
+        cached = self._cache['atom'].get(index0)
+        if cached:
+            self._offset = cached[1]
+            return cached[0]
         index1 = self._offset
         address0 = self._read_parenthesised_expression()
         if not address0:
@@ -903,16 +890,15 @@ class Grammar(object):
                                 address0 = self._read_char_class_expression()
                                 if not address0:
                                     self._offset = index1
-        self._cache['atom'][index0] = address0
+        self._cache['atom'][index0] = (address0, self._offset)
         return address0
 
     def _read_predicated_atom(self):
         address0, index0 = None, self._offset
-        if index0 in self._cache['predicated_atom']:
-            cached = self._cache['predicated_atom'][index0]
-            if cached:
-                self._offset += len(cached.text)
-            return cached
+        cached = self._cache['predicated_atom'].get(index0)
+        if cached:
+            self._offset = cached[1]
+            return cached[0]
         index1, elements0 = self._offset, []
         address1 = None
         index2 = self._offset
@@ -963,16 +949,15 @@ class Grammar(object):
             self._offset = self._offset
         else:
             address0 = None
-        self._cache['predicated_atom'][index0] = address0
+        self._cache['predicated_atom'][index0] = (address0, self._offset)
         return address0
 
     def _read_reference_expression(self):
         address0, index0 = None, self._offset
-        if index0 in self._cache['reference_expression']:
-            cached = self._cache['reference_expression'][index0]
-            if cached:
-                self._offset += len(cached.text)
-            return cached
+        cached = self._cache['reference_expression'].get(index0)
+        if cached:
+            self._offset = cached[1]
+            return cached[0]
         index1, elements0 = self._offset, []
         address1 = None
         address1 = self._read_identifier()
@@ -1000,16 +985,15 @@ class Grammar(object):
             self._offset = self._offset
         else:
             address0 = None
-        self._cache['reference_expression'][index0] = address0
+        self._cache['reference_expression'][index0] = (address0, self._offset)
         return address0
 
     def _read_string_expression(self):
         address0, index0 = None, self._offset
-        if index0 in self._cache['string_expression']:
-            cached = self._cache['string_expression'][index0]
-            if cached:
-                self._offset += len(cached.text)
-            return cached
+        cached = self._cache['string_expression'].get(index0)
+        if cached:
+            self._offset = cached[1]
+            return cached[0]
         index1, elements0 = self._offset, []
         address1 = None
         chunk0 = None
@@ -1132,16 +1116,15 @@ class Grammar(object):
             self._offset = self._offset
         else:
             address0 = None
-        self._cache['string_expression'][index0] = address0
+        self._cache['string_expression'][index0] = (address0, self._offset)
         return address0
 
     def _read_ci_string_expression(self):
         address0, index0 = None, self._offset
-        if index0 in self._cache['ci_string_expression']:
-            cached = self._cache['ci_string_expression'][index0]
-            if cached:
-                self._offset += len(cached.text)
-            return cached
+        cached = self._cache['ci_string_expression'].get(index0)
+        if cached:
+            self._offset = cached[1]
+            return cached[0]
         index1, elements0 = self._offset, []
         address1 = None
         chunk0 = None
@@ -1264,16 +1247,15 @@ class Grammar(object):
             self._offset = self._offset
         else:
             address0 = None
-        self._cache['ci_string_expression'][index0] = address0
+        self._cache['ci_string_expression'][index0] = (address0, self._offset)
         return address0
 
     def _read_any_char_expression(self):
         address0, index0 = None, self._offset
-        if index0 in self._cache['any_char_expression']:
-            cached = self._cache['any_char_expression'][index0]
-            if cached:
-                self._offset += len(cached.text)
-            return cached
+        cached = self._cache['any_char_expression'].get(index0)
+        if cached:
+            self._offset = cached[1]
+            return cached[0]
         chunk0 = None
         if len(self._input) > self._offset:
             chunk0 = self._input[self._offset:self._offset + 1]
@@ -1287,16 +1269,15 @@ class Grammar(object):
                 self._expected = []
             if self._offset == self._failure:
                 self._expected.append('"."')
-        self._cache['any_char_expression'][index0] = address0
+        self._cache['any_char_expression'][index0] = (address0, self._offset)
         return address0
 
     def _read_char_class_expression(self):
         address0, index0 = None, self._offset
-        if index0 in self._cache['char_class_expression']:
-            cached = self._cache['char_class_expression'][index0]
-            if cached:
-                self._offset += len(cached.text)
-            return cached
+        cached = self._cache['char_class_expression'].get(index0)
+        if cached:
+            self._offset = cached[1]
+            return cached[0]
         index1, elements0 = self._offset, []
         address1 = None
         chunk0 = None
@@ -1442,16 +1423,15 @@ class Grammar(object):
             self._offset = self._offset
         else:
             address0 = None
-        self._cache['char_class_expression'][index0] = address0
+        self._cache['char_class_expression'][index0] = (address0, self._offset)
         return address0
 
     def _read_label(self):
         address0, index0 = None, self._offset
-        if index0 in self._cache['label']:
-            cached = self._cache['label'][index0]
-            if cached:
-                self._offset += len(cached.text)
-            return cached
+        cached = self._cache['label'].get(index0)
+        if cached:
+            self._offset = cached[1]
+            return cached[0]
         index1, elements0 = self._offset, []
         address1 = None
         address1 = self._read_identifier()
@@ -1484,16 +1464,15 @@ class Grammar(object):
             self._offset = self._offset
         else:
             address0 = None
-        self._cache['label'][index0] = address0
+        self._cache['label'][index0] = (address0, self._offset)
         return address0
 
     def _read_object_identifier(self):
         address0, index0 = None, self._offset
-        if index0 in self._cache['object_identifier']:
-            cached = self._cache['object_identifier'][index0]
-            if cached:
-                self._offset += len(cached.text)
-            return cached
+        cached = self._cache['object_identifier'].get(index0)
+        if cached:
+            self._offset = cached[1]
+            return cached[0]
         index1, elements0 = self._offset, []
         address1 = None
         address1 = self._read_identifier()
@@ -1555,16 +1534,15 @@ class Grammar(object):
             self._offset = self._offset
         else:
             address0 = None
-        self._cache['object_identifier'][index0] = address0
+        self._cache['object_identifier'][index0] = (address0, self._offset)
         return address0
 
     def _read_identifier(self):
         address0, index0 = None, self._offset
-        if index0 in self._cache['identifier']:
-            cached = self._cache['identifier'][index0]
-            if cached:
-                self._offset += len(cached.text)
-            return cached
+        cached = self._cache['identifier'].get(index0)
+        if cached:
+            self._offset = cached[1]
+            return cached[0]
         index1, elements0 = self._offset, []
         address1 = None
         chunk0 = None
@@ -1619,16 +1597,15 @@ class Grammar(object):
             self._offset = self._offset
         else:
             address0 = None
-        self._cache['identifier'][index0] = address0
+        self._cache['identifier'][index0] = (address0, self._offset)
         return address0
 
     def _read_quantifier(self):
         address0, index0 = None, self._offset
-        if index0 in self._cache['quantifier']:
-            cached = self._cache['quantifier'][index0]
-            if cached:
-                self._offset += len(cached.text)
-            return cached
+        cached = self._cache['quantifier'].get(index0)
+        if cached:
+            self._offset = cached[1]
+            return cached[0]
         index1 = self._offset
         chunk0 = None
         if len(self._input) > self._offset:
@@ -1675,16 +1652,15 @@ class Grammar(object):
                         self._expected.append('"+"')
                 if not address0:
                     self._offset = index1
-        self._cache['quantifier'][index0] = address0
+        self._cache['quantifier'][index0] = (address0, self._offset)
         return address0
 
     def _read_space(self):
         address0, index0 = None, self._offset
-        if index0 in self._cache['space']:
-            cached = self._cache['space'][index0]
-            if cached:
-                self._offset += len(cached.text)
-            return cached
+        cached = self._cache['space'].get(index0)
+        if cached:
+            self._offset = cached[1]
+            return cached[0]
         chunk0 = None
         if len(self._input) > self._offset:
             chunk0 = self._input[self._offset:self._offset + 1]
@@ -1698,7 +1674,7 @@ class Grammar(object):
                 self._expected = []
             if self._offset == self._failure:
                 self._expected.append('[\\s]')
-        self._cache['space'][index0] = address0
+        self._cache['space'][index0] = (address0, self._offset)
         return address0
 
 

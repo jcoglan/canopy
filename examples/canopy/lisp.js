@@ -67,12 +67,10 @@
     _read_program: function() {
       var address0 = null, index0 = this._offset;
       this._cache._program = this._cache._program || {};
-      if (index0 in this._cache._program) {
-        var cached = this._cache._program[index0];
-        if (cached) {
-          this._offset += cached.text.length;
-        }
-        return cached;
+      var cached = this._cache._program[index0];
+      if (cached) {
+        this._offset = cached[1];
+        return cached[0];
       }
       var remaining0 = 1, index1 = this._offset, elements0 = [], address1 = true;
       while (address1 !== null) {
@@ -88,18 +86,17 @@
       } else {
         address0 = null;
       }
-      return this._cache._program[index0] = address0;
+      this._cache._program[index0] = [address0, this._offset];
+      return address0;
     },
 
     _read_cell: function() {
       var address0 = null, index0 = this._offset;
       this._cache._cell = this._cache._cell || {};
-      if (index0 in this._cache._cell) {
-        var cached = this._cache._cell[index0];
-        if (cached) {
-          this._offset += cached.text.length;
-        }
-        return cached;
+      var cached = this._cache._cell[index0];
+      if (cached) {
+        this._offset = cached[1];
+        return cached[0];
       }
       var index1 = this._offset, elements0 = [];
       var address1 = null;
@@ -166,18 +163,17 @@
       } else {
         address0 = null;
       }
-      return this._cache._cell[index0] = address0;
+      this._cache._cell[index0] = [address0, this._offset];
+      return address0;
     },
 
     _read_list: function() {
       var address0 = null, index0 = this._offset;
       this._cache._list = this._cache._list || {};
-      if (index0 in this._cache._list) {
-        var cached = this._cache._list[index0];
-        if (cached) {
-          this._offset += cached.text.length;
-        }
-        return cached;
+      var cached = this._cache._list[index0];
+      if (cached) {
+        this._offset = cached[1];
+        return cached[0];
       }
       var index1 = this._offset, elements0 = [];
       var address1 = null;
@@ -255,18 +251,17 @@
       } else {
         address0 = null;
       }
-      return this._cache._list[index0] = address0;
+      this._cache._list[index0] = [address0, this._offset];
+      return address0;
     },
 
     _read_atom: function() {
       var address0 = null, index0 = this._offset;
       this._cache._atom = this._cache._atom || {};
-      if (index0 in this._cache._atom) {
-        var cached = this._cache._atom[index0];
-        if (cached) {
-          this._offset += cached.text.length;
-        }
-        return cached;
+      var cached = this._cache._atom[index0];
+      if (cached) {
+        this._offset = cached[1];
+        return cached[0];
       }
       var index1 = this._offset;
       address0 = this._read_boolean();
@@ -285,18 +280,17 @@
           }
         }
       }
-      return this._cache._atom[index0] = address0;
+      this._cache._atom[index0] = [address0, this._offset];
+      return address0;
     },
 
     _read_boolean: function() {
       var address0 = null, index0 = this._offset;
       this._cache._boolean = this._cache._boolean || {};
-      if (index0 in this._cache._boolean) {
-        var cached = this._cache._boolean[index0];
-        if (cached) {
-          this._offset += cached.text.length;
-        }
-        return cached;
+      var cached = this._cache._boolean[index0];
+      if (cached) {
+        this._offset = cached[1];
+        return cached[0];
       }
       var index1 = this._offset;
       var chunk0 = null;
@@ -339,18 +333,17 @@
           this._offset = index1;
         }
       }
-      return this._cache._boolean[index0] = address0;
+      this._cache._boolean[index0] = [address0, this._offset];
+      return address0;
     },
 
     _read_integer: function() {
       var address0 = null, index0 = this._offset;
       this._cache._integer = this._cache._integer || {};
-      if (index0 in this._cache._integer) {
-        var cached = this._cache._integer[index0];
-        if (cached) {
-          this._offset += cached.text.length;
-        }
-        return cached;
+      var cached = this._cache._integer[index0];
+      if (cached) {
+        this._offset = cached[1];
+        return cached[0];
       }
       var index1 = this._offset, elements0 = [];
       var address1 = null;
@@ -420,18 +413,17 @@
       } else {
         address0 = null;
       }
-      return this._cache._integer[index0] = address0;
+      this._cache._integer[index0] = [address0, this._offset];
+      return address0;
     },
 
     _read_string: function() {
       var address0 = null, index0 = this._offset;
       this._cache._string = this._cache._string || {};
-      if (index0 in this._cache._string) {
-        var cached = this._cache._string[index0];
-        if (cached) {
-          this._offset += cached.text.length;
-        }
-        return cached;
+      var cached = this._cache._string[index0];
+      if (cached) {
+        this._offset = cached[1];
+        return cached[0];
       }
       var index1 = this._offset, elements0 = [];
       var address1 = null;
@@ -587,18 +579,17 @@
       } else {
         address0 = null;
       }
-      return this._cache._string[index0] = address0;
+      this._cache._string[index0] = [address0, this._offset];
+      return address0;
     },
 
     _read_symbol: function() {
       var address0 = null, index0 = this._offset;
       this._cache._symbol = this._cache._symbol || {};
-      if (index0 in this._cache._symbol) {
-        var cached = this._cache._symbol[index0];
-        if (cached) {
-          this._offset += cached.text.length;
-        }
-        return cached;
+      var cached = this._cache._symbol[index0];
+      if (cached) {
+        this._offset = cached[1];
+        return cached[0];
       }
       var remaining0 = 1, index1 = this._offset, elements0 = [], address1 = true;
       while (address1 !== null) {
@@ -660,18 +651,17 @@
       } else {
         address0 = null;
       }
-      return this._cache._symbol[index0] = address0;
+      this._cache._symbol[index0] = [address0, this._offset];
+      return address0;
     },
 
     _read_space: function() {
       var address0 = null, index0 = this._offset;
       this._cache._space = this._cache._space || {};
-      if (index0 in this._cache._space) {
-        var cached = this._cache._space[index0];
-        if (cached) {
-          this._offset += cached.text.length;
-        }
-        return cached;
+      var cached = this._cache._space[index0];
+      if (cached) {
+        this._offset = cached[1];
+        return cached[0];
       }
       var chunk0 = null;
       if (this._input.length > this._offset) {
@@ -690,18 +680,17 @@
           this._expected.push('[\\s]');
         }
       }
-      return this._cache._space[index0] = address0;
+      this._cache._space[index0] = [address0, this._offset];
+      return address0;
     },
 
     _read_paren: function() {
       var address0 = null, index0 = this._offset;
       this._cache._paren = this._cache._paren || {};
-      if (index0 in this._cache._paren) {
-        var cached = this._cache._paren[index0];
-        if (cached) {
-          this._offset += cached.text.length;
-        }
-        return cached;
+      var cached = this._cache._paren[index0];
+      if (cached) {
+        this._offset = cached[1];
+        return cached[0];
       }
       var index1 = this._offset;
       var chunk0 = null;
@@ -744,18 +733,17 @@
           this._offset = index1;
         }
       }
-      return this._cache._paren[index0] = address0;
+      this._cache._paren[index0] = [address0, this._offset];
+      return address0;
     },
 
     _read_delimiter: function() {
       var address0 = null, index0 = this._offset;
       this._cache._delimiter = this._cache._delimiter || {};
-      if (index0 in this._cache._delimiter) {
-        var cached = this._cache._delimiter[index0];
-        if (cached) {
-          this._offset += cached.text.length;
-        }
-        return cached;
+      var cached = this._cache._delimiter[index0];
+      if (cached) {
+        this._offset = cached[1];
+        return cached[0];
       }
       var index1 = this._offset;
       address0 = this._read_paren();
@@ -766,7 +754,8 @@
           this._offset = index1;
         }
       }
-      return this._cache._delimiter[index0] = address0;
+      this._cache._delimiter[index0] = [address0, this._offset];
+      return address0;
     }
   };
   

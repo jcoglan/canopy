@@ -32,11 +32,10 @@ class ParseError(SyntaxError):
 class Grammar(object):
     def _read_program(self):
         address0, index0 = None, self._offset
-        if index0 in self._cache['program']:
-            cached = self._cache['program'][index0]
-            if cached:
-                self._offset += len(cached.text)
-            return cached
+        cached = self._cache['program'].get(index0)
+        if cached:
+            self._offset = cached[1]
+            return cached[0]
         remaining0, index1, elements0, address1 = 1, self._offset, [], True
         while address1 is not None:
             address1 = self._read_cell()
@@ -48,16 +47,15 @@ class Grammar(object):
             self._offset = self._offset
         else:
             address0 = None
-        self._cache['program'][index0] = address0
+        self._cache['program'][index0] = (address0, self._offset)
         return address0
 
     def _read_cell(self):
         address0, index0 = None, self._offset
-        if index0 in self._cache['cell']:
-            cached = self._cache['cell'][index0]
-            if cached:
-                self._offset += len(cached.text)
-            return cached
+        cached = self._cache['cell'].get(index0)
+        if cached:
+            self._offset = cached[1]
+            return cached[0]
         index1, elements0 = self._offset, []
         address1 = None
         remaining0, index2, elements1, address2 = 0, self._offset, [], True
@@ -111,16 +109,15 @@ class Grammar(object):
             self._offset = self._offset
         else:
             address0 = None
-        self._cache['cell'][index0] = address0
+        self._cache['cell'][index0] = (address0, self._offset)
         return address0
 
     def _read_list(self):
         address0, index0 = None, self._offset
-        if index0 in self._cache['list']:
-            cached = self._cache['list'][index0]
-            if cached:
-                self._offset += len(cached.text)
-            return cached
+        cached = self._cache['list'].get(index0)
+        if cached:
+            self._offset = cached[1]
+            return cached[0]
         index1, elements0 = self._offset, []
         address1 = None
         chunk0 = None
@@ -182,16 +179,15 @@ class Grammar(object):
             self._offset = self._offset
         else:
             address0 = None
-        self._cache['list'][index0] = address0
+        self._cache['list'][index0] = (address0, self._offset)
         return address0
 
     def _read_atom(self):
         address0, index0 = None, self._offset
-        if index0 in self._cache['atom']:
-            cached = self._cache['atom'][index0]
-            if cached:
-                self._offset += len(cached.text)
-            return cached
+        cached = self._cache['atom'].get(index0)
+        if cached:
+            self._offset = cached[1]
+            return cached[0]
         index1 = self._offset
         address0 = self._read_boolean()
         if not address0:
@@ -205,16 +201,15 @@ class Grammar(object):
                     address0 = self._read_symbol()
                     if not address0:
                         self._offset = index1
-        self._cache['atom'][index0] = address0
+        self._cache['atom'][index0] = (address0, self._offset)
         return address0
 
     def _read_boolean(self):
         address0, index0 = None, self._offset
-        if index0 in self._cache['boolean']:
-            cached = self._cache['boolean'][index0]
-            if cached:
-                self._offset += len(cached.text)
-            return cached
+        cached = self._cache['boolean'].get(index0)
+        if cached:
+            self._offset = cached[1]
+            return cached[0]
         index1 = self._offset
         chunk0 = None
         if len(self._input) > self._offset:
@@ -246,16 +241,15 @@ class Grammar(object):
                     self._expected.append('"#f"')
             if not address0:
                 self._offset = index1
-        self._cache['boolean'][index0] = address0
+        self._cache['boolean'][index0] = (address0, self._offset)
         return address0
 
     def _read_integer(self):
         address0, index0 = None, self._offset
-        if index0 in self._cache['integer']:
-            cached = self._cache['integer'][index0]
-            if cached:
-                self._offset += len(cached.text)
-            return cached
+        cached = self._cache['integer'].get(index0)
+        if cached:
+            self._offset = cached[1]
+            return cached[0]
         index1, elements0 = self._offset, []
         address1 = None
         chunk0 = None
@@ -310,16 +304,15 @@ class Grammar(object):
             self._offset = self._offset
         else:
             address0 = None
-        self._cache['integer'][index0] = address0
+        self._cache['integer'][index0] = (address0, self._offset)
         return address0
 
     def _read_string(self):
         address0, index0 = None, self._offset
-        if index0 in self._cache['string']:
-            cached = self._cache['string'][index0]
-            if cached:
-                self._offset += len(cached.text)
-            return cached
+        cached = self._cache['string'].get(index0)
+        if cached:
+            self._offset = cached[1]
+            return cached[0]
         index1, elements0 = self._offset, []
         address1 = None
         chunk0 = None
@@ -442,16 +435,15 @@ class Grammar(object):
             self._offset = self._offset
         else:
             address0 = None
-        self._cache['string'][index0] = address0
+        self._cache['string'][index0] = (address0, self._offset)
         return address0
 
     def _read_symbol(self):
         address0, index0 = None, self._offset
-        if index0 in self._cache['symbol']:
-            cached = self._cache['symbol'][index0]
-            if cached:
-                self._offset += len(cached.text)
-            return cached
+        cached = self._cache['symbol'].get(index0)
+        if cached:
+            self._offset = cached[1]
+            return cached[0]
         remaining0, index1, elements0, address1 = 1, self._offset, [], True
         while address1 is not None:
             index2, elements1 = self._offset, []
@@ -501,16 +493,15 @@ class Grammar(object):
             self._offset = self._offset
         else:
             address0 = None
-        self._cache['symbol'][index0] = address0
+        self._cache['symbol'][index0] = (address0, self._offset)
         return address0
 
     def _read_space(self):
         address0, index0 = None, self._offset
-        if index0 in self._cache['space']:
-            cached = self._cache['space'][index0]
-            if cached:
-                self._offset += len(cached.text)
-            return cached
+        cached = self._cache['space'].get(index0)
+        if cached:
+            self._offset = cached[1]
+            return cached[0]
         chunk0 = None
         if len(self._input) > self._offset:
             chunk0 = self._input[self._offset:self._offset + 1]
@@ -524,16 +515,15 @@ class Grammar(object):
                 self._expected = []
             if self._offset == self._failure:
                 self._expected.append('[\\s]')
-        self._cache['space'][index0] = address0
+        self._cache['space'][index0] = (address0, self._offset)
         return address0
 
     def _read_paren(self):
         address0, index0 = None, self._offset
-        if index0 in self._cache['paren']:
-            cached = self._cache['paren'][index0]
-            if cached:
-                self._offset += len(cached.text)
-            return cached
+        cached = self._cache['paren'].get(index0)
+        if cached:
+            self._offset = cached[1]
+            return cached[0]
         index1 = self._offset
         chunk0 = None
         if len(self._input) > self._offset:
@@ -565,16 +555,15 @@ class Grammar(object):
                     self._expected.append('")"')
             if not address0:
                 self._offset = index1
-        self._cache['paren'][index0] = address0
+        self._cache['paren'][index0] = (address0, self._offset)
         return address0
 
     def _read_delimiter(self):
         address0, index0 = None, self._offset
-        if index0 in self._cache['delimiter']:
-            cached = self._cache['delimiter'][index0]
-            if cached:
-                self._offset += len(cached.text)
-            return cached
+        cached = self._cache['delimiter'].get(index0)
+        if cached:
+            self._offset = cached[1]
+            return cached[0]
         index1 = self._offset
         address0 = self._read_paren()
         if not address0:
@@ -582,7 +571,7 @@ class Grammar(object):
             address0 = self._read_space()
             if not address0:
                 self._offset = index1
-        self._cache['delimiter'][index0] = address0
+        self._cache['delimiter'][index0] = (address0, self._offset)
         return address0
 
 

@@ -168,16 +168,15 @@
           cacheMap  = "self._cache['" + name + "']",
           cacheAddr = cacheMap + '[' + offset + ']';
 
-      this.if_(offset + ' in ' + cacheMap, function(builder) {
-        builder.assign_('cached', cacheAddr);
-        builder.if_('cached', function(builder) {
-          builder._line('self._offset += len(cached.text)');
-        });
-        builder.return_('cached');
-      }, this);
+      this.assign_('cached', cacheMap + '.get(' + offset + ')');
+
+      this.if_('cached', function(builder) {
+        builder.assign_('self._offset', 'cached[1]');
+        builder.return_('cached[0]');
+      });
 
       block.call(context, this, address);
-      this.assign_(cacheAddr, address);
+      this.assign_(cacheAddr, '(' + address + ', self._offset)');
       this.return_(address);
     },
 

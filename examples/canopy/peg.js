@@ -174,12 +174,10 @@
     _read_grammar: function() {
       var address0 = null, index0 = this._offset;
       this._cache._grammar = this._cache._grammar || {};
-      if (index0 in this._cache._grammar) {
-        var cached = this._cache._grammar[index0];
-        if (cached) {
-          this._offset += cached.text.length;
-        }
-        return cached;
+      var cached = this._cache._grammar[index0];
+      if (cached) {
+        this._offset = cached[1];
+        return cached[0];
       }
       var index1 = this._offset, elements0 = [];
       var address1 = null;
@@ -294,18 +292,17 @@
       } else {
         address0 = null;
       }
-      return this._cache._grammar[index0] = address0;
+      this._cache._grammar[index0] = [address0, this._offset];
+      return address0;
     },
 
     _read_grammar_name: function() {
       var address0 = null, index0 = this._offset;
       this._cache._grammar_name = this._cache._grammar_name || {};
-      if (index0 in this._cache._grammar_name) {
-        var cached = this._cache._grammar_name[index0];
-        if (cached) {
-          this._offset += cached.text.length;
-        }
-        return cached;
+      var cached = this._cache._grammar_name[index0];
+      if (cached) {
+        this._offset = cached[1];
+        return cached[0];
       }
       var index1 = this._offset, elements0 = [];
       var address1 = null;
@@ -346,18 +343,17 @@
       } else {
         address0 = null;
       }
-      return this._cache._grammar_name[index0] = address0;
+      this._cache._grammar_name[index0] = [address0, this._offset];
+      return address0;
     },
 
     _read_grammar_rule: function() {
       var address0 = null, index0 = this._offset;
       this._cache._grammar_rule = this._cache._grammar_rule || {};
-      if (index0 in this._cache._grammar_rule) {
-        var cached = this._cache._grammar_rule[index0];
-        if (cached) {
-          this._offset += cached.text.length;
-        }
-        return cached;
+      var cached = this._cache._grammar_rule[index0];
+      if (cached) {
+        this._offset = cached[1];
+        return cached[0];
       }
       var index1 = this._offset, elements0 = [];
       var address1 = null;
@@ -390,18 +386,17 @@
       } else {
         address0 = null;
       }
-      return this._cache._grammar_rule[index0] = address0;
+      this._cache._grammar_rule[index0] = [address0, this._offset];
+      return address0;
     },
 
     _read_assignment: function() {
       var address0 = null, index0 = this._offset;
       this._cache._assignment = this._cache._assignment || {};
-      if (index0 in this._cache._assignment) {
-        var cached = this._cache._assignment[index0];
-        if (cached) {
-          this._offset += cached.text.length;
-        }
-        return cached;
+      var cached = this._cache._assignment[index0];
+      if (cached) {
+        this._offset = cached[1];
+        return cached[0];
       }
       var index1 = this._offset, elements0 = [];
       var address1 = null;
@@ -476,18 +471,17 @@
       } else {
         address0 = null;
       }
-      return this._cache._assignment[index0] = address0;
+      this._cache._assignment[index0] = [address0, this._offset];
+      return address0;
     },
 
     _read_parsing_expression: function() {
       var address0 = null, index0 = this._offset;
       this._cache._parsing_expression = this._cache._parsing_expression || {};
-      if (index0 in this._cache._parsing_expression) {
-        var cached = this._cache._parsing_expression[index0];
-        if (cached) {
-          this._offset += cached.text.length;
-        }
-        return cached;
+      var cached = this._cache._parsing_expression[index0];
+      if (cached) {
+        this._offset = cached[1];
+        return cached[0];
       }
       var index1 = this._offset;
       address0 = this._read_choice_expression();
@@ -498,18 +492,17 @@
           this._offset = index1;
         }
       }
-      return this._cache._parsing_expression[index0] = address0;
+      this._cache._parsing_expression[index0] = [address0, this._offset];
+      return address0;
     },
 
     _read_parenthesised_expression: function() {
       var address0 = null, index0 = this._offset;
       this._cache._parenthesised_expression = this._cache._parenthesised_expression || {};
-      if (index0 in this._cache._parenthesised_expression) {
-        var cached = this._cache._parenthesised_expression[index0];
-        if (cached) {
-          this._offset += cached.text.length;
-        }
-        return cached;
+      var cached = this._cache._parenthesised_expression[index0];
+      if (cached) {
+        this._offset = cached[1];
+        return cached[0];
       }
       var index1 = this._offset, elements0 = [];
       var address1 = null;
@@ -616,18 +609,17 @@
       } else {
         address0 = null;
       }
-      return this._cache._parenthesised_expression[index0] = address0;
+      this._cache._parenthesised_expression[index0] = [address0, this._offset];
+      return address0;
     },
 
     _read_choice_expression: function() {
       var address0 = null, index0 = this._offset;
       this._cache._choice_expression = this._cache._choice_expression || {};
-      if (index0 in this._cache._choice_expression) {
-        var cached = this._cache._choice_expression[index0];
-        if (cached) {
-          this._offset += cached.text.length;
-        }
-        return cached;
+      var cached = this._cache._choice_expression[index0];
+      if (cached) {
+        this._offset = cached[1];
+        return cached[0];
       }
       var index1 = this._offset, elements0 = [];
       var address1 = null;
@@ -745,18 +737,17 @@
       } else {
         address0 = null;
       }
-      return this._cache._choice_expression[index0] = address0;
+      this._cache._choice_expression[index0] = [address0, this._offset];
+      return address0;
     },
 
     _read_choice_part: function() {
       var address0 = null, index0 = this._offset;
       this._cache._choice_part = this._cache._choice_part || {};
-      if (index0 in this._cache._choice_part) {
-        var cached = this._cache._choice_part[index0];
-        if (cached) {
-          this._offset += cached.text.length;
-        }
-        return cached;
+      var cached = this._cache._choice_part[index0];
+      if (cached) {
+        this._offset = cached[1];
+        return cached[0];
       }
       var index1 = this._offset, elements0 = [];
       var address1 = null;
@@ -829,18 +820,17 @@
       } else {
         address0 = null;
       }
-      return this._cache._choice_part[index0] = address0;
+      this._cache._choice_part[index0] = [address0, this._offset];
+      return address0;
     },
 
     _read_type_expression: function() {
       var address0 = null, index0 = this._offset;
       this._cache._type_expression = this._cache._type_expression || {};
-      if (index0 in this._cache._type_expression) {
-        var cached = this._cache._type_expression[index0];
-        if (cached) {
-          this._offset += cached.text.length;
-        }
-        return cached;
+      var cached = this._cache._type_expression[index0];
+      if (cached) {
+        this._offset = cached[1];
+        return cached[0];
       }
       var index1 = this._offset, elements0 = [];
       var address1 = null;
@@ -905,18 +895,17 @@
       } else {
         address0 = null;
       }
-      return this._cache._type_expression[index0] = address0;
+      this._cache._type_expression[index0] = [address0, this._offset];
+      return address0;
     },
 
     _read_sequence_expression: function() {
       var address0 = null, index0 = this._offset;
       this._cache._sequence_expression = this._cache._sequence_expression || {};
-      if (index0 in this._cache._sequence_expression) {
-        var cached = this._cache._sequence_expression[index0];
-        if (cached) {
-          this._offset += cached.text.length;
-        }
-        return cached;
+      var cached = this._cache._sequence_expression[index0];
+      if (cached) {
+        this._offset = cached[1];
+        return cached[0];
       }
       var index1 = this._offset, elements0 = [];
       var address1 = null;
@@ -989,18 +978,17 @@
       } else {
         address0 = null;
       }
-      return this._cache._sequence_expression[index0] = address0;
+      this._cache._sequence_expression[index0] = [address0, this._offset];
+      return address0;
     },
 
     _read_sequence_part: function() {
       var address0 = null, index0 = this._offset;
       this._cache._sequence_part = this._cache._sequence_part || {};
-      if (index0 in this._cache._sequence_part) {
-        var cached = this._cache._sequence_part[index0];
-        if (cached) {
-          this._offset += cached.text.length;
-        }
-        return cached;
+      var cached = this._cache._sequence_part[index0];
+      if (cached) {
+        this._offset = cached[1];
+        return cached[0];
       }
       var index1 = this._offset, elements0 = [];
       var address1 = null;
@@ -1038,18 +1026,17 @@
       } else {
         address0 = null;
       }
-      return this._cache._sequence_part[index0] = address0;
+      this._cache._sequence_part[index0] = [address0, this._offset];
+      return address0;
     },
 
     _read_quantified_atom: function() {
       var address0 = null, index0 = this._offset;
       this._cache._quantified_atom = this._cache._quantified_atom || {};
-      if (index0 in this._cache._quantified_atom) {
-        var cached = this._cache._quantified_atom[index0];
-        if (cached) {
-          this._offset += cached.text.length;
-        }
-        return cached;
+      var cached = this._cache._quantified_atom[index0];
+      if (cached) {
+        this._offset = cached[1];
+        return cached[0];
       }
       var index1 = this._offset, elements0 = [];
       var address1 = null;
@@ -1074,18 +1061,17 @@
       } else {
         address0 = null;
       }
-      return this._cache._quantified_atom[index0] = address0;
+      this._cache._quantified_atom[index0] = [address0, this._offset];
+      return address0;
     },
 
     _read_atom: function() {
       var address0 = null, index0 = this._offset;
       this._cache._atom = this._cache._atom || {};
-      if (index0 in this._cache._atom) {
-        var cached = this._cache._atom[index0];
-        if (cached) {
-          this._offset += cached.text.length;
-        }
-        return cached;
+      var cached = this._cache._atom[index0];
+      if (cached) {
+        this._offset = cached[1];
+        return cached[0];
       }
       var index1 = this._offset;
       address0 = this._read_parenthesised_expression();
@@ -1116,18 +1102,17 @@
           }
         }
       }
-      return this._cache._atom[index0] = address0;
+      this._cache._atom[index0] = [address0, this._offset];
+      return address0;
     },
 
     _read_predicated_atom: function() {
       var address0 = null, index0 = this._offset;
       this._cache._predicated_atom = this._cache._predicated_atom || {};
-      if (index0 in this._cache._predicated_atom) {
-        var cached = this._cache._predicated_atom[index0];
-        if (cached) {
-          this._offset += cached.text.length;
-        }
-        return cached;
+      var cached = this._cache._predicated_atom[index0];
+      if (cached) {
+        this._offset = cached[1];
+        return cached[0];
       }
       var index1 = this._offset, elements0 = [];
       var address1 = null;
@@ -1192,18 +1177,17 @@
       } else {
         address0 = null;
       }
-      return this._cache._predicated_atom[index0] = address0;
+      this._cache._predicated_atom[index0] = [address0, this._offset];
+      return address0;
     },
 
     _read_reference_expression: function() {
       var address0 = null, index0 = this._offset;
       this._cache._reference_expression = this._cache._reference_expression || {};
-      if (index0 in this._cache._reference_expression) {
-        var cached = this._cache._reference_expression[index0];
-        if (cached) {
-          this._offset += cached.text.length;
-        }
-        return cached;
+      var cached = this._cache._reference_expression[index0];
+      if (cached) {
+        this._offset = cached[1];
+        return cached[0];
       }
       var index1 = this._offset, elements0 = [];
       var address1 = null;
@@ -1236,18 +1220,17 @@
       } else {
         address0 = null;
       }
-      return this._cache._reference_expression[index0] = address0;
+      this._cache._reference_expression[index0] = [address0, this._offset];
+      return address0;
     },
 
     _read_string_expression: function() {
       var address0 = null, index0 = this._offset;
       this._cache._string_expression = this._cache._string_expression || {};
-      if (index0 in this._cache._string_expression) {
-        var cached = this._cache._string_expression[index0];
-        if (cached) {
-          this._offset += cached.text.length;
-        }
-        return cached;
+      var cached = this._cache._string_expression[index0];
+      if (cached) {
+        this._offset = cached[1];
+        return cached[0];
       }
       var index1 = this._offset, elements0 = [];
       var address1 = null;
@@ -1403,18 +1386,17 @@
       } else {
         address0 = null;
       }
-      return this._cache._string_expression[index0] = address0;
+      this._cache._string_expression[index0] = [address0, this._offset];
+      return address0;
     },
 
     _read_ci_string_expression: function() {
       var address0 = null, index0 = this._offset;
       this._cache._ci_string_expression = this._cache._ci_string_expression || {};
-      if (index0 in this._cache._ci_string_expression) {
-        var cached = this._cache._ci_string_expression[index0];
-        if (cached) {
-          this._offset += cached.text.length;
-        }
-        return cached;
+      var cached = this._cache._ci_string_expression[index0];
+      if (cached) {
+        this._offset = cached[1];
+        return cached[0];
       }
       var index1 = this._offset, elements0 = [];
       var address1 = null;
@@ -1570,18 +1552,17 @@
       } else {
         address0 = null;
       }
-      return this._cache._ci_string_expression[index0] = address0;
+      this._cache._ci_string_expression[index0] = [address0, this._offset];
+      return address0;
     },
 
     _read_any_char_expression: function() {
       var address0 = null, index0 = this._offset;
       this._cache._any_char_expression = this._cache._any_char_expression || {};
-      if (index0 in this._cache._any_char_expression) {
-        var cached = this._cache._any_char_expression[index0];
-        if (cached) {
-          this._offset += cached.text.length;
-        }
-        return cached;
+      var cached = this._cache._any_char_expression[index0];
+      if (cached) {
+        this._offset = cached[1];
+        return cached[0];
       }
       var chunk0 = null;
       if (this._input.length > this._offset) {
@@ -1600,18 +1581,17 @@
           this._expected.push('"."');
         }
       }
-      return this._cache._any_char_expression[index0] = address0;
+      this._cache._any_char_expression[index0] = [address0, this._offset];
+      return address0;
     },
 
     _read_char_class_expression: function() {
       var address0 = null, index0 = this._offset;
       this._cache._char_class_expression = this._cache._char_class_expression || {};
-      if (index0 in this._cache._char_class_expression) {
-        var cached = this._cache._char_class_expression[index0];
-        if (cached) {
-          this._offset += cached.text.length;
-        }
-        return cached;
+      var cached = this._cache._char_class_expression[index0];
+      if (cached) {
+        this._offset = cached[1];
+        return cached[0];
       }
       var index1 = this._offset, elements0 = [];
       var address1 = null;
@@ -1796,18 +1776,17 @@
       } else {
         address0 = null;
       }
-      return this._cache._char_class_expression[index0] = address0;
+      this._cache._char_class_expression[index0] = [address0, this._offset];
+      return address0;
     },
 
     _read_label: function() {
       var address0 = null, index0 = this._offset;
       this._cache._label = this._cache._label || {};
-      if (index0 in this._cache._label) {
-        var cached = this._cache._label[index0];
-        if (cached) {
-          this._offset += cached.text.length;
-        }
-        return cached;
+      var cached = this._cache._label[index0];
+      if (cached) {
+        this._offset = cached[1];
+        return cached[0];
       }
       var index1 = this._offset, elements0 = [];
       var address1 = null;
@@ -1848,18 +1827,17 @@
       } else {
         address0 = null;
       }
-      return this._cache._label[index0] = address0;
+      this._cache._label[index0] = [address0, this._offset];
+      return address0;
     },
 
     _read_object_identifier: function() {
       var address0 = null, index0 = this._offset;
       this._cache._object_identifier = this._cache._object_identifier || {};
-      if (index0 in this._cache._object_identifier) {
-        var cached = this._cache._object_identifier[index0];
-        if (cached) {
-          this._offset += cached.text.length;
-        }
-        return cached;
+      var cached = this._cache._object_identifier[index0];
+      if (cached) {
+        this._offset = cached[1];
+        return cached[0];
       }
       var index1 = this._offset, elements0 = [];
       var address1 = null;
@@ -1935,18 +1913,17 @@
       } else {
         address0 = null;
       }
-      return this._cache._object_identifier[index0] = address0;
+      this._cache._object_identifier[index0] = [address0, this._offset];
+      return address0;
     },
 
     _read_identifier: function() {
       var address0 = null, index0 = this._offset;
       this._cache._identifier = this._cache._identifier || {};
-      if (index0 in this._cache._identifier) {
-        var cached = this._cache._identifier[index0];
-        if (cached) {
-          this._offset += cached.text.length;
-        }
-        return cached;
+      var cached = this._cache._identifier[index0];
+      if (cached) {
+        this._offset = cached[1];
+        return cached[0];
       }
       var index1 = this._offset, elements0 = [];
       var address1 = null;
@@ -2016,18 +1993,17 @@
       } else {
         address0 = null;
       }
-      return this._cache._identifier[index0] = address0;
+      this._cache._identifier[index0] = [address0, this._offset];
+      return address0;
     },
 
     _read_quantifier: function() {
       var address0 = null, index0 = this._offset;
       this._cache._quantifier = this._cache._quantifier || {};
-      if (index0 in this._cache._quantifier) {
-        var cached = this._cache._quantifier[index0];
-        if (cached) {
-          this._offset += cached.text.length;
-        }
-        return cached;
+      var cached = this._cache._quantifier[index0];
+      if (cached) {
+        this._offset = cached[1];
+        return cached[0];
       }
       var index1 = this._offset;
       var chunk0 = null;
@@ -2090,18 +2066,17 @@
           }
         }
       }
-      return this._cache._quantifier[index0] = address0;
+      this._cache._quantifier[index0] = [address0, this._offset];
+      return address0;
     },
 
     _read_space: function() {
       var address0 = null, index0 = this._offset;
       this._cache._space = this._cache._space || {};
-      if (index0 in this._cache._space) {
-        var cached = this._cache._space[index0];
-        if (cached) {
-          this._offset += cached.text.length;
-        }
-        return cached;
+      var cached = this._cache._space[index0];
+      if (cached) {
+        this._offset = cached[1];
+        return cached[0];
       }
       var chunk0 = null;
       if (this._input.length > this._offset) {
@@ -2120,7 +2095,8 @@
           this._expected.push('[\\s]');
         }
       }
-      return this._cache._space[index0] = address0;
+      this._cache._space[index0] = [address0, this._offset];
+      return address0;
     }
   };
   

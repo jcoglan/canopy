@@ -37,10 +37,10 @@ module CanopyLisp
   module Grammar
     def _read_program
       address0, index0 = nil, @offset
-      if @cache[:program].has_key?(index0)
-        cached = @cache[:program][index0]
-        @offset += cached.text.size if cached
-        return cached
+      cached = @cache[:program][index0]
+      if cached
+        @offset = cached[1]
+        return cached[0]
       end
       remaining0, index1, elements0, address1 = 1, @offset, [], true
       until address1 == nil
@@ -56,15 +56,16 @@ module CanopyLisp
       else
         address0 = nil
       end
-      return @cache[:program][index0] = address0
+      @cache[:program][index0] = [address0, @offset]
+      return address0
     end
 
     def _read_cell
       address0, index0 = nil, @offset
-      if @cache[:cell].has_key?(index0)
-        cached = @cache[:cell][index0]
-        @offset += cached.text.size if cached
-        return cached
+      cached = @cache[:cell][index0]
+      if cached
+        @offset = cached[1]
+        return cached[0]
       end
       index1, elements0 = @offset, []
       address1 = nil
@@ -131,15 +132,16 @@ module CanopyLisp
       else
         address0 = nil
       end
-      return @cache[:cell][index0] = address0
+      @cache[:cell][index0] = [address0, @offset]
+      return address0
     end
 
     def _read_list
       address0, index0 = nil, @offset
-      if @cache[:list].has_key?(index0)
-        cached = @cache[:list][index0]
-        @offset += cached.text.size if cached
-        return cached
+      cached = @cache[:list][index0]
+      if cached
+        @offset = cached[1]
+        return cached[0]
       end
       index1, elements0 = @offset, []
       address1 = nil
@@ -217,15 +219,16 @@ module CanopyLisp
       else
         address0 = nil
       end
-      return @cache[:list][index0] = address0
+      @cache[:list][index0] = [address0, @offset]
+      return address0
     end
 
     def _read_atom
       address0, index0 = nil, @offset
-      if @cache[:atom].has_key?(index0)
-        cached = @cache[:atom][index0]
-        @offset += cached.text.size if cached
-        return cached
+      cached = @cache[:atom][index0]
+      if cached
+        @offset = cached[1]
+        return cached[0]
       end
       index1 = @offset
       address0 = _read_boolean
@@ -244,15 +247,16 @@ module CanopyLisp
           end
         end
       end
-      return @cache[:atom][index0] = address0
+      @cache[:atom][index0] = [address0, @offset]
+      return address0
     end
 
     def _read_boolean
       address0, index0 = nil, @offset
-      if @cache[:boolean].has_key?(index0)
-        cached = @cache[:boolean][index0]
-        @offset += cached.text.size if cached
-        return cached
+      cached = @cache[:boolean][index0]
+      if cached
+        @offset = cached[1]
+        return cached[0]
       end
       index1 = @offset
       chunk0 = nil
@@ -295,15 +299,16 @@ module CanopyLisp
           @offset = index1
         end
       end
-      return @cache[:boolean][index0] = address0
+      @cache[:boolean][index0] = [address0, @offset]
+      return address0
     end
 
     def _read_integer
       address0, index0 = nil, @offset
-      if @cache[:integer].has_key?(index0)
-        cached = @cache[:integer][index0]
-        @offset += cached.text.size if cached
-        return cached
+      cached = @cache[:integer][index0]
+      if cached
+        @offset = cached[1]
+        return cached[0]
       end
       index1, elements0 = @offset, []
       address1 = nil
@@ -373,15 +378,16 @@ module CanopyLisp
       else
         address0 = nil
       end
-      return @cache[:integer][index0] = address0
+      @cache[:integer][index0] = [address0, @offset]
+      return address0
     end
 
     def _read_string
       address0, index0 = nil, @offset
-      if @cache[:string].has_key?(index0)
-        cached = @cache[:string][index0]
-        @offset += cached.text.size if cached
-        return cached
+      cached = @cache[:string][index0]
+      if cached
+        @offset = cached[1]
+        return cached[0]
       end
       index1, elements0 = @offset, []
       address1 = nil
@@ -537,15 +543,16 @@ module CanopyLisp
       else
         address0 = nil
       end
-      return @cache[:string][index0] = address0
+      @cache[:string][index0] = [address0, @offset]
+      return address0
     end
 
     def _read_symbol
       address0, index0 = nil, @offset
-      if @cache[:symbol].has_key?(index0)
-        cached = @cache[:symbol][index0]
-        @offset += cached.text.size if cached
-        return cached
+      cached = @cache[:symbol][index0]
+      if cached
+        @offset = cached[1]
+        return cached[0]
       end
       remaining0, index1, elements0, address1 = 1, @offset, [], true
       until address1 == nil
@@ -607,15 +614,16 @@ module CanopyLisp
       else
         address0 = nil
       end
-      return @cache[:symbol][index0] = address0
+      @cache[:symbol][index0] = [address0, @offset]
+      return address0
     end
 
     def _read_space
       address0, index0 = nil, @offset
-      if @cache[:space].has_key?(index0)
-        cached = @cache[:space][index0]
-        @offset += cached.text.size if cached
-        return cached
+      cached = @cache[:space][index0]
+      if cached
+        @offset = cached[1]
+        return cached[0]
       end
       chunk0 = nil
       if @input.size > @offset
@@ -634,15 +642,16 @@ module CanopyLisp
           @expected << "[\\s]"
         end
       end
-      return @cache[:space][index0] = address0
+      @cache[:space][index0] = [address0, @offset]
+      return address0
     end
 
     def _read_paren
       address0, index0 = nil, @offset
-      if @cache[:paren].has_key?(index0)
-        cached = @cache[:paren][index0]
-        @offset += cached.text.size if cached
-        return cached
+      cached = @cache[:paren][index0]
+      if cached
+        @offset = cached[1]
+        return cached[0]
       end
       index1 = @offset
       chunk0 = nil
@@ -685,15 +694,16 @@ module CanopyLisp
           @offset = index1
         end
       end
-      return @cache[:paren][index0] = address0
+      @cache[:paren][index0] = [address0, @offset]
+      return address0
     end
 
     def _read_delimiter
       address0, index0 = nil, @offset
-      if @cache[:delimiter].has_key?(index0)
-        cached = @cache[:delimiter][index0]
-        @offset += cached.text.size if cached
-        return cached
+      cached = @cache[:delimiter][index0]
+      if cached
+        @offset = cached[1]
+        return cached[0]
       end
       index1 = @offset
       address0 = _read_paren
@@ -704,7 +714,8 @@ module CanopyLisp
           @offset = index1
         end
       end
-      return @cache[:delimiter][index0] = address0
+      @cache[:delimiter][index0] = [address0, @offset]
+      return address0
     end
   end
 
