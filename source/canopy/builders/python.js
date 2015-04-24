@@ -285,7 +285,7 @@
     },
 
     regexMatch_: function(regex, string) {
-      return 're.match(' + this._quote(regex.source) + ', ' + string + ')';
+      return string + ' is not None and re.match(' + this._quote(regex.source) + ', ' + string + ')';
     },
 
     return_: function(expression) {
@@ -306,10 +306,6 @@
 
     decrement_: function(variable) {
       this._line(variable + ' -= 1');
-    },
-
-    and_: function(left, right) {
-      return left + ' and ' + right;
     },
 
     isNull_: function(expression) {

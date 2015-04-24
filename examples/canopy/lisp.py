@@ -255,7 +255,7 @@ class Grammar(object):
         chunk0 = None
         if len(self._input) > self._offset:
             chunk0 = self._input[self._offset:self._offset + 1]
-        if chunk0 and re.match('^[1-9]', chunk0):
+        if chunk0 is not None and re.match('^[1-9]', chunk0):
             address1 = SyntaxNode(self._input[self._offset:self._offset + 1], self._offset, [])
             self._offset = self._offset + 1
         else:
@@ -273,7 +273,7 @@ class Grammar(object):
                 chunk1 = None
                 if len(self._input) > self._offset:
                     chunk1 = self._input[self._offset:self._offset + 1]
-                if chunk1 and re.match('^[0-9]', chunk1):
+                if chunk1 is not None and re.match('^[0-9]', chunk1):
                     address3 = SyntaxNode(self._input[self._offset:self._offset + 1], self._offset, [])
                     self._offset = self._offset + 1
                 else:
@@ -383,7 +383,7 @@ class Grammar(object):
                     chunk3 = None
                     if len(self._input) > self._offset:
                         chunk3 = self._input[self._offset:self._offset + 1]
-                    if chunk3 and re.match('^[^"]', chunk3):
+                    if chunk3 is not None and re.match('^[^"]', chunk3):
                         address3 = SyntaxNode(self._input[self._offset:self._offset + 1], self._offset, [])
                         self._offset = self._offset + 1
                     else:
@@ -505,7 +505,7 @@ class Grammar(object):
         chunk0 = None
         if len(self._input) > self._offset:
             chunk0 = self._input[self._offset:self._offset + 1]
-        if chunk0 and re.match('^[\\s]', chunk0):
+        if chunk0 is not None and re.match('^[\\s]', chunk0):
             address0 = SyntaxNode(self._input[self._offset:self._offset + 1], self._offset, [])
             self._offset = self._offset + 1
         else:

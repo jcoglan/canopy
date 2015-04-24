@@ -334,10 +334,6 @@
       this._line(variable + ' -= 1');
     },
 
-    and_: function(left, right) {
-      return left + ' and ' + right;
-    },
-
     isNull_: function(expression) {
       return expression + '.nil?';
     },

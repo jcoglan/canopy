@@ -316,7 +316,7 @@ module CanopyLisp
       if @input.size > @offset
         chunk0 = @input[@offset...@offset + 1]
       end
-      if chunk0 and chunk0 =~ /\A[1-9]/
+      if chunk0 =~ /\A[1-9]/
         address1 = SyntaxNode.new(@input[@offset...@offset + 1], @offset, [])
         @offset = @offset + 1
       else
@@ -338,7 +338,7 @@ module CanopyLisp
           if @input.size > @offset
             chunk1 = @input[@offset...@offset + 1]
           end
-          if chunk1 and chunk1 =~ /\A[0-9]/
+          if chunk1 =~ /\A[0-9]/
             address3 = SyntaxNode.new(@input[@offset...@offset + 1], @offset, [])
             @offset = @offset + 1
           else
@@ -475,7 +475,7 @@ module CanopyLisp
             if @input.size > @offset
               chunk3 = @input[@offset...@offset + 1]
             end
-            if chunk3 and chunk3 =~ /\A[^"]/
+            if chunk3 =~ /\A[^"]/
               address3 = SyntaxNode.new(@input[@offset...@offset + 1], @offset, [])
               @offset = @offset + 1
             else
@@ -629,7 +629,7 @@ module CanopyLisp
       if @input.size > @offset
         chunk0 = @input[@offset...@offset + 1]
       end
-      if chunk0 and chunk0 =~ /\A[\s]/
+      if chunk0 =~ /\A[\s]/
         address0 = SyntaxNode.new(@input[@offset...@offset + 1], @offset, [])
         @offset = @offset + 1
       else

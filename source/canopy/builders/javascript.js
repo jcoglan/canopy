@@ -324,8 +324,8 @@
       return expression + '.toLowerCase() === ' + this._quote(string) + '.toLowerCase()';
     },
 
-    regexMatch_: function(regex, expression) {
-      return '/' + regex.source + '/.test(' + expression + ')';
+    regexMatch_: function(regex, string) {
+      return string + ' !== null && /' + regex.source + '/.test(' + string + ')';
     },
 
     return_: function(expression) {
@@ -346,10 +346,6 @@
 
     decrement_: function(variable) {
       this._line('--' + variable);
-    },
-
-    and_: function(left, right) {
-      return left + ' && ' + right;
     },
 
     isNull_: function(expression) {
