@@ -16,11 +16,10 @@ Canopy.Compiler.Sequence = {
     return sexp;
   },
 
-  compileNodeClasses: function(builder, nodeClassName, subclassIndex) {
-    var subclassName = nodeClassName + subclassIndex,
-        expressions  = this.expressions(),
-        labels       = {},
-        anyLabels    = false,
+  collectLabels: function(subclassName) {
+    var expressions = this.expressions(),
+        labels      = {},
+        anyLabels   = false,
         exprLabels, i, j, m, n;
 
     for (i = 0, n = expressions.length; i < n; i++) {
@@ -31,19 +30,12 @@ Canopy.Compiler.Sequence = {
         labels[exprLabels[j]] = i;
     }
 
-    if (!anyLabels) return false;
-
-    builder.class_(subclassName, nodeClassName, function(builder) {
-      var keys = [];
-      for (var key in labels) keys.push(key);
-      builder.attributes_(keys);
-      builder.constructor_(['text', 'offset', 'elements'], function(builder) {
-        for (var key in labels)
-          builder.attribute_(key, builder.arrayLookup_('elements', labels[key]));
-      });
-    });
-    this._nodeClassName = subclassName;
-    return true;
+    if (anyLabels) {
+      this._nodeClassName = subclassName;
+      return labels;
+    } else {
+      return null;
+    }
   },
 
   compile: function(builder, address, nodeType) {

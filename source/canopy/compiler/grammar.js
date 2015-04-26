@@ -17,9 +17,20 @@ Canopy.Compiler.Grammar = {
           subclassIndex = 1;
 
       var scan = function(node) {
-        if (node.compileNodeClasses) {
-          if (node.compileNodeClasses(builder, nodeClassName, subclassIndex))
-            subclassIndex += 1;
+        var subclassName = nodeClassName + subclassIndex,
+            labels = node.collectLabels && node.collectLabels(subclassName);
+
+        if (labels) {
+          builder.class_(subclassName, nodeClassName, function(builder) {
+            var keys = [];
+            for (var key in labels) keys.push(key);
+            builder.attributes_(keys);
+            builder.constructor_(['text', 'offset', 'elements'], function(builder) {
+              for (var key in labels)
+                builder.attribute_(key, builder.arrayLookup_('elements', labels[key]));
+            });
+          });
+          subclassIndex += 1;
         }
         node.forEach(scan, this);
       };
