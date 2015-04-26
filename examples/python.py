@@ -19,8 +19,6 @@ grammar_file = os.path.join(dirname, 'canopy', 'peg.peg')
 with open(grammar_file) as f:
     grammar = f.read()
 
-print(parsimonious_peg.parse(grammar))
-
 def test_canopy_parse_lisp(benchmark):
     @benchmark
     def canopy_parse_lisp():
