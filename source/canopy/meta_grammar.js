@@ -183,7 +183,7 @@
       var address1 = null;
       var remaining0 = 0, index2 = this._offset, elements1 = [], address2 = true;
       while (address2 !== null) {
-        address2 = this._read_space();
+        address2 = this._read__();
         if (address2) {
           elements1.push(address2);
           --remaining0;
@@ -208,7 +208,7 @@
             var address6 = null;
             var remaining2 = 0, index5 = this._offset, elements4 = [], address7 = true;
             while (address7 !== null) {
-              address7 = this._read_space();
+              address7 = this._read__();
               if (address7) {
                 elements4.push(address7);
                 --remaining2;
@@ -256,7 +256,7 @@
             var address9 = null;
             var remaining3 = 0, index6 = this._offset, elements5 = [], address10 = true;
             while (address10 !== null) {
-              address10 = this._read_space();
+              address10 = this._read__();
               if (address10) {
                 elements5.push(address10);
                 --remaining3;
@@ -404,7 +404,7 @@
       var address1 = null;
       var remaining0 = 1, index2 = this._offset, elements1 = [], address2 = true;
       while (address2 !== null) {
-        address2 = this._read_space();
+        address2 = this._read__();
         if (address2) {
           elements1.push(address2);
           --remaining0;
@@ -441,7 +441,7 @@
           var address4 = null;
           var remaining1 = 1, index3 = this._offset, elements2 = [], address5 = true;
           while (address5 !== null) {
-            address5 = this._read_space();
+            address5 = this._read__();
             if (address5) {
               elements2.push(address5);
               --remaining1;
@@ -530,7 +530,7 @@
         var address2 = null;
         var remaining0 = 0, index2 = this._offset, elements1 = [], address3 = true;
         while (address3 !== null) {
-          address3 = this._read_space();
+          address3 = this._read__();
           if (address3) {
             elements1.push(address3);
             --remaining0;
@@ -551,7 +551,7 @@
             var address5 = null;
             var remaining1 = 0, index3 = this._offset, elements2 = [], address6 = true;
             while (address6 !== null) {
-              address6 = this._read_space();
+              address6 = this._read__();
               if (address6) {
                 elements2.push(address6);
                 --remaining1;
@@ -635,7 +635,7 @@
           var address4 = null;
           var remaining1 = 1, index4 = this._offset, elements3 = [], address5 = true;
           while (address5 !== null) {
-            address5 = this._read_space();
+            address5 = this._read__();
             if (address5) {
               elements3.push(address5);
               --remaining1;
@@ -672,7 +672,7 @@
               var address7 = null;
               var remaining2 = 1, index5 = this._offset, elements4 = [], address8 = true;
               while (address8 !== null) {
-                address8 = this._read_space();
+                address8 = this._read__();
                 if (address8) {
                   elements4.push(address8);
                   --remaining2;
@@ -771,7 +771,7 @@
         var address3 = null;
         var remaining0 = 1, index5 = this._offset, elements2 = [], address4 = true;
         while (address4 !== null) {
-          address4 = this._read_space();
+          address4 = this._read__();
           if (address4) {
             elements2.push(address4);
             --remaining0;
@@ -923,7 +923,7 @@
           var address4 = null;
           var remaining1 = 1, index4 = this._offset, elements3 = [], address5 = true;
           while (address5 !== null) {
-            address5 = this._read_space();
+            address5 = this._read__();
             if (address5) {
               elements3.push(address5);
               --remaining1;
@@ -2247,10 +2247,10 @@
       return address0;
     },
 
-    _read_space: function() {
+    _read__: function() {
       var address0 = null, index0 = this._offset;
-      this._cache._space = this._cache._space || {};
-      var cached = this._cache._space[index0];
+      this._cache.__ = this._cache.__ || {};
+      var cached = this._cache.__[index0];
       if (cached) {
         this._offset = cached[1];
         return cached[0];
@@ -2272,7 +2272,7 @@
           this._expected.push('[\\s]');
         }
       }
-      this._cache._space[index0] = [address0, this._offset];
+      this._cache.__[index0] = [address0, this._offset];
       return address0;
     }
   };
