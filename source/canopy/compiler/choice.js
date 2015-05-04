@@ -16,28 +16,20 @@ Canopy.Compiler.Choice = {
     return sexp;
   },
 
-  compile: function(builder, address, nodeType) {
+  compile: function(builder, address) {
     var startOffset = builder.localVar_('index', builder.offset_());
-    this._compileChoices(builder, 0, address, nodeType, startOffset);
+    this._compileChoices(builder, 0, address, startOffset);
   },
 
-  _compileChoices: function(builder, index, address, nodeType, startOffset) {
+  _compileChoices: function(builder, index, address, startOffset) {
     var expressions = this.expressions();
     if (index === expressions.length) return;
 
     expressions[index].compile(builder, address);
 
-    var onFail = function(builder) {
+    builder.unless_(address, function(builder) {
       builder.assign_(builder.offset_(), startOffset);
-      this._compileChoices(builder, index + 1, address, nodeType, startOffset);
-    };
-
-    if (nodeType) {
-      builder.ifNode_(address, function(builder) {
-        builder.extendNode_(address, nodeType);
-      }, onFail, this);
-    } else {
-      builder.unless_(address, onFail, this);
-    }
+      this._compileChoices(builder, index + 1, address, startOffset);
+    }, this);
   }
 };

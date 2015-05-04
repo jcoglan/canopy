@@ -254,7 +254,7 @@
       return chunk;
     },
 
-    syntaxNode_: function(address, start, end, elements, nodeType, action, nodeClass) {
+    syntaxNode_: function(address, start, end, elements, action, nodeClass) {
       var args;
 
       if (action) {
@@ -266,7 +266,6 @@
       }
 
       this.assign_(address, action + '(' + args.join(', ') + ')');
-      this.extendNode_(address, nodeType);
       this.assign_('this._offset', end);
     },
 

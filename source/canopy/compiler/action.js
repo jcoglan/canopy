@@ -13,7 +13,7 @@ Canopy.Compiler.Action = {
     return ['action', this.actionName(), this.expression().toSexp()];
   },
 
-  compile: function(builder, address, nodeType) {
-    this.expression().compile(builder, address, nodeType, this.actionName());
+  compile: function(builder, address) {
+    this.expression().compile(builder, address, this.actionName());
   }
 };

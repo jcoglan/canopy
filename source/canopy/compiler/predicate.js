@@ -12,7 +12,7 @@ Canopy.Compiler.Predicate = {
     return [predicate, expression.toSexp()];
   },
 
-  compile: function(builder, address, nodeType) {
+  compile: function(builder, address) {
     var startOffset = builder.localVar_('index', builder.offset_()),
         table       = {'&': 'if_', '!': 'unless_'},
         branch      = table[this.predicate.text];
@@ -22,7 +22,7 @@ Canopy.Compiler.Predicate = {
 
     builder[branch](address, function(builder) {
       var of = builder.offset_();
-      builder.syntaxNode_(address, of, of, builder.emptyList_(), nodeType);
+      builder.syntaxNode_(address, of, of, builder.emptyList_());
     }, function(builder) {
       builder.assign_(address, builder.null_());
     });

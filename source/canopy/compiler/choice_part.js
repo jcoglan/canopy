@@ -11,6 +11,7 @@ Canopy.Compiler.ChoicePart = {
   },
 
   compile: function(builder, address) {
-    this.elements[0].compile(builder, address, this.nodeType());
+    this.elements[0].compile(builder, address);
+    builder.extendNode_(address, this.nodeType());
   }
 };

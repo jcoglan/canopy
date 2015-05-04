@@ -17,7 +17,7 @@ Canopy.Compiler.Repeat = {
     return sexp;
   },
 
-  compile: function(builder, address, nodeType, action) {
+  compile: function(builder, address, action) {
     var quantifier = this.quantifier.text;
 
     var minimum = this.QUANTITIES[quantifier],
@@ -42,7 +42,7 @@ Canopy.Compiler.Repeat = {
     }, this);
 
     builder.if_(builder.isZero_(remaining), function(builder) {
-      builder.syntaxNode_(address, startOffset, builder.offset_(), elements, nodeType, action);
+      builder.syntaxNode_(address, startOffset, builder.offset_(), elements, action);
     }, function(builder) {
       builder.assign_(address, builder.null_());
     });

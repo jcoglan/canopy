@@ -25,7 +25,7 @@ Canopy.Compiler.SequencePart = {
     return sexp;
   },
 
-  compile: function(builder, address, nodeType) {
-    return this.atomic().compile(builder, address, nodeType);
+  compile: function(builder, address) {
+    return this.atomic().compile(builder, address);
   }
 };

@@ -11,20 +11,12 @@ Canopy.Compiler.Maybe = {
     return ['maybe', sexp];
   },
 
-  compile: function(builder, address, nodeType) {
+  compile: function(builder, address) {
     var startOffset = builder.localVar_('index', builder.offset_());
     this.atomic().compile(builder, address);
 
-    var onFail = function(builder) {
-      builder.syntaxNode_(address, startOffset, startOffset, builder.emptyList_(), nodeType);
-    };
-
-    if (nodeType) {
-      builder.ifNode_(address, function(builder) {
-        builder.extendNode_(address, nodeType);
-      }, onFail);
-    } else {
-      builder.unless_(address, onFail);
-    }
+    builder.unless_(address, function(builder) {
+      builder.syntaxNode_(address, startOffset, startOffset, builder.emptyList_());
+    });
   }
 };

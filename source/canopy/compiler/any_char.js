@@ -3,7 +3,7 @@ Canopy.Compiler.AnyChar = {
     return ['any-char'];
   },
 
-  compile: function(builder, address, nodeType, action) {
+  compile: function(builder, address, action) {
     var nextChar = builder.chunk_(1);
 
     // TODO just check the length, don't make a substring
@@ -11,7 +11,7 @@ Canopy.Compiler.AnyChar = {
       builder.failure_(address, '<any char>');
     }, function(builder) {
       var of = builder.offset_();
-      builder.syntaxNode_(address, of, of + ' + 1', builder.emptyList_(), nodeType, action);
+      builder.syntaxNode_(address, of, of + ' + 1', builder.emptyList_(), action);
     });
   }
 };

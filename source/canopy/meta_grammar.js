@@ -313,11 +313,11 @@
       }
       if (elements0) {
         address0 = new SyntaxNode1(this._input.substring(index1, this._offset), index1, elements0);
-        extend(address0, this.constructor.Grammar);
         this._offset = this._offset;
       } else {
         address0 = null;
       }
+      extend(address0, this.constructor.Grammar);
       this._cache._grammar[index0] = [address0, this._offset];
       return address0;
     },
@@ -408,11 +408,11 @@
       }
       if (elements0) {
         address0 = new SyntaxNode4(this._input.substring(index1, this._offset), index1, elements0);
-        extend(address0, this.constructor.GrammarRule);
         this._offset = this._offset;
       } else {
         address0 = null;
       }
+      extend(address0, this.constructor.GrammarRule);
       this._cache._grammar_rule[index0] = [address0, this._offset];
       return address0;
     },
@@ -760,11 +760,11 @@
       }
       if (elements0) {
         address0 = new SyntaxNode6(this._input.substring(index1, this._offset), index1, elements0);
-        extend(address0, this.constructor.Choice);
         this._offset = this._offset;
       } else {
         address0 = null;
       }
+      extend(address0, this.constructor.Choice);
       this._cache._choice_expression[index0] = [address0, this._offset];
       return address0;
     },
@@ -848,11 +848,11 @@
       }
       if (elements0) {
         address0 = new SyntaxNode(this._input.substring(index1, this._offset), index1, elements0);
-        extend(address0, this.constructor.ChoicePart);
         this._offset = this._offset;
       } else {
         address0 = null;
       }
+      extend(address0, this.constructor.ChoicePart);
       this._cache._choice_part[index0] = [address0, this._offset];
       return address0;
     },
@@ -905,11 +905,11 @@
       }
       if (elements0) {
         address0 = new SyntaxNode9(this._input.substring(index1, this._offset), index1, elements0);
-        extend(address0, this.constructor.Action);
         this._offset = this._offset;
       } else {
         address0 = null;
       }
+      extend(address0, this.constructor.Action);
       this._cache._action_expression[index0] = [address0, this._offset];
       return address0;
     },
@@ -1248,11 +1248,11 @@
       }
       if (elements0) {
         address0 = new SyntaxNode13(this._input.substring(index1, this._offset), index1, elements0);
-        extend(address0, this.constructor.Sequence);
         this._offset = this._offset;
       } else {
         address0 = null;
       }
+      extend(address0, this.constructor.Sequence);
       this._cache._sequence_expression[index0] = [address0, this._offset];
       return address0;
     },
@@ -1301,11 +1301,11 @@
       }
       if (elements0) {
         address0 = new SyntaxNode15(this._input.substring(index1, this._offset), index1, elements0);
-        extend(address0, this.constructor.SequencePart);
         this._offset = this._offset;
       } else {
         address0 = null;
       }
+      extend(address0, this.constructor.SequencePart);
       this._cache._sequence_part[index0] = [address0, this._offset];
       return address0;
     },
@@ -1353,11 +1353,11 @@
       }
       if (elements0) {
         address0 = new SyntaxNode16(this._input.substring(index1, this._offset), index1, elements0);
-        extend(address0, this.constructor.Maybe);
         this._offset = this._offset;
       } else {
         address0 = null;
       }
+      extend(address0, this.constructor.Maybe);
       this._cache._maybe_atom[index0] = [address0, this._offset];
       return address0;
     },
@@ -1429,11 +1429,11 @@
       }
       if (elements0) {
         address0 = new SyntaxNode17(this._input.substring(index1, this._offset), index1, elements0);
-        extend(address0, this.constructor.Repeat);
         this._offset = this._offset;
       } else {
         address0 = null;
       }
+      extend(address0, this.constructor.Repeat);
       this._cache._repeated_atom[index0] = [address0, this._offset];
       return address0;
     },
@@ -1563,11 +1563,11 @@
       }
       if (elements0) {
         address0 = new SyntaxNode18(this._input.substring(index1, this._offset), index1, elements0);
-        extend(address0, this.constructor.Predicate);
         this._offset = this._offset;
       } else {
         address0 = null;
       }
+      extend(address0, this.constructor.Predicate);
       this._cache._predicated_atom[index0] = [address0, this._offset];
       return address0;
     },
@@ -1607,11 +1607,11 @@
       }
       if (elements0) {
         address0 = new SyntaxNode19(this._input.substring(index1, this._offset), index1, elements0);
-        extend(address0, this.constructor.Reference);
         this._offset = this._offset;
       } else {
         address0 = null;
       }
+      extend(address0, this.constructor.Reference);
       this._cache._reference_expression[index0] = [address0, this._offset];
       return address0;
     },
@@ -1779,9 +1779,7 @@
       } else {
         address0 = null;
       }
-      if (address0 !== null) {
-        extend(address0, this.constructor.String);
-      } else {
+      if (!address0) {
         this._offset = index1;
         var index6 = this._offset, elements3 = [];
         var address7 = null;
@@ -1937,12 +1935,11 @@
         } else {
           address0 = null;
         }
-        if (address0 !== null) {
-          extend(address0, this.constructor.String);
-        } else {
+        if (!address0) {
           this._offset = index1;
         }
       }
+      extend(address0, this.constructor.String);
       this._cache._string_expression[index0] = [address0, this._offset];
       return address0;
     },
@@ -2105,11 +2102,11 @@
       }
       if (elements0) {
         address0 = new SyntaxNode(this._input.substring(index1, this._offset), index1, elements0);
-        extend(address0, this.constructor.CIString);
         this._offset = this._offset;
       } else {
         address0 = null;
       }
+      extend(address0, this.constructor.CIString);
       this._cache._ci_string_expression[index0] = [address0, this._offset];
       return address0;
     },
@@ -2128,7 +2125,6 @@
       }
       if (chunk0 === '.') {
         address0 = new SyntaxNode(this._input.substring(this._offset, this._offset + 1), this._offset, []);
-        extend(address0, this.constructor.AnyChar);
         this._offset = this._offset + 1;
       } else {
         address0 = null;
@@ -2140,6 +2136,7 @@
           this._expected.push('"."');
         }
       }
+      extend(address0, this.constructor.AnyChar);
       this._cache._any_char_expression[index0] = [address0, this._offset];
       return address0;
     },
@@ -2331,11 +2328,11 @@
       }
       if (elements0) {
         address0 = new SyntaxNode(this._input.substring(index1, this._offset), index1, elements0);
-        extend(address0, this.constructor.CharClass);
         this._offset = this._offset;
       } else {
         address0 = null;
       }
+      extend(address0, this.constructor.CharClass);
       this._cache._char_class_expression[index0] = [address0, this._offset];
       return address0;
     },
