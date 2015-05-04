@@ -33,7 +33,7 @@ Canopy.Compiler.Choice = {
     };
 
     if (nodeType) {
-      builder.if_(address, function(builder) {
+      builder.ifNode_(address, function(builder) {
         builder.extendNode_(address, nodeType);
       }, onFail, this);
     } else {

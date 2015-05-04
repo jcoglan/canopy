@@ -38,7 +38,7 @@ Canopy.Compiler.Sequence = {
     }
   },
 
-  compile: function(builder, address, nodeType) {
+  compile: function(builder, address, nodeType, action) {
     var temp = builder.localVars_({
       index:    builder.offset_(),
       elements: builder.emptyList_()
@@ -48,8 +48,9 @@ Canopy.Compiler.Sequence = {
         elements    = temp.elements;
 
     this._compileExpressions(builder, 0, startOffset, elements);
+
     builder.if_(elements, function(builder) {
-      builder.syntaxNode_(address, nodeType, startOffset, builder.offset_(), elements, this._nodeClassName);
+      builder.syntaxNode_(address, startOffset, builder.offset_(), elements, nodeType, action, this._nodeClassName);
     }, function(builder) {
       builder.assign_(address, builder.null_());
     }, this);
@@ -63,7 +64,7 @@ Canopy.Compiler.Sequence = {
 
     expressions[index].compile(builder, expAddr);
 
-    builder.if_(expAddr, function(builder) {
+    builder.ifNode_(expAddr, function(builder) {
       builder.append_(elements, expAddr);
       this._compileExpressions(builder, index + 1, startOffset, elements);
     }, function(builder) {

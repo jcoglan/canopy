@@ -107,13 +107,15 @@
     },
 
     parserClass_: function(root) {
-      this.function_('var Parser', ['input'], function(builder) {
+      this.function_('var Parser', ['input', 'actions'], function(builder) {
         builder.assign_('this._input', 'input');
         builder.assign_('this._offset', '0');
         builder.assign_('this._cache', '{}');
         builder.assign_('this._failure', '0');
         builder.assign_('this._expected', '[]');
+        builder.assign_('this._actions', 'actions');
       });
+
       this.function_('Parser.prototype.parse', [], function(builder) {
         builder.jump_('var tree', root);
 
@@ -127,10 +129,12 @@
         builder.assign_('this.constructor.lastError', '{offset: this._offset, expected: this._expected}');
         builder._line('throw new SyntaxError(formatError(this._input, this._failure, this._expected))');
       });
-      this.function_('var parse', ['input'], function(builder) {
-        builder.assign_('var parser', 'new Parser(input)');
+
+      this.function_('var parse', ['input', 'actions'], function(builder) {
+        builder.assign_('var parser', 'new Parser(input, actions)');
         builder.return_('parser.parse()');
       });
+
       this._line('extend(Parser.prototype, Grammar)');
       this._newline();
     },
@@ -250,15 +254,24 @@
       return chunk;
     },
 
-    syntaxNode_: function(address, nodeType, start, end, elements, nodeClass) {
-      elements = elements || '[]';
+    syntaxNode_: function(address, start, end, elements, nodeType, action, nodeClass) {
+      var args;
 
-      var klass = nodeClass || 'SyntaxNode',
-          text  = 'this._input.substring(' + start + ', ' + end + ')';
+      if (action) {
+        action = 'this._actions.' + action;
+        args   = ['this._input', start, end, elements];
+      } else {
+        action = 'new ' + (nodeClass || 'SyntaxNode');
+        args   = ['this._input.substring(' + start + ', ' + end + ')', start, elements];
+      }
 
-      this.assign_(address, 'new ' + klass + '(' + [text, start, elements].join(', ') + ')');
+      this.assign_(address, action + '(' + args.join(', ') + ')');
       this.extendNode_(address, nodeType);
       this.assign_('this._offset', end);
+    },
+
+    ifNode_: function(address, block, else_, context) {
+      this.if_(address + ' !== null', block, else_, context);
     },
 
     extendNode_: function(address, nodeType) {

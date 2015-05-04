@@ -288,6 +288,46 @@ function() { with(this) {
     }})
   }})
 
+  describe('action annotation', function() { with(this) {
+    describe('on atomic nodes', function() { with(this) {
+      before(function() { with(this) {
+        this.compiler = new Canopy.Compiler('\
+          grammar ActionString              \
+            string <- "foo" %make_node      \
+        ')
+      }})
+
+      it('wraps the node with an action', function() { with(this) {
+        assertEqual(['grammar', 'ActionString',
+                      ['rule', 'string',
+                        ['action', 'make_node',
+                          ['string', 'foo']]]],
+
+            compiler.toSexp() )
+      }})
+    }})
+
+    describe('on sequences', function() { with(this) {
+      before(function() { with(this) {
+        this.compiler = new Canopy.Compiler('\
+          grammar ActionSequence             \
+            string <- "foo" "bar" %make_seq  \
+        ')
+      }})
+
+      it('wraps the sequence with an action', function() { with(this) {
+        assertEqual(['grammar', 'ActionSequence',
+                      ['rule', 'string',
+                        ['action', 'make_seq',
+                          ['sequence',
+                            ['string', 'foo'],
+                            ['string', 'bar']]]]],
+
+            compiler.toSexp() )
+      }})
+    }})
+  }})
+
   describe('type annotation', function() { with(this) {
     describe('on atomic nodes', function() { with(this) {
       before(function() { with(this) {

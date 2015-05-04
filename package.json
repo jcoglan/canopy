@@ -13,12 +13,13 @@
 , "dependencies"    : {"nopt": ""}
 , "devDependencies" : {"benchmark": "", "jstest": "", "pegjs": "", "wake": ""}
 
-, "scripts"         : { "build" : "wake && ./bin/canopy source/canopy/meta_grammar.peg"
-                      , "js"    : "find examples/canopy -name '*.peg' -exec ./bin/canopy --lang js {} \\;"
+, "scripts"         : { "build"   : "wake"
+                      , "compile" : "./bin/canopy source/canopy/meta_grammar.peg"
+                      , "js"      : "find examples/canopy -name '*.peg' -exec ./bin/canopy --lang js {} \\;"
                       , "python"  : "find examples/canopy -name '*.peg' -exec ./bin/canopy --lang py {} \\;"
-                      , "ruby"  : "find examples/canopy -name '*.peg' -exec ./bin/canopy --lang rb {} \\;"
-                      , "pegjs" : "find examples/pegjs -name '*.peg' -exec pegjs --cache {} \\;"
-                      , "test"  : "node spec/console.js"}
+                      , "ruby"    : "find examples/canopy -name '*.peg' -exec ./bin/canopy --lang rb {} \\;"
+                      , "pegjs"   : "find examples/pegjs -name '*.peg' -exec pegjs --cache {} \\;"
+                      , "test"    : "node spec/console.js"}
 
 , "bugs"            : {"url": "http://github.com/jcoglan/canopy/issues"}
 
@@ -45,11 +46,13 @@
                     "canopy/compiler/grammar_rule",
                     "canopy/compiler/choice",
                     "canopy/compiler/choice_part",
+                    "canopy/compiler/action",
                     "canopy/compiler/any_char",
                     "canopy/compiler/char_class",
                     "canopy/compiler/string",
                     "canopy/compiler/ci_string",
                     "canopy/compiler/predicate",
+                    "canopy/compiler/maybe",
                     "canopy/compiler/repeat",
                     "canopy/compiler/sequence",
                     "canopy/compiler/sequence_part",
