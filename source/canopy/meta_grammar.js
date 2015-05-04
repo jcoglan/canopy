@@ -2586,11 +2586,11 @@
   
   var Parser = function(input, actions) {
     this._input = input;
+    this._actions = actions;
     this._offset = 0;
     this._cache = {};
     this._failure = 0;
     this._expected = [];
-    this._actions = actions;
   };
   
   Parser.prototype.parse = function() {

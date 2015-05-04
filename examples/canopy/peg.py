@@ -148,7 +148,7 @@ class Grammar(object):
         remaining0, index2, elements1, address2 = 0, self._offset, [], True
         while address2 is not None:
             address2 = self._read_space()
-            if address2:
+            if address2 is not None:
                 elements1.append(address2)
                 remaining0 -= 1
         if remaining0 <= 0:
@@ -156,11 +156,11 @@ class Grammar(object):
             self._offset = self._offset
         else:
             address1 = None
-        if address1:
+        if address1 is not None:
             elements0.append(address1)
             address3 = None
             address3 = self._read_grammar_name()
-            if address3:
+            if address3 is not None:
                 elements0.append(address3)
                 address4 = None
                 remaining1, index3, elements2, address5 = 1, self._offset, [], True
@@ -170,7 +170,7 @@ class Grammar(object):
                     remaining2, index5, elements4, address7 = 0, self._offset, [], True
                     while address7 is not None:
                         address7 = self._read_space()
-                        if address7:
+                        if address7 is not None:
                             elements4.append(address7)
                             remaining2 -= 1
                     if remaining2 <= 0:
@@ -178,11 +178,11 @@ class Grammar(object):
                         self._offset = self._offset
                     else:
                         address6 = None
-                    if address6:
+                    if address6 is not None:
                         elements3.append(address6)
                         address8 = None
                         address8 = self._read_grammar_rule()
-                        if address8:
+                        if address8 is not None:
                             elements3.append(address8)
                         else:
                             elements3 = None
@@ -195,7 +195,7 @@ class Grammar(object):
                         self._offset = self._offset
                     else:
                         address5 = None
-                    if address5:
+                    if address5 is not None:
                         elements2.append(address5)
                         remaining1 -= 1
                 if remaining1 <= 0:
@@ -203,13 +203,13 @@ class Grammar(object):
                     self._offset = self._offset
                 else:
                     address4 = None
-                if address4:
+                if address4 is not None:
                     elements0.append(address4)
                     address9 = None
                     remaining3, index6, elements5, address10 = 0, self._offset, [], True
                     while address10 is not None:
                         address10 = self._read_space()
-                        if address10:
+                        if address10 is not None:
                             elements5.append(address10)
                             remaining3 -= 1
                     if remaining3 <= 0:
@@ -217,7 +217,7 @@ class Grammar(object):
                         self._offset = self._offset
                     else:
                         address9 = None
-                    if address9:
+                    if address9 is not None:
                         elements0.append(address9)
                     else:
                         elements0 = None
@@ -260,11 +260,11 @@ class Grammar(object):
                 self._expected = []
             if self._offset == self._failure:
                 self._expected.append('`grammar `')
-        if address1:
+        if address1 is not None:
             elements0.append(address1)
             address2 = None
             address2 = self._read_object_identifier()
-            if address2:
+            if address2 is not None:
                 elements0.append(address2)
             else:
                 elements0 = None
@@ -289,15 +289,15 @@ class Grammar(object):
         index1, elements0 = self._offset, []
         address1 = None
         address1 = self._read_identifier()
-        if address1:
+        if address1 is not None:
             elements0.append(address1)
             address2 = None
             address2 = self._read_assignment()
-            if address2:
+            if address2 is not None:
                 elements0.append(address2)
                 address3 = None
                 address3 = self._read_parsing_expression()
-                if address3:
+                if address3 is not None:
                     elements0.append(address3)
                 else:
                     elements0 = None
@@ -327,7 +327,7 @@ class Grammar(object):
         remaining0, index2, elements1, address2 = 1, self._offset, [], True
         while address2 is not None:
             address2 = self._read_space()
-            if address2:
+            if address2 is not None:
                 elements1.append(address2)
                 remaining0 -= 1
         if remaining0 <= 0:
@@ -335,7 +335,7 @@ class Grammar(object):
             self._offset = self._offset
         else:
             address1 = None
-        if address1:
+        if address1 is not None:
             elements0.append(address1)
             address3 = None
             chunk0 = None
@@ -351,13 +351,13 @@ class Grammar(object):
                     self._expected = []
                 if self._offset == self._failure:
                     self._expected.append('"<-"')
-            if address3:
+            if address3 is not None:
                 elements0.append(address3)
                 address4 = None
                 remaining1, index3, elements2, address5 = 1, self._offset, [], True
                 while address5 is not None:
                     address5 = self._read_space()
-                    if address5:
+                    if address5 is not None:
                         elements2.append(address5)
                         remaining1 -= 1
                 if remaining1 <= 0:
@@ -365,7 +365,7 @@ class Grammar(object):
                     self._offset = self._offset
                 else:
                     address4 = None
-                if address4:
+                if address4 is not None:
                     elements0.append(address4)
                 else:
                     elements0 = None
@@ -421,13 +421,13 @@ class Grammar(object):
                 self._expected = []
             if self._offset == self._failure:
                 self._expected.append('"("')
-        if address1:
+        if address1 is not None:
             elements0.append(address1)
             address2 = None
             remaining0, index2, elements1, address3 = 0, self._offset, [], True
             while address3 is not None:
                 address3 = self._read_space()
-                if address3:
+                if address3 is not None:
                     elements1.append(address3)
                     remaining0 -= 1
             if remaining0 <= 0:
@@ -435,17 +435,17 @@ class Grammar(object):
                 self._offset = self._offset
             else:
                 address2 = None
-            if address2:
+            if address2 is not None:
                 elements0.append(address2)
                 address4 = None
                 address4 = self._read_parsing_expression()
-                if address4:
+                if address4 is not None:
                     elements0.append(address4)
                     address5 = None
                     remaining1, index3, elements2, address6 = 0, self._offset, [], True
                     while address6 is not None:
                         address6 = self._read_space()
-                        if address6:
+                        if address6 is not None:
                             elements2.append(address6)
                             remaining1 -= 1
                     if remaining1 <= 0:
@@ -453,7 +453,7 @@ class Grammar(object):
                         self._offset = self._offset
                     else:
                         address5 = None
-                    if address5:
+                    if address5 is not None:
                         elements0.append(address5)
                         address7 = None
                         chunk1 = None
@@ -469,7 +469,7 @@ class Grammar(object):
                                 self._expected = []
                             if self._offset == self._failure:
                                 self._expected.append('")"')
-                        if address7:
+                        if address7 is not None:
                             elements0.append(address7)
                         else:
                             elements0 = None
@@ -503,7 +503,7 @@ class Grammar(object):
         index1, elements0 = self._offset, []
         address1 = None
         address1 = self._read_choice_part()
-        if address1:
+        if address1 is not None:
             elements0.append(address1)
             address2 = None
             remaining0, index2, elements1, address3 = 1, self._offset, [], True
@@ -513,7 +513,7 @@ class Grammar(object):
                 remaining1, index4, elements3, address5 = 1, self._offset, [], True
                 while address5 is not None:
                     address5 = self._read_space()
-                    if address5:
+                    if address5 is not None:
                         elements3.append(address5)
                         remaining1 -= 1
                 if remaining1 <= 0:
@@ -521,7 +521,7 @@ class Grammar(object):
                     self._offset = self._offset
                 else:
                     address4 = None
-                if address4:
+                if address4 is not None:
                     elements2.append(address4)
                     address6 = None
                     chunk0 = None
@@ -537,13 +537,13 @@ class Grammar(object):
                             self._expected = []
                         if self._offset == self._failure:
                             self._expected.append('"/"')
-                    if address6:
+                    if address6 is not None:
                         elements2.append(address6)
                         address7 = None
                         remaining2, index5, elements4, address8 = 1, self._offset, [], True
                         while address8 is not None:
                             address8 = self._read_space()
-                            if address8:
+                            if address8 is not None:
                                 elements4.append(address8)
                                 remaining2 -= 1
                         if remaining2 <= 0:
@@ -551,11 +551,11 @@ class Grammar(object):
                             self._offset = self._offset
                         else:
                             address7 = None
-                        if address7:
+                        if address7 is not None:
                             elements2.append(address7)
                             address9 = None
                             address9 = self._read_choice_part()
-                            if address9:
+                            if address9 is not None:
                                 elements2.append(address9)
                             else:
                                 elements2 = None
@@ -574,7 +574,7 @@ class Grammar(object):
                     self._offset = self._offset
                 else:
                     address3 = None
-                if address3:
+                if address3 is not None:
                     elements1.append(address3)
                     remaining0 -= 1
             if remaining0 <= 0:
@@ -582,7 +582,7 @@ class Grammar(object):
                 self._offset = self._offset
             else:
                 address2 = None
-            if address2:
+            if address2 is not None:
                 elements0.append(address2)
             else:
                 elements0 = None
@@ -613,7 +613,7 @@ class Grammar(object):
             address1 = self._read_sequence_part()
             if not address1:
                 self._offset = index2
-        if address1:
+        if address1 is not None:
             elements0.append(address1)
             address2 = None
             index3 = self._offset
@@ -622,7 +622,7 @@ class Grammar(object):
             remaining0, index5, elements2, address4 = 1, self._offset, [], True
             while address4 is not None:
                 address4 = self._read_space()
-                if address4:
+                if address4 is not None:
                     elements2.append(address4)
                     remaining0 -= 1
             if remaining0 <= 0:
@@ -630,11 +630,11 @@ class Grammar(object):
                 self._offset = self._offset
             else:
                 address3 = None
-            if address3:
+            if address3 is not None:
                 elements1.append(address3)
                 address5 = None
                 address5 = self._read_type_expression()
-                if address5:
+                if address5 is not None:
                     elements1.append(address5)
                 else:
                     elements1 = None
@@ -650,7 +650,7 @@ class Grammar(object):
             if not address2:
                 address2 = SyntaxNode(self._input[index3:index3], index3, [])
                 self._offset = index3
-            if address2:
+            if address2 is not None:
                 elements0.append(address2)
             else:
                 elements0 = None
@@ -687,11 +687,11 @@ class Grammar(object):
                 self._expected = []
             if self._offset == self._failure:
                 self._expected.append('"<"')
-        if address1:
+        if address1 is not None:
             elements0.append(address1)
             address2 = None
             address2 = self._read_object_identifier()
-            if address2:
+            if address2 is not None:
                 elements0.append(address2)
                 address3 = None
                 chunk1 = None
@@ -707,7 +707,7 @@ class Grammar(object):
                         self._expected = []
                     if self._offset == self._failure:
                         self._expected.append('">"')
-                if address3:
+                if address3 is not None:
                     elements0.append(address3)
                 else:
                     elements0 = None
@@ -735,7 +735,7 @@ class Grammar(object):
         index1, elements0 = self._offset, []
         address1 = None
         address1 = self._read_sequence_part()
-        if address1:
+        if address1 is not None:
             elements0.append(address1)
             address2 = None
             remaining0, index2, elements1, address3 = 1, self._offset, [], True
@@ -745,7 +745,7 @@ class Grammar(object):
                 remaining1, index4, elements3, address5 = 1, self._offset, [], True
                 while address5 is not None:
                     address5 = self._read_space()
-                    if address5:
+                    if address5 is not None:
                         elements3.append(address5)
                         remaining1 -= 1
                 if remaining1 <= 0:
@@ -753,11 +753,11 @@ class Grammar(object):
                     self._offset = self._offset
                 else:
                     address4 = None
-                if address4:
+                if address4 is not None:
                     elements2.append(address4)
                     address6 = None
                     address6 = self._read_sequence_part()
-                    if address6:
+                    if address6 is not None:
                         elements2.append(address6)
                     else:
                         elements2 = None
@@ -770,7 +770,7 @@ class Grammar(object):
                     self._offset = self._offset
                 else:
                     address3 = None
-                if address3:
+                if address3 is not None:
                     elements1.append(address3)
                     remaining0 -= 1
             if remaining0 <= 0:
@@ -778,7 +778,7 @@ class Grammar(object):
                 self._offset = self._offset
             else:
                 address2 = None
-            if address2:
+            if address2 is not None:
                 elements0.append(address2)
             else:
                 elements0 = None
@@ -807,7 +807,7 @@ class Grammar(object):
         if not address1:
             address1 = SyntaxNode(self._input[index2:index2], index2, [])
             self._offset = index2
-        if address1:
+        if address1 is not None:
             elements0.append(address1)
             address2 = None
             index3 = self._offset
@@ -817,7 +817,7 @@ class Grammar(object):
                 address2 = self._read_atom()
                 if not address2:
                     self._offset = index3
-            if address2:
+            if address2 is not None:
                 elements0.append(address2)
             else:
                 elements0 = None
@@ -842,11 +842,11 @@ class Grammar(object):
         index1, elements0 = self._offset, []
         address1 = None
         address1 = self._read_atom()
-        if address1:
+        if address1 is not None:
             elements0.append(address1)
             address2 = None
             address2 = self._read_quantifier()
-            if address2:
+            if address2 is not None:
                 elements0.append(address2)
             else:
                 elements0 = None
@@ -932,11 +932,11 @@ class Grammar(object):
                     self._expected.append('"!"')
             if not address1:
                 self._offset = index2
-        if address1:
+        if address1 is not None:
             elements0.append(address1)
             address2 = None
             address2 = self._read_atom()
-            if address2:
+            if address2 is not None:
                 elements0.append(address2)
             else:
                 elements0 = None
@@ -961,7 +961,7 @@ class Grammar(object):
         index1, elements0 = self._offset, []
         address1 = None
         address1 = self._read_identifier()
-        if address1:
+        if address1 is not None:
             elements0.append(address1)
             address2 = None
             index2 = self._offset
@@ -972,7 +972,7 @@ class Grammar(object):
                 self._offset = self._offset
             else:
                 address2 = None
-            if address2:
+            if address2 is not None:
                 elements0.append(address2)
             else:
                 elements0 = None
@@ -1009,7 +1009,7 @@ class Grammar(object):
                 self._expected = []
             if self._offset == self._failure:
                 self._expected.append('"\\""')
-        if address1:
+        if address1 is not None:
             elements0.append(address1)
             address2 = None
             remaining0, index2, elements1, address3 = 0, self._offset, [], True
@@ -1030,7 +1030,7 @@ class Grammar(object):
                         self._expected = []
                     if self._offset == self._failure:
                         self._expected.append('"\\\\"')
-                if address4:
+                if address4 is not None:
                     elements2.append(address4)
                     address5 = None
                     chunk2 = None
@@ -1046,7 +1046,7 @@ class Grammar(object):
                     else:
                         address5 = SyntaxNode(self._input[self._offset:self._offset + 1], self._offset, [])
                         self._offset = self._offset + 1
-                    if address5:
+                    if address5 is not None:
                         elements2.append(address5)
                     else:
                         elements2 = None
@@ -1076,7 +1076,7 @@ class Grammar(object):
                             self._expected.append('[^"]')
                     if not address3:
                         self._offset = index3
-                if address3:
+                if address3 is not None:
                     elements1.append(address3)
                     remaining0 -= 1
             if remaining0 <= 0:
@@ -1084,7 +1084,7 @@ class Grammar(object):
                 self._offset = self._offset
             else:
                 address2 = None
-            if address2:
+            if address2 is not None:
                 elements0.append(address2)
                 address6 = None
                 chunk4 = None
@@ -1100,7 +1100,7 @@ class Grammar(object):
                         self._expected = []
                     if self._offset == self._failure:
                         self._expected.append('"\\""')
-                if address6:
+                if address6 is not None:
                     elements0.append(address6)
                 else:
                     elements0 = None
@@ -1140,7 +1140,7 @@ class Grammar(object):
                 self._expected = []
             if self._offset == self._failure:
                 self._expected.append('"`"')
-        if address1:
+        if address1 is not None:
             elements0.append(address1)
             address2 = None
             remaining0, index2, elements1, address3 = 0, self._offset, [], True
@@ -1161,7 +1161,7 @@ class Grammar(object):
                         self._expected = []
                     if self._offset == self._failure:
                         self._expected.append('"\\\\"')
-                if address4:
+                if address4 is not None:
                     elements2.append(address4)
                     address5 = None
                     chunk2 = None
@@ -1177,7 +1177,7 @@ class Grammar(object):
                     else:
                         address5 = SyntaxNode(self._input[self._offset:self._offset + 1], self._offset, [])
                         self._offset = self._offset + 1
-                    if address5:
+                    if address5 is not None:
                         elements2.append(address5)
                     else:
                         elements2 = None
@@ -1207,7 +1207,7 @@ class Grammar(object):
                             self._expected.append('[^`]')
                     if not address3:
                         self._offset = index3
-                if address3:
+                if address3 is not None:
                     elements1.append(address3)
                     remaining0 -= 1
             if remaining0 <= 0:
@@ -1215,7 +1215,7 @@ class Grammar(object):
                 self._offset = self._offset
             else:
                 address2 = None
-            if address2:
+            if address2 is not None:
                 elements0.append(address2)
                 address6 = None
                 chunk4 = None
@@ -1231,7 +1231,7 @@ class Grammar(object):
                         self._expected = []
                     if self._offset == self._failure:
                         self._expected.append('"`"')
-                if address6:
+                if address6 is not None:
                     elements0.append(address6)
                 else:
                     elements0 = None
@@ -1293,7 +1293,7 @@ class Grammar(object):
                 self._expected = []
             if self._offset == self._failure:
                 self._expected.append('"["')
-        if address1:
+        if address1 is not None:
             elements0.append(address1)
             address2 = None
             index2 = self._offset
@@ -1313,7 +1313,7 @@ class Grammar(object):
             if not address2:
                 address2 = SyntaxNode(self._input[index2:index2], index2, [])
                 self._offset = index2
-            if address2:
+            if address2 is not None:
                 elements0.append(address2)
                 address3 = None
                 remaining0, index3, elements1, address4 = 1, self._offset, [], True
@@ -1334,7 +1334,7 @@ class Grammar(object):
                             self._expected = []
                         if self._offset == self._failure:
                             self._expected.append('"\\\\"')
-                    if address5:
+                    if address5 is not None:
                         elements2.append(address5)
                         address6 = None
                         chunk3 = None
@@ -1350,7 +1350,7 @@ class Grammar(object):
                         else:
                             address6 = SyntaxNode(self._input[self._offset:self._offset + 1], self._offset, [])
                             self._offset = self._offset + 1
-                        if address6:
+                        if address6 is not None:
                             elements2.append(address6)
                         else:
                             elements2 = None
@@ -1380,7 +1380,7 @@ class Grammar(object):
                                 self._expected.append('[^\\]]')
                         if not address4:
                             self._offset = index4
-                    if address4:
+                    if address4 is not None:
                         elements1.append(address4)
                         remaining0 -= 1
                 if remaining0 <= 0:
@@ -1388,7 +1388,7 @@ class Grammar(object):
                     self._offset = self._offset
                 else:
                     address3 = None
-                if address3:
+                if address3 is not None:
                     elements0.append(address3)
                     address7 = None
                     chunk5 = None
@@ -1404,7 +1404,7 @@ class Grammar(object):
                             self._expected = []
                         if self._offset == self._failure:
                             self._expected.append('"]"')
-                    if address7:
+                    if address7 is not None:
                         elements0.append(address7)
                     else:
                         elements0 = None
@@ -1435,7 +1435,7 @@ class Grammar(object):
         index1, elements0 = self._offset, []
         address1 = None
         address1 = self._read_identifier()
-        if address1:
+        if address1 is not None:
             elements0.append(address1)
             address2 = None
             chunk0 = None
@@ -1451,7 +1451,7 @@ class Grammar(object):
                     self._expected = []
                 if self._offset == self._failure:
                     self._expected.append('":"')
-            if address2:
+            if address2 is not None:
                 elements0.append(address2)
             else:
                 elements0 = None
@@ -1476,7 +1476,7 @@ class Grammar(object):
         index1, elements0 = self._offset, []
         address1 = None
         address1 = self._read_identifier()
-        if address1:
+        if address1 is not None:
             elements0.append(address1)
             address2 = None
             remaining0, index2, elements1, address3 = 0, self._offset, [], True
@@ -1496,11 +1496,11 @@ class Grammar(object):
                         self._expected = []
                     if self._offset == self._failure:
                         self._expected.append('"."')
-                if address4:
+                if address4 is not None:
                     elements2.append(address4)
                     address5 = None
                     address5 = self._read_identifier()
-                    if address5:
+                    if address5 is not None:
                         elements2.append(address5)
                     else:
                         elements2 = None
@@ -1513,7 +1513,7 @@ class Grammar(object):
                     self._offset = self._offset
                 else:
                     address3 = None
-                if address3:
+                if address3 is not None:
                     elements1.append(address3)
                     remaining0 -= 1
             if remaining0 <= 0:
@@ -1521,7 +1521,7 @@ class Grammar(object):
                 self._offset = self._offset
             else:
                 address2 = None
-            if address2:
+            if address2 is not None:
                 elements0.append(address2)
             else:
                 elements0 = None
@@ -1558,7 +1558,7 @@ class Grammar(object):
                 self._expected = []
             if self._offset == self._failure:
                 self._expected.append('[a-zA-Z_]')
-        if address1:
+        if address1 is not None:
             elements0.append(address1)
             address2 = None
             remaining0, index2, elements1, address3 = 0, self._offset, [], True
@@ -1576,7 +1576,7 @@ class Grammar(object):
                         self._expected = []
                     if self._offset == self._failure:
                         self._expected.append('[a-zA-Z0-9_]')
-                if address3:
+                if address3 is not None:
                     elements1.append(address3)
                     remaining0 -= 1
             if remaining0 <= 0:
@@ -1584,7 +1584,7 @@ class Grammar(object):
                 self._offset = self._offset
             else:
                 address2 = None
-            if address2:
+            if address2 is not None:
                 elements0.append(address2)
             else:
                 elements0 = None
@@ -1679,8 +1679,9 @@ class Grammar(object):
 
 
 class Parser(Grammar):
-    def __init__(self, input):
+    def __init__(self, input, actions):
         self._input = input
+        self._actions = actions
         self._offset = 0
         self._cache = defaultdict(dict)
         self._failure = 0
@@ -1707,6 +1708,6 @@ def format_error(input, offset, expected):
     message += ' ' * (offset - position)
     return message + '^'
 
-def parse(input):
-    parser = Parser(input)
+def parse(input, actions=None):
+    parser = Parser(input, actions)
     return parser.parse()

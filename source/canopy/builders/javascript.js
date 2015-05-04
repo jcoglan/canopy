@@ -109,11 +109,11 @@
     parserClass_: function(root) {
       this.function_('var Parser', ['input', 'actions'], function(builder) {
         builder.assign_('this._input', 'input');
+        builder.assign_('this._actions', 'actions');
         builder.assign_('this._offset', '0');
         builder.assign_('this._cache', '{}');
         builder.assign_('this._failure', '0');
         builder.assign_('this._expected', '[]');
-        builder.assign_('this._actions', 'actions');
       });
 
       this.function_('Parser.prototype.parse', [], function(builder) {

@@ -99,8 +99,9 @@
         builder._line('include Grammar');
         builder._methodSeparator = '\n';
 
-        builder.method_('initialize', ['input'], function(builder) {
+        builder.method_('initialize', ['input', 'actions'], function(builder) {
           builder.attribute_('input', 'input');
+          builder.attribute_('actions', 'actions');
           builder.attribute_('offset', '0');
           builder.attribute_('cache', 'Hash.new { |h,k| h[k] = {} }');
           builder.attribute_('failure', '0');
@@ -139,9 +140,9 @@
     },
 
     exports_: function() {
-      this._line('def self.parse(input)');
+      this._line('def self.parse(input, actions = nil)');
       this._indent(function(builder) {
-        builder.assign_('parser', 'Parser.new(input)');
+        builder.assign_('parser', 'Parser.new(input, actions)');
         builder._line('parser.parse');
       });
       this._line('end');
@@ -230,15 +231,23 @@
       return chunk;
     },
 
-    syntaxNode_: function(address, nodeType, start, end, elements, nodeClass) {
-      elements = elements || '[]';
+    syntaxNode_: function(address, start, end, elements, action, nodeClass) {
+      var args;
 
-      var klass = nodeClass || 'SyntaxNode',
-          text  = '@input[' + start + '...' + end + ']';
+      if (action) {
+        action = '@actions.' + action;
+        args   = ['@input', start, end, elements];
+      } else {
+        action = (nodeClass || 'SyntaxNode') + '.new';
+        args   = ['@input[' + start + '...' + end + ']', start, elements];
+      }
 
-      this.assign_(address, klass + '.new(' + [text, start, elements].join(', ') + ')');
-      this.extendNode_(address, nodeType);
+      this.assign_(address, action + '(' + args.join(', ') + ')');
       this.assign_('@offset', end);
+    },
+
+    ifNode_: function(address, block, else_, context) {
+      this.unless_(this.isNull_(address), block, else_, context);
     },
 
     extendNode_: function(address, nodeType) {

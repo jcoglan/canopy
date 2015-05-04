@@ -39,7 +39,7 @@ class Grammar(object):
         remaining0, index1, elements0, address1 = 1, self._offset, [], True
         while address1 is not None:
             address1 = self._read_cell()
-            if address1:
+            if address1 is not None:
                 elements0.append(address1)
                 remaining0 -= 1
         if remaining0 <= 0:
@@ -61,7 +61,7 @@ class Grammar(object):
         remaining0, index2, elements1, address2 = 0, self._offset, [], True
         while address2 is not None:
             address2 = self._read_space()
-            if address2:
+            if address2 is not None:
                 elements1.append(address2)
                 remaining0 -= 1
         if remaining0 <= 0:
@@ -69,7 +69,7 @@ class Grammar(object):
             self._offset = self._offset
         else:
             address1 = None
-        if address1:
+        if address1 is not None:
             elements0.append(address1)
             address3 = None
             index3 = self._offset
@@ -79,13 +79,13 @@ class Grammar(object):
                 address3 = self._read_atom()
                 if not address3:
                     self._offset = index3
-            if address3:
+            if address3 is not None:
                 elements0.append(address3)
                 address4 = None
                 remaining1, index4, elements2, address5 = 0, self._offset, [], True
                 while address5 is not None:
                     address5 = self._read_space()
-                    if address5:
+                    if address5 is not None:
                         elements2.append(address5)
                         remaining1 -= 1
                 if remaining1 <= 0:
@@ -93,7 +93,7 @@ class Grammar(object):
                     self._offset = self._offset
                 else:
                     address4 = None
-                if address4:
+                if address4 is not None:
                     elements0.append(address4)
                 else:
                     elements0 = None
@@ -133,13 +133,13 @@ class Grammar(object):
                 self._expected = []
             if self._offset == self._failure:
                 self._expected.append('"("')
-        if address1:
+        if address1 is not None:
             elements0.append(address1)
             address2 = None
             remaining0, index2, elements1, address3 = 1, self._offset, [], True
             while address3 is not None:
                 address3 = self._read_cell()
-                if address3:
+                if address3 is not None:
                     elements1.append(address3)
                     remaining0 -= 1
             if remaining0 <= 0:
@@ -147,7 +147,7 @@ class Grammar(object):
                 self._offset = self._offset
             else:
                 address2 = None
-            if address2:
+            if address2 is not None:
                 elements0.append(address2)
                 address4 = None
                 chunk1 = None
@@ -163,7 +163,7 @@ class Grammar(object):
                         self._expected = []
                     if self._offset == self._failure:
                         self._expected.append('")"')
-                if address4:
+                if address4 is not None:
                     elements0.append(address4)
                 else:
                     elements0 = None
@@ -265,7 +265,7 @@ class Grammar(object):
                 self._expected = []
             if self._offset == self._failure:
                 self._expected.append('[1-9]')
-        if address1:
+        if address1 is not None:
             elements0.append(address1)
             address2 = None
             remaining0, index2, elements1, address3 = 0, self._offset, [], True
@@ -283,7 +283,7 @@ class Grammar(object):
                         self._expected = []
                     if self._offset == self._failure:
                         self._expected.append('[0-9]')
-                if address3:
+                if address3 is not None:
                     elements1.append(address3)
                     remaining0 -= 1
             if remaining0 <= 0:
@@ -291,7 +291,7 @@ class Grammar(object):
                 self._offset = self._offset
             else:
                 address2 = None
-            if address2:
+            if address2 is not None:
                 elements0.append(address2)
             else:
                 elements0 = None
@@ -328,7 +328,7 @@ class Grammar(object):
                 self._expected = []
             if self._offset == self._failure:
                 self._expected.append('"\\""')
-        if address1:
+        if address1 is not None:
             elements0.append(address1)
             address2 = None
             remaining0, index2, elements1, address3 = 0, self._offset, [], True
@@ -349,7 +349,7 @@ class Grammar(object):
                         self._expected = []
                     if self._offset == self._failure:
                         self._expected.append('"\\\\"')
-                if address4:
+                if address4 is not None:
                     elements2.append(address4)
                     address5 = None
                     chunk2 = None
@@ -365,7 +365,7 @@ class Grammar(object):
                     else:
                         address5 = SyntaxNode(self._input[self._offset:self._offset + 1], self._offset, [])
                         self._offset = self._offset + 1
-                    if address5:
+                    if address5 is not None:
                         elements2.append(address5)
                     else:
                         elements2 = None
@@ -395,7 +395,7 @@ class Grammar(object):
                             self._expected.append('[^"]')
                     if not address3:
                         self._offset = index3
-                if address3:
+                if address3 is not None:
                     elements1.append(address3)
                     remaining0 -= 1
             if remaining0 <= 0:
@@ -403,7 +403,7 @@ class Grammar(object):
                 self._offset = self._offset
             else:
                 address2 = None
-            if address2:
+            if address2 is not None:
                 elements0.append(address2)
                 address6 = None
                 chunk4 = None
@@ -419,7 +419,7 @@ class Grammar(object):
                         self._expected = []
                     if self._offset == self._failure:
                         self._expected.append('"\\""')
-                if address6:
+                if address6 is not None:
                     elements0.append(address6)
                 else:
                     elements0 = None
@@ -456,7 +456,7 @@ class Grammar(object):
                 self._offset = self._offset
             else:
                 address2 = None
-            if address2:
+            if address2 is not None:
                 elements1.append(address2)
                 address3 = None
                 chunk0 = None
@@ -472,7 +472,7 @@ class Grammar(object):
                 else:
                     address3 = SyntaxNode(self._input[self._offset:self._offset + 1], self._offset, [])
                     self._offset = self._offset + 1
-                if address3:
+                if address3 is not None:
                     elements1.append(address3)
                 else:
                     elements1 = None
@@ -485,7 +485,7 @@ class Grammar(object):
                 self._offset = self._offset
             else:
                 address1 = None
-            if address1:
+            if address1 is not None:
                 elements0.append(address1)
                 remaining0 -= 1
         if remaining0 <= 0:
@@ -576,8 +576,9 @@ class Grammar(object):
 
 
 class Parser(Grammar):
-    def __init__(self, input):
+    def __init__(self, input, actions):
         self._input = input
+        self._actions = actions
         self._offset = 0
         self._cache = defaultdict(dict)
         self._failure = 0
@@ -604,6 +605,6 @@ def format_error(input, offset, expected):
     message += ' ' * (offset - position)
     return message + '^'
 
-def parse(input):
-    parser = Parser(input)
+def parse(input, actions=None):
+    parser = Parser(input, actions)
     return parser.parse()

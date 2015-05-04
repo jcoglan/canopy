@@ -93,8 +93,9 @@
 
     parserClass_: function(root) {
       this.class_('Parser', 'Grammar', function(builder) {
-        builder.method_('__init__', ['input'], function(builder) {
+        builder.method_('__init__', ['input', 'actions'], function(builder) {
           builder.attribute_('_input', 'input');
+          builder.attribute_('_actions', 'actions');
           builder.attribute_('_offset', '0');
           builder.attribute_('_cache', 'defaultdict(dict)');
           builder.attribute_('_failure', '0');
@@ -132,9 +133,9 @@
     },
 
     exports_: function() {
-      this._line('def parse(input):');
+      this._line('def parse(input, actions=None):');
       this._indent(function(builder) {
-        builder.assign_('parser', 'Parser(input)');
+        builder.assign_('parser', 'Parser(input, actions)');
         builder.return_('parser.parse()');
       });
     },
@@ -216,15 +217,23 @@
       return chunk;
     },
 
-    syntaxNode_: function(address, nodeType, start, end, elements, nodeClass) {
-      elements = elements || '[]';
+    syntaxNode_: function(address, start, end, elements, action, nodeClass) {
+      var args;
 
-      var klass = nodeClass || 'SyntaxNode',
-          text  = 'self._input[' + start + ':' + end + ']';
+      if (action) {
+        action = 'self._actions.' + action;
+        args   = ['self._input', start, end, elements];
+      } else {
+        action = nodeClass || 'SyntaxNode';
+        args   = ['self._input[' + start + ':' + end + ']', start, elements];
+      }
 
-      this.assign_(address, klass + '(' + [text, start, elements].join(', ') + ')');
-      this.extendNode_(address, nodeType);
+      this.assign_(address, action + '(' + args.join(', ') + ')');
       this.assign_('self._offset', end);
+    },
+
+    ifNode_: function(address, block, else_, context) {
+      this.if_(address + ' is not None', block, else_, context);
     },
 
     extendNode_: function(address, nodeType) {

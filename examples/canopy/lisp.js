@@ -75,7 +75,7 @@
       var remaining0 = 1, index1 = this._offset, elements0 = [], address1 = true;
       while (address1 !== null) {
         address1 = this._read_cell();
-        if (address1) {
+        if (address1 !== null) {
           elements0.push(address1);
           --remaining0;
         }
@@ -103,7 +103,7 @@
       var remaining0 = 0, index2 = this._offset, elements1 = [], address2 = true;
       while (address2 !== null) {
         address2 = this._read_space();
-        if (address2) {
+        if (address2 !== null) {
           elements1.push(address2);
           --remaining0;
         }
@@ -114,7 +114,7 @@
       } else {
         address1 = null;
       }
-      if (address1) {
+      if (address1 !== null) {
         elements0.push(address1);
         var address3 = null;
         var index3 = this._offset;
@@ -126,13 +126,13 @@
             this._offset = index3;
           }
         }
-        if (address3) {
+        if (address3 !== null) {
           elements0.push(address3);
           var address4 = null;
           var remaining1 = 0, index4 = this._offset, elements2 = [], address5 = true;
           while (address5 !== null) {
             address5 = this._read_space();
-            if (address5) {
+            if (address5 !== null) {
               elements2.push(address5);
               --remaining1;
             }
@@ -143,7 +143,7 @@
           } else {
             address4 = null;
           }
-          if (address4) {
+          if (address4 !== null) {
             elements0.push(address4);
           } else {
             elements0 = null;
@@ -194,13 +194,13 @@
           this._expected.push('"("');
         }
       }
-      if (address1) {
+      if (address1 !== null) {
         elements0.push(address1);
         var address2 = null;
         var remaining0 = 1, index2 = this._offset, elements1 = [], address3 = true;
         while (address3 !== null) {
           address3 = this._read_cell();
-          if (address3) {
+          if (address3 !== null) {
             elements1.push(address3);
             --remaining0;
           }
@@ -211,7 +211,7 @@
         } else {
           address2 = null;
         }
-        if (address2) {
+        if (address2 !== null) {
           elements0.push(address2);
           var address4 = null;
           var chunk1 = null;
@@ -231,7 +231,7 @@
               this._expected.push('")"');
             }
           }
-          if (address4) {
+          if (address4 !== null) {
             elements0.push(address4);
           } else {
             elements0 = null;
@@ -364,7 +364,7 @@
           this._expected.push('[1-9]');
         }
       }
-      if (address1) {
+      if (address1 !== null) {
         elements0.push(address1);
         var address2 = null;
         var remaining0 = 0, index2 = this._offset, elements1 = [], address3 = true;
@@ -386,7 +386,7 @@
               this._expected.push('[0-9]');
             }
           }
-          if (address3) {
+          if (address3 !== null) {
             elements1.push(address3);
             --remaining0;
           }
@@ -397,7 +397,7 @@
         } else {
           address2 = null;
         }
-        if (address2) {
+        if (address2 !== null) {
           elements0.push(address2);
         } else {
           elements0 = null;
@@ -444,7 +444,7 @@
           this._expected.push('"\\""');
         }
       }
-      if (address1) {
+      if (address1 !== null) {
         elements0.push(address1);
         var address2 = null;
         var remaining0 = 0, index2 = this._offset, elements1 = [], address3 = true;
@@ -469,7 +469,7 @@
               this._expected.push('"\\\\"');
             }
           }
-          if (address4) {
+          if (address4 !== null) {
             elements2.push(address4);
             var address5 = null;
             var chunk2 = null;
@@ -489,7 +489,7 @@
               address5 = new SyntaxNode(this._input.substring(this._offset, this._offset + 1), this._offset, []);
               this._offset = this._offset + 1;
             }
-            if (address5) {
+            if (address5 !== null) {
               elements2.push(address5);
             } else {
               elements2 = null;
@@ -528,7 +528,7 @@
               this._offset = index3;
             }
           }
-          if (address3) {
+          if (address3 !== null) {
             elements1.push(address3);
             --remaining0;
           }
@@ -539,7 +539,7 @@
         } else {
           address2 = null;
         }
-        if (address2) {
+        if (address2 !== null) {
           elements0.push(address2);
           var address6 = null;
           var chunk4 = null;
@@ -559,7 +559,7 @@
               this._expected.push('"\\""');
             }
           }
-          if (address6) {
+          if (address6 !== null) {
             elements0.push(address6);
           } else {
             elements0 = null;
@@ -604,7 +604,7 @@
         } else {
           address2 = null;
         }
-        if (address2) {
+        if (address2 !== null) {
           elements1.push(address2);
           var address3 = null;
           var chunk0 = null;
@@ -624,7 +624,7 @@
             address3 = new SyntaxNode(this._input.substring(this._offset, this._offset + 1), this._offset, []);
             this._offset = this._offset + 1;
           }
-          if (address3) {
+          if (address3 !== null) {
             elements1.push(address3);
           } else {
             elements1 = null;
@@ -640,7 +640,7 @@
         } else {
           address1 = null;
         }
-        if (address1) {
+        if (address1 !== null) {
           elements0.push(address1);
           --remaining0;
         }
@@ -759,8 +759,9 @@
     }
   };
   
-  var Parser = function(input) {
+  var Parser = function(input, actions) {
     this._input = input;
+    this._actions = actions;
     this._offset = 0;
     this._cache = {};
     this._failure = 0;
@@ -780,8 +781,8 @@
     throw new SyntaxError(formatError(this._input, this._failure, this._expected));
   };
   
-  var parse = function(input) {
-    var parser = new Parser(input);
+  var parse = function(input, actions) {
+    var parser = new Parser(input, actions);
     return parser.parse();
   };
   

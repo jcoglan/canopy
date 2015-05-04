@@ -45,7 +45,7 @@ module CanopyLisp
       remaining0, index1, elements0, address1 = 1, @offset, [], true
       until address1 == nil
         address1 = _read_cell
-        if address1
+        unless address1.nil?
           elements0 << address1
           remaining0 -= 1
         end
@@ -72,7 +72,7 @@ module CanopyLisp
       remaining0, index2, elements1, address2 = 0, @offset, [], true
       until address2 == nil
         address2 = _read_space
-        if address2
+        unless address2.nil?
           elements1 << address2
           remaining0 -= 1
         end
@@ -83,7 +83,7 @@ module CanopyLisp
       else
         address1 = nil
       end
-      if address1
+      unless address1.nil?
         elements0 << address1
         address3 = nil
         index3 = @offset
@@ -95,13 +95,13 @@ module CanopyLisp
             @offset = index3
           end
         end
-        if address3
+        unless address3.nil?
           elements0 << address3
           address4 = nil
           remaining1, index4, elements2, address5 = 0, @offset, [], true
           until address5 == nil
             address5 = _read_space
-            if address5
+            unless address5.nil?
               elements2 << address5
               remaining1 -= 1
             end
@@ -112,7 +112,7 @@ module CanopyLisp
           else
             address4 = nil
           end
-          if address4
+          unless address4.nil?
             elements0 << address4
           else
             elements0 = nil
@@ -162,13 +162,13 @@ module CanopyLisp
           @expected << "\"(\""
         end
       end
-      if address1
+      unless address1.nil?
         elements0 << address1
         address2 = nil
         remaining0, index2, elements1, address3 = 1, @offset, [], true
         until address3 == nil
           address3 = _read_cell
-          if address3
+          unless address3.nil?
             elements1 << address3
             remaining0 -= 1
           end
@@ -179,7 +179,7 @@ module CanopyLisp
         else
           address2 = nil
         end
-        if address2
+        unless address2.nil?
           elements0 << address2
           address4 = nil
           chunk1 = nil
@@ -199,7 +199,7 @@ module CanopyLisp
               @expected << "\")\""
             end
           end
-          if address4
+          unless address4.nil?
             elements0 << address4
           else
             elements0 = nil
@@ -329,7 +329,7 @@ module CanopyLisp
           @expected << "[1-9]"
         end
       end
-      if address1
+      unless address1.nil?
         elements0 << address1
         address2 = nil
         remaining0, index2, elements1, address3 = 0, @offset, [], true
@@ -351,7 +351,7 @@ module CanopyLisp
               @expected << "[0-9]"
             end
           end
-          if address3
+          unless address3.nil?
             elements1 << address3
             remaining0 -= 1
           end
@@ -362,7 +362,7 @@ module CanopyLisp
         else
           address2 = nil
         end
-        if address2
+        unless address2.nil?
           elements0 << address2
         else
           elements0 = nil
@@ -408,7 +408,7 @@ module CanopyLisp
           @expected << "\"\\\"\""
         end
       end
-      if address1
+      unless address1.nil?
         elements0 << address1
         address2 = nil
         remaining0, index2, elements1, address3 = 0, @offset, [], true
@@ -433,7 +433,7 @@ module CanopyLisp
               @expected << "\"\\\\\""
             end
           end
-          if address4
+          unless address4.nil?
             elements2 << address4
             address5 = nil
             chunk2 = nil
@@ -453,7 +453,7 @@ module CanopyLisp
               address5 = SyntaxNode.new(@input[@offset...@offset + 1], @offset, [])
               @offset = @offset + 1
             end
-            if address5
+            unless address5.nil?
               elements2 << address5
             else
               elements2 = nil
@@ -492,7 +492,7 @@ module CanopyLisp
               @offset = index3
             end
           end
-          if address3
+          unless address3.nil?
             elements1 << address3
             remaining0 -= 1
           end
@@ -503,7 +503,7 @@ module CanopyLisp
         else
           address2 = nil
         end
-        if address2
+        unless address2.nil?
           elements0 << address2
           address6 = nil
           chunk4 = nil
@@ -523,7 +523,7 @@ module CanopyLisp
               @expected << "\"\\\"\""
             end
           end
-          if address6
+          unless address6.nil?
             elements0 << address6
           else
             elements0 = nil
@@ -567,7 +567,7 @@ module CanopyLisp
         else
           address2 = nil
         end
-        if address2
+        unless address2.nil?
           elements1 << address2
           address3 = nil
           chunk0 = nil
@@ -587,7 +587,7 @@ module CanopyLisp
             address3 = SyntaxNode.new(@input[@offset...@offset + 1], @offset, [])
             @offset = @offset + 1
           end
-          if address3
+          unless address3.nil?
             elements1 << address3
           else
             elements1 = nil
@@ -603,7 +603,7 @@ module CanopyLisp
         else
           address1 = nil
         end
-        if address1
+        unless address1.nil?
           elements0 << address1
           remaining0 -= 1
         end
@@ -722,8 +722,9 @@ module CanopyLisp
   class Parser
     include Grammar
 
-    def initialize(input)
+    def initialize(input, actions)
       @input = input
+      @actions = actions
       @offset = 0
       @cache = Hash.new { |h,k| h[k] = {} }
       @failure = 0
@@ -756,8 +757,8 @@ module CanopyLisp
     end
   end
 
-  def self.parse(input)
-    parser = Parser.new(input)
+  def self.parse(input, actions = nil)
+    parser = Parser.new(input, actions)
     parser.parse
   end
 end

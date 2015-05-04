@@ -202,7 +202,7 @@ module Canopy::PEG
       remaining0, index2, elements1, address2 = 0, @offset, [], true
       until address2 == nil
         address2 = _read_space
-        if address2
+        unless address2.nil?
           elements1 << address2
           remaining0 -= 1
         end
@@ -213,11 +213,11 @@ module Canopy::PEG
       else
         address1 = nil
       end
-      if address1
+      unless address1.nil?
         elements0 << address1
         address3 = nil
         address3 = _read_grammar_name
-        if address3
+        unless address3.nil?
           elements0 << address3
           address4 = nil
           remaining1, index3, elements2, address5 = 1, @offset, [], true
@@ -227,7 +227,7 @@ module Canopy::PEG
             remaining2, index5, elements4, address7 = 0, @offset, [], true
             until address7 == nil
               address7 = _read_space
-              if address7
+              unless address7.nil?
                 elements4 << address7
                 remaining2 -= 1
               end
@@ -238,11 +238,11 @@ module Canopy::PEG
             else
               address6 = nil
             end
-            if address6
+            unless address6.nil?
               elements3 << address6
               address8 = nil
               address8 = _read_grammar_rule
-              if address8
+              unless address8.nil?
                 elements3 << address8
               else
                 elements3 = nil
@@ -258,7 +258,7 @@ module Canopy::PEG
             else
               address5 = nil
             end
-            if address5
+            unless address5.nil?
               elements2 << address5
               remaining1 -= 1
             end
@@ -269,13 +269,13 @@ module Canopy::PEG
           else
             address4 = nil
           end
-          if address4
+          unless address4.nil?
             elements0 << address4
             address9 = nil
             remaining3, index6, elements5, address10 = 0, @offset, [], true
             until address10 == nil
               address10 = _read_space
-              if address10
+              unless address10.nil?
                 elements5 << address10
                 remaining3 -= 1
               end
@@ -286,7 +286,7 @@ module Canopy::PEG
             else
               address9 = nil
             end
-            if address9
+            unless address9.nil?
               elements0 << address9
             else
               elements0 = nil
@@ -340,11 +340,11 @@ module Canopy::PEG
           @expected << "`grammar `"
         end
       end
-      if address1
+      unless address1.nil?
         elements0 << address1
         address2 = nil
         address2 = _read_object_identifier
-        if address2
+        unless address2.nil?
           elements0 << address2
         else
           elements0 = nil
@@ -374,15 +374,15 @@ module Canopy::PEG
       index1, elements0 = @offset, []
       address1 = nil
       address1 = _read_identifier
-      if address1
+      unless address1.nil?
         elements0 << address1
         address2 = nil
         address2 = _read_assignment
-        if address2
+        unless address2.nil?
           elements0 << address2
           address3 = nil
           address3 = _read_parsing_expression
-          if address3
+          unless address3.nil?
             elements0 << address3
           else
             elements0 = nil
@@ -418,7 +418,7 @@ module Canopy::PEG
       remaining0, index2, elements1, address2 = 1, @offset, [], true
       until address2 == nil
         address2 = _read_space
-        if address2
+        unless address2.nil?
           elements1 << address2
           remaining0 -= 1
         end
@@ -429,7 +429,7 @@ module Canopy::PEG
       else
         address1 = nil
       end
-      if address1
+      unless address1.nil?
         elements0 << address1
         address3 = nil
         chunk0 = nil
@@ -449,13 +449,13 @@ module Canopy::PEG
             @expected << "\"<-\""
           end
         end
-        if address3
+        unless address3.nil?
           elements0 << address3
           address4 = nil
           remaining1, index3, elements2, address5 = 1, @offset, [], true
           until address5 == nil
             address5 = _read_space
-            if address5
+            unless address5.nil?
               elements2 << address5
               remaining1 -= 1
             end
@@ -466,7 +466,7 @@ module Canopy::PEG
           else
             address4 = nil
           end
-          if address4
+          unless address4.nil?
             elements0 << address4
           else
             elements0 = nil
@@ -536,13 +536,13 @@ module Canopy::PEG
           @expected << "\"(\""
         end
       end
-      if address1
+      unless address1.nil?
         elements0 << address1
         address2 = nil
         remaining0, index2, elements1, address3 = 0, @offset, [], true
         until address3 == nil
           address3 = _read_space
-          if address3
+          unless address3.nil?
             elements1 << address3
             remaining0 -= 1
           end
@@ -553,17 +553,17 @@ module Canopy::PEG
         else
           address2 = nil
         end
-        if address2
+        unless address2.nil?
           elements0 << address2
           address4 = nil
           address4 = _read_parsing_expression
-          if address4
+          unless address4.nil?
             elements0 << address4
             address5 = nil
             remaining1, index3, elements2, address6 = 0, @offset, [], true
             until address6 == nil
               address6 = _read_space
-              if address6
+              unless address6.nil?
                 elements2 << address6
                 remaining1 -= 1
               end
@@ -574,7 +574,7 @@ module Canopy::PEG
             else
               address5 = nil
             end
-            if address5
+            unless address5.nil?
               elements0 << address5
               address7 = nil
               chunk1 = nil
@@ -594,7 +594,7 @@ module Canopy::PEG
                   @expected << "\")\""
                 end
               end
-              if address7
+              unless address7.nil?
                 elements0 << address7
               else
                 elements0 = nil
@@ -636,7 +636,7 @@ module Canopy::PEG
       index1, elements0 = @offset, []
       address1 = nil
       address1 = _read_choice_part
-      if address1
+      unless address1.nil?
         elements0 << address1
         address2 = nil
         remaining0, index2, elements1, address3 = 1, @offset, [], true
@@ -646,7 +646,7 @@ module Canopy::PEG
           remaining1, index4, elements3, address5 = 1, @offset, [], true
           until address5 == nil
             address5 = _read_space
-            if address5
+            unless address5.nil?
               elements3 << address5
               remaining1 -= 1
             end
@@ -657,7 +657,7 @@ module Canopy::PEG
           else
             address4 = nil
           end
-          if address4
+          unless address4.nil?
             elements2 << address4
             address6 = nil
             chunk0 = nil
@@ -677,13 +677,13 @@ module Canopy::PEG
                 @expected << "\"/\""
               end
             end
-            if address6
+            unless address6.nil?
               elements2 << address6
               address7 = nil
               remaining2, index5, elements4, address8 = 1, @offset, [], true
               until address8 == nil
                 address8 = _read_space
-                if address8
+                unless address8.nil?
                   elements4 << address8
                   remaining2 -= 1
                 end
@@ -694,11 +694,11 @@ module Canopy::PEG
               else
                 address7 = nil
               end
-              if address7
+              unless address7.nil?
                 elements2 << address7
                 address9 = nil
                 address9 = _read_choice_part
-                if address9
+                unless address9.nil?
                   elements2 << address9
                 else
                   elements2 = nil
@@ -722,7 +722,7 @@ module Canopy::PEG
           else
             address3 = nil
           end
-          if address3
+          unless address3.nil?
             elements1 << address3
             remaining0 -= 1
           end
@@ -733,7 +733,7 @@ module Canopy::PEG
         else
           address2 = nil
         end
-        if address2
+        unless address2.nil?
           elements0 << address2
         else
           elements0 = nil
@@ -771,7 +771,7 @@ module Canopy::PEG
           @offset = index2
         end
       end
-      if address1
+      unless address1.nil?
         elements0 << address1
         address2 = nil
         index3 = @offset
@@ -780,7 +780,7 @@ module Canopy::PEG
         remaining0, index5, elements2, address4 = 1, @offset, [], true
         until address4 == nil
           address4 = _read_space
-          if address4
+          unless address4.nil?
             elements2 << address4
             remaining0 -= 1
           end
@@ -791,11 +791,11 @@ module Canopy::PEG
         else
           address3 = nil
         end
-        if address3
+        unless address3.nil?
           elements1 << address3
           address5 = nil
           address5 = _read_type_expression
-          if address5
+          unless address5.nil?
             elements1 << address5
           else
             elements1 = nil
@@ -815,7 +815,7 @@ module Canopy::PEG
           address2 = SyntaxNode.new(@input[index3...index3], index3, [])
           @offset = index3
         end
-        if address2
+        unless address2.nil?
           elements0 << address2
         else
           elements0 = nil
@@ -861,11 +861,11 @@ module Canopy::PEG
           @expected << "\"<\""
         end
       end
-      if address1
+      unless address1.nil?
         elements0 << address1
         address2 = nil
         address2 = _read_object_identifier
-        if address2
+        unless address2.nil?
           elements0 << address2
           address3 = nil
           chunk1 = nil
@@ -885,7 +885,7 @@ module Canopy::PEG
               @expected << "\">\""
             end
           end
-          if address3
+          unless address3.nil?
             elements0 << address3
           else
             elements0 = nil
@@ -919,7 +919,7 @@ module Canopy::PEG
       index1, elements0 = @offset, []
       address1 = nil
       address1 = _read_sequence_part
-      if address1
+      unless address1.nil?
         elements0 << address1
         address2 = nil
         remaining0, index2, elements1, address3 = 1, @offset, [], true
@@ -929,7 +929,7 @@ module Canopy::PEG
           remaining1, index4, elements3, address5 = 1, @offset, [], true
           until address5 == nil
             address5 = _read_space
-            if address5
+            unless address5.nil?
               elements3 << address5
               remaining1 -= 1
             end
@@ -940,11 +940,11 @@ module Canopy::PEG
           else
             address4 = nil
           end
-          if address4
+          unless address4.nil?
             elements2 << address4
             address6 = nil
             address6 = _read_sequence_part
-            if address6
+            unless address6.nil?
               elements2 << address6
             else
               elements2 = nil
@@ -960,7 +960,7 @@ module Canopy::PEG
           else
             address3 = nil
           end
-          if address3
+          unless address3.nil?
             elements1 << address3
             remaining0 -= 1
           end
@@ -971,7 +971,7 @@ module Canopy::PEG
         else
           address2 = nil
         end
-        if address2
+        unless address2.nil?
           elements0 << address2
         else
           elements0 = nil
@@ -1006,7 +1006,7 @@ module Canopy::PEG
         address1 = SyntaxNode.new(@input[index2...index2], index2, [])
         @offset = index2
       end
-      if address1
+      unless address1.nil?
         elements0 << address1
         address2 = nil
         index3 = @offset
@@ -1018,7 +1018,7 @@ module Canopy::PEG
             @offset = index3
           end
         end
-        if address2
+        unless address2.nil?
           elements0 << address2
         else
           elements0 = nil
@@ -1048,11 +1048,11 @@ module Canopy::PEG
       index1, elements0 = @offset, []
       address1 = nil
       address1 = _read_atom
-      if address1
+      unless address1.nil?
         elements0 << address1
         address2 = nil
         address2 = _read_quantifier
-        if address2
+        unless address2.nil?
           elements0 << address2
         else
           elements0 = nil
@@ -1162,11 +1162,11 @@ module Canopy::PEG
           @offset = index2
         end
       end
-      if address1
+      unless address1.nil?
         elements0 << address1
         address2 = nil
         address2 = _read_atom
-        if address2
+        unless address2.nil?
           elements0 << address2
         else
           elements0 = nil
@@ -1196,7 +1196,7 @@ module Canopy::PEG
       index1, elements0 = @offset, []
       address1 = nil
       address1 = _read_identifier
-      if address1
+      unless address1.nil?
         elements0 << address1
         address2 = nil
         index2 = @offset
@@ -1208,7 +1208,7 @@ module Canopy::PEG
         else
           address2 = nil
         end
-        if address2
+        unless address2.nil?
           elements0 << address2
         else
           elements0 = nil
@@ -1254,7 +1254,7 @@ module Canopy::PEG
           @expected << "\"\\\"\""
         end
       end
-      if address1
+      unless address1.nil?
         elements0 << address1
         address2 = nil
         remaining0, index2, elements1, address3 = 0, @offset, [], true
@@ -1279,7 +1279,7 @@ module Canopy::PEG
               @expected << "\"\\\\\""
             end
           end
-          if address4
+          unless address4.nil?
             elements2 << address4
             address5 = nil
             chunk2 = nil
@@ -1299,7 +1299,7 @@ module Canopy::PEG
               address5 = SyntaxNode.new(@input[@offset...@offset + 1], @offset, [])
               @offset = @offset + 1
             end
-            if address5
+            unless address5.nil?
               elements2 << address5
             else
               elements2 = nil
@@ -1338,7 +1338,7 @@ module Canopy::PEG
               @offset = index3
             end
           end
-          if address3
+          unless address3.nil?
             elements1 << address3
             remaining0 -= 1
           end
@@ -1349,7 +1349,7 @@ module Canopy::PEG
         else
           address2 = nil
         end
-        if address2
+        unless address2.nil?
           elements0 << address2
           address6 = nil
           chunk4 = nil
@@ -1369,7 +1369,7 @@ module Canopy::PEG
               @expected << "\"\\\"\""
             end
           end
-          if address6
+          unless address6.nil?
             elements0 << address6
           else
             elements0 = nil
@@ -1419,7 +1419,7 @@ module Canopy::PEG
           @expected << "\"`\""
         end
       end
-      if address1
+      unless address1.nil?
         elements0 << address1
         address2 = nil
         remaining0, index2, elements1, address3 = 0, @offset, [], true
@@ -1444,7 +1444,7 @@ module Canopy::PEG
               @expected << "\"\\\\\""
             end
           end
-          if address4
+          unless address4.nil?
             elements2 << address4
             address5 = nil
             chunk2 = nil
@@ -1464,7 +1464,7 @@ module Canopy::PEG
               address5 = SyntaxNode.new(@input[@offset...@offset + 1], @offset, [])
               @offset = @offset + 1
             end
-            if address5
+            unless address5.nil?
               elements2 << address5
             else
               elements2 = nil
@@ -1503,7 +1503,7 @@ module Canopy::PEG
               @offset = index3
             end
           end
-          if address3
+          unless address3.nil?
             elements1 << address3
             remaining0 -= 1
           end
@@ -1514,7 +1514,7 @@ module Canopy::PEG
         else
           address2 = nil
         end
-        if address2
+        unless address2.nil?
           elements0 << address2
           address6 = nil
           chunk4 = nil
@@ -1534,7 +1534,7 @@ module Canopy::PEG
               @expected << "\"`\""
             end
           end
-          if address6
+          unless address6.nil?
             elements0 << address6
           else
             elements0 = nil
@@ -1612,7 +1612,7 @@ module Canopy::PEG
           @expected << "\"[\""
         end
       end
-      if address1
+      unless address1.nil?
         elements0 << address1
         address2 = nil
         index2 = @offset
@@ -1637,7 +1637,7 @@ module Canopy::PEG
           address2 = SyntaxNode.new(@input[index2...index2], index2, [])
           @offset = index2
         end
-        if address2
+        unless address2.nil?
           elements0 << address2
           address3 = nil
           remaining0, index3, elements1, address4 = 1, @offset, [], true
@@ -1662,7 +1662,7 @@ module Canopy::PEG
                 @expected << "\"\\\\\""
               end
             end
-            if address5
+            unless address5.nil?
               elements2 << address5
               address6 = nil
               chunk3 = nil
@@ -1682,7 +1682,7 @@ module Canopy::PEG
                 address6 = SyntaxNode.new(@input[@offset...@offset + 1], @offset, [])
                 @offset = @offset + 1
               end
-              if address6
+              unless address6.nil?
                 elements2 << address6
               else
                 elements2 = nil
@@ -1721,7 +1721,7 @@ module Canopy::PEG
                 @offset = index4
               end
             end
-            if address4
+            unless address4.nil?
               elements1 << address4
               remaining0 -= 1
             end
@@ -1732,7 +1732,7 @@ module Canopy::PEG
           else
             address3 = nil
           end
-          if address3
+          unless address3.nil?
             elements0 << address3
             address7 = nil
             chunk5 = nil
@@ -1752,7 +1752,7 @@ module Canopy::PEG
                 @expected << "\"]\""
               end
             end
-            if address7
+            unless address7.nil?
               elements0 << address7
             else
               elements0 = nil
@@ -1790,7 +1790,7 @@ module Canopy::PEG
       index1, elements0 = @offset, []
       address1 = nil
       address1 = _read_identifier
-      if address1
+      unless address1.nil?
         elements0 << address1
         address2 = nil
         chunk0 = nil
@@ -1810,7 +1810,7 @@ module Canopy::PEG
             @expected << "\":\""
           end
         end
-        if address2
+        unless address2.nil?
           elements0 << address2
         else
           elements0 = nil
@@ -1840,7 +1840,7 @@ module Canopy::PEG
       index1, elements0 = @offset, []
       address1 = nil
       address1 = _read_identifier
-      if address1
+      unless address1.nil?
         elements0 << address1
         address2 = nil
         remaining0, index2, elements1, address3 = 0, @offset, [], true
@@ -1864,11 +1864,11 @@ module Canopy::PEG
               @expected << "\".\""
             end
           end
-          if address4
+          unless address4.nil?
             elements2 << address4
             address5 = nil
             address5 = _read_identifier
-            if address5
+            unless address5.nil?
               elements2 << address5
             else
               elements2 = nil
@@ -1884,7 +1884,7 @@ module Canopy::PEG
           else
             address3 = nil
           end
-          if address3
+          unless address3.nil?
             elements1 << address3
             remaining0 -= 1
           end
@@ -1895,7 +1895,7 @@ module Canopy::PEG
         else
           address2 = nil
         end
-        if address2
+        unless address2.nil?
           elements0 << address2
         else
           elements0 = nil
@@ -1941,7 +1941,7 @@ module Canopy::PEG
           @expected << "[a-zA-Z_]"
         end
       end
-      if address1
+      unless address1.nil?
         elements0 << address1
         address2 = nil
         remaining0, index2, elements1, address3 = 0, @offset, [], true
@@ -1963,7 +1963,7 @@ module Canopy::PEG
               @expected << "[a-zA-Z0-9_]"
             end
           end
-          if address3
+          unless address3.nil?
             elements1 << address3
             remaining0 -= 1
           end
@@ -1974,7 +1974,7 @@ module Canopy::PEG
         else
           address2 = nil
         end
-        if address2
+        unless address2.nil?
           elements0 << address2
         else
           elements0 = nil
@@ -2098,8 +2098,9 @@ module Canopy::PEG
   class Parser
     include Grammar
 
-    def initialize(input)
+    def initialize(input, actions)
       @input = input
+      @actions = actions
       @offset = 0
       @cache = Hash.new { |h,k| h[k] = {} }
       @failure = 0
@@ -2132,8 +2133,8 @@ module Canopy::PEG
     end
   end
 
-  def self.parse(input)
-    parser = Parser.new(input)
+  def self.parse(input, actions = nil)
+    parser = Parser.new(input, actions)
     parser.parse
   end
 end
