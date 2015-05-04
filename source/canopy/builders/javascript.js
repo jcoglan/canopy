@@ -107,9 +107,10 @@
     },
 
     parserClass_: function(root) {
-      this.function_('var Parser', ['input', 'actions'], function(builder) {
+      this.function_('var Parser', ['input', 'actions', 'types'], function(builder) {
         builder.assign_('this._input', 'input');
         builder.assign_('this._actions', 'actions');
+        builder.assign_('this._types', 'types');
         builder.assign_('this._offset', '0');
         builder.assign_('this._cache', '{}');
         builder.assign_('this._failure', '0');
@@ -130,8 +131,9 @@
         builder._line('throw new SyntaxError(formatError(this._input, this._failure, this._expected))');
       });
 
-      this.function_('var parse', ['input', 'actions'], function(builder) {
-        builder.assign_('var parser', 'new Parser(input, actions)');
+      this.function_('var parse', ['input', 'options'], function(builder) {
+        builder.assign_('options', 'options || {}');
+        builder.assign_('var parser', 'new Parser(input, options.actions, options.types)');
         builder.return_('parser.parse()');
       });
 
@@ -275,7 +277,7 @@
 
     extendNode_: function(address, nodeType) {
       if (!nodeType) return;
-      this._line('extend(' + address + ', this.constructor.' + nodeType + ')');
+      this._line('extend(' + address + ', this._types.' + nodeType + ')');
     },
 
     failure_: function(address, expected) {

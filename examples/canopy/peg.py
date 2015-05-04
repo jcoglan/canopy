@@ -1679,9 +1679,10 @@ class Grammar(object):
 
 
 class Parser(Grammar):
-    def __init__(self, input, actions):
+    def __init__(self, input, actions, types):
         self._input = input
         self._actions = actions
+        self._types = types
         self._offset = 0
         self._cache = defaultdict(dict)
         self._failure = 0
@@ -1708,6 +1709,6 @@ def format_error(input, offset, expected):
     message += ' ' * (offset - position)
     return message + '^'
 
-def parse(input, actions=None):
-    parser = Parser(input, actions)
+def parse(input, actions=None, types=None):
+    parser = Parser(input, actions, types)
     return parser.parse()

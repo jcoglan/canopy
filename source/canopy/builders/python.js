@@ -93,9 +93,10 @@
 
     parserClass_: function(root) {
       this.class_('Parser', 'Grammar', function(builder) {
-        builder.method_('__init__', ['input', 'actions'], function(builder) {
+        builder.method_('__init__', ['input', 'actions', 'types'], function(builder) {
           builder.attribute_('_input', 'input');
           builder.attribute_('_actions', 'actions');
+          builder.attribute_('_types', 'types');
           builder.attribute_('_offset', '0');
           builder.attribute_('_cache', 'defaultdict(dict)');
           builder.attribute_('_failure', '0');
@@ -133,9 +134,9 @@
     },
 
     exports_: function() {
-      this._line('def parse(input, actions=None):');
+      this._line('def parse(input, actions=None, types=None):');
       this._indent(function(builder) {
-        builder.assign_('parser', 'Parser(input, actions)');
+        builder.assign_('parser', 'Parser(input, actions, types)');
         builder.return_('parser.parse()');
       });
     },
@@ -239,7 +240,7 @@
     extendNode_: function(address, nodeType) {
       if (!nodeType) return;
       var cls = this.localVar_('cls', 'type(' + address + ')');
-      this.assign_(address + '.__class__', "type(" + cls + ".__name__ + '" + nodeType + "', (" + cls + ", type(self)." + nodeType + "), {})");
+      this.assign_(address + '.__class__', "type(" + cls + ".__name__ + '" + nodeType + "', (" + cls + ", self._types." + nodeType + "), {})");
     },
 
     failure_: function(address, expected) {

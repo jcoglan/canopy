@@ -722,9 +722,10 @@ module CanopyLisp
   class Parser
     include Grammar
 
-    def initialize(input, actions)
+    def initialize(input, actions, types)
       @input = input
       @actions = actions
+      @types = types
       @offset = 0
       @cache = Hash.new { |h,k| h[k] = {} }
       @failure = 0
@@ -757,8 +758,8 @@ module CanopyLisp
     end
   end
 
-  def self.parse(input, actions = nil)
-    parser = Parser.new(input, actions)
+  def self.parse(input, options = {})
+    parser = Parser.new(input, options[:actions], options[:types])
     parser.parse
   end
 end

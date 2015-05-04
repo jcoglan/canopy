@@ -14,7 +14,7 @@ function() { with(this) {
       }})
 
       it('creates nodes using the named action', function() { with(this) {
-        assertEqual( {type: 'tBEGIN'}, StringActionTest.parse('begin', actions) )
+        assertEqual( {type: 'tBEGIN'}, StringActionTest.parse('begin', {actions: actions}) )
       }})
     }})
 
@@ -29,7 +29,7 @@ function() { with(this) {
       }})
 
       it('creates nodes using the named action', function() { with(this) {
-        assertEqual( {type: 'tBEGIN'}, CIStringActionTest.parse('BeGiN', actions) )
+        assertEqual( {type: 'tBEGIN'}, CIStringActionTest.parse('BeGiN', {actions: actions}) )
       }})
     }})
 
@@ -44,7 +44,7 @@ function() { with(this) {
       }})
 
       it('creates nodes using the named action', function() { with(this) {
-        assertEqual( 'Q', ClassActionTest.parse('q', actions) )
+        assertEqual( 'Q', ClassActionTest.parse('q', {actions: actions}) )
       }})
     }})
 
@@ -59,7 +59,7 @@ function() { with(this) {
       }})
 
       it('creates nodes using the named action', function() { with(this) {
-        assertEqual( '41', AnyActionTest.parse('A', actions) )
+        assertEqual( '41', AnyActionTest.parse('A', {actions: actions}) )
       }})
     }})
 
@@ -74,7 +74,7 @@ function() { with(this) {
       }})
 
       it('creates nodes using the named action', function() { with(this) {
-        assertEqual( '41', ParenActionTest.parse('A', actions) )
+        assertEqual( '41', ParenActionTest.parse('A', {actions: actions}) )
       }})
     }})
 
@@ -91,7 +91,7 @@ function() { with(this) {
       }})
 
       it('creates nodes using the named action', function() { with(this) {
-        assertEqual( 3, IntActionTest.parse('3', actions) )
+        assertEqual( 3, IntActionTest.parse('3', {actions: actions}) )
       }})
     }})
 
@@ -112,11 +112,11 @@ function() { with(this) {
       }})
 
       it('creates nodes using the named action', function() { with(this) {
-        assertEqual( ['+', 4, 5], MathActionTest.parse('4 + 5', actions) )
+        assertEqual( ['+', 4, 5], MathActionTest.parse('4 + 5', {actions: actions}) )
       }})
 
       it('treats falsey nodes as successes', function() { with(this) {
-        assertEqual( ['+', 0, 1], MathActionTest.parse('0+1', actions) )
+        assertEqual( ['+', 0, 1], MathActionTest.parse('0+1', {actions: actions}) )
       }})
     }})
 
@@ -128,17 +128,19 @@ function() { with(this) {
         Canopy.compile('grammar JS.ENV.ModuleTypeTest\
           rule <- "content" <NodeType>')
 
-        ModuleTypeTest.Parser.NodeType = { custom: function() { return 'pass!' } }
+        this.types = {
+          NodeType: { custom: function() { return 'pass!' } }
+        }
       }})
 
       it('creates nodes using the named type', function() { with(this) {
-        var result = ModuleTypeTest.parse('content')
+        var result = ModuleTypeTest.parse('content', {types: types})
         assertEqual( 'pass!', result.custom() )
         assertRespondTo( result, 'custom' )
       }})
 
       it('contains the parse results in the returned node', function() { with(this) {
-        assertParse( ['content', 0, []], ModuleTypeTest.parse('content') )
+        assertParse( ['content', 0, []], ModuleTypeTest.parse('content', {types: types}) )
       }})
     }})
 
@@ -147,11 +149,13 @@ function() { with(this) {
         Canopy.compile('grammar JS.ENV.TypedChoiceTest\
           rule <- ("content" / "booya") <NodeType>')
 
-        TypedChoiceTest.Parser.NodeType = { custom: function() { return 'pass!' } }
+        this.types = {
+          NodeType: { custom: function() { return 'pass!' } }
+        }
       }})
 
       it('extends the chosen node with the mixin', function() { with(this) {
-        assertEqual( 'pass!', TypedChoiceTest.parse('content').custom() )
+        assertEqual( 'pass!', TypedChoiceTest.parse('content', {types: types}).custom() )
       }})
     }})
 
@@ -161,16 +165,18 @@ function() { with(this) {
           first <- second <First>\
           second <- "bar" <Second>')
 
-          TypedRefTest.Parser.First  = { first:  function() { return '1'} }
-          TypedRefTest.Parser.Second = { second: function() { return '2'} }
+        this.types = {
+          First:  { first:  function() { return '1'} },
+          Second: { second: function() { return '2'} }
+        }
       }})
 
       it('extends the chosen node with the root type', function() { with(this) {
-        assertEqual( '2', TypedRefTest.parse('bar').second() )
+        assertEqual( '2', TypedRefTest.parse('bar', {types: types}).second() )
       }})
 
       it('extends the chosen node with the reference type', function() { with(this) {
-        assertEqual( '1', TypedRefTest.parse('bar').first() )
+        assertEqual( '1', TypedRefTest.parse('bar', {types: types}).first() )
       }})
     }})
 
@@ -179,11 +185,13 @@ function() { with(this) {
         Canopy.compile('grammar JS.ENV.TypedRepeatTest\
           rule <- "content"+ <NodeType>')
 
-        TypedRepeatTest.Parser.NodeType = { custom: function() { return 'pass!' } }
+        this.types = {
+          NodeType: { custom: function() { return 'pass!' } }
+        }
       }})
 
       it('extends the chosen node with the mixin', function() { with(this) {
-        assertEqual( 'pass!', TypedRepeatTest.parse('contentcontent').custom() )
+        assertEqual( 'pass!', TypedRepeatTest.parse('contentcontent', {types: types}).custom() )
       }})
     }})
 
@@ -192,11 +200,13 @@ function() { with(this) {
         Canopy.compile('grammar JS.ENV.TypedMaybeTest\
           rule <- "content"? <NodeType>')
 
-        TypedMaybeTest.Parser.NodeType = { custom: function() { return 'pass!' } }
+        this.types = {
+          NodeType: { custom: function() { return 'pass!' } }
+        }
       }})
 
       it('extends the chosen node with the mixin', function() { with(this) {
-        assertEqual( 'pass!', TypedMaybeTest.parse('content').custom() )
+        assertEqual( 'pass!', TypedMaybeTest.parse('content', {types: types}).custom() )
       }})
     }})
 
@@ -205,13 +215,13 @@ function() { with(this) {
         Canopy.compile('grammar JS.ENV.NamespacedTypeTest\
           rule <- "content" <NS.NodeType>')
 
-        NamespacedTypeTest.Parser.NS = {
-          NodeType: { custom: function() { return 'pass!' } }
+        this.types = {
+          NS: { NodeType: { custom: function() { return 'pass!' } } }
         }
       }})
 
       it('creates nodes using the named type', function() { with(this) {
-        assertEqual( 'pass!', NamespacedTypeTest.parse('content').custom() )
+        assertEqual( 'pass!', NamespacedTypeTest.parse('content', {types: types}).custom() )
       }})
     }})
   }})

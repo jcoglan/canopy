@@ -2100,9 +2100,10 @@
     }
   };
   
-  var Parser = function(input, actions) {
+  var Parser = function(input, actions, types) {
     this._input = input;
     this._actions = actions;
+    this._types = types;
     this._offset = 0;
     this._cache = {};
     this._failure = 0;
@@ -2122,8 +2123,9 @@
     throw new SyntaxError(formatError(this._input, this._failure, this._expected));
   };
   
-  var parse = function(input, actions) {
-    var parser = new Parser(input, actions);
+  var parse = function(input, options) {
+    options = options || {};
+    var parser = new Parser(input, options.actions, options.types);
     return parser.parse();
   };
   

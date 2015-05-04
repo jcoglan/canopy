@@ -8,10 +8,10 @@ Canopy.extend(Canopy.Compiler.prototype, {
     if (this._tree) return this._tree;
     var P = Canopy.MetaGrammar, message;
 
-    this._tree = P.parse(this._grammarText);
+    this._tree = P.parse(this._grammarText, {types: Canopy.Compiler});
     if (this._tree) return this._tree;
 
-    message = P.formatError(P.lastError);
+    message = P.formatError(P.Parser.lastError);
     throw new Error(message);
   },
 

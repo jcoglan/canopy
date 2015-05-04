@@ -99,9 +99,10 @@
         builder._line('include Grammar');
         builder._methodSeparator = '\n';
 
-        builder.method_('initialize', ['input', 'actions'], function(builder) {
+        builder.method_('initialize', ['input', 'actions', 'types'], function(builder) {
           builder.attribute_('input', 'input');
           builder.attribute_('actions', 'actions');
+          builder.attribute_('types', 'types');
           builder.attribute_('offset', '0');
           builder.attribute_('cache', 'Hash.new { |h,k| h[k] = {} }');
           builder.attribute_('failure', '0');
@@ -140,9 +141,9 @@
     },
 
     exports_: function() {
-      this._line('def self.parse(input, actions = nil)');
+      this._line('def self.parse(input, options = {})');
       this._indent(function(builder) {
-        builder.assign_('parser', 'Parser.new(input, actions)');
+        builder.assign_('parser', 'Parser.new(input, options[:actions], options[:types])');
         builder._line('parser.parse');
       });
       this._line('end');
@@ -252,7 +253,7 @@
 
     extendNode_: function(address, nodeType) {
       if (!nodeType) return;
-      this._line(address + '.extend(' + nodeType.replace(/\./g, '::') + ')');
+      this._line(address + '.extend(@types::' + nodeType.replace(/\./g, '::') + ')');
     },
 
     failure_: function(address, expected) {

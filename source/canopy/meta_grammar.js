@@ -317,7 +317,7 @@
       } else {
         address0 = null;
       }
-      extend(address0, this.constructor.Grammar);
+      extend(address0, this._types.Grammar);
       this._cache._grammar[index0] = [address0, this._offset];
       return address0;
     },
@@ -412,7 +412,7 @@
       } else {
         address0 = null;
       }
-      extend(address0, this.constructor.GrammarRule);
+      extend(address0, this._types.GrammarRule);
       this._cache._grammar_rule[index0] = [address0, this._offset];
       return address0;
     },
@@ -764,7 +764,7 @@
       } else {
         address0 = null;
       }
-      extend(address0, this.constructor.Choice);
+      extend(address0, this._types.Choice);
       this._cache._choice_expression[index0] = [address0, this._offset];
       return address0;
     },
@@ -852,7 +852,7 @@
       } else {
         address0 = null;
       }
-      extend(address0, this.constructor.ChoicePart);
+      extend(address0, this._types.ChoicePart);
       this._cache._choice_part[index0] = [address0, this._offset];
       return address0;
     },
@@ -909,7 +909,7 @@
       } else {
         address0 = null;
       }
-      extend(address0, this.constructor.Action);
+      extend(address0, this._types.Action);
       this._cache._action_expression[index0] = [address0, this._offset];
       return address0;
     },
@@ -1252,7 +1252,7 @@
       } else {
         address0 = null;
       }
-      extend(address0, this.constructor.Sequence);
+      extend(address0, this._types.Sequence);
       this._cache._sequence_expression[index0] = [address0, this._offset];
       return address0;
     },
@@ -1305,7 +1305,7 @@
       } else {
         address0 = null;
       }
-      extend(address0, this.constructor.SequencePart);
+      extend(address0, this._types.SequencePart);
       this._cache._sequence_part[index0] = [address0, this._offset];
       return address0;
     },
@@ -1357,7 +1357,7 @@
       } else {
         address0 = null;
       }
-      extend(address0, this.constructor.Maybe);
+      extend(address0, this._types.Maybe);
       this._cache._maybe_atom[index0] = [address0, this._offset];
       return address0;
     },
@@ -1433,7 +1433,7 @@
       } else {
         address0 = null;
       }
-      extend(address0, this.constructor.Repeat);
+      extend(address0, this._types.Repeat);
       this._cache._repeated_atom[index0] = [address0, this._offset];
       return address0;
     },
@@ -1567,7 +1567,7 @@
       } else {
         address0 = null;
       }
-      extend(address0, this.constructor.Predicate);
+      extend(address0, this._types.Predicate);
       this._cache._predicated_atom[index0] = [address0, this._offset];
       return address0;
     },
@@ -1611,7 +1611,7 @@
       } else {
         address0 = null;
       }
-      extend(address0, this.constructor.Reference);
+      extend(address0, this._types.Reference);
       this._cache._reference_expression[index0] = [address0, this._offset];
       return address0;
     },
@@ -1939,7 +1939,7 @@
           this._offset = index1;
         }
       }
-      extend(address0, this.constructor.String);
+      extend(address0, this._types.String);
       this._cache._string_expression[index0] = [address0, this._offset];
       return address0;
     },
@@ -2106,7 +2106,7 @@
       } else {
         address0 = null;
       }
-      extend(address0, this.constructor.CIString);
+      extend(address0, this._types.CIString);
       this._cache._ci_string_expression[index0] = [address0, this._offset];
       return address0;
     },
@@ -2136,7 +2136,7 @@
           this._expected.push('"."');
         }
       }
-      extend(address0, this.constructor.AnyChar);
+      extend(address0, this._types.AnyChar);
       this._cache._any_char_expression[index0] = [address0, this._offset];
       return address0;
     },
@@ -2332,7 +2332,7 @@
       } else {
         address0 = null;
       }
-      extend(address0, this.constructor.CharClass);
+      extend(address0, this._types.CharClass);
       this._cache._char_class_expression[index0] = [address0, this._offset];
       return address0;
     },
@@ -2584,9 +2584,10 @@
     }
   };
   
-  var Parser = function(input, actions) {
+  var Parser = function(input, actions, types) {
     this._input = input;
     this._actions = actions;
+    this._types = types;
     this._offset = 0;
     this._cache = {};
     this._failure = 0;
@@ -2606,8 +2607,9 @@
     throw new SyntaxError(formatError(this._input, this._failure, this._expected));
   };
   
-  var parse = function(input, actions) {
-    var parser = new Parser(input, actions);
+  var parse = function(input, options) {
+    options = options || {};
+    var parser = new Parser(input, options.actions, options.types);
     return parser.parse();
   };
   
