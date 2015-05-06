@@ -66,7 +66,7 @@
   
   var SyntaxNode3 = function(text, offset, elements) {
     SyntaxNode.apply(this, arguments);
-    this['object_identifier'] = elements[1];
+    this['object_identifier'] = elements[3];
   };
   inherit(SyntaxNode3, SyntaxNode);
   
@@ -334,11 +334,11 @@
       var address1 = null;
       var chunk0 = null;
       if (this._input.length > this._offset) {
-        chunk0 = this._input.substring(this._offset, this._offset + 8);
+        chunk0 = this._input.substring(this._offset, this._offset + 7);
       }
-      if (chunk0.toLowerCase() === 'grammar '.toLowerCase()) {
-        address1 = new SyntaxNode(this._input.substring(this._offset, this._offset + 8), this._offset, []);
-        this._offset = this._offset + 8;
+      if (chunk0.toLowerCase() === 'grammar'.toLowerCase()) {
+        address1 = new SyntaxNode(this._input.substring(this._offset, this._offset + 7), this._offset, []);
+        this._offset = this._offset + 7;
       } else {
         address1 = null;
         if (this._offset > this._failure) {
@@ -346,15 +346,65 @@
           this._expected = [];
         }
         if (this._offset === this._failure) {
-          this._expected.push('`grammar `');
+          this._expected.push('`grammar`');
         }
       }
       if (address1 !== null) {
         elements0.push(address1);
         var address2 = null;
-        address2 = this._read_object_identifier();
+        var index2 = this._offset;
+        var chunk1 = null;
+        if (this._input.length > this._offset) {
+          chunk1 = this._input.substring(this._offset, this._offset + 1);
+        }
+        if (chunk1 === ':') {
+          address2 = new SyntaxNode(this._input.substring(this._offset, this._offset + 1), this._offset, []);
+          this._offset = this._offset + 1;
+        } else {
+          address2 = null;
+          if (this._offset > this._failure) {
+            this._failure = this._offset;
+            this._expected = [];
+          }
+          if (this._offset === this._failure) {
+            this._expected.push('":"');
+          }
+        }
+        if (!address2) {
+          address2 = new SyntaxNode(this._input.substring(index2, index2), index2, []);
+          this._offset = index2;
+        }
         if (address2 !== null) {
           elements0.push(address2);
+          var address3 = null;
+          var remaining0 = 1, index3 = this._offset, elements1 = [], address4 = true;
+          while (address4 !== null) {
+            address4 = this._read__();
+            if (address4 !== null) {
+              elements1.push(address4);
+              --remaining0;
+            }
+          }
+          if (remaining0 <= 0) {
+            address3 = new SyntaxNode(this._input.substring(index3, this._offset), index3, elements1);
+            this._offset = this._offset;
+          } else {
+            address3 = null;
+          }
+          if (address3 !== null) {
+            elements0.push(address3);
+            var address5 = null;
+            address5 = this._read_object_identifier();
+            if (address5 !== null) {
+              elements0.push(address5);
+            } else {
+              elements0 = null;
+              this._offset = index1;
+            }
+          } else {
+            elements0 = null;
+            this._offset = index1;
+          }
         } else {
           elements0 = null;
           this._offset = index1;

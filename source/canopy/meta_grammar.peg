@@ -4,7 +4,7 @@ grammar Canopy.MetaGrammar
                                rules:(_* grammar_rule)+ _*
                                <Grammar>
 
-  grammar_name              <- `grammar ` object_identifier
+  grammar_name              <- `grammar` ":"? _+ object_identifier
 
   grammar_rule              <- identifier assignment parsing_expression <GrammarRule>
 
