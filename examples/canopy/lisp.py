@@ -74,10 +74,10 @@ class Grammar(object):
             address3 = None
             index3 = self._offset
             address3 = self._read_list()
-            if not address3:
+            if address3 is None:
                 self._offset = index3
                 address3 = self._read_atom()
-                if not address3:
+                if address3 is None:
                     self._offset = index3
             if address3 is not None:
                 elements0.append(address3)
@@ -190,16 +190,16 @@ class Grammar(object):
             return cached[0]
         index1 = self._offset
         address0 = self._read_boolean()
-        if not address0:
+        if address0 is None:
             self._offset = index1
             address0 = self._read_integer()
-            if not address0:
+            if address0 is None:
                 self._offset = index1
                 address0 = self._read_string()
-                if not address0:
+                if address0 is None:
                     self._offset = index1
                     address0 = self._read_symbol()
-                    if not address0:
+                    if address0 is None:
                         self._offset = index1
         self._cache['atom'][index0] = (address0, self._offset)
         return address0
@@ -224,7 +224,7 @@ class Grammar(object):
                 self._expected = []
             if self._offset == self._failure:
                 self._expected.append('"#t"')
-        if not address0:
+        if address0 is None:
             self._offset = index1
             chunk1 = None
             if len(self._input) > self._offset:
@@ -239,7 +239,7 @@ class Grammar(object):
                     self._expected = []
                 if self._offset == self._failure:
                     self._expected.append('"#f"')
-            if not address0:
+            if address0 is None:
                 self._offset = index1
         self._cache['boolean'][index0] = (address0, self._offset)
         return address0
@@ -378,7 +378,7 @@ class Grammar(object):
                     self._offset = self._offset
                 else:
                     address3 = None
-                if not address3:
+                if address3 is None:
                     self._offset = index3
                     chunk3 = None
                     if len(self._input) > self._offset:
@@ -393,7 +393,7 @@ class Grammar(object):
                             self._expected = []
                         if self._offset == self._failure:
                             self._expected.append('[^"]')
-                    if not address3:
+                    if address3 is None:
                         self._offset = index3
                 if address3 is not None:
                     elements1.append(address3)
@@ -451,7 +451,7 @@ class Grammar(object):
             index3 = self._offset
             address2 = self._read_delimiter()
             self._offset = index3
-            if not address2:
+            if address2 is None:
                 address2 = SyntaxNode(self._input[self._offset:self._offset], self._offset, [])
                 self._offset = self._offset
             else:
@@ -538,7 +538,7 @@ class Grammar(object):
                 self._expected = []
             if self._offset == self._failure:
                 self._expected.append('"("')
-        if not address0:
+        if address0 is None:
             self._offset = index1
             chunk1 = None
             if len(self._input) > self._offset:
@@ -553,7 +553,7 @@ class Grammar(object):
                     self._expected = []
                 if self._offset == self._failure:
                     self._expected.append('")"')
-            if not address0:
+            if address0 is None:
                 self._offset = index1
         self._cache['paren'][index0] = (address0, self._offset)
         return address0
@@ -566,10 +566,10 @@ class Grammar(object):
             return cached[0]
         index1 = self._offset
         address0 = self._read_paren()
-        if not address0:
+        if address0 is None:
             self._offset = index1
             address0 = self._read_space()
-            if not address0:
+            if address0 is None:
                 self._offset = index1
         self._cache['delimiter'][index0] = (address0, self._offset)
         return address0
@@ -587,7 +587,7 @@ class Parser(Grammar):
 
     def parse(self):
         tree = self._read_program()
-        if tree and self._offset == len(self._input):
+        if tree is not None and self._offset == len(self._input):
             return tree
         if not self._expected:
             self._failure = self._offset

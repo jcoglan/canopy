@@ -15,7 +15,7 @@ Canopy.Compiler.Maybe = {
     var startOffset = builder.localVar_('index', builder.offset_());
     this.atomic().compile(builder, address);
 
-    builder.unless_(address, function(builder) {
+    builder.unlessNode_(address, function(builder) {
       builder.syntaxNode_(address, startOffset, startOffset, builder.emptyList_());
     });
   }

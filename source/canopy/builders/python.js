@@ -105,10 +105,10 @@
 
         builder.method_('parse', [], function(builder) {
           builder.jump_('tree', root);
-          builder.if_('tree and self._offset == len(self._input)', function(builder) {
+          builder.if_('tree is not None and self._offset == len(self._input)', function(builder) {
             builder.return_('tree');
           });
-          builder.unless_('self._expected', function(builder) {
+          builder.if_('not self._expected', function(builder) {
             builder.assign_('self._failure', 'self._offset');
             builder.append_('self._expected', "'<EOF>'");
           });
@@ -237,6 +237,10 @@
       this.if_(address + ' is not None', block, else_, context);
     },
 
+    unlessNode_: function(address, block, else_, context) {
+      this.if_(address + ' is None', block, else_, context);
+    },
+
     extendNode_: function(address, nodeType) {
       if (!nodeType) return;
       var cls = this.localVar_('cls', 'type(' + address + ')');
@@ -275,10 +279,6 @@
         this._line('else:');
         this._indent(else_, context);
       }
-    },
-
-    unless_: function(condition, block, else_, context) {
-      this.if_('not ' + condition, block, else_, context);
     },
 
     whileNotNull_: function(expression, block, context) {

@@ -88,10 +88,10 @@ module CanopyLisp
         address3 = nil
         index3 = @offset
         address3 = _read_list
-        unless address3
+        if address3.nil?
           @offset = index3
           address3 = _read_atom
-          unless address3
+          if address3.nil?
             @offset = index3
           end
         end
@@ -232,16 +232,16 @@ module CanopyLisp
       end
       index1 = @offset
       address0 = _read_boolean
-      unless address0
+      if address0.nil?
         @offset = index1
         address0 = _read_integer
-        unless address0
+        if address0.nil?
           @offset = index1
           address0 = _read_string
-          unless address0
+          if address0.nil?
             @offset = index1
             address0 = _read_symbol
-            unless address0
+            if address0.nil?
               @offset = index1
             end
           end
@@ -276,7 +276,7 @@ module CanopyLisp
           @expected << "\"#t\""
         end
       end
-      unless address0
+      if address0.nil?
         @offset = index1
         chunk1 = nil
         if @input.size > @offset
@@ -295,7 +295,7 @@ module CanopyLisp
             @expected << "\"#f\""
           end
         end
-        unless address0
+        if address0.nil?
           @offset = index1
         end
       end
@@ -469,7 +469,7 @@ module CanopyLisp
           else
             address3 = nil
           end
-          unless address3
+          if address3.nil?
             @offset = index3
             chunk3 = nil
             if @input.size > @offset
@@ -488,7 +488,7 @@ module CanopyLisp
                 @expected << "[^\"]"
               end
             end
-            unless address3
+            if address3.nil?
               @offset = index3
             end
           end
@@ -561,7 +561,7 @@ module CanopyLisp
         index3 = @offset
         address2 = _read_delimiter
         @offset = index3
-        unless address2
+        if address2.nil?
           address2 = SyntaxNode.new(@input[@offset...@offset], @offset, [])
           @offset = @offset
         else
@@ -671,7 +671,7 @@ module CanopyLisp
           @expected << "\"(\""
         end
       end
-      unless address0
+      if address0.nil?
         @offset = index1
         chunk1 = nil
         if @input.size > @offset
@@ -690,7 +690,7 @@ module CanopyLisp
             @expected << "\")\""
           end
         end
-        unless address0
+        if address0.nil?
           @offset = index1
         end
       end
@@ -707,10 +707,10 @@ module CanopyLisp
       end
       index1 = @offset
       address0 = _read_paren
-      unless address0
+      if address0.nil?
         @offset = index1
         address0 = _read_space
-        unless address0
+        if address0.nil?
           @offset = index1
         end
       end
@@ -734,7 +734,7 @@ module CanopyLisp
 
     def parse
       tree = _read_program
-      if tree and @offset == @input.size
+      if !tree.nil? and @offset == @input.size
         return tree
       end
       if @expected.empty?

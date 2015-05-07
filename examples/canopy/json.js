@@ -124,10 +124,10 @@
         var address2 = null;
         var index2 = this._offset;
         address2 = this._read_object();
-        if (!address2) {
+        if (address2 === null) {
           this._offset = index2;
           address2 = this._read_array();
-          if (!address2) {
+          if (address2 === null) {
             this._offset = index2;
           }
         }
@@ -290,7 +290,7 @@
       } else {
         address0 = null;
       }
-      if (!address0) {
+      if (address0 === null) {
         this._offset = index1;
         var index5 = this._offset, elements3 = [];
         var address8 = null;
@@ -355,7 +355,7 @@
         } else {
           address0 = null;
         }
-        if (!address0) {
+        if (address0 === null) {
           this._offset = index1;
         }
       }
@@ -569,7 +569,7 @@
       } else {
         address0 = null;
       }
-      if (!address0) {
+      if (address0 === null) {
         this._offset = index1;
         var index5 = this._offset, elements3 = [];
         var address8 = null;
@@ -634,7 +634,7 @@
         } else {
           address0 = null;
         }
-        if (!address0) {
+        if (address0 === null) {
           this._offset = index1;
         }
       }
@@ -658,22 +658,22 @@
         var address2 = null;
         var index2 = this._offset;
         address2 = this._read_object();
-        if (!address2) {
+        if (address2 === null) {
           this._offset = index2;
           address2 = this._read_array();
-          if (!address2) {
+          if (address2 === null) {
             this._offset = index2;
             address2 = this._read_string();
-            if (!address2) {
+            if (address2 === null) {
               this._offset = index2;
               address2 = this._read_number();
-              if (!address2) {
+              if (address2 === null) {
                 this._offset = index2;
                 address2 = this._read_boolean();
-                if (!address2) {
+                if (address2 === null) {
                   this._offset = index2;
                   address2 = this._read_null();
-                  if (!address2) {
+                  if (address2 === null) {
                     this._offset = index2;
                   }
                 }
@@ -797,7 +797,7 @@
           } else {
             address3 = null;
           }
-          if (!address3) {
+          if (address3 === null) {
             this._offset = index3;
             var chunk3 = null;
             if (this._input.length > this._offset) {
@@ -816,7 +816,7 @@
                 this._expected.push('[^"]');
               }
             }
-            if (!address3) {
+            if (address3 === null) {
               this._offset = index3;
             }
           }
@@ -903,7 +903,7 @@
           this._expected.push('"-"');
         }
       }
-      if (!address1) {
+      if (address1 === null) {
         address1 = new SyntaxNode(this._input.substring(index2, index2), index2, []);
         this._offset = index2;
       }
@@ -928,7 +928,7 @@
             this._expected.push('"0"');
           }
         }
-        if (!address2) {
+        if (address2 === null) {
           this._offset = index3;
           var index4 = this._offset, elements1 = [];
           var address3 = null;
@@ -998,7 +998,7 @@
           } else {
             address2 = null;
           }
-          if (!address2) {
+          if (address2 === null) {
             this._offset = index3;
           }
         }
@@ -1074,7 +1074,7 @@
           } else {
             address6 = null;
           }
-          if (!address6) {
+          if (address6 === null) {
             address6 = new SyntaxNode(this._input.substring(index6, index6), index6, []);
             this._offset = index6;
           }
@@ -1102,7 +1102,7 @@
                 this._expected.push('"e"');
               }
             }
-            if (!address11) {
+            if (address11 === null) {
               this._offset = index11;
               var chunk7 = null;
               if (this._input.length > this._offset) {
@@ -1121,7 +1121,7 @@
                   this._expected.push('"E"');
                 }
               }
-              if (!address11) {
+              if (address11 === null) {
                 this._offset = index11;
               }
             }
@@ -1146,7 +1146,7 @@
                   this._expected.push('"+"');
                 }
               }
-              if (!address12) {
+              if (address12 === null) {
                 this._offset = index12;
                 var chunk9 = null;
                 if (this._input.length > this._offset) {
@@ -1165,7 +1165,7 @@
                     this._expected.push('"-"');
                   }
                 }
-                if (!address12) {
+                if (address12 === null) {
                   this._offset = index12;
                   var chunk10 = null;
                   if (this._input.length > this._offset) {
@@ -1184,7 +1184,7 @@
                       this._expected.push('""');
                     }
                   }
-                  if (!address12) {
+                  if (address12 === null) {
                     this._offset = index12;
                   }
                 }
@@ -1242,7 +1242,7 @@
             } else {
               address10 = null;
             }
-            if (!address10) {
+            if (address10 === null) {
               address10 = new SyntaxNode(this._input.substring(index9, index9), index9, []);
               this._offset = index9;
             }
@@ -1300,7 +1300,7 @@
           this._expected.push('"true"');
         }
       }
-      if (!address0) {
+      if (address0 === null) {
         this._offset = index1;
         var chunk1 = null;
         if (this._input.length > this._offset) {
@@ -1319,7 +1319,7 @@
             this._expected.push('"false"');
           }
         }
-        if (!address0) {
+        if (address0 === null) {
           this._offset = index1;
         }
       }
@@ -1411,7 +1411,7 @@
   
   Parser.prototype.parse = function() {
     var tree = this._read_document();
-    if (tree && this._offset === this._input.length) {
+    if (tree !== null && this._offset === this._input.length) {
       return tree;
     }
     if (this._expected.length === 0) {

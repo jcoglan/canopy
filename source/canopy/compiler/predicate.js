@@ -14,7 +14,7 @@ Canopy.Compiler.Predicate = {
 
   compile: function(builder, address) {
     var startOffset = builder.localVar_('index', builder.offset_()),
-        table       = {'&': 'if_', '!': 'unless_'},
+        table       = {'&': 'ifNode_', '!': 'unlessNode_'},
         branch      = table[this.predicate.text];
 
     this.atomic().compile(builder, address);

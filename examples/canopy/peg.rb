@@ -499,10 +499,10 @@ module Canopy::PEG
       end
       index1 = @offset
       address0 = _read_choice_expression
-      unless address0
+      if address0.nil?
         @offset = index1
         address0 = _read_choice_part
-        unless address0
+        if address0.nil?
           @offset = index1
         end
       end
@@ -764,10 +764,10 @@ module Canopy::PEG
       address1 = nil
       index2 = @offset
       address1 = _read_sequence_expression
-      unless address1
+      if address1.nil?
         @offset = index2
         address1 = _read_sequence_part
-        unless address1
+        if address1.nil?
           @offset = index2
         end
       end
@@ -811,7 +811,7 @@ module Canopy::PEG
         else
           address2 = nil
         end
-        unless address2
+        if address2.nil?
           address2 = SyntaxNode.new(@input[index3...index3], index3, [])
           @offset = index3
         end
@@ -1002,7 +1002,7 @@ module Canopy::PEG
       address1 = nil
       index2 = @offset
       address1 = _read_label
-      unless address1
+      if address1.nil?
         address1 = SyntaxNode.new(@input[index2...index2], index2, [])
         @offset = index2
       end
@@ -1011,10 +1011,10 @@ module Canopy::PEG
         address2 = nil
         index3 = @offset
         address2 = _read_quantified_atom
-        unless address2
+        if address2.nil?
           @offset = index3
           address2 = _read_atom
-          unless address2
+          if address2.nil?
             @offset = index3
           end
         end
@@ -1081,25 +1081,25 @@ module Canopy::PEG
       end
       index1 = @offset
       address0 = _read_parenthesised_expression
-      unless address0
+      if address0.nil?
         @offset = index1
         address0 = _read_predicated_atom
-        unless address0
+        if address0.nil?
           @offset = index1
           address0 = _read_reference_expression
-          unless address0
+          if address0.nil?
             @offset = index1
             address0 = _read_string_expression
-            unless address0
+            if address0.nil?
               @offset = index1
               address0 = _read_ci_string_expression
-              unless address0
+              if address0.nil?
                 @offset = index1
                 address0 = _read_any_char_expression
-                unless address0
+                if address0.nil?
                   @offset = index1
                   address0 = _read_char_class_expression
-                  unless address0
+                  if address0.nil?
                     @offset = index1
                   end
                 end
@@ -1139,7 +1139,7 @@ module Canopy::PEG
           @expected << "\"&\""
         end
       end
-      unless address1
+      if address1.nil?
         @offset = index2
         chunk1 = nil
         if @input.size > @offset
@@ -1158,7 +1158,7 @@ module Canopy::PEG
             @expected << "\"!\""
           end
         end
-        unless address1
+        if address1.nil?
           @offset = index2
         end
       end
@@ -1202,7 +1202,7 @@ module Canopy::PEG
         index2 = @offset
         address2 = _read_assignment
         @offset = index2
-        unless address2
+        if address2.nil?
           address2 = SyntaxNode.new(@input[@offset...@offset], @offset, [])
           @offset = @offset
         else
@@ -1315,7 +1315,7 @@ module Canopy::PEG
           else
             address3 = nil
           end
-          unless address3
+          if address3.nil?
             @offset = index3
             chunk3 = nil
             if @input.size > @offset
@@ -1334,7 +1334,7 @@ module Canopy::PEG
                 @expected << "[^\"]"
               end
             end
-            unless address3
+            if address3.nil?
               @offset = index3
             end
           end
@@ -1480,7 +1480,7 @@ module Canopy::PEG
           else
             address3 = nil
           end
-          unless address3
+          if address3.nil?
             @offset = index3
             chunk3 = nil
             if @input.size > @offset
@@ -1499,7 +1499,7 @@ module Canopy::PEG
                 @expected << "[^`]"
               end
             end
-            unless address3
+            if address3.nil?
               @offset = index3
             end
           end
@@ -1633,7 +1633,7 @@ module Canopy::PEG
             @expected << "\"^\""
           end
         end
-        unless address2
+        if address2.nil?
           address2 = SyntaxNode.new(@input[index2...index2], index2, [])
           @offset = index2
         end
@@ -1698,7 +1698,7 @@ module Canopy::PEG
             else
               address4 = nil
             end
-            unless address4
+            if address4.nil?
               @offset = index4
               chunk4 = nil
               if @input.size > @offset
@@ -1717,7 +1717,7 @@ module Canopy::PEG
                   @expected << "[^\\]]"
                 end
               end
-              unless address4
+              if address4.nil?
                 @offset = index4
               end
             end
@@ -2019,7 +2019,7 @@ module Canopy::PEG
           @expected << "\"?\""
         end
       end
-      unless address0
+      if address0.nil?
         @offset = index1
         chunk1 = nil
         if @input.size > @offset
@@ -2038,7 +2038,7 @@ module Canopy::PEG
             @expected << "\"*\""
           end
         end
-        unless address0
+        if address0.nil?
           @offset = index1
           chunk2 = nil
           if @input.size > @offset
@@ -2057,7 +2057,7 @@ module Canopy::PEG
               @expected << "\"+\""
             end
           end
-          unless address0
+          if address0.nil?
             @offset = index1
           end
         end
@@ -2110,7 +2110,7 @@ module Canopy::PEG
 
     def parse
       tree = _read_grammar
-      if tree and @offset == @input.size
+      if !tree.nil? and @offset == @input.size
         return tree
       end
       if @expected.empty?

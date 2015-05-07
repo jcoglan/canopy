@@ -485,10 +485,10 @@
       }
       var index1 = this._offset;
       address0 = this._read_choice_expression();
-      if (!address0) {
+      if (address0 === null) {
         this._offset = index1;
         address0 = this._read_choice_part();
-        if (!address0) {
+        if (address0 === null) {
           this._offset = index1;
         }
       }
@@ -753,10 +753,10 @@
       var address1 = null;
       var index2 = this._offset;
       address1 = this._read_sequence_expression();
-      if (!address1) {
+      if (address1 === null) {
         this._offset = index2;
         address1 = this._read_sequence_part();
-        if (!address1) {
+        if (address1 === null) {
           this._offset = index2;
         }
       }
@@ -800,7 +800,7 @@
         } else {
           address2 = null;
         }
-        if (!address2) {
+        if (address2 === null) {
           address2 = new SyntaxNode(this._input.substring(index3, index3), index3, []);
           this._offset = index3;
         }
@@ -994,7 +994,7 @@
       var address1 = null;
       var index2 = this._offset;
       address1 = this._read_label();
-      if (!address1) {
+      if (address1 === null) {
         address1 = new SyntaxNode(this._input.substring(index2, index2), index2, []);
         this._offset = index2;
       }
@@ -1003,10 +1003,10 @@
         var address2 = null;
         var index3 = this._offset;
         address2 = this._read_quantified_atom();
-        if (!address2) {
+        if (address2 === null) {
           this._offset = index3;
           address2 = this._read_atom();
-          if (!address2) {
+          if (address2 === null) {
             this._offset = index3;
           }
         }
@@ -1075,25 +1075,25 @@
       }
       var index1 = this._offset;
       address0 = this._read_parenthesised_expression();
-      if (!address0) {
+      if (address0 === null) {
         this._offset = index1;
         address0 = this._read_predicated_atom();
-        if (!address0) {
+        if (address0 === null) {
           this._offset = index1;
           address0 = this._read_reference_expression();
-          if (!address0) {
+          if (address0 === null) {
             this._offset = index1;
             address0 = this._read_string_expression();
-            if (!address0) {
+            if (address0 === null) {
               this._offset = index1;
               address0 = this._read_ci_string_expression();
-              if (!address0) {
+              if (address0 === null) {
                 this._offset = index1;
                 address0 = this._read_any_char_expression();
-                if (!address0) {
+                if (address0 === null) {
                   this._offset = index1;
                   address0 = this._read_char_class_expression();
-                  if (!address0) {
+                  if (address0 === null) {
                     this._offset = index1;
                   }
                 }
@@ -1134,7 +1134,7 @@
           this._expected.push('"&"');
         }
       }
-      if (!address1) {
+      if (address1 === null) {
         this._offset = index2;
         var chunk1 = null;
         if (this._input.length > this._offset) {
@@ -1153,7 +1153,7 @@
             this._expected.push('"!"');
           }
         }
-        if (!address1) {
+        if (address1 === null) {
           this._offset = index2;
         }
       }
@@ -1198,7 +1198,7 @@
         var index2 = this._offset;
         address2 = this._read_assignment();
         this._offset = index2;
-        if (!address2) {
+        if (address2 === null) {
           address2 = new SyntaxNode(this._input.substring(this._offset, this._offset), this._offset, []);
           this._offset = this._offset;
         } else {
@@ -1312,7 +1312,7 @@
           } else {
             address3 = null;
           }
-          if (!address3) {
+          if (address3 === null) {
             this._offset = index3;
             var chunk3 = null;
             if (this._input.length > this._offset) {
@@ -1331,7 +1331,7 @@
                 this._expected.push('[^"]');
               }
             }
-            if (!address3) {
+            if (address3 === null) {
               this._offset = index3;
             }
           }
@@ -1478,7 +1478,7 @@
           } else {
             address3 = null;
           }
-          if (!address3) {
+          if (address3 === null) {
             this._offset = index3;
             var chunk3 = null;
             if (this._input.length > this._offset) {
@@ -1497,7 +1497,7 @@
                 this._expected.push('[^`]');
               }
             }
-            if (!address3) {
+            if (address3 === null) {
               this._offset = index3;
             }
           }
@@ -1633,7 +1633,7 @@
             this._expected.push('"^"');
           }
         }
-        if (!address2) {
+        if (address2 === null) {
           address2 = new SyntaxNode(this._input.substring(index2, index2), index2, []);
           this._offset = index2;
         }
@@ -1698,7 +1698,7 @@
             } else {
               address4 = null;
             }
-            if (!address4) {
+            if (address4 === null) {
               this._offset = index4;
               var chunk4 = null;
               if (this._input.length > this._offset) {
@@ -1717,7 +1717,7 @@
                   this._expected.push('[^\\]]');
                 }
               }
-              if (!address4) {
+              if (address4 === null) {
                 this._offset = index4;
               }
             }
@@ -2023,7 +2023,7 @@
           this._expected.push('"?"');
         }
       }
-      if (!address0) {
+      if (address0 === null) {
         this._offset = index1;
         var chunk1 = null;
         if (this._input.length > this._offset) {
@@ -2042,7 +2042,7 @@
             this._expected.push('"*"');
           }
         }
-        if (!address0) {
+        if (address0 === null) {
           this._offset = index1;
           var chunk2 = null;
           if (this._input.length > this._offset) {
@@ -2061,7 +2061,7 @@
               this._expected.push('"+"');
             }
           }
-          if (!address0) {
+          if (address0 === null) {
             this._offset = index1;
           }
         }
@@ -2112,7 +2112,7 @@
   
   Parser.prototype.parse = function() {
     var tree = this._read_grammar();
-    if (tree && this._offset === this._input.length) {
+    if (tree !== null && this._offset === this._input.length) {
       return tree;
     }
     if (this._expected.length === 0) {

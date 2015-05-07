@@ -115,10 +115,10 @@ module CanopyJson
         address2 = nil
         index2 = @offset
         address2 = _read_object
-        unless address2
+        if address2.nil?
           @offset = index2
           address2 = _read_array
-          unless address2
+          if address2.nil?
             @offset = index2
           end
         end
@@ -280,7 +280,7 @@ module CanopyJson
       else
         address0 = nil
       end
-      unless address0
+      if address0.nil?
         @offset = index1
         index5, elements3 = @offset, []
         address8 = nil
@@ -345,7 +345,7 @@ module CanopyJson
         else
           address0 = nil
         end
-        unless address0
+        if address0.nil?
           @offset = index1
         end
       end
@@ -557,7 +557,7 @@ module CanopyJson
       else
         address0 = nil
       end
-      unless address0
+      if address0.nil?
         @offset = index1
         index5, elements3 = @offset, []
         address8 = nil
@@ -622,7 +622,7 @@ module CanopyJson
         else
           address0 = nil
         end
-        unless address0
+        if address0.nil?
           @offset = index1
         end
       end
@@ -645,22 +645,22 @@ module CanopyJson
         address2 = nil
         index2 = @offset
         address2 = _read_object
-        unless address2
+        if address2.nil?
           @offset = index2
           address2 = _read_array
-          unless address2
+          if address2.nil?
             @offset = index2
             address2 = _read_string
-            unless address2
+            if address2.nil?
               @offset = index2
               address2 = _read_number
-              unless address2
+              if address2.nil?
                 @offset = index2
                 address2 = _read_boolean
-                unless address2
+                if address2.nil?
                   @offset = index2
                   address2 = _read_null
-                  unless address2
+                  if address2.nil?
                     @offset = index2
                   end
                 end
@@ -783,7 +783,7 @@ module CanopyJson
           else
             address3 = nil
           end
-          unless address3
+          if address3.nil?
             @offset = index3
             chunk3 = nil
             if @input.size > @offset
@@ -802,7 +802,7 @@ module CanopyJson
                 @expected << "[^\"]"
               end
             end
-            unless address3
+            if address3.nil?
               @offset = index3
             end
           end
@@ -888,7 +888,7 @@ module CanopyJson
           @expected << "\"-\""
         end
       end
-      unless address1
+      if address1.nil?
         address1 = SyntaxNode.new(@input[index2...index2], index2, [])
         @offset = index2
       end
@@ -913,7 +913,7 @@ module CanopyJson
             @expected << "\"0\""
           end
         end
-        unless address2
+        if address2.nil?
           @offset = index3
           index4, elements1 = @offset, []
           address3 = nil
@@ -983,7 +983,7 @@ module CanopyJson
           else
             address2 = nil
           end
-          unless address2
+          if address2.nil?
             @offset = index3
           end
         end
@@ -1059,7 +1059,7 @@ module CanopyJson
           else
             address6 = nil
           end
-          unless address6
+          if address6.nil?
             address6 = SyntaxNode.new(@input[index6...index6], index6, [])
             @offset = index6
           end
@@ -1087,7 +1087,7 @@ module CanopyJson
                 @expected << "\"e\""
               end
             end
-            unless address11
+            if address11.nil?
               @offset = index11
               chunk7 = nil
               if @input.size > @offset
@@ -1106,7 +1106,7 @@ module CanopyJson
                   @expected << "\"E\""
                 end
               end
-              unless address11
+              if address11.nil?
                 @offset = index11
               end
             end
@@ -1131,7 +1131,7 @@ module CanopyJson
                   @expected << "\"+\""
                 end
               end
-              unless address12
+              if address12.nil?
                 @offset = index12
                 chunk9 = nil
                 if @input.size > @offset
@@ -1150,7 +1150,7 @@ module CanopyJson
                     @expected << "\"-\""
                   end
                 end
-                unless address12
+                if address12.nil?
                   @offset = index12
                   chunk10 = nil
                   if @input.size > @offset
@@ -1169,7 +1169,7 @@ module CanopyJson
                       @expected << "\"\""
                     end
                   end
-                  unless address12
+                  if address12.nil?
                     @offset = index12
                   end
                 end
@@ -1227,7 +1227,7 @@ module CanopyJson
             else
               address10 = nil
             end
-            unless address10
+            if address10.nil?
               address10 = SyntaxNode.new(@input[index9...index9], index9, [])
               @offset = index9
             end
@@ -1284,7 +1284,7 @@ module CanopyJson
           @expected << "\"true\""
         end
       end
-      unless address0
+      if address0.nil?
         @offset = index1
         chunk1 = nil
         if @input.size > @offset
@@ -1303,7 +1303,7 @@ module CanopyJson
             @expected << "\"false\""
           end
         end
-        unless address0
+        if address0.nil?
           @offset = index1
         end
       end
@@ -1396,7 +1396,7 @@ module CanopyJson
 
     def parse
       tree = _read_document
-      if tree and @offset == @input.size
+      if !tree.nil? and @offset == @input.size
         return tree
       end
       if @expected.empty?

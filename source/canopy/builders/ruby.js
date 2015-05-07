@@ -111,7 +111,7 @@
 
         builder.method_('parse', [], function(builder) {
           builder.jump_('tree', root);
-          builder.if_('tree and @offset == @input.size', function(builder) {
+          builder.if_('!tree.nil? and @offset == @input.size', function(builder) {
             builder.return_('tree');
           });
           builder.if_('@expected.empty?', function(builder) {
@@ -251,6 +251,10 @@
       this.unless_(this.isNull_(address), block, else_, context);
     },
 
+    unlessNode_: function(address, block, else_, context) {
+      this.if_(this.isNull_(address), block, else_, context);
+    },
+
     extendNode_: function(address, nodeType) {
       if (!nodeType) return;
       this._line(address + '.extend(@types::' + nodeType.replace(/\./g, '::') + ')');
@@ -277,12 +281,12 @@
       this.assign_(address, '_read_' + name);
     },
 
-    if_: function(condition, block, else_, context) {
+    conditional_: function(type, condition, block, else_, context) {
       if (typeof else_ !== 'function') {
         context = else_;
         else_   = null;
       }
-      this._line('if ' + condition);
+      this._line(type + ' ' + condition);
       this._indent(block, context);
       if (else_) {
         this._line('else');
@@ -291,18 +295,12 @@
       this._line('end');
     },
 
+    if_: function(condition, block, else_, context) {
+      this.conditional_('if', condition, block, else_, context);
+    },
+
     unless_: function(condition, block, else_, context) {
-      if (typeof else_ !== 'function') {
-        context = else_;
-        else_   = null;
-      }
-      this._line('unless ' + condition);
-      this._indent(block, context);
-      if (else_) {
-        this._line('else');
-        this._indent(else_, context);
-      }
-      this._line('end');
+      this.conditional_('unless', condition, block, else_, context);
     },
 
     whileNotNull_: function(expression, block, context) {

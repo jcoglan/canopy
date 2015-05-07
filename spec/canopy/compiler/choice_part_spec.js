@@ -5,7 +5,7 @@ function() { with(this) {
   describe('action tags', function() { with(this) {
     describe('constructing a string node', function() { with(this) {
       before(function() { with(this) {
-        Canopy.compile('grammar JS.ENV.StringActionTest\
+        Canopy.compile('grammar JS.ENV.StringActionTest \
           rule <- "begin" %begin')
 
         this.actions = {
@@ -20,7 +20,7 @@ function() { with(this) {
 
     describe('constructing a case-insensitive string node', function() { with(this) {
       before(function() { with(this) {
-        Canopy.compile('grammar JS.ENV.CIStringActionTest\
+        Canopy.compile('grammar JS.ENV.CIStringActionTest \
           rule <- `begin` %begin')
 
         this.actions = {
@@ -35,7 +35,7 @@ function() { with(this) {
 
     describe('constructing a character class node', function() { with(this) {
       before(function() { with(this) {
-        Canopy.compile('grammar JS.ENV.ClassActionTest\
+        Canopy.compile('grammar JS.ENV.ClassActionTest \
           rule <- [a-z] %make_char')
 
         this.actions = {
@@ -50,7 +50,7 @@ function() { with(this) {
 
     describe('constructing an any-char node', function() { with(this) {
       before(function() { with(this) {
-        Canopy.compile('grammar JS.ENV.AnyActionTest\
+        Canopy.compile('grammar JS.ENV.AnyActionTest \
           rule <- . %char_code')
 
         this.actions = {
@@ -65,7 +65,7 @@ function() { with(this) {
 
     describe('constructing a parenthesised node', function() { with(this) {
       before(function() { with(this) {
-        Canopy.compile('grammar JS.ENV.ParenActionTest\
+        Canopy.compile('grammar JS.ENV.ParenActionTest \
           rule <-  ( ( ( ( . ) ) ) ) %char_code')
 
         this.actions = {
@@ -78,10 +78,10 @@ function() { with(this) {
       }})
     }})
 
-    describe('constructing a repeated node', function() { with(this) {
+    describe('constructing an optional node', function() { with(this) {
       before(function() { with(this) {
-        Canopy.compile('grammar JS.ENV.IntActionTest\
-          rule <- [0-9]* %to_int')
+        Canopy.compile('grammar JS.ENV.MaybeActionTest \
+          rule <- ([0-9]+ %to_int)?')
 
         this.actions = {
           to_int: function(input, start, end, elements) {
@@ -91,14 +91,63 @@ function() { with(this) {
       }})
 
       it('creates nodes using the named action', function() { with(this) {
-        assertEqual( 3, IntActionTest.parse('3', {actions: actions}) )
+        assertEqual( 3, MaybeActionTest.parse('3', {actions: actions}) )
+      }})
+
+      it('treats falsey values as successes', function() { with(this) {
+        assertEqual( 0, MaybeActionTest.parse('0', {actions: actions}) )
+      }})
+    }})
+
+    describe('constructing a predicated node', function() { with(this) {
+      before(function() { with(this) {
+        Canopy.compile('grammar JS.ENV.PredicateActionTest \
+          rule <- "value: " &([0-9]+ %to_int) [0-9]')
+
+        this.actions = {
+          to_int: function(input, start, end, elements) {
+            return parseInt(input.substring(start, end), 10)
+          }
+        }
+      }})
+
+      it('treats falsey values as successes', function() { with(this) {
+        assertEqual( 'value: 0', PredicateActionTest.parse('value: 0', {actions: actions}).text )
+      }})
+    }})
+
+    describe('constructing a repeated node', function() { with(this) {
+      before(function() { with(this) {
+        Canopy.compile('grammar JS.ENV.IntActionTest \
+          list <- (num "," %lift)* %to_list \
+          num  <- [0-9]+ %to_int')
+
+        this.actions = {
+          to_list: function(input, start, end, elements) {
+            return elements;
+          },
+          lift: function(input, start, end, elements) {
+            return elements[0];
+          },
+          to_int: function(input, start, end, elements) {
+            return parseInt(input.substring(start, end), 10)
+          }
+        }
+      }})
+
+      it('creates nodes using the named action', function() { with(this) {
+        assertEqual( [3], IntActionTest.parse('3,', {actions: actions}) )
+      }})
+
+      it('treats falsey values as successes', function() { with(this) {
+        assertEqual( [1,0,1], IntActionTest.parse('1,0,1,', {actions: actions}) )
       }})
     }})
 
     describe('constructing a sequence', function() { with(this) {
       before(function() { with(this) {
-        Canopy.compile('grammar JS.ENV.MathActionTest\
-          addition <- int " "* "+" " "* int %add\
+        Canopy.compile('grammar JS.ENV.MathActionTest \
+          addition <- int " "* "+" " "* int %add \
           int      <- [0-9]* %an_int')
 
         this.actions = {
@@ -120,12 +169,28 @@ function() { with(this) {
       }})
     }})
 
+    describe('making a choice', function() { with(this) { describe
+      before(function() { with(this) {
+        Canopy.compile('grammar JS.ENV.ChoiceActionTest \
+          number <- "0" %num / [1-9] [0-9]* %num')
+
+        this.actions = {
+          num: function(input, start, end, elements) {
+            return parseInt(input.substring(start, end), 10)
+          }
+        }
+      }})
+
+      it('treats falsey values as successes', function() { with(this) {
+        assertEqual( 0, ChoiceActionTest.parse('0', {actions: actions}) )
+      }})
+    }})
   }})
 
   describe('type annotations', function() { with(this) {
     describe('when the node type is a mixin', function() { with(this) {
       before(function() { with(this) {
-        Canopy.compile('grammar JS.ENV.ModuleTypeTest\
+        Canopy.compile('grammar JS.ENV.ModuleTypeTest \
           rule <- "content" <NodeType>')
 
         this.types = {
@@ -146,7 +211,7 @@ function() { with(this) {
 
     describe('when the underlying parser is a choice', function() { with(this) {
       before(function() { with(this) {
-        Canopy.compile('grammar JS.ENV.TypedChoiceTest\
+        Canopy.compile('grammar JS.ENV.TypedChoiceTest \
           rule <- ("content" / "booya") <NodeType>')
 
         this.types = {
@@ -161,8 +226,8 @@ function() { with(this) {
 
     describe('where the underlying parser is a reference', function() { with(this) {
       before(function() { with(this) {
-        Canopy.compile('grammar JS.ENV.TypedRefTest\
-          first <- second <First>\
+        Canopy.compile('grammar JS.ENV.TypedRefTest \
+          first <- second <First> \
           second <- "bar" <Second>')
 
         this.types = {
@@ -182,7 +247,7 @@ function() { with(this) {
 
     describe('when the underlying parser is a repetition', function() { with(this) {
       before(function() { with(this) {
-        Canopy.compile('grammar JS.ENV.TypedRepeatTest\
+        Canopy.compile('grammar JS.ENV.TypedRepeatTest \
           rule <- "content"+ <NodeType>')
 
         this.types = {
@@ -197,7 +262,7 @@ function() { with(this) {
 
     describe('when the underlying parser is a maybe', function() { with(this) {
       before(function() { with(this) {
-        Canopy.compile('grammar JS.ENV.TypedMaybeTest\
+        Canopy.compile('grammar JS.ENV.TypedMaybeTest \
           rule <- "content"? <NodeType>')
 
         this.types = {
@@ -212,7 +277,7 @@ function() { with(this) {
 
     describe('when the node type is namespaced', function() { with(this) {
       before(function() { with(this) {
-        Canopy.compile('grammar JS.ENV.NamespacedTypeTest\
+        Canopy.compile('grammar JS.ENV.NamespacedTypeTest \
           rule <- "content" <NS.NodeType>')
 
         this.types = {

@@ -27,7 +27,7 @@ Canopy.Compiler.Choice = {
 
     expressions[index].compile(builder, address);
 
-    builder.unless_(address, function(builder) {
+    builder.unlessNode_(address, function(builder) {
       builder.assign_(builder.offset_(), startOffset);
       this._compileChoices(builder, index + 1, address, startOffset);
     }, this);

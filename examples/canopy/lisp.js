@@ -119,10 +119,10 @@
         var address3 = null;
         var index3 = this._offset;
         address3 = this._read_list();
-        if (!address3) {
+        if (address3 === null) {
           this._offset = index3;
           address3 = this._read_atom();
-          if (!address3) {
+          if (address3 === null) {
             this._offset = index3;
           }
         }
@@ -265,16 +265,16 @@
       }
       var index1 = this._offset;
       address0 = this._read_boolean();
-      if (!address0) {
+      if (address0 === null) {
         this._offset = index1;
         address0 = this._read_integer();
-        if (!address0) {
+        if (address0 === null) {
           this._offset = index1;
           address0 = this._read_string();
-          if (!address0) {
+          if (address0 === null) {
             this._offset = index1;
             address0 = this._read_symbol();
-            if (!address0) {
+            if (address0 === null) {
               this._offset = index1;
             }
           }
@@ -310,7 +310,7 @@
           this._expected.push('"#t"');
         }
       }
-      if (!address0) {
+      if (address0 === null) {
         this._offset = index1;
         var chunk1 = null;
         if (this._input.length > this._offset) {
@@ -329,7 +329,7 @@
             this._expected.push('"#f"');
           }
         }
-        if (!address0) {
+        if (address0 === null) {
           this._offset = index1;
         }
       }
@@ -505,7 +505,7 @@
           } else {
             address3 = null;
           }
-          if (!address3) {
+          if (address3 === null) {
             this._offset = index3;
             var chunk3 = null;
             if (this._input.length > this._offset) {
@@ -524,7 +524,7 @@
                 this._expected.push('[^"]');
               }
             }
-            if (!address3) {
+            if (address3 === null) {
               this._offset = index3;
             }
           }
@@ -598,7 +598,7 @@
         var index3 = this._offset;
         address2 = this._read_delimiter();
         this._offset = index3;
-        if (!address2) {
+        if (address2 === null) {
           address2 = new SyntaxNode(this._input.substring(this._offset, this._offset), this._offset, []);
           this._offset = this._offset;
         } else {
@@ -710,7 +710,7 @@
           this._expected.push('"("');
         }
       }
-      if (!address0) {
+      if (address0 === null) {
         this._offset = index1;
         var chunk1 = null;
         if (this._input.length > this._offset) {
@@ -729,7 +729,7 @@
             this._expected.push('")"');
           }
         }
-        if (!address0) {
+        if (address0 === null) {
           this._offset = index1;
         }
       }
@@ -747,10 +747,10 @@
       }
       var index1 = this._offset;
       address0 = this._read_paren();
-      if (!address0) {
+      if (address0 === null) {
         this._offset = index1;
         address0 = this._read_space();
-        if (!address0) {
+        if (address0 === null) {
           this._offset = index1;
         }
       }
@@ -771,7 +771,7 @@
   
   Parser.prototype.parse = function() {
     var tree = this._read_program();
-    if (tree && this._offset === this._input.length) {
+    if (tree !== null && this._offset === this._input.length) {
       return tree;
     }
     if (this._expected.length === 0) {

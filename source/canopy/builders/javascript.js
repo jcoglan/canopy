@@ -120,7 +120,7 @@
       this.function_('Parser.prototype.parse', [], function(builder) {
         builder.jump_('var tree', root);
 
-        builder.if_('tree && this._offset === this._input.length', function(builder) {
+        builder.if_('tree !== null && this._offset === this._input.length', function(builder) {
           builder.return_('tree');
         });
         builder.if_('this._expected.length === 0', function(builder) {
@@ -275,6 +275,10 @@
       this.if_(address + ' !== null', block, else_, context);
     },
 
+    unlessNode_: function(address, block, else_, context) {
+      this.if_(address + ' === null', block, else_, context);
+    },
+
     extendNode_: function(address, nodeType) {
       if (!nodeType) return;
       this._line('extend(' + address + ', this._types.' + nodeType + ')');
@@ -320,10 +324,6 @@
       this._indent(else_, context);
       this._newline();
       this._write('}');
-    },
-
-    unless_: function(condition, block, else_, context) {
-      this.if_('!' + condition, block, else_, context);
     },
 
     whileNotNull_: function(expression, block, context) {
