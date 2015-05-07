@@ -1,12 +1,18 @@
-var canopyLisp = require('./canopy/lisp'),
+var canopyJson = require('./canopy/json'),
+    pegjsJson  = require('./pegjs/json'),
+    canopyLisp = require('./canopy/lisp'),
     pegjsLisp  = require('./pegjs/lisp'),
     canopyPEG  = require('./canopy/peg'),
     pegjsPEG   = require('./pegjs/peg'),
     benchmark  = require('benchmark');
 
 var program = '(lambda (x y) (display "Hi.") (+ (* x y) 2))',
-    grammar = require('fs').readFileSync(__dirname + '/canopy/peg.peg').toString(),
+    pkg     = require('fs').readFileSync(__dirname + '/../package.json', 'utf8'),
+    grammar = require('fs').readFileSync(__dirname + '/canopy/peg.peg', 'utf8'),
     suite   = new benchmark.Suite();
+
+suite.add('Canopy JSON', function() { canopyJson.parse(pkg) });
+suite.add('PEG.js JSON', function() { pegjsJson.parse(pkg) });
 
 suite.add('Canopy Lisp', function() { canopyLisp.parse(program) });
 suite.add('PEG.js Lisp', function() { pegjsLisp.parse(program) });

@@ -1,0 +1,41 @@
+grammar CitrusJson
+  rule document
+    sp (object | array) sp
+  end
+
+  rule object
+    "{" pair ("," pair)* "}" | "{" sp "}"
+  end
+
+  rule pair
+    sp string sp ":" value
+  end
+
+  rule array
+    "[" value ("," value)* "]" | "[" sp "]"
+  end
+
+  rule value
+    sp (object | array | string | number | boolean | null) sp
+  end
+
+  rule string
+    '"' ("\\" . | [^"])* '"'
+  end
+
+  rule number
+    "-"? ("0" | [1-9] [0-9]*) ("." [0-9]+)? (("e" | "E") ("+" | "-" | "") [0-9]+)?
+  end
+
+  rule boolean
+    "true" | "false"
+  end
+
+  rule null
+    "null"
+  end
+
+  rule sp
+    [\s]*
+  end
+end

@@ -1,0 +1,41 @@
+grammar TreetopJson
+  rule document
+    __ (object / array) __
+  end
+
+  rule object
+    "{" pair ("," pair)* "}" / "{" __ "}"
+  end
+
+  rule pair
+    __ string __ ":" value
+  end
+
+  rule array
+    "[" value ("," value)* "]" / "[" __ "]"
+  end
+
+  rule value
+    __ (object / array / string / number / boolean / null) __
+  end
+
+  rule string
+    '"' ("\\" . / [^"])* '"'
+  end
+
+  rule number
+    "-"? ("0" / [1-9] [0-9]*) ("." [0-9]+)? (("e" / "E") ("+" / "-" / "") [0-9]+)?
+  end
+
+  rule boolean
+    "true" / "false"
+  end
+
+  rule null
+    "null"
+  end
+
+  rule __
+    [\s]*
+  end
+end
