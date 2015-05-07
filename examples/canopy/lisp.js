@@ -178,7 +178,7 @@
       var index1 = this._offset, elements0 = [];
       var address1 = null;
       var chunk0 = null;
-      if (this._input.length > this._offset) {
+      if (this._offset < this._inputSize) {
         chunk0 = this._input.substring(this._offset, this._offset + 1);
       }
       if (chunk0 === '(') {
@@ -215,7 +215,7 @@
           elements0.push(address2);
           var address4 = null;
           var chunk1 = null;
-          if (this._input.length > this._offset) {
+          if (this._offset < this._inputSize) {
             chunk1 = this._input.substring(this._offset, this._offset + 1);
           }
           if (chunk1 === ')') {
@@ -294,7 +294,7 @@
       }
       var index1 = this._offset;
       var chunk0 = null;
-      if (this._input.length > this._offset) {
+      if (this._offset < this._inputSize) {
         chunk0 = this._input.substring(this._offset, this._offset + 2);
       }
       if (chunk0 === '#t') {
@@ -313,7 +313,7 @@
       if (address0 === null) {
         this._offset = index1;
         var chunk1 = null;
-        if (this._input.length > this._offset) {
+        if (this._offset < this._inputSize) {
           chunk1 = this._input.substring(this._offset, this._offset + 2);
         }
         if (chunk1 === '#f') {
@@ -348,7 +348,7 @@
       var index1 = this._offset, elements0 = [];
       var address1 = null;
       var chunk0 = null;
-      if (this._input.length > this._offset) {
+      if (this._offset < this._inputSize) {
         chunk0 = this._input.substring(this._offset, this._offset + 1);
       }
       if (chunk0 !== null && /^[1-9]/.test(chunk0)) {
@@ -370,7 +370,7 @@
         var remaining0 = 0, index2 = this._offset, elements1 = [], address3 = true;
         while (address3 !== null) {
           var chunk1 = null;
-          if (this._input.length > this._offset) {
+          if (this._offset < this._inputSize) {
             chunk1 = this._input.substring(this._offset, this._offset + 1);
           }
           if (chunk1 !== null && /^[0-9]/.test(chunk1)) {
@@ -428,7 +428,7 @@
       var index1 = this._offset, elements0 = [];
       var address1 = null;
       var chunk0 = null;
-      if (this._input.length > this._offset) {
+      if (this._offset < this._inputSize) {
         chunk0 = this._input.substring(this._offset, this._offset + 1);
       }
       if (chunk0 === '"') {
@@ -453,7 +453,7 @@
           var index4 = this._offset, elements2 = [];
           var address4 = null;
           var chunk1 = null;
-          if (this._input.length > this._offset) {
+          if (this._offset < this._inputSize) {
             chunk1 = this._input.substring(this._offset, this._offset + 1);
           }
           if (chunk1 === '\\') {
@@ -473,7 +473,7 @@
             elements2.push(address4);
             var address5 = null;
             var chunk2 = null;
-            if (this._input.length > this._offset) {
+            if (this._offset < this._inputSize) {
               chunk2 = this._input.substring(this._offset, this._offset + 1);
             }
             if (chunk2 === null) {
@@ -508,7 +508,7 @@
           if (address3 === null) {
             this._offset = index3;
             var chunk3 = null;
-            if (this._input.length > this._offset) {
+            if (this._offset < this._inputSize) {
               chunk3 = this._input.substring(this._offset, this._offset + 1);
             }
             if (chunk3 !== null && /^[^"]/.test(chunk3)) {
@@ -543,7 +543,7 @@
           elements0.push(address2);
           var address6 = null;
           var chunk4 = null;
-          if (this._input.length > this._offset) {
+          if (this._offset < this._inputSize) {
             chunk4 = this._input.substring(this._offset, this._offset + 1);
           }
           if (chunk4 === '"') {
@@ -608,7 +608,7 @@
           elements1.push(address2);
           var address3 = null;
           var chunk0 = null;
-          if (this._input.length > this._offset) {
+          if (this._offset < this._inputSize) {
             chunk0 = this._input.substring(this._offset, this._offset + 1);
           }
           if (chunk0 === null) {
@@ -664,7 +664,7 @@
         return cached[0];
       }
       var chunk0 = null;
-      if (this._input.length > this._offset) {
+      if (this._offset < this._inputSize) {
         chunk0 = this._input.substring(this._offset, this._offset + 1);
       }
       if (chunk0 !== null && /^[\s]/.test(chunk0)) {
@@ -694,7 +694,7 @@
       }
       var index1 = this._offset;
       var chunk0 = null;
-      if (this._input.length > this._offset) {
+      if (this._offset < this._inputSize) {
         chunk0 = this._input.substring(this._offset, this._offset + 1);
       }
       if (chunk0 === '(') {
@@ -713,7 +713,7 @@
       if (address0 === null) {
         this._offset = index1;
         var chunk1 = null;
-        if (this._input.length > this._offset) {
+        if (this._offset < this._inputSize) {
           chunk1 = this._input.substring(this._offset, this._offset + 1);
         }
         if (chunk1 === ')') {
@@ -761,6 +761,7 @@
   
   var Parser = function(input, actions, types) {
     this._input = input;
+    this._inputSize = input.length;
     this._actions = actions;
     this._types = types;
     this._offset = 0;
@@ -771,7 +772,7 @@
   
   Parser.prototype.parse = function() {
     var tree = this._read_program();
-    if (tree !== null && this._offset === this._input.length) {
+    if (tree !== null && this._offset === this._inputSize) {
       return tree;
     }
     if (this._expected.length === 0) {

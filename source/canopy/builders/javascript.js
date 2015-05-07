@@ -109,6 +109,7 @@
     parserClass_: function(root) {
       this.function_('var Parser', ['input', 'actions', 'types'], function(builder) {
         builder.assign_('this._input', 'input');
+        builder.assign_('this._inputSize', 'input.length');
         builder.assign_('this._actions', 'actions');
         builder.assign_('this._types', 'types');
         builder.assign_('this._offset', '0');
@@ -120,7 +121,7 @@
       this.function_('Parser.prototype.parse', [], function(builder) {
         builder.jump_('var tree', root);
 
-        builder.if_('tree !== null && this._offset === this._input.length', function(builder) {
+        builder.if_('tree !== null && this._offset === this._inputSize', function(builder) {
           builder.return_('tree');
         });
         builder.if_('this._expected.length === 0', function(builder) {
@@ -250,7 +251,7 @@
 
     chunk_: function(length) {
       var chunk = this.localVar_('chunk', this.null_()), input = 'this._input', of = 'this._offset';
-      this.if_(input + '.length > ' + of, function(builder) {
+      this.if_(of + ' < this._inputSize', function(builder) {
         builder._line(chunk + ' = ' + input + '.substring(' + of + ', ' + of + ' + ' + length + ')');
       });
       return chunk;

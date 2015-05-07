@@ -146,7 +146,7 @@ module CanopyLisp
       index1, elements0 = @offset, []
       address1 = nil
       chunk0 = nil
-      if @input.size > @offset
+      if @offset < @input_size
         chunk0 = @input[@offset...@offset + 1]
       end
       if chunk0 == "("
@@ -183,7 +183,7 @@ module CanopyLisp
           elements0 << address2
           address4 = nil
           chunk1 = nil
-          if @input.size > @offset
+          if @offset < @input_size
             chunk1 = @input[@offset...@offset + 1]
           end
           if chunk1 == ")"
@@ -260,7 +260,7 @@ module CanopyLisp
       end
       index1 = @offset
       chunk0 = nil
-      if @input.size > @offset
+      if @offset < @input_size
         chunk0 = @input[@offset...@offset + 2]
       end
       if chunk0 == "#t"
@@ -279,7 +279,7 @@ module CanopyLisp
       if address0.nil?
         @offset = index1
         chunk1 = nil
-        if @input.size > @offset
+        if @offset < @input_size
           chunk1 = @input[@offset...@offset + 2]
         end
         if chunk1 == "#f"
@@ -313,7 +313,7 @@ module CanopyLisp
       index1, elements0 = @offset, []
       address1 = nil
       chunk0 = nil
-      if @input.size > @offset
+      if @offset < @input_size
         chunk0 = @input[@offset...@offset + 1]
       end
       if chunk0 =~ /\A[1-9]/
@@ -335,7 +335,7 @@ module CanopyLisp
         remaining0, index2, elements1, address3 = 0, @offset, [], true
         until address3 == nil
           chunk1 = nil
-          if @input.size > @offset
+          if @offset < @input_size
             chunk1 = @input[@offset...@offset + 1]
           end
           if chunk1 =~ /\A[0-9]/
@@ -392,7 +392,7 @@ module CanopyLisp
       index1, elements0 = @offset, []
       address1 = nil
       chunk0 = nil
-      if @input.size > @offset
+      if @offset < @input_size
         chunk0 = @input[@offset...@offset + 1]
       end
       if chunk0 == "\""
@@ -417,7 +417,7 @@ module CanopyLisp
           index4, elements2 = @offset, []
           address4 = nil
           chunk1 = nil
-          if @input.size > @offset
+          if @offset < @input_size
             chunk1 = @input[@offset...@offset + 1]
           end
           if chunk1 == "\\"
@@ -437,7 +437,7 @@ module CanopyLisp
             elements2 << address4
             address5 = nil
             chunk2 = nil
-            if @input.size > @offset
+            if @offset < @input_size
               chunk2 = @input[@offset...@offset + 1]
             end
             if chunk2.nil?
@@ -472,7 +472,7 @@ module CanopyLisp
           if address3.nil?
             @offset = index3
             chunk3 = nil
-            if @input.size > @offset
+            if @offset < @input_size
               chunk3 = @input[@offset...@offset + 1]
             end
             if chunk3 =~ /\A[^"]/
@@ -507,7 +507,7 @@ module CanopyLisp
           elements0 << address2
           address6 = nil
           chunk4 = nil
-          if @input.size > @offset
+          if @offset < @input_size
             chunk4 = @input[@offset...@offset + 1]
           end
           if chunk4 == "\""
@@ -571,7 +571,7 @@ module CanopyLisp
           elements1 << address2
           address3 = nil
           chunk0 = nil
-          if @input.size > @offset
+          if @offset < @input_size
             chunk0 = @input[@offset...@offset + 1]
           end
           if chunk0.nil?
@@ -626,7 +626,7 @@ module CanopyLisp
         return cached[0]
       end
       chunk0 = nil
-      if @input.size > @offset
+      if @offset < @input_size
         chunk0 = @input[@offset...@offset + 1]
       end
       if chunk0 =~ /\A[\s]/
@@ -655,7 +655,7 @@ module CanopyLisp
       end
       index1 = @offset
       chunk0 = nil
-      if @input.size > @offset
+      if @offset < @input_size
         chunk0 = @input[@offset...@offset + 1]
       end
       if chunk0 == "("
@@ -674,7 +674,7 @@ module CanopyLisp
       if address0.nil?
         @offset = index1
         chunk1 = nil
-        if @input.size > @offset
+        if @offset < @input_size
           chunk1 = @input[@offset...@offset + 1]
         end
         if chunk1 == ")"
@@ -724,6 +724,7 @@ module CanopyLisp
 
     def initialize(input, actions, types)
       @input = input
+      @input_size = input.size
       @actions = actions
       @types = types
       @offset = 0
@@ -734,7 +735,7 @@ module CanopyLisp
 
     def parse
       tree = _read_program
-      if !tree.nil? and @offset == @input.size
+      if !tree.nil? and @offset == @input_size
         return tree
       end
       if @expected.empty?

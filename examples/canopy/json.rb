@@ -161,7 +161,7 @@ module CanopyJson
       index2, elements0 = @offset, []
       address1 = nil
       chunk0 = nil
-      if @input.size > @offset
+      if @offset < @input_size
         chunk0 = @input[@offset...@offset + 1]
       end
       if chunk0 == "{"
@@ -189,7 +189,7 @@ module CanopyJson
             index4, elements2 = @offset, []
             address5 = nil
             chunk1 = nil
-            if @input.size > @offset
+            if @offset < @input_size
               chunk1 = @input[@offset...@offset + 1]
             end
             if chunk1 == ","
@@ -240,7 +240,7 @@ module CanopyJson
             elements0 << address3
             address7 = nil
             chunk2 = nil
-            if @input.size > @offset
+            if @offset < @input_size
               chunk2 = @input[@offset...@offset + 1]
             end
             if chunk2 == "}"
@@ -285,7 +285,7 @@ module CanopyJson
         index5, elements3 = @offset, []
         address8 = nil
         chunk3 = nil
-        if @input.size > @offset
+        if @offset < @input_size
           chunk3 = @input[@offset...@offset + 1]
         end
         if chunk3 == "{"
@@ -309,7 +309,7 @@ module CanopyJson
             elements3 << address9
             address10 = nil
             chunk4 = nil
-            if @input.size > @offset
+            if @offset < @input_size
               chunk4 = @input[@offset...@offset + 1]
             end
             if chunk4 == "}"
@@ -375,7 +375,7 @@ module CanopyJson
             elements0 << address3
             address4 = nil
             chunk0 = nil
-            if @input.size > @offset
+            if @offset < @input_size
               chunk0 = @input[@offset...@offset + 1]
             end
             if chunk0 == ":"
@@ -438,7 +438,7 @@ module CanopyJson
       index2, elements0 = @offset, []
       address1 = nil
       chunk0 = nil
-      if @input.size > @offset
+      if @offset < @input_size
         chunk0 = @input[@offset...@offset + 1]
       end
       if chunk0 == "["
@@ -466,7 +466,7 @@ module CanopyJson
             index4, elements2 = @offset, []
             address5 = nil
             chunk1 = nil
-            if @input.size > @offset
+            if @offset < @input_size
               chunk1 = @input[@offset...@offset + 1]
             end
             if chunk1 == ","
@@ -517,7 +517,7 @@ module CanopyJson
             elements0 << address3
             address7 = nil
             chunk2 = nil
-            if @input.size > @offset
+            if @offset < @input_size
               chunk2 = @input[@offset...@offset + 1]
             end
             if chunk2 == "]"
@@ -562,7 +562,7 @@ module CanopyJson
         index5, elements3 = @offset, []
         address8 = nil
         chunk3 = nil
-        if @input.size > @offset
+        if @offset < @input_size
           chunk3 = @input[@offset...@offset + 1]
         end
         if chunk3 == "["
@@ -586,7 +586,7 @@ module CanopyJson
             elements3 << address9
             address10 = nil
             chunk4 = nil
-            if @input.size > @offset
+            if @offset < @input_size
               chunk4 = @input[@offset...@offset + 1]
             end
             if chunk4 == "]"
@@ -706,7 +706,7 @@ module CanopyJson
       index1, elements0 = @offset, []
       address1 = nil
       chunk0 = nil
-      if @input.size > @offset
+      if @offset < @input_size
         chunk0 = @input[@offset...@offset + 1]
       end
       if chunk0 == "\""
@@ -731,7 +731,7 @@ module CanopyJson
           index4, elements2 = @offset, []
           address4 = nil
           chunk1 = nil
-          if @input.size > @offset
+          if @offset < @input_size
             chunk1 = @input[@offset...@offset + 1]
           end
           if chunk1 == "\\"
@@ -751,7 +751,7 @@ module CanopyJson
             elements2 << address4
             address5 = nil
             chunk2 = nil
-            if @input.size > @offset
+            if @offset < @input_size
               chunk2 = @input[@offset...@offset + 1]
             end
             if chunk2.nil?
@@ -786,7 +786,7 @@ module CanopyJson
           if address3.nil?
             @offset = index3
             chunk3 = nil
-            if @input.size > @offset
+            if @offset < @input_size
               chunk3 = @input[@offset...@offset + 1]
             end
             if chunk3 =~ /\A[^"]/
@@ -821,7 +821,7 @@ module CanopyJson
           elements0 << address2
           address6 = nil
           chunk4 = nil
-          if @input.size > @offset
+          if @offset < @input_size
             chunk4 = @input[@offset...@offset + 1]
           end
           if chunk4 == "\""
@@ -872,7 +872,7 @@ module CanopyJson
       address1 = nil
       index2 = @offset
       chunk0 = nil
-      if @input.size > @offset
+      if @offset < @input_size
         chunk0 = @input[@offset...@offset + 1]
       end
       if chunk0 == "-"
@@ -897,7 +897,7 @@ module CanopyJson
         address2 = nil
         index3 = @offset
         chunk1 = nil
-        if @input.size > @offset
+        if @offset < @input_size
           chunk1 = @input[@offset...@offset + 1]
         end
         if chunk1 == "0"
@@ -918,7 +918,7 @@ module CanopyJson
           index4, elements1 = @offset, []
           address3 = nil
           chunk2 = nil
-          if @input.size > @offset
+          if @offset < @input_size
             chunk2 = @input[@offset...@offset + 1]
           end
           if chunk2 =~ /\A[1-9]/
@@ -940,7 +940,7 @@ module CanopyJson
             remaining0, index5, elements2, address5 = 0, @offset, [], true
             until address5 == nil
               chunk3 = nil
-              if @input.size > @offset
+              if @offset < @input_size
                 chunk3 = @input[@offset...@offset + 1]
               end
               if chunk3 =~ /\A[0-9]/
@@ -994,7 +994,7 @@ module CanopyJson
           index7, elements3 = @offset, []
           address7 = nil
           chunk4 = nil
-          if @input.size > @offset
+          if @offset < @input_size
             chunk4 = @input[@offset...@offset + 1]
           end
           if chunk4 == "."
@@ -1016,7 +1016,7 @@ module CanopyJson
             remaining1, index8, elements4, address9 = 1, @offset, [], true
             until address9 == nil
               chunk5 = nil
-              if @input.size > @offset
+              if @offset < @input_size
                 chunk5 = @input[@offset...@offset + 1]
               end
               if chunk5 =~ /\A[0-9]/
@@ -1071,7 +1071,7 @@ module CanopyJson
             address11 = nil
             index11 = @offset
             chunk6 = nil
-            if @input.size > @offset
+            if @offset < @input_size
               chunk6 = @input[@offset...@offset + 1]
             end
             if chunk6 == "e"
@@ -1090,7 +1090,7 @@ module CanopyJson
             if address11.nil?
               @offset = index11
               chunk7 = nil
-              if @input.size > @offset
+              if @offset < @input_size
                 chunk7 = @input[@offset...@offset + 1]
               end
               if chunk7 == "E"
@@ -1115,7 +1115,7 @@ module CanopyJson
               address12 = nil
               index12 = @offset
               chunk8 = nil
-              if @input.size > @offset
+              if @offset < @input_size
                 chunk8 = @input[@offset...@offset + 1]
               end
               if chunk8 == "+"
@@ -1134,7 +1134,7 @@ module CanopyJson
               if address12.nil?
                 @offset = index12
                 chunk9 = nil
-                if @input.size > @offset
+                if @offset < @input_size
                   chunk9 = @input[@offset...@offset + 1]
                 end
                 if chunk9 == "-"
@@ -1153,7 +1153,7 @@ module CanopyJson
                 if address12.nil?
                   @offset = index12
                   chunk10 = nil
-                  if @input.size > @offset
+                  if @offset < @input_size
                     chunk10 = @input[@offset...@offset + 0]
                   end
                   if chunk10 == ""
@@ -1180,7 +1180,7 @@ module CanopyJson
                 remaining2, index13, elements6, address14 = 1, @offset, [], true
                 until address14 == nil
                   chunk11 = nil
-                  if @input.size > @offset
+                  if @offset < @input_size
                     chunk11 = @input[@offset...@offset + 1]
                   end
                   if chunk11 =~ /\A[0-9]/
@@ -1268,7 +1268,7 @@ module CanopyJson
       end
       index1 = @offset
       chunk0 = nil
-      if @input.size > @offset
+      if @offset < @input_size
         chunk0 = @input[@offset...@offset + 4]
       end
       if chunk0 == "true"
@@ -1287,7 +1287,7 @@ module CanopyJson
       if address0.nil?
         @offset = index1
         chunk1 = nil
-        if @input.size > @offset
+        if @offset < @input_size
           chunk1 = @input[@offset...@offset + 5]
         end
         if chunk1 == "false"
@@ -1319,7 +1319,7 @@ module CanopyJson
         return cached[0]
       end
       chunk0 = nil
-      if @input.size > @offset
+      if @offset < @input_size
         chunk0 = @input[@offset...@offset + 4]
       end
       if chunk0 == "null"
@@ -1349,7 +1349,7 @@ module CanopyJson
       remaining0, index1, elements0, address1 = 0, @offset, [], true
       until address1 == nil
         chunk0 = nil
-        if @input.size > @offset
+        if @offset < @input_size
           chunk0 = @input[@offset...@offset + 1]
         end
         if chunk0 =~ /\A[\s]/
@@ -1386,6 +1386,7 @@ module CanopyJson
 
     def initialize(input, actions, types)
       @input = input
+      @input_size = input.size
       @actions = actions
       @types = types
       @offset = 0
@@ -1396,7 +1397,7 @@ module CanopyJson
 
     def parse
       tree = _read_document
-      if !tree.nil? and @offset == @input.size
+      if !tree.nil? and @offset == @input_size
         return tree
       end
       if @expected.empty?

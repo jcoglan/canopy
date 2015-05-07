@@ -95,6 +95,7 @@
       this.class_('Parser', 'Grammar', function(builder) {
         builder.method_('__init__', ['input', 'actions', 'types'], function(builder) {
           builder.attribute_('_input', 'input');
+          builder.attribute_('_input_size', 'len(input)');
           builder.attribute_('_actions', 'actions');
           builder.attribute_('_types', 'types');
           builder.attribute_('_offset', '0');
@@ -105,7 +106,7 @@
 
         builder.method_('parse', [], function(builder) {
           builder.jump_('tree', root);
-          builder.if_('tree is not None and self._offset == len(self._input)', function(builder) {
+          builder.if_('tree is not None and self._offset == self._input_size)', function(builder) {
             builder.return_('tree');
           });
           builder.if_('not self._expected', function(builder) {
@@ -212,7 +213,7 @@
 
     chunk_: function(length) {
       var chunk = this.localVar_('chunk', this.null_()), input = 'self._input', of = 'self._offset';
-      this.if_('len(' + input + ') > ' + of, function(builder) {
+      this.if_(of + ' < self._input_size', function(builder) {
         builder.assign_(chunk, input + '[' + of + ':' + of + ' + ' + length + ']');
       });
       return chunk;

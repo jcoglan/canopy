@@ -101,6 +101,7 @@
 
         builder.method_('initialize', ['input', 'actions', 'types'], function(builder) {
           builder.attribute_('input', 'input');
+          builder.attribute_('input_size', 'input.size');
           builder.attribute_('actions', 'actions');
           builder.attribute_('types', 'types');
           builder.attribute_('offset', '0');
@@ -111,7 +112,7 @@
 
         builder.method_('parse', [], function(builder) {
           builder.jump_('tree', root);
-          builder.if_('!tree.nil? and @offset == @input.size', function(builder) {
+          builder.if_('!tree.nil? and @offset == @input_size', function(builder) {
             builder.return_('tree');
           });
           builder.if_('@expected.empty?', function(builder) {
@@ -226,7 +227,7 @@
 
     chunk_: function(length) {
       var chunk = this.localVar_('chunk', this.null_()), input = '@input', of = '@offset';
-      this.if_(input + '.size > ' + of, function(builder) {
+      this.if_(of + ' < @input_size', function(builder) {
         builder.assign_(chunk, input + '[' + of + '...' + of + ' + ' + length + ']');
       });
       return chunk;
