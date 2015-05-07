@@ -44,7 +44,7 @@ Canopy.Compiler.Repeat = {
     builder.if_(builder.isZero_(remaining), function(builder) {
       builder.syntaxNode_(address, startOffset, builder.offset_(), elements, action);
     }, function(builder) {
-      builder.assign_(address, builder.null_());
+      builder.assign_(address, builder.nullNode_());
     });
   }
 };

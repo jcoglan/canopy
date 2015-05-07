@@ -24,7 +24,7 @@ Canopy.Compiler.Predicate = {
       var of = builder.offset_();
       builder.syntaxNode_(address, of, of, builder.emptyList_());
     }, function(builder) {
-      builder.assign_(address, builder.null_());
+      builder.assign_(address, builder.nullNode_());
     });
   }
 };

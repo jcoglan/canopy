@@ -52,7 +52,7 @@ Canopy.Compiler.Sequence = {
     builder.if_(elements, function(builder) {
       builder.syntaxNode_(address, startOffset, builder.offset_(), elements, action, this._nodeClassName);
     }, function(builder) {
-      builder.assign_(address, builder.null_());
+      builder.assign_(address, builder.nullNode_());
     }, this);
   },
 

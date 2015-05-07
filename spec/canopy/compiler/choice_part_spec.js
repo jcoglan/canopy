@@ -85,7 +85,8 @@ function() { with(this) {
 
         this.actions = {
           to_int: function(input, start, end, elements) {
-            return parseInt(input.substring(start, end), 10)
+            var x = parseInt(input.substring(start, end), 10)
+            return x === 4 ? null : x
           }
         }
       }})
@@ -96,6 +97,10 @@ function() { with(this) {
 
       it('treats falsey values as successes', function() { with(this) {
         assertEqual( 0, MaybeActionTest.parse('0', {actions: actions}) )
+      }})
+
+      it('treats null as a success', function() { with(this) {
+        assertEqual( null, MaybeActionTest.parse('4', {actions: actions}) )
       }})
     }})
 

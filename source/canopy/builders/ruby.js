@@ -86,6 +86,7 @@
 
     grammarModule_: function(block, context) {
       this.assign_('ParseError', 'Struct.new(:input, :offset, :expected)');
+      this.assign_(this.nullNode_(), 'Object.new');
       this._newline();
       this._line('module Grammar');
       new Builder(this)._indent(block, context);
@@ -112,7 +113,7 @@
 
         builder.method_('parse', [], function(builder) {
           builder.jump_('tree', root);
-          builder.if_('!tree.nil? and @offset == @input_size', function(builder) {
+          builder.if_('tree != ' + builder.nullNode_() + ' and @offset == @input_size', function(builder) {
             builder.return_('tree');
           });
           builder.if_('@expected.empty?', function(builder) {
@@ -174,7 +175,7 @@
     },
 
     cache_: function(name, block, context) {
-      var temp      = this.localVars_({address: this.null_(), index: '@offset'}),
+      var temp      = this.localVars_({address: this.nullNode_(), index: '@offset'}),
           address   = temp.address,
           offset    = temp.index,
           cacheMap  = '@cache[:' + name + ']',
@@ -221,7 +222,7 @@
       this._varIndex[name] = this._varIndex[name] || 0;
       var varName = name + this._varIndex[name];
       this._varIndex[name] += 1;
-      this.assign_(varName, (value === undefined) ? this.null_(): value);
+      this.assign_(varName, (value === undefined) ? this.nullNode_(): value);
       return varName;
     },
 
@@ -249,11 +250,11 @@
     },
 
     ifNode_: function(address, block, else_, context) {
-      this.unless_(this.isNull_(address), block, else_, context);
+      this.unless_(address + ' == ' + this.nullNode_(), block, else_, context);
     },
 
     unlessNode_: function(address, block, else_, context) {
-      this.if_(this.isNull_(address), block, else_, context);
+      this.if_(address + ' == ' + this.nullNode_(), block, else_, context);
     },
 
     extendNode_: function(address, nodeType) {
@@ -263,7 +264,7 @@
 
     failure_: function(address, expected) {
       expected = this._quote(expected);
-      this.assign_(address, this.null_());
+      this.assign_(address, this.nullNode_());
 
       this.if_('@offset > @failure', function(builder) {
         builder.assign_('@failure', '@offset');
@@ -305,7 +306,7 @@
     },
 
     whileNotNull_: function(expression, block, context) {
-      this._line('until ' + expression + ' == ' + this.null_());
+      this._line('until ' + expression + ' == ' + this.nullNode_());
       this._indent(block, context);
       this._line('end');
     },
@@ -349,6 +350,10 @@
 
     isZero_: function(expression) {
       return expression + ' <= 0';
+    },
+
+    nullNode_: function() {
+      return 'FAILURE';
     },
 
     offset_: function() {

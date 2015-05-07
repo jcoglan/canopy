@@ -63,9 +63,11 @@
   };
   inherit(SyntaxNode2, SyntaxNode);
   
+  var FAILURE = {};
+  
   var Grammar = {
     _read_program: function() {
-      var address0 = null, index0 = this._offset;
+      var address0 = FAILURE, index0 = this._offset;
       this._cache._program = this._cache._program || {};
       var cached = this._cache._program[index0];
       if (cached) {
@@ -73,9 +75,9 @@
         return cached[0];
       }
       var remaining0 = 1, index1 = this._offset, elements0 = [], address1 = true;
-      while (address1 !== null) {
+      while (address1 !== FAILURE) {
         address1 = this._read_cell();
-        if (address1 !== null) {
+        if (address1 !== FAILURE) {
           elements0.push(address1);
           --remaining0;
         }
@@ -84,14 +86,14 @@
         address0 = new SyntaxNode(this._input.substring(index1, this._offset), index1, elements0);
         this._offset = this._offset;
       } else {
-        address0 = null;
+        address0 = FAILURE;
       }
       this._cache._program[index0] = [address0, this._offset];
       return address0;
     },
 
     _read_cell: function() {
-      var address0 = null, index0 = this._offset;
+      var address0 = FAILURE, index0 = this._offset;
       this._cache._cell = this._cache._cell || {};
       var cached = this._cache._cell[index0];
       if (cached) {
@@ -99,11 +101,11 @@
         return cached[0];
       }
       var index1 = this._offset, elements0 = [];
-      var address1 = null;
+      var address1 = FAILURE;
       var remaining0 = 0, index2 = this._offset, elements1 = [], address2 = true;
-      while (address2 !== null) {
+      while (address2 !== FAILURE) {
         address2 = this._read_space();
-        if (address2 !== null) {
+        if (address2 !== FAILURE) {
           elements1.push(address2);
           --remaining0;
         }
@@ -112,27 +114,27 @@
         address1 = new SyntaxNode(this._input.substring(index2, this._offset), index2, elements1);
         this._offset = this._offset;
       } else {
-        address1 = null;
+        address1 = FAILURE;
       }
-      if (address1 !== null) {
+      if (address1 !== FAILURE) {
         elements0.push(address1);
-        var address3 = null;
+        var address3 = FAILURE;
         var index3 = this._offset;
         address3 = this._read_list();
-        if (address3 === null) {
+        if (address3 === FAILURE) {
           this._offset = index3;
           address3 = this._read_atom();
-          if (address3 === null) {
+          if (address3 === FAILURE) {
             this._offset = index3;
           }
         }
-        if (address3 !== null) {
+        if (address3 !== FAILURE) {
           elements0.push(address3);
-          var address4 = null;
+          var address4 = FAILURE;
           var remaining1 = 0, index4 = this._offset, elements2 = [], address5 = true;
-          while (address5 !== null) {
+          while (address5 !== FAILURE) {
             address5 = this._read_space();
-            if (address5 !== null) {
+            if (address5 !== FAILURE) {
               elements2.push(address5);
               --remaining1;
             }
@@ -141,9 +143,9 @@
             address4 = new SyntaxNode(this._input.substring(index4, this._offset), index4, elements2);
             this._offset = this._offset;
           } else {
-            address4 = null;
+            address4 = FAILURE;
           }
-          if (address4 !== null) {
+          if (address4 !== FAILURE) {
             elements0.push(address4);
           } else {
             elements0 = null;
@@ -161,14 +163,14 @@
         address0 = new SyntaxNode1(this._input.substring(index1, this._offset), index1, elements0);
         this._offset = this._offset;
       } else {
-        address0 = null;
+        address0 = FAILURE;
       }
       this._cache._cell[index0] = [address0, this._offset];
       return address0;
     },
 
     _read_list: function() {
-      var address0 = null, index0 = this._offset;
+      var address0 = FAILURE, index0 = this._offset;
       this._cache._list = this._cache._list || {};
       var cached = this._cache._list[index0];
       if (cached) {
@@ -176,7 +178,7 @@
         return cached[0];
       }
       var index1 = this._offset, elements0 = [];
-      var address1 = null;
+      var address1 = FAILURE;
       var chunk0 = null;
       if (this._offset < this._inputSize) {
         chunk0 = this._input.substring(this._offset, this._offset + 1);
@@ -185,7 +187,7 @@
         address1 = new SyntaxNode(this._input.substring(this._offset, this._offset + 1), this._offset, []);
         this._offset = this._offset + 1;
       } else {
-        address1 = null;
+        address1 = FAILURE;
         if (this._offset > this._failure) {
           this._failure = this._offset;
           this._expected = [];
@@ -194,13 +196,13 @@
           this._expected.push('"("');
         }
       }
-      if (address1 !== null) {
+      if (address1 !== FAILURE) {
         elements0.push(address1);
-        var address2 = null;
+        var address2 = FAILURE;
         var remaining0 = 1, index2 = this._offset, elements1 = [], address3 = true;
-        while (address3 !== null) {
+        while (address3 !== FAILURE) {
           address3 = this._read_cell();
-          if (address3 !== null) {
+          if (address3 !== FAILURE) {
             elements1.push(address3);
             --remaining0;
           }
@@ -209,11 +211,11 @@
           address2 = new SyntaxNode(this._input.substring(index2, this._offset), index2, elements1);
           this._offset = this._offset;
         } else {
-          address2 = null;
+          address2 = FAILURE;
         }
-        if (address2 !== null) {
+        if (address2 !== FAILURE) {
           elements0.push(address2);
-          var address4 = null;
+          var address4 = FAILURE;
           var chunk1 = null;
           if (this._offset < this._inputSize) {
             chunk1 = this._input.substring(this._offset, this._offset + 1);
@@ -222,7 +224,7 @@
             address4 = new SyntaxNode(this._input.substring(this._offset, this._offset + 1), this._offset, []);
             this._offset = this._offset + 1;
           } else {
-            address4 = null;
+            address4 = FAILURE;
             if (this._offset > this._failure) {
               this._failure = this._offset;
               this._expected = [];
@@ -231,7 +233,7 @@
               this._expected.push('")"');
             }
           }
-          if (address4 !== null) {
+          if (address4 !== FAILURE) {
             elements0.push(address4);
           } else {
             elements0 = null;
@@ -249,14 +251,14 @@
         address0 = new SyntaxNode2(this._input.substring(index1, this._offset), index1, elements0);
         this._offset = this._offset;
       } else {
-        address0 = null;
+        address0 = FAILURE;
       }
       this._cache._list[index0] = [address0, this._offset];
       return address0;
     },
 
     _read_atom: function() {
-      var address0 = null, index0 = this._offset;
+      var address0 = FAILURE, index0 = this._offset;
       this._cache._atom = this._cache._atom || {};
       var cached = this._cache._atom[index0];
       if (cached) {
@@ -265,16 +267,16 @@
       }
       var index1 = this._offset;
       address0 = this._read_boolean();
-      if (address0 === null) {
+      if (address0 === FAILURE) {
         this._offset = index1;
         address0 = this._read_integer();
-        if (address0 === null) {
+        if (address0 === FAILURE) {
           this._offset = index1;
           address0 = this._read_string();
-          if (address0 === null) {
+          if (address0 === FAILURE) {
             this._offset = index1;
             address0 = this._read_symbol();
-            if (address0 === null) {
+            if (address0 === FAILURE) {
               this._offset = index1;
             }
           }
@@ -285,7 +287,7 @@
     },
 
     _read_boolean: function() {
-      var address0 = null, index0 = this._offset;
+      var address0 = FAILURE, index0 = this._offset;
       this._cache._boolean = this._cache._boolean || {};
       var cached = this._cache._boolean[index0];
       if (cached) {
@@ -301,7 +303,7 @@
         address0 = new SyntaxNode(this._input.substring(this._offset, this._offset + 2), this._offset, []);
         this._offset = this._offset + 2;
       } else {
-        address0 = null;
+        address0 = FAILURE;
         if (this._offset > this._failure) {
           this._failure = this._offset;
           this._expected = [];
@@ -310,7 +312,7 @@
           this._expected.push('"#t"');
         }
       }
-      if (address0 === null) {
+      if (address0 === FAILURE) {
         this._offset = index1;
         var chunk1 = null;
         if (this._offset < this._inputSize) {
@@ -320,7 +322,7 @@
           address0 = new SyntaxNode(this._input.substring(this._offset, this._offset + 2), this._offset, []);
           this._offset = this._offset + 2;
         } else {
-          address0 = null;
+          address0 = FAILURE;
           if (this._offset > this._failure) {
             this._failure = this._offset;
             this._expected = [];
@@ -329,7 +331,7 @@
             this._expected.push('"#f"');
           }
         }
-        if (address0 === null) {
+        if (address0 === FAILURE) {
           this._offset = index1;
         }
       }
@@ -338,7 +340,7 @@
     },
 
     _read_integer: function() {
-      var address0 = null, index0 = this._offset;
+      var address0 = FAILURE, index0 = this._offset;
       this._cache._integer = this._cache._integer || {};
       var cached = this._cache._integer[index0];
       if (cached) {
@@ -346,7 +348,7 @@
         return cached[0];
       }
       var index1 = this._offset, elements0 = [];
-      var address1 = null;
+      var address1 = FAILURE;
       var chunk0 = null;
       if (this._offset < this._inputSize) {
         chunk0 = this._input.substring(this._offset, this._offset + 1);
@@ -355,7 +357,7 @@
         address1 = new SyntaxNode(this._input.substring(this._offset, this._offset + 1), this._offset, []);
         this._offset = this._offset + 1;
       } else {
-        address1 = null;
+        address1 = FAILURE;
         if (this._offset > this._failure) {
           this._failure = this._offset;
           this._expected = [];
@@ -364,11 +366,11 @@
           this._expected.push('[1-9]');
         }
       }
-      if (address1 !== null) {
+      if (address1 !== FAILURE) {
         elements0.push(address1);
-        var address2 = null;
+        var address2 = FAILURE;
         var remaining0 = 0, index2 = this._offset, elements1 = [], address3 = true;
-        while (address3 !== null) {
+        while (address3 !== FAILURE) {
           var chunk1 = null;
           if (this._offset < this._inputSize) {
             chunk1 = this._input.substring(this._offset, this._offset + 1);
@@ -377,7 +379,7 @@
             address3 = new SyntaxNode(this._input.substring(this._offset, this._offset + 1), this._offset, []);
             this._offset = this._offset + 1;
           } else {
-            address3 = null;
+            address3 = FAILURE;
             if (this._offset > this._failure) {
               this._failure = this._offset;
               this._expected = [];
@@ -386,7 +388,7 @@
               this._expected.push('[0-9]');
             }
           }
-          if (address3 !== null) {
+          if (address3 !== FAILURE) {
             elements1.push(address3);
             --remaining0;
           }
@@ -395,9 +397,9 @@
           address2 = new SyntaxNode(this._input.substring(index2, this._offset), index2, elements1);
           this._offset = this._offset;
         } else {
-          address2 = null;
+          address2 = FAILURE;
         }
-        if (address2 !== null) {
+        if (address2 !== FAILURE) {
           elements0.push(address2);
         } else {
           elements0 = null;
@@ -411,14 +413,14 @@
         address0 = new SyntaxNode(this._input.substring(index1, this._offset), index1, elements0);
         this._offset = this._offset;
       } else {
-        address0 = null;
+        address0 = FAILURE;
       }
       this._cache._integer[index0] = [address0, this._offset];
       return address0;
     },
 
     _read_string: function() {
-      var address0 = null, index0 = this._offset;
+      var address0 = FAILURE, index0 = this._offset;
       this._cache._string = this._cache._string || {};
       var cached = this._cache._string[index0];
       if (cached) {
@@ -426,7 +428,7 @@
         return cached[0];
       }
       var index1 = this._offset, elements0 = [];
-      var address1 = null;
+      var address1 = FAILURE;
       var chunk0 = null;
       if (this._offset < this._inputSize) {
         chunk0 = this._input.substring(this._offset, this._offset + 1);
@@ -435,7 +437,7 @@
         address1 = new SyntaxNode(this._input.substring(this._offset, this._offset + 1), this._offset, []);
         this._offset = this._offset + 1;
       } else {
-        address1 = null;
+        address1 = FAILURE;
         if (this._offset > this._failure) {
           this._failure = this._offset;
           this._expected = [];
@@ -444,14 +446,14 @@
           this._expected.push('"\\""');
         }
       }
-      if (address1 !== null) {
+      if (address1 !== FAILURE) {
         elements0.push(address1);
-        var address2 = null;
+        var address2 = FAILURE;
         var remaining0 = 0, index2 = this._offset, elements1 = [], address3 = true;
-        while (address3 !== null) {
+        while (address3 !== FAILURE) {
           var index3 = this._offset;
           var index4 = this._offset, elements2 = [];
-          var address4 = null;
+          var address4 = FAILURE;
           var chunk1 = null;
           if (this._offset < this._inputSize) {
             chunk1 = this._input.substring(this._offset, this._offset + 1);
@@ -460,7 +462,7 @@
             address4 = new SyntaxNode(this._input.substring(this._offset, this._offset + 1), this._offset, []);
             this._offset = this._offset + 1;
           } else {
-            address4 = null;
+            address4 = FAILURE;
             if (this._offset > this._failure) {
               this._failure = this._offset;
               this._expected = [];
@@ -469,15 +471,15 @@
               this._expected.push('"\\\\"');
             }
           }
-          if (address4 !== null) {
+          if (address4 !== FAILURE) {
             elements2.push(address4);
-            var address5 = null;
+            var address5 = FAILURE;
             var chunk2 = null;
             if (this._offset < this._inputSize) {
               chunk2 = this._input.substring(this._offset, this._offset + 1);
             }
             if (chunk2 === null) {
-              address5 = null;
+              address5 = FAILURE;
               if (this._offset > this._failure) {
                 this._failure = this._offset;
                 this._expected = [];
@@ -489,7 +491,7 @@
               address5 = new SyntaxNode(this._input.substring(this._offset, this._offset + 1), this._offset, []);
               this._offset = this._offset + 1;
             }
-            if (address5 !== null) {
+            if (address5 !== FAILURE) {
               elements2.push(address5);
             } else {
               elements2 = null;
@@ -503,9 +505,9 @@
             address3 = new SyntaxNode(this._input.substring(index4, this._offset), index4, elements2);
             this._offset = this._offset;
           } else {
-            address3 = null;
+            address3 = FAILURE;
           }
-          if (address3 === null) {
+          if (address3 === FAILURE) {
             this._offset = index3;
             var chunk3 = null;
             if (this._offset < this._inputSize) {
@@ -515,7 +517,7 @@
               address3 = new SyntaxNode(this._input.substring(this._offset, this._offset + 1), this._offset, []);
               this._offset = this._offset + 1;
             } else {
-              address3 = null;
+              address3 = FAILURE;
               if (this._offset > this._failure) {
                 this._failure = this._offset;
                 this._expected = [];
@@ -524,11 +526,11 @@
                 this._expected.push('[^"]');
               }
             }
-            if (address3 === null) {
+            if (address3 === FAILURE) {
               this._offset = index3;
             }
           }
-          if (address3 !== null) {
+          if (address3 !== FAILURE) {
             elements1.push(address3);
             --remaining0;
           }
@@ -537,11 +539,11 @@
           address2 = new SyntaxNode(this._input.substring(index2, this._offset), index2, elements1);
           this._offset = this._offset;
         } else {
-          address2 = null;
+          address2 = FAILURE;
         }
-        if (address2 !== null) {
+        if (address2 !== FAILURE) {
           elements0.push(address2);
-          var address6 = null;
+          var address6 = FAILURE;
           var chunk4 = null;
           if (this._offset < this._inputSize) {
             chunk4 = this._input.substring(this._offset, this._offset + 1);
@@ -550,7 +552,7 @@
             address6 = new SyntaxNode(this._input.substring(this._offset, this._offset + 1), this._offset, []);
             this._offset = this._offset + 1;
           } else {
-            address6 = null;
+            address6 = FAILURE;
             if (this._offset > this._failure) {
               this._failure = this._offset;
               this._expected = [];
@@ -559,7 +561,7 @@
               this._expected.push('"\\""');
             }
           }
-          if (address6 !== null) {
+          if (address6 !== FAILURE) {
             elements0.push(address6);
           } else {
             elements0 = null;
@@ -577,14 +579,14 @@
         address0 = new SyntaxNode(this._input.substring(index1, this._offset), index1, elements0);
         this._offset = this._offset;
       } else {
-        address0 = null;
+        address0 = FAILURE;
       }
       this._cache._string[index0] = [address0, this._offset];
       return address0;
     },
 
     _read_symbol: function() {
-      var address0 = null, index0 = this._offset;
+      var address0 = FAILURE, index0 = this._offset;
       this._cache._symbol = this._cache._symbol || {};
       var cached = this._cache._symbol[index0];
       if (cached) {
@@ -592,27 +594,27 @@
         return cached[0];
       }
       var remaining0 = 1, index1 = this._offset, elements0 = [], address1 = true;
-      while (address1 !== null) {
+      while (address1 !== FAILURE) {
         var index2 = this._offset, elements1 = [];
-        var address2 = null;
+        var address2 = FAILURE;
         var index3 = this._offset;
         address2 = this._read_delimiter();
         this._offset = index3;
-        if (address2 === null) {
+        if (address2 === FAILURE) {
           address2 = new SyntaxNode(this._input.substring(this._offset, this._offset), this._offset, []);
           this._offset = this._offset;
         } else {
-          address2 = null;
+          address2 = FAILURE;
         }
-        if (address2 !== null) {
+        if (address2 !== FAILURE) {
           elements1.push(address2);
-          var address3 = null;
+          var address3 = FAILURE;
           var chunk0 = null;
           if (this._offset < this._inputSize) {
             chunk0 = this._input.substring(this._offset, this._offset + 1);
           }
           if (chunk0 === null) {
-            address3 = null;
+            address3 = FAILURE;
             if (this._offset > this._failure) {
               this._failure = this._offset;
               this._expected = [];
@@ -624,7 +626,7 @@
             address3 = new SyntaxNode(this._input.substring(this._offset, this._offset + 1), this._offset, []);
             this._offset = this._offset + 1;
           }
-          if (address3 !== null) {
+          if (address3 !== FAILURE) {
             elements1.push(address3);
           } else {
             elements1 = null;
@@ -638,9 +640,9 @@
           address1 = new SyntaxNode(this._input.substring(index2, this._offset), index2, elements1);
           this._offset = this._offset;
         } else {
-          address1 = null;
+          address1 = FAILURE;
         }
-        if (address1 !== null) {
+        if (address1 !== FAILURE) {
           elements0.push(address1);
           --remaining0;
         }
@@ -649,14 +651,14 @@
         address0 = new SyntaxNode(this._input.substring(index1, this._offset), index1, elements0);
         this._offset = this._offset;
       } else {
-        address0 = null;
+        address0 = FAILURE;
       }
       this._cache._symbol[index0] = [address0, this._offset];
       return address0;
     },
 
     _read_space: function() {
-      var address0 = null, index0 = this._offset;
+      var address0 = FAILURE, index0 = this._offset;
       this._cache._space = this._cache._space || {};
       var cached = this._cache._space[index0];
       if (cached) {
@@ -671,7 +673,7 @@
         address0 = new SyntaxNode(this._input.substring(this._offset, this._offset + 1), this._offset, []);
         this._offset = this._offset + 1;
       } else {
-        address0 = null;
+        address0 = FAILURE;
         if (this._offset > this._failure) {
           this._failure = this._offset;
           this._expected = [];
@@ -685,7 +687,7 @@
     },
 
     _read_paren: function() {
-      var address0 = null, index0 = this._offset;
+      var address0 = FAILURE, index0 = this._offset;
       this._cache._paren = this._cache._paren || {};
       var cached = this._cache._paren[index0];
       if (cached) {
@@ -701,7 +703,7 @@
         address0 = new SyntaxNode(this._input.substring(this._offset, this._offset + 1), this._offset, []);
         this._offset = this._offset + 1;
       } else {
-        address0 = null;
+        address0 = FAILURE;
         if (this._offset > this._failure) {
           this._failure = this._offset;
           this._expected = [];
@@ -710,7 +712,7 @@
           this._expected.push('"("');
         }
       }
-      if (address0 === null) {
+      if (address0 === FAILURE) {
         this._offset = index1;
         var chunk1 = null;
         if (this._offset < this._inputSize) {
@@ -720,7 +722,7 @@
           address0 = new SyntaxNode(this._input.substring(this._offset, this._offset + 1), this._offset, []);
           this._offset = this._offset + 1;
         } else {
-          address0 = null;
+          address0 = FAILURE;
           if (this._offset > this._failure) {
             this._failure = this._offset;
             this._expected = [];
@@ -729,7 +731,7 @@
             this._expected.push('")"');
           }
         }
-        if (address0 === null) {
+        if (address0 === FAILURE) {
           this._offset = index1;
         }
       }
@@ -738,7 +740,7 @@
     },
 
     _read_delimiter: function() {
-      var address0 = null, index0 = this._offset;
+      var address0 = FAILURE, index0 = this._offset;
       this._cache._delimiter = this._cache._delimiter || {};
       var cached = this._cache._delimiter[index0];
       if (cached) {
@@ -747,10 +749,10 @@
       }
       var index1 = this._offset;
       address0 = this._read_paren();
-      if (address0 === null) {
+      if (address0 === FAILURE) {
         this._offset = index1;
         address0 = this._read_space();
-        if (address0 === null) {
+        if (address0 === FAILURE) {
           this._offset = index1;
         }
       }
@@ -772,7 +774,7 @@
   
   Parser.prototype.parse = function() {
     var tree = this._read_program();
-    if (tree !== null && this._offset === this._inputSize) {
+    if (tree !== FAILURE && this._offset === this._inputSize) {
       return tree;
     }
     if (this._expected.length === 0) {
