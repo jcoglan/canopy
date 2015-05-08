@@ -357,10 +357,6 @@
       this._line(list + '.push(' + value + ')');
     },
 
-    concatText_: function(buffer, value) {
-      this._line(buffer + ' += ' + value + '.text');
-    },
-
     decrement_: function(variable) {
       this._line('--' + variable);
     },

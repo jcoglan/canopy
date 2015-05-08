@@ -336,10 +336,6 @@
       this._line(list + ' << ' + value);
     },
 
-    concatText_: function(string, value) {
-      this._line(string + ' << ' + value + '.text');
-    },
-
     decrement_: function(variable) {
       this._line(variable + ' -= 1');
     },
