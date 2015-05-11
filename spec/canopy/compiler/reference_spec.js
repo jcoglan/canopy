@@ -5,8 +5,8 @@ function() { with(this) {
   describe('with two rules and a reference', function() { with(this) {
     describe('where the root only contains a reference', function() { with(this) {
       before(function() { with(this) {
-        Canopy.compile('grammar JS.ENV.OneRefTest\
-          first <- second\
+        Canopy.compile('grammar JS.ENV.OneRefTest \
+          first <- second \
           second <- "bar"')
       }})
 
@@ -21,8 +21,8 @@ function() { with(this) {
 
     describe('where the root contains the reference as part of a sequence', function() { with(this) {
       before(function() { with(this) {
-        Canopy.compile('grammar JS.ENV.OneRefWithSequenceTest\
-          first <- second "end"\
+        Canopy.compile('grammar JS.ENV.OneRefWithSequenceTest \
+          first <- second "end" \
           second <- "begin"')
       }})
 
@@ -39,8 +39,8 @@ function() { with(this) {
 
     describe('where the root contains the reference as part of a sub-sequence', function() { with(this) {
       before(function() { with(this) {
-        Canopy.compile('grammar JS.ENV.OneRefWithSubSequenceTest\
-          first <- (second "sub") "end"\
+        Canopy.compile('grammar JS.ENV.OneRefWithSubSequenceTest \
+          first <- (second "sub") "end" \
           second <- "begin"')
       }})
 
@@ -59,8 +59,8 @@ function() { with(this) {
 
     describe('when the root contains the reference as part of a choice', function() { with(this) {
       before(function() { with(this) {
-        Canopy.compile('grammar JS.ENV.OneRefWithChoice\
-          first <- second / "end"\
+        Canopy.compile('grammar JS.ENV.OneRefWithChoice \
+          first <- second / "end" \
           second <- "begin"')
       }})
 

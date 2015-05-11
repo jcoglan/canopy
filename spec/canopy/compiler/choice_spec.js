@@ -3,7 +3,7 @@ function() { with(this) {
   include(Canopy.SpecHelper)
 
   before(function() { with(this) {
-    Canopy.compile('grammar JS.ENV.ChoiceTest\
+    Canopy.compile('grammar JS.ENV.ChoiceTest \
       choice <- "foo" / "bar" / "baz"')
   }})
 
@@ -36,7 +36,7 @@ function() { with(this) {
 
   describe('when the choices are ambiguous', function() { with(this) {
     before(function() { with(this) {
-      Canopy.compile('grammar JS.ENV.AmbiguousChoiceTest\
+      Canopy.compile('grammar JS.ENV.AmbiguousChoiceTest \
         choice <- "foxes love" / "chunky" "bacon" / "chunkyb" "acon"')
     }})
 
@@ -51,7 +51,7 @@ function() { with(this) {
 
   describe('backtracking', function() { with(this) {
     before(function() { with(this) {
-      Canopy.compile('grammar JS.ENV.BacktrackingChoiceTest\
+      Canopy.compile('grammar JS.ENV.BacktrackingChoiceTest \
         choice <- "foob" / "foo"')
     }})
 
@@ -65,7 +65,7 @@ function() { with(this) {
 
     describe('within a sequence', function() { with(this) {
       before(function() { with(this) {
-        Canopy.compile('grammar JS.ENV.BacktrackingSequenceChoice\
+        Canopy.compile('grammar JS.ENV.BacktrackingSequenceChoice \
           choice <- ("word" "type" / "word") "bar"')
       }})
 

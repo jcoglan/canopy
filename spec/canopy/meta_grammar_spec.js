@@ -2,9 +2,9 @@ JS.ENV.Canopy.MetaGrammarSpec = JS.Test.describe("Canopy.MetaGrammar",
 function() { with(this) {
   describe('with an any-char rule', function() { with(this) {
     before(function() { with(this) {
-      this.compiler = new Canopy.Compiler('\
-        grammar AnyChar                   \
-          any <- .                        \
+      this.compiler = new Canopy.Compiler(' \
+        grammar AnyChar \
+          any <- . \
       ')
     }})
 
@@ -19,9 +19,9 @@ function() { with(this) {
 
   describe('with a char-class rule', function() { with(this) {
     before(function() { with(this) {
-      this.compiler = new Canopy.Compiler('\
-        grammar CharClass                 \
-          string <- [^0-9]                \
+      this.compiler = new Canopy.Compiler(' \
+        grammar CharClass \
+          string <- [^0-9] \
       ')
     }})
 
@@ -35,9 +35,9 @@ function() { with(this) {
 
     describe('containing escaped characters', function() { with(this) {
       before(function() { with(this) {
-        this.compiler = new Canopy.Compiler('\
-          grammar CharClass                 \
-            string <- [\\^\\]\\$\\n]        \
+        this.compiler = new Canopy.Compiler(' \
+          grammar CharClass \
+            string <- [\\^\\]\\$\\n] \
         ')
       }})
 
@@ -53,9 +53,9 @@ function() { with(this) {
 
   describe('with a string rule', function() { with(this) {
     before(function() { with(this) {
-      this.compiler = new Canopy.Compiler('\
-        grammar String                    \
-          string <- "foo"                 \
+      this.compiler = new Canopy.Compiler(' \
+        grammar String \
+          string <- "foo" \
       ')
     }})
 
@@ -69,9 +69,9 @@ function() { with(this) {
 
     describe('containing escaped characters', function() { with(this) {
       before(function() { with(this) {
-        this.compiler = new Canopy.Compiler('\
-          grammar String                    \
-            string <- "\\"\\\\\\n"          \
+        this.compiler = new Canopy.Compiler(' \
+          grammar String \
+            string <- "\\"\\\\\\n" \
         ')
       }})
 
@@ -87,9 +87,9 @@ function() { with(this) {
 
   describe('with a case-insensitive string rule', function() { with(this) {
     before(function() { with(this) {
-      this.compiler = new Canopy.Compiler('\
-        grammar String                    \
-          string <- `foo`                 \
+      this.compiler = new Canopy.Compiler(' \
+        grammar String \
+          string <- `foo` \
       ')
     }})
 
@@ -104,9 +104,9 @@ function() { with(this) {
 
   describe('with a maybe string rule', function() { with(this) {
     before(function() { with(this) {
-      this.compiler = new Canopy.Compiler('\
-        grammar MaybeString               \
-          string <- "foo"?                \
+      this.compiler = new Canopy.Compiler(' \
+        grammar MaybeString \
+          string <- "foo"? \
       ')
     }})
 
@@ -121,9 +121,9 @@ function() { with(this) {
 
   describe('with an and string rule', function() { with(this) {
     before(function() { with(this) {
-      this.compiler = new Canopy.Compiler('\
-        grammar AndString                 \
-          string <- &"foo"                \
+      this.compiler = new Canopy.Compiler(' \
+        grammar AndString \
+          string <- &"foo" \
       ')
     }})
 
@@ -138,9 +138,9 @@ function() { with(this) {
 
   describe('with a not string rule', function() { with(this) {
     before(function() { with(this) {
-      this.compiler = new Canopy.Compiler('\
-        grammar NotString                 \
-          string <- !"foo"                \
+      this.compiler = new Canopy.Compiler(' \
+        grammar NotString \
+          string <- !"foo" \
       ')
     }})
 
@@ -155,9 +155,9 @@ function() { with(this) {
 
   describe('with a repeat-0 string rule', function() { with(this) {
     before(function() { with(this) {
-      this.compiler = new Canopy.Compiler('\
-        grammar StarString                \
-          string <- "foo"*                \
+      this.compiler = new Canopy.Compiler(' \
+        grammar StarString \
+          string <- "foo"* \
       ')
     }})
 
@@ -172,9 +172,9 @@ function() { with(this) {
 
   describe('with a repeat-1 string rule', function() { with(this) {
     before(function() { with(this) {
-      this.compiler = new Canopy.Compiler('\
-        grammar PlusString                \
-          string <- "foo"+                \
+      this.compiler = new Canopy.Compiler(' \
+        grammar PlusString \
+          string <- "foo"+ \
       ')
     }})
 
@@ -190,9 +190,9 @@ function() { with(this) {
   describe('with a choice rule', function() { with(this) {
     describe('containing strings', function() { with(this) {
       before(function() { with(this) {
-        this.compiler = new Canopy.Compiler('\
-          grammar Choice                    \
-            choice <- "foo" / "bar"         \
+        this.compiler = new Canopy.Compiler(' \
+          grammar Choice \
+            choice <- "foo" / "bar" \
         ')
       }})
 
@@ -209,9 +209,9 @@ function() { with(this) {
 
     describe('containing sequences', function() { with(this) {
       before(function() { with(this) {
-        this.compiler = new Canopy.Compiler('  \
-          grammar Choice                      \
-            choice <- "foo" "middle" / "bar"  \
+        this.compiler = new Canopy.Compiler(' \
+          grammar Choice \
+            choice <- "foo" "middle" / "bar" \
         ')
       }})
 
@@ -231,9 +231,9 @@ function() { with(this) {
 
   describe('with a sequence rule', function() { with(this) {
     before(function() { with(this) {
-      this.compiler = new Canopy.Compiler('\
-        grammar Sequence                  \
-          sequence <- "foo" "bar"         \
+      this.compiler = new Canopy.Compiler(' \
+        grammar Sequence \
+          sequence <- "foo" "bar" \
       ')
     }})
 
@@ -249,9 +249,9 @@ function() { with(this) {
 
     describe('containing a label', function() { with(this) {
       before(function() { with(this) {
-        this.compiler = new Canopy.Compiler('\
-          grammar LabelledSequence          \
-            labelled <- "foo" end:"bar"     \
+        this.compiler = new Canopy.Compiler(' \
+          grammar LabelledSequence \
+            labelled <- "foo" end:"bar" \
         ')
       }})
 
@@ -270,10 +270,10 @@ function() { with(this) {
 
   describe('with a referencing rule', function() { with(this) {
     before(function() { with(this) {
-      this.compiler = new Canopy.Compiler('\
-        grammar References                \
-          first <- second                 \
-          second <- "done"                \
+      this.compiler = new Canopy.Compiler(' \
+        grammar References \
+          first <- second \
+          second <- "done" \
       ')
     }})
 
@@ -291,9 +291,9 @@ function() { with(this) {
   describe('action annotation', function() { with(this) {
     describe('on atomic nodes', function() { with(this) {
       before(function() { with(this) {
-        this.compiler = new Canopy.Compiler('\
-          grammar ActionString              \
-            string <- "foo" %make_node      \
+        this.compiler = new Canopy.Compiler(' \
+          grammar ActionString \
+            string <- "foo" %make_node \
         ')
       }})
 
@@ -309,9 +309,9 @@ function() { with(this) {
 
     describe('on sequences', function() { with(this) {
       before(function() { with(this) {
-        this.compiler = new Canopy.Compiler('\
-          grammar ActionSequence             \
-            string <- "foo" "bar" %make_seq  \
+        this.compiler = new Canopy.Compiler(' \
+          grammar ActionSequence \
+            string <- "foo" "bar" %make_seq \
         ')
       }})
 
@@ -331,9 +331,9 @@ function() { with(this) {
   describe('type annotation', function() { with(this) {
     describe('on atomic nodes', function() { with(this) {
       before(function() { with(this) {
-        this.compiler = new Canopy.Compiler('\
-          grammar TypedString               \
-            string <- "foo" <Mixin>         \
+        this.compiler = new Canopy.Compiler(' \
+          grammar TypedString \
+            string <- "foo" <Mixin> \
         ')
       }})
 
@@ -349,9 +349,9 @@ function() { with(this) {
 
     describe('on parenthesised choices', function() { with(this) {
       before(function() { with(this) {
-        this.compiler = new Canopy.Compiler('    \
-          grammar TypedChoice                   \
-            choice <- ("foo" / "bar") <Mixin>   \
+        this.compiler = new Canopy.Compiler(' \
+          grammar TypedChoice \
+            choice <- ("foo" / "bar") <Mixin> \
         ')
       }})
 
@@ -369,9 +369,9 @@ function() { with(this) {
 
     describe('with namespaced types', function() { with(this) {
       before(function() { with(this) {
-        this.compiler = new Canopy.Compiler('\
-          grammar TypedString               \
-            string <- "foo" <NS.Mixin>      \
+        this.compiler = new Canopy.Compiler(' \
+          grammar TypedString \
+            string <- "foo" <NS.Mixin> \
         ')
       }})
 
@@ -387,9 +387,9 @@ function() { with(this) {
 
     describe('on sequences', function() { with(this) {
       before(function() { with(this) {
-        this.compiler = new Canopy.Compiler('\
-          grammar TypedSequence             \
-            string <- "foo" "bar" <Mixin>   \
+        this.compiler = new Canopy.Compiler(' \
+          grammar TypedSequence \
+            string <- "foo" "bar" <Mixin> \
         ')
       }})
 
@@ -408,9 +408,9 @@ function() { with(this) {
     describe('on choices', function() { with(this) {
       describe('containing atoms', function() { with(this) {
         before(function() { with(this) {
-          this.compiler = new Canopy.Compiler('  \
-            grammar TypedAtomChoice             \
-              string <- "foo" / "bar" <Mixin>   \
+          this.compiler = new Canopy.Compiler(' \
+            grammar TypedAtomChoice \
+              string <- "foo" / "bar" <Mixin> \
           ')
         }})
 
@@ -428,9 +428,9 @@ function() { with(this) {
 
       describe('containing sequences', function() { with(this) {
         before(function() { with(this) {
-          this.compiler = new Canopy.Compiler('                          \
-            grammar TypedSeqChoice                                      \
-              string <- "foo" "bar" <Branch> / "first" "second" <Fork>  \
+          this.compiler = new Canopy.Compiler(' \
+            grammar TypedSeqChoice \
+              string <- "foo" "bar" <Branch> / "first" "second" <Fork> \
           ')
         }})
 
@@ -455,9 +455,9 @@ function() { with(this) {
 
   describe('parentheses', function() { with(this) {
     before(function() { with(this) {
-      this.compiler = new Canopy.Compiler('\
-        grammar Parens                    \
-          seq <- "foo" ("t" / .) "bar"    \
+      this.compiler = new Canopy.Compiler(' \
+        grammar Parens \
+          seq <- "foo" ("t" / .) "bar" \
       ')
     }})
 
@@ -492,11 +492,11 @@ function() { with(this) {
                                 ['label', 'expression',
                                   ['reference', 'choice_part']]]]]]]]],
 
-          new Canopy.Compiler('\
-            grammar MetaGrammar\
-              choice_expression <- first_expression:choice_part\
-                                   rest_expressions:(space+ "/" space+ expression:choice_part)+\
-                                   <Canopy.Compiler.ChoiceExpression>\
+          new Canopy.Compiler(' \
+            grammar MetaGrammar \
+              choice_expression <- first_expression:choice_part \
+                                   rest_expressions:(space+ "/" space+ expression:choice_part)+ \
+                                   <Canopy.Compiler.ChoiceExpression> \
           ').toSexp() )
     }})
 
@@ -513,9 +513,9 @@ function() { with(this) {
                               ['repeat', 1, ['reference', 'space']],
                               ['reference', 'type_expression']]]]]]],
 
-          new Canopy.Compiler('\
-            grammar MetaGrammar\
-              choice_part <- (sequence_expression / atom) (space+ type_expression)? <Canopy.Compiler.ChoicePart>\
+          new Canopy.Compiler(' \
+            grammar MetaGrammar \
+              choice_part <- (sequence_expression / atom) (space+ type_expression)? <Canopy.Compiler.ChoicePart> \
           ').toSexp() )
     }})
 
@@ -533,10 +533,10 @@ function() { with(this) {
                               ['char-class', '[^"]']]],
                           ['string', '"']]]]],
 
-          new Canopy.Compiler('\
-            grammar MetaGrammar\
-              string_expression <- "\\"" ("\\\\" . / [^"])* "\\""\
-                                   <Canopy.Compiler.StringExpression>\
+          new Canopy.Compiler(' \
+            grammar MetaGrammar \
+              string_expression <- "\\"" ("\\\\" . / [^"])* "\\"" \
+                                   <Canopy.Compiler.StringExpression> \
           ').toSexp() )
     }})
 
@@ -555,10 +555,10 @@ function() { with(this) {
                               ['char-class', '[^\\]]']]],
                           ['string', ']']]]]],
 
-          new Canopy.Compiler('\
-            grammar MetaGrammar\
-              char_class_expression <- "[" "^"? ("\\\\" . / [^\\]])+ "]"\
-                                       <Canopy.Compiler.CharClassExpression>\
+          new Canopy.Compiler(' \
+            grammar MetaGrammar \
+              char_class_expression <- "[" "^"? ("\\\\" . / [^\\]])+ "]" \
+                                       <Canopy.Compiler.CharClassExpression> \
           ').toSexp() )
     }})
   }})

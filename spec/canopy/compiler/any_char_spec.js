@@ -3,7 +3,7 @@ function() { with(this) {
   include(Canopy.SpecHelper)
 
   before(function() { with(this) {
-    Canopy.compile('grammar JS.ENV.AnyCharTest\
+    Canopy.compile('grammar JS.ENV.AnyCharTest \
       anyChar <- .')
   }})
 

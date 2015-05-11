@@ -4,7 +4,7 @@ function() { with(this) {
 
   describe('positive lookahead', function() { with(this) {
     before(function() { with(this) {
-      Canopy.compile('grammar JS.ENV.AndTest\
+      Canopy.compile('grammar JS.ENV.AndTest \
         predicate <- &"foosball" "foo" .*')
     }})
 
@@ -29,7 +29,7 @@ function() { with(this) {
 
   describe('negative lookahead', function() { with(this) {
     before(function() { with(this) {
-      Canopy.compile('grammar JS.ENV.NotTest\
+      Canopy.compile('grammar JS.ENV.NotTest \
         predicate <- !"foo" "bar"')
     }})
 
@@ -47,7 +47,7 @@ function() { with(this) {
 
     describe('combined with repetition', function() { with(this) {
       before(function() { with(this) {
-        Canopy.compile('grammar JS.ENV.RepeatNotTest\
+        Canopy.compile('grammar JS.ENV.RepeatNotTest \
           predicate <- (!" " .)+ " "')
       }})
 

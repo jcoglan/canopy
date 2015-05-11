@@ -4,7 +4,7 @@ function() { with(this) {
 
   describe('maybe', function() { with(this) {
     before(function() { with(this) {
-      Canopy.compile('grammar JS.ENV.MaybeTest\
+      Canopy.compile('grammar JS.ENV.MaybeTest \
         maybe <- "jc"?')
     }})
 
@@ -23,7 +23,7 @@ function() { with(this) {
 
   describe('with zero minimum occurences', function() { with(this) {
     before(function() { with(this) {
-      Canopy.compile('grammar JS.ENV.ZeroOrMoreTest\
+      Canopy.compile('grammar JS.ENV.ZeroOrMoreTest \
         root <- "foo"*')
     }})
 
@@ -53,7 +53,7 @@ function() { with(this) {
 
     describe('followed by more of the repeated pattern', function() { with(this) {
       before(function() { with(this) {
-        Canopy.compile('grammar JS.ENV.ZeroOrUnparsable\
+        Canopy.compile('grammar JS.ENV.ZeroOrUnparsable \
           root <- "foo"* "foo"')
       }})
 
@@ -67,7 +67,7 @@ function() { with(this) {
 
   describe('with one minimum occurence', function() { with(this) {
     before(function() { with(this) {
-      Canopy.compile('grammar JS.ENV.OneOrMoreTest\
+      Canopy.compile('grammar JS.ENV.OneOrMoreTest \
         root <- "foo"+')
     }})
 
@@ -97,7 +97,7 @@ function() { with(this) {
 
     describe('followed by more of the repeated pattern', function() { with(this) {
       before(function() { with(this) {
-        Canopy.compile('grammar JS.ENV.OneOrUnparsable\
+        Canopy.compile('grammar JS.ENV.OneOrUnparsable \
           root <- "foo"+ "foo"')
       }})
 
