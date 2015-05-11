@@ -288,6 +288,27 @@ function() { with(this) {
     }})
   }})
 
+  describe('with comments', function() { with(this) {
+    before(function() { with(this) {
+      this.compiler = new Canopy.Compiler(' \
+        grammar References \n\
+          # the root rule \n\
+          first <- second # calls the second rule \n\
+          second <- "done" \
+      ')
+    }})
+
+    it('compiles a referencing-rule parser', function() { with(this) {
+      assertEqual(['grammar', 'References',
+                    ['rule', 'first',
+                      ['reference', 'second']],
+                    ['rule', 'second',
+                      ['string', 'done']]],
+
+          compiler.toSexp() )
+    }})
+  }})
+
   describe('action annotation', function() { with(this) {
     describe('on atomic nodes', function() { with(this) {
       before(function() { with(this) {
