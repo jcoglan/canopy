@@ -4,7 +4,7 @@ Canopy is a parser compiler for JavaScript, based on [Parsing Expression
 Grammars][1] and heavily influenced by [Treetop][2].
 
 [1]: http://en.wikipedia.org/wiki/Parsing_expression_grammar
-[2]: http://treetop.rubyforge.org/
+[2]: https://github.com/cjheath/treetop
 
 For usage documentation see [canopy.jcoglan.com](http://canopy.jcoglan.com).
 
