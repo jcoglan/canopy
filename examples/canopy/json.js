@@ -1,6 +1,6 @@
 (function() {
   'use strict';
-  
+
   var extend = function (destination, source) {
     if (!destination || !source) return destination;
     for (var key in source) {
@@ -9,7 +9,7 @@
     }
     return destination;
   };
-  
+
   var formatError = function (input, offset, expected) {
     var lines = input.split(/\n/g),
         lineNo = 0,
@@ -31,50 +31,50 @@
     }
     return message + '^';
   };
-  
+
   var inherit = function (subclass, parent) {
     var chain = function() {};
     chain.prototype = parent.prototype;
     subclass.prototype = new chain();
     subclass.prototype.constructor = subclass;
   };
-  
+
   var SyntaxNode = function(text, offset, elements) {
     this.text = text;
     this.offset = offset;
     this.elements = elements || [];
   };
-  
+
   SyntaxNode.prototype.forEach = function(block, context) {
     for (var el = this.elements, i = 0, n = el.length; i < n; i++) {
       block.call(context, el[i], i, el);
     }
   };
-  
+
   var SyntaxNode1 = function(text, offset, elements) {
     SyntaxNode.apply(this, arguments);
     this['__'] = elements[2];
   };
   inherit(SyntaxNode1, SyntaxNode);
-  
+
   var SyntaxNode2 = function(text, offset, elements) {
     SyntaxNode.apply(this, arguments);
     this['pair'] = elements[1];
   };
   inherit(SyntaxNode2, SyntaxNode);
-  
+
   var SyntaxNode3 = function(text, offset, elements) {
     SyntaxNode.apply(this, arguments);
     this['pair'] = elements[1];
   };
   inherit(SyntaxNode3, SyntaxNode);
-  
+
   var SyntaxNode4 = function(text, offset, elements) {
     SyntaxNode.apply(this, arguments);
     this['__'] = elements[1];
   };
   inherit(SyntaxNode4, SyntaxNode);
-  
+
   var SyntaxNode5 = function(text, offset, elements) {
     SyntaxNode.apply(this, arguments);
     this['__'] = elements[2];
@@ -82,33 +82,33 @@
     this['value'] = elements[4];
   };
   inherit(SyntaxNode5, SyntaxNode);
-  
+
   var SyntaxNode6 = function(text, offset, elements) {
     SyntaxNode.apply(this, arguments);
     this['value'] = elements[1];
   };
   inherit(SyntaxNode6, SyntaxNode);
-  
+
   var SyntaxNode7 = function(text, offset, elements) {
     SyntaxNode.apply(this, arguments);
     this['value'] = elements[1];
   };
   inherit(SyntaxNode7, SyntaxNode);
-  
+
   var SyntaxNode8 = function(text, offset, elements) {
     SyntaxNode.apply(this, arguments);
     this['__'] = elements[1];
   };
   inherit(SyntaxNode8, SyntaxNode);
-  
+
   var SyntaxNode9 = function(text, offset, elements) {
     SyntaxNode.apply(this, arguments);
     this['__'] = elements[2];
   };
   inherit(SyntaxNode9, SyntaxNode);
-  
+
   var FAILURE = {};
-  
+
   var Grammar = {
     _read_document: function() {
       var address0 = FAILURE, index0 = this._offset;
@@ -1400,7 +1400,7 @@
       return address0;
     }
   };
-  
+
   var Parser = function(input, actions, types) {
     this._input = input;
     this._inputSize = input.length;
@@ -1411,7 +1411,7 @@
     this._failure = 0;
     this._expected = [];
   };
-  
+
   Parser.prototype.parse = function() {
     var tree = this._read_document();
     if (tree !== FAILURE && this._offset === this._inputSize) {
@@ -1424,17 +1424,16 @@
     this.constructor.lastError = {offset: this._offset, expected: this._expected};
     throw new SyntaxError(formatError(this._input, this._failure, this._expected));
   };
-  
+
   var parse = function(input, options) {
     options = options || {};
     var parser = new Parser(input, options.actions, options.types);
     return parser.parse();
   };
-  
   extend(Parser.prototype, Grammar);
-  
+
   var exported = {Grammar: Grammar, Parser: Parser, parse: parse};
-  
+
   if (typeof require === 'function' && typeof exports === 'object') {
     extend(exports, exported);
   } else {

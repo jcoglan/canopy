@@ -35,13 +35,14 @@
 
     _newline: function() {
       this._write('\n');
-      var i = this._indentLevel;
-      while (i--) this._write('  ');
     },
 
-    _line: function(source) {
+    _line: function(source, semicolon) {
+      var i = this._indentLevel;
+      while (i--) this._write('  ');
+      this._write(source);
+      if (semicolon !== false) this._write(';');
       this._newline();
-      this._write(source + ';');
     },
 
     _quote: function(string) {
@@ -58,7 +59,7 @@
     },
 
     package_: function(name, block, context) {
-      this._write('(function() {');
+      this._line('(function() {', false);
       this._indent(function(builder) {
         builder._line("'use strict'");
 
@@ -68,14 +69,11 @@
         builder._line('var formatError = ' + Canopy.formatError.toString());
         builder._newline();
         builder._line('var inherit = ' + Canopy.inherit.toString());
-        builder._newline();
 
         this._grammarName = name;
         block.call(context, this);
       }, this);
-      this._newline();
-      this._write('})();');
-      this._newline();
+      this._line('})()');
     },
 
     syntaxNodeClass_: function() {
@@ -86,26 +84,23 @@
         builder._line('this.elements = elements || []');
       });
       this.function_(name + '.prototype.forEach', ['block', 'context'], function(builder) {
-        builder._newline();
-        builder._write('for (var el = this.elements, i = 0, n = el.length; i < n; i++) {');
+        builder._line('for (var el = this.elements, i = 0, n = el.length; i < n; i++) {', false);
         builder._indent(function(builder) {
           builder._line('block.call(context, el[i], i, el)');
         });
-        builder._newline();
-        builder._write('}');
+        builder._line('}', false);
       });
       return name;
     },
 
     grammarModule_: function(block, context) {
+      this._newline();
       this.assign_('var ' + this.nullNode_(), '{}');
       this._newline();
-      this._newline();
-      this._write('var Grammar = {');
+      this._line('var Grammar = {', false);
       new Builder(this)._indent(block, context);
       this._newline();
-      this._write('};');
-      this._newline();
+      this._line('}');
     },
 
     parserClass_: function(root) {
@@ -181,26 +176,23 @@
         builder._line(this._parentName + '.apply(this, arguments)');
         block.call(context, builder);
       }, this);
-      this._write('inherit(' + this._name + ', ' + this._parentName + ');');
-      this._newline();
+      this._line('inherit(' + this._name + ', ' + this._parentName + ')');
     },
 
     function_: function(name, args, block, context) {
       this._newline();
-      this._write(name + ' = function(' + args.join(', ') + ') {');
+      this._line(name + ' = function(' + args.join(', ') + ') {', false);
       new Builder(this, this._name, this._parentName)._indent(block, context);
-      this._newline();
-      this._write('};');
-      this._newline();
+      this._line('}');
     },
 
     method_: function(name, args, block, context) {
       this._write(this._methodSeparator);
-      this._methodSeparator = ',\n';
-      this._newline();
-      this._write(name + ': function(' + args.join(', ') + ') {');
+      this._methodSeparator = ',\n\n';
+      this._line(name + ': function(' + args.join(', ') + ') {', false);
       new Builder(this)._indent(block, context);
-      this._newline();
+      var n = this._indentLevel;
+      while (n--) this._write('  ');
       this._write('}');
     },
 
@@ -308,25 +300,22 @@
       this.assign_(address, 'this._read_' + rule + '()');
     },
 
-    conditional_: function(kwd, condition, block, context) {
-      this._newline();
-      this._write(kwd + ' (' + condition + ') {');
-      this._indent(block, context);
-      this._newline();
-      this._write('}');
-    },
-
-    if_: function(condition, block, else_, context) {
+    conditional_: function(kwd, condition, block, else_, context) {
       if (typeof else_ !== 'function') {
         context = else_;
         else_   = null;
       }
-      this.conditional_('if', condition, block, context);
-      if (!else_) return;
-      this._write(' else {');
-      this._indent(else_, context);
-      this._newline();
-      this._write('}');
+      this._line(kwd + ' (' + condition + ') {', false);
+      this._indent(block, context);
+      if (else_) {
+        this._line('} else {', false);
+        this._indent(else_, context);
+      }
+      this._line('}', false);
+    },
+
+    if_: function(condition, block, else_, context) {
+      this.conditional_('if', condition, block, else_, context);
     },
 
     whileNotNull_: function(expression, block, context) {

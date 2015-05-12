@@ -1,6 +1,6 @@
 (function() {
   'use strict';
-  
+
   var extend = function (destination, source) {
     if (!destination || !source) return destination;
     for (var key in source) {
@@ -9,7 +9,7 @@
     }
     return destination;
   };
-  
+
   var formatError = function (input, offset, expected) {
     var lines = input.split(/\n/g),
         lineNo = 0,
@@ -31,40 +31,40 @@
     }
     return message + '^';
   };
-  
+
   var inherit = function (subclass, parent) {
     var chain = function() {};
     chain.prototype = parent.prototype;
     subclass.prototype = new chain();
     subclass.prototype.constructor = subclass;
   };
-  
+
   var SyntaxNode = function(text, offset, elements) {
     this.text = text;
     this.offset = offset;
     this.elements = elements || [];
   };
-  
+
   SyntaxNode.prototype.forEach = function(block, context) {
     for (var el = this.elements, i = 0, n = el.length; i < n; i++) {
       block.call(context, el[i], i, el);
     }
   };
-  
+
   var SyntaxNode1 = function(text, offset, elements) {
     SyntaxNode.apply(this, arguments);
     this['data'] = elements[1];
   };
   inherit(SyntaxNode1, SyntaxNode);
-  
+
   var SyntaxNode2 = function(text, offset, elements) {
     SyntaxNode.apply(this, arguments);
     this['cells'] = elements[1];
   };
   inherit(SyntaxNode2, SyntaxNode);
-  
+
   var FAILURE = {};
-  
+
   var Grammar = {
     _read_program: function() {
       var address0 = FAILURE, index0 = this._offset;
@@ -760,7 +760,7 @@
       return address0;
     }
   };
-  
+
   var Parser = function(input, actions, types) {
     this._input = input;
     this._inputSize = input.length;
@@ -771,7 +771,7 @@
     this._failure = 0;
     this._expected = [];
   };
-  
+
   Parser.prototype.parse = function() {
     var tree = this._read_program();
     if (tree !== FAILURE && this._offset === this._inputSize) {
@@ -784,17 +784,16 @@
     this.constructor.lastError = {offset: this._offset, expected: this._expected};
     throw new SyntaxError(formatError(this._input, this._failure, this._expected));
   };
-  
+
   var parse = function(input, options) {
     options = options || {};
     var parser = new Parser(input, options.actions, options.types);
     return parser.parse();
   };
-  
   extend(Parser.prototype, Grammar);
-  
+
   var exported = {Grammar: Grammar, Parser: Parser, parse: parse};
-  
+
   if (typeof require === 'function' && typeof exports === 'object') {
     extend(exports, exported);
   } else {
