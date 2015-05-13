@@ -1,30 +1,30 @@
 class ParsletPEG < Parslet::Parser
   root(:grammar)
 
-  rule(:grammar)                  { space.repeat(0) >> grammar_name >>
-                                    (space.repeat(0) >> grammar_rule).repeat(1).as(:rules) >>
-                                    space.repeat(0) }
+  rule(:grammar)                  { __.repeat(0) >> grammar_name >>
+                                    (__.repeat(0) >> grammar_rule).repeat(1).as(:rules) >>
+                                    __.repeat(0) }
 
-  rule(:grammar_name)             { str('grammar') >> str(':').maybe >> space.repeat(1) >> object_identifier }
+  rule(:grammar_name)             { str('grammar') >> str(':').maybe >> __.repeat(1) >> object_identifier }
 
   rule(:grammar_rule)             { identifier >> assignment >> parsing_expression }
 
-  rule(:assignment)               { space.repeat(1) >> str('<-') >> space.repeat(1) }
+  rule(:assignment)               { __.repeat(1) >> str('<-') >> __.repeat(1) }
 
   rule(:parsing_expression)       { choice_expression | choice_part }
 
-  rule(:parenthesised_expression) { str('(') >> space.repeat(0) >> parsing_expression >>
-                                    space.repeat(0) >> str(')') }
+  rule(:parenthesised_expression) { str('(') >> __.repeat(0) >> parsing_expression >>
+                                    __.repeat(0) >> str(')') }
 
   rule(:choice_expression)        { choice_part.as(:first_part) >>
-                                    (space.repeat(1) >> str('/') >> space.repeat(1) >> choice_part.as(:expression)).repeat(1).as(:rest) }
+                                    (__.repeat(1) >> str('/') >> __.repeat(1) >> choice_part.as(:expression)).repeat(1).as(:rest) }
 
   rule(:choice_part)              { (action_expression | sequence_expression | sequence_part) >>
-                                    (space.repeat(1) >> type_tag).maybe }
+                                    (__.repeat(1) >> type_tag).maybe }
 
-  rule(:action_expression)        { actionable_expression >> space.repeat(1) >> action_tag }
+  rule(:action_expression)        { actionable_expression >> __.repeat(1) >> action_tag }
 
-  rule(:actionable_expression)    { str('(') >> space.repeat(0) >> actionable_expression >> space.repeat(0) >> str(')') |
+  rule(:actionable_expression)    { str('(') >> __.repeat(0) >> actionable_expression >> __.repeat(0) >> str(')') |
                                     sequence_expression |
                                     repeated_atom |
                                     terminal_node }
@@ -34,7 +34,7 @@ class ParsletPEG < Parslet::Parser
   rule(:type_tag)                 { str('<') >> object_identifier >> str('>') }
 
   rule(:sequence_expression)      { sequence_part.as(:first_part) >>
-                                    (space.repeat(1) >> sequence_part.as(:expression)).repeat(1).as(:rest) }
+                                    (__.repeat(1) >> sequence_part.as(:expression)).repeat(1).as(:rest) }
 
   rule(:sequence_part)            { label.maybe >> (maybe_atom | repeated_atom | atom).as(:expression) }
 
@@ -71,7 +71,7 @@ class ParsletPEG < Parslet::Parser
 
   rule(:identifier)               { match('[a-zA-Z_]') >> match('[a-zA-Z0-9_]').repeat(0) }
 
-  rule(:space)                    { match('[\\s]') | comment }
+  rule(:__)                       { match('[\\s]') | comment }
 
   rule(:comment)                  { str('#') >> match('[^\n]').repeat(0) }
 end

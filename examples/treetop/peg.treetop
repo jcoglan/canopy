@@ -1,10 +1,10 @@
 grammar TreetopPEG
   rule grammar
-    space* grammar_name rules:(space* grammar_rule)+ space*
+    __* grammar_name rules:(__* grammar_rule)+ __*
   end
 
   rule grammar_name
-    "grammar" ":"? space+ object_identifier
+    "grammar" ":"? __+ object_identifier
   end
 
   rule grammar_rule
@@ -12,7 +12,7 @@ grammar TreetopPEG
   end
 
   rule assignment
-    space+ "<-" space+
+    __+ "<-" __+
   end
 
   rule parsing_expression
@@ -20,23 +20,23 @@ grammar TreetopPEG
   end
 
   rule parenthesised_expression
-    "(" space* parsing_expression space* ")"
+    "(" __* parsing_expression __* ")"
   end
 
   rule choice_expression
-    first_part:choice_part rest:(space+ "/" space+ expression:choice_part)+
+    first_part:choice_part rest:(__+ "/" __+ expression:choice_part)+
   end
 
   rule choice_part
-    (action_expression / sequence_expression / sequence_part) (space+ type_tag)?
+    (action_expression / sequence_expression / sequence_part) (__+ type_tag)?
   end
 
   rule action_expression
-    actionable_expression space+ action_tag
+    actionable_expression __+ action_tag
   end
 
   rule actionable_expression
-    "(" space* actionable_expression space* ")" / sequence_expression / repeated_atom / terminal_node
+    "(" __* actionable_expression __* ")" / sequence_expression / repeated_atom / terminal_node
   end
 
   rule action_tag
@@ -48,7 +48,7 @@ grammar TreetopPEG
   end
 
   rule sequence_expression
-    first_part:sequence_part rest:(space+ expression:sequence_part)+
+    first_part:sequence_part rest:(__+ expression:sequence_part)+
   end
 
   rule sequence_part
@@ -107,7 +107,7 @@ grammar TreetopPEG
     [a-zA-Z_] [a-zA-Z0-9_]*
   end
 
-  rule space
+  rule __
     [\s] / comment
   end
 
