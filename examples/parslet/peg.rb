@@ -5,7 +5,7 @@ class ParsletPEG < Parslet::Parser
                                     (space.repeat(0) >> grammar_rule).repeat(1).as(:rules) >>
                                     space.repeat(0) }
 
-  rule(:grammar_name)             { str('grammar ') >> object_identifier }
+  rule(:grammar_name)             { str('grammar') >> str(':').maybe >> space.repeat(1) >> object_identifier }
 
   rule(:grammar_rule)             { identifier >> assignment >> parsing_expression }
 
@@ -19,31 +19,45 @@ class ParsletPEG < Parslet::Parser
   rule(:choice_expression)        { choice_part.as(:first_part) >>
                                     (space.repeat(1) >> str('/') >> space.repeat(1) >> choice_part.as(:expression)).repeat(1).as(:rest) }
 
-  rule(:choice_part)              { (sequence_expression | sequence_part) >>
-                                    (space.repeat(1) >> type_expression).maybe }
+  rule(:choice_part)              { (action_expression | sequence_expression | sequence_part) >>
+                                    (space.repeat(1) >> type_tag).maybe }
 
-  rule(:type_expression)          { str('<') >> object_identifier >> str('>') }
+  rule(:action_expression)        { actionable_expression >> space.repeat(1) >> action_tag }
+
+  rule(:actionable_expression)    { str('(') >> space.repeat(0) >> actionable_expression >> space.repeat(0) >> str(')') |
+                                    sequence_expression |
+                                    repeated_atom |
+                                    terminal_node }
+
+  rule(:action_tag)               { str('%') >> identifier }
+
+  rule(:type_tag)                 { str('<') >> object_identifier >> str('>') }
 
   rule(:sequence_expression)      { sequence_part.as(:first_part) >>
                                     (space.repeat(1) >> sequence_part.as(:expression)).repeat(1).as(:rest) }
 
-  rule(:sequence_part)            { label.maybe >> (quantified_atom | atom).as(:expression) }
+  rule(:sequence_part)            { label.maybe >> (maybe_atom | repeated_atom | atom).as(:expression) }
 
-  rule(:quantified_atom)          { atom >> quantifier }
+  rule(:maybe_atom)               { atom >> str('?') }
+
+  rule(:repeated_atom)            { atom >> (str('*') | str('+')).as(:quantifier) }
 
   rule(:atom)                     { parenthesised_expression |
                                     predicated_atom |
                                     reference_expression |
-                                    string_expression |
+                                    terminal_node }
+
+  rule(:terminal_node)            { string_expression |
                                     ci_string_expression |
-                                    any_char_expression |
-                                    char_class_expression }
+                                    char_class_expression |
+                                    any_char_expression }
 
   rule(:predicated_atom)          { (str('&') | str('!')).as(:predicate) >> atom }
 
   rule(:reference_expression)     { identifier >> assignment.absent? }
 
-  rule(:string_expression)        { str('"') >> (str('\\') >> any | match('[^"]')).repeat(0) >> str('"') }
+  rule(:string_expression)        { str('"') >> (str('\\') >> any | match('[^"]')).repeat(0) >> str('"') |
+                                    str("'") >> (str('\\') >> any | match("[^']")).repeat(0) >> str("'") }
 
   rule(:ci_string_expression)     { str('`') >> (str('\\') >> any | match('[^`]')).repeat(0) >> str('`') }
 
@@ -57,7 +71,7 @@ class ParsletPEG < Parslet::Parser
 
   rule(:identifier)               { match('[a-zA-Z_]') >> match('[a-zA-Z0-9_]').repeat(0) }
 
-  rule(:quantifier)               { str('?') | str('*') | str('+') }
+  rule(:space)                    { match('[\\s]') | comment }
 
-  rule(:space)                    { match('[\\s]') }
+  rule(:comment)                  { str('#') >> match('[^\n]').repeat(0) }
 end

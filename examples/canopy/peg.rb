@@ -38,7 +38,7 @@ module Canopy::PEG
 
     def initialize(text, offset, elements)
       super
-      @object_identifier = elements[1]
+      @object_identifier = elements[3]
     end
   end
 
@@ -84,15 +84,43 @@ module Canopy::PEG
   end
 
   class SyntaxNode8 < SyntaxNode
-    attr_reader :type_expression
+    attr_reader :type_tag
 
     def initialize(text, offset, elements)
       super
-      @type_expression = elements[1]
+      @type_tag = elements[1]
     end
   end
 
   class SyntaxNode9 < SyntaxNode
+    attr_reader :actionable_expression, :action_tag
+
+    def initialize(text, offset, elements)
+      super
+      @actionable_expression = elements[0]
+      @action_tag = elements[2]
+    end
+  end
+
+  class SyntaxNode10 < SyntaxNode
+    attr_reader :actionable_expression
+
+    def initialize(text, offset, elements)
+      super
+      @actionable_expression = elements[2]
+    end
+  end
+
+  class SyntaxNode11 < SyntaxNode
+    attr_reader :identifier
+
+    def initialize(text, offset, elements)
+      super
+      @identifier = elements[1]
+    end
+  end
+
+  class SyntaxNode12 < SyntaxNode
     attr_reader :object_identifier
 
     def initialize(text, offset, elements)
@@ -101,7 +129,7 @@ module Canopy::PEG
     end
   end
 
-  class SyntaxNode10 < SyntaxNode
+  class SyntaxNode13 < SyntaxNode
     attr_reader :first_part, :sequence_part, :rest
 
     def initialize(text, offset, elements)
@@ -112,7 +140,7 @@ module Canopy::PEG
     end
   end
 
-  class SyntaxNode11 < SyntaxNode
+  class SyntaxNode14 < SyntaxNode
     attr_reader :expression, :sequence_part
 
     def initialize(text, offset, elements)
@@ -122,7 +150,7 @@ module Canopy::PEG
     end
   end
 
-  class SyntaxNode12 < SyntaxNode
+  class SyntaxNode15 < SyntaxNode
     attr_reader :expression
 
     def initialize(text, offset, elements)
@@ -131,7 +159,16 @@ module Canopy::PEG
     end
   end
 
-  class SyntaxNode13 < SyntaxNode
+  class SyntaxNode16 < SyntaxNode
+    attr_reader :atom
+
+    def initialize(text, offset, elements)
+      super
+      @atom = elements[0]
+    end
+  end
+
+  class SyntaxNode17 < SyntaxNode
     attr_reader :atom, :quantifier
 
     def initialize(text, offset, elements)
@@ -141,7 +178,7 @@ module Canopy::PEG
     end
   end
 
-  class SyntaxNode14 < SyntaxNode
+  class SyntaxNode18 < SyntaxNode
     attr_reader :predicate, :atom
 
     def initialize(text, offset, elements)
@@ -151,7 +188,7 @@ module Canopy::PEG
     end
   end
 
-  class SyntaxNode15 < SyntaxNode
+  class SyntaxNode19 < SyntaxNode
     attr_reader :identifier
 
     def initialize(text, offset, elements)
@@ -160,7 +197,7 @@ module Canopy::PEG
     end
   end
 
-  class SyntaxNode16 < SyntaxNode
+  class SyntaxNode20 < SyntaxNode
     attr_reader :identifier
 
     def initialize(text, offset, elements)
@@ -169,7 +206,7 @@ module Canopy::PEG
     end
   end
 
-  class SyntaxNode17 < SyntaxNode
+  class SyntaxNode21 < SyntaxNode
     attr_reader :identifier
 
     def initialize(text, offset, elements)
@@ -178,7 +215,7 @@ module Canopy::PEG
     end
   end
 
-  class SyntaxNode18 < SyntaxNode
+  class SyntaxNode22 < SyntaxNode
     attr_reader :identifier
 
     def initialize(text, offset, elements)
@@ -202,7 +239,7 @@ module Canopy::PEG
       address1 = FAILURE
       remaining0, index2, elements1, address2 = 0, @offset, [], true
       until address2 == FAILURE
-        address2 = _read_space
+        address2 = _read___
         unless address2 == FAILURE
           elements1 << address2
           remaining0 -= 1
@@ -227,7 +264,7 @@ module Canopy::PEG
             address6 = FAILURE
             remaining2, index5, elements4, address7 = 0, @offset, [], true
             until address7 == FAILURE
-              address7 = _read_space
+              address7 = _read___
               unless address7 == FAILURE
                 elements4 << address7
                 remaining2 -= 1
@@ -275,7 +312,7 @@ module Canopy::PEG
             address9 = FAILURE
             remaining3, index6, elements5, address10 = 0, @offset, [], true
             until address10 == FAILURE
-              address10 = _read_space
+              address10 = _read___
               unless address10 == FAILURE
                 elements5 << address10
                 remaining3 -= 1
@@ -326,11 +363,11 @@ module Canopy::PEG
       address1 = FAILURE
       chunk0 = nil
       if @offset < @input_size
-        chunk0 = @input[@offset...@offset + 8]
+        chunk0 = @input[@offset...@offset + 7]
       end
-      if chunk0.downcase == "grammar ".downcase
-        address1 = SyntaxNode.new(@input[@offset...@offset + 8], @offset, [])
-        @offset = @offset + 8
+      if chunk0.downcase == "grammar".downcase
+        address1 = SyntaxNode.new(@input[@offset...@offset + 7], @offset, [])
+        @offset = @offset + 7
       else
         address1 = FAILURE
         if @offset > @failure
@@ -338,15 +375,65 @@ module Canopy::PEG
           @expected = []
         end
         if @offset == @failure
-          @expected << "`grammar `"
+          @expected << "`grammar`"
         end
       end
       unless address1 == FAILURE
         elements0 << address1
         address2 = FAILURE
-        address2 = _read_object_identifier
+        index2 = @offset
+        chunk1 = nil
+        if @offset < @input_size
+          chunk1 = @input[@offset...@offset + 1]
+        end
+        if chunk1 == ":"
+          address2 = SyntaxNode.new(@input[@offset...@offset + 1], @offset, [])
+          @offset = @offset + 1
+        else
+          address2 = FAILURE
+          if @offset > @failure
+            @failure = @offset
+            @expected = []
+          end
+          if @offset == @failure
+            @expected << "\":\""
+          end
+        end
+        if address2 == FAILURE
+          address2 = SyntaxNode.new(@input[index2...index2], index2, [])
+          @offset = index2
+        end
         unless address2 == FAILURE
           elements0 << address2
+          address3 = FAILURE
+          remaining0, index3, elements1, address4 = 1, @offset, [], true
+          until address4 == FAILURE
+            address4 = _read___
+            unless address4 == FAILURE
+              elements1 << address4
+              remaining0 -= 1
+            end
+          end
+          if remaining0 <= 0
+            address3 = SyntaxNode.new(@input[index3...@offset], index3, elements1)
+            @offset = @offset
+          else
+            address3 = FAILURE
+          end
+          unless address3 == FAILURE
+            elements0 << address3
+            address5 = FAILURE
+            address5 = _read_object_identifier
+            unless address5 == FAILURE
+              elements0 << address5
+            else
+              elements0 = nil
+              @offset = index1
+            end
+          else
+            elements0 = nil
+            @offset = index1
+          end
         else
           elements0 = nil
           @offset = index1
@@ -418,7 +505,7 @@ module Canopy::PEG
       address1 = FAILURE
       remaining0, index2, elements1, address2 = 1, @offset, [], true
       until address2 == FAILURE
-        address2 = _read_space
+        address2 = _read___
         unless address2 == FAILURE
           elements1 << address2
           remaining0 -= 1
@@ -455,7 +542,7 @@ module Canopy::PEG
           address4 = FAILURE
           remaining1, index3, elements2, address5 = 1, @offset, [], true
           until address5 == FAILURE
-            address5 = _read_space
+            address5 = _read___
             unless address5 == FAILURE
               elements2 << address5
               remaining1 -= 1
@@ -542,7 +629,7 @@ module Canopy::PEG
         address2 = FAILURE
         remaining0, index2, elements1, address3 = 0, @offset, [], true
         until address3 == FAILURE
-          address3 = _read_space
+          address3 = _read___
           unless address3 == FAILURE
             elements1 << address3
             remaining0 -= 1
@@ -563,7 +650,7 @@ module Canopy::PEG
             address5 = FAILURE
             remaining1, index3, elements2, address6 = 0, @offset, [], true
             until address6 == FAILURE
-              address6 = _read_space
+              address6 = _read___
               unless address6 == FAILURE
                 elements2 << address6
                 remaining1 -= 1
@@ -646,7 +733,7 @@ module Canopy::PEG
           address4 = FAILURE
           remaining1, index4, elements3, address5 = 1, @offset, [], true
           until address5 == FAILURE
-            address5 = _read_space
+            address5 = _read___
             unless address5 == FAILURE
               elements3 << address5
               remaining1 -= 1
@@ -683,7 +770,7 @@ module Canopy::PEG
               address7 = FAILURE
               remaining2, index5, elements4, address8 = 1, @offset, [], true
               until address8 == FAILURE
-                address8 = _read_space
+                address8 = _read___
                 unless address8 == FAILURE
                   elements4 << address8
                   remaining2 -= 1
@@ -764,12 +851,16 @@ module Canopy::PEG
       index1, elements0 = @offset, []
       address1 = FAILURE
       index2 = @offset
-      address1 = _read_sequence_expression
+      address1 = _read_action_expression
       if address1 == FAILURE
         @offset = index2
-        address1 = _read_sequence_part
+        address1 = _read_sequence_expression
         if address1 == FAILURE
           @offset = index2
+          address1 = _read_sequence_part
+          if address1 == FAILURE
+            @offset = index2
+          end
         end
       end
       unless address1 == FAILURE
@@ -780,7 +871,7 @@ module Canopy::PEG
         address3 = FAILURE
         remaining0, index5, elements2, address4 = 1, @offset, [], true
         until address4 == FAILURE
-          address4 = _read_space
+          address4 = _read___
           unless address4 == FAILURE
             elements2 << address4
             remaining0 -= 1
@@ -795,7 +886,7 @@ module Canopy::PEG
         unless address3 == FAILURE
           elements1 << address3
           address5 = FAILURE
-          address5 = _read_type_expression
+          address5 = _read_type_tag
           unless address5 == FAILURE
             elements1 << address5
           else
@@ -836,9 +927,246 @@ module Canopy::PEG
       return address0
     end
 
-    def _read_type_expression
+    def _read_action_expression
       address0, index0 = FAILURE, @offset
-      cached = @cache[:type_expression][index0]
+      cached = @cache[:action_expression][index0]
+      if cached
+        @offset = cached[1]
+        return cached[0]
+      end
+      index1, elements0 = @offset, []
+      address1 = FAILURE
+      address1 = _read_actionable_expression
+      unless address1 == FAILURE
+        elements0 << address1
+        address2 = FAILURE
+        remaining0, index2, elements1, address3 = 1, @offset, [], true
+        until address3 == FAILURE
+          address3 = _read___
+          unless address3 == FAILURE
+            elements1 << address3
+            remaining0 -= 1
+          end
+        end
+        if remaining0 <= 0
+          address2 = SyntaxNode.new(@input[index2...@offset], index2, elements1)
+          @offset = @offset
+        else
+          address2 = FAILURE
+        end
+        unless address2 == FAILURE
+          elements0 << address2
+          address4 = FAILURE
+          address4 = _read_action_tag
+          unless address4 == FAILURE
+            elements0 << address4
+          else
+            elements0 = nil
+            @offset = index1
+          end
+        else
+          elements0 = nil
+          @offset = index1
+        end
+      else
+        elements0 = nil
+        @offset = index1
+      end
+      if elements0
+        address0 = SyntaxNode9.new(@input[index1...@offset], index1, elements0)
+        @offset = @offset
+      else
+        address0 = FAILURE
+      end
+      @cache[:action_expression][index0] = [address0, @offset]
+      return address0
+    end
+
+    def _read_actionable_expression
+      address0, index0 = FAILURE, @offset
+      cached = @cache[:actionable_expression][index0]
+      if cached
+        @offset = cached[1]
+        return cached[0]
+      end
+      index1 = @offset
+      index2, elements0 = @offset, []
+      address1 = FAILURE
+      chunk0 = nil
+      if @offset < @input_size
+        chunk0 = @input[@offset...@offset + 1]
+      end
+      if chunk0 == "("
+        address1 = SyntaxNode.new(@input[@offset...@offset + 1], @offset, [])
+        @offset = @offset + 1
+      else
+        address1 = FAILURE
+        if @offset > @failure
+          @failure = @offset
+          @expected = []
+        end
+        if @offset == @failure
+          @expected << "\"(\""
+        end
+      end
+      unless address1 == FAILURE
+        elements0 << address1
+        address2 = FAILURE
+        remaining0, index3, elements1, address3 = 0, @offset, [], true
+        until address3 == FAILURE
+          address3 = _read___
+          unless address3 == FAILURE
+            elements1 << address3
+            remaining0 -= 1
+          end
+        end
+        if remaining0 <= 0
+          address2 = SyntaxNode.new(@input[index3...@offset], index3, elements1)
+          @offset = @offset
+        else
+          address2 = FAILURE
+        end
+        unless address2 == FAILURE
+          elements0 << address2
+          address4 = FAILURE
+          address4 = _read_actionable_expression
+          unless address4 == FAILURE
+            elements0 << address4
+            address5 = FAILURE
+            remaining1, index4, elements2, address6 = 0, @offset, [], true
+            until address6 == FAILURE
+              address6 = _read___
+              unless address6 == FAILURE
+                elements2 << address6
+                remaining1 -= 1
+              end
+            end
+            if remaining1 <= 0
+              address5 = SyntaxNode.new(@input[index4...@offset], index4, elements2)
+              @offset = @offset
+            else
+              address5 = FAILURE
+            end
+            unless address5 == FAILURE
+              elements0 << address5
+              address7 = FAILURE
+              chunk1 = nil
+              if @offset < @input_size
+                chunk1 = @input[@offset...@offset + 1]
+              end
+              if chunk1 == ")"
+                address7 = SyntaxNode.new(@input[@offset...@offset + 1], @offset, [])
+                @offset = @offset + 1
+              else
+                address7 = FAILURE
+                if @offset > @failure
+                  @failure = @offset
+                  @expected = []
+                end
+                if @offset == @failure
+                  @expected << "\")\""
+                end
+              end
+              unless address7 == FAILURE
+                elements0 << address7
+              else
+                elements0 = nil
+                @offset = index2
+              end
+            else
+              elements0 = nil
+              @offset = index2
+            end
+          else
+            elements0 = nil
+            @offset = index2
+          end
+        else
+          elements0 = nil
+          @offset = index2
+        end
+      else
+        elements0 = nil
+        @offset = index2
+      end
+      if elements0
+        address0 = SyntaxNode10.new(@input[index2...@offset], index2, elements0)
+        @offset = @offset
+      else
+        address0 = FAILURE
+      end
+      if address0 == FAILURE
+        @offset = index1
+        address0 = _read_sequence_expression
+        if address0 == FAILURE
+          @offset = index1
+          address0 = _read_repeated_atom
+          if address0 == FAILURE
+            @offset = index1
+            address0 = _read_terminal_node
+            if address0 == FAILURE
+              @offset = index1
+            end
+          end
+        end
+      end
+      @cache[:actionable_expression][index0] = [address0, @offset]
+      return address0
+    end
+
+    def _read_action_tag
+      address0, index0 = FAILURE, @offset
+      cached = @cache[:action_tag][index0]
+      if cached
+        @offset = cached[1]
+        return cached[0]
+      end
+      index1, elements0 = @offset, []
+      address1 = FAILURE
+      chunk0 = nil
+      if @offset < @input_size
+        chunk0 = @input[@offset...@offset + 1]
+      end
+      if chunk0 == "%"
+        address1 = SyntaxNode.new(@input[@offset...@offset + 1], @offset, [])
+        @offset = @offset + 1
+      else
+        address1 = FAILURE
+        if @offset > @failure
+          @failure = @offset
+          @expected = []
+        end
+        if @offset == @failure
+          @expected << "\"%\""
+        end
+      end
+      unless address1 == FAILURE
+        elements0 << address1
+        address2 = FAILURE
+        address2 = _read_identifier
+        unless address2 == FAILURE
+          elements0 << address2
+        else
+          elements0 = nil
+          @offset = index1
+        end
+      else
+        elements0 = nil
+        @offset = index1
+      end
+      if elements0
+        address0 = SyntaxNode11.new(@input[index1...@offset], index1, elements0)
+        @offset = @offset
+      else
+        address0 = FAILURE
+      end
+      @cache[:action_tag][index0] = [address0, @offset]
+      return address0
+    end
+
+    def _read_type_tag
+      address0, index0 = FAILURE, @offset
+      cached = @cache[:type_tag][index0]
       if cached
         @offset = cached[1]
         return cached[0]
@@ -901,12 +1229,12 @@ module Canopy::PEG
         @offset = index1
       end
       if elements0
-        address0 = SyntaxNode9.new(@input[index1...@offset], index1, elements0)
+        address0 = SyntaxNode12.new(@input[index1...@offset], index1, elements0)
         @offset = @offset
       else
         address0 = FAILURE
       end
-      @cache[:type_expression][index0] = [address0, @offset]
+      @cache[:type_tag][index0] = [address0, @offset]
       return address0
     end
 
@@ -929,7 +1257,7 @@ module Canopy::PEG
           address4 = FAILURE
           remaining1, index4, elements3, address5 = 1, @offset, [], true
           until address5 == FAILURE
-            address5 = _read_space
+            address5 = _read___
             unless address5 == FAILURE
               elements3 << address5
               remaining1 -= 1
@@ -956,7 +1284,7 @@ module Canopy::PEG
             @offset = index3
           end
           if elements2
-            address3 = SyntaxNode11.new(@input[index3...@offset], index3, elements2)
+            address3 = SyntaxNode14.new(@input[index3...@offset], index3, elements2)
             @offset = @offset
           else
             address3 = FAILURE
@@ -983,7 +1311,7 @@ module Canopy::PEG
         @offset = index1
       end
       if elements0
-        address0 = SyntaxNode10.new(@input[index1...@offset], index1, elements0)
+        address0 = SyntaxNode13.new(@input[index1...@offset], index1, elements0)
         @offset = @offset
       else
         address0 = FAILURE
@@ -1011,12 +1339,16 @@ module Canopy::PEG
         elements0 << address1
         address2 = FAILURE
         index3 = @offset
-        address2 = _read_quantified_atom
+        address2 = _read_maybe_atom
         if address2 == FAILURE
           @offset = index3
-          address2 = _read_atom
+          address2 = _read_repeated_atom
           if address2 == FAILURE
             @offset = index3
+            address2 = _read_atom
+            if address2 == FAILURE
+              @offset = index3
+            end
           end
         end
         unless address2 == FAILURE
@@ -1030,7 +1362,7 @@ module Canopy::PEG
         @offset = index1
       end
       if elements0
-        address0 = SyntaxNode12.new(@input[index1...@offset], index1, elements0)
+        address0 = SyntaxNode15.new(@input[index1...@offset], index1, elements0)
         @offset = @offset
       else
         address0 = FAILURE
@@ -1039,9 +1371,9 @@ module Canopy::PEG
       return address0
     end
 
-    def _read_quantified_atom
+    def _read_maybe_atom
       address0, index0 = FAILURE, @offset
-      cached = @cache[:quantified_atom][index0]
+      cached = @cache[:maybe_atom][index0]
       if cached
         @offset = cached[1]
         return cached[0]
@@ -1052,7 +1384,23 @@ module Canopy::PEG
       unless address1 == FAILURE
         elements0 << address1
         address2 = FAILURE
-        address2 = _read_quantifier
+        chunk0 = nil
+        if @offset < @input_size
+          chunk0 = @input[@offset...@offset + 1]
+        end
+        if chunk0 == "?"
+          address2 = SyntaxNode.new(@input[@offset...@offset + 1], @offset, [])
+          @offset = @offset + 1
+        else
+          address2 = FAILURE
+          if @offset > @failure
+            @failure = @offset
+            @expected = []
+          end
+          if @offset == @failure
+            @expected << "\"?\""
+          end
+        end
         unless address2 == FAILURE
           elements0 << address2
         else
@@ -1064,12 +1412,86 @@ module Canopy::PEG
         @offset = index1
       end
       if elements0
-        address0 = SyntaxNode13.new(@input[index1...@offset], index1, elements0)
+        address0 = SyntaxNode16.new(@input[index1...@offset], index1, elements0)
         @offset = @offset
       else
         address0 = FAILURE
       end
-      @cache[:quantified_atom][index0] = [address0, @offset]
+      @cache[:maybe_atom][index0] = [address0, @offset]
+      return address0
+    end
+
+    def _read_repeated_atom
+      address0, index0 = FAILURE, @offset
+      cached = @cache[:repeated_atom][index0]
+      if cached
+        @offset = cached[1]
+        return cached[0]
+      end
+      index1, elements0 = @offset, []
+      address1 = FAILURE
+      address1 = _read_atom
+      unless address1 == FAILURE
+        elements0 << address1
+        address2 = FAILURE
+        index2 = @offset
+        chunk0 = nil
+        if @offset < @input_size
+          chunk0 = @input[@offset...@offset + 1]
+        end
+        if chunk0 == "*"
+          address2 = SyntaxNode.new(@input[@offset...@offset + 1], @offset, [])
+          @offset = @offset + 1
+        else
+          address2 = FAILURE
+          if @offset > @failure
+            @failure = @offset
+            @expected = []
+          end
+          if @offset == @failure
+            @expected << "\"*\""
+          end
+        end
+        if address2 == FAILURE
+          @offset = index2
+          chunk1 = nil
+          if @offset < @input_size
+            chunk1 = @input[@offset...@offset + 1]
+          end
+          if chunk1 == "+"
+            address2 = SyntaxNode.new(@input[@offset...@offset + 1], @offset, [])
+            @offset = @offset + 1
+          else
+            address2 = FAILURE
+            if @offset > @failure
+              @failure = @offset
+              @expected = []
+            end
+            if @offset == @failure
+              @expected << "\"+\""
+            end
+          end
+          if address2 == FAILURE
+            @offset = index2
+          end
+        end
+        unless address2 == FAILURE
+          elements0 << address2
+        else
+          elements0 = nil
+          @offset = index1
+        end
+      else
+        elements0 = nil
+        @offset = index1
+      end
+      if elements0
+        address0 = SyntaxNode17.new(@input[index1...@offset], index1, elements0)
+        @offset = @offset
+      else
+        address0 = FAILURE
+      end
+      @cache[:repeated_atom][index0] = [address0, @offset]
       return address0
     end
 
@@ -1090,26 +1512,42 @@ module Canopy::PEG
           address0 = _read_reference_expression
           if address0 == FAILURE
             @offset = index1
-            address0 = _read_string_expression
+            address0 = _read_terminal_node
             if address0 == FAILURE
               @offset = index1
-              address0 = _read_ci_string_expression
-              if address0 == FAILURE
-                @offset = index1
-                address0 = _read_any_char_expression
-                if address0 == FAILURE
-                  @offset = index1
-                  address0 = _read_char_class_expression
-                  if address0 == FAILURE
-                    @offset = index1
-                  end
-                end
-              end
             end
           end
         end
       end
       @cache[:atom][index0] = [address0, @offset]
+      return address0
+    end
+
+    def _read_terminal_node
+      address0, index0 = FAILURE, @offset
+      cached = @cache[:terminal_node][index0]
+      if cached
+        @offset = cached[1]
+        return cached[0]
+      end
+      index1 = @offset
+      address0 = _read_string_expression
+      if address0 == FAILURE
+        @offset = index1
+        address0 = _read_ci_string_expression
+        if address0 == FAILURE
+          @offset = index1
+          address0 = _read_char_class_expression
+          if address0 == FAILURE
+            @offset = index1
+            address0 = _read_any_char_expression
+            if address0 == FAILURE
+              @offset = index1
+            end
+          end
+        end
+      end
+      @cache[:terminal_node][index0] = [address0, @offset]
       return address0
     end
 
@@ -1178,7 +1616,7 @@ module Canopy::PEG
         @offset = index1
       end
       if elements0
-        address0 = SyntaxNode14.new(@input[index1...@offset], index1, elements0)
+        address0 = SyntaxNode18.new(@input[index1...@offset], index1, elements0)
         @offset = @offset
       else
         address0 = FAILURE
@@ -1220,7 +1658,7 @@ module Canopy::PEG
         @offset = index1
       end
       if elements0
-        address0 = SyntaxNode15.new(@input[index1...@offset], index1, elements0)
+        address0 = SyntaxNode19.new(@input[index1...@offset], index1, elements0)
         @offset = @offset
       else
         address0 = FAILURE
@@ -1236,7 +1674,8 @@ module Canopy::PEG
         @offset = cached[1]
         return cached[0]
       end
-      index1, elements0 = @offset, []
+      index1 = @offset
+      index2, elements0 = @offset, []
       address1 = FAILURE
       chunk0 = nil
       if @offset < @input_size
@@ -1252,16 +1691,16 @@ module Canopy::PEG
           @expected = []
         end
         if @offset == @failure
-          @expected << "\"\\\"\""
+          @expected << "'\"'"
         end
       end
       unless address1 == FAILURE
         elements0 << address1
         address2 = FAILURE
-        remaining0, index2, elements1, address3 = 0, @offset, [], true
+        remaining0, index3, elements1, address3 = 0, @offset, [], true
         until address3 == FAILURE
-          index3 = @offset
-          index4, elements2 = @offset, []
+          index4 = @offset
+          index5, elements2 = @offset, []
           address4 = FAILURE
           chunk1 = nil
           if @offset < @input_size
@@ -1304,20 +1743,20 @@ module Canopy::PEG
               elements2 << address5
             else
               elements2 = nil
-              @offset = index4
+              @offset = index5
             end
           else
             elements2 = nil
-            @offset = index4
+            @offset = index5
           end
           if elements2
-            address3 = SyntaxNode.new(@input[index4...@offset], index4, elements2)
+            address3 = SyntaxNode.new(@input[index5...@offset], index5, elements2)
             @offset = @offset
           else
             address3 = FAILURE
           end
           if address3 == FAILURE
-            @offset = index3
+            @offset = index4
             chunk3 = nil
             if @offset < @input_size
               chunk3 = @input[@offset...@offset + 1]
@@ -1336,7 +1775,7 @@ module Canopy::PEG
               end
             end
             if address3 == FAILURE
-              @offset = index3
+              @offset = index4
             end
           end
           unless address3 == FAILURE
@@ -1345,7 +1784,7 @@ module Canopy::PEG
           end
         end
         if remaining0 <= 0
-          address2 = SyntaxNode.new(@input[index2...@offset], index2, elements1)
+          address2 = SyntaxNode.new(@input[index3...@offset], index3, elements1)
           @offset = @offset
         else
           address2 = FAILURE
@@ -1367,28 +1806,188 @@ module Canopy::PEG
               @expected = []
             end
             if @offset == @failure
-              @expected << "\"\\\"\""
+              @expected << "'\"'"
             end
           end
           unless address6 == FAILURE
             elements0 << address6
           else
             elements0 = nil
-            @offset = index1
+            @offset = index2
           end
         else
           elements0 = nil
-          @offset = index1
+          @offset = index2
         end
       else
         elements0 = nil
-        @offset = index1
+        @offset = index2
       end
       if elements0
-        address0 = SyntaxNode.new(@input[index1...@offset], index1, elements0)
+        address0 = SyntaxNode.new(@input[index2...@offset], index2, elements0)
         @offset = @offset
       else
         address0 = FAILURE
+      end
+      if address0 == FAILURE
+        @offset = index1
+        index6, elements3 = @offset, []
+        address7 = FAILURE
+        chunk5 = nil
+        if @offset < @input_size
+          chunk5 = @input[@offset...@offset + 1]
+        end
+        if chunk5 == "'"
+          address7 = SyntaxNode.new(@input[@offset...@offset + 1], @offset, [])
+          @offset = @offset + 1
+        else
+          address7 = FAILURE
+          if @offset > @failure
+            @failure = @offset
+            @expected = []
+          end
+          if @offset == @failure
+            @expected << "\"'\""
+          end
+        end
+        unless address7 == FAILURE
+          elements3 << address7
+          address8 = FAILURE
+          remaining1, index7, elements4, address9 = 0, @offset, [], true
+          until address9 == FAILURE
+            index8 = @offset
+            index9, elements5 = @offset, []
+            address10 = FAILURE
+            chunk6 = nil
+            if @offset < @input_size
+              chunk6 = @input[@offset...@offset + 1]
+            end
+            if chunk6 == "\\"
+              address10 = SyntaxNode.new(@input[@offset...@offset + 1], @offset, [])
+              @offset = @offset + 1
+            else
+              address10 = FAILURE
+              if @offset > @failure
+                @failure = @offset
+                @expected = []
+              end
+              if @offset == @failure
+                @expected << "\"\\\\\""
+              end
+            end
+            unless address10 == FAILURE
+              elements5 << address10
+              address11 = FAILURE
+              chunk7 = nil
+              if @offset < @input_size
+                chunk7 = @input[@offset...@offset + 1]
+              end
+              if chunk7.nil?
+                address11 = FAILURE
+                if @offset > @failure
+                  @failure = @offset
+                  @expected = []
+                end
+                if @offset == @failure
+                  @expected << "<any char>"
+                end
+              else
+                address11 = SyntaxNode.new(@input[@offset...@offset + 1], @offset, [])
+                @offset = @offset + 1
+              end
+              unless address11 == FAILURE
+                elements5 << address11
+              else
+                elements5 = nil
+                @offset = index9
+              end
+            else
+              elements5 = nil
+              @offset = index9
+            end
+            if elements5
+              address9 = SyntaxNode.new(@input[index9...@offset], index9, elements5)
+              @offset = @offset
+            else
+              address9 = FAILURE
+            end
+            if address9 == FAILURE
+              @offset = index8
+              chunk8 = nil
+              if @offset < @input_size
+                chunk8 = @input[@offset...@offset + 1]
+              end
+              if chunk8 =~ /\A[^']/
+                address9 = SyntaxNode.new(@input[@offset...@offset + 1], @offset, [])
+                @offset = @offset + 1
+              else
+                address9 = FAILURE
+                if @offset > @failure
+                  @failure = @offset
+                  @expected = []
+                end
+                if @offset == @failure
+                  @expected << "[^']"
+                end
+              end
+              if address9 == FAILURE
+                @offset = index8
+              end
+            end
+            unless address9 == FAILURE
+              elements4 << address9
+              remaining1 -= 1
+            end
+          end
+          if remaining1 <= 0
+            address8 = SyntaxNode.new(@input[index7...@offset], index7, elements4)
+            @offset = @offset
+          else
+            address8 = FAILURE
+          end
+          unless address8 == FAILURE
+            elements3 << address8
+            address12 = FAILURE
+            chunk9 = nil
+            if @offset < @input_size
+              chunk9 = @input[@offset...@offset + 1]
+            end
+            if chunk9 == "'"
+              address12 = SyntaxNode.new(@input[@offset...@offset + 1], @offset, [])
+              @offset = @offset + 1
+            else
+              address12 = FAILURE
+              if @offset > @failure
+                @failure = @offset
+                @expected = []
+              end
+              if @offset == @failure
+                @expected << "\"'\""
+              end
+            end
+            unless address12 == FAILURE
+              elements3 << address12
+            else
+              elements3 = nil
+              @offset = index6
+            end
+          else
+            elements3 = nil
+            @offset = index6
+          end
+        else
+          elements3 = nil
+          @offset = index6
+        end
+        if elements3
+          address0 = SyntaxNode.new(@input[index6...@offset], index6, elements3)
+          @offset = @offset
+        else
+          address0 = FAILURE
+        end
+        if address0 == FAILURE
+          @offset = index1
+        end
       end
       @cache[:string_expression][index0] = [address0, @offset]
       return address0
@@ -1822,7 +2421,7 @@ module Canopy::PEG
         @offset = index1
       end
       if elements0
-        address0 = SyntaxNode16.new(@input[index1...@offset], index1, elements0)
+        address0 = SyntaxNode20.new(@input[index1...@offset], index1, elements0)
         @offset = @offset
       else
         address0 = FAILURE
@@ -1880,7 +2479,7 @@ module Canopy::PEG
             @offset = index3
           end
           if elements2
-            address3 = SyntaxNode18.new(@input[index3...@offset], index3, elements2)
+            address3 = SyntaxNode22.new(@input[index3...@offset], index3, elements2)
             @offset = @offset
           else
             address3 = FAILURE
@@ -1907,7 +2506,7 @@ module Canopy::PEG
         @offset = index1
       end
       if elements0
-        address0 = SyntaxNode17.new(@input[index1...@offset], index1, elements0)
+        address0 = SyntaxNode21.new(@input[index1...@offset], index1, elements0)
         @offset = @offset
       else
         address0 = FAILURE
@@ -1995,85 +2594,14 @@ module Canopy::PEG
       return address0
     end
 
-    def _read_quantifier
+    def _read___
       address0, index0 = FAILURE, @offset
-      cached = @cache[:quantifier][index0]
+      cached = @cache[:__][index0]
       if cached
         @offset = cached[1]
         return cached[0]
       end
       index1 = @offset
-      chunk0 = nil
-      if @offset < @input_size
-        chunk0 = @input[@offset...@offset + 1]
-      end
-      if chunk0 == "?"
-        address0 = SyntaxNode.new(@input[@offset...@offset + 1], @offset, [])
-        @offset = @offset + 1
-      else
-        address0 = FAILURE
-        if @offset > @failure
-          @failure = @offset
-          @expected = []
-        end
-        if @offset == @failure
-          @expected << "\"?\""
-        end
-      end
-      if address0 == FAILURE
-        @offset = index1
-        chunk1 = nil
-        if @offset < @input_size
-          chunk1 = @input[@offset...@offset + 1]
-        end
-        if chunk1 == "*"
-          address0 = SyntaxNode.new(@input[@offset...@offset + 1], @offset, [])
-          @offset = @offset + 1
-        else
-          address0 = FAILURE
-          if @offset > @failure
-            @failure = @offset
-            @expected = []
-          end
-          if @offset == @failure
-            @expected << "\"*\""
-          end
-        end
-        if address0 == FAILURE
-          @offset = index1
-          chunk2 = nil
-          if @offset < @input_size
-            chunk2 = @input[@offset...@offset + 1]
-          end
-          if chunk2 == "+"
-            address0 = SyntaxNode.new(@input[@offset...@offset + 1], @offset, [])
-            @offset = @offset + 1
-          else
-            address0 = FAILURE
-            if @offset > @failure
-              @failure = @offset
-              @expected = []
-            end
-            if @offset == @failure
-              @expected << "\"+\""
-            end
-          end
-          if address0 == FAILURE
-            @offset = index1
-          end
-        end
-      end
-      @cache[:quantifier][index0] = [address0, @offset]
-      return address0
-    end
-
-    def _read_space
-      address0, index0 = FAILURE, @offset
-      cached = @cache[:space][index0]
-      if cached
-        @offset = cached[1]
-        return cached[0]
-      end
       chunk0 = nil
       if @offset < @input_size
         chunk0 = @input[@offset...@offset + 1]
@@ -2091,7 +2619,93 @@ module Canopy::PEG
           @expected << "[\\s]"
         end
       end
-      @cache[:space][index0] = [address0, @offset]
+      if address0 == FAILURE
+        @offset = index1
+        address0 = _read_comment
+        if address0 == FAILURE
+          @offset = index1
+        end
+      end
+      @cache[:__][index0] = [address0, @offset]
+      return address0
+    end
+
+    def _read_comment
+      address0, index0 = FAILURE, @offset
+      cached = @cache[:comment][index0]
+      if cached
+        @offset = cached[1]
+        return cached[0]
+      end
+      index1, elements0 = @offset, []
+      address1 = FAILURE
+      chunk0 = nil
+      if @offset < @input_size
+        chunk0 = @input[@offset...@offset + 1]
+      end
+      if chunk0 == "#"
+        address1 = SyntaxNode.new(@input[@offset...@offset + 1], @offset, [])
+        @offset = @offset + 1
+      else
+        address1 = FAILURE
+        if @offset > @failure
+          @failure = @offset
+          @expected = []
+        end
+        if @offset == @failure
+          @expected << "\"#\""
+        end
+      end
+      unless address1 == FAILURE
+        elements0 << address1
+        address2 = FAILURE
+        remaining0, index2, elements1, address3 = 0, @offset, [], true
+        until address3 == FAILURE
+          chunk1 = nil
+          if @offset < @input_size
+            chunk1 = @input[@offset...@offset + 1]
+          end
+          if chunk1 =~ /\A[^\n]/
+            address3 = SyntaxNode.new(@input[@offset...@offset + 1], @offset, [])
+            @offset = @offset + 1
+          else
+            address3 = FAILURE
+            if @offset > @failure
+              @failure = @offset
+              @expected = []
+            end
+            if @offset == @failure
+              @expected << "[^\\n]"
+            end
+          end
+          unless address3 == FAILURE
+            elements1 << address3
+            remaining0 -= 1
+          end
+        end
+        if remaining0 <= 0
+          address2 = SyntaxNode.new(@input[index2...@offset], index2, elements1)
+          @offset = @offset
+        else
+          address2 = FAILURE
+        end
+        unless address2 == FAILURE
+          elements0 << address2
+        else
+          elements0 = nil
+          @offset = index1
+        end
+      else
+        elements0 = nil
+        @offset = index1
+      end
+      if elements0
+        address0 = SyntaxNode.new(@input[index1...@offset], index1, elements0)
+        @offset = @offset
+      else
+        address0 = FAILURE
+      end
+      @cache[:comment][index0] = [address0, @offset]
       return address0
     end
   end
