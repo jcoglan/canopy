@@ -1,72 +1,72 @@
 
 
-  grammar                    =  __* grammar_name
-                                (__* grammar_rule)+ __*
+grammar                    =  __* grammar_name
+                              (__* grammar_rule)+ __*
 
-  grammar_name               =  "grammar" ":"? __+ object_identifier
+grammar_name               =  "grammar" ":"? __+ object_identifier
 
-  grammar_rule               =  identifier assignment parsing_expression
+grammar_rule               =  identifier assignment parsing_expression
 
-  assignment                 =  __+ "<-" __+
+assignment                 =  __+ "<-" __+
 
-  parsing_expression         =  choice_expression / choice_part
+parsing_expression         =  choice_expression / choice_part
 
-  parenthesised_expression   =  "(" __* parsing_expression __* ")"
+parenthesised_expression   =  "(" __* parsing_expression __* ")"
 
-  choice_expression          =  choice_part
-                                (__+ "/" __+ choice_part)+
+choice_expression          =  choice_part
+                              (__+ "/" __+ choice_part)+
 
-  choice_part                =  (action_expression / sequence_expression / sequence_part)
-                                (__+ type_tag)?
+choice_part                =  (action_expression / sequence_expression / sequence_part)
+                              (__+ type_tag)?
 
-  action_expression          =  actionable_expression __+ action_tag
+action_expression          =  actionable_expression __+ action_tag
 
-  actionable_expression      =  ("(" __* actionable_expression __* ")")
-                             /  sequence_expression
-                             /  repeated_atom
-                             /  terminal_node
+actionable_expression      =  ("(" __* actionable_expression __* ")")
+                           /  sequence_expression
+                           /  repeated_atom
+                           /  terminal_node
 
-  action_tag                 =  "%" identifier
+action_tag                 =  "%" identifier
 
-  type_tag                   =  "<" object_identifier ">"
+type_tag                   =  "<" object_identifier ">"
 
-  sequence_expression        =  sequence_part
-                                (__+ sequence_part)+
+sequence_expression        =  sequence_part
+                              (__+ sequence_part)+
 
-  sequence_part              =  label? (maybe_atom / repeated_atom / atom)
+sequence_part              =  label? (maybe_atom / repeated_atom / atom)
 
-  maybe_atom                 =  atom "?"
+maybe_atom                 =  atom "?"
 
-  repeated_atom              =  atom ("*" / "+")
+repeated_atom              =  atom ("*" / "+")
 
-  atom                       =  parenthesised_expression
-                             /  predicated_atom
-                             /  reference_expression
-                             /  terminal_node
+atom                       =  parenthesised_expression
+                           /  predicated_atom
+                           /  reference_expression
+                           /  terminal_node
 
-  terminal_node              =  string_expression
-                             /  ci_string_expression
-                             /  char_class_expression
-                             /  any_char_expression
+terminal_node              =  string_expression
+                           /  ci_string_expression
+                           /  char_class_expression
+                           /  any_char_expression
 
-  predicated_atom            =  ("&" / "!") atom
+predicated_atom            =  ("&" / "!") atom
 
-  reference_expression       =  identifier !assignment
+reference_expression       =  identifier !assignment
 
-  string_expression          =  ('"' (("\\" ~".") / ~"[^\"]")* '"') / ("'" (("\\" ~".") / ~"[^']")* "'")
+string_expression          =  ('"' (("\\" ~".") / ~"[^\"]")* '"') / ("'" (("\\" ~".") / ~"[^']")* "'")
 
-  ci_string_expression       =  "`" (("\\" ~".") / ~"[^`]")* "`"
+ci_string_expression       =  "`" (("\\" ~".") / ~"[^`]")* "`"
 
-  any_char_expression        =  "."
+any_char_expression        =  "."
 
-  char_class_expression      =  "[" "^"? (("\\" ~".") / ~"[^\]]")+ "]"
+char_class_expression      =  "[" "^"? (("\\" ~".") / ~"[^\]]")+ "]"
 
-  label                      =  identifier ":"
+label                      =  identifier ":"
 
-  object_identifier          =  identifier ("." identifier)*
+object_identifier          =  identifier ("." identifier)*
 
-  identifier                 =  ~"[a-zA-Z_]" ~"[a-zA-Z0-9_]"*
+identifier                 =  ~"[a-zA-Z_]" ~"[a-zA-Z0-9_]"*
 
-  __                         =  ~"[\\s]" / comment
+__                         =  ~"[\\s]" / comment
 
-  comment                    =  "#" ~"[^\\n]"*
+comment                    =  "#" ~"[^\\n]"*
