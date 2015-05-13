@@ -2748,7 +2748,7 @@
       Canopy.PEG = exported;
     }
   } else {
-    var namespace = window;
+    var namespace = typeof this !== 'undefined' ? this : window;
     namespace = namespace.Canopy = namespace.Canopy || {};
     namespace.PEG = exported;
   }

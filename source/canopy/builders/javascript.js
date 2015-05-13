@@ -158,7 +158,7 @@
           builder.assign_(grammar, 'exported');
         });
       }, function(builder) {
-        builder.assign_('var namespace', 'window');
+        builder.assign_('var namespace', "typeof this !== 'undefined' ? this : window");
         for (var i = 0; i < n; i++) {
           builder.assign_('namespace', 'namespace.' + namespace[i] + ' = namespace.' + namespace[i] + ' || {}');
         }

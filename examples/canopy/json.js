@@ -1437,7 +1437,7 @@
   if (typeof require === 'function' && typeof exports === 'object') {
     extend(exports, exported);
   } else {
-    var namespace = window;
+    var namespace = typeof this !== 'undefined' ? this : window;
     namespace.CanopyJson = exported;
   }
 })();
