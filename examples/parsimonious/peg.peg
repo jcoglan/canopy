@@ -51,7 +51,7 @@
 
   predicated_atom            =  ("&" / "!") atom
 
-  reference_expression       =  identifier !assignment 
+  reference_expression       =  identifier !assignment
 
   string_expression          =  ('"' (("\\" ~".") / ~"[^\"]")* '"') / ("'" (("\\" ~".") / ~"[^']")* "'")
 

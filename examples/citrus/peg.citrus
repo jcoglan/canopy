@@ -2,13 +2,13 @@ grammar CitrusPEG
   rule grammar
     space* grammar_name rules:(space* grammar_rule)+ space*
   end
-                               
+
   rule grammar_name
     `grammar` ":"? space+ object_identifier
   end
 
   rule grammar_rule
-    identifier assignment parsing_expression 
+    identifier assignment parsing_expression
   end
 
   rule assignment
@@ -52,7 +52,7 @@ grammar CitrusPEG
   end
 
   rule sequence_part
-    label? expression:(maybe_atom | repeated_atom | atom) 
+    label? expression:(maybe_atom | repeated_atom | atom)
   end
 
   rule maybe_atom
@@ -68,15 +68,15 @@ grammar CitrusPEG
   end
 
   rule terminal_node
-    string_expression | ci_string_expression | char_class_expression | any_char_expression 
+    string_expression | ci_string_expression | char_class_expression | any_char_expression
   end
 
   rule predicated_atom
-    predicate:("&" | "!") atom 
+    predicate:("&" | "!") atom
   end
 
   rule reference_expression
-    identifier !assignment 
+    identifier !assignment
   end
 
   rule string_expression
@@ -84,15 +84,15 @@ grammar CitrusPEG
   end
 
   rule ci_string_expression
-    "`" ("\\" . | [^`])* "`" 
+    "`" ("\\" . | [^`])* "`"
   end
 
   rule any_char_expression
-    "." 
+    "."
   end
 
   rule char_class_expression
-    "[" "^"? ("\\" . | [^\]])+ "]" 
+    "[" "^"? ("\\" . | [^\]])+ "]"
   end
 
   rule label
