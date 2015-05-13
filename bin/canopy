@@ -17,7 +17,7 @@ try {
   if (!BUILDERS.hasOwnProperty(lang))
     throw new Error('Unrecognised target language: ' + lang);
 
-  var grammar    = fs.readFileSync(inputFile).toString(),
+  var grammar    = fs.readFileSync(inputFile, 'utf8'),
       builder    = new BUILDERS[lang](),
       parser     = Canopy.compile(grammar, builder),
       outputFile = options.output || builder.outputPathname(inputFile);
