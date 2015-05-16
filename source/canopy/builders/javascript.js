@@ -256,11 +256,12 @@
 
       if (action) {
         action = 'this._actions.' + action;
-        args   = ['this._input', start, end, elements];
+        args   = ['this._input', start, end];
       } else {
         action = 'new ' + (nodeClass || 'SyntaxNode');
-        args   = ['this._input.substring(' + start + ', ' + end + ')', start, elements];
+        args   = ['this._input.substring(' + start + ', ' + end + ')', start];
       }
+      if (elements) args.push(elements);
 
       this.assign_(address, action + '(' + args.join(', ') + ')');
       this.assign_('this._offset', end);

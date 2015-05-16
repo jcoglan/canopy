@@ -16,7 +16,7 @@ Canopy.Compiler.Maybe = {
     this.atomic().compile(builder, address);
 
     builder.unlessNode_(address, function(builder) {
-      builder.syntaxNode_(address, startOffset, startOffset, builder.emptyList_());
+      builder.syntaxNode_(address, startOffset, startOffset, null);
     });
   }
 };

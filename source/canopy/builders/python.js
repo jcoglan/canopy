@@ -69,7 +69,7 @@
     syntaxNodeClass_: function() {
       var name = 'SyntaxNode';
       this.class_(name, 'object', function(builder) {
-        builder.method_('__init__', ['text', 'offset', 'elements'], function(builder) {
+        builder.method_('__init__', ['text', 'offset', 'elements=None'], function(builder) {
           builder.attribute_('text', 'text');
           builder.attribute_('offset', 'offset');
           builder.attribute_('elements', 'elements or []');
@@ -227,11 +227,12 @@
 
       if (action) {
         action = 'self._actions.' + action;
-        args   = ['self._input', start, end, elements];
+        args   = ['self._input', start, end];
       } else {
         action = nodeClass || 'SyntaxNode';
-        args   = ['self._input[' + start + ':' + end + ']', start, elements];
+        args   = ['self._input[' + start + ':' + end + ']', start];
       }
+      if (elements) args.push(elements);
 
       this.assign_(address, action + '(' + args.join(', ') + ')');
       this.assign_('self._offset', end);

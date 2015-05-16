@@ -9,7 +9,7 @@ Canopy.Compiler.CharClass = {
 
     builder.if_(builder.regexMatch_(regex, chunk), function(builder) {
       var of = builder.offset_();
-      builder.syntaxNode_(address, of, of + ' + 1', builder.emptyList_(), action);
+      builder.syntaxNode_(address, of, of + ' + 1', null, action);
     }, function(builder) {
       builder.failure_(address, this.text);
     }, this);

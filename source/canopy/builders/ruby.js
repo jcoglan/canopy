@@ -70,10 +70,10 @@
       this._indent(function(builder) {
         builder._line('include Enumerable');
         builder.attributes_(['text', 'offset', 'elements']);
-        builder.method_('initialize', ['text', 'offset', 'elements'], function(builder) {
+        builder.method_('initialize', ['text', 'offset', 'elements = []'], function(builder) {
           builder.attribute_('text', 'text');
           builder.attribute_('offset', 'offset');
-          builder.attribute_('elements', 'elements || []');
+          builder.attribute_('elements', 'elements');
         });
         builder.method_('each', ['&block'], function(builder) {
           builder._line('@elements.each(&block)');
@@ -239,11 +239,12 @@
 
       if (action) {
         action = '@actions.' + action;
-        args   = ['@input', start, end, elements];
+        args   = ['@input', start, end];
       } else {
         action = (nodeClass || 'SyntaxNode') + '.new';
-        args   = ['@input[' + start + '...' + end + ']', start, elements];
+        args   = ['@input[' + start + '...' + end + ']', start];
       }
+      if (elements) args.push(elements);
 
       this.assign_(address, action + '(' + args.join(', ') + ')');
       this.assign_('@offset', end);

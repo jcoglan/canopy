@@ -3,10 +3,10 @@ module CanopyLisp
     include Enumerable
     attr_reader :text, :offset, :elements
 
-    def initialize(text, offset, elements)
+    def initialize(text, offset, elements = [])
       @text = text
       @offset = offset
-      @elements = elements || []
+      @elements = elements
     end
 
     def each(&block)
@@ -151,7 +151,7 @@ module CanopyLisp
         chunk0 = @input[@offset...@offset + 1]
       end
       if chunk0 == "("
-        address1 = SyntaxNode.new(@input[@offset...@offset + 1], @offset, [])
+        address1 = SyntaxNode.new(@input[@offset...@offset + 1], @offset)
         @offset = @offset + 1
       else
         address1 = FAILURE
@@ -188,7 +188,7 @@ module CanopyLisp
             chunk1 = @input[@offset...@offset + 1]
           end
           if chunk1 == ")"
-            address4 = SyntaxNode.new(@input[@offset...@offset + 1], @offset, [])
+            address4 = SyntaxNode.new(@input[@offset...@offset + 1], @offset)
             @offset = @offset + 1
           else
             address4 = FAILURE
@@ -265,7 +265,7 @@ module CanopyLisp
         chunk0 = @input[@offset...@offset + 2]
       end
       if chunk0 == "#t"
-        address0 = SyntaxNode.new(@input[@offset...@offset + 2], @offset, [])
+        address0 = SyntaxNode.new(@input[@offset...@offset + 2], @offset)
         @offset = @offset + 2
       else
         address0 = FAILURE
@@ -284,7 +284,7 @@ module CanopyLisp
           chunk1 = @input[@offset...@offset + 2]
         end
         if chunk1 == "#f"
-          address0 = SyntaxNode.new(@input[@offset...@offset + 2], @offset, [])
+          address0 = SyntaxNode.new(@input[@offset...@offset + 2], @offset)
           @offset = @offset + 2
         else
           address0 = FAILURE
@@ -318,7 +318,7 @@ module CanopyLisp
         chunk0 = @input[@offset...@offset + 1]
       end
       if chunk0 =~ /\A[1-9]/
-        address1 = SyntaxNode.new(@input[@offset...@offset + 1], @offset, [])
+        address1 = SyntaxNode.new(@input[@offset...@offset + 1], @offset)
         @offset = @offset + 1
       else
         address1 = FAILURE
@@ -340,7 +340,7 @@ module CanopyLisp
             chunk1 = @input[@offset...@offset + 1]
           end
           if chunk1 =~ /\A[0-9]/
-            address3 = SyntaxNode.new(@input[@offset...@offset + 1], @offset, [])
+            address3 = SyntaxNode.new(@input[@offset...@offset + 1], @offset)
             @offset = @offset + 1
           else
             address3 = FAILURE
@@ -397,7 +397,7 @@ module CanopyLisp
         chunk0 = @input[@offset...@offset + 1]
       end
       if chunk0 == "\""
-        address1 = SyntaxNode.new(@input[@offset...@offset + 1], @offset, [])
+        address1 = SyntaxNode.new(@input[@offset...@offset + 1], @offset)
         @offset = @offset + 1
       else
         address1 = FAILURE
@@ -422,7 +422,7 @@ module CanopyLisp
             chunk1 = @input[@offset...@offset + 1]
           end
           if chunk1 == "\\"
-            address4 = SyntaxNode.new(@input[@offset...@offset + 1], @offset, [])
+            address4 = SyntaxNode.new(@input[@offset...@offset + 1], @offset)
             @offset = @offset + 1
           else
             address4 = FAILURE
@@ -451,7 +451,7 @@ module CanopyLisp
                 @expected << "<any char>"
               end
             else
-              address5 = SyntaxNode.new(@input[@offset...@offset + 1], @offset, [])
+              address5 = SyntaxNode.new(@input[@offset...@offset + 1], @offset)
               @offset = @offset + 1
             end
             unless address5 == FAILURE
@@ -477,7 +477,7 @@ module CanopyLisp
               chunk3 = @input[@offset...@offset + 1]
             end
             if chunk3 =~ /\A[^"]/
-              address3 = SyntaxNode.new(@input[@offset...@offset + 1], @offset, [])
+              address3 = SyntaxNode.new(@input[@offset...@offset + 1], @offset)
               @offset = @offset + 1
             else
               address3 = FAILURE
@@ -512,7 +512,7 @@ module CanopyLisp
             chunk4 = @input[@offset...@offset + 1]
           end
           if chunk4 == "\""
-            address6 = SyntaxNode.new(@input[@offset...@offset + 1], @offset, [])
+            address6 = SyntaxNode.new(@input[@offset...@offset + 1], @offset)
             @offset = @offset + 1
           else
             address6 = FAILURE
@@ -563,7 +563,7 @@ module CanopyLisp
         address2 = _read_delimiter
         @offset = index3
         if address2 == FAILURE
-          address2 = SyntaxNode.new(@input[@offset...@offset], @offset, [])
+          address2 = SyntaxNode.new(@input[@offset...@offset], @offset)
           @offset = @offset
         else
           address2 = FAILURE
@@ -585,7 +585,7 @@ module CanopyLisp
               @expected << "<any char>"
             end
           else
-            address3 = SyntaxNode.new(@input[@offset...@offset + 1], @offset, [])
+            address3 = SyntaxNode.new(@input[@offset...@offset + 1], @offset)
             @offset = @offset + 1
           end
           unless address3 == FAILURE
@@ -631,7 +631,7 @@ module CanopyLisp
         chunk0 = @input[@offset...@offset + 1]
       end
       if chunk0 =~ /\A[\s]/
-        address0 = SyntaxNode.new(@input[@offset...@offset + 1], @offset, [])
+        address0 = SyntaxNode.new(@input[@offset...@offset + 1], @offset)
         @offset = @offset + 1
       else
         address0 = FAILURE
@@ -660,7 +660,7 @@ module CanopyLisp
         chunk0 = @input[@offset...@offset + 1]
       end
       if chunk0 == "("
-        address0 = SyntaxNode.new(@input[@offset...@offset + 1], @offset, [])
+        address0 = SyntaxNode.new(@input[@offset...@offset + 1], @offset)
         @offset = @offset + 1
       else
         address0 = FAILURE
@@ -679,7 +679,7 @@ module CanopyLisp
           chunk1 = @input[@offset...@offset + 1]
         end
         if chunk1 == ")"
-          address0 = SyntaxNode.new(@input[@offset...@offset + 1], @offset, [])
+          address0 = SyntaxNode.new(@input[@offset...@offset + 1], @offset)
           @offset = @offset + 1
         else
           address0 = FAILURE

@@ -11,7 +11,7 @@ Canopy.Compiler.AnyChar = {
       builder.failure_(address, '<any char>');
     }, function(builder) {
       var of = builder.offset_();
-      builder.syntaxNode_(address, of, of + ' + 1', builder.emptyList_(), action);
+      builder.syntaxNode_(address, of, of + ' + 1', null, action);
     });
   }
 };
