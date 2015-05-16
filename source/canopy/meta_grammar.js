@@ -206,7 +206,7 @@
         this._offset = cached[1];
         return cached[0];
       }
-      var index1 = this._offset, elements0 = [];
+      var index1 = this._offset, elements0 = new Array(4);
       var address1 = FAILURE;
       var remaining0 = 0, index2 = this._offset, elements1 = [], address2 = true;
       while (address2 !== FAILURE) {
@@ -223,15 +223,15 @@
         address1 = FAILURE;
       }
       if (address1 !== FAILURE) {
-        elements0.push(address1);
+        elements0[0] = address1;
         var address3 = FAILURE;
         address3 = this._read_grammar_name();
         if (address3 !== FAILURE) {
-          elements0.push(address3);
+          elements0[1] = address3;
           var address4 = FAILURE;
           var remaining1 = 1, index3 = this._offset, elements2 = [], address5 = true;
           while (address5 !== FAILURE) {
-            var index4 = this._offset, elements3 = [];
+            var index4 = this._offset, elements3 = new Array(2);
             var address6 = FAILURE;
             var remaining2 = 0, index5 = this._offset, elements4 = [], address7 = true;
             while (address7 !== FAILURE) {
@@ -248,11 +248,11 @@
               address6 = FAILURE;
             }
             if (address6 !== FAILURE) {
-              elements3.push(address6);
+              elements3[0] = address6;
               var address8 = FAILURE;
               address8 = this._read_grammar_rule();
               if (address8 !== FAILURE) {
-                elements3.push(address8);
+                elements3[1] = address8;
               } else {
                 elements3 = null;
                 this._offset = index4;
@@ -279,7 +279,7 @@
             address4 = FAILURE;
           }
           if (address4 !== FAILURE) {
-            elements0.push(address4);
+            elements0[2] = address4;
             var address9 = FAILURE;
             var remaining3 = 0, index6 = this._offset, elements5 = [], address10 = true;
             while (address10 !== FAILURE) {
@@ -296,7 +296,7 @@
               address9 = FAILURE;
             }
             if (address9 !== FAILURE) {
-              elements0.push(address9);
+              elements0[3] = address9;
             } else {
               elements0 = null;
               this._offset = index1;
@@ -332,7 +332,7 @@
         this._offset = cached[1];
         return cached[0];
       }
-      var index1 = this._offset, elements0 = [];
+      var index1 = this._offset, elements0 = new Array(4);
       var address1 = FAILURE;
       var chunk0 = null;
       if (this._offset < this._inputSize) {
@@ -352,7 +352,7 @@
         }
       }
       if (address1 !== FAILURE) {
-        elements0.push(address1);
+        elements0[0] = address1;
         var address2 = FAILURE;
         var index2 = this._offset;
         var chunk1 = null;
@@ -377,7 +377,7 @@
           this._offset = index2;
         }
         if (address2 !== FAILURE) {
-          elements0.push(address2);
+          elements0[1] = address2;
           var address3 = FAILURE;
           var remaining0 = 1, index3 = this._offset, elements1 = [], address4 = true;
           while (address4 !== FAILURE) {
@@ -394,11 +394,11 @@
             address3 = FAILURE;
           }
           if (address3 !== FAILURE) {
-            elements0.push(address3);
+            elements0[2] = address3;
             var address5 = FAILURE;
             address5 = this._read_object_identifier();
             if (address5 !== FAILURE) {
-              elements0.push(address5);
+              elements0[3] = address5;
             } else {
               elements0 = null;
               this._offset = index1;
@@ -433,19 +433,19 @@
         this._offset = cached[1];
         return cached[0];
       }
-      var index1 = this._offset, elements0 = [];
+      var index1 = this._offset, elements0 = new Array(3);
       var address1 = FAILURE;
       address1 = this._read_identifier();
       if (address1 !== FAILURE) {
-        elements0.push(address1);
+        elements0[0] = address1;
         var address2 = FAILURE;
         address2 = this._read_assignment();
         if (address2 !== FAILURE) {
-          elements0.push(address2);
+          elements0[1] = address2;
           var address3 = FAILURE;
           address3 = this._read_parsing_expression();
           if (address3 !== FAILURE) {
-            elements0.push(address3);
+            elements0[2] = address3;
           } else {
             elements0 = null;
             this._offset = index1;
@@ -477,7 +477,7 @@
         this._offset = cached[1];
         return cached[0];
       }
-      var index1 = this._offset, elements0 = [];
+      var index1 = this._offset, elements0 = new Array(3);
       var address1 = FAILURE;
       var remaining0 = 1, index2 = this._offset, elements1 = [], address2 = true;
       while (address2 !== FAILURE) {
@@ -494,7 +494,7 @@
         address1 = FAILURE;
       }
       if (address1 !== FAILURE) {
-        elements0.push(address1);
+        elements0[0] = address1;
         var address3 = FAILURE;
         var chunk0 = null;
         if (this._offset < this._inputSize) {
@@ -514,7 +514,7 @@
           }
         }
         if (address3 !== FAILURE) {
-          elements0.push(address3);
+          elements0[1] = address3;
           var address4 = FAILURE;
           var remaining1 = 1, index3 = this._offset, elements2 = [], address5 = true;
           while (address5 !== FAILURE) {
@@ -531,7 +531,7 @@
             address4 = FAILURE;
           }
           if (address4 !== FAILURE) {
-            elements0.push(address4);
+            elements0[2] = address4;
           } else {
             elements0 = null;
             this._offset = index1;
@@ -583,7 +583,7 @@
         this._offset = cached[1];
         return cached[0];
       }
-      var index1 = this._offset, elements0 = [];
+      var index1 = this._offset, elements0 = new Array(5);
       var address1 = FAILURE;
       var chunk0 = null;
       if (this._offset < this._inputSize) {
@@ -603,7 +603,7 @@
         }
       }
       if (address1 !== FAILURE) {
-        elements0.push(address1);
+        elements0[0] = address1;
         var address2 = FAILURE;
         var remaining0 = 0, index2 = this._offset, elements1 = [], address3 = true;
         while (address3 !== FAILURE) {
@@ -620,11 +620,11 @@
           address2 = FAILURE;
         }
         if (address2 !== FAILURE) {
-          elements0.push(address2);
+          elements0[1] = address2;
           var address4 = FAILURE;
           address4 = this._read_parsing_expression();
           if (address4 !== FAILURE) {
-            elements0.push(address4);
+            elements0[2] = address4;
             var address5 = FAILURE;
             var remaining1 = 0, index3 = this._offset, elements2 = [], address6 = true;
             while (address6 !== FAILURE) {
@@ -641,7 +641,7 @@
               address5 = FAILURE;
             }
             if (address5 !== FAILURE) {
-              elements0.push(address5);
+              elements0[3] = address5;
               var address7 = FAILURE;
               var chunk1 = null;
               if (this._offset < this._inputSize) {
@@ -661,7 +661,7 @@
                 }
               }
               if (address7 !== FAILURE) {
-                elements0.push(address7);
+                elements0[4] = address7;
               } else {
                 elements0 = null;
                 this._offset = index1;
@@ -700,15 +700,15 @@
         this._offset = cached[1];
         return cached[0];
       }
-      var index1 = this._offset, elements0 = [];
+      var index1 = this._offset, elements0 = new Array(2);
       var address1 = FAILURE;
       address1 = this._read_choice_part();
       if (address1 !== FAILURE) {
-        elements0.push(address1);
+        elements0[0] = address1;
         var address2 = FAILURE;
         var remaining0 = 1, index2 = this._offset, elements1 = [], address3 = true;
         while (address3 !== FAILURE) {
-          var index3 = this._offset, elements2 = [];
+          var index3 = this._offset, elements2 = new Array(4);
           var address4 = FAILURE;
           var remaining1 = 1, index4 = this._offset, elements3 = [], address5 = true;
           while (address5 !== FAILURE) {
@@ -725,7 +725,7 @@
             address4 = FAILURE;
           }
           if (address4 !== FAILURE) {
-            elements2.push(address4);
+            elements2[0] = address4;
             var address6 = FAILURE;
             var chunk0 = null;
             if (this._offset < this._inputSize) {
@@ -745,7 +745,7 @@
               }
             }
             if (address6 !== FAILURE) {
-              elements2.push(address6);
+              elements2[1] = address6;
               var address7 = FAILURE;
               var remaining2 = 1, index5 = this._offset, elements4 = [], address8 = true;
               while (address8 !== FAILURE) {
@@ -762,11 +762,11 @@
                 address7 = FAILURE;
               }
               if (address7 !== FAILURE) {
-                elements2.push(address7);
+                elements2[2] = address7;
                 var address9 = FAILURE;
                 address9 = this._read_choice_part();
                 if (address9 !== FAILURE) {
-                  elements2.push(address9);
+                  elements2[3] = address9;
                 } else {
                   elements2 = null;
                   this._offset = index3;
@@ -801,7 +801,7 @@
           address2 = FAILURE;
         }
         if (address2 !== FAILURE) {
-          elements0.push(address2);
+          elements0[1] = address2;
         } else {
           elements0 = null;
           this._offset = index1;
@@ -829,7 +829,7 @@
         this._offset = cached[1];
         return cached[0];
       }
-      var index1 = this._offset, elements0 = [];
+      var index1 = this._offset, elements0 = new Array(2);
       var address1 = FAILURE;
       var index2 = this._offset;
       address1 = this._read_action_expression();
@@ -845,10 +845,10 @@
         }
       }
       if (address1 !== FAILURE) {
-        elements0.push(address1);
+        elements0[0] = address1;
         var address2 = FAILURE;
         var index3 = this._offset;
-        var index4 = this._offset, elements1 = [];
+        var index4 = this._offset, elements1 = new Array(2);
         var address3 = FAILURE;
         var remaining0 = 1, index5 = this._offset, elements2 = [], address4 = true;
         while (address4 !== FAILURE) {
@@ -865,11 +865,11 @@
           address3 = FAILURE;
         }
         if (address3 !== FAILURE) {
-          elements1.push(address3);
+          elements1[0] = address3;
           var address5 = FAILURE;
           address5 = this._read_type_tag();
           if (address5 !== FAILURE) {
-            elements1.push(address5);
+            elements1[1] = address5;
           } else {
             elements1 = null;
             this._offset = index4;
@@ -889,7 +889,7 @@
           this._offset = index3;
         }
         if (address2 !== FAILURE) {
-          elements0.push(address2);
+          elements0[1] = address2;
         } else {
           elements0 = null;
           this._offset = index1;
@@ -917,11 +917,11 @@
         this._offset = cached[1];
         return cached[0];
       }
-      var index1 = this._offset, elements0 = [];
+      var index1 = this._offset, elements0 = new Array(3);
       var address1 = FAILURE;
       address1 = this._read_actionable_expression();
       if (address1 !== FAILURE) {
-        elements0.push(address1);
+        elements0[0] = address1;
         var address2 = FAILURE;
         var remaining0 = 1, index2 = this._offset, elements1 = [], address3 = true;
         while (address3 !== FAILURE) {
@@ -938,11 +938,11 @@
           address2 = FAILURE;
         }
         if (address2 !== FAILURE) {
-          elements0.push(address2);
+          elements0[1] = address2;
           var address4 = FAILURE;
           address4 = this._read_action_tag();
           if (address4 !== FAILURE) {
-            elements0.push(address4);
+            elements0[2] = address4;
           } else {
             elements0 = null;
             this._offset = index1;
@@ -975,7 +975,7 @@
         return cached[0];
       }
       var index1 = this._offset;
-      var index2 = this._offset, elements0 = [];
+      var index2 = this._offset, elements0 = new Array(5);
       var address1 = FAILURE;
       var chunk0 = null;
       if (this._offset < this._inputSize) {
@@ -995,7 +995,7 @@
         }
       }
       if (address1 !== FAILURE) {
-        elements0.push(address1);
+        elements0[0] = address1;
         var address2 = FAILURE;
         var remaining0 = 0, index3 = this._offset, elements1 = [], address3 = true;
         while (address3 !== FAILURE) {
@@ -1012,11 +1012,11 @@
           address2 = FAILURE;
         }
         if (address2 !== FAILURE) {
-          elements0.push(address2);
+          elements0[1] = address2;
           var address4 = FAILURE;
           address4 = this._read_actionable_expression();
           if (address4 !== FAILURE) {
-            elements0.push(address4);
+            elements0[2] = address4;
             var address5 = FAILURE;
             var remaining1 = 0, index4 = this._offset, elements2 = [], address6 = true;
             while (address6 !== FAILURE) {
@@ -1033,7 +1033,7 @@
               address5 = FAILURE;
             }
             if (address5 !== FAILURE) {
-              elements0.push(address5);
+              elements0[3] = address5;
               var address7 = FAILURE;
               var chunk1 = null;
               if (this._offset < this._inputSize) {
@@ -1053,7 +1053,7 @@
                 }
               }
               if (address7 !== FAILURE) {
-                elements0.push(address7);
+                elements0[4] = address7;
               } else {
                 elements0 = null;
                 this._offset = index2;
@@ -1107,7 +1107,7 @@
         this._offset = cached[1];
         return cached[0];
       }
-      var index1 = this._offset, elements0 = [];
+      var index1 = this._offset, elements0 = new Array(2);
       var address1 = FAILURE;
       var chunk0 = null;
       if (this._offset < this._inputSize) {
@@ -1127,11 +1127,11 @@
         }
       }
       if (address1 !== FAILURE) {
-        elements0.push(address1);
+        elements0[0] = address1;
         var address2 = FAILURE;
         address2 = this._read_identifier();
         if (address2 !== FAILURE) {
-          elements0.push(address2);
+          elements0[1] = address2;
         } else {
           elements0 = null;
           this._offset = index1;
@@ -1158,7 +1158,7 @@
         this._offset = cached[1];
         return cached[0];
       }
-      var index1 = this._offset, elements0 = [];
+      var index1 = this._offset, elements0 = new Array(3);
       var address1 = FAILURE;
       var chunk0 = null;
       if (this._offset < this._inputSize) {
@@ -1178,11 +1178,11 @@
         }
       }
       if (address1 !== FAILURE) {
-        elements0.push(address1);
+        elements0[0] = address1;
         var address2 = FAILURE;
         address2 = this._read_object_identifier();
         if (address2 !== FAILURE) {
-          elements0.push(address2);
+          elements0[1] = address2;
           var address3 = FAILURE;
           var chunk1 = null;
           if (this._offset < this._inputSize) {
@@ -1202,7 +1202,7 @@
             }
           }
           if (address3 !== FAILURE) {
-            elements0.push(address3);
+            elements0[2] = address3;
           } else {
             elements0 = null;
             this._offset = index1;
@@ -1233,15 +1233,15 @@
         this._offset = cached[1];
         return cached[0];
       }
-      var index1 = this._offset, elements0 = [];
+      var index1 = this._offset, elements0 = new Array(2);
       var address1 = FAILURE;
       address1 = this._read_sequence_part();
       if (address1 !== FAILURE) {
-        elements0.push(address1);
+        elements0[0] = address1;
         var address2 = FAILURE;
         var remaining0 = 1, index2 = this._offset, elements1 = [], address3 = true;
         while (address3 !== FAILURE) {
-          var index3 = this._offset, elements2 = [];
+          var index3 = this._offset, elements2 = new Array(2);
           var address4 = FAILURE;
           var remaining1 = 1, index4 = this._offset, elements3 = [], address5 = true;
           while (address5 !== FAILURE) {
@@ -1258,11 +1258,11 @@
             address4 = FAILURE;
           }
           if (address4 !== FAILURE) {
-            elements2.push(address4);
+            elements2[0] = address4;
             var address6 = FAILURE;
             address6 = this._read_sequence_part();
             if (address6 !== FAILURE) {
-              elements2.push(address6);
+              elements2[1] = address6;
             } else {
               elements2 = null;
               this._offset = index3;
@@ -1289,7 +1289,7 @@
           address2 = FAILURE;
         }
         if (address2 !== FAILURE) {
-          elements0.push(address2);
+          elements0[1] = address2;
         } else {
           elements0 = null;
           this._offset = index1;
@@ -1317,7 +1317,7 @@
         this._offset = cached[1];
         return cached[0];
       }
-      var index1 = this._offset, elements0 = [];
+      var index1 = this._offset, elements0 = new Array(2);
       var address1 = FAILURE;
       var index2 = this._offset;
       address1 = this._read_label();
@@ -1326,7 +1326,7 @@
         this._offset = index2;
       }
       if (address1 !== FAILURE) {
-        elements0.push(address1);
+        elements0[0] = address1;
         var address2 = FAILURE;
         var index3 = this._offset;
         address2 = this._read_maybe_atom();
@@ -1342,7 +1342,7 @@
           }
         }
         if (address2 !== FAILURE) {
-          elements0.push(address2);
+          elements0[1] = address2;
         } else {
           elements0 = null;
           this._offset = index1;
@@ -1370,11 +1370,11 @@
         this._offset = cached[1];
         return cached[0];
       }
-      var index1 = this._offset, elements0 = [];
+      var index1 = this._offset, elements0 = new Array(2);
       var address1 = FAILURE;
       address1 = this._read_atom();
       if (address1 !== FAILURE) {
-        elements0.push(address1);
+        elements0[0] = address1;
         var address2 = FAILURE;
         var chunk0 = null;
         if (this._offset < this._inputSize) {
@@ -1394,7 +1394,7 @@
           }
         }
         if (address2 !== FAILURE) {
-          elements0.push(address2);
+          elements0[1] = address2;
         } else {
           elements0 = null;
           this._offset = index1;
@@ -1422,11 +1422,11 @@
         this._offset = cached[1];
         return cached[0];
       }
-      var index1 = this._offset, elements0 = [];
+      var index1 = this._offset, elements0 = new Array(2);
       var address1 = FAILURE;
       address1 = this._read_atom();
       if (address1 !== FAILURE) {
-        elements0.push(address1);
+        elements0[0] = address1;
         var address2 = FAILURE;
         var index2 = this._offset;
         var chunk0 = null;
@@ -1470,7 +1470,7 @@
           }
         }
         if (address2 !== FAILURE) {
-          elements0.push(address2);
+          elements0[1] = address2;
         } else {
           elements0 = null;
           this._offset = index1;
@@ -1556,7 +1556,7 @@
         this._offset = cached[1];
         return cached[0];
       }
-      var index1 = this._offset, elements0 = [];
+      var index1 = this._offset, elements0 = new Array(2);
       var address1 = FAILURE;
       var index2 = this._offset;
       var chunk0 = null;
@@ -1600,11 +1600,11 @@
         }
       }
       if (address1 !== FAILURE) {
-        elements0.push(address1);
+        elements0[0] = address1;
         var address2 = FAILURE;
         address2 = this._read_atom();
         if (address2 !== FAILURE) {
-          elements0.push(address2);
+          elements0[1] = address2;
         } else {
           elements0 = null;
           this._offset = index1;
@@ -1632,11 +1632,11 @@
         this._offset = cached[1];
         return cached[0];
       }
-      var index1 = this._offset, elements0 = [];
+      var index1 = this._offset, elements0 = new Array(2);
       var address1 = FAILURE;
       address1 = this._read_identifier();
       if (address1 !== FAILURE) {
-        elements0.push(address1);
+        elements0[0] = address1;
         var address2 = FAILURE;
         var index2 = this._offset;
         address2 = this._read_assignment();
@@ -1648,7 +1648,7 @@
           address2 = FAILURE;
         }
         if (address2 !== FAILURE) {
-          elements0.push(address2);
+          elements0[1] = address2;
         } else {
           elements0 = null;
           this._offset = index1;
@@ -1677,7 +1677,7 @@
         return cached[0];
       }
       var index1 = this._offset;
-      var index2 = this._offset, elements0 = [];
+      var index2 = this._offset, elements0 = new Array(3);
       var address1 = FAILURE;
       var chunk0 = null;
       if (this._offset < this._inputSize) {
@@ -1697,12 +1697,12 @@
         }
       }
       if (address1 !== FAILURE) {
-        elements0.push(address1);
+        elements0[0] = address1;
         var address2 = FAILURE;
         var remaining0 = 0, index3 = this._offset, elements1 = [], address3 = true;
         while (address3 !== FAILURE) {
           var index4 = this._offset;
-          var index5 = this._offset, elements2 = [];
+          var index5 = this._offset, elements2 = new Array(2);
           var address4 = FAILURE;
           var chunk1 = null;
           if (this._offset < this._inputSize) {
@@ -1722,7 +1722,7 @@
             }
           }
           if (address4 !== FAILURE) {
-            elements2.push(address4);
+            elements2[0] = address4;
             var address5 = FAILURE;
             var chunk2 = null;
             if (this._offset < this._inputSize) {
@@ -1742,7 +1742,7 @@
               this._offset = this._offset + 1;
             }
             if (address5 !== FAILURE) {
-              elements2.push(address5);
+              elements2[1] = address5;
             } else {
               elements2 = null;
               this._offset = index5;
@@ -1792,7 +1792,7 @@
           address2 = FAILURE;
         }
         if (address2 !== FAILURE) {
-          elements0.push(address2);
+          elements0[1] = address2;
           var address6 = FAILURE;
           var chunk4 = null;
           if (this._offset < this._inputSize) {
@@ -1812,7 +1812,7 @@
             }
           }
           if (address6 !== FAILURE) {
-            elements0.push(address6);
+            elements0[2] = address6;
           } else {
             elements0 = null;
             this._offset = index2;
@@ -1833,7 +1833,7 @@
       }
       if (address0 === FAILURE) {
         this._offset = index1;
-        var index6 = this._offset, elements3 = [];
+        var index6 = this._offset, elements3 = new Array(3);
         var address7 = FAILURE;
         var chunk5 = null;
         if (this._offset < this._inputSize) {
@@ -1853,12 +1853,12 @@
           }
         }
         if (address7 !== FAILURE) {
-          elements3.push(address7);
+          elements3[0] = address7;
           var address8 = FAILURE;
           var remaining1 = 0, index7 = this._offset, elements4 = [], address9 = true;
           while (address9 !== FAILURE) {
             var index8 = this._offset;
-            var index9 = this._offset, elements5 = [];
+            var index9 = this._offset, elements5 = new Array(2);
             var address10 = FAILURE;
             var chunk6 = null;
             if (this._offset < this._inputSize) {
@@ -1878,7 +1878,7 @@
               }
             }
             if (address10 !== FAILURE) {
-              elements5.push(address10);
+              elements5[0] = address10;
               var address11 = FAILURE;
               var chunk7 = null;
               if (this._offset < this._inputSize) {
@@ -1898,7 +1898,7 @@
                 this._offset = this._offset + 1;
               }
               if (address11 !== FAILURE) {
-                elements5.push(address11);
+                elements5[1] = address11;
               } else {
                 elements5 = null;
                 this._offset = index9;
@@ -1948,7 +1948,7 @@
             address8 = FAILURE;
           }
           if (address8 !== FAILURE) {
-            elements3.push(address8);
+            elements3[1] = address8;
             var address12 = FAILURE;
             var chunk9 = null;
             if (this._offset < this._inputSize) {
@@ -1968,7 +1968,7 @@
               }
             }
             if (address12 !== FAILURE) {
-              elements3.push(address12);
+              elements3[2] = address12;
             } else {
               elements3 = null;
               this._offset = index6;
@@ -2004,7 +2004,7 @@
         this._offset = cached[1];
         return cached[0];
       }
-      var index1 = this._offset, elements0 = [];
+      var index1 = this._offset, elements0 = new Array(3);
       var address1 = FAILURE;
       var chunk0 = null;
       if (this._offset < this._inputSize) {
@@ -2024,12 +2024,12 @@
         }
       }
       if (address1 !== FAILURE) {
-        elements0.push(address1);
+        elements0[0] = address1;
         var address2 = FAILURE;
         var remaining0 = 0, index2 = this._offset, elements1 = [], address3 = true;
         while (address3 !== FAILURE) {
           var index3 = this._offset;
-          var index4 = this._offset, elements2 = [];
+          var index4 = this._offset, elements2 = new Array(2);
           var address4 = FAILURE;
           var chunk1 = null;
           if (this._offset < this._inputSize) {
@@ -2049,7 +2049,7 @@
             }
           }
           if (address4 !== FAILURE) {
-            elements2.push(address4);
+            elements2[0] = address4;
             var address5 = FAILURE;
             var chunk2 = null;
             if (this._offset < this._inputSize) {
@@ -2069,7 +2069,7 @@
               this._offset = this._offset + 1;
             }
             if (address5 !== FAILURE) {
-              elements2.push(address5);
+              elements2[1] = address5;
             } else {
               elements2 = null;
               this._offset = index4;
@@ -2119,7 +2119,7 @@
           address2 = FAILURE;
         }
         if (address2 !== FAILURE) {
-          elements0.push(address2);
+          elements0[1] = address2;
           var address6 = FAILURE;
           var chunk4 = null;
           if (this._offset < this._inputSize) {
@@ -2139,7 +2139,7 @@
             }
           }
           if (address6 !== FAILURE) {
-            elements0.push(address6);
+            elements0[2] = address6;
           } else {
             elements0 = null;
             this._offset = index1;
@@ -2201,7 +2201,7 @@
         this._offset = cached[1];
         return cached[0];
       }
-      var index1 = this._offset, elements0 = [];
+      var index1 = this._offset, elements0 = new Array(4);
       var address1 = FAILURE;
       var chunk0 = null;
       if (this._offset < this._inputSize) {
@@ -2221,7 +2221,7 @@
         }
       }
       if (address1 !== FAILURE) {
-        elements0.push(address1);
+        elements0[0] = address1;
         var address2 = FAILURE;
         var index2 = this._offset;
         var chunk1 = null;
@@ -2246,12 +2246,12 @@
           this._offset = index2;
         }
         if (address2 !== FAILURE) {
-          elements0.push(address2);
+          elements0[1] = address2;
           var address3 = FAILURE;
           var remaining0 = 1, index3 = this._offset, elements1 = [], address4 = true;
           while (address4 !== FAILURE) {
             var index4 = this._offset;
-            var index5 = this._offset, elements2 = [];
+            var index5 = this._offset, elements2 = new Array(2);
             var address5 = FAILURE;
             var chunk2 = null;
             if (this._offset < this._inputSize) {
@@ -2271,7 +2271,7 @@
               }
             }
             if (address5 !== FAILURE) {
-              elements2.push(address5);
+              elements2[0] = address5;
               var address6 = FAILURE;
               var chunk3 = null;
               if (this._offset < this._inputSize) {
@@ -2291,7 +2291,7 @@
                 this._offset = this._offset + 1;
               }
               if (address6 !== FAILURE) {
-                elements2.push(address6);
+                elements2[1] = address6;
               } else {
                 elements2 = null;
                 this._offset = index5;
@@ -2341,7 +2341,7 @@
             address3 = FAILURE;
           }
           if (address3 !== FAILURE) {
-            elements0.push(address3);
+            elements0[2] = address3;
             var address7 = FAILURE;
             var chunk5 = null;
             if (this._offset < this._inputSize) {
@@ -2361,7 +2361,7 @@
               }
             }
             if (address7 !== FAILURE) {
-              elements0.push(address7);
+              elements0[3] = address7;
             } else {
               elements0 = null;
               this._offset = index1;
@@ -2397,11 +2397,11 @@
         this._offset = cached[1];
         return cached[0];
       }
-      var index1 = this._offset, elements0 = [];
+      var index1 = this._offset, elements0 = new Array(2);
       var address1 = FAILURE;
       address1 = this._read_identifier();
       if (address1 !== FAILURE) {
-        elements0.push(address1);
+        elements0[0] = address1;
         var address2 = FAILURE;
         var chunk0 = null;
         if (this._offset < this._inputSize) {
@@ -2421,7 +2421,7 @@
           }
         }
         if (address2 !== FAILURE) {
-          elements0.push(address2);
+          elements0[1] = address2;
         } else {
           elements0 = null;
           this._offset = index1;
@@ -2448,15 +2448,15 @@
         this._offset = cached[1];
         return cached[0];
       }
-      var index1 = this._offset, elements0 = [];
+      var index1 = this._offset, elements0 = new Array(2);
       var address1 = FAILURE;
       address1 = this._read_identifier();
       if (address1 !== FAILURE) {
-        elements0.push(address1);
+        elements0[0] = address1;
         var address2 = FAILURE;
         var remaining0 = 0, index2 = this._offset, elements1 = [], address3 = true;
         while (address3 !== FAILURE) {
-          var index3 = this._offset, elements2 = [];
+          var index3 = this._offset, elements2 = new Array(2);
           var address4 = FAILURE;
           var chunk0 = null;
           if (this._offset < this._inputSize) {
@@ -2476,11 +2476,11 @@
             }
           }
           if (address4 !== FAILURE) {
-            elements2.push(address4);
+            elements2[0] = address4;
             var address5 = FAILURE;
             address5 = this._read_identifier();
             if (address5 !== FAILURE) {
-              elements2.push(address5);
+              elements2[1] = address5;
             } else {
               elements2 = null;
               this._offset = index3;
@@ -2507,7 +2507,7 @@
           address2 = FAILURE;
         }
         if (address2 !== FAILURE) {
-          elements0.push(address2);
+          elements0[1] = address2;
         } else {
           elements0 = null;
           this._offset = index1;
@@ -2534,7 +2534,7 @@
         this._offset = cached[1];
         return cached[0];
       }
-      var index1 = this._offset, elements0 = [];
+      var index1 = this._offset, elements0 = new Array(2);
       var address1 = FAILURE;
       var chunk0 = null;
       if (this._offset < this._inputSize) {
@@ -2554,7 +2554,7 @@
         }
       }
       if (address1 !== FAILURE) {
-        elements0.push(address1);
+        elements0[0] = address1;
         var address2 = FAILURE;
         var remaining0 = 0, index2 = this._offset, elements1 = [], address3 = true;
         while (address3 !== FAILURE) {
@@ -2587,7 +2587,7 @@
           address2 = FAILURE;
         }
         if (address2 !== FAILURE) {
-          elements0.push(address2);
+          elements0[1] = address2;
         } else {
           elements0 = null;
           this._offset = index1;
@@ -2651,7 +2651,7 @@
         this._offset = cached[1];
         return cached[0];
       }
-      var index1 = this._offset, elements0 = [];
+      var index1 = this._offset, elements0 = new Array(2);
       var address1 = FAILURE;
       var chunk0 = null;
       if (this._offset < this._inputSize) {
@@ -2671,7 +2671,7 @@
         }
       }
       if (address1 !== FAILURE) {
-        elements0.push(address1);
+        elements0[0] = address1;
         var address2 = FAILURE;
         var remaining0 = 0, index2 = this._offset, elements1 = [], address3 = true;
         while (address3 !== FAILURE) {
@@ -2704,7 +2704,7 @@
           address2 = FAILURE;
         }
         if (address2 !== FAILURE) {
-          elements0.push(address2);
+          elements0[1] = address2;
         } else {
           elements0 = null;
           this._offset = index1;

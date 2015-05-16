@@ -342,8 +342,11 @@
       return expression + '[' + offset + ']';
     },
 
-    append_: function(list, value) {
-      this._line(list + '.push(' + value + ')');
+    append_: function(list, value, index) {
+      if (index === undefined)
+        this._line(list + '.push(' + value + ')');
+      else
+        this._line(list + '[' + index + '] = ' + value);
     },
 
     decrement_: function(variable) {
@@ -366,8 +369,8 @@
       return 'this._offset';
     },
 
-    emptyList_: function() {
-      return '[]';
+    emptyList_: function(size) {
+      return size ? 'new Array(' + size + ')' : '[]';
     },
 
     emptyString_: function() {

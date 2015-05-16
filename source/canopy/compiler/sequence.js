@@ -41,7 +41,7 @@ Canopy.Compiler.Sequence = {
   compile: function(builder, address, action) {
     var temp = builder.localVars_({
       index:    builder.offset_(),
-      elements: builder.emptyList_()
+      elements: builder.emptyList_(this.expressions().length)
     });
 
     var startOffset = temp.index,
@@ -65,7 +65,7 @@ Canopy.Compiler.Sequence = {
     expressions[index].compile(builder, expAddr);
 
     builder.ifNode_(expAddr, function(builder) {
-      builder.append_(elements, expAddr);
+      builder.append_(elements, expAddr, index);
       this._compileExpressions(builder, index + 1, startOffset, elements);
     }, function(builder) {
       builder.assign_(elements, builder.null_());
