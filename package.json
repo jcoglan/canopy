@@ -14,6 +14,7 @@
 , "devDependencies" : {"benchmark": "", "jstest": "", "pegjs": "", "wake": ""}
 
 , "scripts"         : { "build"   : "wake"
+                      , "clean"   : "find examples -name '*.class' -o -name '*.pyc' -exec rm {} \\;"
                       , "compile" : "./bin/canopy source/canopy/meta_grammar.peg"
                       , "java"    : "find examples/canopy -name '*.peg' -exec ./bin/canopy --lang java {} \\;"
                       , "js"      : "find examples/canopy -name '*.peg' -exec ./bin/canopy --lang js {} \\;"

@@ -3,7 +3,6 @@
 .npmignore
 .wake.json
 Gemfile*
-examples
 node_modules
 site
 source
