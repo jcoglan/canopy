@@ -12,13 +12,21 @@
     this._varIndex = {};
   };
 
+  Builder.create = function(filename) {
+    var builder = new Builder();
+    builder.filename = filename;
+    return builder;
+  };
+
   Canopy.extend(Builder.prototype, {
     serialize: function() {
-      return this._buffer;
+      var files = {};
+      files[this._outputPathname()] = this._buffer;
+      return files;
     },
 
-    outputPathname: function(inputPathname) {
-      return inputPathname.replace(/\.peg$/, '.py');
+    _outputPathname: function() {
+      return this.filename.replace(/\.peg$/, '.py');
     },
 
     _write: function(string) {

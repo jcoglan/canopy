@@ -26,10 +26,9 @@ JS.require('JS.Test', function() {
   var compile = Canopy.compile
 
   Canopy.compile = function(grammar) {
-    var builder = new Canopy.Builders.JavaScript()
+    var builder = Canopy.Builders.JavaScript.create('testfile')
     var source = compile.call(this, grammar, builder)
-    eval(source)
-    return source
+    eval(source.testfile)
   }
 
   JS.require( 'Canopy.MetaGrammarSpec',

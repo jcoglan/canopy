@@ -2,6 +2,8 @@
 
 var Canopy = require('../lib/canopy'),
     fs     = require('fs'),
+    path   = require('path'),
+    mkdirp = require('mkdirp'),
     nopt   = require('nopt');
 
 var BUILDERS = {};
@@ -10,19 +12,27 @@ BUILDERS.py = BUILDERS.python = Canopy.Builders.Python;
 BUILDERS.rb = BUILDERS.ruby = Canopy.Builders.Ruby;
 
 try {
-  var options   = nopt({lang: String, output: String}, {l: '--lang', o: '--output'}),
+  var options   = nopt({lang: String}, {l: '--lang'}),
       lang      = options.lang || 'js',
-      inputFile = options.argv.remain[0];
+
+      inputFile = path.resolve(options.argv.remain[0]),
+      inputDir  = path.dirname(inputFile),
+      inputBase = path.basename(inputFile);
 
   if (!BUILDERS.hasOwnProperty(lang))
     throw new Error('Unrecognised target language: ' + lang);
 
-  var grammar    = fs.readFileSync(inputFile, 'utf8'),
-      builder    = new BUILDERS[lang](),
-      parser     = Canopy.compile(grammar, builder),
-      outputFile = options.output || builder.outputPathname(inputFile);
+  var grammar = fs.readFileSync(inputFile, 'utf8'),
+      builder = BUILDERS[lang].create(inputBase),
+      parser  = Canopy.compile(grammar, builder),
+      pathname;
 
-  fs.writeFileSync(outputFile, parser);
+  for (var name in parser) (function(name, content) {
+    pathname = path.join(inputDir, name);
+    mkdirp(path.dirname(pathname), function(error) {
+      fs.writeFile(pathname, parser[name]);
+    });
+  })(name, parser[name]);
 
 } catch (e) {
   console.error(e.message);
