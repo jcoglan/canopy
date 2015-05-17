@@ -1385,19 +1385,16 @@ class Grammar(object):
                 if address4 is not FAILURE:
                     elements2.append(address4)
                     address5 = FAILURE
-                    chunk2 = None
                     if self._offset < self._input_size:
-                        chunk2 = self._input[self._offset:self._offset + 1]
-                    if chunk2 is None:
+                        address5 = SyntaxNode(self._input[self._offset:self._offset + 1], self._offset)
+                        self._offset = self._offset + 1
+                    else:
                         address5 = FAILURE
                         if self._offset > self._failure:
                             self._failure = self._offset
                             self._expected = []
                         if self._offset == self._failure:
                             self._expected.append('<any char>')
-                    else:
-                        address5 = SyntaxNode(self._input[self._offset:self._offset + 1], self._offset)
-                        self._offset = self._offset + 1
                     if address5 is not FAILURE:
                         elements2.append(address5)
                     else:
@@ -1413,10 +1410,10 @@ class Grammar(object):
                     address3 = FAILURE
                 if address3 is FAILURE:
                     self._offset = index4
-                    chunk3 = None
+                    chunk2 = None
                     if self._offset < self._input_size:
-                        chunk3 = self._input[self._offset:self._offset + 1]
-                    if chunk3 is not None and re.match('^[^"]', chunk3):
+                        chunk2 = self._input[self._offset:self._offset + 1]
+                    if chunk2 is not None and re.match('^[^"]', chunk2):
                         address3 = SyntaxNode(self._input[self._offset:self._offset + 1], self._offset)
                         self._offset = self._offset + 1
                     else:
@@ -1439,10 +1436,10 @@ class Grammar(object):
             if address2 is not FAILURE:
                 elements0.append(address2)
                 address6 = FAILURE
-                chunk4 = None
+                chunk3 = None
                 if self._offset < self._input_size:
-                    chunk4 = self._input[self._offset:self._offset + 1]
-                if chunk4 == '"':
+                    chunk3 = self._input[self._offset:self._offset + 1]
+                if chunk3 == '"':
                     address6 = SyntaxNode(self._input[self._offset:self._offset + 1], self._offset)
                     self._offset = self._offset + 1
                 else:
@@ -1472,10 +1469,10 @@ class Grammar(object):
             self._offset = index1
             index6, elements3 = self._offset, []
             address7 = FAILURE
-            chunk5 = None
+            chunk4 = None
             if self._offset < self._input_size:
-                chunk5 = self._input[self._offset:self._offset + 1]
-            if chunk5 == '\'':
+                chunk4 = self._input[self._offset:self._offset + 1]
+            if chunk4 == '\'':
                 address7 = SyntaxNode(self._input[self._offset:self._offset + 1], self._offset)
                 self._offset = self._offset + 1
             else:
@@ -1493,10 +1490,10 @@ class Grammar(object):
                     index8 = self._offset
                     index9, elements5 = self._offset, []
                     address10 = FAILURE
-                    chunk6 = None
+                    chunk5 = None
                     if self._offset < self._input_size:
-                        chunk6 = self._input[self._offset:self._offset + 1]
-                    if chunk6 == '\\':
+                        chunk5 = self._input[self._offset:self._offset + 1]
+                    if chunk5 == '\\':
                         address10 = SyntaxNode(self._input[self._offset:self._offset + 1], self._offset)
                         self._offset = self._offset + 1
                     else:
@@ -1509,19 +1506,16 @@ class Grammar(object):
                     if address10 is not FAILURE:
                         elements5.append(address10)
                         address11 = FAILURE
-                        chunk7 = None
                         if self._offset < self._input_size:
-                            chunk7 = self._input[self._offset:self._offset + 1]
-                        if chunk7 is None:
+                            address11 = SyntaxNode(self._input[self._offset:self._offset + 1], self._offset)
+                            self._offset = self._offset + 1
+                        else:
                             address11 = FAILURE
                             if self._offset > self._failure:
                                 self._failure = self._offset
                                 self._expected = []
                             if self._offset == self._failure:
                                 self._expected.append('<any char>')
-                        else:
-                            address11 = SyntaxNode(self._input[self._offset:self._offset + 1], self._offset)
-                            self._offset = self._offset + 1
                         if address11 is not FAILURE:
                             elements5.append(address11)
                         else:
@@ -1537,10 +1531,10 @@ class Grammar(object):
                         address9 = FAILURE
                     if address9 is FAILURE:
                         self._offset = index8
-                        chunk8 = None
+                        chunk6 = None
                         if self._offset < self._input_size:
-                            chunk8 = self._input[self._offset:self._offset + 1]
-                        if chunk8 is not None and re.match('^[^\']', chunk8):
+                            chunk6 = self._input[self._offset:self._offset + 1]
+                        if chunk6 is not None and re.match('^[^\']', chunk6):
                             address9 = SyntaxNode(self._input[self._offset:self._offset + 1], self._offset)
                             self._offset = self._offset + 1
                         else:
@@ -1563,10 +1557,10 @@ class Grammar(object):
                 if address8 is not FAILURE:
                     elements3.append(address8)
                     address12 = FAILURE
-                    chunk9 = None
+                    chunk7 = None
                     if self._offset < self._input_size:
-                        chunk9 = self._input[self._offset:self._offset + 1]
-                    if chunk9 == '\'':
+                        chunk7 = self._input[self._offset:self._offset + 1]
+                    if chunk7 == '\'':
                         address12 = SyntaxNode(self._input[self._offset:self._offset + 1], self._offset)
                         self._offset = self._offset + 1
                     else:
@@ -1642,19 +1636,16 @@ class Grammar(object):
                 if address4 is not FAILURE:
                     elements2.append(address4)
                     address5 = FAILURE
-                    chunk2 = None
                     if self._offset < self._input_size:
-                        chunk2 = self._input[self._offset:self._offset + 1]
-                    if chunk2 is None:
+                        address5 = SyntaxNode(self._input[self._offset:self._offset + 1], self._offset)
+                        self._offset = self._offset + 1
+                    else:
                         address5 = FAILURE
                         if self._offset > self._failure:
                             self._failure = self._offset
                             self._expected = []
                         if self._offset == self._failure:
                             self._expected.append('<any char>')
-                    else:
-                        address5 = SyntaxNode(self._input[self._offset:self._offset + 1], self._offset)
-                        self._offset = self._offset + 1
                     if address5 is not FAILURE:
                         elements2.append(address5)
                     else:
@@ -1670,10 +1661,10 @@ class Grammar(object):
                     address3 = FAILURE
                 if address3 is FAILURE:
                     self._offset = index3
-                    chunk3 = None
+                    chunk2 = None
                     if self._offset < self._input_size:
-                        chunk3 = self._input[self._offset:self._offset + 1]
-                    if chunk3 is not None and re.match('^[^`]', chunk3):
+                        chunk2 = self._input[self._offset:self._offset + 1]
+                    if chunk2 is not None and re.match('^[^`]', chunk2):
                         address3 = SyntaxNode(self._input[self._offset:self._offset + 1], self._offset)
                         self._offset = self._offset + 1
                     else:
@@ -1696,10 +1687,10 @@ class Grammar(object):
             if address2 is not FAILURE:
                 elements0.append(address2)
                 address6 = FAILURE
-                chunk4 = None
+                chunk3 = None
                 if self._offset < self._input_size:
-                    chunk4 = self._input[self._offset:self._offset + 1]
-                if chunk4 == '`':
+                    chunk3 = self._input[self._offset:self._offset + 1]
+                if chunk3 == '`':
                     address6 = SyntaxNode(self._input[self._offset:self._offset + 1], self._offset)
                     self._offset = self._offset + 1
                 else:
@@ -1815,19 +1806,16 @@ class Grammar(object):
                     if address5 is not FAILURE:
                         elements2.append(address5)
                         address6 = FAILURE
-                        chunk3 = None
                         if self._offset < self._input_size:
-                            chunk3 = self._input[self._offset:self._offset + 1]
-                        if chunk3 is None:
+                            address6 = SyntaxNode(self._input[self._offset:self._offset + 1], self._offset)
+                            self._offset = self._offset + 1
+                        else:
                             address6 = FAILURE
                             if self._offset > self._failure:
                                 self._failure = self._offset
                                 self._expected = []
                             if self._offset == self._failure:
                                 self._expected.append('<any char>')
-                        else:
-                            address6 = SyntaxNode(self._input[self._offset:self._offset + 1], self._offset)
-                            self._offset = self._offset + 1
                         if address6 is not FAILURE:
                             elements2.append(address6)
                         else:
@@ -1843,10 +1831,10 @@ class Grammar(object):
                         address4 = FAILURE
                     if address4 is FAILURE:
                         self._offset = index4
-                        chunk4 = None
+                        chunk3 = None
                         if self._offset < self._input_size:
-                            chunk4 = self._input[self._offset:self._offset + 1]
-                        if chunk4 is not None and re.match('^[^\\]]', chunk4):
+                            chunk3 = self._input[self._offset:self._offset + 1]
+                        if chunk3 is not None and re.match('^[^\\]]', chunk3):
                             address4 = SyntaxNode(self._input[self._offset:self._offset + 1], self._offset)
                             self._offset = self._offset + 1
                         else:
@@ -1869,10 +1857,10 @@ class Grammar(object):
                 if address3 is not FAILURE:
                     elements0.append(address3)
                     address7 = FAILURE
-                    chunk5 = None
+                    chunk4 = None
                     if self._offset < self._input_size:
-                        chunk5 = self._input[self._offset:self._offset + 1]
-                    if chunk5 == ']':
+                        chunk4 = self._input[self._offset:self._offset + 1]
+                    if chunk4 == ']':
                         address7 = SyntaxNode(self._input[self._offset:self._offset + 1], self._offset)
                         self._offset = self._offset + 1
                     else:

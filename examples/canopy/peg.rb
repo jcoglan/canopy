@@ -1722,11 +1722,10 @@ module Canopy::PEG
           unless address4 == FAILURE
             elements2 << address4
             address5 = FAILURE
-            chunk2 = nil
             if @offset < @input_size
-              chunk2 = @input[@offset...@offset + 1]
-            end
-            if chunk2.nil?
+              address5 = SyntaxNode.new(@input[@offset...@offset + 1], @offset)
+              @offset = @offset + 1
+            else
               address5 = FAILURE
               if @offset > @failure
                 @failure = @offset
@@ -1735,9 +1734,6 @@ module Canopy::PEG
               if @offset == @failure
                 @expected << "<any char>"
               end
-            else
-              address5 = SyntaxNode.new(@input[@offset...@offset + 1], @offset)
-              @offset = @offset + 1
             end
             unless address5 == FAILURE
               elements2 << address5
@@ -1757,11 +1753,11 @@ module Canopy::PEG
           end
           if address3 == FAILURE
             @offset = index4
-            chunk3 = nil
+            chunk2 = nil
             if @offset < @input_size
-              chunk3 = @input[@offset...@offset + 1]
+              chunk2 = @input[@offset...@offset + 1]
             end
-            if chunk3 =~ /\A[^"]/
+            if chunk2 =~ /\A[^"]/
               address3 = SyntaxNode.new(@input[@offset...@offset + 1], @offset)
               @offset = @offset + 1
             else
@@ -1792,11 +1788,11 @@ module Canopy::PEG
         unless address2 == FAILURE
           elements0 << address2
           address6 = FAILURE
-          chunk4 = nil
+          chunk3 = nil
           if @offset < @input_size
-            chunk4 = @input[@offset...@offset + 1]
+            chunk3 = @input[@offset...@offset + 1]
           end
-          if chunk4 == "\""
+          if chunk3 == "\""
             address6 = SyntaxNode.new(@input[@offset...@offset + 1], @offset)
             @offset = @offset + 1
           else
@@ -1833,11 +1829,11 @@ module Canopy::PEG
         @offset = index1
         index6, elements3 = @offset, []
         address7 = FAILURE
-        chunk5 = nil
+        chunk4 = nil
         if @offset < @input_size
-          chunk5 = @input[@offset...@offset + 1]
+          chunk4 = @input[@offset...@offset + 1]
         end
-        if chunk5 == "'"
+        if chunk4 == "'"
           address7 = SyntaxNode.new(@input[@offset...@offset + 1], @offset)
           @offset = @offset + 1
         else
@@ -1858,11 +1854,11 @@ module Canopy::PEG
             index8 = @offset
             index9, elements5 = @offset, []
             address10 = FAILURE
-            chunk6 = nil
+            chunk5 = nil
             if @offset < @input_size
-              chunk6 = @input[@offset...@offset + 1]
+              chunk5 = @input[@offset...@offset + 1]
             end
-            if chunk6 == "\\"
+            if chunk5 == "\\"
               address10 = SyntaxNode.new(@input[@offset...@offset + 1], @offset)
               @offset = @offset + 1
             else
@@ -1878,11 +1874,10 @@ module Canopy::PEG
             unless address10 == FAILURE
               elements5 << address10
               address11 = FAILURE
-              chunk7 = nil
               if @offset < @input_size
-                chunk7 = @input[@offset...@offset + 1]
-              end
-              if chunk7.nil?
+                address11 = SyntaxNode.new(@input[@offset...@offset + 1], @offset)
+                @offset = @offset + 1
+              else
                 address11 = FAILURE
                 if @offset > @failure
                   @failure = @offset
@@ -1891,9 +1886,6 @@ module Canopy::PEG
                 if @offset == @failure
                   @expected << "<any char>"
                 end
-              else
-                address11 = SyntaxNode.new(@input[@offset...@offset + 1], @offset)
-                @offset = @offset + 1
               end
               unless address11 == FAILURE
                 elements5 << address11
@@ -1913,11 +1905,11 @@ module Canopy::PEG
             end
             if address9 == FAILURE
               @offset = index8
-              chunk8 = nil
+              chunk6 = nil
               if @offset < @input_size
-                chunk8 = @input[@offset...@offset + 1]
+                chunk6 = @input[@offset...@offset + 1]
               end
-              if chunk8 =~ /\A[^']/
+              if chunk6 =~ /\A[^']/
                 address9 = SyntaxNode.new(@input[@offset...@offset + 1], @offset)
                 @offset = @offset + 1
               else
@@ -1948,11 +1940,11 @@ module Canopy::PEG
           unless address8 == FAILURE
             elements3 << address8
             address12 = FAILURE
-            chunk9 = nil
+            chunk7 = nil
             if @offset < @input_size
-              chunk9 = @input[@offset...@offset + 1]
+              chunk7 = @input[@offset...@offset + 1]
             end
-            if chunk9 == "'"
+            if chunk7 == "'"
               address12 = SyntaxNode.new(@input[@offset...@offset + 1], @offset)
               @offset = @offset + 1
             else
@@ -2047,11 +2039,10 @@ module Canopy::PEG
           unless address4 == FAILURE
             elements2 << address4
             address5 = FAILURE
-            chunk2 = nil
             if @offset < @input_size
-              chunk2 = @input[@offset...@offset + 1]
-            end
-            if chunk2.nil?
+              address5 = SyntaxNode.new(@input[@offset...@offset + 1], @offset)
+              @offset = @offset + 1
+            else
               address5 = FAILURE
               if @offset > @failure
                 @failure = @offset
@@ -2060,9 +2051,6 @@ module Canopy::PEG
               if @offset == @failure
                 @expected << "<any char>"
               end
-            else
-              address5 = SyntaxNode.new(@input[@offset...@offset + 1], @offset)
-              @offset = @offset + 1
             end
             unless address5 == FAILURE
               elements2 << address5
@@ -2082,11 +2070,11 @@ module Canopy::PEG
           end
           if address3 == FAILURE
             @offset = index3
-            chunk3 = nil
+            chunk2 = nil
             if @offset < @input_size
-              chunk3 = @input[@offset...@offset + 1]
+              chunk2 = @input[@offset...@offset + 1]
             end
-            if chunk3 =~ /\A[^`]/
+            if chunk2 =~ /\A[^`]/
               address3 = SyntaxNode.new(@input[@offset...@offset + 1], @offset)
               @offset = @offset + 1
             else
@@ -2117,11 +2105,11 @@ module Canopy::PEG
         unless address2 == FAILURE
           elements0 << address2
           address6 = FAILURE
-          chunk4 = nil
+          chunk3 = nil
           if @offset < @input_size
-            chunk4 = @input[@offset...@offset + 1]
+            chunk3 = @input[@offset...@offset + 1]
           end
-          if chunk4 == "`"
+          if chunk3 == "`"
             address6 = SyntaxNode.new(@input[@offset...@offset + 1], @offset)
             @offset = @offset + 1
           else
@@ -2265,11 +2253,10 @@ module Canopy::PEG
             unless address5 == FAILURE
               elements2 << address5
               address6 = FAILURE
-              chunk3 = nil
               if @offset < @input_size
-                chunk3 = @input[@offset...@offset + 1]
-              end
-              if chunk3.nil?
+                address6 = SyntaxNode.new(@input[@offset...@offset + 1], @offset)
+                @offset = @offset + 1
+              else
                 address6 = FAILURE
                 if @offset > @failure
                   @failure = @offset
@@ -2278,9 +2265,6 @@ module Canopy::PEG
                 if @offset == @failure
                   @expected << "<any char>"
                 end
-              else
-                address6 = SyntaxNode.new(@input[@offset...@offset + 1], @offset)
-                @offset = @offset + 1
               end
               unless address6 == FAILURE
                 elements2 << address6
@@ -2300,11 +2284,11 @@ module Canopy::PEG
             end
             if address4 == FAILURE
               @offset = index4
-              chunk4 = nil
+              chunk3 = nil
               if @offset < @input_size
-                chunk4 = @input[@offset...@offset + 1]
+                chunk3 = @input[@offset...@offset + 1]
               end
-              if chunk4 =~ /\A[^\]]/
+              if chunk3 =~ /\A[^\]]/
                 address4 = SyntaxNode.new(@input[@offset...@offset + 1], @offset)
                 @offset = @offset + 1
               else
@@ -2335,11 +2319,11 @@ module Canopy::PEG
           unless address3 == FAILURE
             elements0 << address3
             address7 = FAILURE
-            chunk5 = nil
+            chunk4 = nil
             if @offset < @input_size
-              chunk5 = @input[@offset...@offset + 1]
+              chunk4 = @input[@offset...@offset + 1]
             end
-            if chunk5 == "]"
+            if chunk4 == "]"
               address7 = SyntaxNode.new(@input[@offset...@offset + 1], @offset)
               @offset = @offset + 1
             else

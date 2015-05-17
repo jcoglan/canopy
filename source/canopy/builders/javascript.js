@@ -354,12 +354,12 @@
       this._line('--' + variable);
     },
 
-    isNull_: function(expression) {
-      return expression + ' === ' + this.null_();
-    },
-
     isZero_: function(expression) {
       return expression + ' <= 0';
+    },
+
+    hasChars_: function() {
+      return 'this._offset < this._inputSize';
     },
 
     nullNode_: function() {

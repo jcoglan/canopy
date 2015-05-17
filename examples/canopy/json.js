@@ -766,11 +766,10 @@
           if (address4 !== FAILURE) {
             elements2[0] = address4;
             var address5 = FAILURE;
-            var chunk2 = null;
             if (this._offset < this._inputSize) {
-              chunk2 = this._input.substring(this._offset, this._offset + 1);
-            }
-            if (chunk2 === null) {
+              address5 = new SyntaxNode(this._input.substring(this._offset, this._offset + 1), this._offset);
+              this._offset = this._offset + 1;
+            } else {
               address5 = FAILURE;
               if (this._offset > this._failure) {
                 this._failure = this._offset;
@@ -779,9 +778,6 @@
               if (this._offset === this._failure) {
                 this._expected.push('<any char>');
               }
-            } else {
-              address5 = new SyntaxNode(this._input.substring(this._offset, this._offset + 1), this._offset);
-              this._offset = this._offset + 1;
             }
             if (address5 !== FAILURE) {
               elements2[1] = address5;
@@ -801,11 +797,11 @@
           }
           if (address3 === FAILURE) {
             this._offset = index3;
-            var chunk3 = null;
+            var chunk2 = null;
             if (this._offset < this._inputSize) {
-              chunk3 = this._input.substring(this._offset, this._offset + 1);
+              chunk2 = this._input.substring(this._offset, this._offset + 1);
             }
-            if (chunk3 !== null && /^[^"]/.test(chunk3)) {
+            if (chunk2 !== null && /^[^"]/.test(chunk2)) {
               address3 = new SyntaxNode(this._input.substring(this._offset, this._offset + 1), this._offset);
               this._offset = this._offset + 1;
             } else {
@@ -836,11 +832,11 @@
         if (address2 !== FAILURE) {
           elements0[1] = address2;
           var address6 = FAILURE;
-          var chunk4 = null;
+          var chunk3 = null;
           if (this._offset < this._inputSize) {
-            chunk4 = this._input.substring(this._offset, this._offset + 1);
+            chunk3 = this._input.substring(this._offset, this._offset + 1);
           }
-          if (chunk4 === '"') {
+          if (chunk3 === '"') {
             address6 = new SyntaxNode(this._input.substring(this._offset, this._offset + 1), this._offset);
             this._offset = this._offset + 1;
           } else {

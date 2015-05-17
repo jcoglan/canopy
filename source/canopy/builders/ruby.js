@@ -341,8 +341,8 @@
       this._line(variable + ' -= 1');
     },
 
-    isNull_: function(expression) {
-      return expression + '.nil?';
+    hasChars_: function() {
+      return '@offset < @input_size';
     },
 
     isZero_: function(expression) {

@@ -751,11 +751,10 @@ module CanopyJson
           unless address4 == FAILURE
             elements2 << address4
             address5 = FAILURE
-            chunk2 = nil
             if @offset < @input_size
-              chunk2 = @input[@offset...@offset + 1]
-            end
-            if chunk2.nil?
+              address5 = SyntaxNode.new(@input[@offset...@offset + 1], @offset)
+              @offset = @offset + 1
+            else
               address5 = FAILURE
               if @offset > @failure
                 @failure = @offset
@@ -764,9 +763,6 @@ module CanopyJson
               if @offset == @failure
                 @expected << "<any char>"
               end
-            else
-              address5 = SyntaxNode.new(@input[@offset...@offset + 1], @offset)
-              @offset = @offset + 1
             end
             unless address5 == FAILURE
               elements2 << address5
@@ -786,11 +782,11 @@ module CanopyJson
           end
           if address3 == FAILURE
             @offset = index3
-            chunk3 = nil
+            chunk2 = nil
             if @offset < @input_size
-              chunk3 = @input[@offset...@offset + 1]
+              chunk2 = @input[@offset...@offset + 1]
             end
-            if chunk3 =~ /\A[^"]/
+            if chunk2 =~ /\A[^"]/
               address3 = SyntaxNode.new(@input[@offset...@offset + 1], @offset)
               @offset = @offset + 1
             else
@@ -821,11 +817,11 @@ module CanopyJson
         unless address2 == FAILURE
           elements0 << address2
           address6 = FAILURE
-          chunk4 = nil
+          chunk3 = nil
           if @offset < @input_size
-            chunk4 = @input[@offset...@offset + 1]
+            chunk3 = @input[@offset...@offset + 1]
           end
-          if chunk4 == "\""
+          if chunk3 == "\""
             address6 = SyntaxNode.new(@input[@offset...@offset + 1], @offset)
             @offset = @offset + 1
           else

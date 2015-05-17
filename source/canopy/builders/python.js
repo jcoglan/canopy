@@ -319,8 +319,8 @@
       this._line(variable + ' -= 1');
     },
 
-    isNull_: function(expression) {
-      return expression + ' is None';
+    hasChars_: function() {
+      return 'self._offset < self._input_size';
     },
 
     isZero_: function(expression) {
