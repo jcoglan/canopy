@@ -283,6 +283,10 @@
       this.if_(address + ' === ' + this.nullNode_(), block, else_, context);
     },
 
+    ifNull_: function(elements, block, else_, context) {
+      this.if_(elements + ' === null', block, else_, context);
+    },
+
     extendNode_: function(address, nodeType) {
       if (!nodeType) return;
       this._line('extend(' + address + ', this._types.' + nodeType + ')');

@@ -141,11 +141,11 @@ module CanopyJson
         elements0 = nil
         @offset = index1
       end
-      if elements0
+      if elements0.nil?
+        address0 = FAILURE
+      else
         address0 = SyntaxNode1.new(@input[index1...@offset], index1, elements0)
         @offset = @offset
-      else
-        address0 = FAILURE
       end
       @cache[:document][index0] = [address0, @offset]
       return address0
@@ -220,11 +220,11 @@ module CanopyJson
               elements2 = nil
               @offset = index4
             end
-            if elements2
+            if elements2.nil?
+              address4 = FAILURE
+            else
               address4 = SyntaxNode3.new(@input[index4...@offset], index4, elements2)
               @offset = @offset
-            else
-              address4 = FAILURE
             end
             unless address4 == FAILURE
               elements1 << address4
@@ -275,11 +275,11 @@ module CanopyJson
         elements0 = nil
         @offset = index2
       end
-      if elements0
+      if elements0.nil?
+        address0 = FAILURE
+      else
         address0 = SyntaxNode2.new(@input[index2...@offset], index2, elements0)
         @offset = @offset
-      else
-        address0 = FAILURE
       end
       if address0 == FAILURE
         @offset = index1
@@ -340,11 +340,11 @@ module CanopyJson
           elements3 = nil
           @offset = index5
         end
-        if elements3
+        if elements3.nil?
+          address0 = FAILURE
+        else
           address0 = SyntaxNode4.new(@input[index5...@offset], index5, elements3)
           @offset = @offset
-        else
-          address0 = FAILURE
         end
         if address0 == FAILURE
           @offset = index1
@@ -418,11 +418,11 @@ module CanopyJson
         elements0 = nil
         @offset = index1
       end
-      if elements0
+      if elements0.nil?
+        address0 = FAILURE
+      else
         address0 = SyntaxNode5.new(@input[index1...@offset], index1, elements0)
         @offset = @offset
-      else
-        address0 = FAILURE
       end
       @cache[:pair][index0] = [address0, @offset]
       return address0
@@ -497,11 +497,11 @@ module CanopyJson
               elements2 = nil
               @offset = index4
             end
-            if elements2
+            if elements2.nil?
+              address4 = FAILURE
+            else
               address4 = SyntaxNode7.new(@input[index4...@offset], index4, elements2)
               @offset = @offset
-            else
-              address4 = FAILURE
             end
             unless address4 == FAILURE
               elements1 << address4
@@ -552,11 +552,11 @@ module CanopyJson
         elements0 = nil
         @offset = index2
       end
-      if elements0
+      if elements0.nil?
+        address0 = FAILURE
+      else
         address0 = SyntaxNode6.new(@input[index2...@offset], index2, elements0)
         @offset = @offset
-      else
-        address0 = FAILURE
       end
       if address0 == FAILURE
         @offset = index1
@@ -617,11 +617,11 @@ module CanopyJson
           elements3 = nil
           @offset = index5
         end
-        if elements3
+        if elements3.nil?
+          address0 = FAILURE
+        else
           address0 = SyntaxNode8.new(@input[index5...@offset], index5, elements3)
           @offset = @offset
-        else
-          address0 = FAILURE
         end
         if address0 == FAILURE
           @offset = index1
@@ -657,10 +657,10 @@ module CanopyJson
               address2 = _read_number
               if address2 == FAILURE
                 @offset = index2
-                address2 = _read_boolean
+                address2 = _read_boolean_
                 if address2 == FAILURE
                   @offset = index2
-                  address2 = _read_null
+                  address2 = _read_null_
                   if address2 == FAILURE
                     @offset = index2
                   end
@@ -687,11 +687,11 @@ module CanopyJson
         elements0 = nil
         @offset = index1
       end
-      if elements0
+      if elements0.nil?
+        address0 = FAILURE
+      else
         address0 = SyntaxNode9.new(@input[index1...@offset], index1, elements0)
         @offset = @offset
-      else
-        address0 = FAILURE
       end
       @cache[:value][index0] = [address0, @offset]
       return address0
@@ -774,11 +774,11 @@ module CanopyJson
             elements2 = nil
             @offset = index4
           end
-          if elements2
+          if elements2.nil?
+            address3 = FAILURE
+          else
             address3 = SyntaxNode.new(@input[index4...@offset], index4, elements2)
             @offset = @offset
-          else
-            address3 = FAILURE
           end
           if address3 == FAILURE
             @offset = index3
@@ -848,11 +848,11 @@ module CanopyJson
         elements0 = nil
         @offset = index1
       end
-      if elements0
+      if elements0.nil?
+        address0 = FAILURE
+      else
         address0 = SyntaxNode.new(@input[index1...@offset], index1, elements0)
         @offset = @offset
-      else
-        address0 = FAILURE
       end
       @cache[:string][index0] = [address0, @offset]
       return address0
@@ -974,11 +974,11 @@ module CanopyJson
             elements1 = nil
             @offset = index4
           end
-          if elements1
+          if elements1.nil?
+            address2 = FAILURE
+          else
             address2 = SyntaxNode.new(@input[index4...@offset], index4, elements1)
             @offset = @offset
-          else
-            address2 = FAILURE
           end
           if address2 == FAILURE
             @offset = index3
@@ -1050,11 +1050,11 @@ module CanopyJson
             elements3 = nil
             @offset = index7
           end
-          if elements3
+          if elements3.nil?
+            address6 = FAILURE
+          else
             address6 = SyntaxNode.new(@input[index7...@offset], index7, elements3)
             @offset = @offset
-          else
-            address6 = FAILURE
           end
           if address6 == FAILURE
             address6 = SyntaxNode.new(@input[index6...index6], index6)
@@ -1218,11 +1218,11 @@ module CanopyJson
               elements5 = nil
               @offset = index10
             end
-            if elements5
+            if elements5.nil?
+              address10 = FAILURE
+            else
               address10 = SyntaxNode.new(@input[index10...@offset], index10, elements5)
               @offset = @offset
-            else
-              address10 = FAILURE
             end
             if address10 == FAILURE
               address10 = SyntaxNode.new(@input[index9...index9], index9)
@@ -1246,19 +1246,19 @@ module CanopyJson
         elements0 = nil
         @offset = index1
       end
-      if elements0
+      if elements0.nil?
+        address0 = FAILURE
+      else
         address0 = SyntaxNode.new(@input[index1...@offset], index1, elements0)
         @offset = @offset
-      else
-        address0 = FAILURE
       end
       @cache[:number][index0] = [address0, @offset]
       return address0
     end
 
-    def _read_boolean
+    def _read_boolean_
       address0, index0 = FAILURE, @offset
-      cached = @cache[:boolean][index0]
+      cached = @cache[:boolean_][index0]
       if cached
         @offset = cached[1]
         return cached[0]
@@ -1304,13 +1304,13 @@ module CanopyJson
           @offset = index1
         end
       end
-      @cache[:boolean][index0] = [address0, @offset]
+      @cache[:boolean_][index0] = [address0, @offset]
       return address0
     end
 
-    def _read_null
+    def _read_null_
       address0, index0 = FAILURE, @offset
-      cached = @cache[:null][index0]
+      cached = @cache[:null_][index0]
       if cached
         @offset = cached[1]
         return cached[0]
@@ -1332,7 +1332,7 @@ module CanopyJson
           @expected << "\"null\""
         end
       end
-      @cache[:null][index0] = [address0, @offset]
+      @cache[:null_][index0] = [address0, @offset]
       return address0
     end
 

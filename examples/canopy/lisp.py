@@ -107,11 +107,11 @@ class Grammar(object):
         else:
             elements0 = None
             self._offset = index1
-        if elements0:
+        if elements0 is None:
+            address0 = FAILURE
+        else:
             address0 = SyntaxNode1(self._input[index1:self._offset], index1, elements0)
             self._offset = self._offset
-        else:
-            address0 = FAILURE
         self._cache['cell'][index0] = (address0, self._offset)
         return address0
 
@@ -177,11 +177,11 @@ class Grammar(object):
         else:
             elements0 = None
             self._offset = index1
-        if elements0:
+        if elements0 is None:
+            address0 = FAILURE
+        else:
             address0 = SyntaxNode2(self._input[index1:self._offset], index1, elements0)
             self._offset = self._offset
-        else:
-            address0 = FAILURE
         self._cache['list'][index0] = (address0, self._offset)
         return address0
 
@@ -192,7 +192,7 @@ class Grammar(object):
             self._offset = cached[1]
             return cached[0]
         index1 = self._offset
-        address0 = self._read_boolean()
+        address0 = self._read_boolean_()
         if address0 is FAILURE:
             self._offset = index1
             address0 = self._read_integer()
@@ -207,9 +207,9 @@ class Grammar(object):
         self._cache['atom'][index0] = (address0, self._offset)
         return address0
 
-    def _read_boolean(self):
+    def _read_boolean_(self):
         address0, index0 = FAILURE, self._offset
-        cached = self._cache['boolean'].get(index0)
+        cached = self._cache['boolean_'].get(index0)
         if cached:
             self._offset = cached[1]
             return cached[0]
@@ -244,7 +244,7 @@ class Grammar(object):
                     self._expected.append('"#f"')
             if address0 is FAILURE:
                 self._offset = index1
-        self._cache['boolean'][index0] = (address0, self._offset)
+        self._cache['boolean_'][index0] = (address0, self._offset)
         return address0
 
     def _read_integer(self):
@@ -302,11 +302,11 @@ class Grammar(object):
         else:
             elements0 = None
             self._offset = index1
-        if elements0:
+        if elements0 is None:
+            address0 = FAILURE
+        else:
             address0 = SyntaxNode(self._input[index1:self._offset], index1, elements0)
             self._offset = self._offset
-        else:
-            address0 = FAILURE
         self._cache['integer'][index0] = (address0, self._offset)
         return address0
 
@@ -373,11 +373,11 @@ class Grammar(object):
                 else:
                     elements2 = None
                     self._offset = index4
-                if elements2:
+                if elements2 is None:
+                    address3 = FAILURE
+                else:
                     address3 = SyntaxNode(self._input[index4:self._offset], index4, elements2)
                     self._offset = self._offset
-                else:
-                    address3 = FAILURE
                 if address3 is FAILURE:
                     self._offset = index3
                     chunk2 = None
@@ -430,11 +430,11 @@ class Grammar(object):
         else:
             elements0 = None
             self._offset = index1
-        if elements0:
+        if elements0 is None:
+            address0 = FAILURE
+        else:
             address0 = SyntaxNode(self._input[index1:self._offset], index1, elements0)
             self._offset = self._offset
-        else:
-            address0 = FAILURE
         self._cache['string'][index0] = (address0, self._offset)
         return address0
 
@@ -477,11 +477,11 @@ class Grammar(object):
             else:
                 elements1 = None
                 self._offset = index2
-            if elements1:
+            if elements1 is None:
+                address1 = FAILURE
+            else:
                 address1 = SyntaxNode(self._input[index2:self._offset], index2, elements1)
                 self._offset = self._offset
-            else:
-                address1 = FAILURE
             if address1 is not FAILURE:
                 elements0.append(address1)
                 remaining0 -= 1

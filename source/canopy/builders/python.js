@@ -254,6 +254,10 @@
       this.if_(address + ' is ' + this.nullNode_(), block, else_, context);
     },
 
+    ifNull_: function(elements, block, else_, context) {
+      this.if_(elements + ' is None', block, else_, context);
+    },
+
     extendNode_: function(address, nodeType) {
       if (!nodeType) return;
       var cls = this.localVar_('cls', 'type(' + address + ')');

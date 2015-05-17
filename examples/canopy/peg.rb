@@ -290,11 +290,11 @@ module Canopy::PEG
               elements3 = nil
               @offset = index4
             end
-            if elements3
+            if elements3.nil?
+              address5 = FAILURE
+            else
               address5 = SyntaxNode2.new(@input[index4...@offset], index4, elements3)
               @offset = @offset
-            else
-              address5 = FAILURE
             end
             unless address5 == FAILURE
               elements2 << address5
@@ -342,11 +342,11 @@ module Canopy::PEG
         elements0 = nil
         @offset = index1
       end
-      if elements0
+      if elements0.nil?
+        address0 = FAILURE
+      else
         address0 = SyntaxNode1.new(@input[index1...@offset], index1, elements0)
         @offset = @offset
-      else
-        address0 = FAILURE
       end
       @cache[:grammar][index0] = [address0, @offset]
       return address0
@@ -442,11 +442,11 @@ module Canopy::PEG
         elements0 = nil
         @offset = index1
       end
-      if elements0
+      if elements0.nil?
+        address0 = FAILURE
+      else
         address0 = SyntaxNode3.new(@input[index1...@offset], index1, elements0)
         @offset = @offset
-      else
-        address0 = FAILURE
       end
       @cache[:grammar_name][index0] = [address0, @offset]
       return address0
@@ -484,11 +484,11 @@ module Canopy::PEG
         elements0 = nil
         @offset = index1
       end
-      if elements0
+      if elements0.nil?
+        address0 = FAILURE
+      else
         address0 = SyntaxNode4.new(@input[index1...@offset], index1, elements0)
         @offset = @offset
-      else
-        address0 = FAILURE
       end
       @cache[:grammar_rule][index0] = [address0, @offset]
       return address0
@@ -568,11 +568,11 @@ module Canopy::PEG
         elements0 = nil
         @offset = index1
       end
-      if elements0
+      if elements0.nil?
+        address0 = FAILURE
+      else
         address0 = SyntaxNode.new(@input[index1...@offset], index1, elements0)
         @offset = @offset
-      else
-        address0 = FAILURE
       end
       @cache[:assignment][index0] = [address0, @offset]
       return address0
@@ -704,11 +704,11 @@ module Canopy::PEG
         elements0 = nil
         @offset = index1
       end
-      if elements0
+      if elements0.nil?
+        address0 = FAILURE
+      else
         address0 = SyntaxNode5.new(@input[index1...@offset], index1, elements0)
         @offset = @offset
-      else
-        address0 = FAILURE
       end
       @cache[:parenthesised_expression][index0] = [address0, @offset]
       return address0
@@ -804,11 +804,11 @@ module Canopy::PEG
             elements2 = nil
             @offset = index3
           end
-          if elements2
+          if elements2.nil?
+            address3 = FAILURE
+          else
             address3 = SyntaxNode7.new(@input[index3...@offset], index3, elements2)
             @offset = @offset
-          else
-            address3 = FAILURE
           end
           unless address3 == FAILURE
             elements1 << address3
@@ -831,11 +831,11 @@ module Canopy::PEG
         elements0 = nil
         @offset = index1
       end
-      if elements0
+      if elements0.nil?
+        address0 = FAILURE
+      else
         address0 = SyntaxNode6.new(@input[index1...@offset], index1, elements0)
         @offset = @offset
-      else
-        address0 = FAILURE
       end
       @cache[:choice_expression][index0] = [address0, @offset]
       return address0
@@ -897,11 +897,11 @@ module Canopy::PEG
           elements1 = nil
           @offset = index4
         end
-        if elements1
+        if elements1.nil?
+          address2 = FAILURE
+        else
           address2 = SyntaxNode8.new(@input[index4...@offset], index4, elements1)
           @offset = @offset
-        else
-          address2 = FAILURE
         end
         if address2 == FAILURE
           address2 = SyntaxNode.new(@input[index3...index3], index3)
@@ -917,11 +917,11 @@ module Canopy::PEG
         elements0 = nil
         @offset = index1
       end
-      if elements0
+      if elements0.nil?
+        address0 = FAILURE
+      else
         address0 = SyntaxNode.new(@input[index1...@offset], index1, elements0)
         @offset = @offset
-      else
-        address0 = FAILURE
       end
       @cache[:choice_part][index0] = [address0, @offset]
       return address0
@@ -972,11 +972,11 @@ module Canopy::PEG
         elements0 = nil
         @offset = index1
       end
-      if elements0
+      if elements0.nil?
+        address0 = FAILURE
+      else
         address0 = SyntaxNode9.new(@input[index1...@offset], index1, elements0)
         @offset = @offset
-      else
-        address0 = FAILURE
       end
       @cache[:action_expression][index0] = [address0, @offset]
       return address0
@@ -1089,11 +1089,11 @@ module Canopy::PEG
         elements0 = nil
         @offset = index2
       end
-      if elements0
+      if elements0.nil?
+        address0 = FAILURE
+      else
         address0 = SyntaxNode10.new(@input[index2...@offset], index2, elements0)
         @offset = @offset
-      else
-        address0 = FAILURE
       end
       if address0 == FAILURE
         @offset = index1
@@ -1154,11 +1154,11 @@ module Canopy::PEG
         elements0 = nil
         @offset = index1
       end
-      if elements0
+      if elements0.nil?
+        address0 = FAILURE
+      else
         address0 = SyntaxNode11.new(@input[index1...@offset], index1, elements0)
         @offset = @offset
-      else
-        address0 = FAILURE
       end
       @cache[:action_tag][index0] = [address0, @offset]
       return address0
@@ -1228,11 +1228,11 @@ module Canopy::PEG
         elements0 = nil
         @offset = index1
       end
-      if elements0
+      if elements0.nil?
+        address0 = FAILURE
+      else
         address0 = SyntaxNode12.new(@input[index1...@offset], index1, elements0)
         @offset = @offset
-      else
-        address0 = FAILURE
       end
       @cache[:type_tag][index0] = [address0, @offset]
       return address0
@@ -1283,11 +1283,11 @@ module Canopy::PEG
             elements2 = nil
             @offset = index3
           end
-          if elements2
+          if elements2.nil?
+            address3 = FAILURE
+          else
             address3 = SyntaxNode14.new(@input[index3...@offset], index3, elements2)
             @offset = @offset
-          else
-            address3 = FAILURE
           end
           unless address3 == FAILURE
             elements1 << address3
@@ -1310,11 +1310,11 @@ module Canopy::PEG
         elements0 = nil
         @offset = index1
       end
-      if elements0
+      if elements0.nil?
+        address0 = FAILURE
+      else
         address0 = SyntaxNode13.new(@input[index1...@offset], index1, elements0)
         @offset = @offset
-      else
-        address0 = FAILURE
       end
       @cache[:sequence_expression][index0] = [address0, @offset]
       return address0
@@ -1361,11 +1361,11 @@ module Canopy::PEG
         elements0 = nil
         @offset = index1
       end
-      if elements0
+      if elements0.nil?
+        address0 = FAILURE
+      else
         address0 = SyntaxNode15.new(@input[index1...@offset], index1, elements0)
         @offset = @offset
-      else
-        address0 = FAILURE
       end
       @cache[:sequence_part][index0] = [address0, @offset]
       return address0
@@ -1411,11 +1411,11 @@ module Canopy::PEG
         elements0 = nil
         @offset = index1
       end
-      if elements0
+      if elements0.nil?
+        address0 = FAILURE
+      else
         address0 = SyntaxNode16.new(@input[index1...@offset], index1, elements0)
         @offset = @offset
-      else
-        address0 = FAILURE
       end
       @cache[:maybe_atom][index0] = [address0, @offset]
       return address0
@@ -1485,11 +1485,11 @@ module Canopy::PEG
         elements0 = nil
         @offset = index1
       end
-      if elements0
+      if elements0.nil?
+        address0 = FAILURE
+      else
         address0 = SyntaxNode17.new(@input[index1...@offset], index1, elements0)
         @offset = @offset
-      else
-        address0 = FAILURE
       end
       @cache[:repeated_atom][index0] = [address0, @offset]
       return address0
@@ -1615,11 +1615,11 @@ module Canopy::PEG
         elements0 = nil
         @offset = index1
       end
-      if elements0
+      if elements0.nil?
+        address0 = FAILURE
+      else
         address0 = SyntaxNode18.new(@input[index1...@offset], index1, elements0)
         @offset = @offset
-      else
-        address0 = FAILURE
       end
       @cache[:predicated_atom][index0] = [address0, @offset]
       return address0
@@ -1657,11 +1657,11 @@ module Canopy::PEG
         elements0 = nil
         @offset = index1
       end
-      if elements0
+      if elements0.nil?
+        address0 = FAILURE
+      else
         address0 = SyntaxNode19.new(@input[index1...@offset], index1, elements0)
         @offset = @offset
-      else
-        address0 = FAILURE
       end
       @cache[:reference_expression][index0] = [address0, @offset]
       return address0
@@ -1745,11 +1745,11 @@ module Canopy::PEG
             elements2 = nil
             @offset = index5
           end
-          if elements2
+          if elements2.nil?
+            address3 = FAILURE
+          else
             address3 = SyntaxNode.new(@input[index5...@offset], index5, elements2)
             @offset = @offset
-          else
-            address3 = FAILURE
           end
           if address3 == FAILURE
             @offset = index4
@@ -1819,11 +1819,11 @@ module Canopy::PEG
         elements0 = nil
         @offset = index2
       end
-      if elements0
+      if elements0.nil?
+        address0 = FAILURE
+      else
         address0 = SyntaxNode.new(@input[index2...@offset], index2, elements0)
         @offset = @offset
-      else
-        address0 = FAILURE
       end
       if address0 == FAILURE
         @offset = index1
@@ -1897,11 +1897,11 @@ module Canopy::PEG
               elements5 = nil
               @offset = index9
             end
-            if elements5
+            if elements5.nil?
+              address9 = FAILURE
+            else
               address9 = SyntaxNode.new(@input[index9...@offset], index9, elements5)
               @offset = @offset
-            else
-              address9 = FAILURE
             end
             if address9 == FAILURE
               @offset = index8
@@ -1971,11 +1971,11 @@ module Canopy::PEG
           elements3 = nil
           @offset = index6
         end
-        if elements3
+        if elements3.nil?
+          address0 = FAILURE
+        else
           address0 = SyntaxNode.new(@input[index6...@offset], index6, elements3)
           @offset = @offset
-        else
-          address0 = FAILURE
         end
         if address0 == FAILURE
           @offset = index1
@@ -2062,11 +2062,11 @@ module Canopy::PEG
             elements2 = nil
             @offset = index4
           end
-          if elements2
+          if elements2.nil?
+            address3 = FAILURE
+          else
             address3 = SyntaxNode.new(@input[index4...@offset], index4, elements2)
             @offset = @offset
-          else
-            address3 = FAILURE
           end
           if address3 == FAILURE
             @offset = index3
@@ -2136,11 +2136,11 @@ module Canopy::PEG
         elements0 = nil
         @offset = index1
       end
-      if elements0
+      if elements0.nil?
+        address0 = FAILURE
+      else
         address0 = SyntaxNode.new(@input[index1...@offset], index1, elements0)
         @offset = @offset
-      else
-        address0 = FAILURE
       end
       @cache[:ci_string_expression][index0] = [address0, @offset]
       return address0
@@ -2276,11 +2276,11 @@ module Canopy::PEG
               elements2 = nil
               @offset = index5
             end
-            if elements2
+            if elements2.nil?
+              address4 = FAILURE
+            else
               address4 = SyntaxNode.new(@input[index5...@offset], index5, elements2)
               @offset = @offset
-            else
-              address4 = FAILURE
             end
             if address4 == FAILURE
               @offset = index4
@@ -2354,11 +2354,11 @@ module Canopy::PEG
         elements0 = nil
         @offset = index1
       end
-      if elements0
+      if elements0.nil?
+        address0 = FAILURE
+      else
         address0 = SyntaxNode.new(@input[index1...@offset], index1, elements0)
         @offset = @offset
-      else
-        address0 = FAILURE
       end
       @cache[:char_class_expression][index0] = [address0, @offset]
       return address0
@@ -2404,11 +2404,11 @@ module Canopy::PEG
         elements0 = nil
         @offset = index1
       end
-      if elements0
+      if elements0.nil?
+        address0 = FAILURE
+      else
         address0 = SyntaxNode20.new(@input[index1...@offset], index1, elements0)
         @offset = @offset
-      else
-        address0 = FAILURE
       end
       @cache[:label][index0] = [address0, @offset]
       return address0
@@ -2462,11 +2462,11 @@ module Canopy::PEG
             elements2 = nil
             @offset = index3
           end
-          if elements2
+          if elements2.nil?
+            address3 = FAILURE
+          else
             address3 = SyntaxNode22.new(@input[index3...@offset], index3, elements2)
             @offset = @offset
-          else
-            address3 = FAILURE
           end
           unless address3 == FAILURE
             elements1 << address3
@@ -2489,11 +2489,11 @@ module Canopy::PEG
         elements0 = nil
         @offset = index1
       end
-      if elements0
+      if elements0.nil?
+        address0 = FAILURE
+      else
         address0 = SyntaxNode21.new(@input[index1...@offset], index1, elements0)
         @offset = @offset
-      else
-        address0 = FAILURE
       end
       @cache[:object_identifier][index0] = [address0, @offset]
       return address0
@@ -2568,11 +2568,11 @@ module Canopy::PEG
         elements0 = nil
         @offset = index1
       end
-      if elements0
+      if elements0.nil?
+        address0 = FAILURE
+      else
         address0 = SyntaxNode.new(@input[index1...@offset], index1, elements0)
         @offset = @offset
-      else
-        address0 = FAILURE
       end
       @cache[:identifier][index0] = [address0, @offset]
       return address0
@@ -2683,11 +2683,11 @@ module Canopy::PEG
         elements0 = nil
         @offset = index1
       end
-      if elements0
+      if elements0.nil?
+        address0 = FAILURE
+      else
         address0 = SyntaxNode.new(@input[index1...@offset], index1, elements0)
         @offset = @offset
-      else
-        address0 = FAILURE
       end
       @cache[:comment][index0] = [address0, @offset]
       return address0

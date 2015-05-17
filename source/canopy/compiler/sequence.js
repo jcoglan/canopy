@@ -49,10 +49,10 @@ Canopy.Compiler.Sequence = {
 
     this._compileExpressions(builder, 0, startOffset, elements);
 
-    builder.if_(elements, function(builder) {
-      builder.syntaxNode_(address, startOffset, builder.offset_(), elements, action, this._nodeClassName);
-    }, function(builder) {
+    builder.ifNull_(elements, function(builder) {
       builder.assign_(address, builder.nullNode_());
+    }, function(builder) {
+      builder.syntaxNode_(address, startOffset, builder.offset_(), elements, action, this._nodeClassName);
     }, this);
   },
 

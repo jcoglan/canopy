@@ -127,11 +127,11 @@ module CanopyLisp
         elements0 = nil
         @offset = index1
       end
-      if elements0
+      if elements0.nil?
+        address0 = FAILURE
+      else
         address0 = SyntaxNode1.new(@input[index1...@offset], index1, elements0)
         @offset = @offset
-      else
-        address0 = FAILURE
       end
       @cache[:cell][index0] = [address0, @offset]
       return address0
@@ -214,11 +214,11 @@ module CanopyLisp
         elements0 = nil
         @offset = index1
       end
-      if elements0
+      if elements0.nil?
+        address0 = FAILURE
+      else
         address0 = SyntaxNode2.new(@input[index1...@offset], index1, elements0)
         @offset = @offset
-      else
-        address0 = FAILURE
       end
       @cache[:list][index0] = [address0, @offset]
       return address0
@@ -232,7 +232,7 @@ module CanopyLisp
         return cached[0]
       end
       index1 = @offset
-      address0 = _read_boolean
+      address0 = _read_boolean_
       if address0 == FAILURE
         @offset = index1
         address0 = _read_integer
@@ -252,9 +252,9 @@ module CanopyLisp
       return address0
     end
 
-    def _read_boolean
+    def _read_boolean_
       address0, index0 = FAILURE, @offset
-      cached = @cache[:boolean][index0]
+      cached = @cache[:boolean_][index0]
       if cached
         @offset = cached[1]
         return cached[0]
@@ -300,7 +300,7 @@ module CanopyLisp
           @offset = index1
         end
       end
-      @cache[:boolean][index0] = [address0, @offset]
+      @cache[:boolean_][index0] = [address0, @offset]
       return address0
     end
 
@@ -373,11 +373,11 @@ module CanopyLisp
         elements0 = nil
         @offset = index1
       end
-      if elements0
+      if elements0.nil?
+        address0 = FAILURE
+      else
         address0 = SyntaxNode.new(@input[index1...@offset], index1, elements0)
         @offset = @offset
-      else
-        address0 = FAILURE
       end
       @cache[:integer][index0] = [address0, @offset]
       return address0
@@ -460,11 +460,11 @@ module CanopyLisp
             elements2 = nil
             @offset = index4
           end
-          if elements2
+          if elements2.nil?
+            address3 = FAILURE
+          else
             address3 = SyntaxNode.new(@input[index4...@offset], index4, elements2)
             @offset = @offset
-          else
-            address3 = FAILURE
           end
           if address3 == FAILURE
             @offset = index3
@@ -534,11 +534,11 @@ module CanopyLisp
         elements0 = nil
         @offset = index1
       end
-      if elements0
+      if elements0.nil?
+        address0 = FAILURE
+      else
         address0 = SyntaxNode.new(@input[index1...@offset], index1, elements0)
         @offset = @offset
-      else
-        address0 = FAILURE
       end
       @cache[:string][index0] = [address0, @offset]
       return address0
@@ -590,11 +590,11 @@ module CanopyLisp
           elements1 = nil
           @offset = index2
         end
-        if elements1
+        if elements1.nil?
+          address1 = FAILURE
+        else
           address1 = SyntaxNode.new(@input[index2...@offset], index2, elements1)
           @offset = @offset
-        else
-          address1 = FAILURE
         end
         unless address1 == FAILURE
           elements0 << address1
