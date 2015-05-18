@@ -12,31 +12,40 @@ Canopy.Compiler.Grammar = {
   },
 
   compile: function(builder) {
+    var scan = function(node, callback, context) {
+      callback.call(context, node);
+      node.forEach(function(child) { scan(child, callback, context) });
+    };
+
     builder.package_(this.grammarName(), function(builder) {
       var nodeClassName = builder.syntaxNodeClass_(),
           subclassIndex = 1;
 
-      var scan = function(node) {
+      scan(this, function(node) {
         var subclassName = nodeClassName + subclassIndex,
             labels = node.collectLabels && node.collectLabels(subclassName);
 
-        if (labels) {
-          builder.class_(subclassName, nodeClassName, function(builder) {
-            var keys = [];
-            for (var key in labels) keys.push(key);
-            builder.attributes_(keys);
-            builder.constructor_(['text', 'offset', 'elements'], function(builder) {
-              for (var key in labels)
-                builder.attribute_(key, builder.arrayLookup_('elements', labels[key]));
-            });
+        if (!labels) return;
+
+        builder.class_(subclassName, nodeClassName, function(builder) {
+          var keys = [];
+          for (var key in labels) keys.push(key);
+          builder.attributes_(keys);
+          builder.constructor_(['text', 'offset', 'elements'], function(builder) {
+            for (var key in labels)
+              builder.attribute_(key, builder.arrayLookup_('elements', labels[key]));
           });
-          subclassIndex += 1;
-        }
-        node.forEach(scan, this);
-      };
-      scan.call(this, this);
+        });
+        subclassIndex += 1;
+      });
 
       builder.grammarModule_(function(builder) {
+        var regexName = 'REGEX_', regexIndex = 1;
+
+        scan(this, function(node) {
+          if (node.regex) builder.compileRegex_(node, regexName + (regexIndex++));
+        });
+
         this.rules.forEach(function(rule) {
           rule.grammar_rule.compile(builder);
         });

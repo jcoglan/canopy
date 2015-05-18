@@ -8,7 +8,6 @@
       this._indentLevel = 0;
     }
     this._name = name;
-    this._methodSeparator = '';
     this._varIndex = {};
 
     this._buffers = {};
@@ -173,6 +172,14 @@
       this._line('}', false);
     },
 
+    compileRegex_: function(charClass, name) {
+      var regex  = charClass.toRegExp(),
+          source = regex.source.replace(/^\^/, '\\A');
+
+      this.assign_('private static Pattern ' + name, 'Pattern.compile(' + this._quote(source) + ')');
+      charClass.constName = name;
+    },
+
     parserClass_: function(root) {
       this._newBuffer('SyntaxError');
       this._line('public class SyntaxError extends Exception {', false);
@@ -287,8 +294,7 @@
     },
 
     method_: function(name, args, block, context) {
-      this._write(this._methodSeparator);
-      this._methodSeparator = '\n';
+      this._newline();
       this._line('TreeNode ' + name + '() {', false);
       new Builder(this)._indent(block, context);
       this._line('}', false);
@@ -435,8 +441,7 @@
     },
 
     regexMatch_: function(regex, string) {
-      var source = regex.source.replace(/^\^/g, '\\A');
-      return string + ' != null && Pattern.matches(' + this._quote(source) + ', ' + string + ')';
+      return string + ' != null && ' + regex + '.matcher(' + string + ').matches()';
     },
 
     return_: function(expression) {

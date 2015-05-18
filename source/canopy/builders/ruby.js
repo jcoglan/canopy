@@ -102,6 +102,8 @@
       this._newline();
     },
 
+    compileRegex_: function() {},
+
     parserClass_: function(root) {
       this._line('class Parser');
       this._indent(function(builder) {

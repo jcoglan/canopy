@@ -102,6 +102,13 @@
       this.class_('Grammar', 'object', block, context);
     },
 
+    compileRegex_: function(charClass, name) {
+      var regex = charClass.toRegExp();
+      this.assign_(name, 're.compile(' + this._quote(regex.source) + ')');
+      charClass.constName = name;
+      this._methodSeparator = '\n';
+    },
+
     parserClass_: function(root) {
       this.class_('Parser', 'Grammar', function(builder) {
         builder.method_('__init__', ['input', 'actions', 'types'], function(builder) {
@@ -312,7 +319,7 @@
     },
 
     regexMatch_: function(regex, string) {
-      return string + ' is not None and re.match(' + this._quote(regex.source) + ', ' + string + ')';
+      return string + ' is not None and Grammar.' + regex + '.search(' + string + ')';
     },
 
     return_: function(expression) {

@@ -1,10 +1,16 @@
 Canopy.Compiler.CharClass = {
+  regex: true,
+
+  toRegExp: function() {
+    return new RegExp('^' + this.text);
+  },
+
   toSexp: function() {
     return ['char-class', this.text];
   },
 
   compile: function(builder, address, action) {
-    var regex = new RegExp('^' + this.text),
+    var regex = this.constName || this.toRegExp(),
         chunk = builder.chunk_(1);
 
     builder.if_(builder.regexMatch_(regex, chunk), function(builder) {

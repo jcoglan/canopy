@@ -14,6 +14,13 @@ abstract class Grammar {
     List<String> expected;
     Map<Label, Map<Integer, CacheRecord>> cache;
 
+    private static Pattern REGEX_1 = Pattern.compile("\\A[^\"]");
+    private static Pattern REGEX_2 = Pattern.compile("\\A[1-9]");
+    private static Pattern REGEX_3 = Pattern.compile("\\A[0-9]");
+    private static Pattern REGEX_4 = Pattern.compile("\\A[0-9]");
+    private static Pattern REGEX_5 = Pattern.compile("\\A[0-9]");
+    private static Pattern REGEX_6 = Pattern.compile("\\A[\\s]");
+
     TreeNode _read_document() {
         TreeNode address0 = FAILURE;
         int index0 = offset;
@@ -754,7 +761,7 @@ abstract class Grammar {
                         if (offset < inputSize) {
                             chunk2 = input.substring(offset, offset + 1);
                         }
-                        if (chunk2 != null && Pattern.matches("\\A[^\"]", chunk2)) {
+                        if (chunk2 != null && REGEX_1.matcher(chunk2).matches()) {
                             address3 = new TreeNode(input.substring(offset, offset + 1), offset);
                             offset = offset + 1;
                         } else {
@@ -894,7 +901,7 @@ abstract class Grammar {
                     if (offset < inputSize) {
                         chunk2 = input.substring(offset, offset + 1);
                     }
-                    if (chunk2 != null && Pattern.matches("\\A[1-9]", chunk2)) {
+                    if (chunk2 != null && REGEX_2.matcher(chunk2).matches()) {
                         address3 = new TreeNode(input.substring(offset, offset + 1), offset);
                         offset = offset + 1;
                     } else {
@@ -919,7 +926,7 @@ abstract class Grammar {
                             if (offset < inputSize) {
                                 chunk3 = input.substring(offset, offset + 1);
                             }
-                            if (chunk3 != null && Pattern.matches("\\A[0-9]", chunk3)) {
+                            if (chunk3 != null && REGEX_3.matcher(chunk3).matches()) {
                                 address5 = new TreeNode(input.substring(offset, offset + 1), offset);
                                 offset = offset + 1;
                             } else {
@@ -999,7 +1006,7 @@ abstract class Grammar {
                             if (offset < inputSize) {
                                 chunk5 = input.substring(offset, offset + 1);
                             }
-                            if (chunk5 != null && Pattern.matches("\\A[0-9]", chunk5)) {
+                            if (chunk5 != null && REGEX_4.matcher(chunk5).matches()) {
                                 address9 = new TreeNode(input.substring(offset, offset + 1), offset);
                                 offset = offset + 1;
                             } else {
@@ -1167,7 +1174,7 @@ abstract class Grammar {
                                     if (offset < inputSize) {
                                         chunk11 = input.substring(offset, offset + 1);
                                     }
-                                    if (chunk11 != null && Pattern.matches("\\A[0-9]", chunk11)) {
+                                    if (chunk11 != null && REGEX_5.matcher(chunk11).matches()) {
                                         address14 = new TreeNode(input.substring(offset, offset + 1), offset);
                                         offset = offset + 1;
                                     } else {
@@ -1357,7 +1364,7 @@ abstract class Grammar {
                 if (offset < inputSize) {
                     chunk0 = input.substring(offset, offset + 1);
                 }
-                if (chunk0 != null && Pattern.matches("\\A[\\s]", chunk0)) {
+                if (chunk0 != null && REGEX_6.matcher(chunk0).matches()) {
                     address1 = new TreeNode(input.substring(offset, offset + 1), offset);
                     offset = offset + 1;
                 } else {

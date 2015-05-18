@@ -111,6 +111,8 @@
       this._line('}');
     },
 
+    compileRegex_: function() {},
+
     parserClass_: function(root) {
       this.function_('var Parser', ['input', 'actions', 'types'], function(builder) {
         builder.assign_('this._input', 'input');

@@ -33,6 +33,11 @@ FAILURE = object()
 
 
 class Grammar(object):
+    REGEX_1 = re.compile('^[1-9]')
+    REGEX_2 = re.compile('^[0-9]')
+    REGEX_3 = re.compile('^[^"]')
+    REGEX_4 = re.compile('^[\\s]')
+
     def _read_program(self):
         address0, index0 = FAILURE, self._offset
         cached = self._cache['program'].get(index0)
@@ -258,7 +263,7 @@ class Grammar(object):
         chunk0 = None
         if self._offset < self._input_size:
             chunk0 = self._input[self._offset:self._offset + 1]
-        if chunk0 is not None and re.match('^[1-9]', chunk0):
+        if chunk0 is not None and Grammar.REGEX_1.search(chunk0):
             address1 = TreeNode(self._input[self._offset:self._offset + 1], self._offset)
             self._offset = self._offset + 1
         else:
@@ -276,7 +281,7 @@ class Grammar(object):
                 chunk1 = None
                 if self._offset < self._input_size:
                     chunk1 = self._input[self._offset:self._offset + 1]
-                if chunk1 is not None and re.match('^[0-9]', chunk1):
+                if chunk1 is not None and Grammar.REGEX_2.search(chunk1):
                     address3 = TreeNode(self._input[self._offset:self._offset + 1], self._offset)
                     self._offset = self._offset + 1
                 else:
@@ -383,7 +388,7 @@ class Grammar(object):
                     chunk2 = None
                     if self._offset < self._input_size:
                         chunk2 = self._input[self._offset:self._offset + 1]
-                    if chunk2 is not None and re.match('^[^"]', chunk2):
+                    if chunk2 is not None and Grammar.REGEX_3.search(chunk2):
                         address3 = TreeNode(self._input[self._offset:self._offset + 1], self._offset)
                         self._offset = self._offset + 1
                     else:
@@ -502,7 +507,7 @@ class Grammar(object):
         chunk0 = None
         if self._offset < self._input_size:
             chunk0 = self._input[self._offset:self._offset + 1]
-        if chunk0 is not None and re.match('^[\\s]', chunk0):
+        if chunk0 is not None and Grammar.REGEX_4.search(chunk0):
             address0 = TreeNode(self._input[self._offset:self._offset + 1], self._offset)
             self._offset = self._offset + 1
         else:
