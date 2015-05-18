@@ -289,7 +289,7 @@
     method_: function(name, args, block, context) {
       this._write(this._methodSeparator);
       this._methodSeparator = '\n';
-      this._line('protected TreeNode ' + name + '() {', false);
+      this._line('TreeNode ' + name + '() {', false);
       new Builder(this)._indent(block, context);
       this._line('}', false);
     },

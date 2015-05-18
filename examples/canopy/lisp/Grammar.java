@@ -14,7 +14,7 @@ abstract class Grammar {
     List<String> expected;
     Map<Label, Map<Integer, CacheRecord>> cache;
 
-    protected TreeNode _read_program() {
+    TreeNode _read_program() {
         TreeNode address0 = FAILURE;
         int index0 = offset;
         Map<Integer, CacheRecord> rule = cache.get(Label.program);
@@ -48,7 +48,7 @@ abstract class Grammar {
         return address0;
     }
 
-    protected TreeNode _read_cell() {
+    TreeNode _read_cell() {
         TreeNode address0 = FAILURE;
         int index0 = offset;
         Map<Integer, CacheRecord> rule = cache.get(Label.cell);
@@ -137,7 +137,7 @@ abstract class Grammar {
         return address0;
     }
 
-    protected TreeNode _read_list() {
+    TreeNode _read_list() {
         TreeNode address0 = FAILURE;
         int index0 = offset;
         Map<Integer, CacheRecord> rule = cache.get(Label.list);
@@ -234,7 +234,7 @@ abstract class Grammar {
         return address0;
     }
 
-    protected TreeNode _read_atom() {
+    TreeNode _read_atom() {
         TreeNode address0 = FAILURE;
         int index0 = offset;
         Map<Integer, CacheRecord> rule = cache.get(Label.atom);
@@ -268,7 +268,7 @@ abstract class Grammar {
         return address0;
     }
 
-    protected TreeNode _read_boolean_() {
+    TreeNode _read_boolean_() {
         TreeNode address0 = FAILURE;
         int index0 = offset;
         Map<Integer, CacheRecord> rule = cache.get(Label.boolean_);
@@ -326,7 +326,7 @@ abstract class Grammar {
         return address0;
     }
 
-    protected TreeNode _read_integer() {
+    TreeNode _read_integer() {
         TreeNode address0 = FAILURE;
         int index0 = offset;
         Map<Integer, CacheRecord> rule = cache.get(Label.integer);
@@ -415,7 +415,7 @@ abstract class Grammar {
         return address0;
     }
 
-    protected TreeNode _read_string() {
+    TreeNode _read_string() {
         TreeNode address0 = FAILURE;
         int index0 = offset;
         Map<Integer, CacheRecord> rule = cache.get(Label.string);
@@ -587,7 +587,7 @@ abstract class Grammar {
         return address0;
     }
 
-    protected TreeNode _read_symbol() {
+    TreeNode _read_symbol() {
         TreeNode address0 = FAILURE;
         int index0 = offset;
         Map<Integer, CacheRecord> rule = cache.get(Label.symbol);
@@ -664,7 +664,7 @@ abstract class Grammar {
         return address0;
     }
 
-    protected TreeNode _read_space() {
+    TreeNode _read_space() {
         TreeNode address0 = FAILURE;
         int index0 = offset;
         Map<Integer, CacheRecord> rule = cache.get(Label.space);
@@ -698,7 +698,7 @@ abstract class Grammar {
         return address0;
     }
 
-    protected TreeNode _read_paren() {
+    TreeNode _read_paren() {
         TreeNode address0 = FAILURE;
         int index0 = offset;
         Map<Integer, CacheRecord> rule = cache.get(Label.paren);
@@ -756,7 +756,7 @@ abstract class Grammar {
         return address0;
     }
 
-    protected TreeNode _read_delimiter() {
+    TreeNode _read_delimiter() {
         TreeNode address0 = FAILURE;
         int index0 = offset;
         Map<Integer, CacheRecord> rule = cache.get(Label.delimiter);
