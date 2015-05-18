@@ -1,5 +1,5 @@
 module CanopyJson
-  class SyntaxNode
+  class TreeNode
     include Enumerable
     attr_reader :text, :offset, :elements
 
@@ -14,7 +14,7 @@ module CanopyJson
     end
   end
 
-  class SyntaxNode1 < SyntaxNode
+  class TreeNode1 < TreeNode
     attr_reader :__
 
     def initialize(text, offset, elements)
@@ -23,7 +23,7 @@ module CanopyJson
     end
   end
 
-  class SyntaxNode2 < SyntaxNode
+  class TreeNode2 < TreeNode
     attr_reader :pair
 
     def initialize(text, offset, elements)
@@ -32,7 +32,7 @@ module CanopyJson
     end
   end
 
-  class SyntaxNode3 < SyntaxNode
+  class TreeNode3 < TreeNode
     attr_reader :pair
 
     def initialize(text, offset, elements)
@@ -41,7 +41,7 @@ module CanopyJson
     end
   end
 
-  class SyntaxNode4 < SyntaxNode
+  class TreeNode4 < TreeNode
     attr_reader :__
 
     def initialize(text, offset, elements)
@@ -50,7 +50,7 @@ module CanopyJson
     end
   end
 
-  class SyntaxNode5 < SyntaxNode
+  class TreeNode5 < TreeNode
     attr_reader :__, :string, :value
 
     def initialize(text, offset, elements)
@@ -61,7 +61,7 @@ module CanopyJson
     end
   end
 
-  class SyntaxNode6 < SyntaxNode
+  class TreeNode6 < TreeNode
     attr_reader :value
 
     def initialize(text, offset, elements)
@@ -70,7 +70,7 @@ module CanopyJson
     end
   end
 
-  class SyntaxNode7 < SyntaxNode
+  class TreeNode7 < TreeNode
     attr_reader :value
 
     def initialize(text, offset, elements)
@@ -79,7 +79,7 @@ module CanopyJson
     end
   end
 
-  class SyntaxNode8 < SyntaxNode
+  class TreeNode8 < TreeNode
     attr_reader :__
 
     def initialize(text, offset, elements)
@@ -88,7 +88,7 @@ module CanopyJson
     end
   end
 
-  class SyntaxNode9 < SyntaxNode
+  class TreeNode9 < TreeNode
     attr_reader :__
 
     def initialize(text, offset, elements)
@@ -144,7 +144,7 @@ module CanopyJson
       if elements0.nil?
         address0 = FAILURE
       else
-        address0 = SyntaxNode1.new(@input[index1...@offset], index1, elements0)
+        address0 = TreeNode1.new(@input[index1...@offset], index1, elements0)
         @offset = @offset
       end
       @cache[:document][index0] = [address0, @offset]
@@ -166,7 +166,7 @@ module CanopyJson
         chunk0 = @input[@offset...@offset + 1]
       end
       if chunk0 == "{"
-        address1 = SyntaxNode.new(@input[@offset...@offset + 1], @offset)
+        address1 = TreeNode.new(@input[@offset...@offset + 1], @offset)
         @offset = @offset + 1
       else
         address1 = FAILURE
@@ -194,7 +194,7 @@ module CanopyJson
               chunk1 = @input[@offset...@offset + 1]
             end
             if chunk1 == ","
-              address5 = SyntaxNode.new(@input[@offset...@offset + 1], @offset)
+              address5 = TreeNode.new(@input[@offset...@offset + 1], @offset)
               @offset = @offset + 1
             else
               address5 = FAILURE
@@ -223,7 +223,7 @@ module CanopyJson
             if elements2.nil?
               address4 = FAILURE
             else
-              address4 = SyntaxNode3.new(@input[index4...@offset], index4, elements2)
+              address4 = TreeNode3.new(@input[index4...@offset], index4, elements2)
               @offset = @offset
             end
             unless address4 == FAILURE
@@ -232,7 +232,7 @@ module CanopyJson
             end
           end
           if remaining0 <= 0
-            address3 = SyntaxNode.new(@input[index3...@offset], index3, elements1)
+            address3 = TreeNode.new(@input[index3...@offset], index3, elements1)
             @offset = @offset
           else
             address3 = FAILURE
@@ -245,7 +245,7 @@ module CanopyJson
               chunk2 = @input[@offset...@offset + 1]
             end
             if chunk2 == "}"
-              address7 = SyntaxNode.new(@input[@offset...@offset + 1], @offset)
+              address7 = TreeNode.new(@input[@offset...@offset + 1], @offset)
               @offset = @offset + 1
             else
               address7 = FAILURE
@@ -278,7 +278,7 @@ module CanopyJson
       if elements0.nil?
         address0 = FAILURE
       else
-        address0 = SyntaxNode2.new(@input[index2...@offset], index2, elements0)
+        address0 = TreeNode2.new(@input[index2...@offset], index2, elements0)
         @offset = @offset
       end
       if address0 == FAILURE
@@ -290,7 +290,7 @@ module CanopyJson
           chunk3 = @input[@offset...@offset + 1]
         end
         if chunk3 == "{"
-          address8 = SyntaxNode.new(@input[@offset...@offset + 1], @offset)
+          address8 = TreeNode.new(@input[@offset...@offset + 1], @offset)
           @offset = @offset + 1
         else
           address8 = FAILURE
@@ -314,7 +314,7 @@ module CanopyJson
               chunk4 = @input[@offset...@offset + 1]
             end
             if chunk4 == "}"
-              address10 = SyntaxNode.new(@input[@offset...@offset + 1], @offset)
+              address10 = TreeNode.new(@input[@offset...@offset + 1], @offset)
               @offset = @offset + 1
             else
               address10 = FAILURE
@@ -343,7 +343,7 @@ module CanopyJson
         if elements3.nil?
           address0 = FAILURE
         else
-          address0 = SyntaxNode4.new(@input[index5...@offset], index5, elements3)
+          address0 = TreeNode4.new(@input[index5...@offset], index5, elements3)
           @offset = @offset
         end
         if address0 == FAILURE
@@ -380,7 +380,7 @@ module CanopyJson
               chunk0 = @input[@offset...@offset + 1]
             end
             if chunk0 == ":"
-              address4 = SyntaxNode.new(@input[@offset...@offset + 1], @offset)
+              address4 = TreeNode.new(@input[@offset...@offset + 1], @offset)
               @offset = @offset + 1
             else
               address4 = FAILURE
@@ -421,7 +421,7 @@ module CanopyJson
       if elements0.nil?
         address0 = FAILURE
       else
-        address0 = SyntaxNode5.new(@input[index1...@offset], index1, elements0)
+        address0 = TreeNode5.new(@input[index1...@offset], index1, elements0)
         @offset = @offset
       end
       @cache[:pair][index0] = [address0, @offset]
@@ -443,7 +443,7 @@ module CanopyJson
         chunk0 = @input[@offset...@offset + 1]
       end
       if chunk0 == "["
-        address1 = SyntaxNode.new(@input[@offset...@offset + 1], @offset)
+        address1 = TreeNode.new(@input[@offset...@offset + 1], @offset)
         @offset = @offset + 1
       else
         address1 = FAILURE
@@ -471,7 +471,7 @@ module CanopyJson
               chunk1 = @input[@offset...@offset + 1]
             end
             if chunk1 == ","
-              address5 = SyntaxNode.new(@input[@offset...@offset + 1], @offset)
+              address5 = TreeNode.new(@input[@offset...@offset + 1], @offset)
               @offset = @offset + 1
             else
               address5 = FAILURE
@@ -500,7 +500,7 @@ module CanopyJson
             if elements2.nil?
               address4 = FAILURE
             else
-              address4 = SyntaxNode7.new(@input[index4...@offset], index4, elements2)
+              address4 = TreeNode7.new(@input[index4...@offset], index4, elements2)
               @offset = @offset
             end
             unless address4 == FAILURE
@@ -509,7 +509,7 @@ module CanopyJson
             end
           end
           if remaining0 <= 0
-            address3 = SyntaxNode.new(@input[index3...@offset], index3, elements1)
+            address3 = TreeNode.new(@input[index3...@offset], index3, elements1)
             @offset = @offset
           else
             address3 = FAILURE
@@ -522,7 +522,7 @@ module CanopyJson
               chunk2 = @input[@offset...@offset + 1]
             end
             if chunk2 == "]"
-              address7 = SyntaxNode.new(@input[@offset...@offset + 1], @offset)
+              address7 = TreeNode.new(@input[@offset...@offset + 1], @offset)
               @offset = @offset + 1
             else
               address7 = FAILURE
@@ -555,7 +555,7 @@ module CanopyJson
       if elements0.nil?
         address0 = FAILURE
       else
-        address0 = SyntaxNode6.new(@input[index2...@offset], index2, elements0)
+        address0 = TreeNode6.new(@input[index2...@offset], index2, elements0)
         @offset = @offset
       end
       if address0 == FAILURE
@@ -567,7 +567,7 @@ module CanopyJson
           chunk3 = @input[@offset...@offset + 1]
         end
         if chunk3 == "["
-          address8 = SyntaxNode.new(@input[@offset...@offset + 1], @offset)
+          address8 = TreeNode.new(@input[@offset...@offset + 1], @offset)
           @offset = @offset + 1
         else
           address8 = FAILURE
@@ -591,7 +591,7 @@ module CanopyJson
               chunk4 = @input[@offset...@offset + 1]
             end
             if chunk4 == "]"
-              address10 = SyntaxNode.new(@input[@offset...@offset + 1], @offset)
+              address10 = TreeNode.new(@input[@offset...@offset + 1], @offset)
               @offset = @offset + 1
             else
               address10 = FAILURE
@@ -620,7 +620,7 @@ module CanopyJson
         if elements3.nil?
           address0 = FAILURE
         else
-          address0 = SyntaxNode8.new(@input[index5...@offset], index5, elements3)
+          address0 = TreeNode8.new(@input[index5...@offset], index5, elements3)
           @offset = @offset
         end
         if address0 == FAILURE
@@ -690,7 +690,7 @@ module CanopyJson
       if elements0.nil?
         address0 = FAILURE
       else
-        address0 = SyntaxNode9.new(@input[index1...@offset], index1, elements0)
+        address0 = TreeNode9.new(@input[index1...@offset], index1, elements0)
         @offset = @offset
       end
       @cache[:value][index0] = [address0, @offset]
@@ -711,7 +711,7 @@ module CanopyJson
         chunk0 = @input[@offset...@offset + 1]
       end
       if chunk0 == "\""
-        address1 = SyntaxNode.new(@input[@offset...@offset + 1], @offset)
+        address1 = TreeNode.new(@input[@offset...@offset + 1], @offset)
         @offset = @offset + 1
       else
         address1 = FAILURE
@@ -736,7 +736,7 @@ module CanopyJson
             chunk1 = @input[@offset...@offset + 1]
           end
           if chunk1 == "\\"
-            address4 = SyntaxNode.new(@input[@offset...@offset + 1], @offset)
+            address4 = TreeNode.new(@input[@offset...@offset + 1], @offset)
             @offset = @offset + 1
           else
             address4 = FAILURE
@@ -752,7 +752,7 @@ module CanopyJson
             elements2 << address4
             address5 = FAILURE
             if @offset < @input_size
-              address5 = SyntaxNode.new(@input[@offset...@offset + 1], @offset)
+              address5 = TreeNode.new(@input[@offset...@offset + 1], @offset)
               @offset = @offset + 1
             else
               address5 = FAILURE
@@ -777,7 +777,7 @@ module CanopyJson
           if elements2.nil?
             address3 = FAILURE
           else
-            address3 = SyntaxNode.new(@input[index4...@offset], index4, elements2)
+            address3 = TreeNode.new(@input[index4...@offset], index4, elements2)
             @offset = @offset
           end
           if address3 == FAILURE
@@ -787,7 +787,7 @@ module CanopyJson
               chunk2 = @input[@offset...@offset + 1]
             end
             if chunk2 =~ /\A[^"]/
-              address3 = SyntaxNode.new(@input[@offset...@offset + 1], @offset)
+              address3 = TreeNode.new(@input[@offset...@offset + 1], @offset)
               @offset = @offset + 1
             else
               address3 = FAILURE
@@ -809,7 +809,7 @@ module CanopyJson
           end
         end
         if remaining0 <= 0
-          address2 = SyntaxNode.new(@input[index2...@offset], index2, elements1)
+          address2 = TreeNode.new(@input[index2...@offset], index2, elements1)
           @offset = @offset
         else
           address2 = FAILURE
@@ -822,7 +822,7 @@ module CanopyJson
             chunk3 = @input[@offset...@offset + 1]
           end
           if chunk3 == "\""
-            address6 = SyntaxNode.new(@input[@offset...@offset + 1], @offset)
+            address6 = TreeNode.new(@input[@offset...@offset + 1], @offset)
             @offset = @offset + 1
           else
             address6 = FAILURE
@@ -851,7 +851,7 @@ module CanopyJson
       if elements0.nil?
         address0 = FAILURE
       else
-        address0 = SyntaxNode.new(@input[index1...@offset], index1, elements0)
+        address0 = TreeNode.new(@input[index1...@offset], index1, elements0)
         @offset = @offset
       end
       @cache[:string][index0] = [address0, @offset]
@@ -873,7 +873,7 @@ module CanopyJson
         chunk0 = @input[@offset...@offset + 1]
       end
       if chunk0 == "-"
-        address1 = SyntaxNode.new(@input[@offset...@offset + 1], @offset)
+        address1 = TreeNode.new(@input[@offset...@offset + 1], @offset)
         @offset = @offset + 1
       else
         address1 = FAILURE
@@ -886,7 +886,7 @@ module CanopyJson
         end
       end
       if address1 == FAILURE
-        address1 = SyntaxNode.new(@input[index2...index2], index2)
+        address1 = TreeNode.new(@input[index2...index2], index2)
         @offset = index2
       end
       unless address1 == FAILURE
@@ -898,7 +898,7 @@ module CanopyJson
           chunk1 = @input[@offset...@offset + 1]
         end
         if chunk1 == "0"
-          address2 = SyntaxNode.new(@input[@offset...@offset + 1], @offset)
+          address2 = TreeNode.new(@input[@offset...@offset + 1], @offset)
           @offset = @offset + 1
         else
           address2 = FAILURE
@@ -919,7 +919,7 @@ module CanopyJson
             chunk2 = @input[@offset...@offset + 1]
           end
           if chunk2 =~ /\A[1-9]/
-            address3 = SyntaxNode.new(@input[@offset...@offset + 1], @offset)
+            address3 = TreeNode.new(@input[@offset...@offset + 1], @offset)
             @offset = @offset + 1
           else
             address3 = FAILURE
@@ -941,7 +941,7 @@ module CanopyJson
                 chunk3 = @input[@offset...@offset + 1]
               end
               if chunk3 =~ /\A[0-9]/
-                address5 = SyntaxNode.new(@input[@offset...@offset + 1], @offset)
+                address5 = TreeNode.new(@input[@offset...@offset + 1], @offset)
                 @offset = @offset + 1
               else
                 address5 = FAILURE
@@ -959,7 +959,7 @@ module CanopyJson
               end
             end
             if remaining0 <= 0
-              address4 = SyntaxNode.new(@input[index5...@offset], index5, elements2)
+              address4 = TreeNode.new(@input[index5...@offset], index5, elements2)
               @offset = @offset
             else
               address4 = FAILURE
@@ -977,7 +977,7 @@ module CanopyJson
           if elements1.nil?
             address2 = FAILURE
           else
-            address2 = SyntaxNode.new(@input[index4...@offset], index4, elements1)
+            address2 = TreeNode.new(@input[index4...@offset], index4, elements1)
             @offset = @offset
           end
           if address2 == FAILURE
@@ -995,7 +995,7 @@ module CanopyJson
             chunk4 = @input[@offset...@offset + 1]
           end
           if chunk4 == "."
-            address7 = SyntaxNode.new(@input[@offset...@offset + 1], @offset)
+            address7 = TreeNode.new(@input[@offset...@offset + 1], @offset)
             @offset = @offset + 1
           else
             address7 = FAILURE
@@ -1017,7 +1017,7 @@ module CanopyJson
                 chunk5 = @input[@offset...@offset + 1]
               end
               if chunk5 =~ /\A[0-9]/
-                address9 = SyntaxNode.new(@input[@offset...@offset + 1], @offset)
+                address9 = TreeNode.new(@input[@offset...@offset + 1], @offset)
                 @offset = @offset + 1
               else
                 address9 = FAILURE
@@ -1035,7 +1035,7 @@ module CanopyJson
               end
             end
             if remaining1 <= 0
-              address8 = SyntaxNode.new(@input[index8...@offset], index8, elements4)
+              address8 = TreeNode.new(@input[index8...@offset], index8, elements4)
               @offset = @offset
             else
               address8 = FAILURE
@@ -1053,11 +1053,11 @@ module CanopyJson
           if elements3.nil?
             address6 = FAILURE
           else
-            address6 = SyntaxNode.new(@input[index7...@offset], index7, elements3)
+            address6 = TreeNode.new(@input[index7...@offset], index7, elements3)
             @offset = @offset
           end
           if address6 == FAILURE
-            address6 = SyntaxNode.new(@input[index6...index6], index6)
+            address6 = TreeNode.new(@input[index6...index6], index6)
             @offset = index6
           end
           unless address6 == FAILURE
@@ -1072,7 +1072,7 @@ module CanopyJson
               chunk6 = @input[@offset...@offset + 1]
             end
             if chunk6 == "e"
-              address11 = SyntaxNode.new(@input[@offset...@offset + 1], @offset)
+              address11 = TreeNode.new(@input[@offset...@offset + 1], @offset)
               @offset = @offset + 1
             else
               address11 = FAILURE
@@ -1091,7 +1091,7 @@ module CanopyJson
                 chunk7 = @input[@offset...@offset + 1]
               end
               if chunk7 == "E"
-                address11 = SyntaxNode.new(@input[@offset...@offset + 1], @offset)
+                address11 = TreeNode.new(@input[@offset...@offset + 1], @offset)
                 @offset = @offset + 1
               else
                 address11 = FAILURE
@@ -1116,7 +1116,7 @@ module CanopyJson
                 chunk8 = @input[@offset...@offset + 1]
               end
               if chunk8 == "+"
-                address12 = SyntaxNode.new(@input[@offset...@offset + 1], @offset)
+                address12 = TreeNode.new(@input[@offset...@offset + 1], @offset)
                 @offset = @offset + 1
               else
                 address12 = FAILURE
@@ -1135,7 +1135,7 @@ module CanopyJson
                   chunk9 = @input[@offset...@offset + 1]
                 end
                 if chunk9 == "-"
-                  address12 = SyntaxNode.new(@input[@offset...@offset + 1], @offset)
+                  address12 = TreeNode.new(@input[@offset...@offset + 1], @offset)
                   @offset = @offset + 1
                 else
                   address12 = FAILURE
@@ -1154,7 +1154,7 @@ module CanopyJson
                     chunk10 = @input[@offset...@offset + 0]
                   end
                   if chunk10 == ""
-                    address12 = SyntaxNode.new(@input[@offset...@offset + 0], @offset)
+                    address12 = TreeNode.new(@input[@offset...@offset + 0], @offset)
                     @offset = @offset + 0
                   else
                     address12 = FAILURE
@@ -1181,7 +1181,7 @@ module CanopyJson
                     chunk11 = @input[@offset...@offset + 1]
                   end
                   if chunk11 =~ /\A[0-9]/
-                    address14 = SyntaxNode.new(@input[@offset...@offset + 1], @offset)
+                    address14 = TreeNode.new(@input[@offset...@offset + 1], @offset)
                     @offset = @offset + 1
                   else
                     address14 = FAILURE
@@ -1199,7 +1199,7 @@ module CanopyJson
                   end
                 end
                 if remaining2 <= 0
-                  address13 = SyntaxNode.new(@input[index13...@offset], index13, elements6)
+                  address13 = TreeNode.new(@input[index13...@offset], index13, elements6)
                   @offset = @offset
                 else
                   address13 = FAILURE
@@ -1221,11 +1221,11 @@ module CanopyJson
             if elements5.nil?
               address10 = FAILURE
             else
-              address10 = SyntaxNode.new(@input[index10...@offset], index10, elements5)
+              address10 = TreeNode.new(@input[index10...@offset], index10, elements5)
               @offset = @offset
             end
             if address10 == FAILURE
-              address10 = SyntaxNode.new(@input[index9...index9], index9)
+              address10 = TreeNode.new(@input[index9...index9], index9)
               @offset = index9
             end
             unless address10 == FAILURE
@@ -1249,7 +1249,7 @@ module CanopyJson
       if elements0.nil?
         address0 = FAILURE
       else
-        address0 = SyntaxNode.new(@input[index1...@offset], index1, elements0)
+        address0 = TreeNode.new(@input[index1...@offset], index1, elements0)
         @offset = @offset
       end
       @cache[:number][index0] = [address0, @offset]
@@ -1269,7 +1269,7 @@ module CanopyJson
         chunk0 = @input[@offset...@offset + 4]
       end
       if chunk0 == "true"
-        address0 = SyntaxNode.new(@input[@offset...@offset + 4], @offset)
+        address0 = TreeNode.new(@input[@offset...@offset + 4], @offset)
         @offset = @offset + 4
       else
         address0 = FAILURE
@@ -1288,7 +1288,7 @@ module CanopyJson
           chunk1 = @input[@offset...@offset + 5]
         end
         if chunk1 == "false"
-          address0 = SyntaxNode.new(@input[@offset...@offset + 5], @offset)
+          address0 = TreeNode.new(@input[@offset...@offset + 5], @offset)
           @offset = @offset + 5
         else
           address0 = FAILURE
@@ -1320,7 +1320,7 @@ module CanopyJson
         chunk0 = @input[@offset...@offset + 4]
       end
       if chunk0 == "null"
-        address0 = SyntaxNode.new(@input[@offset...@offset + 4], @offset)
+        address0 = TreeNode.new(@input[@offset...@offset + 4], @offset)
         @offset = @offset + 4
       else
         address0 = FAILURE
@@ -1350,7 +1350,7 @@ module CanopyJson
           chunk0 = @input[@offset...@offset + 1]
         end
         if chunk0 =~ /\A[\s]/
-          address1 = SyntaxNode.new(@input[@offset...@offset + 1], @offset)
+          address1 = TreeNode.new(@input[@offset...@offset + 1], @offset)
           @offset = @offset + 1
         else
           address1 = FAILURE
@@ -1368,7 +1368,7 @@ module CanopyJson
         end
       end
       if remaining0 <= 0
-        address0 = SyntaxNode.new(@input[index1...@offset], index1, elements0)
+        address0 = TreeNode.new(@input[index1...@offset], index1, elements0)
         @offset = @offset
       else
         address0 = FAILURE

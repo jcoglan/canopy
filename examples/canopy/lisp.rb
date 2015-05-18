@@ -1,5 +1,5 @@
 module CanopyLisp
-  class SyntaxNode
+  class TreeNode
     include Enumerable
     attr_reader :text, :offset, :elements
 
@@ -14,7 +14,7 @@ module CanopyLisp
     end
   end
 
-  class SyntaxNode1 < SyntaxNode
+  class TreeNode1 < TreeNode
     attr_reader :data
 
     def initialize(text, offset, elements)
@@ -23,7 +23,7 @@ module CanopyLisp
     end
   end
 
-  class SyntaxNode2 < SyntaxNode
+  class TreeNode2 < TreeNode
     attr_reader :cells
 
     def initialize(text, offset, elements)
@@ -52,7 +52,7 @@ module CanopyLisp
         end
       end
       if remaining0 <= 0
-        address0 = SyntaxNode.new(@input[index1...@offset], index1, elements0)
+        address0 = TreeNode.new(@input[index1...@offset], index1, elements0)
         @offset = @offset
       else
         address0 = FAILURE
@@ -79,7 +79,7 @@ module CanopyLisp
         end
       end
       if remaining0 <= 0
-        address1 = SyntaxNode.new(@input[index2...@offset], index2, elements1)
+        address1 = TreeNode.new(@input[index2...@offset], index2, elements1)
         @offset = @offset
       else
         address1 = FAILURE
@@ -108,7 +108,7 @@ module CanopyLisp
             end
           end
           if remaining1 <= 0
-            address4 = SyntaxNode.new(@input[index4...@offset], index4, elements2)
+            address4 = TreeNode.new(@input[index4...@offset], index4, elements2)
             @offset = @offset
           else
             address4 = FAILURE
@@ -130,7 +130,7 @@ module CanopyLisp
       if elements0.nil?
         address0 = FAILURE
       else
-        address0 = SyntaxNode1.new(@input[index1...@offset], index1, elements0)
+        address0 = TreeNode1.new(@input[index1...@offset], index1, elements0)
         @offset = @offset
       end
       @cache[:cell][index0] = [address0, @offset]
@@ -151,7 +151,7 @@ module CanopyLisp
         chunk0 = @input[@offset...@offset + 1]
       end
       if chunk0 == "("
-        address1 = SyntaxNode.new(@input[@offset...@offset + 1], @offset)
+        address1 = TreeNode.new(@input[@offset...@offset + 1], @offset)
         @offset = @offset + 1
       else
         address1 = FAILURE
@@ -175,7 +175,7 @@ module CanopyLisp
           end
         end
         if remaining0 <= 0
-          address2 = SyntaxNode.new(@input[index2...@offset], index2, elements1)
+          address2 = TreeNode.new(@input[index2...@offset], index2, elements1)
           @offset = @offset
         else
           address2 = FAILURE
@@ -188,7 +188,7 @@ module CanopyLisp
             chunk1 = @input[@offset...@offset + 1]
           end
           if chunk1 == ")"
-            address4 = SyntaxNode.new(@input[@offset...@offset + 1], @offset)
+            address4 = TreeNode.new(@input[@offset...@offset + 1], @offset)
             @offset = @offset + 1
           else
             address4 = FAILURE
@@ -217,7 +217,7 @@ module CanopyLisp
       if elements0.nil?
         address0 = FAILURE
       else
-        address0 = SyntaxNode2.new(@input[index1...@offset], index1, elements0)
+        address0 = TreeNode2.new(@input[index1...@offset], index1, elements0)
         @offset = @offset
       end
       @cache[:list][index0] = [address0, @offset]
@@ -265,7 +265,7 @@ module CanopyLisp
         chunk0 = @input[@offset...@offset + 2]
       end
       if chunk0 == "#t"
-        address0 = SyntaxNode.new(@input[@offset...@offset + 2], @offset)
+        address0 = TreeNode.new(@input[@offset...@offset + 2], @offset)
         @offset = @offset + 2
       else
         address0 = FAILURE
@@ -284,7 +284,7 @@ module CanopyLisp
           chunk1 = @input[@offset...@offset + 2]
         end
         if chunk1 == "#f"
-          address0 = SyntaxNode.new(@input[@offset...@offset + 2], @offset)
+          address0 = TreeNode.new(@input[@offset...@offset + 2], @offset)
           @offset = @offset + 2
         else
           address0 = FAILURE
@@ -318,7 +318,7 @@ module CanopyLisp
         chunk0 = @input[@offset...@offset + 1]
       end
       if chunk0 =~ /\A[1-9]/
-        address1 = SyntaxNode.new(@input[@offset...@offset + 1], @offset)
+        address1 = TreeNode.new(@input[@offset...@offset + 1], @offset)
         @offset = @offset + 1
       else
         address1 = FAILURE
@@ -340,7 +340,7 @@ module CanopyLisp
             chunk1 = @input[@offset...@offset + 1]
           end
           if chunk1 =~ /\A[0-9]/
-            address3 = SyntaxNode.new(@input[@offset...@offset + 1], @offset)
+            address3 = TreeNode.new(@input[@offset...@offset + 1], @offset)
             @offset = @offset + 1
           else
             address3 = FAILURE
@@ -358,7 +358,7 @@ module CanopyLisp
           end
         end
         if remaining0 <= 0
-          address2 = SyntaxNode.new(@input[index2...@offset], index2, elements1)
+          address2 = TreeNode.new(@input[index2...@offset], index2, elements1)
           @offset = @offset
         else
           address2 = FAILURE
@@ -376,7 +376,7 @@ module CanopyLisp
       if elements0.nil?
         address0 = FAILURE
       else
-        address0 = SyntaxNode.new(@input[index1...@offset], index1, elements0)
+        address0 = TreeNode.new(@input[index1...@offset], index1, elements0)
         @offset = @offset
       end
       @cache[:integer][index0] = [address0, @offset]
@@ -397,7 +397,7 @@ module CanopyLisp
         chunk0 = @input[@offset...@offset + 1]
       end
       if chunk0 == "\""
-        address1 = SyntaxNode.new(@input[@offset...@offset + 1], @offset)
+        address1 = TreeNode.new(@input[@offset...@offset + 1], @offset)
         @offset = @offset + 1
       else
         address1 = FAILURE
@@ -422,7 +422,7 @@ module CanopyLisp
             chunk1 = @input[@offset...@offset + 1]
           end
           if chunk1 == "\\"
-            address4 = SyntaxNode.new(@input[@offset...@offset + 1], @offset)
+            address4 = TreeNode.new(@input[@offset...@offset + 1], @offset)
             @offset = @offset + 1
           else
             address4 = FAILURE
@@ -438,7 +438,7 @@ module CanopyLisp
             elements2 << address4
             address5 = FAILURE
             if @offset < @input_size
-              address5 = SyntaxNode.new(@input[@offset...@offset + 1], @offset)
+              address5 = TreeNode.new(@input[@offset...@offset + 1], @offset)
               @offset = @offset + 1
             else
               address5 = FAILURE
@@ -463,7 +463,7 @@ module CanopyLisp
           if elements2.nil?
             address3 = FAILURE
           else
-            address3 = SyntaxNode.new(@input[index4...@offset], index4, elements2)
+            address3 = TreeNode.new(@input[index4...@offset], index4, elements2)
             @offset = @offset
           end
           if address3 == FAILURE
@@ -473,7 +473,7 @@ module CanopyLisp
               chunk2 = @input[@offset...@offset + 1]
             end
             if chunk2 =~ /\A[^"]/
-              address3 = SyntaxNode.new(@input[@offset...@offset + 1], @offset)
+              address3 = TreeNode.new(@input[@offset...@offset + 1], @offset)
               @offset = @offset + 1
             else
               address3 = FAILURE
@@ -495,7 +495,7 @@ module CanopyLisp
           end
         end
         if remaining0 <= 0
-          address2 = SyntaxNode.new(@input[index2...@offset], index2, elements1)
+          address2 = TreeNode.new(@input[index2...@offset], index2, elements1)
           @offset = @offset
         else
           address2 = FAILURE
@@ -508,7 +508,7 @@ module CanopyLisp
             chunk3 = @input[@offset...@offset + 1]
           end
           if chunk3 == "\""
-            address6 = SyntaxNode.new(@input[@offset...@offset + 1], @offset)
+            address6 = TreeNode.new(@input[@offset...@offset + 1], @offset)
             @offset = @offset + 1
           else
             address6 = FAILURE
@@ -537,7 +537,7 @@ module CanopyLisp
       if elements0.nil?
         address0 = FAILURE
       else
-        address0 = SyntaxNode.new(@input[index1...@offset], index1, elements0)
+        address0 = TreeNode.new(@input[index1...@offset], index1, elements0)
         @offset = @offset
       end
       @cache[:string][index0] = [address0, @offset]
@@ -559,7 +559,7 @@ module CanopyLisp
         address2 = _read_delimiter
         @offset = index3
         if address2 == FAILURE
-          address2 = SyntaxNode.new(@input[@offset...@offset], @offset)
+          address2 = TreeNode.new(@input[@offset...@offset], @offset)
           @offset = @offset
         else
           address2 = FAILURE
@@ -568,7 +568,7 @@ module CanopyLisp
           elements1 << address2
           address3 = FAILURE
           if @offset < @input_size
-            address3 = SyntaxNode.new(@input[@offset...@offset + 1], @offset)
+            address3 = TreeNode.new(@input[@offset...@offset + 1], @offset)
             @offset = @offset + 1
           else
             address3 = FAILURE
@@ -593,7 +593,7 @@ module CanopyLisp
         if elements1.nil?
           address1 = FAILURE
         else
-          address1 = SyntaxNode.new(@input[index2...@offset], index2, elements1)
+          address1 = TreeNode.new(@input[index2...@offset], index2, elements1)
           @offset = @offset
         end
         unless address1 == FAILURE
@@ -602,7 +602,7 @@ module CanopyLisp
         end
       end
       if remaining0 <= 0
-        address0 = SyntaxNode.new(@input[index1...@offset], index1, elements0)
+        address0 = TreeNode.new(@input[index1...@offset], index1, elements0)
         @offset = @offset
       else
         address0 = FAILURE
@@ -623,7 +623,7 @@ module CanopyLisp
         chunk0 = @input[@offset...@offset + 1]
       end
       if chunk0 =~ /\A[\s]/
-        address0 = SyntaxNode.new(@input[@offset...@offset + 1], @offset)
+        address0 = TreeNode.new(@input[@offset...@offset + 1], @offset)
         @offset = @offset + 1
       else
         address0 = FAILURE
@@ -652,7 +652,7 @@ module CanopyLisp
         chunk0 = @input[@offset...@offset + 1]
       end
       if chunk0 == "("
-        address0 = SyntaxNode.new(@input[@offset...@offset + 1], @offset)
+        address0 = TreeNode.new(@input[@offset...@offset + 1], @offset)
         @offset = @offset + 1
       else
         address0 = FAILURE
@@ -671,7 +671,7 @@ module CanopyLisp
           chunk1 = @input[@offset...@offset + 1]
         end
         if chunk1 == ")"
-          address0 = SyntaxNode.new(@input[@offset...@offset + 1], @offset)
+          address0 = TreeNode.new(@input[@offset...@offset + 1], @offset)
           @offset = @offset + 1
         else
           address0 = FAILURE

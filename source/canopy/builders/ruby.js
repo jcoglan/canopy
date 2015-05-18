@@ -73,7 +73,7 @@
     },
 
     syntaxNodeClass_: function() {
-      var name = 'SyntaxNode';
+      var name = 'TreeNode';
       this._line('class ' + name);
       this._indent(function(builder) {
         builder._line('include Enumerable');
@@ -249,7 +249,7 @@
         action = '@actions.' + action;
         args   = ['@input', start, end];
       } else {
-        action = (nodeClass || 'SyntaxNode') + '.new';
+        action = (nodeClass || 'TreeNode') + '.new';
         args   = ['@input[' + start + '...' + end + ']', start];
       }
       if (elements) args.push(elements);

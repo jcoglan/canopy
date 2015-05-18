@@ -15,7 +15,7 @@ public class CanopyPEG extends Grammar {
         this.expected = new ArrayList<String>();
     }
 
-    public static SyntaxNode parse(String input) throws SyntaxError {
+    public static TreeNode parse(String input) throws SyntaxError {
         CanopyPEG parser = new CanopyPEG(input);
         return parser.parse();
     }
@@ -38,8 +38,8 @@ public class CanopyPEG extends Grammar {
         return message + "^";
     }
 
-    private SyntaxNode parse() throws SyntaxError {
-        SyntaxNode tree = _read_grammar();
+    private TreeNode parse() throws SyntaxError {
+        TreeNode tree = _read_grammar();
         if (tree != FAILURE && offset == inputSize) {
             return tree;
         }

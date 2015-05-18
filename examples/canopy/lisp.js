@@ -39,29 +39,29 @@
     subclass.prototype.constructor = subclass;
   };
 
-  var SyntaxNode = function(text, offset, elements) {
+  var TreeNode = function(text, offset, elements) {
     this.text = text;
     this.offset = offset;
     this.elements = elements || [];
   };
 
-  SyntaxNode.prototype.forEach = function(block, context) {
+  TreeNode.prototype.forEach = function(block, context) {
     for (var el = this.elements, i = 0, n = el.length; i < n; i++) {
       block.call(context, el[i], i, el);
     }
   };
 
-  var SyntaxNode1 = function(text, offset, elements) {
-    SyntaxNode.apply(this, arguments);
+  var TreeNode1 = function(text, offset, elements) {
+    TreeNode.apply(this, arguments);
     this['data'] = elements[1];
   };
-  inherit(SyntaxNode1, SyntaxNode);
+  inherit(TreeNode1, TreeNode);
 
-  var SyntaxNode2 = function(text, offset, elements) {
-    SyntaxNode.apply(this, arguments);
+  var TreeNode2 = function(text, offset, elements) {
+    TreeNode.apply(this, arguments);
     this['cells'] = elements[1];
   };
-  inherit(SyntaxNode2, SyntaxNode);
+  inherit(TreeNode2, TreeNode);
 
   var FAILURE = {};
 
@@ -83,7 +83,7 @@
         }
       }
       if (remaining0 <= 0) {
-        address0 = new SyntaxNode(this._input.substring(index1, this._offset), index1, elements0);
+        address0 = new TreeNode(this._input.substring(index1, this._offset), index1, elements0);
         this._offset = this._offset;
       } else {
         address0 = FAILURE;
@@ -111,7 +111,7 @@
         }
       }
       if (remaining0 <= 0) {
-        address1 = new SyntaxNode(this._input.substring(index2, this._offset), index2, elements1);
+        address1 = new TreeNode(this._input.substring(index2, this._offset), index2, elements1);
         this._offset = this._offset;
       } else {
         address1 = FAILURE;
@@ -140,7 +140,7 @@
             }
           }
           if (remaining1 <= 0) {
-            address4 = new SyntaxNode(this._input.substring(index4, this._offset), index4, elements2);
+            address4 = new TreeNode(this._input.substring(index4, this._offset), index4, elements2);
             this._offset = this._offset;
           } else {
             address4 = FAILURE;
@@ -162,7 +162,7 @@
       if (elements0 === null) {
         address0 = FAILURE;
       } else {
-        address0 = new SyntaxNode1(this._input.substring(index1, this._offset), index1, elements0);
+        address0 = new TreeNode1(this._input.substring(index1, this._offset), index1, elements0);
         this._offset = this._offset;
       }
       this._cache._cell[index0] = [address0, this._offset];
@@ -184,7 +184,7 @@
         chunk0 = this._input.substring(this._offset, this._offset + 1);
       }
       if (chunk0 === '(') {
-        address1 = new SyntaxNode(this._input.substring(this._offset, this._offset + 1), this._offset);
+        address1 = new TreeNode(this._input.substring(this._offset, this._offset + 1), this._offset);
         this._offset = this._offset + 1;
       } else {
         address1 = FAILURE;
@@ -208,7 +208,7 @@
           }
         }
         if (remaining0 <= 0) {
-          address2 = new SyntaxNode(this._input.substring(index2, this._offset), index2, elements1);
+          address2 = new TreeNode(this._input.substring(index2, this._offset), index2, elements1);
           this._offset = this._offset;
         } else {
           address2 = FAILURE;
@@ -221,7 +221,7 @@
             chunk1 = this._input.substring(this._offset, this._offset + 1);
           }
           if (chunk1 === ')') {
-            address4 = new SyntaxNode(this._input.substring(this._offset, this._offset + 1), this._offset);
+            address4 = new TreeNode(this._input.substring(this._offset, this._offset + 1), this._offset);
             this._offset = this._offset + 1;
           } else {
             address4 = FAILURE;
@@ -250,7 +250,7 @@
       if (elements0 === null) {
         address0 = FAILURE;
       } else {
-        address0 = new SyntaxNode2(this._input.substring(index1, this._offset), index1, elements0);
+        address0 = new TreeNode2(this._input.substring(index1, this._offset), index1, elements0);
         this._offset = this._offset;
       }
       this._cache._list[index0] = [address0, this._offset];
@@ -300,7 +300,7 @@
         chunk0 = this._input.substring(this._offset, this._offset + 2);
       }
       if (chunk0 === '#t') {
-        address0 = new SyntaxNode(this._input.substring(this._offset, this._offset + 2), this._offset);
+        address0 = new TreeNode(this._input.substring(this._offset, this._offset + 2), this._offset);
         this._offset = this._offset + 2;
       } else {
         address0 = FAILURE;
@@ -319,7 +319,7 @@
           chunk1 = this._input.substring(this._offset, this._offset + 2);
         }
         if (chunk1 === '#f') {
-          address0 = new SyntaxNode(this._input.substring(this._offset, this._offset + 2), this._offset);
+          address0 = new TreeNode(this._input.substring(this._offset, this._offset + 2), this._offset);
           this._offset = this._offset + 2;
         } else {
           address0 = FAILURE;
@@ -354,7 +354,7 @@
         chunk0 = this._input.substring(this._offset, this._offset + 1);
       }
       if (chunk0 !== null && /^[1-9]/.test(chunk0)) {
-        address1 = new SyntaxNode(this._input.substring(this._offset, this._offset + 1), this._offset);
+        address1 = new TreeNode(this._input.substring(this._offset, this._offset + 1), this._offset);
         this._offset = this._offset + 1;
       } else {
         address1 = FAILURE;
@@ -376,7 +376,7 @@
             chunk1 = this._input.substring(this._offset, this._offset + 1);
           }
           if (chunk1 !== null && /^[0-9]/.test(chunk1)) {
-            address3 = new SyntaxNode(this._input.substring(this._offset, this._offset + 1), this._offset);
+            address3 = new TreeNode(this._input.substring(this._offset, this._offset + 1), this._offset);
             this._offset = this._offset + 1;
           } else {
             address3 = FAILURE;
@@ -394,7 +394,7 @@
           }
         }
         if (remaining0 <= 0) {
-          address2 = new SyntaxNode(this._input.substring(index2, this._offset), index2, elements1);
+          address2 = new TreeNode(this._input.substring(index2, this._offset), index2, elements1);
           this._offset = this._offset;
         } else {
           address2 = FAILURE;
@@ -412,7 +412,7 @@
       if (elements0 === null) {
         address0 = FAILURE;
       } else {
-        address0 = new SyntaxNode(this._input.substring(index1, this._offset), index1, elements0);
+        address0 = new TreeNode(this._input.substring(index1, this._offset), index1, elements0);
         this._offset = this._offset;
       }
       this._cache._integer[index0] = [address0, this._offset];
@@ -434,7 +434,7 @@
         chunk0 = this._input.substring(this._offset, this._offset + 1);
       }
       if (chunk0 === '"') {
-        address1 = new SyntaxNode(this._input.substring(this._offset, this._offset + 1), this._offset);
+        address1 = new TreeNode(this._input.substring(this._offset, this._offset + 1), this._offset);
         this._offset = this._offset + 1;
       } else {
         address1 = FAILURE;
@@ -459,7 +459,7 @@
             chunk1 = this._input.substring(this._offset, this._offset + 1);
           }
           if (chunk1 === '\\') {
-            address4 = new SyntaxNode(this._input.substring(this._offset, this._offset + 1), this._offset);
+            address4 = new TreeNode(this._input.substring(this._offset, this._offset + 1), this._offset);
             this._offset = this._offset + 1;
           } else {
             address4 = FAILURE;
@@ -475,7 +475,7 @@
             elements2[0] = address4;
             var address5 = FAILURE;
             if (this._offset < this._inputSize) {
-              address5 = new SyntaxNode(this._input.substring(this._offset, this._offset + 1), this._offset);
+              address5 = new TreeNode(this._input.substring(this._offset, this._offset + 1), this._offset);
               this._offset = this._offset + 1;
             } else {
               address5 = FAILURE;
@@ -500,7 +500,7 @@
           if (elements2 === null) {
             address3 = FAILURE;
           } else {
-            address3 = new SyntaxNode(this._input.substring(index4, this._offset), index4, elements2);
+            address3 = new TreeNode(this._input.substring(index4, this._offset), index4, elements2);
             this._offset = this._offset;
           }
           if (address3 === FAILURE) {
@@ -510,7 +510,7 @@
               chunk2 = this._input.substring(this._offset, this._offset + 1);
             }
             if (chunk2 !== null && /^[^"]/.test(chunk2)) {
-              address3 = new SyntaxNode(this._input.substring(this._offset, this._offset + 1), this._offset);
+              address3 = new TreeNode(this._input.substring(this._offset, this._offset + 1), this._offset);
               this._offset = this._offset + 1;
             } else {
               address3 = FAILURE;
@@ -532,7 +532,7 @@
           }
         }
         if (remaining0 <= 0) {
-          address2 = new SyntaxNode(this._input.substring(index2, this._offset), index2, elements1);
+          address2 = new TreeNode(this._input.substring(index2, this._offset), index2, elements1);
           this._offset = this._offset;
         } else {
           address2 = FAILURE;
@@ -545,7 +545,7 @@
             chunk3 = this._input.substring(this._offset, this._offset + 1);
           }
           if (chunk3 === '"') {
-            address6 = new SyntaxNode(this._input.substring(this._offset, this._offset + 1), this._offset);
+            address6 = new TreeNode(this._input.substring(this._offset, this._offset + 1), this._offset);
             this._offset = this._offset + 1;
           } else {
             address6 = FAILURE;
@@ -574,7 +574,7 @@
       if (elements0 === null) {
         address0 = FAILURE;
       } else {
-        address0 = new SyntaxNode(this._input.substring(index1, this._offset), index1, elements0);
+        address0 = new TreeNode(this._input.substring(index1, this._offset), index1, elements0);
         this._offset = this._offset;
       }
       this._cache._string[index0] = [address0, this._offset];
@@ -597,7 +597,7 @@
         address2 = this._read_delimiter();
         this._offset = index3;
         if (address2 === FAILURE) {
-          address2 = new SyntaxNode(this._input.substring(this._offset, this._offset), this._offset);
+          address2 = new TreeNode(this._input.substring(this._offset, this._offset), this._offset);
           this._offset = this._offset;
         } else {
           address2 = FAILURE;
@@ -606,7 +606,7 @@
           elements1[0] = address2;
           var address3 = FAILURE;
           if (this._offset < this._inputSize) {
-            address3 = new SyntaxNode(this._input.substring(this._offset, this._offset + 1), this._offset);
+            address3 = new TreeNode(this._input.substring(this._offset, this._offset + 1), this._offset);
             this._offset = this._offset + 1;
           } else {
             address3 = FAILURE;
@@ -631,7 +631,7 @@
         if (elements1 === null) {
           address1 = FAILURE;
         } else {
-          address1 = new SyntaxNode(this._input.substring(index2, this._offset), index2, elements1);
+          address1 = new TreeNode(this._input.substring(index2, this._offset), index2, elements1);
           this._offset = this._offset;
         }
         if (address1 !== FAILURE) {
@@ -640,7 +640,7 @@
         }
       }
       if (remaining0 <= 0) {
-        address0 = new SyntaxNode(this._input.substring(index1, this._offset), index1, elements0);
+        address0 = new TreeNode(this._input.substring(index1, this._offset), index1, elements0);
         this._offset = this._offset;
       } else {
         address0 = FAILURE;
@@ -662,7 +662,7 @@
         chunk0 = this._input.substring(this._offset, this._offset + 1);
       }
       if (chunk0 !== null && /^[\s]/.test(chunk0)) {
-        address0 = new SyntaxNode(this._input.substring(this._offset, this._offset + 1), this._offset);
+        address0 = new TreeNode(this._input.substring(this._offset, this._offset + 1), this._offset);
         this._offset = this._offset + 1;
       } else {
         address0 = FAILURE;
@@ -692,7 +692,7 @@
         chunk0 = this._input.substring(this._offset, this._offset + 1);
       }
       if (chunk0 === '(') {
-        address0 = new SyntaxNode(this._input.substring(this._offset, this._offset + 1), this._offset);
+        address0 = new TreeNode(this._input.substring(this._offset, this._offset + 1), this._offset);
         this._offset = this._offset + 1;
       } else {
         address0 = FAILURE;
@@ -711,7 +711,7 @@
           chunk1 = this._input.substring(this._offset, this._offset + 1);
         }
         if (chunk1 === ')') {
-          address0 = new SyntaxNode(this._input.substring(this._offset, this._offset + 1), this._offset);
+          address0 = new TreeNode(this._input.substring(this._offset, this._offset + 1), this._offset);
           this._offset = this._offset + 1;
         } else {
           address0 = FAILURE;

@@ -7,15 +7,15 @@ import java.util.Map;
 import java.util.regex.Pattern;
 
 abstract class Grammar {
-    static SyntaxNode FAILURE = new SyntaxNode("", -1);
+    static TreeNode FAILURE = new TreeNode("", -1);
 
     int inputSize, offset, failure;
     String input;
     List<String> expected;
     Map<Label, Map<Integer, CacheRecord>> cache;
 
-    protected SyntaxNode _read_document() {
-        SyntaxNode address0 = FAILURE;
+    protected TreeNode _read_document() {
+        TreeNode address0 = FAILURE;
         int index0 = offset;
         Map<Integer, CacheRecord> rule = cache.get(Label.document);
         if (rule == null) {
@@ -27,12 +27,12 @@ abstract class Grammar {
             offset = rule.get(offset).tail;
         } else {
             int index1 = offset;
-            List<SyntaxNode> elements0 = new ArrayList<SyntaxNode>(3);
-            SyntaxNode address1 = FAILURE;
+            List<TreeNode> elements0 = new ArrayList<TreeNode>(3);
+            TreeNode address1 = FAILURE;
             address1 = _read___();
             if (address1 != FAILURE) {
                 elements0.add(0, address1);
-                SyntaxNode address2 = FAILURE;
+                TreeNode address2 = FAILURE;
                 int index2 = offset;
                 address2 = _read_object();
                 if (address2 == FAILURE) {
@@ -44,7 +44,7 @@ abstract class Grammar {
                 }
                 if (address2 != FAILURE) {
                     elements0.add(1, address2);
-                    SyntaxNode address3 = FAILURE;
+                    TreeNode address3 = FAILURE;
                     address3 = _read___();
                     if (address3 != FAILURE) {
                         elements0.add(2, address3);
@@ -63,7 +63,7 @@ abstract class Grammar {
             if (elements0 == null) {
                 address0 = FAILURE;
             } else {
-                address0 = new SyntaxNode1(input.substring(index1, offset), index1, elements0);
+                address0 = new TreeNode1(input.substring(index1, offset), index1, elements0);
                 offset = offset;
             }
             rule.put(index0, new CacheRecord(address0, offset));
@@ -71,8 +71,8 @@ abstract class Grammar {
         return address0;
     }
 
-    protected SyntaxNode _read_object() {
-        SyntaxNode address0 = FAILURE;
+    protected TreeNode _read_object() {
+        TreeNode address0 = FAILURE;
         int index0 = offset;
         Map<Integer, CacheRecord> rule = cache.get(Label.object);
         if (rule == null) {
@@ -85,14 +85,14 @@ abstract class Grammar {
         } else {
             int index1 = offset;
             int index2 = offset;
-            List<SyntaxNode> elements0 = new ArrayList<SyntaxNode>(4);
-            SyntaxNode address1 = FAILURE;
+            List<TreeNode> elements0 = new ArrayList<TreeNode>(4);
+            TreeNode address1 = FAILURE;
             String chunk0 = null;
             if (offset < inputSize) {
                 chunk0 = input.substring(offset, offset + 1);
             }
             if (chunk0 != null && chunk0.equals("{")) {
-                address1 = new SyntaxNode(input.substring(offset, offset + 1), offset);
+                address1 = new TreeNode(input.substring(offset, offset + 1), offset);
                 offset = offset + 1;
             } else {
                 address1 = FAILURE;
@@ -106,25 +106,25 @@ abstract class Grammar {
             }
             if (address1 != FAILURE) {
                 elements0.add(0, address1);
-                SyntaxNode address2 = FAILURE;
+                TreeNode address2 = FAILURE;
                 address2 = _read_pair();
                 if (address2 != FAILURE) {
                     elements0.add(1, address2);
-                    SyntaxNode address3 = FAILURE;
+                    TreeNode address3 = FAILURE;
                     int remaining0 = 0;
                     int index3 = offset;
-                    List<SyntaxNode> elements1 = new ArrayList<SyntaxNode>();
-                    SyntaxNode address4 = new SyntaxNode("", -1);
+                    List<TreeNode> elements1 = new ArrayList<TreeNode>();
+                    TreeNode address4 = new TreeNode("", -1);
                     while (address4 != FAILURE) {
                         int index4 = offset;
-                        List<SyntaxNode> elements2 = new ArrayList<SyntaxNode>(2);
-                        SyntaxNode address5 = FAILURE;
+                        List<TreeNode> elements2 = new ArrayList<TreeNode>(2);
+                        TreeNode address5 = FAILURE;
                         String chunk1 = null;
                         if (offset < inputSize) {
                             chunk1 = input.substring(offset, offset + 1);
                         }
                         if (chunk1 != null && chunk1.equals(",")) {
-                            address5 = new SyntaxNode(input.substring(offset, offset + 1), offset);
+                            address5 = new TreeNode(input.substring(offset, offset + 1), offset);
                             offset = offset + 1;
                         } else {
                             address5 = FAILURE;
@@ -138,7 +138,7 @@ abstract class Grammar {
                         }
                         if (address5 != FAILURE) {
                             elements2.add(0, address5);
-                            SyntaxNode address6 = FAILURE;
+                            TreeNode address6 = FAILURE;
                             address6 = _read_pair();
                             if (address6 != FAILURE) {
                                 elements2.add(1, address6);
@@ -153,7 +153,7 @@ abstract class Grammar {
                         if (elements2 == null) {
                             address4 = FAILURE;
                         } else {
-                            address4 = new SyntaxNode3(input.substring(index4, offset), index4, elements2);
+                            address4 = new TreeNode3(input.substring(index4, offset), index4, elements2);
                             offset = offset;
                         }
                         if (address4 != FAILURE) {
@@ -162,20 +162,20 @@ abstract class Grammar {
                         }
                     }
                     if (remaining0 <= 0) {
-                        address3 = new SyntaxNode(input.substring(index3, offset), index3, elements1);
+                        address3 = new TreeNode(input.substring(index3, offset), index3, elements1);
                         offset = offset;
                     } else {
                         address3 = FAILURE;
                     }
                     if (address3 != FAILURE) {
                         elements0.add(2, address3);
-                        SyntaxNode address7 = FAILURE;
+                        TreeNode address7 = FAILURE;
                         String chunk2 = null;
                         if (offset < inputSize) {
                             chunk2 = input.substring(offset, offset + 1);
                         }
                         if (chunk2 != null && chunk2.equals("}")) {
-                            address7 = new SyntaxNode(input.substring(offset, offset + 1), offset);
+                            address7 = new TreeNode(input.substring(offset, offset + 1), offset);
                             offset = offset + 1;
                         } else {
                             address7 = FAILURE;
@@ -208,20 +208,20 @@ abstract class Grammar {
             if (elements0 == null) {
                 address0 = FAILURE;
             } else {
-                address0 = new SyntaxNode2(input.substring(index2, offset), index2, elements0);
+                address0 = new TreeNode2(input.substring(index2, offset), index2, elements0);
                 offset = offset;
             }
             if (address0 == FAILURE) {
                 offset = index1;
                 int index5 = offset;
-                List<SyntaxNode> elements3 = new ArrayList<SyntaxNode>(3);
-                SyntaxNode address8 = FAILURE;
+                List<TreeNode> elements3 = new ArrayList<TreeNode>(3);
+                TreeNode address8 = FAILURE;
                 String chunk3 = null;
                 if (offset < inputSize) {
                     chunk3 = input.substring(offset, offset + 1);
                 }
                 if (chunk3 != null && chunk3.equals("{")) {
-                    address8 = new SyntaxNode(input.substring(offset, offset + 1), offset);
+                    address8 = new TreeNode(input.substring(offset, offset + 1), offset);
                     offset = offset + 1;
                 } else {
                     address8 = FAILURE;
@@ -235,17 +235,17 @@ abstract class Grammar {
                 }
                 if (address8 != FAILURE) {
                     elements3.add(0, address8);
-                    SyntaxNode address9 = FAILURE;
+                    TreeNode address9 = FAILURE;
                     address9 = _read___();
                     if (address9 != FAILURE) {
                         elements3.add(1, address9);
-                        SyntaxNode address10 = FAILURE;
+                        TreeNode address10 = FAILURE;
                         String chunk4 = null;
                         if (offset < inputSize) {
                             chunk4 = input.substring(offset, offset + 1);
                         }
                         if (chunk4 != null && chunk4.equals("}")) {
-                            address10 = new SyntaxNode(input.substring(offset, offset + 1), offset);
+                            address10 = new TreeNode(input.substring(offset, offset + 1), offset);
                             offset = offset + 1;
                         } else {
                             address10 = FAILURE;
@@ -274,7 +274,7 @@ abstract class Grammar {
                 if (elements3 == null) {
                     address0 = FAILURE;
                 } else {
-                    address0 = new SyntaxNode4(input.substring(index5, offset), index5, elements3);
+                    address0 = new TreeNode4(input.substring(index5, offset), index5, elements3);
                     offset = offset;
                 }
                 if (address0 == FAILURE) {
@@ -286,8 +286,8 @@ abstract class Grammar {
         return address0;
     }
 
-    protected SyntaxNode _read_pair() {
-        SyntaxNode address0 = FAILURE;
+    protected TreeNode _read_pair() {
+        TreeNode address0 = FAILURE;
         int index0 = offset;
         Map<Integer, CacheRecord> rule = cache.get(Label.pair);
         if (rule == null) {
@@ -299,26 +299,26 @@ abstract class Grammar {
             offset = rule.get(offset).tail;
         } else {
             int index1 = offset;
-            List<SyntaxNode> elements0 = new ArrayList<SyntaxNode>(5);
-            SyntaxNode address1 = FAILURE;
+            List<TreeNode> elements0 = new ArrayList<TreeNode>(5);
+            TreeNode address1 = FAILURE;
             address1 = _read___();
             if (address1 != FAILURE) {
                 elements0.add(0, address1);
-                SyntaxNode address2 = FAILURE;
+                TreeNode address2 = FAILURE;
                 address2 = _read_string();
                 if (address2 != FAILURE) {
                     elements0.add(1, address2);
-                    SyntaxNode address3 = FAILURE;
+                    TreeNode address3 = FAILURE;
                     address3 = _read___();
                     if (address3 != FAILURE) {
                         elements0.add(2, address3);
-                        SyntaxNode address4 = FAILURE;
+                        TreeNode address4 = FAILURE;
                         String chunk0 = null;
                         if (offset < inputSize) {
                             chunk0 = input.substring(offset, offset + 1);
                         }
                         if (chunk0 != null && chunk0.equals(":")) {
-                            address4 = new SyntaxNode(input.substring(offset, offset + 1), offset);
+                            address4 = new TreeNode(input.substring(offset, offset + 1), offset);
                             offset = offset + 1;
                         } else {
                             address4 = FAILURE;
@@ -332,7 +332,7 @@ abstract class Grammar {
                         }
                         if (address4 != FAILURE) {
                             elements0.add(3, address4);
-                            SyntaxNode address5 = FAILURE;
+                            TreeNode address5 = FAILURE;
                             address5 = _read_value();
                             if (address5 != FAILURE) {
                                 elements0.add(4, address5);
@@ -359,7 +359,7 @@ abstract class Grammar {
             if (elements0 == null) {
                 address0 = FAILURE;
             } else {
-                address0 = new SyntaxNode5(input.substring(index1, offset), index1, elements0);
+                address0 = new TreeNode5(input.substring(index1, offset), index1, elements0);
                 offset = offset;
             }
             rule.put(index0, new CacheRecord(address0, offset));
@@ -367,8 +367,8 @@ abstract class Grammar {
         return address0;
     }
 
-    protected SyntaxNode _read_array() {
-        SyntaxNode address0 = FAILURE;
+    protected TreeNode _read_array() {
+        TreeNode address0 = FAILURE;
         int index0 = offset;
         Map<Integer, CacheRecord> rule = cache.get(Label.array);
         if (rule == null) {
@@ -381,14 +381,14 @@ abstract class Grammar {
         } else {
             int index1 = offset;
             int index2 = offset;
-            List<SyntaxNode> elements0 = new ArrayList<SyntaxNode>(4);
-            SyntaxNode address1 = FAILURE;
+            List<TreeNode> elements0 = new ArrayList<TreeNode>(4);
+            TreeNode address1 = FAILURE;
             String chunk0 = null;
             if (offset < inputSize) {
                 chunk0 = input.substring(offset, offset + 1);
             }
             if (chunk0 != null && chunk0.equals("[")) {
-                address1 = new SyntaxNode(input.substring(offset, offset + 1), offset);
+                address1 = new TreeNode(input.substring(offset, offset + 1), offset);
                 offset = offset + 1;
             } else {
                 address1 = FAILURE;
@@ -402,25 +402,25 @@ abstract class Grammar {
             }
             if (address1 != FAILURE) {
                 elements0.add(0, address1);
-                SyntaxNode address2 = FAILURE;
+                TreeNode address2 = FAILURE;
                 address2 = _read_value();
                 if (address2 != FAILURE) {
                     elements0.add(1, address2);
-                    SyntaxNode address3 = FAILURE;
+                    TreeNode address3 = FAILURE;
                     int remaining0 = 0;
                     int index3 = offset;
-                    List<SyntaxNode> elements1 = new ArrayList<SyntaxNode>();
-                    SyntaxNode address4 = new SyntaxNode("", -1);
+                    List<TreeNode> elements1 = new ArrayList<TreeNode>();
+                    TreeNode address4 = new TreeNode("", -1);
                     while (address4 != FAILURE) {
                         int index4 = offset;
-                        List<SyntaxNode> elements2 = new ArrayList<SyntaxNode>(2);
-                        SyntaxNode address5 = FAILURE;
+                        List<TreeNode> elements2 = new ArrayList<TreeNode>(2);
+                        TreeNode address5 = FAILURE;
                         String chunk1 = null;
                         if (offset < inputSize) {
                             chunk1 = input.substring(offset, offset + 1);
                         }
                         if (chunk1 != null && chunk1.equals(",")) {
-                            address5 = new SyntaxNode(input.substring(offset, offset + 1), offset);
+                            address5 = new TreeNode(input.substring(offset, offset + 1), offset);
                             offset = offset + 1;
                         } else {
                             address5 = FAILURE;
@@ -434,7 +434,7 @@ abstract class Grammar {
                         }
                         if (address5 != FAILURE) {
                             elements2.add(0, address5);
-                            SyntaxNode address6 = FAILURE;
+                            TreeNode address6 = FAILURE;
                             address6 = _read_value();
                             if (address6 != FAILURE) {
                                 elements2.add(1, address6);
@@ -449,7 +449,7 @@ abstract class Grammar {
                         if (elements2 == null) {
                             address4 = FAILURE;
                         } else {
-                            address4 = new SyntaxNode7(input.substring(index4, offset), index4, elements2);
+                            address4 = new TreeNode7(input.substring(index4, offset), index4, elements2);
                             offset = offset;
                         }
                         if (address4 != FAILURE) {
@@ -458,20 +458,20 @@ abstract class Grammar {
                         }
                     }
                     if (remaining0 <= 0) {
-                        address3 = new SyntaxNode(input.substring(index3, offset), index3, elements1);
+                        address3 = new TreeNode(input.substring(index3, offset), index3, elements1);
                         offset = offset;
                     } else {
                         address3 = FAILURE;
                     }
                     if (address3 != FAILURE) {
                         elements0.add(2, address3);
-                        SyntaxNode address7 = FAILURE;
+                        TreeNode address7 = FAILURE;
                         String chunk2 = null;
                         if (offset < inputSize) {
                             chunk2 = input.substring(offset, offset + 1);
                         }
                         if (chunk2 != null && chunk2.equals("]")) {
-                            address7 = new SyntaxNode(input.substring(offset, offset + 1), offset);
+                            address7 = new TreeNode(input.substring(offset, offset + 1), offset);
                             offset = offset + 1;
                         } else {
                             address7 = FAILURE;
@@ -504,20 +504,20 @@ abstract class Grammar {
             if (elements0 == null) {
                 address0 = FAILURE;
             } else {
-                address0 = new SyntaxNode6(input.substring(index2, offset), index2, elements0);
+                address0 = new TreeNode6(input.substring(index2, offset), index2, elements0);
                 offset = offset;
             }
             if (address0 == FAILURE) {
                 offset = index1;
                 int index5 = offset;
-                List<SyntaxNode> elements3 = new ArrayList<SyntaxNode>(3);
-                SyntaxNode address8 = FAILURE;
+                List<TreeNode> elements3 = new ArrayList<TreeNode>(3);
+                TreeNode address8 = FAILURE;
                 String chunk3 = null;
                 if (offset < inputSize) {
                     chunk3 = input.substring(offset, offset + 1);
                 }
                 if (chunk3 != null && chunk3.equals("[")) {
-                    address8 = new SyntaxNode(input.substring(offset, offset + 1), offset);
+                    address8 = new TreeNode(input.substring(offset, offset + 1), offset);
                     offset = offset + 1;
                 } else {
                     address8 = FAILURE;
@@ -531,17 +531,17 @@ abstract class Grammar {
                 }
                 if (address8 != FAILURE) {
                     elements3.add(0, address8);
-                    SyntaxNode address9 = FAILURE;
+                    TreeNode address9 = FAILURE;
                     address9 = _read___();
                     if (address9 != FAILURE) {
                         elements3.add(1, address9);
-                        SyntaxNode address10 = FAILURE;
+                        TreeNode address10 = FAILURE;
                         String chunk4 = null;
                         if (offset < inputSize) {
                             chunk4 = input.substring(offset, offset + 1);
                         }
                         if (chunk4 != null && chunk4.equals("]")) {
-                            address10 = new SyntaxNode(input.substring(offset, offset + 1), offset);
+                            address10 = new TreeNode(input.substring(offset, offset + 1), offset);
                             offset = offset + 1;
                         } else {
                             address10 = FAILURE;
@@ -570,7 +570,7 @@ abstract class Grammar {
                 if (elements3 == null) {
                     address0 = FAILURE;
                 } else {
-                    address0 = new SyntaxNode8(input.substring(index5, offset), index5, elements3);
+                    address0 = new TreeNode8(input.substring(index5, offset), index5, elements3);
                     offset = offset;
                 }
                 if (address0 == FAILURE) {
@@ -582,8 +582,8 @@ abstract class Grammar {
         return address0;
     }
 
-    protected SyntaxNode _read_value() {
-        SyntaxNode address0 = FAILURE;
+    protected TreeNode _read_value() {
+        TreeNode address0 = FAILURE;
         int index0 = offset;
         Map<Integer, CacheRecord> rule = cache.get(Label.value);
         if (rule == null) {
@@ -595,12 +595,12 @@ abstract class Grammar {
             offset = rule.get(offset).tail;
         } else {
             int index1 = offset;
-            List<SyntaxNode> elements0 = new ArrayList<SyntaxNode>(3);
-            SyntaxNode address1 = FAILURE;
+            List<TreeNode> elements0 = new ArrayList<TreeNode>(3);
+            TreeNode address1 = FAILURE;
             address1 = _read___();
             if (address1 != FAILURE) {
                 elements0.add(0, address1);
-                SyntaxNode address2 = FAILURE;
+                TreeNode address2 = FAILURE;
                 int index2 = offset;
                 address2 = _read_object();
                 if (address2 == FAILURE) {
@@ -628,7 +628,7 @@ abstract class Grammar {
                 }
                 if (address2 != FAILURE) {
                     elements0.add(1, address2);
-                    SyntaxNode address3 = FAILURE;
+                    TreeNode address3 = FAILURE;
                     address3 = _read___();
                     if (address3 != FAILURE) {
                         elements0.add(2, address3);
@@ -647,7 +647,7 @@ abstract class Grammar {
             if (elements0 == null) {
                 address0 = FAILURE;
             } else {
-                address0 = new SyntaxNode9(input.substring(index1, offset), index1, elements0);
+                address0 = new TreeNode9(input.substring(index1, offset), index1, elements0);
                 offset = offset;
             }
             rule.put(index0, new CacheRecord(address0, offset));
@@ -655,8 +655,8 @@ abstract class Grammar {
         return address0;
     }
 
-    protected SyntaxNode _read_string() {
-        SyntaxNode address0 = FAILURE;
+    protected TreeNode _read_string() {
+        TreeNode address0 = FAILURE;
         int index0 = offset;
         Map<Integer, CacheRecord> rule = cache.get(Label.string);
         if (rule == null) {
@@ -668,14 +668,14 @@ abstract class Grammar {
             offset = rule.get(offset).tail;
         } else {
             int index1 = offset;
-            List<SyntaxNode> elements0 = new ArrayList<SyntaxNode>(3);
-            SyntaxNode address1 = FAILURE;
+            List<TreeNode> elements0 = new ArrayList<TreeNode>(3);
+            TreeNode address1 = FAILURE;
             String chunk0 = null;
             if (offset < inputSize) {
                 chunk0 = input.substring(offset, offset + 1);
             }
             if (chunk0 != null && chunk0.equals("\"")) {
-                address1 = new SyntaxNode(input.substring(offset, offset + 1), offset);
+                address1 = new TreeNode(input.substring(offset, offset + 1), offset);
                 offset = offset + 1;
             } else {
                 address1 = FAILURE;
@@ -689,22 +689,22 @@ abstract class Grammar {
             }
             if (address1 != FAILURE) {
                 elements0.add(0, address1);
-                SyntaxNode address2 = FAILURE;
+                TreeNode address2 = FAILURE;
                 int remaining0 = 0;
                 int index2 = offset;
-                List<SyntaxNode> elements1 = new ArrayList<SyntaxNode>();
-                SyntaxNode address3 = new SyntaxNode("", -1);
+                List<TreeNode> elements1 = new ArrayList<TreeNode>();
+                TreeNode address3 = new TreeNode("", -1);
                 while (address3 != FAILURE) {
                     int index3 = offset;
                     int index4 = offset;
-                    List<SyntaxNode> elements2 = new ArrayList<SyntaxNode>(2);
-                    SyntaxNode address4 = FAILURE;
+                    List<TreeNode> elements2 = new ArrayList<TreeNode>(2);
+                    TreeNode address4 = FAILURE;
                     String chunk1 = null;
                     if (offset < inputSize) {
                         chunk1 = input.substring(offset, offset + 1);
                     }
                     if (chunk1 != null && chunk1.equals("\\")) {
-                        address4 = new SyntaxNode(input.substring(offset, offset + 1), offset);
+                        address4 = new TreeNode(input.substring(offset, offset + 1), offset);
                         offset = offset + 1;
                     } else {
                         address4 = FAILURE;
@@ -718,9 +718,9 @@ abstract class Grammar {
                     }
                     if (address4 != FAILURE) {
                         elements2.add(0, address4);
-                        SyntaxNode address5 = FAILURE;
+                        TreeNode address5 = FAILURE;
                         if (offset < inputSize) {
-                            address5 = new SyntaxNode(input.substring(offset, offset + 1), offset);
+                            address5 = new TreeNode(input.substring(offset, offset + 1), offset);
                             offset = offset + 1;
                         } else {
                             address5 = FAILURE;
@@ -745,7 +745,7 @@ abstract class Grammar {
                     if (elements2 == null) {
                         address3 = FAILURE;
                     } else {
-                        address3 = new SyntaxNode(input.substring(index4, offset), index4, elements2);
+                        address3 = new TreeNode(input.substring(index4, offset), index4, elements2);
                         offset = offset;
                     }
                     if (address3 == FAILURE) {
@@ -755,7 +755,7 @@ abstract class Grammar {
                             chunk2 = input.substring(offset, offset + 1);
                         }
                         if (chunk2 != null && Pattern.matches("\\A[^\"]", chunk2)) {
-                            address3 = new SyntaxNode(input.substring(offset, offset + 1), offset);
+                            address3 = new TreeNode(input.substring(offset, offset + 1), offset);
                             offset = offset + 1;
                         } else {
                             address3 = FAILURE;
@@ -777,20 +777,20 @@ abstract class Grammar {
                     }
                 }
                 if (remaining0 <= 0) {
-                    address2 = new SyntaxNode(input.substring(index2, offset), index2, elements1);
+                    address2 = new TreeNode(input.substring(index2, offset), index2, elements1);
                     offset = offset;
                 } else {
                     address2 = FAILURE;
                 }
                 if (address2 != FAILURE) {
                     elements0.add(1, address2);
-                    SyntaxNode address6 = FAILURE;
+                    TreeNode address6 = FAILURE;
                     String chunk3 = null;
                     if (offset < inputSize) {
                         chunk3 = input.substring(offset, offset + 1);
                     }
                     if (chunk3 != null && chunk3.equals("\"")) {
-                        address6 = new SyntaxNode(input.substring(offset, offset + 1), offset);
+                        address6 = new TreeNode(input.substring(offset, offset + 1), offset);
                         offset = offset + 1;
                     } else {
                         address6 = FAILURE;
@@ -819,7 +819,7 @@ abstract class Grammar {
             if (elements0 == null) {
                 address0 = FAILURE;
             } else {
-                address0 = new SyntaxNode(input.substring(index1, offset), index1, elements0);
+                address0 = new TreeNode(input.substring(index1, offset), index1, elements0);
                 offset = offset;
             }
             rule.put(index0, new CacheRecord(address0, offset));
@@ -827,8 +827,8 @@ abstract class Grammar {
         return address0;
     }
 
-    protected SyntaxNode _read_number() {
-        SyntaxNode address0 = FAILURE;
+    protected TreeNode _read_number() {
+        TreeNode address0 = FAILURE;
         int index0 = offset;
         Map<Integer, CacheRecord> rule = cache.get(Label.number);
         if (rule == null) {
@@ -840,15 +840,15 @@ abstract class Grammar {
             offset = rule.get(offset).tail;
         } else {
             int index1 = offset;
-            List<SyntaxNode> elements0 = new ArrayList<SyntaxNode>(4);
-            SyntaxNode address1 = FAILURE;
+            List<TreeNode> elements0 = new ArrayList<TreeNode>(4);
+            TreeNode address1 = FAILURE;
             int index2 = offset;
             String chunk0 = null;
             if (offset < inputSize) {
                 chunk0 = input.substring(offset, offset + 1);
             }
             if (chunk0 != null && chunk0.equals("-")) {
-                address1 = new SyntaxNode(input.substring(offset, offset + 1), offset);
+                address1 = new TreeNode(input.substring(offset, offset + 1), offset);
                 offset = offset + 1;
             } else {
                 address1 = FAILURE;
@@ -861,19 +861,19 @@ abstract class Grammar {
                 }
             }
             if (address1 == FAILURE) {
-                address1 = new SyntaxNode(input.substring(index2, index2), index2);
+                address1 = new TreeNode(input.substring(index2, index2), index2);
                 offset = index2;
             }
             if (address1 != FAILURE) {
                 elements0.add(0, address1);
-                SyntaxNode address2 = FAILURE;
+                TreeNode address2 = FAILURE;
                 int index3 = offset;
                 String chunk1 = null;
                 if (offset < inputSize) {
                     chunk1 = input.substring(offset, offset + 1);
                 }
                 if (chunk1 != null && chunk1.equals("0")) {
-                    address2 = new SyntaxNode(input.substring(offset, offset + 1), offset);
+                    address2 = new TreeNode(input.substring(offset, offset + 1), offset);
                     offset = offset + 1;
                 } else {
                     address2 = FAILURE;
@@ -888,14 +888,14 @@ abstract class Grammar {
                 if (address2 == FAILURE) {
                     offset = index3;
                     int index4 = offset;
-                    List<SyntaxNode> elements1 = new ArrayList<SyntaxNode>(2);
-                    SyntaxNode address3 = FAILURE;
+                    List<TreeNode> elements1 = new ArrayList<TreeNode>(2);
+                    TreeNode address3 = FAILURE;
                     String chunk2 = null;
                     if (offset < inputSize) {
                         chunk2 = input.substring(offset, offset + 1);
                     }
                     if (chunk2 != null && Pattern.matches("\\A[1-9]", chunk2)) {
-                        address3 = new SyntaxNode(input.substring(offset, offset + 1), offset);
+                        address3 = new TreeNode(input.substring(offset, offset + 1), offset);
                         offset = offset + 1;
                     } else {
                         address3 = FAILURE;
@@ -909,18 +909,18 @@ abstract class Grammar {
                     }
                     if (address3 != FAILURE) {
                         elements1.add(0, address3);
-                        SyntaxNode address4 = FAILURE;
+                        TreeNode address4 = FAILURE;
                         int remaining0 = 0;
                         int index5 = offset;
-                        List<SyntaxNode> elements2 = new ArrayList<SyntaxNode>();
-                        SyntaxNode address5 = new SyntaxNode("", -1);
+                        List<TreeNode> elements2 = new ArrayList<TreeNode>();
+                        TreeNode address5 = new TreeNode("", -1);
                         while (address5 != FAILURE) {
                             String chunk3 = null;
                             if (offset < inputSize) {
                                 chunk3 = input.substring(offset, offset + 1);
                             }
                             if (chunk3 != null && Pattern.matches("\\A[0-9]", chunk3)) {
-                                address5 = new SyntaxNode(input.substring(offset, offset + 1), offset);
+                                address5 = new TreeNode(input.substring(offset, offset + 1), offset);
                                 offset = offset + 1;
                             } else {
                                 address5 = FAILURE;
@@ -938,7 +938,7 @@ abstract class Grammar {
                             }
                         }
                         if (remaining0 <= 0) {
-                            address4 = new SyntaxNode(input.substring(index5, offset), index5, elements2);
+                            address4 = new TreeNode(input.substring(index5, offset), index5, elements2);
                             offset = offset;
                         } else {
                             address4 = FAILURE;
@@ -956,7 +956,7 @@ abstract class Grammar {
                     if (elements1 == null) {
                         address2 = FAILURE;
                     } else {
-                        address2 = new SyntaxNode(input.substring(index4, offset), index4, elements1);
+                        address2 = new TreeNode(input.substring(index4, offset), index4, elements1);
                         offset = offset;
                     }
                     if (address2 == FAILURE) {
@@ -965,17 +965,17 @@ abstract class Grammar {
                 }
                 if (address2 != FAILURE) {
                     elements0.add(1, address2);
-                    SyntaxNode address6 = FAILURE;
+                    TreeNode address6 = FAILURE;
                     int index6 = offset;
                     int index7 = offset;
-                    List<SyntaxNode> elements3 = new ArrayList<SyntaxNode>(2);
-                    SyntaxNode address7 = FAILURE;
+                    List<TreeNode> elements3 = new ArrayList<TreeNode>(2);
+                    TreeNode address7 = FAILURE;
                     String chunk4 = null;
                     if (offset < inputSize) {
                         chunk4 = input.substring(offset, offset + 1);
                     }
                     if (chunk4 != null && chunk4.equals(".")) {
-                        address7 = new SyntaxNode(input.substring(offset, offset + 1), offset);
+                        address7 = new TreeNode(input.substring(offset, offset + 1), offset);
                         offset = offset + 1;
                     } else {
                         address7 = FAILURE;
@@ -989,18 +989,18 @@ abstract class Grammar {
                     }
                     if (address7 != FAILURE) {
                         elements3.add(0, address7);
-                        SyntaxNode address8 = FAILURE;
+                        TreeNode address8 = FAILURE;
                         int remaining1 = 1;
                         int index8 = offset;
-                        List<SyntaxNode> elements4 = new ArrayList<SyntaxNode>();
-                        SyntaxNode address9 = new SyntaxNode("", -1);
+                        List<TreeNode> elements4 = new ArrayList<TreeNode>();
+                        TreeNode address9 = new TreeNode("", -1);
                         while (address9 != FAILURE) {
                             String chunk5 = null;
                             if (offset < inputSize) {
                                 chunk5 = input.substring(offset, offset + 1);
                             }
                             if (chunk5 != null && Pattern.matches("\\A[0-9]", chunk5)) {
-                                address9 = new SyntaxNode(input.substring(offset, offset + 1), offset);
+                                address9 = new TreeNode(input.substring(offset, offset + 1), offset);
                                 offset = offset + 1;
                             } else {
                                 address9 = FAILURE;
@@ -1018,7 +1018,7 @@ abstract class Grammar {
                             }
                         }
                         if (remaining1 <= 0) {
-                            address8 = new SyntaxNode(input.substring(index8, offset), index8, elements4);
+                            address8 = new TreeNode(input.substring(index8, offset), index8, elements4);
                             offset = offset;
                         } else {
                             address8 = FAILURE;
@@ -1036,27 +1036,27 @@ abstract class Grammar {
                     if (elements3 == null) {
                         address6 = FAILURE;
                     } else {
-                        address6 = new SyntaxNode(input.substring(index7, offset), index7, elements3);
+                        address6 = new TreeNode(input.substring(index7, offset), index7, elements3);
                         offset = offset;
                     }
                     if (address6 == FAILURE) {
-                        address6 = new SyntaxNode(input.substring(index6, index6), index6);
+                        address6 = new TreeNode(input.substring(index6, index6), index6);
                         offset = index6;
                     }
                     if (address6 != FAILURE) {
                         elements0.add(2, address6);
-                        SyntaxNode address10 = FAILURE;
+                        TreeNode address10 = FAILURE;
                         int index9 = offset;
                         int index10 = offset;
-                        List<SyntaxNode> elements5 = new ArrayList<SyntaxNode>(3);
-                        SyntaxNode address11 = FAILURE;
+                        List<TreeNode> elements5 = new ArrayList<TreeNode>(3);
+                        TreeNode address11 = FAILURE;
                         int index11 = offset;
                         String chunk6 = null;
                         if (offset < inputSize) {
                             chunk6 = input.substring(offset, offset + 1);
                         }
                         if (chunk6 != null && chunk6.equals("e")) {
-                            address11 = new SyntaxNode(input.substring(offset, offset + 1), offset);
+                            address11 = new TreeNode(input.substring(offset, offset + 1), offset);
                             offset = offset + 1;
                         } else {
                             address11 = FAILURE;
@@ -1075,7 +1075,7 @@ abstract class Grammar {
                                 chunk7 = input.substring(offset, offset + 1);
                             }
                             if (chunk7 != null && chunk7.equals("E")) {
-                                address11 = new SyntaxNode(input.substring(offset, offset + 1), offset);
+                                address11 = new TreeNode(input.substring(offset, offset + 1), offset);
                                 offset = offset + 1;
                             } else {
                                 address11 = FAILURE;
@@ -1093,14 +1093,14 @@ abstract class Grammar {
                         }
                         if (address11 != FAILURE) {
                             elements5.add(0, address11);
-                            SyntaxNode address12 = FAILURE;
+                            TreeNode address12 = FAILURE;
                             int index12 = offset;
                             String chunk8 = null;
                             if (offset < inputSize) {
                                 chunk8 = input.substring(offset, offset + 1);
                             }
                             if (chunk8 != null && chunk8.equals("+")) {
-                                address12 = new SyntaxNode(input.substring(offset, offset + 1), offset);
+                                address12 = new TreeNode(input.substring(offset, offset + 1), offset);
                                 offset = offset + 1;
                             } else {
                                 address12 = FAILURE;
@@ -1119,7 +1119,7 @@ abstract class Grammar {
                                     chunk9 = input.substring(offset, offset + 1);
                                 }
                                 if (chunk9 != null && chunk9.equals("-")) {
-                                    address12 = new SyntaxNode(input.substring(offset, offset + 1), offset);
+                                    address12 = new TreeNode(input.substring(offset, offset + 1), offset);
                                     offset = offset + 1;
                                 } else {
                                     address12 = FAILURE;
@@ -1138,7 +1138,7 @@ abstract class Grammar {
                                         chunk10 = input.substring(offset, offset + 0);
                                     }
                                     if (chunk10 != null && chunk10.equals("")) {
-                                        address12 = new SyntaxNode(input.substring(offset, offset + 0), offset);
+                                        address12 = new TreeNode(input.substring(offset, offset + 0), offset);
                                         offset = offset + 0;
                                     } else {
                                         address12 = FAILURE;
@@ -1157,18 +1157,18 @@ abstract class Grammar {
                             }
                             if (address12 != FAILURE) {
                                 elements5.add(1, address12);
-                                SyntaxNode address13 = FAILURE;
+                                TreeNode address13 = FAILURE;
                                 int remaining2 = 1;
                                 int index13 = offset;
-                                List<SyntaxNode> elements6 = new ArrayList<SyntaxNode>();
-                                SyntaxNode address14 = new SyntaxNode("", -1);
+                                List<TreeNode> elements6 = new ArrayList<TreeNode>();
+                                TreeNode address14 = new TreeNode("", -1);
                                 while (address14 != FAILURE) {
                                     String chunk11 = null;
                                     if (offset < inputSize) {
                                         chunk11 = input.substring(offset, offset + 1);
                                     }
                                     if (chunk11 != null && Pattern.matches("\\A[0-9]", chunk11)) {
-                                        address14 = new SyntaxNode(input.substring(offset, offset + 1), offset);
+                                        address14 = new TreeNode(input.substring(offset, offset + 1), offset);
                                         offset = offset + 1;
                                     } else {
                                         address14 = FAILURE;
@@ -1186,7 +1186,7 @@ abstract class Grammar {
                                     }
                                 }
                                 if (remaining2 <= 0) {
-                                    address13 = new SyntaxNode(input.substring(index13, offset), index13, elements6);
+                                    address13 = new TreeNode(input.substring(index13, offset), index13, elements6);
                                     offset = offset;
                                 } else {
                                     address13 = FAILURE;
@@ -1208,11 +1208,11 @@ abstract class Grammar {
                         if (elements5 == null) {
                             address10 = FAILURE;
                         } else {
-                            address10 = new SyntaxNode(input.substring(index10, offset), index10, elements5);
+                            address10 = new TreeNode(input.substring(index10, offset), index10, elements5);
                             offset = offset;
                         }
                         if (address10 == FAILURE) {
-                            address10 = new SyntaxNode(input.substring(index9, index9), index9);
+                            address10 = new TreeNode(input.substring(index9, index9), index9);
                             offset = index9;
                         }
                         if (address10 != FAILURE) {
@@ -1236,7 +1236,7 @@ abstract class Grammar {
             if (elements0 == null) {
                 address0 = FAILURE;
             } else {
-                address0 = new SyntaxNode(input.substring(index1, offset), index1, elements0);
+                address0 = new TreeNode(input.substring(index1, offset), index1, elements0);
                 offset = offset;
             }
             rule.put(index0, new CacheRecord(address0, offset));
@@ -1244,8 +1244,8 @@ abstract class Grammar {
         return address0;
     }
 
-    protected SyntaxNode _read_boolean_() {
-        SyntaxNode address0 = FAILURE;
+    protected TreeNode _read_boolean_() {
+        TreeNode address0 = FAILURE;
         int index0 = offset;
         Map<Integer, CacheRecord> rule = cache.get(Label.boolean_);
         if (rule == null) {
@@ -1262,7 +1262,7 @@ abstract class Grammar {
                 chunk0 = input.substring(offset, offset + 4);
             }
             if (chunk0 != null && chunk0.equals("true")) {
-                address0 = new SyntaxNode(input.substring(offset, offset + 4), offset);
+                address0 = new TreeNode(input.substring(offset, offset + 4), offset);
                 offset = offset + 4;
             } else {
                 address0 = FAILURE;
@@ -1281,7 +1281,7 @@ abstract class Grammar {
                     chunk1 = input.substring(offset, offset + 5);
                 }
                 if (chunk1 != null && chunk1.equals("false")) {
-                    address0 = new SyntaxNode(input.substring(offset, offset + 5), offset);
+                    address0 = new TreeNode(input.substring(offset, offset + 5), offset);
                     offset = offset + 5;
                 } else {
                     address0 = FAILURE;
@@ -1302,8 +1302,8 @@ abstract class Grammar {
         return address0;
     }
 
-    protected SyntaxNode _read_null_() {
-        SyntaxNode address0 = FAILURE;
+    protected TreeNode _read_null_() {
+        TreeNode address0 = FAILURE;
         int index0 = offset;
         Map<Integer, CacheRecord> rule = cache.get(Label.null_);
         if (rule == null) {
@@ -1319,7 +1319,7 @@ abstract class Grammar {
                 chunk0 = input.substring(offset, offset + 4);
             }
             if (chunk0 != null && chunk0.equals("null")) {
-                address0 = new SyntaxNode(input.substring(offset, offset + 4), offset);
+                address0 = new TreeNode(input.substring(offset, offset + 4), offset);
                 offset = offset + 4;
             } else {
                 address0 = FAILURE;
@@ -1336,8 +1336,8 @@ abstract class Grammar {
         return address0;
     }
 
-    protected SyntaxNode _read___() {
-        SyntaxNode address0 = FAILURE;
+    protected TreeNode _read___() {
+        TreeNode address0 = FAILURE;
         int index0 = offset;
         Map<Integer, CacheRecord> rule = cache.get(Label.__);
         if (rule == null) {
@@ -1350,15 +1350,15 @@ abstract class Grammar {
         } else {
             int remaining0 = 0;
             int index1 = offset;
-            List<SyntaxNode> elements0 = new ArrayList<SyntaxNode>();
-            SyntaxNode address1 = new SyntaxNode("", -1);
+            List<TreeNode> elements0 = new ArrayList<TreeNode>();
+            TreeNode address1 = new TreeNode("", -1);
             while (address1 != FAILURE) {
                 String chunk0 = null;
                 if (offset < inputSize) {
                     chunk0 = input.substring(offset, offset + 1);
                 }
                 if (chunk0 != null && Pattern.matches("\\A[\\s]", chunk0)) {
-                    address1 = new SyntaxNode(input.substring(offset, offset + 1), offset);
+                    address1 = new TreeNode(input.substring(offset, offset + 1), offset);
                     offset = offset + 1;
                 } else {
                     address1 = FAILURE;
@@ -1376,7 +1376,7 @@ abstract class Grammar {
                 }
             }
             if (remaining0 <= 0) {
-                address0 = new SyntaxNode(input.substring(index1, offset), index1, elements0);
+                address0 = new TreeNode(input.substring(index1, offset), index1, elements0);
                 offset = offset;
             } else {
                 address0 = FAILURE;

@@ -15,7 +15,7 @@ public class CanopyLisp extends Grammar {
         this.expected = new ArrayList<String>();
     }
 
-    public static SyntaxNode parse(String input) throws SyntaxError {
+    public static TreeNode parse(String input) throws SyntaxError {
         CanopyLisp parser = new CanopyLisp(input);
         return parser.parse();
     }
@@ -38,8 +38,8 @@ public class CanopyLisp extends Grammar {
         return message + "^";
     }
 
-    private SyntaxNode parse() throws SyntaxError {
-        SyntaxNode tree = _read_program();
+    private TreeNode parse() throws SyntaxError {
+        TreeNode tree = _read_program();
         if (tree != FAILURE && offset == inputSize) {
             return tree;
         }

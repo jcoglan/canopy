@@ -17,9 +17,9 @@
   };
 
   var TYPES = {
-    address:    'SyntaxNode',
+    address:    'TreeNode',
     chunk:      'String',
-    elements:   'List<SyntaxNode>',
+    elements:   'List<TreeNode>',
     index:      'int',
     remaining:  'int'
   };
@@ -83,13 +83,13 @@
     },
 
     syntaxNodeClass_: function() {
-      this._newBuffer('SyntaxNode');
+      this._newBuffer('TreeNode');
 
       var imports = ['ArrayList', 'EnumMap', 'Iterator', 'List', 'Map'];
       for (var i = 0, n = imports.length; i < n; i++)
         this._line('import java.util.' + imports[i]);
 
-      var name = 'SyntaxNode';
+      var name = 'TreeNode';
 
       this._newline();
       this._line('public class ' + name + ' implements Iterable<' + name + '> {', false);
@@ -140,10 +140,10 @@
       this._newBuffer('CacheRecord');
       this._line('class CacheRecord {', false);
       this._indent(function(builder) {
-        builder._line('SyntaxNode node');
+        builder._line('TreeNode node');
         builder._line('int tail');
         builder._newline();
-        builder._line('CacheRecord(SyntaxNode node, int tail) {', false);
+        builder._line('CacheRecord(TreeNode node, int tail) {', false);
         builder._indent(function(builder) {
           builder.assign_('this.node', 'node');
           builder.assign_('this.tail', 'tail');
@@ -161,7 +161,7 @@
       this._newline();
       this._line('abstract class Grammar {', false);
       this._indent(function(builder) {
-        builder.assign_('static SyntaxNode ' + builder.nullNode_(), 'new SyntaxNode("", -1)');
+        builder.assign_('static TreeNode ' + builder.nullNode_(), 'new TreeNode("", -1)');
         builder._newline();
         builder._line('int inputSize, offset, failure');
         builder._line('String input');
@@ -207,7 +207,7 @@
         builder._line('}', false);
 
         builder._newline();
-        builder._line('public static SyntaxNode parse(String input) throws SyntaxError {', false);
+        builder._line('public static TreeNode parse(String input) throws SyntaxError {', false);
         builder._indent(function(builder) {
           builder.assign_(this._grammarName + ' parser', 'new ' + this._grammarName + '(input)');
           builder.return_('parser.parse()');
@@ -240,9 +240,9 @@
         builder._line('}', false);
 
         builder._newline();
-        builder._line('private SyntaxNode parse() throws SyntaxError {', false);
+        builder._line('private TreeNode parse() throws SyntaxError {', false);
         builder._indent(function(builder) {
-          builder.jump_('SyntaxNode tree', root);
+          builder.jump_('TreeNode tree', root);
           builder.if_('tree != ' + builder.nullNode_() + ' && offset == inputSize', function(builder) {
             builder.return_('tree');
           });
@@ -278,7 +278,7 @@
     },
 
     constructor_: function(args, block, context) {
-      this._line(this._name + '(String text, int offset, List<SyntaxNode> elements) {', false);
+      this._line(this._name + '(String text, int offset, List<TreeNode> elements) {', false);
       this._indent(function(builder) {
         builder._line('super(text, offset, elements)');
         block.call(context, builder);
@@ -289,7 +289,7 @@
     method_: function(name, args, block, context) {
       this._write(this._methodSeparator);
       this._methodSeparator = '\n';
-      this._line('protected SyntaxNode ' + name + '() {', false);
+      this._line('protected TreeNode ' + name + '() {', false);
       new Builder(this)._indent(block, context);
       this._line('}', false);
     },
@@ -357,7 +357,7 @@
         action = 'this._actions.' + action;
         args   = ['input', start, end];
       } else {
-        action = 'new ' + (nodeClass || 'SyntaxNode');
+        action = 'new ' + (nodeClass || 'TreeNode');
         args   = ['input.substring(' + start + ', ' + end + ')', start];
       }
       if (elements) args.push(elements);
@@ -475,7 +475,7 @@
     },
 
     emptyList_: function(size) {
-      return 'new ArrayList<SyntaxNode>(' + (size ? size : '') + ')';
+      return 'new ArrayList<TreeNode>(' + (size ? size : '') + ')';
     },
 
     emptyString_: function() {
@@ -483,7 +483,7 @@
     },
 
     true_: function() {
-      return 'new SyntaxNode("", -1)';
+      return 'new TreeNode("", -1)';
     },
 
     null_: function() {

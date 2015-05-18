@@ -7,12 +7,12 @@ import java.io.IOException;
 import examples.canopy.peg.CanopyPEG;
 import examples.canopy.peg.Label;
 import examples.canopy.peg.SyntaxError;
-import examples.canopy.peg.SyntaxNode;
+import examples.canopy.peg.TreeNode;
 
 class JavaExample {
     public static void main(String[] args) throws IOException {
         try {
-            SyntaxNode tree = CanopyPEG.parse(read("examples/canopy/peg.peg"));
+            TreeNode tree = CanopyPEG.parse(read("examples/canopy/peg.peg"));
             String name = tree.get(Label.grammar_name).get(Label.object_identifier).text;
             System.out.println("Name: " + name);
             printTree(tree, 0);
@@ -21,7 +21,7 @@ class JavaExample {
         }
     }
 
-    private static void printTree(SyntaxNode tree, int indent) {
+    private static void printTree(TreeNode tree, int indent) {
         String line = "";
 
         int in = indent;
@@ -33,7 +33,7 @@ class JavaExample {
 
         System.out.println(line);
 
-        for (SyntaxNode node : tree)
+        for (TreeNode node : tree)
             printTree(node, indent + 1);
     }
 

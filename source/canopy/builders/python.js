@@ -75,7 +75,7 @@
     },
 
     syntaxNodeClass_: function() {
-      var name = 'SyntaxNode';
+      var name = 'TreeNode';
       this.class_(name, 'object', function(builder) {
         builder.method_('__init__', ['text', 'offset', 'elements=None'], function(builder) {
           builder.attribute_('text', 'text');
@@ -237,7 +237,7 @@
         action = 'self._actions.' + action;
         args   = ['self._input', start, end];
       } else {
-        action = nodeClass || 'SyntaxNode';
+        action = nodeClass || 'TreeNode';
         args   = ['self._input[' + start + ':' + end + ']', start];
       }
       if (elements) args.push(elements);

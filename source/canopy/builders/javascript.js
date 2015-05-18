@@ -85,7 +85,7 @@
     },
 
     syntaxNodeClass_: function() {
-      var name = 'SyntaxNode';
+      var name = 'TreeNode';
       this.function_('var ' + name, ['text', 'offset', 'elements'], function(builder) {
         builder._line('this.text = text');
         builder._line('this.offset = offset');
@@ -266,7 +266,7 @@
         action = 'this._actions.' + action;
         args   = ['this._input', start, end];
       } else {
-        action = 'new ' + (nodeClass || 'SyntaxNode');
+        action = 'new ' + (nodeClass || 'TreeNode');
         args   = ['this._input.substring(' + start + ', ' + end + ')', start];
       }
       if (elements) args.push(elements);

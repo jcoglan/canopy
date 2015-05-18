@@ -1,10 +1,10 @@
 package examples.canopy.json;
 
 class CacheRecord {
-    SyntaxNode node;
+    TreeNode node;
     int tail;
 
-    CacheRecord(SyntaxNode node, int tail) {
+    CacheRecord(TreeNode node, int tail) {
         this.node = node;
         this.tail = tail;
     }

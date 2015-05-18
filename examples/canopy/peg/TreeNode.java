@@ -6,57 +6,57 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-public class SyntaxNode implements Iterable<SyntaxNode> {
+public class TreeNode implements Iterable<TreeNode> {
     public String text;
     public int offset;
-    public List<SyntaxNode> elements;
+    public List<TreeNode> elements;
 
-    Map<Label, SyntaxNode> labelled;
+    Map<Label, TreeNode> labelled;
 
-    public SyntaxNode(String text, int offset) {
-        this(text, offset, new ArrayList<SyntaxNode>(0));
+    public TreeNode(String text, int offset) {
+        this(text, offset, new ArrayList<TreeNode>(0));
     }
 
-    public SyntaxNode(String text, int offset, List<SyntaxNode> elements) {
+    public TreeNode(String text, int offset, List<TreeNode> elements) {
         this.text = text;
         this.offset = offset;
         this.elements = elements;
-        this.labelled = new EnumMap<Label, SyntaxNode>(Label.class);
+        this.labelled = new EnumMap<Label, TreeNode>(Label.class);
     }
 
-    public SyntaxNode get(Label key) {
+    public TreeNode get(Label key) {
         return labelled.get(key);
     }
 
-    public Iterator<SyntaxNode> iterator() {
+    public Iterator<TreeNode> iterator() {
         return elements.iterator();
     }
 }
 
-class SyntaxNode1 extends SyntaxNode {
-    SyntaxNode1(String text, int offset, List<SyntaxNode> elements) {
+class TreeNode1 extends TreeNode {
+    TreeNode1(String text, int offset, List<TreeNode> elements) {
         super(text, offset, elements);
         labelled.put(Label.grammar_name, elements.get(1));
         labelled.put(Label.rules, elements.get(2));
     }
 }
 
-class SyntaxNode2 extends SyntaxNode {
-    SyntaxNode2(String text, int offset, List<SyntaxNode> elements) {
+class TreeNode2 extends TreeNode {
+    TreeNode2(String text, int offset, List<TreeNode> elements) {
         super(text, offset, elements);
         labelled.put(Label.grammar_rule, elements.get(1));
     }
 }
 
-class SyntaxNode3 extends SyntaxNode {
-    SyntaxNode3(String text, int offset, List<SyntaxNode> elements) {
+class TreeNode3 extends TreeNode {
+    TreeNode3(String text, int offset, List<TreeNode> elements) {
         super(text, offset, elements);
         labelled.put(Label.object_identifier, elements.get(3));
     }
 }
 
-class SyntaxNode4 extends SyntaxNode {
-    SyntaxNode4(String text, int offset, List<SyntaxNode> elements) {
+class TreeNode4 extends TreeNode {
+    TreeNode4(String text, int offset, List<TreeNode> elements) {
         super(text, offset, elements);
         labelled.put(Label.identifier, elements.get(0));
         labelled.put(Label.assignment, elements.get(1));
@@ -64,15 +64,15 @@ class SyntaxNode4 extends SyntaxNode {
     }
 }
 
-class SyntaxNode5 extends SyntaxNode {
-    SyntaxNode5(String text, int offset, List<SyntaxNode> elements) {
+class TreeNode5 extends TreeNode {
+    TreeNode5(String text, int offset, List<TreeNode> elements) {
         super(text, offset, elements);
         labelled.put(Label.parsing_expression, elements.get(2));
     }
 }
 
-class SyntaxNode6 extends SyntaxNode {
-    SyntaxNode6(String text, int offset, List<SyntaxNode> elements) {
+class TreeNode6 extends TreeNode {
+    TreeNode6(String text, int offset, List<TreeNode> elements) {
         super(text, offset, elements);
         labelled.put(Label.first_part, elements.get(0));
         labelled.put(Label.choice_part, elements.get(0));
@@ -80,52 +80,52 @@ class SyntaxNode6 extends SyntaxNode {
     }
 }
 
-class SyntaxNode7 extends SyntaxNode {
-    SyntaxNode7(String text, int offset, List<SyntaxNode> elements) {
+class TreeNode7 extends TreeNode {
+    TreeNode7(String text, int offset, List<TreeNode> elements) {
         super(text, offset, elements);
         labelled.put(Label.expression, elements.get(3));
         labelled.put(Label.choice_part, elements.get(3));
     }
 }
 
-class SyntaxNode8 extends SyntaxNode {
-    SyntaxNode8(String text, int offset, List<SyntaxNode> elements) {
+class TreeNode8 extends TreeNode {
+    TreeNode8(String text, int offset, List<TreeNode> elements) {
         super(text, offset, elements);
         labelled.put(Label.type_tag, elements.get(1));
     }
 }
 
-class SyntaxNode9 extends SyntaxNode {
-    SyntaxNode9(String text, int offset, List<SyntaxNode> elements) {
+class TreeNode9 extends TreeNode {
+    TreeNode9(String text, int offset, List<TreeNode> elements) {
         super(text, offset, elements);
         labelled.put(Label.actionable_expression, elements.get(0));
         labelled.put(Label.action_tag, elements.get(2));
     }
 }
 
-class SyntaxNode10 extends SyntaxNode {
-    SyntaxNode10(String text, int offset, List<SyntaxNode> elements) {
+class TreeNode10 extends TreeNode {
+    TreeNode10(String text, int offset, List<TreeNode> elements) {
         super(text, offset, elements);
         labelled.put(Label.actionable_expression, elements.get(2));
     }
 }
 
-class SyntaxNode11 extends SyntaxNode {
-    SyntaxNode11(String text, int offset, List<SyntaxNode> elements) {
+class TreeNode11 extends TreeNode {
+    TreeNode11(String text, int offset, List<TreeNode> elements) {
         super(text, offset, elements);
         labelled.put(Label.identifier, elements.get(1));
     }
 }
 
-class SyntaxNode12 extends SyntaxNode {
-    SyntaxNode12(String text, int offset, List<SyntaxNode> elements) {
+class TreeNode12 extends TreeNode {
+    TreeNode12(String text, int offset, List<TreeNode> elements) {
         super(text, offset, elements);
         labelled.put(Label.object_identifier, elements.get(1));
     }
 }
 
-class SyntaxNode13 extends SyntaxNode {
-    SyntaxNode13(String text, int offset, List<SyntaxNode> elements) {
+class TreeNode13 extends TreeNode {
+    TreeNode13(String text, int offset, List<TreeNode> elements) {
         super(text, offset, elements);
         labelled.put(Label.first_part, elements.get(0));
         labelled.put(Label.sequence_part, elements.get(0));
@@ -133,67 +133,67 @@ class SyntaxNode13 extends SyntaxNode {
     }
 }
 
-class SyntaxNode14 extends SyntaxNode {
-    SyntaxNode14(String text, int offset, List<SyntaxNode> elements) {
+class TreeNode14 extends TreeNode {
+    TreeNode14(String text, int offset, List<TreeNode> elements) {
         super(text, offset, elements);
         labelled.put(Label.expression, elements.get(1));
         labelled.put(Label.sequence_part, elements.get(1));
     }
 }
 
-class SyntaxNode15 extends SyntaxNode {
-    SyntaxNode15(String text, int offset, List<SyntaxNode> elements) {
+class TreeNode15 extends TreeNode {
+    TreeNode15(String text, int offset, List<TreeNode> elements) {
         super(text, offset, elements);
         labelled.put(Label.expression, elements.get(1));
     }
 }
 
-class SyntaxNode16 extends SyntaxNode {
-    SyntaxNode16(String text, int offset, List<SyntaxNode> elements) {
+class TreeNode16 extends TreeNode {
+    TreeNode16(String text, int offset, List<TreeNode> elements) {
         super(text, offset, elements);
         labelled.put(Label.atom, elements.get(0));
     }
 }
 
-class SyntaxNode17 extends SyntaxNode {
-    SyntaxNode17(String text, int offset, List<SyntaxNode> elements) {
+class TreeNode17 extends TreeNode {
+    TreeNode17(String text, int offset, List<TreeNode> elements) {
         super(text, offset, elements);
         labelled.put(Label.atom, elements.get(0));
         labelled.put(Label.quantifier, elements.get(1));
     }
 }
 
-class SyntaxNode18 extends SyntaxNode {
-    SyntaxNode18(String text, int offset, List<SyntaxNode> elements) {
+class TreeNode18 extends TreeNode {
+    TreeNode18(String text, int offset, List<TreeNode> elements) {
         super(text, offset, elements);
         labelled.put(Label.predicate, elements.get(0));
         labelled.put(Label.atom, elements.get(1));
     }
 }
 
-class SyntaxNode19 extends SyntaxNode {
-    SyntaxNode19(String text, int offset, List<SyntaxNode> elements) {
+class TreeNode19 extends TreeNode {
+    TreeNode19(String text, int offset, List<TreeNode> elements) {
         super(text, offset, elements);
         labelled.put(Label.identifier, elements.get(0));
     }
 }
 
-class SyntaxNode20 extends SyntaxNode {
-    SyntaxNode20(String text, int offset, List<SyntaxNode> elements) {
+class TreeNode20 extends TreeNode {
+    TreeNode20(String text, int offset, List<TreeNode> elements) {
         super(text, offset, elements);
         labelled.put(Label.identifier, elements.get(0));
     }
 }
 
-class SyntaxNode21 extends SyntaxNode {
-    SyntaxNode21(String text, int offset, List<SyntaxNode> elements) {
+class TreeNode21 extends TreeNode {
+    TreeNode21(String text, int offset, List<TreeNode> elements) {
         super(text, offset, elements);
         labelled.put(Label.identifier, elements.get(0));
     }
 }
 
-class SyntaxNode22 extends SyntaxNode {
-    SyntaxNode22(String text, int offset, List<SyntaxNode> elements) {
+class TreeNode22 extends TreeNode {
+    TreeNode22(String text, int offset, List<TreeNode> elements) {
         super(text, offset, elements);
         labelled.put(Label.identifier, elements.get(1));
     }
