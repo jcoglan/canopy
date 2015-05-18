@@ -6,18 +6,23 @@ import java.util.List;
 import java.util.Map;
 
 public class CanopyJson extends Grammar {
-    public CanopyJson(String input) {
+    public CanopyJson(String input, Actions actions) {
         this.input = input;
         this.inputSize = input.length();
+        this.actions = actions;
         this.offset = 0;
         this.cache = new EnumMap<Label, Map<Integer, CacheRecord>>(Label.class);
         this.failure = 0;
         this.expected = new ArrayList<String>();
     }
 
-    public static TreeNode parse(String input) throws SyntaxError {
-        CanopyJson parser = new CanopyJson(input);
+    public static TreeNode parse(String input, Actions actions) throws SyntaxError {
+        CanopyJson parser = new CanopyJson(input, actions);
         return parser.parse();
+    }
+
+    public static TreeNode parse(String input) throws SyntaxError {
+        return parse(input, null);
     }
 
     private static String formatError(String input, int offset, List<String> expected) {

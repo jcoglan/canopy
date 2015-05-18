@@ -13,6 +13,10 @@ public class TreeNode implements Iterable<TreeNode> {
 
     Map<Label, TreeNode> labelled;
 
+    public TreeNode() {
+        this("", -1, new ArrayList<TreeNode>(0));
+    }
+
     public TreeNode(String text, int offset) {
         this(text, offset, new ArrayList<TreeNode>(0));
     }

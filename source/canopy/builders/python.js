@@ -92,7 +92,7 @@
       return name;
     },
 
-    grammarModule_: function(block, context) {
+    grammarModule_: function(actions, block, context) {
       this.class_('ParseError', 'SyntaxError', function(builder) {
         builder._line('pass');
       });

@@ -101,7 +101,7 @@
       return name;
     },
 
-    grammarModule_: function(block, context) {
+    grammarModule_: function(actions, block, context) {
       this._newline();
       this.assign_('var ' + this.nullNode_(), '{}');
       this._newline();

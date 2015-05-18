@@ -13,9 +13,12 @@ class JavaExample {
     public static void main(String[] args) throws IOException {
         try {
             TreeNode tree = CanopyPEG.parse(read("examples/canopy/peg.peg"));
+
             String name = tree.get(Label.grammar_name).get(Label.object_identifier).text;
             System.out.println("Name: " + name);
+
             printTree(tree, 0);
+
         } catch (SyntaxError ex) {
             System.out.println(ex);
         }

@@ -7,12 +7,13 @@ import java.util.Map;
 import java.util.regex.Pattern;
 
 abstract class Grammar {
-    static TreeNode FAILURE = new TreeNode("", -1);
+    static TreeNode FAILURE = new TreeNode();
 
     int inputSize, offset, failure;
     String input;
     List<String> expected;
     Map<Label, Map<Integer, CacheRecord>> cache;
+    Actions actions;
 
     private static Pattern REGEX_1 = Pattern.compile("\\A[1-9]");
     private static Pattern REGEX_2 = Pattern.compile("\\A[0-9]");

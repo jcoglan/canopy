@@ -100,6 +100,13 @@
         builder._line('Map<Label, ' + name + '> labelled');
 
         builder._newline();
+        builder._line('public ' + name + '() {', false);
+        builder._indent(function(builder) {
+          builder._line('this("", -1, new ArrayList<' + name + '>(0))');
+        });
+        builder._line('}', false);
+
+        builder._newline();
         builder._line('public ' + name + '(String text, int offset) {', false);
         builder._indent(function(builder) {
           builder._line('this(text, offset, new ArrayList<' + name + '>(0))');
@@ -135,7 +142,7 @@
       return name;
     },
 
-    grammarModule_: function(block, context) {
+    grammarModule_: function(actions, block, context) {
       this._newBuffer('CacheRecord');
       this._line('class CacheRecord {', false);
       this._indent(function(builder) {
@@ -151,6 +158,16 @@
       });
       this._line('}', false);
 
+      this._newBuffer('Actions');
+      this._line('import java.util.List');
+      this._newline();
+      this._line('public interface Actions {', false);
+      this._indent(function(builder) {
+        for (var i = 0, n = actions.length ; i < n; i++)
+          builder._line('public TreeNode ' + actions[i] + '(String input, int start, int end, List<TreeNode> elements)');
+      });
+      this._line('}', false);
+
       this._newBuffer('Grammar');
       this._line('import java.util.ArrayList');
       this._line('import java.util.HashMap');
@@ -160,12 +177,13 @@
       this._newline();
       this._line('abstract class Grammar {', false);
       this._indent(function(builder) {
-        builder.assign_('static TreeNode ' + builder.nullNode_(), 'new TreeNode("", -1)');
+        builder.assign_('static TreeNode ' + builder.nullNode_(), 'new TreeNode()');
         builder._newline();
         builder._line('int inputSize, offset, failure');
         builder._line('String input');
         builder._line('List<String> expected');
         builder._line('Map<Label, Map<Integer, CacheRecord>> cache');
+        builder._line('Actions actions');
         builder._newline();
         block.call(context, builder);
       });
@@ -201,11 +219,11 @@
       this._newline();
       this._line('public class ' + this._grammarName + ' extends Grammar {', false);
       this._indent(function(builder) {
-        builder._line('public ' + this._grammarName + '(String input) {', false);
+        builder._line('public ' + this._grammarName + '(String input, Actions actions) {', false);
         builder._indent(function(builder) {
           builder.assign_('this.input', 'input');
           builder.assign_('this.inputSize', 'input.length()');
-          // TODO actions
+          builder.assign_('this.actions', 'actions');
           builder.assign_('this.offset', '0');
           builder.assign_('this.cache', 'new EnumMap<Label, Map<Integer, CacheRecord>>(Label.class)');
           builder.assign_('this.failure', '0');
@@ -214,11 +232,18 @@
         builder._line('}', false);
 
         builder._newline();
-        builder._line('public static TreeNode parse(String input) throws SyntaxError {', false);
+        builder._line('public static TreeNode parse(String input, Actions actions) throws SyntaxError {', false);
         builder._indent(function(builder) {
-          builder.assign_(this._grammarName + ' parser', 'new ' + this._grammarName + '(input)');
+          builder.assign_(this._grammarName + ' parser', 'new ' + this._grammarName + '(input, actions)');
           builder.return_('parser.parse()');
         }, this);
+        builder._line('}', false);
+
+        builder._newline();
+        builder._line('public static TreeNode parse(String input) throws SyntaxError {', false);
+        builder._indent(function(builder) {
+          builder.return_('parse(input, null)');
+        });
         builder._line('}', false);
 
         builder._newline();
@@ -360,7 +385,7 @@
       var args;
 
       if (action) {
-        action = 'this._actions.' + action;
+        action = 'actions.' + action;
         args   = ['input', start, end];
       } else {
         action = 'new ' + (nodeClass || 'TreeNode');

@@ -92,7 +92,7 @@
       return name;
     },
 
-    grammarModule_: function(block, context) {
+    grammarModule_: function(actions, block, context) {
       this.assign_('ParseError', 'Struct.new(:input, :offset, :expected)');
       this.assign_(this.nullNode_(), 'Object.new');
       this._newline();

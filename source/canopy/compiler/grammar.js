@@ -18,9 +18,12 @@ Canopy.Compiler.Grammar = {
     };
 
     builder.package_(this.grammarName(), function(builder) {
-      var nodeClassName = builder.syntaxNodeClass_(),
-          subclassIndex = 1;
+      var actions = [];
+      scan(this, function(node) {
+        if (node.action_tag) actions.push(node.action_tag.identifier.text);
+      });
 
+      var nodeClassName = builder.syntaxNodeClass_(), subclassIndex = 1;
       scan(this, function(node) {
         var subclassName = nodeClassName + subclassIndex,
             labels = node.collectLabels && node.collectLabels(subclassName);
@@ -39,9 +42,8 @@ Canopy.Compiler.Grammar = {
         subclassIndex += 1;
       });
 
-      builder.grammarModule_(function(builder) {
+      builder.grammarModule_(actions.sort(), function(builder) {
         var regexName = 'REGEX_', regexIndex = 1;
-
         scan(this, function(node) {
           if (node.regex) builder.compileRegex_(node, regexName + (regexIndex++));
         });
