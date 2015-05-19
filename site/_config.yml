@@ -1,0 +1,6 @@
+title:    "Canopy"
+
+markdown: "redcarpet"
+
+redcarpet:
+  extensions: ["smart"]

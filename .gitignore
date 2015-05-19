@@ -1,5 +1,5 @@
 .wake.json
+*.class
 Gemfile.lock
 lib
 node_modules
-*.class
