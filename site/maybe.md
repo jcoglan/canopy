@@ -27,10 +27,10 @@ other input will cause an error.
 
 ```js
 require('./future').parse('future')
-// -> { textValue: 'future', offset: 0, elements: [] }
+   == { textValue: 'future', offset: 0, elements: [] }
 
 require('./future').parse('')
-// -> { textValue: '', offset: 0, elements: [] }
+   == { textValue: '', offset: 0, elements: [] }
 
 require('./future').parse('perfect')
 Error: Line 1: expected "future"

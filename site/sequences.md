@@ -21,14 +21,14 @@ resulting parses of the possible inputs:
 
 ```js
 require('./hamlet').parse('to be')
-// -> { textValue: 'to be',
+   == { textValue: 'to be',
         offset: 0,
         elements: 
          [ { textValue: '', offset: 0, elements: [] },
            { textValue: 'to be', offset: 0, elements: [] } ] }
 
 require('./hamlet').parse('not to be')
-// -> { textValue: 'not to be',
+   == { textValue: 'not to be',
         offset: 0,
         elements: 
          [ { textValue: 'not ', offset: 0, elements: [] },
@@ -69,7 +69,7 @@ labelled nodes in the output:
 ```js
 tree = require('./hash').parse("{'foo' => 36}")
 
-// -> { textValue: '{\'foo\' => 36}',
+   == { textValue: '{\'foo\' => 36}',
         offset: 0,
         elements: 
          [ { textValue: '{', offset: 0, elements: [] },
@@ -83,10 +83,10 @@ tree = require('./hash').parse("{'foo' => 36}")
          { textValue: '36', offset: 10, elements: [...] } }
 
 tree.string.textValue
-// -> "'foo'"
+   == "'foo'"
 
 tree.number.textValue
-// -> "36"
+   == "36"
 ```
 
 Here we see that `tree.string` is the same as `tree.elements[1]`, and

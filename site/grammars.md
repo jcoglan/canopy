@@ -50,14 +50,14 @@ invalid input:
 var parens = require('./parens')
 
 parens.parse('94')
-// -> { textValue: '94',
+   == { textValue: '94',
         offset: 0,
         elements: 
          [ { textValue: '9', offset: 0, elements: [] },
            { textValue: '4', offset: 1, elements: [] } ] }
 
 parens.parse('(94)')
-// -> { textValue: '(94)',
+   == { textValue: '(94)',
         offset: 0,
         elements: 
          [ { textValue: '(', offset: 0, elements: [] },

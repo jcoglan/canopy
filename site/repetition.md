@@ -22,7 +22,7 @@ you'll get an error.
 
 ```js
 require('./badger').parse('badgerbadgerbadger')
-// -> { textValue: 'badgerbadgerbadger',
+   == { textValue: 'badgerbadgerbadger',
         offset: 0,
         elements: 
          [ { textValue: 'badger', offset: 0, elements: [] },

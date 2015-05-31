@@ -17,7 +17,7 @@ has no child nodes.
 
 ```js
 require('./parsers').parse('I like parsers')
-// -> { textValue: 'I like parsers',
+   == { textValue: 'I like parsers',
         offset: 0,
         elements: [] }
 
@@ -44,7 +44,7 @@ It will then match any casing of the input:
 
 ```js
 require('./parsers').parse('I like PARSERS')
-// -> { textValue: 'I like PARSERS',
+   == { textValue: 'I like PARSERS',
         offset: 0,
         elements: [] }
 ```

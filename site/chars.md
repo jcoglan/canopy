@@ -18,10 +18,10 @@ This will parse any character matched by the class, and no others:
 
 ```js
 require('./alphanum').parse('a')
-// -> { textValue: 'a', offset: 0, elements: [] }
+   == { textValue: 'a', offset: 0, elements: [] }
 
 require('./alphanum').parse('7')
-// -> { textValue: '7', offset: 0, elements: [] }
+   == { textValue: '7', offset: 0, elements: [] }
 
 require('./alphanum').parse('!')
 Error: Line 1: expected [A-Za-z0-9]
@@ -39,5 +39,5 @@ character.
 
 ```js
 require('./anything').parse('a')
-// -> { textValue: 'a', offset: 0, elements: [] }
+   == { textValue: 'a', offset: 0, elements: [] }
 ```

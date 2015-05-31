@@ -1,6 +1,5 @@
-title:    "Canopy"
-
-markdown: "redcarpet"
+title:    Canopy
+markdown: redcarpet
 
 redcarpet:
-  extensions: ["smart"]
+  extensions: [smart]

@@ -2,102 +2,129 @@
 ---
 
 body {
-  background: #2d2d2d;
-  color: #dddddd;
-  font: 15px/1.8 FreeSans, Helvetica, Arial, sans-serif;
+  background: #E2E2E4;
+  color: #292836;
+  font: 300 18px/1.5 FreeSans, Helvetica, Arial, sans-serif;
   margin: 0;
   padding: 0;
 }
 
-.header, .footer {
-  clear: both;
-  margin: 0 auto;
-  padding: 0 200px;
-  width: 600px;
-}
-
-.footer {
-  border-top: 1px solid #666666;
-  font-size: 80%;
-  margin-bottom: 4em;
-  padding: 1em 0;
-  width: 600px;
-}
-
-h1 {
-  font-size: 400%;
-  text-align: center;
-}
-h1 a {
-  text-decoration: none;
-}
-h1 span {
-  border-top: 1px solid #666666;
-  display: block;
-  font-size: 20%;
-  font-weight: normal;
-  padding-top: 1.5em;
-}
-
-.main {
-  margin: 0 auto;
-  width: 1000px;
-}
-
-.navigation {
-  float: left;
+nav {
+  background: #28252F;
+  font-size: 0.7em;
   position: fixed;
-  width: 160px;
-}
-.navigation ul {
-  list-style: none;
-  margin: 1em 0;
-  padding: 0;
-}
-.navigation ul a {
-  color: #aaaaaa;
-  text-decoration: none;
-}
-.navigation ul a:hover {
-  color: white;
-  text-decoration: underline;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 300px;
+
+  header {
+    background: #C37386;
+    padding: 2em 3em;
+
+    h1, a, span {
+      color: #28252F;
+      display: block;
+      font-weight: 300;
+      margin: 0;
+    }
+
+    a {
+      letter-spacing: 1em;
+      text-transform: uppercase;
+    }
+
+    span {
+      border-top: 1px solid #28252F;
+      margin-top: 0.6em;
+      padding-top: 0.6em;
+      text-transform: lowercase;
+    }
+  }
+
+  footer {
+    background: #6386A8;
+    padding: 1em 3em;
+    position: absolute;
+    bottom: 0;
+  }
+
+  ul {
+    margin: 2em 0 0;
+    padding: 0;
+
+    li {
+      margin: 0;
+      padding: 0 3em;
+    }
+
+    a {
+      text-transform: uppercase;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+  }
+
+  a {
+    color: #9CA7B1;
+    text-decoration: none;
+  }
 }
 
-.content {
-  float: left;
-  width: 600px;
-  margin: 0 0 2em 200px;
-}
+main {
+  margin-left: 300px;
+  padding: 1em 0;
 
-h2 {
-  font-size: 1.5em;
-  font-weight: normal;
-  margin: 2em 0 0.5em;
-}
+  article {
+    h2, p {
+      width: 720px;
+    }
 
-h2:first-child {
-  margin-top: 0.5em;
-}
+    h2 {
+      font-size: 2em;
+      font-weight: 600;
+      margin: 0.5em 0;
+      padding-left: 2em;
+    }
 
-h6 {
-  background: #dddddd;
-  color: #333333;
-  font-size: 80%;
-  margin-bottom: -1em;
-  padding: 0.2em 1em;
-  width: 8em;
-}
+    h6 {
+      background: #C07438;
+      color: white;
+      display: inline-block;
+      font-size: 0.8em;
+      font-weight: 200;
+      margin: 0.5em 0 0.2em;
+      padding: 0.2em 2em 0.2em 5em;
+    }
 
-pre {
-  border-bottom: 1px solid #666666;
-  border-top: 1px solid #666666;
-  font-size: 80%;
-  padding: 1em;
-}
+    p, ul {
+      margin: 1.5em 0;
+      padding-left: 4em;
+    }
 
-a {
-  color: white;
-  text-decoration: underline;
+    pre {
+      margin: 0;
+      background: white;
+      padding: 1.5em 0 1.5em 4em;
+    }
+
+    h6 + .highlight pre {
+      background: #5C779B;
+      color: white;
+    }
+
+    code {
+      font: 0.8em Ubuntu Mono, Monaco, Courier New, monospace;
+    }
+
+    a {
+      color: #C07438;
+      font-weight: 600;
+      text-decoration: none;
+    }
+  }
 }
 
 @import "syntax-highlighting";

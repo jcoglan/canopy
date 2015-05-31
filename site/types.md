@@ -21,8 +21,6 @@ Let's take a simple example: matching a string literal:
     grammar Strings
       root  <-  "hello" <HelloNode>
 
-###### strings_test.js
-
 ```js
 var strings = require('./strings');
 
@@ -76,8 +74,6 @@ For example the following means that a node matching the sequence
 
 The extension methods have access to the labelled node from the sequence.
 
-###### types_test.js
-
 ```js
 var types = require('./types');
 
@@ -89,12 +85,14 @@ types.Parser.Extension = {
 };
 
 types.parse('foobar').convert()
-// -> 'fooBAR'
+   == 'fooBAR'
 ```
 
 Because type annotations bind to sequences rather than to choices, the
 following matches either the string `"abc"` which gains the `Foo` type, or
 `"123"` which gains the `Bar` type:
+
+###### sequences.peg
 
     grammar Choice
       root  <-  "a" "b" "c" <Foo> / "1" "2" "3" <Bar>
@@ -109,8 +107,6 @@ you need to parenthesize the choice and place the type afterward.
       alpha   <-  first:"a" second:"z"
       beta    <-  first:"j" second:"c"
 
-###### choices_test.js
-
 ```js
 var choices = require('./choices');
 
@@ -122,8 +118,8 @@ choices.Parser.Extension = {
 };
 
 choices.parse('az').convert()
-// -> 'aZ'
+   == 'aZ'
 
 choices.parse('jc').convert()
-// -> 'jC'
+   == 'jC'
 ```

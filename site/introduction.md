@@ -69,13 +69,13 @@ descend.
 tree = parser.parse('[1,[],2,[3,4,5],[[6]]]')
 
 tree.elements[0]
-// -> { textValue: '[', offset: 0, elements: [] }
+   == { textValue: '[', offset: 0, elements: [] }
 
 tree.elements[1].elements[0]
-// -> { textValue: '1', offset: 1, elements: [] }
+   == { textValue: '1', offset: 1, elements: [] }
 
 tree.elements[1].elements[1].elements[0].elements[1]
-// -> { textValue: '[]',
+   == { textValue: '[]',
         offset: 3,
         elements: 
          [ { textValue: '[', offset: 3, elements: [] },
@@ -83,14 +83,14 @@ tree.elements[1].elements[1].elements[0].elements[1]
            { textValue: ']', offset: 4, elements: [] } ] }
 
 tree.elements[1].elements[1].elements[1]
-// -> { textValue: ',2',
+   == { textValue: ',2',
         offset: 5,
         elements: 
          [ { textValue: ',', offset: 5, elements: [] },
            { textValue: '2', offset: 6, elements: [] } ] }
 
 tree.elements[1].elements[1].elements[3].elements[1].elements[1]
-// -> { textValue: '[6]',
+   == { textValue: '[6]',
         offset: 17,
         elements: 
          [ { textValue: '[6]',
@@ -118,7 +118,7 @@ references to some of its child nodes, as well as the standard `textValue`,
 ```js
 tree = require('./hash').parse("{'foo' => 36}")
 
-// -> { textValue: '{\'foo\' => 36}',
+   == { textValue: '{\'foo\' => 36}',
         offset: 0,
         elements: 
          [ { textValue: '{', offset: 0, elements: [] },
@@ -132,10 +132,10 @@ tree = require('./hash').parse("{'foo' => 36}")
          { textValue: '36', offset: 10, elements: [...] } }
 
 tree.string.textValue
-// -> "'foo'"
+   == "'foo'"
 
 tree.number.textValue
-// -> "36"
+   == "36"
 ```
 
 These labelled nodes can make it much easier to navigate the elements when
