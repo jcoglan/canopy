@@ -315,7 +315,8 @@
     },
 
     stringMatchCI_: function(expression, string) {
-      return expression + '.lower() == ' + this._quote(string) + '.lower()';
+      return expression + ' is not None and ' +
+        expression + '.lower() == ' + this._quote(string) + '.lower()';
     },
 
     regexMatch_: function(regex, string) {
