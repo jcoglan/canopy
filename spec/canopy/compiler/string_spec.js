@@ -46,4 +46,17 @@ function() { with(this) {
       assertParse( ['FOO', 0, []], CIStringTest.parse('FOO') )
     }})
   }})
+
+  describe('optional case-insensitive strings', function() { with(this) {
+    before(function() { with(this) {
+      Canopy.compile('grammar JS.ENV.CIStringTest \
+        root <- string1 string2? \
+        string1 <- "foo" \
+        string2 <- `bar`')
+    }})
+
+    it('fails to parse when absent', function() { with(this) {
+      assertThrows(Error, function() { CIStringTest.parse('foo') })
+    }})
+  }})
 }})
