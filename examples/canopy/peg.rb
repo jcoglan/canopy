@@ -366,7 +366,7 @@ module Canopy::PEG
       if @offset < @input_size
         chunk0 = @input[@offset...@offset + 7]
       end
-      if chunk0.downcase == "grammar".downcase
+      if !chunk0.nil? && chunk0.downcase == "grammar".downcase
         address1 = TreeNode.new(@input[@offset...@offset + 7], @offset)
         @offset = @offset + 7
       else

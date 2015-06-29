@@ -287,7 +287,7 @@ class Grammar(object):
         chunk0 = None
         if self._offset < self._input_size:
             chunk0 = self._input[self._offset:self._offset + 7]
-        if chunk0.lower() == 'grammar'.lower():
+        if chunk0 is not None and chunk0.lower() == 'grammar'.lower():
             address1 = TreeNode(self._input[self._offset:self._offset + 7], self._offset)
             self._offset = self._offset + 7
         else:

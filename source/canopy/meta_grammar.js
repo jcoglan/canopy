@@ -338,7 +338,7 @@
       if (this._offset < this._inputSize) {
         chunk0 = this._input.substring(this._offset, this._offset + 7);
       }
-      if (chunk0.toLowerCase() === 'grammar'.toLowerCase()) {
+      if (chunk0 !== null && chunk0.toLowerCase() === 'grammar'.toLowerCase()) {
         address1 = new TreeNode(this._input.substring(this._offset, this._offset + 7), this._offset);
         this._offset = this._offset + 7;
       } else {
