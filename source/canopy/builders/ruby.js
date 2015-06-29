@@ -332,7 +332,8 @@
     },
 
     stringMatchCI_: function(expression, string) {
-      return expression + '.downcase == ' + this._quote(string) + '.downcase';
+      return '!' + expression + '.nil? && ' +
+        expression + '.downcase == ' + this._quote(string) + '.downcase';
     },
 
     regexMatch_: function(regex, string) {
