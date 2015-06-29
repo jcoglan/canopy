@@ -224,7 +224,8 @@ module Canopy::PEG
     end
   end
 
-  ParseError = Struct.new(:input, :offset, :expected)
+  ParseError = Class.new(StandardError)
+
   FAILURE = Object.new
 
   module Grammar
@@ -2717,7 +2718,7 @@ module Canopy::PEG
         @failure = @offset
         @expected << "<EOF>"
       end
-      raise SyntaxError, Parser.format_error(@input, @failure, @expected)
+      raise ParseError, Parser.format_error(@input, @failure, @expected)
     end
 
     def self.format_error(input, offset, expected)

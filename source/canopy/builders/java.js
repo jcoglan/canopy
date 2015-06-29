@@ -199,10 +199,10 @@
     },
 
     parserClass_: function(root) {
-      this._newBuffer('SyntaxError');
-      this._line('public class SyntaxError extends Exception {', false);
+      this._newBuffer('ParseError');
+      this._line('public class ParseError extends Exception {', false);
       this._indent(function(builder) {
-        builder._line('public SyntaxError(String message) {', false);
+        builder._line('public ParseError(String message) {', false);
         builder._indent(function(builder) {
           builder._line('super(message)');
         });
@@ -232,7 +232,7 @@
         builder._line('}', false);
 
         builder._newline();
-        builder._line('public static TreeNode parse(String input, Actions actions) throws SyntaxError {', false);
+        builder._line('public static TreeNode parse(String input, Actions actions) throws ParseError {', false);
         builder._indent(function(builder) {
           builder.assign_(this._grammarName + ' parser', 'new ' + this._grammarName + '(input, actions)');
           builder.return_('parser.parse()');
@@ -240,7 +240,7 @@
         builder._line('}', false);
 
         builder._newline();
-        builder._line('public static TreeNode parse(String input) throws SyntaxError {', false);
+        builder._line('public static TreeNode parse(String input) throws ParseError {', false);
         builder._indent(function(builder) {
           builder.return_('parse(input, null)');
         });
@@ -272,7 +272,7 @@
         builder._line('}', false);
 
         builder._newline();
-        builder._line('private TreeNode parse() throws SyntaxError {', false);
+        builder._line('private TreeNode parse() throws ParseError {', false);
         builder._indent(function(builder) {
           builder.jump_('TreeNode tree', root);
           builder.if_('tree != ' + builder.nullNode_() + ' && offset == inputSize', function(builder) {
@@ -282,7 +282,7 @@
             builder.assign_('failure', 'offset');
             builder.append_('expected', '"<EOF>"');
           });
-          builder._line('throw new SyntaxError(formatError(input, failure, expected))');
+          builder._line('throw new ParseError(formatError(input, failure, expected))');
         });
         builder._line('}', false);
       }, this);

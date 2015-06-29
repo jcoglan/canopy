@@ -93,7 +93,8 @@
     },
 
     grammarModule_: function(actions, block, context) {
-      this.assign_('ParseError', 'Struct.new(:input, :offset, :expected)');
+      this.assign_('ParseError', 'Class.new(StandardError)');
+      this._newline();
       this.assign_(this.nullNode_(), 'Object.new');
       this._newline();
       this._line('module Grammar');
@@ -130,7 +131,7 @@
             builder.assign_('@failure', '@offset');
             builder.append_('@expected', '"<EOF>"');
           });
-          builder._line('raise SyntaxError, Parser.format_error(@input, @failure, @expected)');
+          builder._line('raise ParseError, Parser.format_error(@input, @failure, @expected)');
         });
 
         builder.method_('self.format_error', ['input', 'offset', 'expected'], function(builder) {

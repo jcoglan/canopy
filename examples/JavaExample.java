@@ -6,7 +6,7 @@ import java.io.IOException;
 
 import examples.canopy.peg.CanopyPEG;
 import examples.canopy.peg.Label;
-import examples.canopy.peg.SyntaxError;
+import examples.canopy.peg.ParseError;
 import examples.canopy.peg.TreeNode;
 
 class JavaExample {
@@ -19,7 +19,7 @@ class JavaExample {
 
             printTree(tree, 0);
 
-        } catch (SyntaxError ex) {
+        } catch (ParseError ex) {
             System.out.println(ex);
         }
     }
