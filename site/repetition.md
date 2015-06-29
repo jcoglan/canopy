@@ -1,5 +1,6 @@
 ---
 layout: default
+title: Repeated nodes
 ---
 
 ## Repeated nodes
@@ -22,12 +23,12 @@ you'll get an error.
 
 ```js
 require('./badger').parse('badgerbadgerbadger')
-   == { textValue: 'badgerbadgerbadger',
+   == { text: 'badgerbadgerbadger',
         offset: 0,
         elements: 
-         [ { textValue: 'badger', offset: 0, elements: [] },
-           { textValue: 'badger', offset: 6, elements: [] },
-           { textValue: 'badger', offset: 12, elements: [] } ] }
+         [ { text: 'badger', offset: 0, elements: [] },
+           { text: 'badger', offset: 6, elements: [] },
+           { text: 'badger', offset: 12, elements: [] } ] }
 
 require('./badger').parse('bad')
 Error: Line 1: expected "badger"

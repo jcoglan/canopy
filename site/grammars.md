@@ -1,5 +1,6 @@
 ---
 layout: default
+title: Grammar syntax
 ---
 
 ## Grammar syntax
@@ -50,19 +51,19 @@ invalid input:
 var parens = require('./parens')
 
 parens.parse('94')
-   == { textValue: '94',
+   == { text: '94',
         offset: 0,
         elements: 
-         [ { textValue: '9', offset: 0, elements: [] },
-           { textValue: '4', offset: 1, elements: [] } ] }
+         [ { text: '9', offset: 0, elements: [] },
+           { text: '4', offset: 1, elements: [] } ] }
 
 parens.parse('(94)')
-   == { textValue: '(94)',
+   == { text: '(94)',
         offset: 0,
         elements: 
-         [ { textValue: '(', offset: 0, elements: [] },
-           { textValue: '94', offset: 1, elements: [...] },
-           { textValue: ')', offset: 3, elements: [] } ] }
+         [ { text: '(', offset: 0, elements: [] },
+           { text: '94', offset: 1, elements: [...] },
+           { text: ')', offset: 3, elements: [] } ] }
 
 parens.parse('(((94)')
 Error: Line 1: expected ")"

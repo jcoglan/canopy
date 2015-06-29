@@ -11,6 +11,7 @@ body {
 
 nav {
   background: #28252F;
+  border-right: 8px solid #18151F;
   font-size: 0.7em;
   position: fixed;
   top: 0;
@@ -20,10 +21,12 @@ nav {
 
   header {
     background: #C37386;
+    border-right: 8px solid #b36376;
+    margin-right: -8px;
     padding: 2em 3em;
 
     h1, a, span {
-      color: #28252F;
+      color: white;
       display: block;
       font-weight: 300;
       margin: 0;
@@ -35,7 +38,7 @@ nav {
     }
 
     span {
-      border-top: 1px solid #28252F;
+      border-top: 1px solid white;
       margin-top: 0.6em;
       padding-top: 0.6em;
       text-transform: lowercase;
@@ -44,6 +47,8 @@ nav {
 
   footer {
     background: #6386A8;
+    border-right: 8px solid #537698;
+    margin-right: -8px;
     padding: 1em 3em;
     position: absolute;
     bottom: 0;
@@ -75,7 +80,7 @@ nav {
 
 main {
   margin-left: 300px;
-  padding: 1em 0;
+  padding: 0;
 
   article {
     h2, p {

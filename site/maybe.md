@@ -1,5 +1,6 @@
 ---
 layout: default
+title: Optional nodes
 ---
 
 ## Optional nodes
@@ -27,10 +28,10 @@ other input will cause an error.
 
 ```js
 require('./future').parse('future')
-   == { textValue: 'future', offset: 0, elements: [] }
+   == { text: 'future', offset: 0, elements: [] }
 
 require('./future').parse('')
-   == { textValue: '', offset: 0, elements: [] }
+   == { text: '', offset: 0, elements: [] }
 
 require('./future').parse('perfect')
 Error: Line 1: expected "future"

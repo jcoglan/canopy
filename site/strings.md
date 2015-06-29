@@ -1,5 +1,6 @@
 ---
 layout: default
+title: Matching strings
 ---
 
 ## Matching strings
@@ -17,7 +18,7 @@ has no child nodes.
 
 ```js
 require('./parsers').parse('I like parsers')
-   == { textValue: 'I like parsers',
+   == { text: 'I like parsers',
         offset: 0,
         elements: [] }
 
@@ -44,7 +45,7 @@ It will then match any casing of the input:
 
 ```js
 require('./parsers').parse('I like PARSERS')
-   == { textValue: 'I like PARSERS',
+   == { text: 'I like PARSERS',
         offset: 0,
         elements: [] }
 ```

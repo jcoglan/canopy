@@ -1,5 +1,6 @@
 ---
 layout: default
+title: Cross-references
 ---
 
 ## Cross-references
@@ -18,15 +19,15 @@ simplified example of using rules to match an email address:
 
 ```js
 require('./email').parse('bob@example.com')
-   == { textValue: 'bob@example.com',
+   == { text: 'bob@example.com',
         offset: 0,
         elements: 
-         [ { textValue: 'bob', offset: 0, elements: [...] },
-           { textValue: '@', offset: 3, elements: [] },
-           { textValue: 'example.com', offset: 4, elements: [...] } ],
-        username: { textValue: 'bob', offset: 0, elements: [...] },
+         [ { text: 'bob', offset: 0, elements: [...] },
+           { text: '@', offset: 3, elements: [] },
+           { text: 'example.com', offset: 4, elements: [...] } ],
+        username: { text: 'bob', offset: 0, elements: [...] },
         host: 
-         { textValue: 'example.com',
+         { text: 'example.com',
            offset: 4,
            elements: [...] } }
 ```
@@ -37,8 +38,8 @@ an easier way to traverse the tree than using the `elements` array.
 
 ```js
 var tree = require('./email').parse('bob@example.com');
-tree.username.textValue    == 'bob'
-tree.host.textValue        == 'example.com'
+tree.username.text    == 'bob'
+tree.host.text        == 'example.com'
 ```
 
 References allow you to create recursive matchers, which is why PEGs can match
@@ -57,12 +58,12 @@ We can parse a string using this grammar and browse the tree it generates:
 ```js
 var tree = require('./lists').parse('[[1,2],3]')
 
-tree.textValue
+tree.text
    == '[[1,2],3]'
 
-tree.elements[1].textValue
+tree.elements[1].text
    == '[1,2]'
 
-tree.elements[1].elements[2].elements[0].elements[1].textValue
+tree.elements[1].elements[2].elements[0].elements[1].text
    == '2'
 ```

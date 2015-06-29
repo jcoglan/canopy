@@ -1,5 +1,6 @@
 ---
 layout: default
+title: Sequences
 ---
 
 ## Sequences
@@ -21,18 +22,18 @@ resulting parses of the possible inputs:
 
 ```js
 require('./hamlet').parse('to be')
-   == { textValue: 'to be',
+   == { text: 'to be',
         offset: 0,
         elements: 
-         [ { textValue: '', offset: 0, elements: [] },
-           { textValue: 'to be', offset: 0, elements: [] } ] }
+         [ { text: '', offset: 0, elements: [] },
+           { text: 'to be', offset: 0, elements: [] } ] }
 
 require('./hamlet').parse('not to be')
-   == { textValue: 'not to be',
+   == { text: 'not to be',
         offset: 0,
         elements: 
-         [ { textValue: 'not ', offset: 0, elements: [] },
-           { textValue: 'to be', offset: 4, elements: [] } ] }
+         [ { text: 'not ', offset: 0, elements: [] },
+           { text: 'to be', offset: 4, elements: [] } ] }
 
 require('./hamlet').parse('or not to be')
 Error: Line 1: expected "to be"
@@ -69,23 +70,23 @@ labelled nodes in the output:
 ```js
 tree = require('./hash').parse("{'foo' => 36}")
 
-   == { textValue: '{\'foo\' => 36}',
+   == { text: '{\'foo\' => 36}',
         offset: 0,
         elements: 
-         [ { textValue: '{', offset: 0, elements: [] },
-           { textValue: '\'foo\'', offset: 1, elements: [...] },
-           { textValue: ' => ', offset: 6, elements: [] },
-           { textValue: '36', offset: 10, elements: [...] },
-           { textValue: '}', offset: 12, elements: [] } ],
+         [ { text: '{', offset: 0, elements: [] },
+           { text: '\'foo\'', offset: 1, elements: [...] },
+           { text: ' => ', offset: 6, elements: [] },
+           { text: '36', offset: 10, elements: [...] },
+           { text: '}', offset: 12, elements: [] } ],
         string: 
-         { textValue: '\'foo\'', offset: 1, elements: [...] },
+         { text: '\'foo\'', offset: 1, elements: [...] },
         number: 
-         { textValue: '36', offset: 10, elements: [...] } }
+         { text: '36', offset: 10, elements: [...] } }
 
-tree.string.textValue
+tree.string.text
    == "'foo'"
 
-tree.number.textValue
+tree.number.text
    == "36"
 ```
 

@@ -1,13 +1,13 @@
 ---
 layout: default
+title: Building parse trees
 ---
 
-## Extending nodes with types
+## Building parse trees
 
-The syntax nodes produced by Canopy by default are all of the same 'type'.
-They all have a `textValue`, an `offset` and a (possibly empty) list of
-`elements`. But you can add your own methods to them to add new functionality
-to the parse tree.
+The syntax nodes produced by Canopy by default are all of the same 'type'.  They
+all have a `text`, an `offset` and a (possibly empty) list of `elements`. But
+you can add your own methods to them to add new functionality to the parse tree.
 
 This is done by annotating parsing expressions with types. A type is any valid
 JavaScript object name like `Foo.Bar` surrounded with pointy brackets. When
@@ -26,7 +26,7 @@ var strings = require('./strings');
 
 strings.Parser.HelloNode = {
   upcase: function() {
-    return this.textValue.toUpperCase();
+    return this.text.toUpperCase();
   }
 };
 
@@ -79,8 +79,8 @@ var types = require('./types');
 
 types.Parser.Extension = {
   convert: function() {
-    return this.first.textValue +
-           this.second.textValue.toUpperCase();
+    return this.first.text +
+           this.second.text.toUpperCase();
   }
 };
 
@@ -112,8 +112,8 @@ var choices = require('./choices');
 
 choices.Parser.Extension = {
   convert: function() {
-    return this.first.textValue +
-           this.second.textValue.toUpperCase();
+    return this.first.text +
+           this.second.text.toUpperCase();
   }
 };
 
