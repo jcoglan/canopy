@@ -37,6 +37,7 @@ To recompile the metagrammar, if you've edited `meta_grammar.peg`:
 
 To regenerate the example Canopy parsers:
 
+    npm run java
     npm run js
     npm run python
     npm run ruby
@@ -58,6 +59,10 @@ To run the test suite in the browser:
     open spec/browser.html
 
 ## Running the examples
+
+To run the Java examples:
+
+    javac examples/JavaExample.java && java examples.JavaExample
 
 To run the JavaScript examples:
 

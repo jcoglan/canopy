@@ -1,9 +1,13 @@
+.bundle
 .git
 .gitignore
 .npmignore
+.venv
 .wake.json
+CONTRIBUTING.md
 Gemfile*
 node_modules
+requirements.txt
 site
 source
 spec
