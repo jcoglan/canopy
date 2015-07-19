@@ -52,7 +52,7 @@ This little example shows a few important things:
 
 You invoke the parser by calling the module's `parse()` function with a string.
 In the browser, you can call `URL.parse()` rather than using `require()`; Canopy
-greates a global named after the grammar.
+creates a global named after the grammar.
 
 The `parse()` method returns a tree of *nodes*.
 
