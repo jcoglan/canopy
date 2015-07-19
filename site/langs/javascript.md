@@ -91,3 +91,78 @@ url.parse('https://example.com./');
    https://example.com./
                        ^                      */
 ```
+
+## Implementing actions
+
+Say you have a grammar that uses action annotations, for example:
+
+###### maps.peg
+
+    grammar Maps
+      map     <-  "{" string ":" value "}" %make_map
+      string  <-  "'" [^']* "'" %make_string
+      value   <-  list / number
+      list    <-  "[" value ("," value)* "]" %make_list
+      number  <-  [0-9]+ %make_number
+
+In JavaScript, you give the action functions to the parser by using the
+`actions` option, which should be an object implementing the named actions:
+
+```js
+var maps = require('./maps');
+
+var actions = {
+  make_map: function(input, start, end, elements) {
+    var map = {};
+    map[elements[1]] = elements[3];
+    return map;
+  },
+
+  make_string: function(input, start, end, elements) {
+    return elements[1].text;
+  },
+
+  make_list: function(input, start, end, elements) {
+    var list = [elements[1]];
+    elements[2].forEach(function(el) { list.push(el.value) });
+    return list;
+  },
+
+  make_number: function(input, start, end, elements) {
+    return parseInt(input.substring(start, end), 10);
+  }
+};
+
+var result = maps.parse("{'ints':[1,2,3]}", {actions: actions});
+
+console.log(result);
+// -> { ints: [ 1, 2, 3 ] }
+```
+
+## Extended node types
+
+Say you have a grammar that contains type annotations:
+
+###### words.peg
+
+    grammar Words
+      root  <-  first:"foo" second:"bar" <Extension>
+
+To use this parse, you must pass in an object containing implementations of the
+named types via the `types` option. Each defined type contains the methods that
+will be added to the nodes.
+
+```js
+var words = require('./words');
+
+var types = {
+  Extension: {
+    convert: function() {
+      return this.first.text + this.second.text.toUpperCase();
+    }
+  }
+};
+
+words.parse('foobar', {types: types}).convert()
+// -> 'fooBAR'
+```

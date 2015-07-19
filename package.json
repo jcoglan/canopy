@@ -21,7 +21,8 @@
                       , "python"  : "find examples/canopy -name '*.peg' -exec ./bin/canopy --lang py {} \\;"
                       , "ruby"    : "find examples/canopy -name '*.peg' -exec ./bin/canopy --lang rb {} \\;"
                       , "pegjs"   : "find examples/pegjs -name '*.peg' -exec pegjs --cache {} \\;"
-                      , "test"    : "node spec/console.js"}
+                      , "test"    : "node spec/console.js"
+                      }
 
 , "bugs"            : {"url": "http://github.com/jcoglan/canopy/issues"}
 

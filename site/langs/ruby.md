@@ -89,3 +89,76 @@ URL.parse('https://example.com./')
 #   https://example.com./
 #                       ^
 ```
+
+## Implementing actions
+
+Say you have a grammar that uses action annotations, for example:
+
+###### maps.peg
+
+    grammar Maps
+      map     <-  "{" string ":" value "}" %make_map
+      string  <-  "'" [^']* "'" %make_string
+      value   <-  list / number
+      list    <-  "[" value ("," value)* "]" %make_list
+      number  <-  [0-9]+ %make_number
+
+In Ruby, you give the action functions to the parser by using the `actions`
+option, which should be an object implementing the named actions:
+
+```rb
+require './maps'
+
+class Actions
+  def make_map(input, start, _end, elements)
+    {elements[1] => elements[3]}
+  end
+
+  def make_string(input, start, _end, elements)
+    elements[1].text
+  end
+
+  def make_list(input, start, _end, elements)
+    list = [elements[1]]
+    elements[2].each { |el| list << el.value }
+    list
+  end
+
+  def make_number(input, start, _end, elements)
+    input[start..._end].to_i(10)
+  end
+end
+
+result = Maps.parse("{'ints':[1,2,3]}", :actions => Actions.new)
+
+p result
+# -> {"ints"=>[1, 2, 3]}
+```
+
+## Extended node types
+
+Say you have a grammar that contains type annotations:
+
+###### words.peg
+
+    grammar Words
+      root  <-  first:"foo" second:"bar" <Extension>
+
+To use this parse, you must pass in a module containing implementations of the
+named types via the `types` option. Each defined type contains the methods that
+will be added to the nodes.
+
+```rb
+require './words'
+
+module Types
+  module Extension
+    def convert
+      first.text + second.text.upcase
+    end
+  end
+end
+
+Words.parse('foobar', :types => Types).convert
+# -> 'fooBAR'
+```

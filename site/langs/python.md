@@ -88,3 +88,91 @@ url.parse('https://example.com./')
 #   https://example.com./
 #                       ^
 ```
+
+## Implementing actions
+
+Say you have a grammar that uses action annotations, for example:
+
+###### maps.peg
+
+    grammar Maps
+      map     <-  "{" string ":" value "}" %make_map
+      string  <-  "'" [^']* "'" %make_string
+      value   <-  list / number
+      list    <-  "[" value ("," value)* "]" %make_list
+      number  <-  [0-9]+ %make_number
+
+In Python, you give the action functions to the parser by using the `actions`
+keyword argument, which should be an object implementing the named actions:
+
+```py
+import maps
+
+class Actions(object):
+    def make_map(self, input, start, end, elements):
+        return {elements[1]: elements[3]}
+
+    def make_string(self, input, start, end, elements):
+        return elements[1].text
+
+    def make_list(self, input, start, end, elements):
+        list = [elements[1]]
+        for el in elements[2]:
+            list.append(el.value)
+        return list
+
+    def make_number(self, input, start, end, elements):
+        return int(input[start:end], 10)
+
+result = maps.parse("{'ints':[1,2,3]}", actions=Actions())
+
+print result
+# -> {'ints': [1, 2, 3]}
+```
+
+## Extended node types
+
+Say you have a grammar that contains type annotations:
+
+###### words.peg
+
+    grammar Words
+      root  <-  first:"foo" second:"bar" <Extension>
+
+To use this parse, you must pass in an object containing implementations of the
+named types via the `types` option. Each defined type contains the methods that
+will be added to the nodes.
+
+You can import the types from a module:
+
+```py
+# node_types.py
+
+class Extension(object):
+    def convert(self):
+        return self.first.text + self.second.text.upper()
+
+
+# example.py
+
+import words
+import node_types
+
+words.parse('foobar', types=node_types).convert()
+# -> 'fooBAR'
+```
+
+Or, you can enclose the extension classes in another class that you pass to the
+parser:
+
+```py
+import words
+
+class Types
+    class Extension(object):
+        def convert(self):
+            return self.first.text + self.second.text.upper()
+
+words.parse('foobar', types=Types).convert()
+# -> 'fooBAR'
+```

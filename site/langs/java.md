@@ -117,3 +117,120 @@ public class Example {
     https://example.com./
                         ^                             */
 ```
+
+## Implementing actions
+
+Say you have a grammar that uses action annotations, for example:
+
+###### maps.peg
+
+    grammar Maps
+      map     <-  "{" string ":" value "}" %make_map
+      string  <-  "'" [^']* "'" %make_string
+      value   <-  list / number
+      list    <-  "[" value ("," value)* "]" %make_list
+      number  <-  [0-9]+ %make_number
+
+In Java, compiling the above grammar produces a package called `maps` that
+contains classes called `Maps`, `TreeNode` and `ParseError`, an enum called
+`Label` and an interface called `Actions`. You supply the action functions to
+the parser by implementing the `Actions` interface, which has one method for
+each action named in the grammar, each of which must return a `TreeNode`.
+`TreeNode` has a no-argument constructor so making subclasses of it is
+relatively easy.
+
+The following example parses the input `{'ints':[1,2,3]}`. It defines one
+`TreeNode` subclass for each kind of value in the tree:
+
+* `Pair` wraps a `Map<String, List<Integer>>`
+* `Text` wraps a `String`
+* `Array` wraps a `List<Integer>`
+* `Number` wraps an `int`
+
+It then implements the `Actions` interface to generate values of these types
+from the parser matches.
+
+```java
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import maps.Actions;
+import maps.Label;
+import maps.Maps;
+import maps.ParseError;
+import maps.TreeNode;
+
+class Pair extends TreeNode {
+    Map<String, List<Integer>> pair;
+
+    Pair(String key, List<Integer> value) {
+        pair = new HashMap<String, List<Integer>>();
+        pair.put(key, value);
+    }
+}
+
+class Text extends TreeNode {
+    String string;
+
+    Text(String string) {
+        this.string = string;
+    }
+}
+
+class Array extends TreeNode {
+    List<Integer> list;
+
+    Array(List<Integer> list) {
+        this.list = list;
+    }
+}
+
+class Number extends TreeNode {
+    int number;
+
+    Number(int number) {
+        this.number = number;
+    }
+}
+
+class MapsActions implements Actions {
+    public Pair make_map(String input, int start, int end, List<TreeNode> elements) {
+        Text string = (Text)elements.get(1);
+        Array array = (Array)elements.get(3);
+        return new Pair(string.string, array.list);
+    }
+
+    public Text make_string(String input, int start, int end, List<TreeNode> elements) {
+        return new Text(elements.get(1).text);
+    }
+
+    public Array make_list(String input, int start, int end, List<TreeNode> elements) {
+        List<Integer> list = new ArrayList<Integer>();
+        list.add(((Number)elements.get(1)).number);
+        for (TreeNode el : elements.get(2)) {
+            Number number = (Number)el.get(Label.value);
+            list.add(number.number);
+        }
+        return new Array(list);
+    }
+
+    public Number make_number(String input, int start, int end, List<TreeNode> elements) {
+        return new Number(Integer.parseInt(input.substring(start, end), 10));
+    }
+}
+
+public class Example {
+    public static void main(String[] args) throws ParseError {
+        Pair result = (Pair)Maps.parse("{'ints':[1,2,3]}", new MapsActions());
+
+        System.out.println(result.pair);
+        // -> {ints=[1, 2, 3]}
+    }
+}
+```
+
+## Extended node types
+
+Using the `<Type>` grammar annotation is not supported in the Java version.
