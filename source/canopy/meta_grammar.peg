@@ -24,10 +24,10 @@ choice_part               <-  (action_expression / sequence_expression / sequenc
 
 action_expression         <-  actionable_expression __+ action_tag <Action>
 
-actionable_expression     <-  "(" __* actionable_expression __* ")"
-                           /  sequence_expression
+actionable_expression     <-  sequence_expression
                            /  repeated_atom
                            /  terminal_node
+                           /  "(" __* actionable_expression __* ")"
 
 action_tag                <-  "%" identifier
 

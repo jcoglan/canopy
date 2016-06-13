@@ -125,7 +125,7 @@ function() { with(this) {
       before(function() { with(this) {
         Canopy.compile('grammar JS.ENV.IntActionTest \
           list <- (num "," %lift)* %to_list \
-          num  <- [0-9]+ %to_int')
+          num  <- ([0-9])+ %to_int')
 
         this.actions = {
           to_list: function(input, start, end, elements) {
