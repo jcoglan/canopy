@@ -125,7 +125,7 @@ class Actions
   end
 
   def make_number(input, start, _end, elements)
-    input[start..._end-1].to_i(10)
+    input[start..._end].to_i(10)
   end
 end
 
