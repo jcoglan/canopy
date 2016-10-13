@@ -136,7 +136,7 @@
 
         builder.method_('self.format_error', ['input', 'offset', 'expected'], function(builder) {
           builder._line('lines, line_no, position = input.split(/\\n/), 0, 0');
-          builder._line('while position <= offset');
+          builder._line('while position <= offset && line_no < lines.size');
           builder._indent(function(builder) {
             builder._line('position += lines[line_no].size + 1');
             builder._line('line_no += 1');
