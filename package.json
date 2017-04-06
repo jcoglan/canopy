@@ -10,8 +10,8 @@
 , "main"            : "./lib/canopy.js"
 , "bin"             : {"canopy": "./bin/canopy"}
 , "preferGlobal"    : true
-, "dependencies"    : {"mkdirp": "", "nopt": ""}
-, "devDependencies" : {"benchmark": "", "jstest": "", "pegjs": "", "wake": ""}
+, "dependencies"    : {"mkdirp": ">=0.5.1", "nopt": ">=4.0.1"}
+, "devDependencies" : {"benchmark": ">=2.1.4", "jstest": ">=1.0.5", "pegjs": ">=0.10.0", "wake": ">=0.3.6"}
 
 , "scripts"         : { "build"   : "wake"
                       , "clean"   : "find examples -name '*.class' -o -name '*.pyc' -exec rm {} \\;"
