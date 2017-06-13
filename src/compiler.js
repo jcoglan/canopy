@@ -8,7 +8,6 @@ var types = {
   CharClass:    require('./compiler/char_class'),
   Choice:       require('./compiler/choice'),
   ChoicePart:   require('./compiler/choice_part'),
-  CIString:     require('./compiler/ci_string'),
   Grammar:      require('./compiler/grammar'),
   GrammarRule:  require('./compiler/grammar_rule'),
   Maybe:        require('./compiler/maybe'),
@@ -24,7 +23,17 @@ var String  = require('./ast/string'),
 
 var actions = {
   string: function(text, a, b, elements) {
-    return new String(text.substring(a, b));
+    var text  = text.substring(a, b),
+        value = eval(text);
+
+    return new String(text, value, false);
+  },
+
+  ci_string: function(text, a, b, elements) {
+    var text  = text.substring(a, b),
+        value = eval('"' + elements[1].text + '"');
+
+    return new String(text, value, true);
   },
 
   any_char: function(text, a, b, elements) {

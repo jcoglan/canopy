@@ -2155,10 +2155,9 @@
       if (elements0 === null) {
         address0 = FAILURE;
       } else {
-        address0 = new TreeNode(this._input.substring(index1, this._offset), index1, elements0);
+        address0 = this._actions.ci_string(this._input, index1, this._offset, elements0);
         this._offset = this._offset;
       }
-      extend(address0, this._types.CIString);
       this._cache._ci_string_expression[index0] = [address0, this._offset];
       return address0;
     },
