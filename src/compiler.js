@@ -10,12 +10,12 @@ var types = {
   Grammar:      require('./compiler/grammar'),
   GrammarRule:  require('./compiler/grammar_rule'),
   Predicate:    require('./compiler/predicate'),
-  Repeat:       require('./compiler/repeat'),
   Sequence:     require('./compiler/sequence'),
   SequencePart: require('./compiler/sequence_part')
 };
 
-var Maybe     = require('./ast/maybe'),
+var Repeat    = require('./ast/repeat'),
+    Maybe     = require('./ast/maybe'),
     Reference = require('./ast/reference'),
     String    = require('./ast/string'),
     CharClass = require('./ast/char_class'),
@@ -24,6 +24,11 @@ var Maybe     = require('./ast/maybe'),
 var actions = {
   paren_expr: function(text, a, b, elements) {
     return elements[2];
+  },
+
+  repeat: function(text, a, b, elements) {
+    var quantities = {'*': 0, '+': 1};
+    return new Repeat(elements[0], quantities[elements[1].text]);
   },
 
   maybe: function(text, a, b, elements) {

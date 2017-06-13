@@ -1,24 +1,24 @@
 'use strict';
 
-module.exports = {
-  QUANTITIES: {'*': 0, '+': 1},
+var util = require('../util');
 
+var Repeat = function(expression, count) {
+  this._expression = expression;
+  this._count      = count;
+};
+
+util.assign(Repeat.prototype, {
   toSexp: function() {
-    var sexp = this.atom.toSexp();
+    return ['repeat', this._count, this._expression.toSexp()];
+  },
 
-    switch (this.quantifier.text) {
-      case '*': sexp = ['repeat', 0, sexp]; break;
-      case '+': sexp = ['repeat', 1, sexp]; break;
-    }
-    return sexp;
+  forEach: function(callback, context) {
+    callback.call(context, this._expression);
   },
 
   compile: function(builder, address, action) {
-    var quantifier = this.quantifier.text;
-
-    var minimum = this.QUANTITIES[quantifier],
-        temp = builder.localVars_({
-          remaining: minimum,
+    var temp = builder.localVars_({
+          remaining: this._count,
           index:     builder.offset_(),
           elements:  builder.emptyList_(),
           address:   builder.true_()
@@ -30,7 +30,7 @@ module.exports = {
         elAddr      = temp.address;
 
     builder.whileNotNull_(elAddr, function(builder) {
-      this.atom.compile(builder, elAddr);
+      this._expression.compile(builder, elAddr);
       builder.ifNode_(elAddr, function(builder) {
         builder.append_(elements, elAddr);
         builder.decrement_(remaining);
@@ -43,4 +43,6 @@ module.exports = {
       builder.assign_(address, builder.nullNode_());
     });
   }
-};
+});
+
+module.exports = Repeat;

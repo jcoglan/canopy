@@ -1494,10 +1494,9 @@
       if (elements0 === null) {
         address0 = FAILURE;
       } else {
-        address0 = new TreeNode17(this._input.substring(index1, this._offset), index1, elements0);
+        address0 = this._actions.repeat(this._input, index1, this._offset, elements0);
         this._offset = this._offset;
       }
-      extend(address0, this._types.Repeat);
       this._cache._repeated_atom[index0] = [address0, this._offset];
       return address0;
     },

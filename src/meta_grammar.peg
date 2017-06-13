@@ -41,7 +41,7 @@ sequence_part             <-  mute? label? expression:(maybe_atom / repeated_ato
 
 maybe_atom                <-  atom "?" %maybe
 
-repeated_atom             <-  atom quantifier:("*" / "+") <Repeat>
+repeated_atom             <-  atom quantifier:("*" / "+") %repeat
 
 atom                      <-  parenthesised_expression
                            /  predicated_atom
