@@ -5,7 +5,6 @@ var metagrammar = require('./meta_grammar'),
 
 var types = {
   Action:       require('./compiler/action'),
-  CharClass:    require('./compiler/char_class'),
   Choice:       require('./compiler/choice'),
   ChoicePart:   require('./compiler/choice_part'),
   Grammar:      require('./compiler/grammar'),
@@ -18,8 +17,9 @@ var types = {
   SequencePart: require('./compiler/sequence_part')
 };
 
-var String  = require('./ast/string'),
-    AnyChar = require('./ast/any_char');
+var String    = require('./ast/string'),
+    CharClass = require('./ast/char_class'),
+    AnyChar   = require('./ast/any_char');
 
 var actions = {
   string: function(text, a, b, elements) {
@@ -34,6 +34,11 @@ var actions = {
         value = eval('"' + elements[1].text + '"');
 
     return new String(text, value, true);
+  },
+
+  char_class: function(text, a, b, elements) {
+    var text = text.substring(a, b);
+    return new CharClass(text, new RegExp('^' + text));
   },
 
   any_char: function(text, a, b, elements) {

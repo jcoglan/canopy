@@ -64,7 +64,7 @@ ci_string_expression      <-  "`" ("\\" . / [^`])* "`" %ci_string
 
 any_char_expression       <-  "." %any_char
 
-char_class_expression     <-  "[" "^"? ("\\" . / [^\]])+ "]" <CharClass>
+char_class_expression     <-  "[" "^"? ("\\" . / [^\]])+ "]" %char_class
 
 label                     <-  identifier ":"
 

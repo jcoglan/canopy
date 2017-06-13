@@ -194,7 +194,7 @@ util.assign(Builder.prototype, {
   },
 
   compileRegex_: function(charClass, name) {
-    var regex  = charClass.toRegExp(),
+    var regex  = charClass.regex,
         source = regex.source.replace(/^\^/, '\\A');
 
     this.assign_('private static Pattern ' + name, 'Pattern.compile(' + this._quote(source) + ')');

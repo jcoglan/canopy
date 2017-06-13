@@ -106,7 +106,7 @@ util.assign(Builder.prototype, {
   },
 
   compileRegex_: function(charClass, name) {
-    var regex = charClass.toRegExp();
+    var regex = charClass.regex;
     this.assign_(name, 're.compile(' + this._quote(regex.source) + ')');
     charClass.constName = name;
     this._methodSeparator = '\n';
