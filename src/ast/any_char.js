@@ -1,6 +1,10 @@
 'use strict';
 
-module.exports = {
+var util = require('../util');
+
+var AnyChar = function() {};
+
+util.assign(AnyChar.prototype, {
   toSexp: function() {
     return ['any-char'];
   },
@@ -13,4 +17,6 @@ module.exports = {
       builder.failure_(address, '<any char>');
     });
   }
-};
+});
+
+module.exports = AnyChar;

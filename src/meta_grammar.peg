@@ -62,7 +62,7 @@ string_expression         <-  '"' ("\\" . / [^"])* '"' %string
 
 ci_string_expression      <-  "`" ("\\" . / [^`])* "`" <CIString>
 
-any_char_expression       <-  "." <AnyChar>
+any_char_expression       <-  "." %any_char
 
 char_class_expression     <-  "[" "^"? ("\\" . / [^\]])+ "]" <CharClass>
 

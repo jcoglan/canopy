@@ -2176,7 +2176,7 @@
         chunk0 = this._input.substring(this._offset, this._offset + 1);
       }
       if (chunk0 === '.') {
-        address0 = new TreeNode(this._input.substring(this._offset, this._offset + 1), this._offset);
+        address0 = this._actions.any_char(this._input, this._offset, this._offset + 1);
         this._offset = this._offset + 1;
       } else {
         address0 = FAILURE;
@@ -2188,7 +2188,6 @@
           this._expected.push('"."');
         }
       }
-      extend(address0, this._types.AnyChar);
       this._cache._any_char_expression[index0] = [address0, this._offset];
       return address0;
     },
