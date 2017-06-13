@@ -1,7 +1,7 @@
 'use strict'
 
-var canopy    = require('../source/canopy'),
-    jsBuilder = require('../source/canopy/builders/javascript'),
+var canopy    = require('../src/canopy'),
+    jsBuilder = require('../src/builders/javascript'),
     jstest    = require('jstest')
 
 module.exports = new jstest.Module({

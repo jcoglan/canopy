@@ -1,4 +1,4 @@
-var util   = require('../source/util'),
+var util   = require('../src/util'),
     jstest = require('jstest').Test
 
 jstest.describe("Canopy", function() { with(this) {

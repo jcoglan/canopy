@@ -1,7 +1,7 @@
 'use strict';
 
 var metagrammar = require('./meta_grammar'),
-    util        = require('../util');
+    util        = require('./util');
 
 var types = {
   Action:       require('./compiler/action'),

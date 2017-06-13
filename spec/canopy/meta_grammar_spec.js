@@ -1,4 +1,4 @@
-var Compiler = require('../../source/canopy/compiler'),
+var Compiler = require('../../src/compiler'),
     jstest   = require('jstest').Test
 
 jstest.describe("MetaGrammar", function() { with(this) {

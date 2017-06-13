@@ -1,6 +1,6 @@
 'use strict';
 
-var util = require('../../util');
+var util = require('../util');
 
 module.exports = {
   expressions: function() {

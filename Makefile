@@ -1,20 +1,20 @@
 SHELL := /bin/bash
 PATH  := $(PATH):node_modules/.bin
 
-src_files := $(shell find source -type f)
-lib_files := $(src_files:source/%=lib/%)
+src_files := $(shell find src -type f)
+lib_files := $(src_files:src/%=lib/%)
 
 .PHONY: bootstrap compile test examples clean
 
 bootstrap: test $(lib_files)
 
-lib/%: source/%
+lib/%: src/%
 	mkdir -p $(@D)
 	rsync -av $< $@
 
-compile: source/canopy/meta_grammar.js
+compile: src/meta_grammar.js
 
-source/canopy/meta_grammar.js: source/canopy/meta_grammar.peg
+src/meta_grammar.js: src/meta_grammar.peg
 	./bin/canopy $< --lang javascript
 
 test:
