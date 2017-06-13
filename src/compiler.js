@@ -9,7 +9,6 @@ var types = {
   ChoicePart:   require('./compiler/choice_part'),
   Grammar:      require('./compiler/grammar'),
   GrammarRule:  require('./compiler/grammar_rule'),
-  Maybe:        require('./compiler/maybe'),
   Predicate:    require('./compiler/predicate'),
   Reference:    require('./compiler/reference'),
   Repeat:       require('./compiler/repeat'),
@@ -17,13 +16,18 @@ var types = {
   SequencePart: require('./compiler/sequence_part')
 };
 
-var String    = require('./ast/string'),
+var Maybe     = require('./ast/maybe'),
+    String    = require('./ast/string'),
     CharClass = require('./ast/char_class'),
     AnyChar   = require('./ast/any_char');
 
 var actions = {
   paren_expr: function(text, a, b, elements) {
     return elements[2];
+  },
+
+  maybe: function(text, a, b, elements) {
+    return new Maybe(elements[0]);
   },
 
   string: function(text, a, b, elements) {
