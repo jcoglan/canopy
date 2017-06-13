@@ -24,14 +24,17 @@ module.exports = {
     var expressions = this.expressions(),
         labels      = {},
         anyLabels   = false,
+        k           = 0,
         exprLabels, i, j, m, n;
 
     for (i = 0, n = expressions.length; i < n; i++) {
       exprLabels = expressions[i].labels();
-      if (exprLabels.length === 0) continue;
-      anyLabels = true;
-      for (j = 0, m = exprLabels.length; j < m; j++)
-        labels[exprLabels[j]] = i;
+      if (exprLabels.length > 0) {
+        anyLabels = true;
+        for (j = 0, m = exprLabels.length; j < m; j++)
+          labels[exprLabels[j]] = k;
+      }
+      if (!expressions[i].muted()) k += 1;
     }
 
     if (anyLabels) {
@@ -42,16 +45,28 @@ module.exports = {
     }
   },
 
+  countUnmuted: function() {
+    var expressions = this.expressions(),
+        count       = 0,
+        i, n;
+
+    for (i = 0, n = expressions.length; i < n; i++) {
+      if (!expressions[i].muted()) count += 1;
+    }
+
+    return count;
+  },
+
   compile: function(builder, address, action) {
     var temp = builder.localVars_({
       index:    builder.offset_(),
-      elements: builder.emptyList_(this.expressions().length)
+      elements: builder.emptyList_(this.countUnmuted())
     });
 
     var startOffset = temp.index,
         elements    = temp.elements;
 
-    this._compileExpressions(builder, 0, startOffset, elements);
+    this._compileExpressions(builder, 0, 0, startOffset, elements);
 
     builder.ifNull_(elements, function(builder) {
       builder.assign_(address, builder.nullNode_());
@@ -60,17 +75,19 @@ module.exports = {
     }, this);
   },
 
-  _compileExpressions: function(builder, index, startOffset, elements) {
+  _compileExpressions: function(builder, index, elIndex, startOffset, elements) {
     var expressions = this.expressions();
     if (index === expressions.length) return;
 
-    var expAddr = builder.localVar_('address');
+    var expAddr = builder.localVar_('address'),
+        expr    = expressions[index],
+        muted   = expr.muted();
 
-    expressions[index].compile(builder, expAddr);
+    expr.compile(builder, expAddr);
 
     builder.ifNode_(expAddr, function(builder) {
-      builder.append_(elements, expAddr, index);
-      this._compileExpressions(builder, index + 1, startOffset, elements);
+      if (!muted) builder.append_(elements, expAddr, elIndex);
+      this._compileExpressions(builder, index + 1, elIndex + (muted ? 0 : 1), startOffset, elements);
     }, function(builder) {
       builder.assign_(elements, builder.null_());
       builder.assign_(builder.offset_(), startOffset);

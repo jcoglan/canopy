@@ -30,6 +30,32 @@ jstest.describe("Compiler.Sequence", function() { with(this) {
     assertThrows(Error, function() { SequenceTest.parse('foobart') })
   }})
 
+  describe('muting', function() { with(this) {
+    before(function() { with(this) {
+      parseHelper.compile('grammar global.MuteTest \
+        sequence <- first:"foo" @"bar" last:"qux"')
+    }})
+
+    it('excludes marked expresions from the tree', function() { with(this) {
+      assertParse(['foobarqux', 0, [
+                    ['foo', 0, []],
+                    ['qux', 6, []]]],
+
+        MuteTest.parse('foobarqux') )
+    }})
+
+    it('excludes marked expresions from the labelled nodes', function() { with(this) {
+      assertParse(['foobarqux', 0, [
+                    ['foo', 0, []],
+                    ['qux', 6, []]], {
+                    first: ['foo', 0, []],
+                    last: ['qux', 6, []]
+                  }],
+
+        MuteTest.parse('foobarqux') )
+    }})
+  }})
+
   describe('labelling', function() { with(this) {
     describe('a terminal node', function() { with(this) {
       before(function() { with(this) {

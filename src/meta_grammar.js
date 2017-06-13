@@ -147,7 +147,7 @@
 
   var TreeNode15 = function(text, offset, elements) {
     TreeNode.apply(this, arguments);
-    this['expression'] = elements[1];
+    this['expression'] = elements[2];
   };
   inherit(TreeNode15, TreeNode);
 
@@ -1317,10 +1317,10 @@
         this._offset = cached[1];
         return cached[0];
       }
-      var index1 = this._offset, elements0 = new Array(2);
+      var index1 = this._offset, elements0 = new Array(3);
       var address1 = FAILURE;
       var index2 = this._offset;
-      address1 = this._read_label();
+      address1 = this._read_mute();
       if (address1 === FAILURE) {
         address1 = new TreeNode(this._input.substring(index2, index2), index2);
         this._offset = index2;
@@ -1329,20 +1329,33 @@
         elements0[0] = address1;
         var address2 = FAILURE;
         var index3 = this._offset;
-        address2 = this._read_maybe_atom();
+        address2 = this._read_label();
         if (address2 === FAILURE) {
+          address2 = new TreeNode(this._input.substring(index3, index3), index3);
           this._offset = index3;
-          address2 = this._read_repeated_atom();
-          if (address2 === FAILURE) {
-            this._offset = index3;
-            address2 = this._read_atom();
-            if (address2 === FAILURE) {
-              this._offset = index3;
-            }
-          }
         }
         if (address2 !== FAILURE) {
           elements0[1] = address2;
+          var address3 = FAILURE;
+          var index4 = this._offset;
+          address3 = this._read_maybe_atom();
+          if (address3 === FAILURE) {
+            this._offset = index4;
+            address3 = this._read_repeated_atom();
+            if (address3 === FAILURE) {
+              this._offset = index4;
+              address3 = this._read_atom();
+              if (address3 === FAILURE) {
+                this._offset = index4;
+              }
+            }
+          }
+          if (address3 !== FAILURE) {
+            elements0[2] = address3;
+          } else {
+            elements0 = null;
+            this._offset = index1;
+          }
         } else {
           elements0 = null;
           this._offset = index1;
@@ -2421,6 +2434,35 @@
         this._offset = this._offset;
       }
       this._cache._label[index0] = [address0, this._offset];
+      return address0;
+    },
+
+    _read_mute: function() {
+      var address0 = FAILURE, index0 = this._offset;
+      this._cache._mute = this._cache._mute || {};
+      var cached = this._cache._mute[index0];
+      if (cached) {
+        this._offset = cached[1];
+        return cached[0];
+      }
+      var chunk0 = null;
+      if (this._offset < this._inputSize) {
+        chunk0 = this._input.substring(this._offset, this._offset + 1);
+      }
+      if (chunk0 === '@') {
+        address0 = new TreeNode(this._input.substring(this._offset, this._offset + 1), this._offset);
+        this._offset = this._offset + 1;
+      } else {
+        address0 = FAILURE;
+        if (this._offset > this._failure) {
+          this._failure = this._offset;
+          this._expected = [];
+        }
+        if (this._offset === this._failure) {
+          this._expected.push('"@"');
+        }
+      }
+      this._cache._mute[index0] = [address0, this._offset];
       return address0;
     },
 

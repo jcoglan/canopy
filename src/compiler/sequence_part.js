@@ -7,7 +7,7 @@ module.exports = {
   },
 
   labels: function() {
-    var element    = this.elements[0].identifier,
+    var element    = this.elements[1].identifier,
         expression = this.atomic(),
         labels     = [];
 
@@ -17,12 +17,16 @@ module.exports = {
     return labels;
   },
 
+  muted: function() {
+    return this.elements[0].text !== '';
+  },
+
   toSexp: function() {
     var expression = this.atomic(),
         labels     = this.labels(),
         sexp       = expression.toSexp();
 
-    if (this.elements[0].identifier) sexp = ['label', labels[0], sexp];
+    if (this.elements[1].identifier) sexp = ['label', labels[0], sexp];
 
     return sexp;
   },
