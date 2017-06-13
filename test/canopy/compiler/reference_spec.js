@@ -7,7 +7,7 @@ jstest.describe("Compiler.Reference", function() { with(this) {
   describe('with two rules and a reference', function() { with(this) {
     describe('where the root only contains a reference', function() { with(this) {
       before(function() { with(this) {
-        parseHelper.compile('grammar global.OneRefTest \
+        compile('grammar global.OneRefTest \
           first <- second \
           second <- "bar"')
       }})
@@ -23,7 +23,7 @@ jstest.describe("Compiler.Reference", function() { with(this) {
 
     describe('where the root contains the reference as part of a sequence', function() { with(this) {
       before(function() { with(this) {
-        parseHelper.compile('grammar global.OneRefWithSequenceTest \
+        compile('grammar global.OneRefWithSequenceTest \
           first <- second "end" \
           second <- "begin"')
       }})
@@ -41,7 +41,7 @@ jstest.describe("Compiler.Reference", function() { with(this) {
 
     describe('where the root contains the reference as part of a sub-sequence', function() { with(this) {
       before(function() { with(this) {
-        parseHelper.compile('grammar global.OneRefWithSubSequenceTest \
+        compile('grammar global.OneRefWithSubSequenceTest \
           first <- (second "sub") "end" \
           second <- "begin"')
       }})
@@ -61,7 +61,7 @@ jstest.describe("Compiler.Reference", function() { with(this) {
 
     describe('when the root contains the reference as part of a choice', function() { with(this) {
       before(function() { with(this) {
-        parseHelper.compile('grammar global.OneRefWithChoice \
+        compile('grammar global.OneRefWithChoice \
           first <- second / "end" \
           second <- "begin"')
       }})

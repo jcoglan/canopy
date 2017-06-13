@@ -21,11 +21,9 @@ module.exports = new jstest.Module({
     })
   },
 
-  extend: {
-    compile: function(grammar) {
-      var builder = jsBuilder.create('testfile')
-      var source = canopy.compile(grammar, builder)
-      eval(source.testfile)
-    }
+  compile: function(grammar) {
+    var builder = jsBuilder.create('testfile')
+    var source = canopy.compile(grammar, builder)
+    eval(source.testfile)
   }
 })

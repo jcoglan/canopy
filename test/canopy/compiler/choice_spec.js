@@ -5,7 +5,7 @@ jstest.describe("Compiler.Choice", function() { with(this) {
   include(parseHelper)
 
   before(function() { with(this) {
-    parseHelper.compile('grammar global.ChoiceTest \
+    compile('grammar global.ChoiceTest \
       choice <- "foo" / "bar" / "baz"')
   }})
 
@@ -38,7 +38,7 @@ jstest.describe("Compiler.Choice", function() { with(this) {
 
   describe('when the choices are ambiguous', function() { with(this) {
     before(function() { with(this) {
-      parseHelper.compile('grammar global.AmbiguousChoiceTest \
+      compile('grammar global.AmbiguousChoiceTest \
         choice <- "foxes love" / "chunky" "bacon" / "chunkyb" "acon"')
     }})
 
@@ -53,7 +53,7 @@ jstest.describe("Compiler.Choice", function() { with(this) {
 
   describe('backtracking', function() { with(this) {
     before(function() { with(this) {
-      parseHelper.compile('grammar global.BacktrackingChoiceTest \
+      compile('grammar global.BacktrackingChoiceTest \
         choice <- "foob" / "foo"')
     }})
 
@@ -67,7 +67,7 @@ jstest.describe("Compiler.Choice", function() { with(this) {
 
     describe('within a sequence', function() { with(this) {
       before(function() { with(this) {
-        parseHelper.compile('grammar global.BacktrackingSequenceChoice \
+        compile('grammar global.BacktrackingSequenceChoice \
           choice <- ("word" "type" / "word") "bar"')
       }})
 

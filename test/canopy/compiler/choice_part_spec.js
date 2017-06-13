@@ -7,7 +7,7 @@ jstest.describe("Compiler.ChoicePart", function() { with(this) {
   describe('action tags', function() { with(this) {
     describe('constructing a string node', function() { with(this) {
       before(function() { with(this) {
-        parseHelper.compile('grammar global.StringActionTest \
+        compile('grammar global.StringActionTest \
           rule <- "begin" %begin')
 
         this.actions = {
@@ -22,7 +22,7 @@ jstest.describe("Compiler.ChoicePart", function() { with(this) {
 
     describe('constructing a case-insensitive string node', function() { with(this) {
       before(function() { with(this) {
-        parseHelper.compile('grammar global.CIStringActionTest \
+        compile('grammar global.CIStringActionTest \
           rule <- `begin` %begin')
 
         this.actions = {
@@ -37,7 +37,7 @@ jstest.describe("Compiler.ChoicePart", function() { with(this) {
 
     describe('constructing a character class node', function() { with(this) {
       before(function() { with(this) {
-        parseHelper.compile('grammar global.ClassActionTest \
+        compile('grammar global.ClassActionTest \
           rule <- [a-z] %make_char')
 
         this.actions = {
@@ -52,7 +52,7 @@ jstest.describe("Compiler.ChoicePart", function() { with(this) {
 
     describe('constructing an any-char node', function() { with(this) {
       before(function() { with(this) {
-        parseHelper.compile('grammar global.AnyActionTest \
+        compile('grammar global.AnyActionTest \
           rule <- . %char_code')
 
         this.actions = {
@@ -67,7 +67,7 @@ jstest.describe("Compiler.ChoicePart", function() { with(this) {
 
     describe('constructing a parenthesised node', function() { with(this) {
       before(function() { with(this) {
-        parseHelper.compile('grammar global.ParenActionTest \
+        compile('grammar global.ParenActionTest \
           rule <-  ( ( ( ( . ) ) ) ) %char_code')
 
         this.actions = {
@@ -82,7 +82,7 @@ jstest.describe("Compiler.ChoicePart", function() { with(this) {
 
     describe('constructing an optional node', function() { with(this) {
       before(function() { with(this) {
-        parseHelper.compile('grammar global.MaybeActionTest \
+        compile('grammar global.MaybeActionTest \
           rule <- ([0-9]+ %to_int)?')
 
         this.actions = {
@@ -108,7 +108,7 @@ jstest.describe("Compiler.ChoicePart", function() { with(this) {
 
     describe('constructing a predicated node', function() { with(this) {
       before(function() { with(this) {
-        parseHelper.compile('grammar global.PredicateActionTest \
+        compile('grammar global.PredicateActionTest \
           rule <- "value: " &([0-9]+ %to_int) [0-9]')
 
         this.actions = {
@@ -125,7 +125,7 @@ jstest.describe("Compiler.ChoicePart", function() { with(this) {
 
     describe('constructing a repeated node', function() { with(this) {
       before(function() { with(this) {
-        parseHelper.compile('grammar global.IntActionTest \
+        compile('grammar global.IntActionTest \
           list <- (num "," %lift)* %to_list \
           num  <- ([0-9])+ %to_int')
 
@@ -153,7 +153,7 @@ jstest.describe("Compiler.ChoicePart", function() { with(this) {
 
     describe('constructing a sequence', function() { with(this) {
       before(function() { with(this) {
-        parseHelper.compile('grammar global.MathActionTest \
+        compile('grammar global.MathActionTest \
           addition <- int " "* "+" " "* int %add \
           int      <- [0-9]* %an_int')
 
@@ -178,7 +178,7 @@ jstest.describe("Compiler.ChoicePart", function() { with(this) {
 
     describe('making a choice', function() { with(this) { describe
       before(function() { with(this) {
-        parseHelper.compile('grammar global.ChoiceActionTest \
+        compile('grammar global.ChoiceActionTest \
           number <- "0" %num / [1-9] [0-9]* %num')
 
         this.actions = {
@@ -197,7 +197,7 @@ jstest.describe("Compiler.ChoicePart", function() { with(this) {
   describe('type annotations', function() { with(this) {
     describe('when the node type is a mixin', function() { with(this) {
       before(function() { with(this) {
-        parseHelper.compile('grammar global.ModuleTypeTest \
+        compile('grammar global.ModuleTypeTest \
           rule <- "content" <NodeType>')
 
         this.types = {
@@ -218,7 +218,7 @@ jstest.describe("Compiler.ChoicePart", function() { with(this) {
 
     describe('when the underlying parser is a choice', function() { with(this) {
       before(function() { with(this) {
-        parseHelper.compile('grammar global.TypedChoiceTest \
+        compile('grammar global.TypedChoiceTest \
           rule <- ("content" / "booya") <NodeType>')
 
         this.types = {
@@ -233,7 +233,7 @@ jstest.describe("Compiler.ChoicePart", function() { with(this) {
 
     describe('where the underlying parser is a reference', function() { with(this) {
       before(function() { with(this) {
-        parseHelper.compile('grammar global.TypedRefTest \
+        compile('grammar global.TypedRefTest \
           first <- second <First> \
           second <- "bar" <Second>')
 
@@ -254,7 +254,7 @@ jstest.describe("Compiler.ChoicePart", function() { with(this) {
 
     describe('when the underlying parser is a repetition', function() { with(this) {
       before(function() { with(this) {
-        parseHelper.compile('grammar global.TypedRepeatTest \
+        compile('grammar global.TypedRepeatTest \
           rule <- "content"+ <NodeType>')
 
         this.types = {
@@ -269,7 +269,7 @@ jstest.describe("Compiler.ChoicePart", function() { with(this) {
 
     describe('when the underlying parser is a maybe', function() { with(this) {
       before(function() { with(this) {
-        parseHelper.compile('grammar global.TypedMaybeTest \
+        compile('grammar global.TypedMaybeTest \
           rule <- "content"? <NodeType>')
 
         this.types = {
@@ -284,7 +284,7 @@ jstest.describe("Compiler.ChoicePart", function() { with(this) {
 
     describe('when the node type is namespaced', function() { with(this) {
       before(function() { with(this) {
-        parseHelper.compile('grammar global.NamespacedTypeTest \
+        compile('grammar global.NamespacedTypeTest \
           rule <- "content" <NS.NodeType>')
 
         this.types = {

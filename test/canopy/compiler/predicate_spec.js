@@ -6,7 +6,7 @@ jstest.describe("Compiler.Predicate", function() { with(this) {
 
   describe('positive lookahead', function() { with(this) {
     before(function() { with(this) {
-      parseHelper.compile('grammar global.AndTest \
+      compile('grammar global.AndTest \
         predicate <- &"foosball" "foo" .*')
     }})
 
@@ -31,7 +31,7 @@ jstest.describe("Compiler.Predicate", function() { with(this) {
 
   describe('negative lookahead', function() { with(this) {
     before(function() { with(this) {
-      parseHelper.compile('grammar global.NotTest \
+      compile('grammar global.NotTest \
         predicate <- !"foo" "bar"')
     }})
 
@@ -49,7 +49,7 @@ jstest.describe("Compiler.Predicate", function() { with(this) {
 
     describe('combined with repetition', function() { with(this) {
       before(function() { with(this) {
-        parseHelper.compile('grammar global.RepeatNotTest \
+        compile('grammar global.RepeatNotTest \
           predicate <- (!" " .)+ " "')
       }})
 

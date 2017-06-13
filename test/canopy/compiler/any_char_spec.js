@@ -5,7 +5,7 @@ jstest.describe("Compiler.AnyChar", function() { with(this) {
   include(parseHelper)
 
   before(function() { with(this) {
-    parseHelper.compile('grammar global.AnyCharTest \
+    compile('grammar global.AnyCharTest \
       anyChar <- .')
   }})
 

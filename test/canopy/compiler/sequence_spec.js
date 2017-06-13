@@ -5,7 +5,7 @@ jstest.describe("Compiler.Sequence", function() { with(this) {
   include(parseHelper)
 
   before(function() { with(this) {
-    parseHelper.compile('grammar global.SequenceTest \
+    compile('grammar global.SequenceTest \
       sequence <- "foo" "bar"')
   }})
 
@@ -32,7 +32,7 @@ jstest.describe("Compiler.Sequence", function() { with(this) {
 
   describe('muting', function() { with(this) {
     before(function() { with(this) {
-      parseHelper.compile('grammar global.MuteTest \
+      compile('grammar global.MuteTest \
         sequence <- first:"foo" @"bar" last:"qux"')
     }})
 
@@ -59,7 +59,7 @@ jstest.describe("Compiler.Sequence", function() { with(this) {
   describe('labelling', function() { with(this) {
     describe('a terminal node', function() { with(this) {
       before(function() { with(this) {
-        parseHelper.compile('grammar global.LabelTestA \
+        compile('grammar global.LabelTestA \
           root <- "first" middle:"second" "third"')
       }})
 
@@ -77,7 +77,7 @@ jstest.describe("Compiler.Sequence", function() { with(this) {
 
     describe('a reference', function() { with(this) {
       before(function() { with(this) {
-        parseHelper.compile('grammar global.LabelTestR \
+        compile('grammar global.LabelTestR \
           root   <- "first" middle "third" \
           middle <- "second"')
       }})
@@ -96,7 +96,7 @@ jstest.describe("Compiler.Sequence", function() { with(this) {
 
     describe('a labelled reference', function() { with(this) {
       before(function() { with(this) {
-        parseHelper.compile('grammar global.LabelTestR \
+        compile('grammar global.LabelTestR \
           root   <- "first" alias:middle "third" \
           middle <- "second"')
       }})
@@ -116,7 +116,7 @@ jstest.describe("Compiler.Sequence", function() { with(this) {
 
     describe('a repetition node', function() { with(this) {
       before(function() { with(this) {
-        parseHelper.compile('grammar global.LabelTestB \
+        compile('grammar global.LabelTestB \
           root <- "first" middle:"a"+ "third"')
       }})
 
@@ -142,7 +142,7 @@ jstest.describe("Compiler.Sequence", function() { with(this) {
 
     describe('nesting', function() { with(this) {
       before(function() { with(this) {
-        parseHelper.compile('grammar global.LabelTestC \
+        compile('grammar global.LabelTestC \
           root <- firstLetter:[a-z] restLetters:(", " letter:[a-z])*')
 
         this.rest = [', b, c', 1, [

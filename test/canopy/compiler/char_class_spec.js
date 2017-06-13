@@ -6,7 +6,7 @@ jstest.describe("Compiler.CharClass", function() { with(this) {
 
   describe('positive', function() { with(this) {
     before(function() { with(this) {
-      parseHelper.compile('grammar global.PositiveCharClassTest \
+      compile('grammar global.PositiveCharClassTest \
         charClass <- [a-z]')
     }})
 
@@ -27,7 +27,7 @@ jstest.describe("Compiler.CharClass", function() { with(this) {
 
   describe('negative', function() { with(this) {
     before(function() { with(this) {
-      parseHelper.compile('grammar global.NegativeCharClassTest \
+      compile('grammar global.NegativeCharClassTest \
         charClass <- [^a-z]')
     }})
 
@@ -46,7 +46,7 @@ jstest.describe("Compiler.CharClass", function() { with(this) {
 
   describe('with sequencing and repetition', function() { with(this) {
     before(function() { with(this) {
-      parseHelper.compile('grammar global.RepeatCharClassTest \
+      compile('grammar global.RepeatCharClassTest \
         root <- [1-9] [0-9]*')
     }})
 

@@ -5,7 +5,7 @@ jstest.describe("Compiler.String", function() { with(this) {
   include(parseHelper)
 
   before(function() { with(this) {
-    parseHelper.compile('grammar global.StringTest \
+    compile('grammar global.StringTest \
       string <- "foo"')
   }})
 
@@ -28,7 +28,7 @@ jstest.describe("Compiler.String", function() { with(this) {
 
   describe('single-quoted strings', function() { with(this) {
     before(function() { with(this) {
-      parseHelper.compile("grammar global.SingleQuoteTest \
+      compile("grammar global.SingleQuoteTest \
         string <- 'foo'")
     }})
 
@@ -39,7 +39,7 @@ jstest.describe("Compiler.String", function() { with(this) {
 
   describe('case-insensitive strings', function() { with(this) {
     before(function() { with(this) {
-      parseHelper.compile('grammar global.CIStringTest \
+      compile('grammar global.CIStringTest \
         string <- `foo`')
     }})
 
@@ -51,7 +51,7 @@ jstest.describe("Compiler.String", function() { with(this) {
 
   describe('optional case-insensitive strings', function() { with(this) {
     before(function() { with(this) {
-      parseHelper.compile('grammar global.CIStringTest \
+      compile('grammar global.CIStringTest \
         root <- string1 string2? \
         string1 <- "foo" \
         string2 <- `bar`')

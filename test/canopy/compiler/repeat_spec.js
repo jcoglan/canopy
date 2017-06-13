@@ -6,7 +6,7 @@ jstest.describe("Compiler.Repeat", function() { with(this) {
 
   describe('maybe', function() { with(this) {
     before(function() { with(this) {
-      parseHelper.compile('grammar global.MaybeTest \
+      compile('grammar global.MaybeTest \
         maybe <- "jc"?')
     }})
 
@@ -25,7 +25,7 @@ jstest.describe("Compiler.Repeat", function() { with(this) {
 
   describe('with zero minimum occurences', function() { with(this) {
     before(function() { with(this) {
-      parseHelper.compile('grammar global.ZeroOrMoreTest \
+      compile('grammar global.ZeroOrMoreTest \
         root <- "foo"*')
     }})
 
@@ -55,7 +55,7 @@ jstest.describe("Compiler.Repeat", function() { with(this) {
 
     describe('followed by more of the repeated pattern', function() { with(this) {
       before(function() { with(this) {
-        parseHelper.compile('grammar global.ZeroOrUnparsable \
+        compile('grammar global.ZeroOrUnparsable \
           root <- "foo"* "foo"')
       }})
 
@@ -69,7 +69,7 @@ jstest.describe("Compiler.Repeat", function() { with(this) {
 
   describe('with one minimum occurence', function() { with(this) {
     before(function() { with(this) {
-      parseHelper.compile('grammar global.OneOrMoreTest \
+      compile('grammar global.OneOrMoreTest \
         root <- "foo"+')
     }})
 
@@ -99,7 +99,7 @@ jstest.describe("Compiler.Repeat", function() { with(this) {
 
     describe('followed by more of the repeated pattern', function() { with(this) {
       before(function() { with(this) {
-        parseHelper.compile('grammar global.OneOrUnparsable \
+        compile('grammar global.OneOrUnparsable \
           root <- "foo"+ "foo"')
       }})
 
