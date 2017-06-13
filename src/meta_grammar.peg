@@ -57,7 +57,8 @@ predicated_atom           <-  predicate:("&" / "!") atom <Predicate>
 
 reference_expression      <-  identifier !assignment <Reference>
 
-string_expression         <-  ('"' ("\\" . / [^"])* '"' / "'" ("\\" . / [^'])* "'") <String>
+string_expression         <-  '"' ("\\" . / [^"])* '"' %string
+                           /  "'" ("\\" . / [^'])* "'" %string
 
 ci_string_expression      <-  "`" ("\\" . / [^`])* "`" <CIString>
 

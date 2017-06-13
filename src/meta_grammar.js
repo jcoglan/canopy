@@ -1837,7 +1837,7 @@
       if (elements0 === null) {
         address0 = FAILURE;
       } else {
-        address0 = new TreeNode(this._input.substring(index2, this._offset), index2, elements0);
+        address0 = this._actions.string(this._input, index2, this._offset, elements0);
         this._offset = this._offset;
       }
       if (address0 === FAILURE) {
@@ -1989,14 +1989,13 @@
         if (elements3 === null) {
           address0 = FAILURE;
         } else {
-          address0 = new TreeNode(this._input.substring(index6, this._offset), index6, elements3);
+          address0 = this._actions.string(this._input, index6, this._offset, elements3);
           this._offset = this._offset;
         }
         if (address0 === FAILURE) {
           this._offset = index1;
         }
       }
-      extend(address0, this._types.String);
       this._cache._string_expression[index0] = [address0, this._offset];
       return address0;
     },

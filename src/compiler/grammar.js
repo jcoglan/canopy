@@ -16,7 +16,8 @@ module.exports = {
   compile: function(builder) {
     var scan = function(node, callback, context) {
       callback.call(context, node);
-      node.forEach(function(child) { scan(child, callback, context) });
+      if (node.forEach)
+        node.forEach(function(child) { scan(child, callback, context) });
     };
 
     builder.package_(this.grammarName(), function(builder) {

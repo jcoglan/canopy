@@ -17,8 +17,15 @@ var types = {
   Reference:    require('./compiler/reference'),
   Repeat:       require('./compiler/repeat'),
   Sequence:     require('./compiler/sequence'),
-  SequencePart: require('./compiler/sequence_part'),
-  String:       require('./compiler/string')
+  SequencePart: require('./compiler/sequence_part')
+};
+
+var String = require('./ast/string');
+
+var actions = {
+  string: function(text, a, b, elements) {
+    return new String(text.substring(a, b));
+  }
 };
 
 var Compiler = function(grammarText, builder) {
@@ -30,7 +37,7 @@ util.assign(Compiler.prototype, {
   parseTree: function() {
     if (this._tree) return this._tree;
 
-    this._tree = metagrammar.parse(this._grammarText, {types: types});
+    this._tree = metagrammar.parse(this._grammarText, {types: types, actions: actions});
     if (this._tree) return this._tree;
 
     var message = metagrammar.formatError(metagrammar.Parser.lastError);
