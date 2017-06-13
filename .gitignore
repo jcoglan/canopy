@@ -1,4 +1,3 @@
-.wake.json
 *.class
 Gemfile.lock
 lib

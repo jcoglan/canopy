@@ -1,4 +1,6 @@
-Canopy.Compiler.String = {
+'use strict';
+
+module.exports = {
   toSexp: function() {
     return ['string', eval(this.text)];
   },

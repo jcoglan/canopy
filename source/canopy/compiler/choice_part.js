@@ -1,4 +1,6 @@
-Canopy.Compiler.ChoicePart = {
+'use strict';
+
+module.exports = {
   nodeType: function() {
     var element = this.elements[1].type_tag;
     return element ? element.object_identifier.text : null;

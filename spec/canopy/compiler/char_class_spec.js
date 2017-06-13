@@ -1,10 +1,12 @@
-JS.ENV.Canopy.Compiler.CharClassSpec = JS.Test.describe("Canopy.Compiler.CharClass",
-function() { with(this) {
-  include(Canopy.SpecHelper)
+var parseHelper = require('../../parse_helper'),
+    jstest      = require('jstest').Test
+
+jstest.describe("Compiler.CharClass", function() { with(this) {
+  include(parseHelper)
 
   describe('positive', function() { with(this) {
     before(function() { with(this) {
-      Canopy.compile('grammar JS.ENV.PositiveCharClassTest \
+      parseHelper.compile('grammar global.PositiveCharClassTest \
         charClass <- [a-z]')
     }})
 
@@ -25,7 +27,7 @@ function() { with(this) {
 
   describe('negative', function() { with(this) {
     before(function() { with(this) {
-      Canopy.compile('grammar JS.ENV.NegativeCharClassTest \
+      parseHelper.compile('grammar global.NegativeCharClassTest \
         charClass <- [^a-z]')
     }})
 
@@ -44,7 +46,7 @@ function() { with(this) {
 
   describe('with sequencing and repetition', function() { with(this) {
     before(function() { with(this) {
-      Canopy.compile('grammar JS.ENV.RepeatCharClassTest \
+      parseHelper.compile('grammar global.RepeatCharClassTest \
         root <- [1-9] [0-9]*')
     }})
 

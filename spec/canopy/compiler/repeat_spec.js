@@ -1,10 +1,12 @@
-JS.ENV.Canopy.Compiler.RepeatSpec = JS.Test.describe("Canopy.Compiler.Repeat",
-function() { with(this) {
-  include(Canopy.SpecHelper)
+var parseHelper = require('../../parse_helper'),
+    jstest      = require('jstest').Test
+
+jstest.describe("Compiler.Repeat", function() { with(this) {
+  include(parseHelper)
 
   describe('maybe', function() { with(this) {
     before(function() { with(this) {
-      Canopy.compile('grammar JS.ENV.MaybeTest \
+      parseHelper.compile('grammar global.MaybeTest \
         maybe <- "jc"?')
     }})
 
@@ -23,7 +25,7 @@ function() { with(this) {
 
   describe('with zero minimum occurences', function() { with(this) {
     before(function() { with(this) {
-      Canopy.compile('grammar JS.ENV.ZeroOrMoreTest \
+      parseHelper.compile('grammar global.ZeroOrMoreTest \
         root <- "foo"*')
     }})
 
@@ -53,7 +55,7 @@ function() { with(this) {
 
     describe('followed by more of the repeated pattern', function() { with(this) {
       before(function() { with(this) {
-        Canopy.compile('grammar JS.ENV.ZeroOrUnparsable \
+        parseHelper.compile('grammar global.ZeroOrUnparsable \
           root <- "foo"* "foo"')
       }})
 
@@ -67,7 +69,7 @@ function() { with(this) {
 
   describe('with one minimum occurence', function() { with(this) {
     before(function() { with(this) {
-      Canopy.compile('grammar JS.ENV.OneOrMoreTest \
+      parseHelper.compile('grammar global.OneOrMoreTest \
         root <- "foo"+')
     }})
 
@@ -97,7 +99,7 @@ function() { with(this) {
 
     describe('followed by more of the repeated pattern', function() { with(this) {
       before(function() { with(this) {
-        Canopy.compile('grammar JS.ENV.OneOrUnparsable \
+        parseHelper.compile('grammar global.OneOrUnparsable \
           root <- "foo"+ "foo"')
       }})
 

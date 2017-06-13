@@ -1,4 +1,6 @@
-Canopy.Compiler.CharClass = {
+'use strict';
+
+module.exports = {
   regex: true,
 
   toRegExp: function() {

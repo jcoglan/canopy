@@ -1,10 +1,12 @@
-JS.ENV.Canopy.Compiler.PredicateSpec = JS.Test.describe("Canopy.Compiler.Predicate",
-function() { with(this) {
-  include(Canopy.SpecHelper)
+var parseHelper = require('../../parse_helper'),
+    jstest      = require('jstest').Test
+
+jstest.describe("Compiler.Predicate", function() { with(this) {
+  include(parseHelper)
 
   describe('positive lookahead', function() { with(this) {
     before(function() { with(this) {
-      Canopy.compile('grammar JS.ENV.AndTest \
+      parseHelper.compile('grammar global.AndTest \
         predicate <- &"foosball" "foo" .*')
     }})
 
@@ -29,7 +31,7 @@ function() { with(this) {
 
   describe('negative lookahead', function() { with(this) {
     before(function() { with(this) {
-      Canopy.compile('grammar JS.ENV.NotTest \
+      parseHelper.compile('grammar global.NotTest \
         predicate <- !"foo" "bar"')
     }})
 
@@ -47,7 +49,7 @@ function() { with(this) {
 
     describe('combined with repetition', function() { with(this) {
       before(function() { with(this) {
-        Canopy.compile('grammar JS.ENV.RepeatNotTest \
+        parseHelper.compile('grammar global.RepeatNotTest \
           predicate <- (!" " .)+ " "')
       }})
 

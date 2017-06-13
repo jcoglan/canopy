@@ -1,16 +1,17 @@
 #!/usr/bin/env node
 
-var Canopy = require('../lib/canopy'),
+var canopy = require('../lib/canopy'),
     fs     = require('fs'),
     path   = require('path'),
     mkdirp = require('mkdirp'),
     nopt   = require('nopt');
 
 var BUILDERS = {};
-BUILDERS.java = Canopy.Builders.Java;
-BUILDERS.js = BUILDERS.javascript = Canopy.Builders.JavaScript;
-BUILDERS.py = BUILDERS.python = Canopy.Builders.Python;
-BUILDERS.rb = BUILDERS.ruby = Canopy.Builders.Ruby;
+
+BUILDERS.java                     = canopy.builders.java;
+BUILDERS.js = BUILDERS.javascript = canopy.builders.javascript;
+BUILDERS.py = BUILDERS.python     = canopy.builders.python;
+BUILDERS.rb = BUILDERS.ruby       = canopy.builders.ruby;
 
 try {
   var options   = nopt({lang: String}, {l: '--lang'}),
@@ -22,7 +23,7 @@ try {
 
   var grammar = fs.readFileSync(inputFile, 'utf8'),
       builder = BUILDERS[lang].create(inputFile, path.sep),
-      parser  = Canopy.compile(grammar, builder),
+      parser  = canopy.compile(grammar, builder),
       names   = Object.keys(parser);
 
   var write = function(index) {

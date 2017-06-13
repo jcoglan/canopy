@@ -1,4 +1,7 @@
-JS.ENV.CanopySpec = JS.Test.describe("Canopy", function() { with(this) {
+var util   = require('../source/util'),
+    jstest = require('jstest').Test
+
+jstest.describe("Canopy", function() { with(this) {
   describe('formatError', function() { with(this) {
     before(function() { with(this) {
       this.parseError = {

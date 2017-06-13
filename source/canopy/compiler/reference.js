@@ -1,4 +1,6 @@
-Canopy.Compiler.Reference = {
+'use strict';
+
+module.exports = {
   referenceName: function() {
     return this.identifier.text;
   },

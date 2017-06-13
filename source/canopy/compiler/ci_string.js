@@ -1,4 +1,6 @@
-Canopy.Compiler.CIString = {
+'use strict';
+
+module.exports = {
   toSexp: function() {
     return ['ci-string', this.stringValue()];
   },

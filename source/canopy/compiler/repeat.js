@@ -1,4 +1,6 @@
-Canopy.Compiler.Repeat = {
+'use strict';
+
+module.exports = {
   QUANTITIES: {'*': 0, '+': 1},
 
   atomic: function() {

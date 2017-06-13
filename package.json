@@ -11,58 +11,13 @@
 , "bin"             : {"canopy": "./bin/canopy"}
 , "preferGlobal"    : true
 , "dependencies"    : {"mkdirp": "", "nopt": ""}
-, "devDependencies" : {"benchmark": "", "jstest": "", "pegjs": "", "wake": ""}
+, "devDependencies" : {"benchmark": "", "jstest": "", "pegjs": ""}
 
-, "scripts"         : { "build"   : "wake"
-                      , "clean"   : "find examples -name '*.class' -o -name '*.pyc' -exec rm {} \\;"
-                      , "compile" : "./bin/canopy source/canopy/meta_grammar.peg"
-                      , "java"    : "find examples/canopy -name '*.peg' -exec ./bin/canopy --lang java {} \\;"
-                      , "js"      : "find examples/canopy -name '*.peg' -exec ./bin/canopy --lang js {} \\;"
-                      , "python"  : "find examples/canopy -name '*.peg' -exec ./bin/canopy --lang py {} \\;"
-                      , "ruby"    : "find examples/canopy -name '*.peg' -exec ./bin/canopy --lang rb {} \\;"
-                      , "pegjs"   : "find examples/pegjs -name '*.peg' -exec pegjs --cache {} \\;"
-                      , "test"    : "node spec/console.js"
-                      }
+, "scripts"         : {"test": "make test"}
 
-, "bugs"            : {"url": "http://github.com/jcoglan/canopy/issues"}
+, "bugs"            : {"url": "https://github.com/jcoglan/canopy/issues"}
 
 , "repository"      : { "type"  : "git"
                       , "url"   : "git://github.com/jcoglan/canopy.git"
                       }
-
-, "wake": {
-    "javascript": {
-      "sourceDirectory": "source",
-      "targetDirectory": "lib",
-      "builds": {
-        "src": {"digest": false, "minify": false},
-        "min": {"digest": false, "minify": true, "tag": "suffix", "sourceMap": "src"}
-      },
-      "targets": {
-        "canopy": [ "canopy.js",
-                    "canopy/meta_grammar",
-                    "canopy/builders/java",
-                    "canopy/builders/javascript",
-                    "canopy/builders/python",
-                    "canopy/builders/ruby",
-                    "canopy/compiler.js",
-                    "canopy/compiler/grammar",
-                    "canopy/compiler/grammar_rule",
-                    "canopy/compiler/choice",
-                    "canopy/compiler/choice_part",
-                    "canopy/compiler/action",
-                    "canopy/compiler/any_char",
-                    "canopy/compiler/char_class",
-                    "canopy/compiler/string",
-                    "canopy/compiler/ci_string",
-                    "canopy/compiler/predicate",
-                    "canopy/compiler/maybe",
-                    "canopy/compiler/repeat",
-                    "canopy/compiler/sequence",
-                    "canopy/compiler/sequence_part",
-                    "canopy/compiler/reference",
-                    "bindings" ]
-      }
-    }
-  }
 }

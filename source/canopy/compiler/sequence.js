@@ -1,4 +1,8 @@
-Canopy.Compiler.Sequence = {
+'use strict';
+
+var util = require('../../util');
+
+module.exports = {
   expressions: function() {
     if (this._expressions) return this._expressions;
     this._expressions = [this.first_part];
@@ -10,7 +14,7 @@ Canopy.Compiler.Sequence = {
 
   toSexp: function() {
     var sexp = ['sequence'];
-    Canopy.forEach(this.expressions(), function(expression) {
+    util.forEach(this.expressions(), function(expression) {
       sexp.push(expression.toSexp());
     });
     return sexp;

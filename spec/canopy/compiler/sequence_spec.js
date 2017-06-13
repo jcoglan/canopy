@@ -1,9 +1,11 @@
-JS.ENV.Canopy.Compiler.SequenceSpec = JS.Test.describe("Canopy.Compiler.Sequence",
-function() { with(this) {
-  include(Canopy.SpecHelper)
+var parseHelper = require('../../parse_helper'),
+    jstest      = require('jstest').Test
+
+jstest.describe("Compiler.Sequence", function() { with(this) {
+  include(parseHelper)
 
   before(function() { with(this) {
-    Canopy.compile('grammar JS.ENV.SequenceTest \
+    parseHelper.compile('grammar global.SequenceTest \
       sequence <- "foo" "bar"')
   }})
 
@@ -31,7 +33,7 @@ function() { with(this) {
   describe('labelling', function() { with(this) {
     describe('a terminal node', function() { with(this) {
       before(function() { with(this) {
-        Canopy.compile('grammar JS.ENV.LabelTestA \
+        parseHelper.compile('grammar global.LabelTestA \
           root <- "first" middle:"second" "third"')
       }})
 
@@ -49,7 +51,7 @@ function() { with(this) {
 
     describe('a reference', function() { with(this) {
       before(function() { with(this) {
-        Canopy.compile('grammar JS.ENV.LabelTestR \
+        parseHelper.compile('grammar global.LabelTestR \
           root   <- "first" middle "third" \
           middle <- "second"')
       }})
@@ -68,7 +70,7 @@ function() { with(this) {
 
     describe('a labelled reference', function() { with(this) {
       before(function() { with(this) {
-        Canopy.compile('grammar JS.ENV.LabelTestR \
+        parseHelper.compile('grammar global.LabelTestR \
           root   <- "first" alias:middle "third" \
           middle <- "second"')
       }})
@@ -88,7 +90,7 @@ function() { with(this) {
 
     describe('a repetition node', function() { with(this) {
       before(function() { with(this) {
-        Canopy.compile('grammar JS.ENV.LabelTestB \
+        parseHelper.compile('grammar global.LabelTestB \
           root <- "first" middle:"a"+ "third"')
       }})
 
@@ -114,7 +116,7 @@ function() { with(this) {
 
     describe('nesting', function() { with(this) {
       before(function() { with(this) {
-        Canopy.compile('grammar JS.ENV.LabelTestC \
+        parseHelper.compile('grammar global.LabelTestC \
           root <- firstLetter:[a-z] restLetters:(", " letter:[a-z])*')
 
         this.rest = [', b, c', 1, [

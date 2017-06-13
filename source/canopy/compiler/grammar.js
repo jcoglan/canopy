@@ -1,4 +1,6 @@
-Canopy.Compiler.Grammar = {
+'use strict';
+
+module.exports = {
   grammarName: function() {
     return this.grammar_name.object_identifier.text
   },

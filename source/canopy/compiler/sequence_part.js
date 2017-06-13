@@ -1,4 +1,6 @@
-Canopy.Compiler.SequencePart = {
+'use strict';
+
+module.exports = {
   atomic: function() {
     var expression = this.expression;
     return expression.parsing_expression || expression;

@@ -1,11 +1,13 @@
-JS.ENV.Canopy.Compiler.ReferenceSpec = JS.Test.describe("Canopy.Compiler.Reference",
-function() { with(this) {
-  include(Canopy.SpecHelper)
+var parseHelper = require('../../parse_helper'),
+    jstest      = require('jstest').Test
+
+jstest.describe("Compiler.Reference", function() { with(this) {
+  include(parseHelper)
 
   describe('with two rules and a reference', function() { with(this) {
     describe('where the root only contains a reference', function() { with(this) {
       before(function() { with(this) {
-        Canopy.compile('grammar JS.ENV.OneRefTest \
+        parseHelper.compile('grammar global.OneRefTest \
           first <- second \
           second <- "bar"')
       }})
@@ -21,7 +23,7 @@ function() { with(this) {
 
     describe('where the root contains the reference as part of a sequence', function() { with(this) {
       before(function() { with(this) {
-        Canopy.compile('grammar JS.ENV.OneRefWithSequenceTest \
+        parseHelper.compile('grammar global.OneRefWithSequenceTest \
           first <- second "end" \
           second <- "begin"')
       }})
@@ -39,7 +41,7 @@ function() { with(this) {
 
     describe('where the root contains the reference as part of a sub-sequence', function() { with(this) {
       before(function() { with(this) {
-        Canopy.compile('grammar JS.ENV.OneRefWithSubSequenceTest \
+        parseHelper.compile('grammar global.OneRefWithSubSequenceTest \
           first <- (second "sub") "end" \
           second <- "begin"')
       }})
@@ -59,7 +61,7 @@ function() { with(this) {
 
     describe('when the root contains the reference as part of a choice', function() { with(this) {
       before(function() { with(this) {
-        Canopy.compile('grammar JS.ENV.OneRefWithChoice \
+        parseHelper.compile('grammar global.OneRefWithChoice \
           first <- second / "end" \
           second <- "begin"')
       }})

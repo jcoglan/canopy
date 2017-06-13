@@ -1,4 +1,6 @@
-Canopy.Compiler.Action = {
+'use strict';
+
+module.exports = {
   expression: function() {
     var expr = this;
     while (expr.actionable_expression) expr = expr.actionable_expression;

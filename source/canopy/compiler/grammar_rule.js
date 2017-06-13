@@ -1,4 +1,6 @@
-Canopy.Compiler.GrammarRule = {
+'use strict';
+
+module.exports = {
   name: function() {
     return this.identifier.text;
   },

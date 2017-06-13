@@ -1,9 +1,11 @@
-JS.ENV.Canopy.Compiler.StringSpec = JS.Test.describe("Canopy.Compiler.String",
-function() { with(this) {
-  include(Canopy.SpecHelper)
+var parseHelper = require('../../parse_helper'),
+    jstest      = require('jstest').Test
+
+jstest.describe("Compiler.String", function() { with(this) {
+  include(parseHelper)
 
   before(function() { with(this) {
-    Canopy.compile('grammar JS.ENV.StringTest \
+    parseHelper.compile('grammar global.StringTest \
       string <- "foo"')
   }})
 
@@ -26,7 +28,7 @@ function() { with(this) {
 
   describe('single-quoted strings', function() { with(this) {
     before(function() { with(this) {
-      Canopy.compile("grammar JS.ENV.SingleQuoteTest \
+      parseHelper.compile("grammar global.SingleQuoteTest \
         string <- 'foo'")
     }})
 
@@ -37,7 +39,7 @@ function() { with(this) {
 
   describe('case-insensitive strings', function() { with(this) {
     before(function() { with(this) {
-      Canopy.compile('grammar JS.ENV.CIStringTest \
+      parseHelper.compile('grammar global.CIStringTest \
         string <- `foo`')
     }})
 
@@ -49,7 +51,7 @@ function() { with(this) {
 
   describe('optional case-insensitive strings', function() { with(this) {
     before(function() { with(this) {
-      Canopy.compile('grammar JS.ENV.CIStringTest \
+      parseHelper.compile('grammar global.CIStringTest \
         root <- string1 string2? \
         string1 <- "foo" \
         string2 <- `bar`')

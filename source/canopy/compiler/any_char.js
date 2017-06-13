@@ -1,4 +1,6 @@
-Canopy.Compiler.AnyChar = {
+'use strict';
+
+module.exports = {
   toSexp: function() {
     return ['any-char'];
   },

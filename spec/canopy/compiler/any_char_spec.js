@@ -1,9 +1,11 @@
-JS.ENV.Canopy.Compiler.AnyCharSpec = JS.Test.describe("Canopy.Compiler.AnyChar",
-function() { with(this) {
-  include(Canopy.SpecHelper)
+var parseHelper = require('../../parse_helper'),
+    jstest      = require('jstest').Test
+
+jstest.describe("Compiler.AnyChar", function() { with(this) {
+  include(parseHelper)
 
   before(function() { with(this) {
-    Canopy.compile('grammar JS.ENV.AnyCharTest \
+    parseHelper.compile('grammar global.AnyCharTest \
       anyChar <- .')
   }})
 

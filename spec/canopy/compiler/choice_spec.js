@@ -1,9 +1,11 @@
-JS.ENV.Canopy.Compiler.ChoiceSpec = JS.Test.describe("Canopy.Compiler.Choice",
-function() { with(this) {
-  include(Canopy.SpecHelper)
+var parseHelper = require('../../parse_helper'),
+    jstest      = require('jstest').Test
+
+jstest.describe("Compiler.Choice", function() { with(this) {
+  include(parseHelper)
 
   before(function() { with(this) {
-    Canopy.compile('grammar JS.ENV.ChoiceTest \
+    parseHelper.compile('grammar global.ChoiceTest \
       choice <- "foo" / "bar" / "baz"')
   }})
 
@@ -36,7 +38,7 @@ function() { with(this) {
 
   describe('when the choices are ambiguous', function() { with(this) {
     before(function() { with(this) {
-      Canopy.compile('grammar JS.ENV.AmbiguousChoiceTest \
+      parseHelper.compile('grammar global.AmbiguousChoiceTest \
         choice <- "foxes love" / "chunky" "bacon" / "chunkyb" "acon"')
     }})
 
@@ -51,7 +53,7 @@ function() { with(this) {
 
   describe('backtracking', function() { with(this) {
     before(function() { with(this) {
-      Canopy.compile('grammar JS.ENV.BacktrackingChoiceTest \
+      parseHelper.compile('grammar global.BacktrackingChoiceTest \
         choice <- "foob" / "foo"')
     }})
 
@@ -65,7 +67,7 @@ function() { with(this) {
 
     describe('within a sequence', function() { with(this) {
       before(function() { with(this) {
-        Canopy.compile('grammar JS.ENV.BacktrackingSequenceChoice \
+        parseHelper.compile('grammar global.BacktrackingSequenceChoice \
           choice <- ("word" "type" / "word") "bar"')
       }})
 

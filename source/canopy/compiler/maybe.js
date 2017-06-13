@@ -1,4 +1,6 @@
-Canopy.Compiler.Maybe = {
+'use strict';
+
+module.exports = {
   atomic: function() {
     var expression = this.atom;
     return expression.parsing_expression || expression;

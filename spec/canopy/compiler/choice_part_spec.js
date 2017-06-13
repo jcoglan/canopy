@@ -1,11 +1,13 @@
-JS.ENV.Canopy.Compiler.ChoicePartSpec = JS.Test.describe("Canopy.Compiler.ChoicePart",
-function() { with(this) {
-  include(Canopy.SpecHelper)
+var parseHelper = require('../../parse_helper'),
+    jstest      = require('jstest').Test
+
+jstest.describe("Compiler.ChoicePart", function() { with(this) {
+  include(parseHelper)
 
   describe('action tags', function() { with(this) {
     describe('constructing a string node', function() { with(this) {
       before(function() { with(this) {
-        Canopy.compile('grammar JS.ENV.StringActionTest \
+        parseHelper.compile('grammar global.StringActionTest \
           rule <- "begin" %begin')
 
         this.actions = {
@@ -20,7 +22,7 @@ function() { with(this) {
 
     describe('constructing a case-insensitive string node', function() { with(this) {
       before(function() { with(this) {
-        Canopy.compile('grammar JS.ENV.CIStringActionTest \
+        parseHelper.compile('grammar global.CIStringActionTest \
           rule <- `begin` %begin')
 
         this.actions = {
@@ -35,7 +37,7 @@ function() { with(this) {
 
     describe('constructing a character class node', function() { with(this) {
       before(function() { with(this) {
-        Canopy.compile('grammar JS.ENV.ClassActionTest \
+        parseHelper.compile('grammar global.ClassActionTest \
           rule <- [a-z] %make_char')
 
         this.actions = {
@@ -50,7 +52,7 @@ function() { with(this) {
 
     describe('constructing an any-char node', function() { with(this) {
       before(function() { with(this) {
-        Canopy.compile('grammar JS.ENV.AnyActionTest \
+        parseHelper.compile('grammar global.AnyActionTest \
           rule <- . %char_code')
 
         this.actions = {
@@ -65,7 +67,7 @@ function() { with(this) {
 
     describe('constructing a parenthesised node', function() { with(this) {
       before(function() { with(this) {
-        Canopy.compile('grammar JS.ENV.ParenActionTest \
+        parseHelper.compile('grammar global.ParenActionTest \
           rule <-  ( ( ( ( . ) ) ) ) %char_code')
 
         this.actions = {
@@ -80,7 +82,7 @@ function() { with(this) {
 
     describe('constructing an optional node', function() { with(this) {
       before(function() { with(this) {
-        Canopy.compile('grammar JS.ENV.MaybeActionTest \
+        parseHelper.compile('grammar global.MaybeActionTest \
           rule <- ([0-9]+ %to_int)?')
 
         this.actions = {
@@ -106,7 +108,7 @@ function() { with(this) {
 
     describe('constructing a predicated node', function() { with(this) {
       before(function() { with(this) {
-        Canopy.compile('grammar JS.ENV.PredicateActionTest \
+        parseHelper.compile('grammar global.PredicateActionTest \
           rule <- "value: " &([0-9]+ %to_int) [0-9]')
 
         this.actions = {
@@ -123,7 +125,7 @@ function() { with(this) {
 
     describe('constructing a repeated node', function() { with(this) {
       before(function() { with(this) {
-        Canopy.compile('grammar JS.ENV.IntActionTest \
+        parseHelper.compile('grammar global.IntActionTest \
           list <- (num "," %lift)* %to_list \
           num  <- ([0-9])+ %to_int')
 
@@ -151,7 +153,7 @@ function() { with(this) {
 
     describe('constructing a sequence', function() { with(this) {
       before(function() { with(this) {
-        Canopy.compile('grammar JS.ENV.MathActionTest \
+        parseHelper.compile('grammar global.MathActionTest \
           addition <- int " "* "+" " "* int %add \
           int      <- [0-9]* %an_int')
 
@@ -176,7 +178,7 @@ function() { with(this) {
 
     describe('making a choice', function() { with(this) { describe
       before(function() { with(this) {
-        Canopy.compile('grammar JS.ENV.ChoiceActionTest \
+        parseHelper.compile('grammar global.ChoiceActionTest \
           number <- "0" %num / [1-9] [0-9]* %num')
 
         this.actions = {
@@ -195,7 +197,7 @@ function() { with(this) {
   describe('type annotations', function() { with(this) {
     describe('when the node type is a mixin', function() { with(this) {
       before(function() { with(this) {
-        Canopy.compile('grammar JS.ENV.ModuleTypeTest \
+        parseHelper.compile('grammar global.ModuleTypeTest \
           rule <- "content" <NodeType>')
 
         this.types = {
@@ -216,7 +218,7 @@ function() { with(this) {
 
     describe('when the underlying parser is a choice', function() { with(this) {
       before(function() { with(this) {
-        Canopy.compile('grammar JS.ENV.TypedChoiceTest \
+        parseHelper.compile('grammar global.TypedChoiceTest \
           rule <- ("content" / "booya") <NodeType>')
 
         this.types = {
@@ -231,7 +233,7 @@ function() { with(this) {
 
     describe('where the underlying parser is a reference', function() { with(this) {
       before(function() { with(this) {
-        Canopy.compile('grammar JS.ENV.TypedRefTest \
+        parseHelper.compile('grammar global.TypedRefTest \
           first <- second <First> \
           second <- "bar" <Second>')
 
@@ -252,7 +254,7 @@ function() { with(this) {
 
     describe('when the underlying parser is a repetition', function() { with(this) {
       before(function() { with(this) {
-        Canopy.compile('grammar JS.ENV.TypedRepeatTest \
+        parseHelper.compile('grammar global.TypedRepeatTest \
           rule <- "content"+ <NodeType>')
 
         this.types = {
@@ -267,7 +269,7 @@ function() { with(this) {
 
     describe('when the underlying parser is a maybe', function() { with(this) {
       before(function() { with(this) {
-        Canopy.compile('grammar JS.ENV.TypedMaybeTest \
+        parseHelper.compile('grammar global.TypedMaybeTest \
           rule <- "content"? <NodeType>')
 
         this.types = {
@@ -282,7 +284,7 @@ function() { with(this) {
 
     describe('when the node type is namespaced', function() { with(this) {
       before(function() { with(this) {
-        Canopy.compile('grammar JS.ENV.NamespacedTypeTest \
+        parseHelper.compile('grammar global.NamespacedTypeTest \
           rule <- "content" <NS.NodeType>')
 
         this.types = {
