@@ -10,13 +10,13 @@ var types = {
   Grammar:      require('./compiler/grammar'),
   GrammarRule:  require('./compiler/grammar_rule'),
   Predicate:    require('./compiler/predicate'),
-  Reference:    require('./compiler/reference'),
   Repeat:       require('./compiler/repeat'),
   Sequence:     require('./compiler/sequence'),
   SequencePart: require('./compiler/sequence_part')
 };
 
 var Maybe     = require('./ast/maybe'),
+    Reference = require('./ast/reference'),
     String    = require('./ast/string'),
     CharClass = require('./ast/char_class'),
     AnyChar   = require('./ast/any_char');
@@ -28,6 +28,10 @@ var actions = {
 
   maybe: function(text, a, b, elements) {
     return new Maybe(elements[0]);
+  },
+
+  reference: function(text, a, b, elements) {
+    return new Reference(elements[0].text);
   },
 
   string: function(text, a, b, elements) {

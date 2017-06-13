@@ -55,7 +55,7 @@ terminal_node             <-  string_expression
 
 predicated_atom           <-  predicate:("&" / "!") atom <Predicate>
 
-reference_expression      <-  identifier !assignment <Reference>
+reference_expression      <-  identifier !assignment %reference
 
 string_expression         <-  '"' ("\\" . / [^"])* '"' %string
                            /  "'" ("\\" . / [^'])* "'" %string
