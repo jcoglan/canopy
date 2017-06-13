@@ -1,21 +1,13 @@
 'use strict';
 
 module.exports = {
-  atomic: function() {
-    var expression = this.atom;
-    return expression.parsing_expression || expression;
-  },
-
   toSexp: function() {
-    var expression = this.atomic(),
-        sexp = expression.toSexp();
-
-    return ['maybe', sexp];
+    return ['maybe', this.atom.toSexp()];
   },
 
   compile: function(builder, address) {
     var startOffset = builder.localVar_('index', builder.offset_());
-    this.atomic().compile(builder, address);
+    this.atom.compile(builder, address);
 
     builder.unlessNode_(address, function(builder) {
       builder.syntaxNode_(address, startOffset, startOffset, null);

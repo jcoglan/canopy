@@ -1,14 +1,9 @@
 'use strict';
 
 module.exports = {
-  atomic: function() {
-    var expression = this.expression;
-    return expression.parsing_expression || expression;
-  },
-
   labels: function() {
     var element    = this.elements[1].identifier,
-        expression = this.atomic(),
+        expression = this.expression,
         labels     = [];
 
     if (element) labels.push(element.text);
@@ -22,7 +17,7 @@ module.exports = {
   },
 
   toSexp: function() {
-    var expression = this.atomic(),
+    var expression = this.expression,
         labels     = this.labels(),
         sexp       = expression.toSexp();
 
@@ -32,6 +27,6 @@ module.exports = {
   },
 
   compile: function(builder, address) {
-    return this.atomic().compile(builder, address);
+    return this.expression.compile(builder, address);
   }
 };

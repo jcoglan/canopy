@@ -12,7 +12,7 @@ assignment                <-  __+ "<-" __+
 
 parsing_expression        <-  choice_expression / choice_part
 
-parenthesised_expression  <-  "(" __* parsing_expression __* ")"
+parenthesised_expression  <-  "(" __* parsing_expression __* ")" %paren_expr
 
 choice_expression         <-  first_part:choice_part
                               rest:(__+ "/" __+ expression:choice_part)+

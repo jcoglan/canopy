@@ -685,7 +685,7 @@
       if (elements0 === null) {
         address0 = FAILURE;
       } else {
-        address0 = new TreeNode5(this._input.substring(index1, this._offset), index1, elements0);
+        address0 = this._actions.paren_expr(this._input, index1, this._offset, elements0);
         this._offset = this._offset;
       }
       this._cache._parenthesised_expression[index0] = [address0, this._offset];

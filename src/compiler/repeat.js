@@ -3,14 +3,8 @@
 module.exports = {
   QUANTITIES: {'*': 0, '+': 1},
 
-  atomic: function() {
-    var expression = this.atom;
-    return expression.parsing_expression || expression;
-  },
-
   toSexp: function() {
-    var expression = this.atomic(),
-        sexp = expression.toSexp();
+    var sexp = this.atom.toSexp();
 
     switch (this.quantifier.text) {
       case '*': sexp = ['repeat', 0, sexp]; break;
@@ -36,7 +30,7 @@ module.exports = {
         elAddr      = temp.address;
 
     builder.whileNotNull_(elAddr, function(builder) {
-      this.atomic().compile(builder, elAddr);
+      this.atom.compile(builder, elAddr);
       builder.ifNode_(elAddr, function(builder) {
         builder.append_(elements, elAddr);
         builder.decrement_(remaining);

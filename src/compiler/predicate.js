@@ -1,13 +1,8 @@
 'use strict';
 
 module.exports = {
-  atomic: function() {
-    var expression = this.atom;
-    return expression.parsing_expression || expression;
-  },
-
   toSexp: function() {
-    var expression = this.atomic(),
+    var expression = this.atom,
         table      = {'&': 'and', '!': 'not'},
         predicate  = table[this.predicate.text];
 
@@ -19,7 +14,7 @@ module.exports = {
         table       = {'&': 'ifNode_', '!': 'unlessNode_'},
         branch      = table[this.predicate.text];
 
-    this.atomic().compile(builder, address);
+    this.atom.compile(builder, address);
     builder.assign_(builder.offset_(), startOffset);
 
     builder[branch](address, function(builder) {

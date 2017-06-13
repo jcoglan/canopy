@@ -22,6 +22,10 @@ var String    = require('./ast/string'),
     AnyChar   = require('./ast/any_char');
 
 var actions = {
+  paren_expr: function(text, a, b, elements) {
+    return elements[2];
+  },
+
   string: function(text, a, b, elements) {
     var text  = text.substring(a, b),
         value = eval(text);
