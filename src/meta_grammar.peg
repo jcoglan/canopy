@@ -53,7 +53,7 @@ terminal_node             <-  string_expression
                            /  char_class_expression
                            /  any_char_expression
 
-predicated_atom           <-  predicate:("&" / "!") atom <Predicate>
+predicated_atom           <-  predicate:("&" / "!") atom %predicate
 
 reference_expression      <-  identifier !assignment %reference
 
