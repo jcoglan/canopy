@@ -10,20 +10,27 @@ var types = {
   Grammar:      require('./compiler/grammar'),
   GrammarRule:  require('./compiler/grammar_rule'),
   Sequence:     require('./compiler/sequence'),
-  SequencePart: require('./compiler/sequence_part')
 };
 
-var Predicate = require('./ast/predicate'),
-    Repeat    = require('./ast/repeat'),
-    Maybe     = require('./ast/maybe'),
-    Reference = require('./ast/reference'),
-    String    = require('./ast/string'),
-    CharClass = require('./ast/char_class'),
-    AnyChar   = require('./ast/any_char');
+var SequencePart = require('./ast/sequence_part'),
+    Predicate    = require('./ast/predicate'),
+    Repeat       = require('./ast/repeat'),
+    Maybe        = require('./ast/maybe'),
+    Reference    = require('./ast/reference'),
+    String       = require('./ast/string'),
+    CharClass    = require('./ast/char_class'),
+    AnyChar      = require('./ast/any_char');
 
 var actions = {
   paren_expr: function(text, a, b, elements) {
     return elements[2];
+  },
+
+  seq_part: function(text, a, b, elements) {
+    var muted = elements[0].text !== '',
+        label = elements[1].identifier;
+
+    return new SequencePart(elements[2], label && label.text, muted);
   },
 
   predicate: function(text, a, b, elements) {

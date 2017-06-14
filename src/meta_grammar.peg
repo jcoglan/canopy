@@ -37,7 +37,7 @@ sequence_expression       <-  first_part:sequence_part
                               rest:(__+ expression:sequence_part)+
                               <Sequence>
 
-sequence_part             <-  mute? label? expression:(maybe_atom / repeated_atom / atom) <SequencePart>
+sequence_part             <-  mute? label? expression:(maybe_atom / repeated_atom / atom) %seq_part
 
 maybe_atom                <-  atom "?" %maybe
 

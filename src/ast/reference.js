@@ -3,20 +3,20 @@
 var util = require('../util');
 
 var Reference = function(name) {
-  this._name = name;
+  this.refName = name;
 };
 
 util.assign(Reference.prototype, {
   referenceName: function() {
-    return this._name;
+    return this.refName;
   },
 
   toSexp: function() {
-    return ['reference', this._name];
+    return ['reference', this.refName];
   },
 
   compile: function(builder, address) {
-    builder.jump_(address, this._name);
+    builder.jump_(address, this.refName);
   }
 });
 
