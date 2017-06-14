@@ -22,7 +22,7 @@ choice_part               <-  (action_expression / sequence_expression / sequenc
                               (__+ type_tag)?
                               <ChoicePart>
 
-action_expression         <-  actionable_expression __+ action_tag <Action>
+action_expression         <-  actionable_expression __+ action_tag %action
 
 actionable_expression     <-  sequence_expression
                            /  repeated_atom

@@ -4,14 +4,14 @@ var metagrammar = require('./meta_grammar'),
     util        = require('./util');
 
 var types = {
-  Action:       require('./compiler/action'),
   Choice:       require('./compiler/choice'),
   ChoicePart:   require('./compiler/choice_part'),
   Grammar:      require('./compiler/grammar'),
   GrammarRule:  require('./compiler/grammar_rule')
 };
 
-var Sequence     = require('./ast/sequence'),
+var Action       = require('./ast/action'),
+    Sequence     = require('./ast/sequence'),
     SequencePart = require('./ast/sequence_part'),
     Predicate    = require('./ast/predicate'),
     Repeat       = require('./ast/repeat'),
@@ -24,6 +24,12 @@ var Sequence     = require('./ast/sequence'),
 var actions = {
   paren_expr: function(text, a, b, elements) {
     return elements[2];
+  },
+
+  action: function(text, a, b, elements) {
+    var element = elements[0];
+    while (element.actionable_expression) element = element.actionable_expression;
+    return new Action(element, elements[2].identifier.text);
   },
 
   sequence: function(text, a, b, elements) {
