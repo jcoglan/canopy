@@ -27,9 +27,7 @@ var actions = {
   },
 
   action: function(text, a, b, elements) {
-    var element = elements[0];
-    while (element.actionable_expression) element = element.actionable_expression;
-    return new Action(element, elements[2].identifier.text);
+    return new Action(elements[0], elements[2].identifier.text);
   },
 
   sequence: function(text, a, b, elements) {

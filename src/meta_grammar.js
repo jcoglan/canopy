@@ -1085,7 +1085,7 @@
             if (elements0 === null) {
               address0 = FAILURE;
             } else {
-              address0 = new TreeNode10(this._input.substring(index2, this._offset), index2, elements0);
+              address0 = this._actions.paren_expr(this._input, index2, this._offset, elements0);
               this._offset = this._offset;
             }
             if (address0 === FAILURE) {

@@ -27,7 +27,7 @@ action_expression         <-  actionable_expression __+ action_tag %action
 actionable_expression     <-  sequence_expression
                            /  repeated_atom
                            /  terminal_node
-                           /  "(" __* actionable_expression __* ")"
+                           /  "(" __* actionable_expression __* ")" %paren_expr
 
 action_tag                <-  "%" identifier
 
