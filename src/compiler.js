@@ -8,11 +8,11 @@ var types = {
   Choice:       require('./compiler/choice'),
   ChoicePart:   require('./compiler/choice_part'),
   Grammar:      require('./compiler/grammar'),
-  GrammarRule:  require('./compiler/grammar_rule'),
-  Sequence:     require('./compiler/sequence'),
+  GrammarRule:  require('./compiler/grammar_rule')
 };
 
-var SequencePart = require('./ast/sequence_part'),
+var Sequence     = require('./ast/sequence'),
+    SequencePart = require('./ast/sequence_part'),
     Predicate    = require('./ast/predicate'),
     Repeat       = require('./ast/repeat'),
     Maybe        = require('./ast/maybe'),
@@ -26,7 +26,14 @@ var actions = {
     return elements[2];
   },
 
-  seq_part: function(text, a, b, elements) {
+  sequence: function(text, a, b, elements) {
+    var parts = [elements[0]].concat(
+      elements[1].elements.map(function(e) { return e.expression }));
+
+    return new Sequence(parts);
+  },
+
+  sequence_part: function(text, a, b, elements) {
     var muted = elements[0].text !== '',
         label = elements[1].identifier;
 

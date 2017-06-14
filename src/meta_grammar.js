@@ -1301,10 +1301,9 @@
       if (elements0 === null) {
         address0 = FAILURE;
       } else {
-        address0 = new TreeNode13(this._input.substring(index1, this._offset), index1, elements0);
+        address0 = this._actions.sequence(this._input, index1, this._offset, elements0);
         this._offset = this._offset;
       }
-      extend(address0, this._types.Sequence);
       this._cache._sequence_expression[index0] = [address0, this._offset];
       return address0;
     },
@@ -1367,7 +1366,7 @@
       if (elements0 === null) {
         address0 = FAILURE;
       } else {
-        address0 = this._actions.seq_part(this._input, index1, this._offset, elements0);
+        address0 = this._actions.sequence_part(this._input, index1, this._offset, elements0);
         this._offset = this._offset;
       }
       this._cache._sequence_part[index0] = [address0, this._offset];

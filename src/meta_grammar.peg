@@ -35,9 +35,9 @@ type_tag                  <-  "<" object_identifier ">"
 
 sequence_expression       <-  first_part:sequence_part
                               rest:(__+ expression:sequence_part)+
-                              <Sequence>
+                              %sequence
 
-sequence_part             <-  mute? label? expression:(maybe_atom / repeated_atom / atom) %seq_part
+sequence_part             <-  mute? label? expression:(maybe_atom / repeated_atom / atom) %sequence_part
 
 maybe_atom                <-  atom "?" %maybe
 
