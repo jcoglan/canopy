@@ -43,15 +43,16 @@ util.assign(Sequence.prototype, {
     });
 
     var startOffset = temp.index,
-        elements    = temp.elements;
+        elements    = temp.elements,
+        klass       = this._nodeClassName;
 
     this._compileExpressions(builder, 0, 0, startOffset, elements);
 
     builder.ifNull_(elements, function(builder) {
       builder.assign_(address, builder.nullNode_());
     }, function(builder) {
-      builder.syntaxNode_(address, startOffset, builder.offset_(), elements, action, this._nodeClassName);
-    }, this);
+      builder.syntaxNode_(address, startOffset, builder.offset_(), elements, action, klass);
+    });
   },
 
   _compileExpressions: function(builder, index, elIndex, startOffset, elements) {
