@@ -3,12 +3,9 @@
 var metagrammar = require('./meta_grammar'),
     util        = require('./util');
 
-var types = {
-  Grammar:      require('./compiler/grammar'),
-  GrammarRule:  require('./compiler/grammar_rule')
-};
-
-var Choice       = require('./ast/choice'),
+var Grammar      = require('./ast/grammar'),
+    Rule         = require('./ast/rule'),
+    Choice       = require('./ast/choice'),
     Extension    = require('./ast/extension'),
     Action       = require('./ast/action'),
     Sequence     = require('./ast/sequence'),
@@ -22,6 +19,15 @@ var Choice       = require('./ast/choice'),
     AnyChar      = require('./ast/any_char');
 
 var actions = {
+  grammar: function(text, a, b, elements) {
+    var rules = elements[2].elements.map(function(e) { return e.grammar_rule });
+    return new Grammar(elements[1].object_identifier.text, rules);
+  },
+
+  rule: function(text, a, b, elements) {
+    return new Rule(elements[0].text, elements[2]);
+  },
+
   paren_expr: function(text, a, b, elements) {
     return elements[2];
   },
@@ -112,7 +118,7 @@ util.assign(Compiler.prototype, {
   parseTree: function() {
     if (this._tree) return this._tree;
 
-    this._tree = metagrammar.parse(this._grammarText, {types: types, actions: actions});
+    this._tree = metagrammar.parse(this._grammarText, {actions: actions});
     if (this._tree) return this._tree;
 
     var message = metagrammar.formatError(metagrammar.Parser.lastError);

@@ -316,10 +316,9 @@
       if (elements0 === null) {
         address0 = FAILURE;
       } else {
-        address0 = new TreeNode1(this._input.substring(index1, this._offset), index1, elements0);
+        address0 = this._actions.grammar(this._input, index1, this._offset, elements0);
         this._offset = this._offset;
       }
-      extend(address0, this._types.Grammar);
       this._cache._grammar[index0] = [address0, this._offset];
       return address0;
     },
@@ -461,10 +460,9 @@
       if (elements0 === null) {
         address0 = FAILURE;
       } else {
-        address0 = new TreeNode4(this._input.substring(index1, this._offset), index1, elements0);
+        address0 = this._actions.rule(this._input, index1, this._offset, elements0);
         this._offset = this._offset;
       }
-      extend(address0, this._types.GrammarRule);
       this._cache._grammar_rule[index0] = [address0, this._offset];
       return address0;
     },

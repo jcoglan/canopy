@@ -10,11 +10,6 @@ module.exports = {
     return destination;
   },
 
-  forEach: function(list, block, context) {
-    for (var i = 0, n = list.length; i < n; i++)
-      block.call(context, list[i], i);
-  },
-
   formatError: function(input, offset, expected) {
     var lines = input.split(/\n/g),
         lineNo = 0,

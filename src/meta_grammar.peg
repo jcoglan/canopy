@@ -2,11 +2,11 @@ grammar Canopy.MetaGrammar
 
 grammar                   <-  __* grammar_name
                               rules:(__* grammar_rule)+ __*
-                              <Grammar>
+                              %grammar
 
 grammar_name              <-  `grammar` ":"? __+ object_identifier
 
-grammar_rule              <-  identifier assignment parsing_expression <GrammarRule>
+grammar_rule              <-  identifier assignment parsing_expression %rule
 
 assignment                <-  __+ "<-" __+
 

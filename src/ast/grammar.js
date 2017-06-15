@@ -1,16 +1,20 @@
 'use strict';
 
-module.exports = {
-  grammarName: function() {
-    return this.grammar_name.object_identifier.text
+var util = require('../util');
+
+var Grammar = function(name, rules) {
+  this._name  = name;
+  this._rules = rules;
+};
+
+util.assign(Grammar.prototype, {
+  toSexp: function() {
+    var rules = this._rules.map(function(r) { return r.toSexp() });
+    return ['grammar', this._name].concat(rules);
   },
 
-  toSexp: function() {
-    var sexp = ['grammar', this.grammarName()];
-    this.rules.forEach(function(rule) {
-      sexp.push(rule.grammar_rule.toSexp());
-    });
-    return sexp;
+  forEach: function(callback, context) {
+    this._rules.forEach(callback, context);
   },
 
   compile: function(builder) {
@@ -20,7 +24,7 @@ module.exports = {
         node.forEach(function(child) { scan(child, callback, context) });
     };
 
-    builder.package_(this.grammarName(), function(builder) {
+    builder.package_(this._name, function(builder) {
       var actions = [];
       scan(this, function(node) {
         if (node.action_tag) actions.push(node.action_tag.identifier.text);
@@ -51,15 +55,15 @@ module.exports = {
           if (node.regex) builder.compileRegex_(node, regexName + (regexIndex++));
         });
 
-        this.rules.forEach(function(rule) {
-          rule.grammar_rule.compile(builder);
-        });
+        this._rules.forEach(function(rule) { rule.compile(builder) });
       }, this);
 
-      var root = this.rules.elements[0].grammar_rule.name();
+      var root = this._rules[0].name;
 
       builder.parserClass_(root);
       builder.exports_();
     }, this);
   }
-};
+});
+
+module.exports = Grammar;
