@@ -20,7 +20,7 @@ choice_expression         <-  first_part:choice_part
 
 choice_part               <-  (action_expression / sequence_expression / sequence_part)
                               (__+ type_tag)?
-                              <ChoicePart>
+                              %choice_part
 
 action_expression         <-  actionable_expression __+ action_tag %action
 
