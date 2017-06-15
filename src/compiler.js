@@ -4,12 +4,12 @@ var metagrammar = require('./meta_grammar'),
     util        = require('./util');
 
 var types = {
-  Choice:       require('./compiler/choice'),
   Grammar:      require('./compiler/grammar'),
   GrammarRule:  require('./compiler/grammar_rule')
 };
 
-var Extension    = require('./ast/extension'),
+var Choice       = require('./ast/choice'),
+    Extension    = require('./ast/extension'),
     Action       = require('./ast/action'),
     Sequence     = require('./ast/sequence'),
     SequencePart = require('./ast/sequence_part'),
@@ -24,6 +24,13 @@ var Extension    = require('./ast/extension'),
 var actions = {
   paren_expr: function(text, a, b, elements) {
     return elements[2];
+  },
+
+  choice: function(text, a, b, elements) {
+    var parts = [elements[0]].concat(
+      elements[1].elements.map(function(e) { return e.expression }));
+
+    return new Choice(parts);
   },
 
   choice_part: function(text, a, b, elements) {

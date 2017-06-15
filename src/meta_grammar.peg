@@ -16,7 +16,7 @@ parenthesised_expression  <-  "(" __* parsing_expression __* ")" %paren_expr
 
 choice_expression         <-  first_part:choice_part
                               rest:(__+ "/" __+ expression:choice_part)+
-                              <Choice>
+                              %choice
 
 choice_part               <-  (action_expression / sequence_expression / sequence_part)
                               (__+ type_tag)?
