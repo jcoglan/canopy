@@ -9,8 +9,8 @@ lib_files := $(src_files:src/%=lib/%)
 bootstrap: test $(lib_files)
 
 lib/%: src/%
-	mkdir -p $(@D)
-	rsync -av $< $@
+	@mkdir -p $(@D)
+	cp $< $@
 
 compile: src/meta_grammar.js
 
