@@ -6,3 +6,4 @@ gem 'treetop'
 gem 'benchmark-ips'
 
 gem 'jekyll'
+gem 'redcarpet'
