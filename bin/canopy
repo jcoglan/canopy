@@ -14,7 +14,8 @@ BUILDERS.py = BUILDERS.python     = canopy.builders.python;
 BUILDERS.rb = BUILDERS.ruby       = canopy.builders.ruby;
 
 try {
-  var options   = nopt({lang: String}, {l: '--lang'}),
+  var options   = nopt({lang: String, out: String}, 
+  			{l: '--lang', o: '--out'}),
       lang      = options.lang || 'js',
       inputFile = options.argv.remain[0];
 
@@ -28,10 +29,15 @@ try {
 
   var write = function(index) {
     var name = names[index];
+    var outf = name;
     if (!name) return;
 
-    mkdirp(path.dirname(name), function(error) {
-      fs.writeFileSync(name, parser[name]);
+    if (options.out) {
+      outf = options.out;
+    }
+
+    mkdirp(path.dirname(outf), function(error) {
+      fs.writeFileSync(outf, parser[name]);
       write(index + 1);
     });
   };
