@@ -16,10 +16,9 @@ var Builder = function(parent, name, parentName) {
   this._varIndex = {};
 };
 
-Builder.create = function(filename, output) {
+Builder.create = function(filename) {
   var builder = new Builder();
   builder.filename = filename;
-  builder.output = output || this.filename.replace(/\.peg$/, '.js');
   return builder;
 };
 
@@ -31,7 +30,7 @@ util.assign(Builder.prototype, {
   },
 
   _outputPathname: function() {
-    return this.output;
+    return this.filename.replace(/\.peg$/, '.js');
   },
 
   _write: function(string) {
