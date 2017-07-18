@@ -1,4 +1,4 @@
-# Canopy
+# Canopy [![Build status](https://travis-ci.org/jcoglan/canopy.svg?branch=master)](https://travis-ci.org/jcoglan/canopy)
 
 Canopy is a parser compiler targeting Java, JavaScript, Python and Ruby. It
 takes a file describing a [parsing expression grammar][1] and compiles it into a
