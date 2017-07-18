@@ -20,8 +20,8 @@ var Grammar      = require('./ast/grammar'),
 
 var actions = {
   grammar: function(text, a, b, elements) {
-    var rules = elements[2].elements.map(function(e) { return e.grammar_rule });
-    return new Grammar(elements[1].object_identifier.text, rules);
+    var rules = elements[2].elements.map(function(e) { return e.rule });
+    return new Grammar(elements[1].id.text, rules);
   },
 
   rule: function(text, a, b, elements) {
@@ -34,47 +34,44 @@ var actions = {
 
   choice: function(text, a, b, elements) {
     var parts = [elements[0]].concat(
-      elements[1].elements.map(function(e) { return e.expression }));
+      elements[1].elements.map(function(e) { return e.expr }));
 
     return new Choice(parts);
   },
 
-  choice_part: function(text, a, b, elements) {
+  extension: function(text, a, b, elements) {
     var expression = elements[0],
-        typeTag    = elements[1].type_tag;
+        typeTag    = elements[2];
 
-    if (typeTag)
-      return new Extension(expression, typeTag.object_identifier.text);
-    else
-      return expression;
+    return new Extension(expression, typeTag.id.text);
   },
 
   action: function(text, a, b, elements) {
-    return new Action(elements[0], elements[2].identifier.text);
+    return new Action(elements[0], elements[2].id.text);
   },
 
   sequence: function(text, a, b, elements) {
     var parts = [elements[0]].concat(
-      elements[1].elements.map(function(e) { return e.expression }));
+      elements[1].elements.map(function(e) { return e.expr }));
 
     return new Sequence(parts);
   },
 
   sequence_part: function(text, a, b, elements) {
     var muted = elements[0].text !== '',
-        label = elements[1].identifier;
+        label = elements[1].id;
 
     return new SequencePart(elements[2], label && label.text, muted);
   },
 
   predicate: function(text, a, b, elements) {
     var polarities = {'&': true, '!': false};
-    return new Predicate(elements[1], polarities[elements[0].text]);
+    return new Predicate(elements[2], polarities[elements[0].text]);
   },
 
   repeat: function(text, a, b, elements) {
     var quantities = {'*': 0, '+': 1};
-    return new Repeat(elements[0], quantities[elements[1].text]);
+    return new Repeat(elements[0], quantities[elements[2].text]);
   },
 
   maybe: function(text, a, b, elements) {
