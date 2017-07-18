@@ -34,6 +34,11 @@ Builder.create = function(filename, sep) {
 };
 
 util.assign(Builder.prototype, {
+  comment: function(lines) {
+    lines = lines.map(function(line) { return ' * ' + line });
+    return ['/**'].concat(lines).concat([' */']);
+  },
+
   serialize: function() {
     return this._buffers;
   },

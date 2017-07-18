@@ -21,6 +21,11 @@ try {
   if (!BUILDERS.hasOwnProperty(lang))
     throw new Error('Unrecognised target language: ' + lang);
 
+  var comment = [
+    'This file was generated from ' + path.relative(process.cwd(), inputFile),
+    'See http://canopy.jcoglan.com/ for documentation.'
+  ];
+
   var grammar = fs.readFileSync(inputFile, 'utf8'),
       builder = BUILDERS[lang].create(inputFile, path.sep),
       parser  = canopy.compile(grammar, builder),
@@ -31,7 +36,8 @@ try {
     if (!name) return;
 
     mkdirp(path.dirname(name), function(error) {
-      fs.writeFileSync(name, parser[name]);
+      var content = builder.comment(comment).join('\n') + '\n\n' + parser[name];
+      fs.writeFileSync(name, content);
       write(index + 1);
     });
   };

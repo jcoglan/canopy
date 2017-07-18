@@ -22,6 +22,10 @@ Builder.create = function(filename) {
 };
 
 util.assign(Builder.prototype, {
+  comment: function(lines) {
+    return lines.map(function(line) { return '# ' + line });
+  },
+
   serialize: function() {
     var files = {};
     files[this._outputPathname()] = this._buffer;

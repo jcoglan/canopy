@@ -23,6 +23,11 @@ Builder.create = function(filename) {
 };
 
 util.assign(Builder.prototype, {
+  comment: function(lines) {
+    lines = lines.map(function(line) { return ' * ' + line });
+    return ['/**'].concat(lines).concat([' */']);
+  },
+
   serialize: function() {
     var files = {};
     files[this._outputPathname()] = this._buffer;
