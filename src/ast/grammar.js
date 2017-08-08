@@ -27,7 +27,9 @@ util.assign(Grammar.prototype, {
     builder.package_(this._name, function(builder) {
       var actions = [];
       scan(this, function(node) {
-        if (node.action_tag) actions.push(node.action_tag.identifier.text);
+        if (node._actionName) {
+          actions.push(node._actionName);
+        }
       });
 
       var nodeClassName = builder.syntaxNodeClass_(), subclassIndex = 1;
