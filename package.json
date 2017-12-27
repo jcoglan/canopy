@@ -13,7 +13,7 @@
 , "dependencies"    : {"mkdirp": "", "nopt": ""}
 , "devDependencies" : {"benchmark": "", "jstest": "", "pegjs": ""}
 
-, "scripts"         : {"test": "make test"}
+, "scripts"         : {"test": "make test", "prepare": "make"}
 
 , "bugs"            : {"url": "https://github.com/jcoglan/canopy/issues"}
 
