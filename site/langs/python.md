@@ -168,7 +168,7 @@ parser:
 ```py
 import words
 
-class Types
+class Types:
     class Extension(object):
         def convert(self):
             return self.first.text + self.second.text.upper()
