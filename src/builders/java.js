@@ -401,7 +401,7 @@ util.assign(Builder.prototype, {
       action = 'new ' + (nodeClass || 'TreeNode');
       args   = ['input.substring(' + start + ', ' + end + ')', start];
     }
-    if (elements) args.push(elements);
+    args.push(elements || this.null_());
 
     this.assign_(address, action + '(' + args.join(', ') + ')');
     this.assign_('offset', end);
