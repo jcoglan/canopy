@@ -11,7 +11,7 @@
 , "bin"             : {"canopy": "./bin/canopy"}
 , "preferGlobal"    : true
 , "dependencies"    : {"mkdirp": "^0.5.1", "nopt": "^4.0.1"}
-, "devDependencies" : {"benchmark": "", "jstest": "", "pegjs": ""}
+, "devDependencies" : {"benchmark": "^2.1.4", "jstest": "^1.0.5", "pegjs": "^0.10.0"}
 
 , "scripts"         : {"test": "make test"}
 
