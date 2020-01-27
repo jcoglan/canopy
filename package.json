@@ -5,7 +5,7 @@
 , "keywords"        : ["parser", "compiler", "peg"]
 , "license"         : "GPL-3.0"
 
-, "version"         : "0.3.0"
+, "version"         : "0.3.1"
 , "engines"         : {"node": ">=0.4.0"}
 , "main"            : "./lib/canopy.js"
 , "bin"             : {"canopy": "./bin/canopy"}
