@@ -35,7 +35,7 @@ try {
     var name = names[index];
     if (!name) return;
 
-    mkdirp(path.dirname(name), function(error) {
+    mkdirp(path.dirname(name)).then(function() {
       var content = builder.comment(comment).join('\n') + '\n\n' + parser[name];
       fs.writeFileSync(name, content);
       write(index + 1);
