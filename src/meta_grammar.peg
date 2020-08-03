@@ -55,6 +55,7 @@ action_expression     <-  actionable _+ action_tag %action
 
 actionable            <-  sequence
                        /  repeated_atom
+                       /  maybe_atom
                        /  terminal
                        /  "(" _* actionable _* ")" %paren_expr
 

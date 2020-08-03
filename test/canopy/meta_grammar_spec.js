@@ -330,6 +330,25 @@ jstest.describe("MetaGrammar", function() { with(this) {
       }})
     }})
 
+    describe('on repetitions', function() { with(this) {
+      before(function() { with(this) {
+        this.compiler = new Compiler(' \
+          grammar ActionRepetition \
+            string <- "foo"+ %make_rep \
+        ')
+      }})
+
+      it('wraps the repetition with an action', function() { with(this) {
+        assertEqual(['grammar', 'ActionRepetition',
+                      ['rule', 'string',
+                        ['action', 'make_rep',
+                          ['repeat', 1,
+                            ['string', 'foo']]]]],
+
+            compiler.toSexp() )
+      }})
+    }})
+
     describe('on sequences', function() { with(this) {
       before(function() { with(this) {
         this.compiler = new Compiler(' \
@@ -345,6 +364,25 @@ jstest.describe("MetaGrammar", function() { with(this) {
                           ['sequence',
                             ['string', 'foo'],
                             ['string', 'bar']]]]],
+
+            compiler.toSexp() )
+      }})
+    }})
+
+    describe('on maybe nodes', function() { with(this) {
+      before(function() { with(this) {
+        this.compiler = new Compiler(' \
+          grammar ActionMaybe \
+            string <- "foo"? %make_maybe \
+        ')
+      }})
+
+      it('transforms the action inside the maybe', function() { with(this) {
+        assertEqual(['grammar', 'ActionMaybe',
+                      ['rule', 'string',
+                        ['maybe',
+                          ['action', 'make_maybe',
+                            ['string', 'foo']]]]],
 
             compiler.toSexp() )
       }})
