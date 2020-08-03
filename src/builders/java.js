@@ -413,7 +413,6 @@ util.assign(Builder.prototype, {
   },
 
   extendNode_: function(address, nodeType) {
-    if (!nodeType) return;
     // TODO
   },
 

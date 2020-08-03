@@ -298,7 +298,6 @@ util.assign(Builder.prototype, {
   },
 
   extendNode_: function(address, nodeType) {
-    if (!nodeType) return;
     this._line('extend(' + address + ', this._types.' + nodeType + ')');
   },
 

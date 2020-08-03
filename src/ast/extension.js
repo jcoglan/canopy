@@ -18,7 +18,10 @@ util.assign(Extension.prototype, {
 
   compile: function(builder, address) {
     this._expression.compile(builder, address);
-    builder.extendNode_(address, this._typeName);
+
+    builder.ifNode_(address, function(builder) {
+      builder.extendNode_(address, this._typeName);
+    }, this);
   }
 });
 

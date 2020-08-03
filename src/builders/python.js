@@ -273,7 +273,6 @@ util.assign(Builder.prototype, {
   },
 
   extendNode_: function(address, nodeType) {
-    if (!nodeType) return;
     var cls = this.localVar_('cls', 'type(' + address + ')');
     this.assign_(address + '.__class__', "type(" + cls + ".__name__ + '" + nodeType + "', (" + cls + ", self._types." + nodeType + "), {})");
   },
