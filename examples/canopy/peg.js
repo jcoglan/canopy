@@ -338,9 +338,9 @@
       }
       var index1 = this._offset, elements0 = new Array(4);
       var address1 = FAILURE;
-      var chunk0 = null;
-      if (this._offset < this._inputSize) {
-        chunk0 = this._input.substring(this._offset, this._offset + 7);
+      var chunk0 = null, max0 = this._offset + 7;
+      if (max0 <= this._inputSize) {
+        chunk0 = this._input.substring(this._offset, max0);
       }
       if (chunk0 !== null && chunk0.toLowerCase() === 'grammar'.toLowerCase()) {
         address1 = new TreeNode(this._input.substring(this._offset, this._offset + 7), this._offset, []);
@@ -359,9 +359,9 @@
         elements0[0] = address1;
         var address2 = FAILURE;
         var index2 = this._offset;
-        var chunk1 = null;
-        if (this._offset < this._inputSize) {
-          chunk1 = this._input.substring(this._offset, this._offset + 1);
+        var chunk1 = null, max1 = this._offset + 1;
+        if (max1 <= this._inputSize) {
+          chunk1 = this._input.substring(this._offset, max1);
         }
         if (chunk1 === ':') {
           address2 = new TreeNode(this._input.substring(this._offset, this._offset + 1), this._offset, []);
@@ -499,9 +499,9 @@
       if (address1 !== FAILURE) {
         elements0[0] = address1;
         var address3 = FAILURE;
-        var chunk0 = null;
-        if (this._offset < this._inputSize) {
-          chunk0 = this._input.substring(this._offset, this._offset + 2);
+        var chunk0 = null, max0 = this._offset + 2;
+        if (max0 <= this._inputSize) {
+          chunk0 = this._input.substring(this._offset, max0);
         }
         if (chunk0 === '<-') {
           address3 = new TreeNode(this._input.substring(this._offset, this._offset + 2), this._offset, []);
@@ -588,9 +588,9 @@
       }
       var index1 = this._offset, elements0 = new Array(5);
       var address1 = FAILURE;
-      var chunk0 = null;
-      if (this._offset < this._inputSize) {
-        chunk0 = this._input.substring(this._offset, this._offset + 1);
+      var chunk0 = null, max0 = this._offset + 1;
+      if (max0 <= this._inputSize) {
+        chunk0 = this._input.substring(this._offset, max0);
       }
       if (chunk0 === '(') {
         address1 = new TreeNode(this._input.substring(this._offset, this._offset + 1), this._offset, []);
@@ -646,9 +646,9 @@
             if (address5 !== FAILURE) {
               elements0[3] = address5;
               var address7 = FAILURE;
-              var chunk1 = null;
-              if (this._offset < this._inputSize) {
-                chunk1 = this._input.substring(this._offset, this._offset + 1);
+              var chunk1 = null, max1 = this._offset + 1;
+              if (max1 <= this._inputSize) {
+                chunk1 = this._input.substring(this._offset, max1);
               }
               if (chunk1 === ')') {
                 address7 = new TreeNode(this._input.substring(this._offset, this._offset + 1), this._offset, []);
@@ -730,9 +730,9 @@
           if (address4 !== FAILURE) {
             elements2[0] = address4;
             var address6 = FAILURE;
-            var chunk0 = null;
-            if (this._offset < this._inputSize) {
-              chunk0 = this._input.substring(this._offset, this._offset + 1);
+            var chunk0 = null, max0 = this._offset + 1;
+            if (max0 <= this._inputSize) {
+              chunk0 = this._input.substring(this._offset, max0);
             }
             if (chunk0 === '/') {
               address6 = new TreeNode(this._input.substring(this._offset, this._offset + 1), this._offset, []);
@@ -977,9 +977,9 @@
       var index1 = this._offset;
       var index2 = this._offset, elements0 = new Array(5);
       var address1 = FAILURE;
-      var chunk0 = null;
-      if (this._offset < this._inputSize) {
-        chunk0 = this._input.substring(this._offset, this._offset + 1);
+      var chunk0 = null, max0 = this._offset + 1;
+      if (max0 <= this._inputSize) {
+        chunk0 = this._input.substring(this._offset, max0);
       }
       if (chunk0 === '(') {
         address1 = new TreeNode(this._input.substring(this._offset, this._offset + 1), this._offset, []);
@@ -1035,9 +1035,9 @@
             if (address5 !== FAILURE) {
               elements0[3] = address5;
               var address7 = FAILURE;
-              var chunk1 = null;
-              if (this._offset < this._inputSize) {
-                chunk1 = this._input.substring(this._offset, this._offset + 1);
+              var chunk1 = null, max1 = this._offset + 1;
+              if (max1 <= this._inputSize) {
+                chunk1 = this._input.substring(this._offset, max1);
               }
               if (chunk1 === ')') {
                 address7 = new TreeNode(this._input.substring(this._offset, this._offset + 1), this._offset, []);
@@ -1109,9 +1109,9 @@
       }
       var index1 = this._offset, elements0 = new Array(2);
       var address1 = FAILURE;
-      var chunk0 = null;
-      if (this._offset < this._inputSize) {
-        chunk0 = this._input.substring(this._offset, this._offset + 1);
+      var chunk0 = null, max0 = this._offset + 1;
+      if (max0 <= this._inputSize) {
+        chunk0 = this._input.substring(this._offset, max0);
       }
       if (chunk0 === '%') {
         address1 = new TreeNode(this._input.substring(this._offset, this._offset + 1), this._offset, []);
@@ -1160,9 +1160,9 @@
       }
       var index1 = this._offset, elements0 = new Array(3);
       var address1 = FAILURE;
-      var chunk0 = null;
-      if (this._offset < this._inputSize) {
-        chunk0 = this._input.substring(this._offset, this._offset + 1);
+      var chunk0 = null, max0 = this._offset + 1;
+      if (max0 <= this._inputSize) {
+        chunk0 = this._input.substring(this._offset, max0);
       }
       if (chunk0 === '<') {
         address1 = new TreeNode(this._input.substring(this._offset, this._offset + 1), this._offset, []);
@@ -1184,9 +1184,9 @@
         if (address2 !== FAILURE) {
           elements0[1] = address2;
           var address3 = FAILURE;
-          var chunk1 = null;
-          if (this._offset < this._inputSize) {
-            chunk1 = this._input.substring(this._offset, this._offset + 1);
+          var chunk1 = null, max1 = this._offset + 1;
+          if (max1 <= this._inputSize) {
+            chunk1 = this._input.substring(this._offset, max1);
           }
           if (chunk1 === '>') {
             address3 = new TreeNode(this._input.substring(this._offset, this._offset + 1), this._offset, []);
@@ -1374,9 +1374,9 @@
       if (address1 !== FAILURE) {
         elements0[0] = address1;
         var address2 = FAILURE;
-        var chunk0 = null;
-        if (this._offset < this._inputSize) {
-          chunk0 = this._input.substring(this._offset, this._offset + 1);
+        var chunk0 = null, max0 = this._offset + 1;
+        if (max0 <= this._inputSize) {
+          chunk0 = this._input.substring(this._offset, max0);
         }
         if (chunk0 === '?') {
           address2 = new TreeNode(this._input.substring(this._offset, this._offset + 1), this._offset, []);
@@ -1426,9 +1426,9 @@
         elements0[0] = address1;
         var address2 = FAILURE;
         var index2 = this._offset;
-        var chunk0 = null;
-        if (this._offset < this._inputSize) {
-          chunk0 = this._input.substring(this._offset, this._offset + 1);
+        var chunk0 = null, max0 = this._offset + 1;
+        if (max0 <= this._inputSize) {
+          chunk0 = this._input.substring(this._offset, max0);
         }
         if (chunk0 === '*') {
           address2 = new TreeNode(this._input.substring(this._offset, this._offset + 1), this._offset, []);
@@ -1445,9 +1445,9 @@
         }
         if (address2 === FAILURE) {
           this._offset = index2;
-          var chunk1 = null;
-          if (this._offset < this._inputSize) {
-            chunk1 = this._input.substring(this._offset, this._offset + 1);
+          var chunk1 = null, max1 = this._offset + 1;
+          if (max1 <= this._inputSize) {
+            chunk1 = this._input.substring(this._offset, max1);
           }
           if (chunk1 === '+') {
             address2 = new TreeNode(this._input.substring(this._offset, this._offset + 1), this._offset, []);
@@ -1555,9 +1555,9 @@
       var index1 = this._offset, elements0 = new Array(2);
       var address1 = FAILURE;
       var index2 = this._offset;
-      var chunk0 = null;
-      if (this._offset < this._inputSize) {
-        chunk0 = this._input.substring(this._offset, this._offset + 1);
+      var chunk0 = null, max0 = this._offset + 1;
+      if (max0 <= this._inputSize) {
+        chunk0 = this._input.substring(this._offset, max0);
       }
       if (chunk0 === '&') {
         address1 = new TreeNode(this._input.substring(this._offset, this._offset + 1), this._offset, []);
@@ -1574,9 +1574,9 @@
       }
       if (address1 === FAILURE) {
         this._offset = index2;
-        var chunk1 = null;
-        if (this._offset < this._inputSize) {
-          chunk1 = this._input.substring(this._offset, this._offset + 1);
+        var chunk1 = null, max1 = this._offset + 1;
+        if (max1 <= this._inputSize) {
+          chunk1 = this._input.substring(this._offset, max1);
         }
         if (chunk1 === '!') {
           address1 = new TreeNode(this._input.substring(this._offset, this._offset + 1), this._offset, []);
@@ -1673,9 +1673,9 @@
       var index1 = this._offset;
       var index2 = this._offset, elements0 = new Array(3);
       var address1 = FAILURE;
-      var chunk0 = null;
-      if (this._offset < this._inputSize) {
-        chunk0 = this._input.substring(this._offset, this._offset + 1);
+      var chunk0 = null, max0 = this._offset + 1;
+      if (max0 <= this._inputSize) {
+        chunk0 = this._input.substring(this._offset, max0);
       }
       if (chunk0 === '"') {
         address1 = new TreeNode(this._input.substring(this._offset, this._offset + 1), this._offset, []);
@@ -1698,9 +1698,9 @@
           var index4 = this._offset;
           var index5 = this._offset, elements2 = new Array(2);
           var address4 = FAILURE;
-          var chunk1 = null;
-          if (this._offset < this._inputSize) {
-            chunk1 = this._input.substring(this._offset, this._offset + 1);
+          var chunk1 = null, max1 = this._offset + 1;
+          if (max1 <= this._inputSize) {
+            chunk1 = this._input.substring(this._offset, max1);
           }
           if (chunk1 === '\\') {
             address4 = new TreeNode(this._input.substring(this._offset, this._offset + 1), this._offset, []);
@@ -1749,9 +1749,9 @@
           }
           if (address3 === FAILURE) {
             this._offset = index4;
-            var chunk2 = null;
-            if (this._offset < this._inputSize) {
-              chunk2 = this._input.substring(this._offset, this._offset + 1);
+            var chunk2 = null, max2 = this._offset + 1;
+            if (max2 <= this._inputSize) {
+              chunk2 = this._input.substring(this._offset, max2);
             }
             if (chunk2 !== null && /^[^"]/.test(chunk2)) {
               address3 = new TreeNode(this._input.substring(this._offset, this._offset + 1), this._offset, []);
@@ -1784,9 +1784,9 @@
         if (address2 !== FAILURE) {
           elements0[1] = address2;
           var address6 = FAILURE;
-          var chunk3 = null;
-          if (this._offset < this._inputSize) {
-            chunk3 = this._input.substring(this._offset, this._offset + 1);
+          var chunk3 = null, max3 = this._offset + 1;
+          if (max3 <= this._inputSize) {
+            chunk3 = this._input.substring(this._offset, max3);
           }
           if (chunk3 === '"') {
             address6 = new TreeNode(this._input.substring(this._offset, this._offset + 1), this._offset, []);
@@ -1825,9 +1825,9 @@
         this._offset = index1;
         var index6 = this._offset, elements3 = new Array(3);
         var address7 = FAILURE;
-        var chunk4 = null;
-        if (this._offset < this._inputSize) {
-          chunk4 = this._input.substring(this._offset, this._offset + 1);
+        var chunk4 = null, max4 = this._offset + 1;
+        if (max4 <= this._inputSize) {
+          chunk4 = this._input.substring(this._offset, max4);
         }
         if (chunk4 === '\'') {
           address7 = new TreeNode(this._input.substring(this._offset, this._offset + 1), this._offset, []);
@@ -1850,9 +1850,9 @@
             var index8 = this._offset;
             var index9 = this._offset, elements5 = new Array(2);
             var address10 = FAILURE;
-            var chunk5 = null;
-            if (this._offset < this._inputSize) {
-              chunk5 = this._input.substring(this._offset, this._offset + 1);
+            var chunk5 = null, max5 = this._offset + 1;
+            if (max5 <= this._inputSize) {
+              chunk5 = this._input.substring(this._offset, max5);
             }
             if (chunk5 === '\\') {
               address10 = new TreeNode(this._input.substring(this._offset, this._offset + 1), this._offset, []);
@@ -1901,9 +1901,9 @@
             }
             if (address9 === FAILURE) {
               this._offset = index8;
-              var chunk6 = null;
-              if (this._offset < this._inputSize) {
-                chunk6 = this._input.substring(this._offset, this._offset + 1);
+              var chunk6 = null, max6 = this._offset + 1;
+              if (max6 <= this._inputSize) {
+                chunk6 = this._input.substring(this._offset, max6);
               }
               if (chunk6 !== null && /^[^']/.test(chunk6)) {
                 address9 = new TreeNode(this._input.substring(this._offset, this._offset + 1), this._offset, []);
@@ -1936,9 +1936,9 @@
           if (address8 !== FAILURE) {
             elements3[1] = address8;
             var address12 = FAILURE;
-            var chunk7 = null;
-            if (this._offset < this._inputSize) {
-              chunk7 = this._input.substring(this._offset, this._offset + 1);
+            var chunk7 = null, max7 = this._offset + 1;
+            if (max7 <= this._inputSize) {
+              chunk7 = this._input.substring(this._offset, max7);
             }
             if (chunk7 === '\'') {
               address12 = new TreeNode(this._input.substring(this._offset, this._offset + 1), this._offset, []);
@@ -1991,9 +1991,9 @@
       }
       var index1 = this._offset, elements0 = new Array(3);
       var address1 = FAILURE;
-      var chunk0 = null;
-      if (this._offset < this._inputSize) {
-        chunk0 = this._input.substring(this._offset, this._offset + 1);
+      var chunk0 = null, max0 = this._offset + 1;
+      if (max0 <= this._inputSize) {
+        chunk0 = this._input.substring(this._offset, max0);
       }
       if (chunk0 === '`') {
         address1 = new TreeNode(this._input.substring(this._offset, this._offset + 1), this._offset, []);
@@ -2016,9 +2016,9 @@
           var index3 = this._offset;
           var index4 = this._offset, elements2 = new Array(2);
           var address4 = FAILURE;
-          var chunk1 = null;
-          if (this._offset < this._inputSize) {
-            chunk1 = this._input.substring(this._offset, this._offset + 1);
+          var chunk1 = null, max1 = this._offset + 1;
+          if (max1 <= this._inputSize) {
+            chunk1 = this._input.substring(this._offset, max1);
           }
           if (chunk1 === '\\') {
             address4 = new TreeNode(this._input.substring(this._offset, this._offset + 1), this._offset, []);
@@ -2067,9 +2067,9 @@
           }
           if (address3 === FAILURE) {
             this._offset = index3;
-            var chunk2 = null;
-            if (this._offset < this._inputSize) {
-              chunk2 = this._input.substring(this._offset, this._offset + 1);
+            var chunk2 = null, max2 = this._offset + 1;
+            if (max2 <= this._inputSize) {
+              chunk2 = this._input.substring(this._offset, max2);
             }
             if (chunk2 !== null && /^[^`]/.test(chunk2)) {
               address3 = new TreeNode(this._input.substring(this._offset, this._offset + 1), this._offset, []);
@@ -2102,9 +2102,9 @@
         if (address2 !== FAILURE) {
           elements0[1] = address2;
           var address6 = FAILURE;
-          var chunk3 = null;
-          if (this._offset < this._inputSize) {
-            chunk3 = this._input.substring(this._offset, this._offset + 1);
+          var chunk3 = null, max3 = this._offset + 1;
+          if (max3 <= this._inputSize) {
+            chunk3 = this._input.substring(this._offset, max3);
           }
           if (chunk3 === '`') {
             address6 = new TreeNode(this._input.substring(this._offset, this._offset + 1), this._offset, []);
@@ -2151,9 +2151,9 @@
         this._offset = cached[1];
         return cached[0];
       }
-      var chunk0 = null;
-      if (this._offset < this._inputSize) {
-        chunk0 = this._input.substring(this._offset, this._offset + 1);
+      var chunk0 = null, max0 = this._offset + 1;
+      if (max0 <= this._inputSize) {
+        chunk0 = this._input.substring(this._offset, max0);
       }
       if (chunk0 === '.') {
         address0 = new TreeNode(this._input.substring(this._offset, this._offset + 1), this._offset, []);
@@ -2182,9 +2182,9 @@
       }
       var index1 = this._offset, elements0 = new Array(4);
       var address1 = FAILURE;
-      var chunk0 = null;
-      if (this._offset < this._inputSize) {
-        chunk0 = this._input.substring(this._offset, this._offset + 1);
+      var chunk0 = null, max0 = this._offset + 1;
+      if (max0 <= this._inputSize) {
+        chunk0 = this._input.substring(this._offset, max0);
       }
       if (chunk0 === '[') {
         address1 = new TreeNode(this._input.substring(this._offset, this._offset + 1), this._offset, []);
@@ -2203,9 +2203,9 @@
         elements0[0] = address1;
         var address2 = FAILURE;
         var index2 = this._offset;
-        var chunk1 = null;
-        if (this._offset < this._inputSize) {
-          chunk1 = this._input.substring(this._offset, this._offset + 1);
+        var chunk1 = null, max1 = this._offset + 1;
+        if (max1 <= this._inputSize) {
+          chunk1 = this._input.substring(this._offset, max1);
         }
         if (chunk1 === '^') {
           address2 = new TreeNode(this._input.substring(this._offset, this._offset + 1), this._offset, []);
@@ -2232,9 +2232,9 @@
             var index4 = this._offset;
             var index5 = this._offset, elements2 = new Array(2);
             var address5 = FAILURE;
-            var chunk2 = null;
-            if (this._offset < this._inputSize) {
-              chunk2 = this._input.substring(this._offset, this._offset + 1);
+            var chunk2 = null, max2 = this._offset + 1;
+            if (max2 <= this._inputSize) {
+              chunk2 = this._input.substring(this._offset, max2);
             }
             if (chunk2 === '\\') {
               address5 = new TreeNode(this._input.substring(this._offset, this._offset + 1), this._offset, []);
@@ -2283,9 +2283,9 @@
             }
             if (address4 === FAILURE) {
               this._offset = index4;
-              var chunk3 = null;
-              if (this._offset < this._inputSize) {
-                chunk3 = this._input.substring(this._offset, this._offset + 1);
+              var chunk3 = null, max3 = this._offset + 1;
+              if (max3 <= this._inputSize) {
+                chunk3 = this._input.substring(this._offset, max3);
               }
               if (chunk3 !== null && /^[^\]]/.test(chunk3)) {
                 address4 = new TreeNode(this._input.substring(this._offset, this._offset + 1), this._offset, []);
@@ -2318,9 +2318,9 @@
           if (address3 !== FAILURE) {
             elements0[2] = address3;
             var address7 = FAILURE;
-            var chunk4 = null;
-            if (this._offset < this._inputSize) {
-              chunk4 = this._input.substring(this._offset, this._offset + 1);
+            var chunk4 = null, max4 = this._offset + 1;
+            if (max4 <= this._inputSize) {
+              chunk4 = this._input.substring(this._offset, max4);
             }
             if (chunk4 === ']') {
               address7 = new TreeNode(this._input.substring(this._offset, this._offset + 1), this._offset, []);
@@ -2377,9 +2377,9 @@
       if (address1 !== FAILURE) {
         elements0[0] = address1;
         var address2 = FAILURE;
-        var chunk0 = null;
-        if (this._offset < this._inputSize) {
-          chunk0 = this._input.substring(this._offset, this._offset + 1);
+        var chunk0 = null, max0 = this._offset + 1;
+        if (max0 <= this._inputSize) {
+          chunk0 = this._input.substring(this._offset, max0);
         }
         if (chunk0 === ':') {
           address2 = new TreeNode(this._input.substring(this._offset, this._offset + 1), this._offset, []);
@@ -2432,9 +2432,9 @@
         while (address3 !== FAILURE) {
           var index3 = this._offset, elements2 = new Array(2);
           var address4 = FAILURE;
-          var chunk0 = null;
-          if (this._offset < this._inputSize) {
-            chunk0 = this._input.substring(this._offset, this._offset + 1);
+          var chunk0 = null, max0 = this._offset + 1;
+          if (max0 <= this._inputSize) {
+            chunk0 = this._input.substring(this._offset, max0);
           }
           if (chunk0 === '.') {
             address4 = new TreeNode(this._input.substring(this._offset, this._offset + 1), this._offset, []);
@@ -2510,9 +2510,9 @@
       }
       var index1 = this._offset, elements0 = new Array(2);
       var address1 = FAILURE;
-      var chunk0 = null;
-      if (this._offset < this._inputSize) {
-        chunk0 = this._input.substring(this._offset, this._offset + 1);
+      var chunk0 = null, max0 = this._offset + 1;
+      if (max0 <= this._inputSize) {
+        chunk0 = this._input.substring(this._offset, max0);
       }
       if (chunk0 !== null && /^[a-zA-Z_]/.test(chunk0)) {
         address1 = new TreeNode(this._input.substring(this._offset, this._offset + 1), this._offset, []);
@@ -2532,9 +2532,9 @@
         var address2 = FAILURE;
         var remaining0 = 0, index2 = this._offset, elements1 = [], address3 = true;
         while (address3 !== FAILURE) {
-          var chunk1 = null;
-          if (this._offset < this._inputSize) {
-            chunk1 = this._input.substring(this._offset, this._offset + 1);
+          var chunk1 = null, max1 = this._offset + 1;
+          if (max1 <= this._inputSize) {
+            chunk1 = this._input.substring(this._offset, max1);
           }
           if (chunk1 !== null && /^[a-zA-Z0-9_]/.test(chunk1)) {
             address3 = new TreeNode(this._input.substring(this._offset, this._offset + 1), this._offset, []);
@@ -2589,9 +2589,9 @@
         return cached[0];
       }
       var index1 = this._offset;
-      var chunk0 = null;
-      if (this._offset < this._inputSize) {
-        chunk0 = this._input.substring(this._offset, this._offset + 1);
+      var chunk0 = null, max0 = this._offset + 1;
+      if (max0 <= this._inputSize) {
+        chunk0 = this._input.substring(this._offset, max0);
       }
       if (chunk0 !== null && /^[\s]/.test(chunk0)) {
         address0 = new TreeNode(this._input.substring(this._offset, this._offset + 1), this._offset, []);
@@ -2627,9 +2627,9 @@
       }
       var index1 = this._offset, elements0 = new Array(2);
       var address1 = FAILURE;
-      var chunk0 = null;
-      if (this._offset < this._inputSize) {
-        chunk0 = this._input.substring(this._offset, this._offset + 1);
+      var chunk0 = null, max0 = this._offset + 1;
+      if (max0 <= this._inputSize) {
+        chunk0 = this._input.substring(this._offset, max0);
       }
       if (chunk0 === '#') {
         address1 = new TreeNode(this._input.substring(this._offset, this._offset + 1), this._offset, []);
@@ -2649,9 +2649,9 @@
         var address2 = FAILURE;
         var remaining0 = 0, index2 = this._offset, elements1 = [], address3 = true;
         while (address3 !== FAILURE) {
-          var chunk1 = null;
-          if (this._offset < this._inputSize) {
-            chunk1 = this._input.substring(this._offset, this._offset + 1);
+          var chunk1 = null, max1 = this._offset + 1;
+          if (max1 <= this._inputSize) {
+            chunk1 = this._input.substring(this._offset, max1);
           }
           if (chunk1 !== null && /^[^\n]/.test(chunk1)) {
             address3 = new TreeNode(this._input.substring(this._offset, this._offset + 1), this._offset, []);

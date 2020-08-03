@@ -150,9 +150,9 @@ module CanopyLisp
       end
       index1, elements0 = @offset, []
       address1 = FAILURE
-      chunk0 = nil
-      if @offset < @input_size
-        chunk0 = @input[@offset...@offset + 1]
+      chunk0, max0 = nil, @offset + 1
+      if max0 <= @input_size
+        chunk0 = @input[@offset...max0]
       end
       if chunk0 == "("
         address1 = TreeNode.new(@input[@offset...@offset + 1], @offset, [])
@@ -187,9 +187,9 @@ module CanopyLisp
         unless address2 == FAILURE
           elements0 << address2
           address4 = FAILURE
-          chunk1 = nil
-          if @offset < @input_size
-            chunk1 = @input[@offset...@offset + 1]
+          chunk1, max1 = nil, @offset + 1
+          if max1 <= @input_size
+            chunk1 = @input[@offset...max1]
           end
           if chunk1 == ")"
             address4 = TreeNode.new(@input[@offset...@offset + 1], @offset, [])
@@ -264,9 +264,9 @@ module CanopyLisp
         return cached[0]
       end
       index1 = @offset
-      chunk0 = nil
-      if @offset < @input_size
-        chunk0 = @input[@offset...@offset + 2]
+      chunk0, max0 = nil, @offset + 2
+      if max0 <= @input_size
+        chunk0 = @input[@offset...max0]
       end
       if chunk0 == "#t"
         address0 = TreeNode.new(@input[@offset...@offset + 2], @offset, [])
@@ -283,9 +283,9 @@ module CanopyLisp
       end
       if address0 == FAILURE
         @offset = index1
-        chunk1 = nil
-        if @offset < @input_size
-          chunk1 = @input[@offset...@offset + 2]
+        chunk1, max1 = nil, @offset + 2
+        if max1 <= @input_size
+          chunk1 = @input[@offset...max1]
         end
         if chunk1 == "#f"
           address0 = TreeNode.new(@input[@offset...@offset + 2], @offset, [])
@@ -317,9 +317,9 @@ module CanopyLisp
       end
       index1, elements0 = @offset, []
       address1 = FAILURE
-      chunk0 = nil
-      if @offset < @input_size
-        chunk0 = @input[@offset...@offset + 1]
+      chunk0, max0 = nil, @offset + 1
+      if max0 <= @input_size
+        chunk0 = @input[@offset...max0]
       end
       if chunk0 =~ /\A[1-9]/
         address1 = TreeNode.new(@input[@offset...@offset + 1], @offset, [])
@@ -339,9 +339,9 @@ module CanopyLisp
         address2 = FAILURE
         remaining0, index2, elements1, address3 = 0, @offset, [], true
         until address3 == FAILURE
-          chunk1 = nil
-          if @offset < @input_size
-            chunk1 = @input[@offset...@offset + 1]
+          chunk1, max1 = nil, @offset + 1
+          if max1 <= @input_size
+            chunk1 = @input[@offset...max1]
           end
           if chunk1 =~ /\A[0-9]/
             address3 = TreeNode.new(@input[@offset...@offset + 1], @offset, [])
@@ -396,9 +396,9 @@ module CanopyLisp
       end
       index1, elements0 = @offset, []
       address1 = FAILURE
-      chunk0 = nil
-      if @offset < @input_size
-        chunk0 = @input[@offset...@offset + 1]
+      chunk0, max0 = nil, @offset + 1
+      if max0 <= @input_size
+        chunk0 = @input[@offset...max0]
       end
       if chunk0 == "\""
         address1 = TreeNode.new(@input[@offset...@offset + 1], @offset, [])
@@ -421,9 +421,9 @@ module CanopyLisp
           index3 = @offset
           index4, elements2 = @offset, []
           address4 = FAILURE
-          chunk1 = nil
-          if @offset < @input_size
-            chunk1 = @input[@offset...@offset + 1]
+          chunk1, max1 = nil, @offset + 1
+          if max1 <= @input_size
+            chunk1 = @input[@offset...max1]
           end
           if chunk1 == "\\"
             address4 = TreeNode.new(@input[@offset...@offset + 1], @offset, [])
@@ -472,9 +472,9 @@ module CanopyLisp
           end
           if address3 == FAILURE
             @offset = index3
-            chunk2 = nil
-            if @offset < @input_size
-              chunk2 = @input[@offset...@offset + 1]
+            chunk2, max2 = nil, @offset + 1
+            if max2 <= @input_size
+              chunk2 = @input[@offset...max2]
             end
             if chunk2 =~ /\A[^"]/
               address3 = TreeNode.new(@input[@offset...@offset + 1], @offset, [])
@@ -507,9 +507,9 @@ module CanopyLisp
         unless address2 == FAILURE
           elements0 << address2
           address6 = FAILURE
-          chunk3 = nil
-          if @offset < @input_size
-            chunk3 = @input[@offset...@offset + 1]
+          chunk3, max3 = nil, @offset + 1
+          if max3 <= @input_size
+            chunk3 = @input[@offset...max3]
           end
           if chunk3 == "\""
             address6 = TreeNode.new(@input[@offset...@offset + 1], @offset, [])
@@ -622,9 +622,9 @@ module CanopyLisp
         @offset = cached[1]
         return cached[0]
       end
-      chunk0 = nil
-      if @offset < @input_size
-        chunk0 = @input[@offset...@offset + 1]
+      chunk0, max0 = nil, @offset + 1
+      if max0 <= @input_size
+        chunk0 = @input[@offset...max0]
       end
       if chunk0 =~ /\A[\s]/
         address0 = TreeNode.new(@input[@offset...@offset + 1], @offset, [])
@@ -651,9 +651,9 @@ module CanopyLisp
         return cached[0]
       end
       index1 = @offset
-      chunk0 = nil
-      if @offset < @input_size
-        chunk0 = @input[@offset...@offset + 1]
+      chunk0, max0 = nil, @offset + 1
+      if max0 <= @input_size
+        chunk0 = @input[@offset...max0]
       end
       if chunk0 == "("
         address0 = TreeNode.new(@input[@offset...@offset + 1], @offset, [])
@@ -670,9 +670,9 @@ module CanopyLisp
       end
       if address0 == FAILURE
         @offset = index1
-        chunk1 = nil
-        if @offset < @input_size
-          chunk1 = @input[@offset...@offset + 1]
+        chunk1, max1 = nil, @offset + 1
+        if max1 <= @input_size
+          chunk1 = @input[@offset...max1]
         end
         if chunk1 == ")"
           address0 = TreeNode.new(@input[@offset...@offset + 1], @offset, [])

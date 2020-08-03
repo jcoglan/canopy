@@ -23,6 +23,7 @@ var TYPES = {
   chunk:      'String',
   elements:   'List<TreeNode>',
   index:      'int',
+  max:        'int',
   remaining:  'int'
 };
 
@@ -378,12 +379,14 @@ util.assign(Builder.prototype, {
   },
 
   chunk_: function(length) {
-    var chunk = this.localVar_('chunk', this.null_()), input = 'input', of = 'offset';
-    this.if_(of + ' < inputSize', function(builder) {
-      builder._line(chunk + ' = ' + input + '.substring(' + of + ', ' +
-          'Math.min(' + of + ' + ' + length + ', inputSize))');
+    var input = 'input',
+        ofs   = 'offset',
+        temp  = this.localVars_({chunk: this.null_(), max: ofs + ' + ' + length});
+
+    this.if_(temp.max + ' <= inputSize', function(builder) {
+      builder._line(temp.chunk + ' = ' + input + '.substring(' + ofs + ', ' + temp.max + ')');
     });
-    return chunk;
+    return temp.chunk;
   },
 
   syntaxNode_: function(address, start, end, elements, action, nodeClass) {

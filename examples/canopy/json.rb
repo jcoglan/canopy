@@ -165,9 +165,9 @@ module CanopyJson
       index1 = @offset
       index2, elements0 = @offset, []
       address1 = FAILURE
-      chunk0 = nil
-      if @offset < @input_size
-        chunk0 = @input[@offset...@offset + 1]
+      chunk0, max0 = nil, @offset + 1
+      if max0 <= @input_size
+        chunk0 = @input[@offset...max0]
       end
       if chunk0 == "{"
         address1 = TreeNode.new(@input[@offset...@offset + 1], @offset, [])
@@ -193,9 +193,9 @@ module CanopyJson
           until address4 == FAILURE
             index4, elements2 = @offset, []
             address5 = FAILURE
-            chunk1 = nil
-            if @offset < @input_size
-              chunk1 = @input[@offset...@offset + 1]
+            chunk1, max1 = nil, @offset + 1
+            if max1 <= @input_size
+              chunk1 = @input[@offset...max1]
             end
             if chunk1 == ","
               address5 = TreeNode.new(@input[@offset...@offset + 1], @offset, [])
@@ -244,9 +244,9 @@ module CanopyJson
           unless address3 == FAILURE
             elements0 << address3
             address7 = FAILURE
-            chunk2 = nil
-            if @offset < @input_size
-              chunk2 = @input[@offset...@offset + 1]
+            chunk2, max2 = nil, @offset + 1
+            if max2 <= @input_size
+              chunk2 = @input[@offset...max2]
             end
             if chunk2 == "}"
               address7 = TreeNode.new(@input[@offset...@offset + 1], @offset, [])
@@ -289,9 +289,9 @@ module CanopyJson
         @offset = index1
         index5, elements3 = @offset, []
         address8 = FAILURE
-        chunk3 = nil
-        if @offset < @input_size
-          chunk3 = @input[@offset...@offset + 1]
+        chunk3, max3 = nil, @offset + 1
+        if max3 <= @input_size
+          chunk3 = @input[@offset...max3]
         end
         if chunk3 == "{"
           address8 = TreeNode.new(@input[@offset...@offset + 1], @offset, [])
@@ -313,9 +313,9 @@ module CanopyJson
           unless address9 == FAILURE
             elements3 << address9
             address10 = FAILURE
-            chunk4 = nil
-            if @offset < @input_size
-              chunk4 = @input[@offset...@offset + 1]
+            chunk4, max4 = nil, @offset + 1
+            if max4 <= @input_size
+              chunk4 = @input[@offset...max4]
             end
             if chunk4 == "}"
               address10 = TreeNode.new(@input[@offset...@offset + 1], @offset, [])
@@ -379,9 +379,9 @@ module CanopyJson
           unless address3 == FAILURE
             elements0 << address3
             address4 = FAILURE
-            chunk0 = nil
-            if @offset < @input_size
-              chunk0 = @input[@offset...@offset + 1]
+            chunk0, max0 = nil, @offset + 1
+            if max0 <= @input_size
+              chunk0 = @input[@offset...max0]
             end
             if chunk0 == ":"
               address4 = TreeNode.new(@input[@offset...@offset + 1], @offset, [])
@@ -442,9 +442,9 @@ module CanopyJson
       index1 = @offset
       index2, elements0 = @offset, []
       address1 = FAILURE
-      chunk0 = nil
-      if @offset < @input_size
-        chunk0 = @input[@offset...@offset + 1]
+      chunk0, max0 = nil, @offset + 1
+      if max0 <= @input_size
+        chunk0 = @input[@offset...max0]
       end
       if chunk0 == "["
         address1 = TreeNode.new(@input[@offset...@offset + 1], @offset, [])
@@ -470,9 +470,9 @@ module CanopyJson
           until address4 == FAILURE
             index4, elements2 = @offset, []
             address5 = FAILURE
-            chunk1 = nil
-            if @offset < @input_size
-              chunk1 = @input[@offset...@offset + 1]
+            chunk1, max1 = nil, @offset + 1
+            if max1 <= @input_size
+              chunk1 = @input[@offset...max1]
             end
             if chunk1 == ","
               address5 = TreeNode.new(@input[@offset...@offset + 1], @offset, [])
@@ -521,9 +521,9 @@ module CanopyJson
           unless address3 == FAILURE
             elements0 << address3
             address7 = FAILURE
-            chunk2 = nil
-            if @offset < @input_size
-              chunk2 = @input[@offset...@offset + 1]
+            chunk2, max2 = nil, @offset + 1
+            if max2 <= @input_size
+              chunk2 = @input[@offset...max2]
             end
             if chunk2 == "]"
               address7 = TreeNode.new(@input[@offset...@offset + 1], @offset, [])
@@ -566,9 +566,9 @@ module CanopyJson
         @offset = index1
         index5, elements3 = @offset, []
         address8 = FAILURE
-        chunk3 = nil
-        if @offset < @input_size
-          chunk3 = @input[@offset...@offset + 1]
+        chunk3, max3 = nil, @offset + 1
+        if max3 <= @input_size
+          chunk3 = @input[@offset...max3]
         end
         if chunk3 == "["
           address8 = TreeNode.new(@input[@offset...@offset + 1], @offset, [])
@@ -590,9 +590,9 @@ module CanopyJson
           unless address9 == FAILURE
             elements3 << address9
             address10 = FAILURE
-            chunk4 = nil
-            if @offset < @input_size
-              chunk4 = @input[@offset...@offset + 1]
+            chunk4, max4 = nil, @offset + 1
+            if max4 <= @input_size
+              chunk4 = @input[@offset...max4]
             end
             if chunk4 == "]"
               address10 = TreeNode.new(@input[@offset...@offset + 1], @offset, [])
@@ -710,9 +710,9 @@ module CanopyJson
       end
       index1, elements0 = @offset, []
       address1 = FAILURE
-      chunk0 = nil
-      if @offset < @input_size
-        chunk0 = @input[@offset...@offset + 1]
+      chunk0, max0 = nil, @offset + 1
+      if max0 <= @input_size
+        chunk0 = @input[@offset...max0]
       end
       if chunk0 == "\""
         address1 = TreeNode.new(@input[@offset...@offset + 1], @offset, [])
@@ -735,9 +735,9 @@ module CanopyJson
           index3 = @offset
           index4, elements2 = @offset, []
           address4 = FAILURE
-          chunk1 = nil
-          if @offset < @input_size
-            chunk1 = @input[@offset...@offset + 1]
+          chunk1, max1 = nil, @offset + 1
+          if max1 <= @input_size
+            chunk1 = @input[@offset...max1]
           end
           if chunk1 == "\\"
             address4 = TreeNode.new(@input[@offset...@offset + 1], @offset, [])
@@ -786,9 +786,9 @@ module CanopyJson
           end
           if address3 == FAILURE
             @offset = index3
-            chunk2 = nil
-            if @offset < @input_size
-              chunk2 = @input[@offset...@offset + 1]
+            chunk2, max2 = nil, @offset + 1
+            if max2 <= @input_size
+              chunk2 = @input[@offset...max2]
             end
             if chunk2 =~ /\A[^"]/
               address3 = TreeNode.new(@input[@offset...@offset + 1], @offset, [])
@@ -821,9 +821,9 @@ module CanopyJson
         unless address2 == FAILURE
           elements0 << address2
           address6 = FAILURE
-          chunk3 = nil
-          if @offset < @input_size
-            chunk3 = @input[@offset...@offset + 1]
+          chunk3, max3 = nil, @offset + 1
+          if max3 <= @input_size
+            chunk3 = @input[@offset...max3]
           end
           if chunk3 == "\""
             address6 = TreeNode.new(@input[@offset...@offset + 1], @offset, [])
@@ -872,9 +872,9 @@ module CanopyJson
       index1, elements0 = @offset, []
       address1 = FAILURE
       index2 = @offset
-      chunk0 = nil
-      if @offset < @input_size
-        chunk0 = @input[@offset...@offset + 1]
+      chunk0, max0 = nil, @offset + 1
+      if max0 <= @input_size
+        chunk0 = @input[@offset...max0]
       end
       if chunk0 == "-"
         address1 = TreeNode.new(@input[@offset...@offset + 1], @offset, [])
@@ -897,9 +897,9 @@ module CanopyJson
         elements0 << address1
         address2 = FAILURE
         index3 = @offset
-        chunk1 = nil
-        if @offset < @input_size
-          chunk1 = @input[@offset...@offset + 1]
+        chunk1, max1 = nil, @offset + 1
+        if max1 <= @input_size
+          chunk1 = @input[@offset...max1]
         end
         if chunk1 == "0"
           address2 = TreeNode.new(@input[@offset...@offset + 1], @offset, [])
@@ -918,9 +918,9 @@ module CanopyJson
           @offset = index3
           index4, elements1 = @offset, []
           address3 = FAILURE
-          chunk2 = nil
-          if @offset < @input_size
-            chunk2 = @input[@offset...@offset + 1]
+          chunk2, max2 = nil, @offset + 1
+          if max2 <= @input_size
+            chunk2 = @input[@offset...max2]
           end
           if chunk2 =~ /\A[1-9]/
             address3 = TreeNode.new(@input[@offset...@offset + 1], @offset, [])
@@ -940,9 +940,9 @@ module CanopyJson
             address4 = FAILURE
             remaining0, index5, elements2, address5 = 0, @offset, [], true
             until address5 == FAILURE
-              chunk3 = nil
-              if @offset < @input_size
-                chunk3 = @input[@offset...@offset + 1]
+              chunk3, max3 = nil, @offset + 1
+              if max3 <= @input_size
+                chunk3 = @input[@offset...max3]
               end
               if chunk3 =~ /\A[0-9]/
                 address5 = TreeNode.new(@input[@offset...@offset + 1], @offset, [])
@@ -994,9 +994,9 @@ module CanopyJson
           index6 = @offset
           index7, elements3 = @offset, []
           address7 = FAILURE
-          chunk4 = nil
-          if @offset < @input_size
-            chunk4 = @input[@offset...@offset + 1]
+          chunk4, max4 = nil, @offset + 1
+          if max4 <= @input_size
+            chunk4 = @input[@offset...max4]
           end
           if chunk4 == "."
             address7 = TreeNode.new(@input[@offset...@offset + 1], @offset, [])
@@ -1016,9 +1016,9 @@ module CanopyJson
             address8 = FAILURE
             remaining1, index8, elements4, address9 = 1, @offset, [], true
             until address9 == FAILURE
-              chunk5 = nil
-              if @offset < @input_size
-                chunk5 = @input[@offset...@offset + 1]
+              chunk5, max5 = nil, @offset + 1
+              if max5 <= @input_size
+                chunk5 = @input[@offset...max5]
               end
               if chunk5 =~ /\A[0-9]/
                 address9 = TreeNode.new(@input[@offset...@offset + 1], @offset, [])
@@ -1071,9 +1071,9 @@ module CanopyJson
             index10, elements5 = @offset, []
             address11 = FAILURE
             index11 = @offset
-            chunk6 = nil
-            if @offset < @input_size
-              chunk6 = @input[@offset...@offset + 1]
+            chunk6, max6 = nil, @offset + 1
+            if max6 <= @input_size
+              chunk6 = @input[@offset...max6]
             end
             if chunk6 == "e"
               address11 = TreeNode.new(@input[@offset...@offset + 1], @offset, [])
@@ -1090,9 +1090,9 @@ module CanopyJson
             end
             if address11 == FAILURE
               @offset = index11
-              chunk7 = nil
-              if @offset < @input_size
-                chunk7 = @input[@offset...@offset + 1]
+              chunk7, max7 = nil, @offset + 1
+              if max7 <= @input_size
+                chunk7 = @input[@offset...max7]
               end
               if chunk7 == "E"
                 address11 = TreeNode.new(@input[@offset...@offset + 1], @offset, [])
@@ -1115,9 +1115,9 @@ module CanopyJson
               elements5 << address11
               address12 = FAILURE
               index12 = @offset
-              chunk8 = nil
-              if @offset < @input_size
-                chunk8 = @input[@offset...@offset + 1]
+              chunk8, max8 = nil, @offset + 1
+              if max8 <= @input_size
+                chunk8 = @input[@offset...max8]
               end
               if chunk8 == "+"
                 address12 = TreeNode.new(@input[@offset...@offset + 1], @offset, [])
@@ -1134,9 +1134,9 @@ module CanopyJson
               end
               if address12 == FAILURE
                 @offset = index12
-                chunk9 = nil
-                if @offset < @input_size
-                  chunk9 = @input[@offset...@offset + 1]
+                chunk9, max9 = nil, @offset + 1
+                if max9 <= @input_size
+                  chunk9 = @input[@offset...max9]
                 end
                 if chunk9 == "-"
                   address12 = TreeNode.new(@input[@offset...@offset + 1], @offset, [])
@@ -1153,9 +1153,9 @@ module CanopyJson
                 end
                 if address12 == FAILURE
                   @offset = index12
-                  chunk10 = nil
-                  if @offset < @input_size
-                    chunk10 = @input[@offset...@offset + 0]
+                  chunk10, max10 = nil, @offset + 0
+                  if max10 <= @input_size
+                    chunk10 = @input[@offset...max10]
                   end
                   if chunk10 == ""
                     address12 = TreeNode.new(@input[@offset...@offset + 0], @offset, [])
@@ -1180,9 +1180,9 @@ module CanopyJson
                 address13 = FAILURE
                 remaining2, index13, elements6, address14 = 1, @offset, [], true
                 until address14 == FAILURE
-                  chunk11 = nil
-                  if @offset < @input_size
-                    chunk11 = @input[@offset...@offset + 1]
+                  chunk11, max11 = nil, @offset + 1
+                  if max11 <= @input_size
+                    chunk11 = @input[@offset...max11]
                   end
                   if chunk11 =~ /\A[0-9]/
                     address14 = TreeNode.new(@input[@offset...@offset + 1], @offset, [])
@@ -1268,9 +1268,9 @@ module CanopyJson
         return cached[0]
       end
       index1 = @offset
-      chunk0 = nil
-      if @offset < @input_size
-        chunk0 = @input[@offset...@offset + 4]
+      chunk0, max0 = nil, @offset + 4
+      if max0 <= @input_size
+        chunk0 = @input[@offset...max0]
       end
       if chunk0 == "true"
         address0 = TreeNode.new(@input[@offset...@offset + 4], @offset, [])
@@ -1287,9 +1287,9 @@ module CanopyJson
       end
       if address0 == FAILURE
         @offset = index1
-        chunk1 = nil
-        if @offset < @input_size
-          chunk1 = @input[@offset...@offset + 5]
+        chunk1, max1 = nil, @offset + 5
+        if max1 <= @input_size
+          chunk1 = @input[@offset...max1]
         end
         if chunk1 == "false"
           address0 = TreeNode.new(@input[@offset...@offset + 5], @offset, [])
@@ -1319,9 +1319,9 @@ module CanopyJson
         @offset = cached[1]
         return cached[0]
       end
-      chunk0 = nil
-      if @offset < @input_size
-        chunk0 = @input[@offset...@offset + 4]
+      chunk0, max0 = nil, @offset + 4
+      if max0 <= @input_size
+        chunk0 = @input[@offset...max0]
       end
       if chunk0 == "null"
         address0 = TreeNode.new(@input[@offset...@offset + 4], @offset, [])
@@ -1349,9 +1349,9 @@ module CanopyJson
       end
       remaining0, index1, elements0, address1 = 0, @offset, [], true
       until address1 == FAILURE
-        chunk0 = nil
-        if @offset < @input_size
-          chunk0 = @input[@offset...@offset + 1]
+        chunk0, max0 = nil, @offset + 1
+        if max0 <= @input_size
+          chunk0 = @input[@offset...max0]
         end
         if chunk0 =~ /\A[\s]/
           address1 = TreeNode.new(@input[@offset...@offset + 1], @offset, [])

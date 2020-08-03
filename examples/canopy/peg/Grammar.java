@@ -189,8 +189,9 @@ abstract class Grammar {
             List<TreeNode> elements0 = new ArrayList<TreeNode>(4);
             TreeNode address1 = FAILURE;
             String chunk0 = null;
-            if (offset < inputSize) {
-                chunk0 = input.substring(offset, Math.min(offset + 7, inputSize));
+            int max0 = offset + 7;
+            if (max0 <= inputSize) {
+                chunk0 = input.substring(offset, max0);
             }
             if (chunk0 != null && chunk0.toLowerCase().equals("grammar".toLowerCase())) {
                 address1 = new TreeNode(input.substring(offset, offset + 7), offset, new ArrayList<TreeNode>());
@@ -210,8 +211,9 @@ abstract class Grammar {
                 TreeNode address2 = FAILURE;
                 int index2 = offset;
                 String chunk1 = null;
-                if (offset < inputSize) {
-                    chunk1 = input.substring(offset, Math.min(offset + 1, inputSize));
+                int max1 = offset + 1;
+                if (max1 <= inputSize) {
+                    chunk1 = input.substring(offset, max1);
                 }
                 if (chunk1 != null && chunk1.equals(":")) {
                     address2 = new TreeNode(input.substring(offset, offset + 1), offset, new ArrayList<TreeNode>());
@@ -368,8 +370,9 @@ abstract class Grammar {
                 elements0.add(0, address1);
                 TreeNode address3 = FAILURE;
                 String chunk0 = null;
-                if (offset < inputSize) {
-                    chunk0 = input.substring(offset, Math.min(offset + 2, inputSize));
+                int max0 = offset + 2;
+                if (max0 <= inputSize) {
+                    chunk0 = input.substring(offset, max0);
                 }
                 if (chunk0 != null && chunk0.equals("<-")) {
                     address3 = new TreeNode(input.substring(offset, offset + 2), offset, new ArrayList<TreeNode>());
@@ -471,8 +474,9 @@ abstract class Grammar {
             List<TreeNode> elements0 = new ArrayList<TreeNode>(5);
             TreeNode address1 = FAILURE;
             String chunk0 = null;
-            if (offset < inputSize) {
-                chunk0 = input.substring(offset, Math.min(offset + 1, inputSize));
+            int max0 = offset + 1;
+            if (max0 <= inputSize) {
+                chunk0 = input.substring(offset, max0);
             }
             if (chunk0 != null && chunk0.equals("(")) {
                 address1 = new TreeNode(input.substring(offset, offset + 1), offset, new ArrayList<TreeNode>());
@@ -535,8 +539,9 @@ abstract class Grammar {
                             elements0.add(3, address5);
                             TreeNode address7 = FAILURE;
                             String chunk1 = null;
-                            if (offset < inputSize) {
-                                chunk1 = input.substring(offset, Math.min(offset + 1, inputSize));
+                            int max1 = offset + 1;
+                            if (max1 <= inputSize) {
+                                chunk1 = input.substring(offset, max1);
                             }
                             if (chunk1 != null && chunk1.equals(")")) {
                                 address7 = new TreeNode(input.substring(offset, offset + 1), offset, new ArrayList<TreeNode>());
@@ -632,8 +637,9 @@ abstract class Grammar {
                         elements2.add(0, address4);
                         TreeNode address6 = FAILURE;
                         String chunk0 = null;
-                        if (offset < inputSize) {
-                            chunk0 = input.substring(offset, Math.min(offset + 1, inputSize));
+                        int max0 = offset + 1;
+                        if (max0 <= inputSize) {
+                            chunk0 = input.substring(offset, max0);
                         }
                         if (chunk0 != null && chunk0.equals("/")) {
                             address6 = new TreeNode(input.substring(offset, offset + 1), offset, new ArrayList<TreeNode>());
@@ -907,8 +913,9 @@ abstract class Grammar {
             List<TreeNode> elements0 = new ArrayList<TreeNode>(5);
             TreeNode address1 = FAILURE;
             String chunk0 = null;
-            if (offset < inputSize) {
-                chunk0 = input.substring(offset, Math.min(offset + 1, inputSize));
+            int max0 = offset + 1;
+            if (max0 <= inputSize) {
+                chunk0 = input.substring(offset, max0);
             }
             if (chunk0 != null && chunk0.equals("(")) {
                 address1 = new TreeNode(input.substring(offset, offset + 1), offset, new ArrayList<TreeNode>());
@@ -971,8 +978,9 @@ abstract class Grammar {
                             elements0.add(3, address5);
                             TreeNode address7 = FAILURE;
                             String chunk1 = null;
-                            if (offset < inputSize) {
-                                chunk1 = input.substring(offset, Math.min(offset + 1, inputSize));
+                            int max1 = offset + 1;
+                            if (max1 <= inputSize) {
+                                chunk1 = input.substring(offset, max1);
                             }
                             if (chunk1 != null && chunk1.equals(")")) {
                                 address7 = new TreeNode(input.substring(offset, offset + 1), offset, new ArrayList<TreeNode>());
@@ -1051,8 +1059,9 @@ abstract class Grammar {
             List<TreeNode> elements0 = new ArrayList<TreeNode>(2);
             TreeNode address1 = FAILURE;
             String chunk0 = null;
-            if (offset < inputSize) {
-                chunk0 = input.substring(offset, Math.min(offset + 1, inputSize));
+            int max0 = offset + 1;
+            if (max0 <= inputSize) {
+                chunk0 = input.substring(offset, max0);
             }
             if (chunk0 != null && chunk0.equals("%")) {
                 address1 = new TreeNode(input.substring(offset, offset + 1), offset, new ArrayList<TreeNode>());
@@ -1108,8 +1117,9 @@ abstract class Grammar {
             List<TreeNode> elements0 = new ArrayList<TreeNode>(3);
             TreeNode address1 = FAILURE;
             String chunk0 = null;
-            if (offset < inputSize) {
-                chunk0 = input.substring(offset, Math.min(offset + 1, inputSize));
+            int max0 = offset + 1;
+            if (max0 <= inputSize) {
+                chunk0 = input.substring(offset, max0);
             }
             if (chunk0 != null && chunk0.equals("<")) {
                 address1 = new TreeNode(input.substring(offset, offset + 1), offset, new ArrayList<TreeNode>());
@@ -1132,8 +1142,9 @@ abstract class Grammar {
                     elements0.add(1, address2);
                     TreeNode address3 = FAILURE;
                     String chunk1 = null;
-                    if (offset < inputSize) {
-                        chunk1 = input.substring(offset, Math.min(offset + 1, inputSize));
+                    int max1 = offset + 1;
+                    if (max1 <= inputSize) {
+                        chunk1 = input.substring(offset, max1);
                     }
                     if (chunk1 != null && chunk1.equals(">")) {
                         address3 = new TreeNode(input.substring(offset, offset + 1), offset, new ArrayList<TreeNode>());
@@ -1347,8 +1358,9 @@ abstract class Grammar {
                 elements0.add(0, address1);
                 TreeNode address2 = FAILURE;
                 String chunk0 = null;
-                if (offset < inputSize) {
-                    chunk0 = input.substring(offset, Math.min(offset + 1, inputSize));
+                int max0 = offset + 1;
+                if (max0 <= inputSize) {
+                    chunk0 = input.substring(offset, max0);
                 }
                 if (chunk0 != null && chunk0.equals("?")) {
                     address2 = new TreeNode(input.substring(offset, offset + 1), offset, new ArrayList<TreeNode>());
@@ -1405,8 +1417,9 @@ abstract class Grammar {
                 TreeNode address2 = FAILURE;
                 int index2 = offset;
                 String chunk0 = null;
-                if (offset < inputSize) {
-                    chunk0 = input.substring(offset, Math.min(offset + 1, inputSize));
+                int max0 = offset + 1;
+                if (max0 <= inputSize) {
+                    chunk0 = input.substring(offset, max0);
                 }
                 if (chunk0 != null && chunk0.equals("*")) {
                     address2 = new TreeNode(input.substring(offset, offset + 1), offset, new ArrayList<TreeNode>());
@@ -1424,8 +1437,9 @@ abstract class Grammar {
                 if (address2 == FAILURE) {
                     offset = index2;
                     String chunk1 = null;
-                    if (offset < inputSize) {
-                        chunk1 = input.substring(offset, Math.min(offset + 1, inputSize));
+                    int max1 = offset + 1;
+                    if (max1 <= inputSize) {
+                        chunk1 = input.substring(offset, max1);
                     }
                     if (chunk1 != null && chunk1.equals("+")) {
                         address2 = new TreeNode(input.substring(offset, offset + 1), offset, new ArrayList<TreeNode>());
@@ -1550,8 +1564,9 @@ abstract class Grammar {
             TreeNode address1 = FAILURE;
             int index2 = offset;
             String chunk0 = null;
-            if (offset < inputSize) {
-                chunk0 = input.substring(offset, Math.min(offset + 1, inputSize));
+            int max0 = offset + 1;
+            if (max0 <= inputSize) {
+                chunk0 = input.substring(offset, max0);
             }
             if (chunk0 != null && chunk0.equals("&")) {
                 address1 = new TreeNode(input.substring(offset, offset + 1), offset, new ArrayList<TreeNode>());
@@ -1569,8 +1584,9 @@ abstract class Grammar {
             if (address1 == FAILURE) {
                 offset = index2;
                 String chunk1 = null;
-                if (offset < inputSize) {
-                    chunk1 = input.substring(offset, Math.min(offset + 1, inputSize));
+                int max1 = offset + 1;
+                if (max1 <= inputSize) {
+                    chunk1 = input.substring(offset, max1);
                 }
                 if (chunk1 != null && chunk1.equals("!")) {
                     address1 = new TreeNode(input.substring(offset, offset + 1), offset, new ArrayList<TreeNode>());
@@ -1680,8 +1696,9 @@ abstract class Grammar {
             List<TreeNode> elements0 = new ArrayList<TreeNode>(3);
             TreeNode address1 = FAILURE;
             String chunk0 = null;
-            if (offset < inputSize) {
-                chunk0 = input.substring(offset, Math.min(offset + 1, inputSize));
+            int max0 = offset + 1;
+            if (max0 <= inputSize) {
+                chunk0 = input.substring(offset, max0);
             }
             if (chunk0 != null && chunk0.equals("\"")) {
                 address1 = new TreeNode(input.substring(offset, offset + 1), offset, new ArrayList<TreeNode>());
@@ -1709,8 +1726,9 @@ abstract class Grammar {
                     List<TreeNode> elements2 = new ArrayList<TreeNode>(2);
                     TreeNode address4 = FAILURE;
                     String chunk1 = null;
-                    if (offset < inputSize) {
-                        chunk1 = input.substring(offset, Math.min(offset + 1, inputSize));
+                    int max1 = offset + 1;
+                    if (max1 <= inputSize) {
+                        chunk1 = input.substring(offset, max1);
                     }
                     if (chunk1 != null && chunk1.equals("\\")) {
                         address4 = new TreeNode(input.substring(offset, offset + 1), offset, new ArrayList<TreeNode>());
@@ -1760,8 +1778,9 @@ abstract class Grammar {
                     if (address3 == FAILURE) {
                         offset = index4;
                         String chunk2 = null;
-                        if (offset < inputSize) {
-                            chunk2 = input.substring(offset, Math.min(offset + 1, inputSize));
+                        int max2 = offset + 1;
+                        if (max2 <= inputSize) {
+                            chunk2 = input.substring(offset, max2);
                         }
                         if (chunk2 != null && REGEX_1.matcher(chunk2).matches()) {
                             address3 = new TreeNode(input.substring(offset, offset + 1), offset, new ArrayList<TreeNode>());
@@ -1795,8 +1814,9 @@ abstract class Grammar {
                     elements0.add(1, address2);
                     TreeNode address6 = FAILURE;
                     String chunk3 = null;
-                    if (offset < inputSize) {
-                        chunk3 = input.substring(offset, Math.min(offset + 1, inputSize));
+                    int max3 = offset + 1;
+                    if (max3 <= inputSize) {
+                        chunk3 = input.substring(offset, max3);
                     }
                     if (chunk3 != null && chunk3.equals("\"")) {
                         address6 = new TreeNode(input.substring(offset, offset + 1), offset, new ArrayList<TreeNode>());
@@ -1837,8 +1857,9 @@ abstract class Grammar {
                 List<TreeNode> elements3 = new ArrayList<TreeNode>(3);
                 TreeNode address7 = FAILURE;
                 String chunk4 = null;
-                if (offset < inputSize) {
-                    chunk4 = input.substring(offset, Math.min(offset + 1, inputSize));
+                int max4 = offset + 1;
+                if (max4 <= inputSize) {
+                    chunk4 = input.substring(offset, max4);
                 }
                 if (chunk4 != null && chunk4.equals("'")) {
                     address7 = new TreeNode(input.substring(offset, offset + 1), offset, new ArrayList<TreeNode>());
@@ -1866,8 +1887,9 @@ abstract class Grammar {
                         List<TreeNode> elements5 = new ArrayList<TreeNode>(2);
                         TreeNode address10 = FAILURE;
                         String chunk5 = null;
-                        if (offset < inputSize) {
-                            chunk5 = input.substring(offset, Math.min(offset + 1, inputSize));
+                        int max5 = offset + 1;
+                        if (max5 <= inputSize) {
+                            chunk5 = input.substring(offset, max5);
                         }
                         if (chunk5 != null && chunk5.equals("\\")) {
                             address10 = new TreeNode(input.substring(offset, offset + 1), offset, new ArrayList<TreeNode>());
@@ -1917,8 +1939,9 @@ abstract class Grammar {
                         if (address9 == FAILURE) {
                             offset = index8;
                             String chunk6 = null;
-                            if (offset < inputSize) {
-                                chunk6 = input.substring(offset, Math.min(offset + 1, inputSize));
+                            int max6 = offset + 1;
+                            if (max6 <= inputSize) {
+                                chunk6 = input.substring(offset, max6);
                             }
                             if (chunk6 != null && REGEX_2.matcher(chunk6).matches()) {
                                 address9 = new TreeNode(input.substring(offset, offset + 1), offset, new ArrayList<TreeNode>());
@@ -1952,8 +1975,9 @@ abstract class Grammar {
                         elements3.add(1, address8);
                         TreeNode address12 = FAILURE;
                         String chunk7 = null;
-                        if (offset < inputSize) {
-                            chunk7 = input.substring(offset, Math.min(offset + 1, inputSize));
+                        int max7 = offset + 1;
+                        if (max7 <= inputSize) {
+                            chunk7 = input.substring(offset, max7);
                         }
                         if (chunk7 != null && chunk7.equals("'")) {
                             address12 = new TreeNode(input.substring(offset, offset + 1), offset, new ArrayList<TreeNode>());
@@ -2013,8 +2037,9 @@ abstract class Grammar {
             List<TreeNode> elements0 = new ArrayList<TreeNode>(3);
             TreeNode address1 = FAILURE;
             String chunk0 = null;
-            if (offset < inputSize) {
-                chunk0 = input.substring(offset, Math.min(offset + 1, inputSize));
+            int max0 = offset + 1;
+            if (max0 <= inputSize) {
+                chunk0 = input.substring(offset, max0);
             }
             if (chunk0 != null && chunk0.equals("`")) {
                 address1 = new TreeNode(input.substring(offset, offset + 1), offset, new ArrayList<TreeNode>());
@@ -2042,8 +2067,9 @@ abstract class Grammar {
                     List<TreeNode> elements2 = new ArrayList<TreeNode>(2);
                     TreeNode address4 = FAILURE;
                     String chunk1 = null;
-                    if (offset < inputSize) {
-                        chunk1 = input.substring(offset, Math.min(offset + 1, inputSize));
+                    int max1 = offset + 1;
+                    if (max1 <= inputSize) {
+                        chunk1 = input.substring(offset, max1);
                     }
                     if (chunk1 != null && chunk1.equals("\\")) {
                         address4 = new TreeNode(input.substring(offset, offset + 1), offset, new ArrayList<TreeNode>());
@@ -2093,8 +2119,9 @@ abstract class Grammar {
                     if (address3 == FAILURE) {
                         offset = index3;
                         String chunk2 = null;
-                        if (offset < inputSize) {
-                            chunk2 = input.substring(offset, Math.min(offset + 1, inputSize));
+                        int max2 = offset + 1;
+                        if (max2 <= inputSize) {
+                            chunk2 = input.substring(offset, max2);
                         }
                         if (chunk2 != null && REGEX_3.matcher(chunk2).matches()) {
                             address3 = new TreeNode(input.substring(offset, offset + 1), offset, new ArrayList<TreeNode>());
@@ -2128,8 +2155,9 @@ abstract class Grammar {
                     elements0.add(1, address2);
                     TreeNode address6 = FAILURE;
                     String chunk3 = null;
-                    if (offset < inputSize) {
-                        chunk3 = input.substring(offset, Math.min(offset + 1, inputSize));
+                    int max3 = offset + 1;
+                    if (max3 <= inputSize) {
+                        chunk3 = input.substring(offset, max3);
                     }
                     if (chunk3 != null && chunk3.equals("`")) {
                         address6 = new TreeNode(input.substring(offset, offset + 1), offset, new ArrayList<TreeNode>());
@@ -2182,8 +2210,9 @@ abstract class Grammar {
             offset = rule.get(offset).tail;
         } else {
             String chunk0 = null;
-            if (offset < inputSize) {
-                chunk0 = input.substring(offset, Math.min(offset + 1, inputSize));
+            int max0 = offset + 1;
+            if (max0 <= inputSize) {
+                chunk0 = input.substring(offset, max0);
             }
             if (chunk0 != null && chunk0.equals(".")) {
                 address0 = new TreeNode(input.substring(offset, offset + 1), offset, new ArrayList<TreeNode>());
@@ -2219,8 +2248,9 @@ abstract class Grammar {
             List<TreeNode> elements0 = new ArrayList<TreeNode>(4);
             TreeNode address1 = FAILURE;
             String chunk0 = null;
-            if (offset < inputSize) {
-                chunk0 = input.substring(offset, Math.min(offset + 1, inputSize));
+            int max0 = offset + 1;
+            if (max0 <= inputSize) {
+                chunk0 = input.substring(offset, max0);
             }
             if (chunk0 != null && chunk0.equals("[")) {
                 address1 = new TreeNode(input.substring(offset, offset + 1), offset, new ArrayList<TreeNode>());
@@ -2240,8 +2270,9 @@ abstract class Grammar {
                 TreeNode address2 = FAILURE;
                 int index2 = offset;
                 String chunk1 = null;
-                if (offset < inputSize) {
-                    chunk1 = input.substring(offset, Math.min(offset + 1, inputSize));
+                int max1 = offset + 1;
+                if (max1 <= inputSize) {
+                    chunk1 = input.substring(offset, max1);
                 }
                 if (chunk1 != null && chunk1.equals("^")) {
                     address2 = new TreeNode(input.substring(offset, offset + 1), offset, new ArrayList<TreeNode>());
@@ -2273,8 +2304,9 @@ abstract class Grammar {
                         List<TreeNode> elements2 = new ArrayList<TreeNode>(2);
                         TreeNode address5 = FAILURE;
                         String chunk2 = null;
-                        if (offset < inputSize) {
-                            chunk2 = input.substring(offset, Math.min(offset + 1, inputSize));
+                        int max2 = offset + 1;
+                        if (max2 <= inputSize) {
+                            chunk2 = input.substring(offset, max2);
                         }
                         if (chunk2 != null && chunk2.equals("\\")) {
                             address5 = new TreeNode(input.substring(offset, offset + 1), offset, new ArrayList<TreeNode>());
@@ -2324,8 +2356,9 @@ abstract class Grammar {
                         if (address4 == FAILURE) {
                             offset = index4;
                             String chunk3 = null;
-                            if (offset < inputSize) {
-                                chunk3 = input.substring(offset, Math.min(offset + 1, inputSize));
+                            int max3 = offset + 1;
+                            if (max3 <= inputSize) {
+                                chunk3 = input.substring(offset, max3);
                             }
                             if (chunk3 != null && REGEX_4.matcher(chunk3).matches()) {
                                 address4 = new TreeNode(input.substring(offset, offset + 1), offset, new ArrayList<TreeNode>());
@@ -2359,8 +2392,9 @@ abstract class Grammar {
                         elements0.add(2, address3);
                         TreeNode address7 = FAILURE;
                         String chunk4 = null;
-                        if (offset < inputSize) {
-                            chunk4 = input.substring(offset, Math.min(offset + 1, inputSize));
+                        int max4 = offset + 1;
+                        if (max4 <= inputSize) {
+                            chunk4 = input.substring(offset, max4);
                         }
                         if (chunk4 != null && chunk4.equals("]")) {
                             address7 = new TreeNode(input.substring(offset, offset + 1), offset, new ArrayList<TreeNode>());
@@ -2424,8 +2458,9 @@ abstract class Grammar {
                 elements0.add(0, address1);
                 TreeNode address2 = FAILURE;
                 String chunk0 = null;
-                if (offset < inputSize) {
-                    chunk0 = input.substring(offset, Math.min(offset + 1, inputSize));
+                int max0 = offset + 1;
+                if (max0 <= inputSize) {
+                    chunk0 = input.substring(offset, max0);
                 }
                 if (chunk0 != null && chunk0.equals(":")) {
                     address2 = new TreeNode(input.substring(offset, offset + 1), offset, new ArrayList<TreeNode>());
@@ -2489,8 +2524,9 @@ abstract class Grammar {
                     List<TreeNode> elements2 = new ArrayList<TreeNode>(2);
                     TreeNode address4 = FAILURE;
                     String chunk0 = null;
-                    if (offset < inputSize) {
-                        chunk0 = input.substring(offset, Math.min(offset + 1, inputSize));
+                    int max0 = offset + 1;
+                    if (max0 <= inputSize) {
+                        chunk0 = input.substring(offset, max0);
                     }
                     if (chunk0 != null && chunk0.equals(".")) {
                         address4 = new TreeNode(input.substring(offset, offset + 1), offset, new ArrayList<TreeNode>());
@@ -2573,8 +2609,9 @@ abstract class Grammar {
             List<TreeNode> elements0 = new ArrayList<TreeNode>(2);
             TreeNode address1 = FAILURE;
             String chunk0 = null;
-            if (offset < inputSize) {
-                chunk0 = input.substring(offset, Math.min(offset + 1, inputSize));
+            int max0 = offset + 1;
+            if (max0 <= inputSize) {
+                chunk0 = input.substring(offset, max0);
             }
             if (chunk0 != null && REGEX_5.matcher(chunk0).matches()) {
                 address1 = new TreeNode(input.substring(offset, offset + 1), offset, new ArrayList<TreeNode>());
@@ -2598,8 +2635,9 @@ abstract class Grammar {
                 TreeNode address3 = new TreeNode("", -1, new ArrayList<TreeNode>());
                 while (address3 != FAILURE) {
                     String chunk1 = null;
-                    if (offset < inputSize) {
-                        chunk1 = input.substring(offset, Math.min(offset + 1, inputSize));
+                    int max1 = offset + 1;
+                    if (max1 <= inputSize) {
+                        chunk1 = input.substring(offset, max1);
                     }
                     if (chunk1 != null && REGEX_6.matcher(chunk1).matches()) {
                         address3 = new TreeNode(input.substring(offset, offset + 1), offset, new ArrayList<TreeNode>());
@@ -2660,8 +2698,9 @@ abstract class Grammar {
         } else {
             int index1 = offset;
             String chunk0 = null;
-            if (offset < inputSize) {
-                chunk0 = input.substring(offset, Math.min(offset + 1, inputSize));
+            int max0 = offset + 1;
+            if (max0 <= inputSize) {
+                chunk0 = input.substring(offset, max0);
             }
             if (chunk0 != null && REGEX_7.matcher(chunk0).matches()) {
                 address0 = new TreeNode(input.substring(offset, offset + 1), offset, new ArrayList<TreeNode>());
@@ -2704,8 +2743,9 @@ abstract class Grammar {
             List<TreeNode> elements0 = new ArrayList<TreeNode>(2);
             TreeNode address1 = FAILURE;
             String chunk0 = null;
-            if (offset < inputSize) {
-                chunk0 = input.substring(offset, Math.min(offset + 1, inputSize));
+            int max0 = offset + 1;
+            if (max0 <= inputSize) {
+                chunk0 = input.substring(offset, max0);
             }
             if (chunk0 != null && chunk0.equals("#")) {
                 address1 = new TreeNode(input.substring(offset, offset + 1), offset, new ArrayList<TreeNode>());
@@ -2729,8 +2769,9 @@ abstract class Grammar {
                 TreeNode address3 = new TreeNode("", -1, new ArrayList<TreeNode>());
                 while (address3 != FAILURE) {
                     String chunk1 = null;
-                    if (offset < inputSize) {
-                        chunk1 = input.substring(offset, Math.min(offset + 1, inputSize));
+                    int max1 = offset + 1;
+                    if (max1 <= inputSize) {
+                        chunk1 = input.substring(offset, max1);
                     }
                     if (chunk1 != null && REGEX_8.matcher(chunk1).matches()) {
                         address3 = new TreeNode(input.substring(offset, offset + 1), offset, new ArrayList<TreeNode>());

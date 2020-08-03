@@ -248,11 +248,14 @@ util.assign(Builder.prototype, {
   },
 
   chunk_: function(length) {
-    var chunk = this.localVar_('chunk', this.null_()), input = '@input', of = '@offset';
-    this.if_(of + ' < @input_size', function(builder) {
-      builder.assign_(chunk, input + '[' + of + '...' + of + ' + ' + length + ']');
+    var input = '@input',
+        ofs   = '@offset',
+        temp  = this.localVars_({chunk: this.null_(), max: ofs + ' + ' + length});
+
+    this.if_(temp.max + ' <= @input_size', function(builder) {
+      builder.assign_(temp.chunk, input + '[' + ofs + '...' + temp.max + ']');
     });
-    return chunk;
+    return temp.chunk;
   },
 
   syntaxNode_: function(address, start, end, elements, action, nodeClass) {

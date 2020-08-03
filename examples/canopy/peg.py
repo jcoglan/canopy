@@ -287,9 +287,9 @@ class Grammar(object):
             return cached[0]
         index1, elements0 = self._offset, []
         address1 = FAILURE
-        chunk0 = None
-        if self._offset < self._input_size:
-            chunk0 = self._input[self._offset:self._offset + 7]
+        chunk0, max0 = None, self._offset + 7
+        if max0 <= self._input_size:
+            chunk0 = self._input[self._offset:max0]
         if chunk0 is not None and chunk0.lower() == 'grammar'.lower():
             address1 = TreeNode(self._input[self._offset:self._offset + 7], self._offset, [])
             self._offset = self._offset + 7
@@ -304,9 +304,9 @@ class Grammar(object):
             elements0.append(address1)
             address2 = FAILURE
             index2 = self._offset
-            chunk1 = None
-            if self._offset < self._input_size:
-                chunk1 = self._input[self._offset:self._offset + 1]
+            chunk1, max1 = None, self._offset + 1
+            if max1 <= self._input_size:
+                chunk1 = self._input[self._offset:max1]
             if chunk1 == ':':
                 address2 = TreeNode(self._input[self._offset:self._offset + 1], self._offset, [])
                 self._offset = self._offset + 1
@@ -418,9 +418,9 @@ class Grammar(object):
         if address1 is not FAILURE:
             elements0.append(address1)
             address3 = FAILURE
-            chunk0 = None
-            if self._offset < self._input_size:
-                chunk0 = self._input[self._offset:self._offset + 2]
+            chunk0, max0 = None, self._offset + 2
+            if max0 <= self._input_size:
+                chunk0 = self._input[self._offset:max0]
             if chunk0 == '<-':
                 address3 = TreeNode(self._input[self._offset:self._offset + 2], self._offset, [])
                 self._offset = self._offset + 2
@@ -488,9 +488,9 @@ class Grammar(object):
             return cached[0]
         index1, elements0 = self._offset, []
         address1 = FAILURE
-        chunk0 = None
-        if self._offset < self._input_size:
-            chunk0 = self._input[self._offset:self._offset + 1]
+        chunk0, max0 = None, self._offset + 1
+        if max0 <= self._input_size:
+            chunk0 = self._input[self._offset:max0]
         if chunk0 == '(':
             address1 = TreeNode(self._input[self._offset:self._offset + 1], self._offset, [])
             self._offset = self._offset + 1
@@ -536,9 +536,9 @@ class Grammar(object):
                     if address5 is not FAILURE:
                         elements0.append(address5)
                         address7 = FAILURE
-                        chunk1 = None
-                        if self._offset < self._input_size:
-                            chunk1 = self._input[self._offset:self._offset + 1]
+                        chunk1, max1 = None, self._offset + 1
+                        if max1 <= self._input_size:
+                            chunk1 = self._input[self._offset:max1]
                         if chunk1 == ')':
                             address7 = TreeNode(self._input[self._offset:self._offset + 1], self._offset, [])
                             self._offset = self._offset + 1
@@ -604,9 +604,9 @@ class Grammar(object):
                 if address4 is not FAILURE:
                     elements2.append(address4)
                     address6 = FAILURE
-                    chunk0 = None
-                    if self._offset < self._input_size:
-                        chunk0 = self._input[self._offset:self._offset + 1]
+                    chunk0, max0 = None, self._offset + 1
+                    if max0 <= self._input_size:
+                        chunk0 = self._input[self._offset:max0]
                     if chunk0 == '/':
                         address6 = TreeNode(self._input[self._offset:self._offset + 1], self._offset, [])
                         self._offset = self._offset + 1
@@ -804,9 +804,9 @@ class Grammar(object):
         index1 = self._offset
         index2, elements0 = self._offset, []
         address1 = FAILURE
-        chunk0 = None
-        if self._offset < self._input_size:
-            chunk0 = self._input[self._offset:self._offset + 1]
+        chunk0, max0 = None, self._offset + 1
+        if max0 <= self._input_size:
+            chunk0 = self._input[self._offset:max0]
         if chunk0 == '(':
             address1 = TreeNode(self._input[self._offset:self._offset + 1], self._offset, [])
             self._offset = self._offset + 1
@@ -852,9 +852,9 @@ class Grammar(object):
                     if address5 is not FAILURE:
                         elements0.append(address5)
                         address7 = FAILURE
-                        chunk1 = None
-                        if self._offset < self._input_size:
-                            chunk1 = self._input[self._offset:self._offset + 1]
+                        chunk1, max1 = None, self._offset + 1
+                        if max1 <= self._input_size:
+                            chunk1 = self._input[self._offset:max1]
                         if chunk1 == ')':
                             address7 = TreeNode(self._input[self._offset:self._offset + 1], self._offset, [])
                             self._offset = self._offset + 1
@@ -909,9 +909,9 @@ class Grammar(object):
             return cached[0]
         index1, elements0 = self._offset, []
         address1 = FAILURE
-        chunk0 = None
-        if self._offset < self._input_size:
-            chunk0 = self._input[self._offset:self._offset + 1]
+        chunk0, max0 = None, self._offset + 1
+        if max0 <= self._input_size:
+            chunk0 = self._input[self._offset:max0]
         if chunk0 == '%':
             address1 = TreeNode(self._input[self._offset:self._offset + 1], self._offset, [])
             self._offset = self._offset + 1
@@ -950,9 +950,9 @@ class Grammar(object):
             return cached[0]
         index1, elements0 = self._offset, []
         address1 = FAILURE
-        chunk0 = None
-        if self._offset < self._input_size:
-            chunk0 = self._input[self._offset:self._offset + 1]
+        chunk0, max0 = None, self._offset + 1
+        if max0 <= self._input_size:
+            chunk0 = self._input[self._offset:max0]
         if chunk0 == '<':
             address1 = TreeNode(self._input[self._offset:self._offset + 1], self._offset, [])
             self._offset = self._offset + 1
@@ -970,9 +970,9 @@ class Grammar(object):
             if address2 is not FAILURE:
                 elements0.append(address2)
                 address3 = FAILURE
-                chunk1 = None
-                if self._offset < self._input_size:
-                    chunk1 = self._input[self._offset:self._offset + 1]
+                chunk1, max1 = None, self._offset + 1
+                if max1 <= self._input_size:
+                    chunk1 = self._input[self._offset:max1]
                 if chunk1 == '>':
                     address3 = TreeNode(self._input[self._offset:self._offset + 1], self._offset, [])
                     self._offset = self._offset + 1
@@ -1124,9 +1124,9 @@ class Grammar(object):
         if address1 is not FAILURE:
             elements0.append(address1)
             address2 = FAILURE
-            chunk0 = None
-            if self._offset < self._input_size:
-                chunk0 = self._input[self._offset:self._offset + 1]
+            chunk0, max0 = None, self._offset + 1
+            if max0 <= self._input_size:
+                chunk0 = self._input[self._offset:max0]
             if chunk0 == '?':
                 address2 = TreeNode(self._input[self._offset:self._offset + 1], self._offset, [])
                 self._offset = self._offset + 1
@@ -1166,9 +1166,9 @@ class Grammar(object):
             elements0.append(address1)
             address2 = FAILURE
             index2 = self._offset
-            chunk0 = None
-            if self._offset < self._input_size:
-                chunk0 = self._input[self._offset:self._offset + 1]
+            chunk0, max0 = None, self._offset + 1
+            if max0 <= self._input_size:
+                chunk0 = self._input[self._offset:max0]
             if chunk0 == '*':
                 address2 = TreeNode(self._input[self._offset:self._offset + 1], self._offset, [])
                 self._offset = self._offset + 1
@@ -1181,9 +1181,9 @@ class Grammar(object):
                     self._expected.append('"*"')
             if address2 is FAILURE:
                 self._offset = index2
-                chunk1 = None
-                if self._offset < self._input_size:
-                    chunk1 = self._input[self._offset:self._offset + 1]
+                chunk1, max1 = None, self._offset + 1
+                if max1 <= self._input_size:
+                    chunk1 = self._input[self._offset:max1]
                 if chunk1 == '+':
                     address2 = TreeNode(self._input[self._offset:self._offset + 1], self._offset, [])
                     self._offset = self._offset + 1
@@ -1265,9 +1265,9 @@ class Grammar(object):
         index1, elements0 = self._offset, []
         address1 = FAILURE
         index2 = self._offset
-        chunk0 = None
-        if self._offset < self._input_size:
-            chunk0 = self._input[self._offset:self._offset + 1]
+        chunk0, max0 = None, self._offset + 1
+        if max0 <= self._input_size:
+            chunk0 = self._input[self._offset:max0]
         if chunk0 == '&':
             address1 = TreeNode(self._input[self._offset:self._offset + 1], self._offset, [])
             self._offset = self._offset + 1
@@ -1280,9 +1280,9 @@ class Grammar(object):
                 self._expected.append('"&"')
         if address1 is FAILURE:
             self._offset = index2
-            chunk1 = None
-            if self._offset < self._input_size:
-                chunk1 = self._input[self._offset:self._offset + 1]
+            chunk1, max1 = None, self._offset + 1
+            if max1 <= self._input_size:
+                chunk1 = self._input[self._offset:max1]
             if chunk1 == '!':
                 address1 = TreeNode(self._input[self._offset:self._offset + 1], self._offset, [])
                 self._offset = self._offset + 1
@@ -1360,9 +1360,9 @@ class Grammar(object):
         index1 = self._offset
         index2, elements0 = self._offset, []
         address1 = FAILURE
-        chunk0 = None
-        if self._offset < self._input_size:
-            chunk0 = self._input[self._offset:self._offset + 1]
+        chunk0, max0 = None, self._offset + 1
+        if max0 <= self._input_size:
+            chunk0 = self._input[self._offset:max0]
         if chunk0 == '"':
             address1 = TreeNode(self._input[self._offset:self._offset + 1], self._offset, [])
             self._offset = self._offset + 1
@@ -1381,9 +1381,9 @@ class Grammar(object):
                 index4 = self._offset
                 index5, elements2 = self._offset, []
                 address4 = FAILURE
-                chunk1 = None
-                if self._offset < self._input_size:
-                    chunk1 = self._input[self._offset:self._offset + 1]
+                chunk1, max1 = None, self._offset + 1
+                if max1 <= self._input_size:
+                    chunk1 = self._input[self._offset:max1]
                 if chunk1 == '\\':
                     address4 = TreeNode(self._input[self._offset:self._offset + 1], self._offset, [])
                     self._offset = self._offset + 1
@@ -1422,9 +1422,9 @@ class Grammar(object):
                     self._offset = self._offset
                 if address3 is FAILURE:
                     self._offset = index4
-                    chunk2 = None
-                    if self._offset < self._input_size:
-                        chunk2 = self._input[self._offset:self._offset + 1]
+                    chunk2, max2 = None, self._offset + 1
+                    if max2 <= self._input_size:
+                        chunk2 = self._input[self._offset:max2]
                     if chunk2 is not None and Grammar.REGEX_1.search(chunk2):
                         address3 = TreeNode(self._input[self._offset:self._offset + 1], self._offset, [])
                         self._offset = self._offset + 1
@@ -1448,9 +1448,9 @@ class Grammar(object):
             if address2 is not FAILURE:
                 elements0.append(address2)
                 address6 = FAILURE
-                chunk3 = None
-                if self._offset < self._input_size:
-                    chunk3 = self._input[self._offset:self._offset + 1]
+                chunk3, max3 = None, self._offset + 1
+                if max3 <= self._input_size:
+                    chunk3 = self._input[self._offset:max3]
                 if chunk3 == '"':
                     address6 = TreeNode(self._input[self._offset:self._offset + 1], self._offset, [])
                     self._offset = self._offset + 1
@@ -1481,9 +1481,9 @@ class Grammar(object):
             self._offset = index1
             index6, elements3 = self._offset, []
             address7 = FAILURE
-            chunk4 = None
-            if self._offset < self._input_size:
-                chunk4 = self._input[self._offset:self._offset + 1]
+            chunk4, max4 = None, self._offset + 1
+            if max4 <= self._input_size:
+                chunk4 = self._input[self._offset:max4]
             if chunk4 == '\'':
                 address7 = TreeNode(self._input[self._offset:self._offset + 1], self._offset, [])
                 self._offset = self._offset + 1
@@ -1502,9 +1502,9 @@ class Grammar(object):
                     index8 = self._offset
                     index9, elements5 = self._offset, []
                     address10 = FAILURE
-                    chunk5 = None
-                    if self._offset < self._input_size:
-                        chunk5 = self._input[self._offset:self._offset + 1]
+                    chunk5, max5 = None, self._offset + 1
+                    if max5 <= self._input_size:
+                        chunk5 = self._input[self._offset:max5]
                     if chunk5 == '\\':
                         address10 = TreeNode(self._input[self._offset:self._offset + 1], self._offset, [])
                         self._offset = self._offset + 1
@@ -1543,9 +1543,9 @@ class Grammar(object):
                         self._offset = self._offset
                     if address9 is FAILURE:
                         self._offset = index8
-                        chunk6 = None
-                        if self._offset < self._input_size:
-                            chunk6 = self._input[self._offset:self._offset + 1]
+                        chunk6, max6 = None, self._offset + 1
+                        if max6 <= self._input_size:
+                            chunk6 = self._input[self._offset:max6]
                         if chunk6 is not None and Grammar.REGEX_2.search(chunk6):
                             address9 = TreeNode(self._input[self._offset:self._offset + 1], self._offset, [])
                             self._offset = self._offset + 1
@@ -1569,9 +1569,9 @@ class Grammar(object):
                 if address8 is not FAILURE:
                     elements3.append(address8)
                     address12 = FAILURE
-                    chunk7 = None
-                    if self._offset < self._input_size:
-                        chunk7 = self._input[self._offset:self._offset + 1]
+                    chunk7, max7 = None, self._offset + 1
+                    if max7 <= self._input_size:
+                        chunk7 = self._input[self._offset:max7]
                     if chunk7 == '\'':
                         address12 = TreeNode(self._input[self._offset:self._offset + 1], self._offset, [])
                         self._offset = self._offset + 1
@@ -1611,9 +1611,9 @@ class Grammar(object):
             return cached[0]
         index1, elements0 = self._offset, []
         address1 = FAILURE
-        chunk0 = None
-        if self._offset < self._input_size:
-            chunk0 = self._input[self._offset:self._offset + 1]
+        chunk0, max0 = None, self._offset + 1
+        if max0 <= self._input_size:
+            chunk0 = self._input[self._offset:max0]
         if chunk0 == '`':
             address1 = TreeNode(self._input[self._offset:self._offset + 1], self._offset, [])
             self._offset = self._offset + 1
@@ -1632,9 +1632,9 @@ class Grammar(object):
                 index3 = self._offset
                 index4, elements2 = self._offset, []
                 address4 = FAILURE
-                chunk1 = None
-                if self._offset < self._input_size:
-                    chunk1 = self._input[self._offset:self._offset + 1]
+                chunk1, max1 = None, self._offset + 1
+                if max1 <= self._input_size:
+                    chunk1 = self._input[self._offset:max1]
                 if chunk1 == '\\':
                     address4 = TreeNode(self._input[self._offset:self._offset + 1], self._offset, [])
                     self._offset = self._offset + 1
@@ -1673,9 +1673,9 @@ class Grammar(object):
                     self._offset = self._offset
                 if address3 is FAILURE:
                     self._offset = index3
-                    chunk2 = None
-                    if self._offset < self._input_size:
-                        chunk2 = self._input[self._offset:self._offset + 1]
+                    chunk2, max2 = None, self._offset + 1
+                    if max2 <= self._input_size:
+                        chunk2 = self._input[self._offset:max2]
                     if chunk2 is not None and Grammar.REGEX_3.search(chunk2):
                         address3 = TreeNode(self._input[self._offset:self._offset + 1], self._offset, [])
                         self._offset = self._offset + 1
@@ -1699,9 +1699,9 @@ class Grammar(object):
             if address2 is not FAILURE:
                 elements0.append(address2)
                 address6 = FAILURE
-                chunk3 = None
-                if self._offset < self._input_size:
-                    chunk3 = self._input[self._offset:self._offset + 1]
+                chunk3, max3 = None, self._offset + 1
+                if max3 <= self._input_size:
+                    chunk3 = self._input[self._offset:max3]
                 if chunk3 == '`':
                     address6 = TreeNode(self._input[self._offset:self._offset + 1], self._offset, [])
                     self._offset = self._offset + 1
@@ -1737,9 +1737,9 @@ class Grammar(object):
         if cached:
             self._offset = cached[1]
             return cached[0]
-        chunk0 = None
-        if self._offset < self._input_size:
-            chunk0 = self._input[self._offset:self._offset + 1]
+        chunk0, max0 = None, self._offset + 1
+        if max0 <= self._input_size:
+            chunk0 = self._input[self._offset:max0]
         if chunk0 == '.':
             address0 = TreeNode(self._input[self._offset:self._offset + 1], self._offset, [])
             self._offset = self._offset + 1
@@ -1761,9 +1761,9 @@ class Grammar(object):
             return cached[0]
         index1, elements0 = self._offset, []
         address1 = FAILURE
-        chunk0 = None
-        if self._offset < self._input_size:
-            chunk0 = self._input[self._offset:self._offset + 1]
+        chunk0, max0 = None, self._offset + 1
+        if max0 <= self._input_size:
+            chunk0 = self._input[self._offset:max0]
         if chunk0 == '[':
             address1 = TreeNode(self._input[self._offset:self._offset + 1], self._offset, [])
             self._offset = self._offset + 1
@@ -1778,9 +1778,9 @@ class Grammar(object):
             elements0.append(address1)
             address2 = FAILURE
             index2 = self._offset
-            chunk1 = None
-            if self._offset < self._input_size:
-                chunk1 = self._input[self._offset:self._offset + 1]
+            chunk1, max1 = None, self._offset + 1
+            if max1 <= self._input_size:
+                chunk1 = self._input[self._offset:max1]
             if chunk1 == '^':
                 address2 = TreeNode(self._input[self._offset:self._offset + 1], self._offset, [])
                 self._offset = self._offset + 1
@@ -1802,9 +1802,9 @@ class Grammar(object):
                     index4 = self._offset
                     index5, elements2 = self._offset, []
                     address5 = FAILURE
-                    chunk2 = None
-                    if self._offset < self._input_size:
-                        chunk2 = self._input[self._offset:self._offset + 1]
+                    chunk2, max2 = None, self._offset + 1
+                    if max2 <= self._input_size:
+                        chunk2 = self._input[self._offset:max2]
                     if chunk2 == '\\':
                         address5 = TreeNode(self._input[self._offset:self._offset + 1], self._offset, [])
                         self._offset = self._offset + 1
@@ -1843,9 +1843,9 @@ class Grammar(object):
                         self._offset = self._offset
                     if address4 is FAILURE:
                         self._offset = index4
-                        chunk3 = None
-                        if self._offset < self._input_size:
-                            chunk3 = self._input[self._offset:self._offset + 1]
+                        chunk3, max3 = None, self._offset + 1
+                        if max3 <= self._input_size:
+                            chunk3 = self._input[self._offset:max3]
                         if chunk3 is not None and Grammar.REGEX_4.search(chunk3):
                             address4 = TreeNode(self._input[self._offset:self._offset + 1], self._offset, [])
                             self._offset = self._offset + 1
@@ -1869,9 +1869,9 @@ class Grammar(object):
                 if address3 is not FAILURE:
                     elements0.append(address3)
                     address7 = FAILURE
-                    chunk4 = None
-                    if self._offset < self._input_size:
-                        chunk4 = self._input[self._offset:self._offset + 1]
+                    chunk4, max4 = None, self._offset + 1
+                    if max4 <= self._input_size:
+                        chunk4 = self._input[self._offset:max4]
                     if chunk4 == ']':
                         address7 = TreeNode(self._input[self._offset:self._offset + 1], self._offset, [])
                         self._offset = self._offset + 1
@@ -1916,9 +1916,9 @@ class Grammar(object):
         if address1 is not FAILURE:
             elements0.append(address1)
             address2 = FAILURE
-            chunk0 = None
-            if self._offset < self._input_size:
-                chunk0 = self._input[self._offset:self._offset + 1]
+            chunk0, max0 = None, self._offset + 1
+            if max0 <= self._input_size:
+                chunk0 = self._input[self._offset:max0]
             if chunk0 == ':':
                 address2 = TreeNode(self._input[self._offset:self._offset + 1], self._offset, [])
                 self._offset = self._offset + 1
@@ -1961,9 +1961,9 @@ class Grammar(object):
             while address3 is not FAILURE:
                 index3, elements2 = self._offset, []
                 address4 = FAILURE
-                chunk0 = None
-                if self._offset < self._input_size:
-                    chunk0 = self._input[self._offset:self._offset + 1]
+                chunk0, max0 = None, self._offset + 1
+                if max0 <= self._input_size:
+                    chunk0 = self._input[self._offset:max0]
                 if chunk0 == '.':
                     address4 = TreeNode(self._input[self._offset:self._offset + 1], self._offset, [])
                     self._offset = self._offset + 1
@@ -2023,9 +2023,9 @@ class Grammar(object):
             return cached[0]
         index1, elements0 = self._offset, []
         address1 = FAILURE
-        chunk0 = None
-        if self._offset < self._input_size:
-            chunk0 = self._input[self._offset:self._offset + 1]
+        chunk0, max0 = None, self._offset + 1
+        if max0 <= self._input_size:
+            chunk0 = self._input[self._offset:max0]
         if chunk0 is not None and Grammar.REGEX_5.search(chunk0):
             address1 = TreeNode(self._input[self._offset:self._offset + 1], self._offset, [])
             self._offset = self._offset + 1
@@ -2041,9 +2041,9 @@ class Grammar(object):
             address2 = FAILURE
             remaining0, index2, elements1, address3 = 0, self._offset, [], True
             while address3 is not FAILURE:
-                chunk1 = None
-                if self._offset < self._input_size:
-                    chunk1 = self._input[self._offset:self._offset + 1]
+                chunk1, max1 = None, self._offset + 1
+                if max1 <= self._input_size:
+                    chunk1 = self._input[self._offset:max1]
                 if chunk1 is not None and Grammar.REGEX_6.search(chunk1):
                     address3 = TreeNode(self._input[self._offset:self._offset + 1], self._offset, [])
                     self._offset = self._offset + 1
@@ -2085,9 +2085,9 @@ class Grammar(object):
             self._offset = cached[1]
             return cached[0]
         index1 = self._offset
-        chunk0 = None
-        if self._offset < self._input_size:
-            chunk0 = self._input[self._offset:self._offset + 1]
+        chunk0, max0 = None, self._offset + 1
+        if max0 <= self._input_size:
+            chunk0 = self._input[self._offset:max0]
         if chunk0 is not None and Grammar.REGEX_7.search(chunk0):
             address0 = TreeNode(self._input[self._offset:self._offset + 1], self._offset, [])
             self._offset = self._offset + 1
@@ -2114,9 +2114,9 @@ class Grammar(object):
             return cached[0]
         index1, elements0 = self._offset, []
         address1 = FAILURE
-        chunk0 = None
-        if self._offset < self._input_size:
-            chunk0 = self._input[self._offset:self._offset + 1]
+        chunk0, max0 = None, self._offset + 1
+        if max0 <= self._input_size:
+            chunk0 = self._input[self._offset:max0]
         if chunk0 == '#':
             address1 = TreeNode(self._input[self._offset:self._offset + 1], self._offset, [])
             self._offset = self._offset + 1
@@ -2132,9 +2132,9 @@ class Grammar(object):
             address2 = FAILURE
             remaining0, index2, elements1, address3 = 0, self._offset, [], True
             while address3 is not FAILURE:
-                chunk1 = None
-                if self._offset < self._input_size:
-                    chunk1 = self._input[self._offset:self._offset + 1]
+                chunk1, max1 = None, self._offset + 1
+                if max1 <= self._input_size:
+                    chunk1 = self._input[self._offset:max1]
                 if chunk1 is not None and Grammar.REGEX_8.search(chunk1):
                     address3 = TreeNode(self._input[self._offset:self._offset + 1], self._offset, [])
                     self._offset = self._offset + 1
