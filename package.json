@@ -5,17 +5,18 @@
 , "keywords"        : ["parser", "compiler", "peg"]
 , "license"         : "GPL-3.0"
 
-, "version"         : "0.3.0"
-, "engines"         : {"node": ">=0.4.0"}
+, "version"         : "0.4.0"
+, "engines"         : { "node": ">=0.4.0" }
+, "files"           : ["bin", "lib"]
 , "main"            : "./lib/canopy.js"
-, "bin"             : {"canopy": "./bin/canopy"}
-, "preferGlobal"    : true
-, "dependencies"    : {"mkdirp": "", "nopt": ""}
-, "devDependencies" : {"benchmark": "", "jstest": "", "pegjs": ""}
+, "bin"             : { "canopy": "./bin/canopy" }
 
-, "scripts"         : {"test": "make test"}
+, "dependencies"    : { "mkdirp": "", "nopt": "" }
+, "devDependencies" : { "benchmark": "", "jstest": "", "pegjs": "" }
 
-, "bugs"            : {"url": "https://github.com/jcoglan/canopy/issues"}
+, "scripts"         : { "test": "make test" }
+
+, "bugs"            : { "url": "https://github.com/jcoglan/canopy/issues" }
 
 , "repository"      : { "type"  : "git"
                       , "url"   : "git://github.com/jcoglan/canopy.git"
