@@ -381,8 +381,7 @@ util.assign(Builder.prototype, {
     var chunk = this.localVar_('chunk', this.null_()), input = 'input', of = 'offset';
     this.if_(of + ' < inputSize', function(builder) {
       builder._line(chunk + ' = ' + input + '.substring(' + of + ', ' +
-          'Math.min(' + of + ' + ' + length + ', ' +
-          input + '.length()' + '))');
+          'Math.min(' + of + ' + ' + length + ', inputSize))');
     });
     return chunk;
   },
