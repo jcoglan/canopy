@@ -2,3 +2,4 @@
 Gemfile.lock
 lib
 node_modules
+Pipfile.lock

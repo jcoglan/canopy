@@ -17,7 +17,7 @@ To install the dependencies for the build and test suite:
 
 To install the dependencies for the Python examples:
 
-    pip install -r requirements.txt
+    pipenv install
 
 To install the dependencies for the Ruby examples (and the tools used to build
 the website):
@@ -81,6 +81,7 @@ To run the JavaScript examples:
 
 To run the Python examples:
 
+    pipenv shell
     py.test examples/python.py
 
 To run the Ruby examples:
