@@ -84,10 +84,10 @@ util.assign(Builder.prototype, {
   syntaxNodeClass_: function() {
     var name = 'TreeNode';
     this.class_(name, 'object', function(builder) {
-      builder.method_('__init__', ['text', 'offset', 'elements=None'], function(builder) {
+      builder.method_('__init__', ['text', 'offset', 'elements'], function(builder) {
         builder.attribute_('text', 'text');
         builder.attribute_('offset', 'offset');
-        builder.attribute_('elements', 'elements or []');
+        builder.attribute_('elements', 'elements');
       });
       builder.method_('__iter__', [], function(builder) {
         builder._line('for el in self.elements:');
@@ -254,7 +254,7 @@ util.assign(Builder.prototype, {
       action = nodeClass || 'TreeNode';
       args   = ['self._input[' + start + ':' + end + ']', start];
     }
-    if (elements) args.push(elements);
+    args.push(elements ? elements : this.emptyList_());
 
     this.assign_(address, action + '(' + args.join(', ') + ')');
     this.assign_('self._offset', end);

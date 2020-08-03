@@ -1,3 +1,8 @@
+/**
+ * This file was generated from examples/canopy/peg.peg
+ * See http://canopy.jcoglan.com/ for documentation.
+ */
+
 package examples.canopy.peg;
 
 import java.util.ArrayList;
@@ -15,10 +20,6 @@ public class TreeNode implements Iterable<TreeNode> {
 
     public TreeNode() {
         this("", -1, new ArrayList<TreeNode>(0));
-    }
-
-    public TreeNode(String text, int offset) {
-        this(text, offset, new ArrayList<TreeNode>(0));
     }
 
     public TreeNode(String text, int offset, List<TreeNode> elements) {

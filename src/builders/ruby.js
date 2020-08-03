@@ -85,7 +85,7 @@ util.assign(Builder.prototype, {
     this._indent(function(builder) {
       builder._line('include Enumerable');
       builder.attributes_(['text', 'offset', 'elements']);
-      builder.method_('initialize', ['text', 'offset', 'elements = []'], function(builder) {
+      builder.method_('initialize', ['text', 'offset', 'elements'], function(builder) {
         builder.attribute_('text', 'text');
         builder.attribute_('offset', 'offset');
         builder.attribute_('elements', 'elements');
@@ -262,7 +262,7 @@ util.assign(Builder.prototype, {
       action = (nodeClass || 'TreeNode') + '.new';
       args   = ['@input[' + start + '...' + end + ']', start];
     }
-    if (elements) args.push(elements);
+    args.push(elements ? elements : this.emptyList_());
 
     this.assign_(address, action + '(' + args.join(', ') + ')');
     this.assign_('@offset', end);

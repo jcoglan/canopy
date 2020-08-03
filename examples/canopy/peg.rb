@@ -1,9 +1,12 @@
+# This file was generated from examples/canopy/peg.peg
+# See http://canopy.jcoglan.com/ for documentation.
+
 module Canopy::PEG
   class TreeNode
     include Enumerable
     attr_reader :text, :offset, :elements
 
-    def initialize(text, offset, elements = [])
+    def initialize(text, offset, elements)
       @text = text
       @offset = offset
       @elements = elements
@@ -367,7 +370,7 @@ module Canopy::PEG
         chunk0 = @input[@offset...@offset + 7]
       end
       if !chunk0.nil? && chunk0.downcase == "grammar".downcase
-        address1 = TreeNode.new(@input[@offset...@offset + 7], @offset)
+        address1 = TreeNode.new(@input[@offset...@offset + 7], @offset, [])
         @offset = @offset + 7
       else
         address1 = FAILURE
@@ -388,7 +391,7 @@ module Canopy::PEG
           chunk1 = @input[@offset...@offset + 1]
         end
         if chunk1 == ":"
-          address2 = TreeNode.new(@input[@offset...@offset + 1], @offset)
+          address2 = TreeNode.new(@input[@offset...@offset + 1], @offset, [])
           @offset = @offset + 1
         else
           address2 = FAILURE
@@ -401,7 +404,7 @@ module Canopy::PEG
           end
         end
         if address2 == FAILURE
-          address2 = TreeNode.new(@input[index2...index2], index2)
+          address2 = TreeNode.new(@input[index2...index2], index2, [])
           @offset = index2
         end
         unless address2 == FAILURE
@@ -526,7 +529,7 @@ module Canopy::PEG
           chunk0 = @input[@offset...@offset + 2]
         end
         if chunk0 == "<-"
-          address3 = TreeNode.new(@input[@offset...@offset + 2], @offset)
+          address3 = TreeNode.new(@input[@offset...@offset + 2], @offset, [])
           @offset = @offset + 2
         else
           address3 = FAILURE
@@ -613,7 +616,7 @@ module Canopy::PEG
         chunk0 = @input[@offset...@offset + 1]
       end
       if chunk0 == "("
-        address1 = TreeNode.new(@input[@offset...@offset + 1], @offset)
+        address1 = TreeNode.new(@input[@offset...@offset + 1], @offset, [])
         @offset = @offset + 1
       else
         address1 = FAILURE
@@ -671,7 +674,7 @@ module Canopy::PEG
                 chunk1 = @input[@offset...@offset + 1]
               end
               if chunk1 == ")"
-                address7 = TreeNode.new(@input[@offset...@offset + 1], @offset)
+                address7 = TreeNode.new(@input[@offset...@offset + 1], @offset, [])
                 @offset = @offset + 1
               else
                 address7 = FAILURE
@@ -754,7 +757,7 @@ module Canopy::PEG
               chunk0 = @input[@offset...@offset + 1]
             end
             if chunk0 == "/"
-              address6 = TreeNode.new(@input[@offset...@offset + 1], @offset)
+              address6 = TreeNode.new(@input[@offset...@offset + 1], @offset, [])
               @offset = @offset + 1
             else
               address6 = FAILURE
@@ -905,7 +908,7 @@ module Canopy::PEG
           @offset = @offset
         end
         if address2 == FAILURE
-          address2 = TreeNode.new(@input[index3...index3], index3)
+          address2 = TreeNode.new(@input[index3...index3], index3, [])
           @offset = index3
         end
         unless address2 == FAILURE
@@ -998,7 +1001,7 @@ module Canopy::PEG
         chunk0 = @input[@offset...@offset + 1]
       end
       if chunk0 == "("
-        address1 = TreeNode.new(@input[@offset...@offset + 1], @offset)
+        address1 = TreeNode.new(@input[@offset...@offset + 1], @offset, [])
         @offset = @offset + 1
       else
         address1 = FAILURE
@@ -1056,7 +1059,7 @@ module Canopy::PEG
                 chunk1 = @input[@offset...@offset + 1]
               end
               if chunk1 == ")"
-                address7 = TreeNode.new(@input[@offset...@offset + 1], @offset)
+                address7 = TreeNode.new(@input[@offset...@offset + 1], @offset, [])
                 @offset = @offset + 1
               else
                 address7 = FAILURE
@@ -1129,7 +1132,7 @@ module Canopy::PEG
         chunk0 = @input[@offset...@offset + 1]
       end
       if chunk0 == "%"
-        address1 = TreeNode.new(@input[@offset...@offset + 1], @offset)
+        address1 = TreeNode.new(@input[@offset...@offset + 1], @offset, [])
         @offset = @offset + 1
       else
         address1 = FAILURE
@@ -1179,7 +1182,7 @@ module Canopy::PEG
         chunk0 = @input[@offset...@offset + 1]
       end
       if chunk0 == "<"
-        address1 = TreeNode.new(@input[@offset...@offset + 1], @offset)
+        address1 = TreeNode.new(@input[@offset...@offset + 1], @offset, [])
         @offset = @offset + 1
       else
         address1 = FAILURE
@@ -1203,7 +1206,7 @@ module Canopy::PEG
             chunk1 = @input[@offset...@offset + 1]
           end
           if chunk1 == ">"
-            address3 = TreeNode.new(@input[@offset...@offset + 1], @offset)
+            address3 = TreeNode.new(@input[@offset...@offset + 1], @offset, [])
             @offset = @offset + 1
           else
             address3 = FAILURE
@@ -1333,7 +1336,7 @@ module Canopy::PEG
       index2 = @offset
       address1 = _read_label
       if address1 == FAILURE
-        address1 = TreeNode.new(@input[index2...index2], index2)
+        address1 = TreeNode.new(@input[index2...index2], index2, [])
         @offset = index2
       end
       unless address1 == FAILURE
@@ -1390,7 +1393,7 @@ module Canopy::PEG
           chunk0 = @input[@offset...@offset + 1]
         end
         if chunk0 == "?"
-          address2 = TreeNode.new(@input[@offset...@offset + 1], @offset)
+          address2 = TreeNode.new(@input[@offset...@offset + 1], @offset, [])
           @offset = @offset + 1
         else
           address2 = FAILURE
@@ -1441,7 +1444,7 @@ module Canopy::PEG
           chunk0 = @input[@offset...@offset + 1]
         end
         if chunk0 == "*"
-          address2 = TreeNode.new(@input[@offset...@offset + 1], @offset)
+          address2 = TreeNode.new(@input[@offset...@offset + 1], @offset, [])
           @offset = @offset + 1
         else
           address2 = FAILURE
@@ -1460,7 +1463,7 @@ module Canopy::PEG
             chunk1 = @input[@offset...@offset + 1]
           end
           if chunk1 == "+"
-            address2 = TreeNode.new(@input[@offset...@offset + 1], @offset)
+            address2 = TreeNode.new(@input[@offset...@offset + 1], @offset, [])
             @offset = @offset + 1
           else
             address2 = FAILURE
@@ -1567,7 +1570,7 @@ module Canopy::PEG
         chunk0 = @input[@offset...@offset + 1]
       end
       if chunk0 == "&"
-        address1 = TreeNode.new(@input[@offset...@offset + 1], @offset)
+        address1 = TreeNode.new(@input[@offset...@offset + 1], @offset, [])
         @offset = @offset + 1
       else
         address1 = FAILURE
@@ -1586,7 +1589,7 @@ module Canopy::PEG
           chunk1 = @input[@offset...@offset + 1]
         end
         if chunk1 == "!"
-          address1 = TreeNode.new(@input[@offset...@offset + 1], @offset)
+          address1 = TreeNode.new(@input[@offset...@offset + 1], @offset, [])
           @offset = @offset + 1
         else
           address1 = FAILURE
@@ -1643,7 +1646,7 @@ module Canopy::PEG
         address2 = _read_assignment
         @offset = index2
         if address2 == FAILURE
-          address2 = TreeNode.new(@input[@offset...@offset], @offset)
+          address2 = TreeNode.new(@input[@offset...@offset], @offset, [])
           @offset = @offset
         else
           address2 = FAILURE
@@ -1683,7 +1686,7 @@ module Canopy::PEG
         chunk0 = @input[@offset...@offset + 1]
       end
       if chunk0 == "\""
-        address1 = TreeNode.new(@input[@offset...@offset + 1], @offset)
+        address1 = TreeNode.new(@input[@offset...@offset + 1], @offset, [])
         @offset = @offset + 1
       else
         address1 = FAILURE
@@ -1708,7 +1711,7 @@ module Canopy::PEG
             chunk1 = @input[@offset...@offset + 1]
           end
           if chunk1 == "\\"
-            address4 = TreeNode.new(@input[@offset...@offset + 1], @offset)
+            address4 = TreeNode.new(@input[@offset...@offset + 1], @offset, [])
             @offset = @offset + 1
           else
             address4 = FAILURE
@@ -1724,7 +1727,7 @@ module Canopy::PEG
             elements2 << address4
             address5 = FAILURE
             if @offset < @input_size
-              address5 = TreeNode.new(@input[@offset...@offset + 1], @offset)
+              address5 = TreeNode.new(@input[@offset...@offset + 1], @offset, [])
               @offset = @offset + 1
             else
               address5 = FAILURE
@@ -1759,7 +1762,7 @@ module Canopy::PEG
               chunk2 = @input[@offset...@offset + 1]
             end
             if chunk2 =~ /\A[^"]/
-              address3 = TreeNode.new(@input[@offset...@offset + 1], @offset)
+              address3 = TreeNode.new(@input[@offset...@offset + 1], @offset, [])
               @offset = @offset + 1
             else
               address3 = FAILURE
@@ -1794,7 +1797,7 @@ module Canopy::PEG
             chunk3 = @input[@offset...@offset + 1]
           end
           if chunk3 == "\""
-            address6 = TreeNode.new(@input[@offset...@offset + 1], @offset)
+            address6 = TreeNode.new(@input[@offset...@offset + 1], @offset, [])
             @offset = @offset + 1
           else
             address6 = FAILURE
@@ -1835,7 +1838,7 @@ module Canopy::PEG
           chunk4 = @input[@offset...@offset + 1]
         end
         if chunk4 == "'"
-          address7 = TreeNode.new(@input[@offset...@offset + 1], @offset)
+          address7 = TreeNode.new(@input[@offset...@offset + 1], @offset, [])
           @offset = @offset + 1
         else
           address7 = FAILURE
@@ -1860,7 +1863,7 @@ module Canopy::PEG
               chunk5 = @input[@offset...@offset + 1]
             end
             if chunk5 == "\\"
-              address10 = TreeNode.new(@input[@offset...@offset + 1], @offset)
+              address10 = TreeNode.new(@input[@offset...@offset + 1], @offset, [])
               @offset = @offset + 1
             else
               address10 = FAILURE
@@ -1876,7 +1879,7 @@ module Canopy::PEG
               elements5 << address10
               address11 = FAILURE
               if @offset < @input_size
-                address11 = TreeNode.new(@input[@offset...@offset + 1], @offset)
+                address11 = TreeNode.new(@input[@offset...@offset + 1], @offset, [])
                 @offset = @offset + 1
               else
                 address11 = FAILURE
@@ -1911,7 +1914,7 @@ module Canopy::PEG
                 chunk6 = @input[@offset...@offset + 1]
               end
               if chunk6 =~ /\A[^']/
-                address9 = TreeNode.new(@input[@offset...@offset + 1], @offset)
+                address9 = TreeNode.new(@input[@offset...@offset + 1], @offset, [])
                 @offset = @offset + 1
               else
                 address9 = FAILURE
@@ -1946,7 +1949,7 @@ module Canopy::PEG
               chunk7 = @input[@offset...@offset + 1]
             end
             if chunk7 == "'"
-              address12 = TreeNode.new(@input[@offset...@offset + 1], @offset)
+              address12 = TreeNode.new(@input[@offset...@offset + 1], @offset, [])
               @offset = @offset + 1
             else
               address12 = FAILURE
@@ -2000,7 +2003,7 @@ module Canopy::PEG
         chunk0 = @input[@offset...@offset + 1]
       end
       if chunk0 == "`"
-        address1 = TreeNode.new(@input[@offset...@offset + 1], @offset)
+        address1 = TreeNode.new(@input[@offset...@offset + 1], @offset, [])
         @offset = @offset + 1
       else
         address1 = FAILURE
@@ -2025,7 +2028,7 @@ module Canopy::PEG
             chunk1 = @input[@offset...@offset + 1]
           end
           if chunk1 == "\\"
-            address4 = TreeNode.new(@input[@offset...@offset + 1], @offset)
+            address4 = TreeNode.new(@input[@offset...@offset + 1], @offset, [])
             @offset = @offset + 1
           else
             address4 = FAILURE
@@ -2041,7 +2044,7 @@ module Canopy::PEG
             elements2 << address4
             address5 = FAILURE
             if @offset < @input_size
-              address5 = TreeNode.new(@input[@offset...@offset + 1], @offset)
+              address5 = TreeNode.new(@input[@offset...@offset + 1], @offset, [])
               @offset = @offset + 1
             else
               address5 = FAILURE
@@ -2076,7 +2079,7 @@ module Canopy::PEG
               chunk2 = @input[@offset...@offset + 1]
             end
             if chunk2 =~ /\A[^`]/
-              address3 = TreeNode.new(@input[@offset...@offset + 1], @offset)
+              address3 = TreeNode.new(@input[@offset...@offset + 1], @offset, [])
               @offset = @offset + 1
             else
               address3 = FAILURE
@@ -2111,7 +2114,7 @@ module Canopy::PEG
             chunk3 = @input[@offset...@offset + 1]
           end
           if chunk3 == "`"
-            address6 = TreeNode.new(@input[@offset...@offset + 1], @offset)
+            address6 = TreeNode.new(@input[@offset...@offset + 1], @offset, [])
             @offset = @offset + 1
           else
             address6 = FAILURE
@@ -2159,7 +2162,7 @@ module Canopy::PEG
         chunk0 = @input[@offset...@offset + 1]
       end
       if chunk0 == "."
-        address0 = TreeNode.new(@input[@offset...@offset + 1], @offset)
+        address0 = TreeNode.new(@input[@offset...@offset + 1], @offset, [])
         @offset = @offset + 1
       else
         address0 = FAILURE
@@ -2189,7 +2192,7 @@ module Canopy::PEG
         chunk0 = @input[@offset...@offset + 1]
       end
       if chunk0 == "["
-        address1 = TreeNode.new(@input[@offset...@offset + 1], @offset)
+        address1 = TreeNode.new(@input[@offset...@offset + 1], @offset, [])
         @offset = @offset + 1
       else
         address1 = FAILURE
@@ -2210,7 +2213,7 @@ module Canopy::PEG
           chunk1 = @input[@offset...@offset + 1]
         end
         if chunk1 == "^"
-          address2 = TreeNode.new(@input[@offset...@offset + 1], @offset)
+          address2 = TreeNode.new(@input[@offset...@offset + 1], @offset, [])
           @offset = @offset + 1
         else
           address2 = FAILURE
@@ -2223,7 +2226,7 @@ module Canopy::PEG
           end
         end
         if address2 == FAILURE
-          address2 = TreeNode.new(@input[index2...index2], index2)
+          address2 = TreeNode.new(@input[index2...index2], index2, [])
           @offset = index2
         end
         unless address2 == FAILURE
@@ -2239,7 +2242,7 @@ module Canopy::PEG
               chunk2 = @input[@offset...@offset + 1]
             end
             if chunk2 == "\\"
-              address5 = TreeNode.new(@input[@offset...@offset + 1], @offset)
+              address5 = TreeNode.new(@input[@offset...@offset + 1], @offset, [])
               @offset = @offset + 1
             else
               address5 = FAILURE
@@ -2255,7 +2258,7 @@ module Canopy::PEG
               elements2 << address5
               address6 = FAILURE
               if @offset < @input_size
-                address6 = TreeNode.new(@input[@offset...@offset + 1], @offset)
+                address6 = TreeNode.new(@input[@offset...@offset + 1], @offset, [])
                 @offset = @offset + 1
               else
                 address6 = FAILURE
@@ -2290,7 +2293,7 @@ module Canopy::PEG
                 chunk3 = @input[@offset...@offset + 1]
               end
               if chunk3 =~ /\A[^\]]/
-                address4 = TreeNode.new(@input[@offset...@offset + 1], @offset)
+                address4 = TreeNode.new(@input[@offset...@offset + 1], @offset, [])
                 @offset = @offset + 1
               else
                 address4 = FAILURE
@@ -2325,7 +2328,7 @@ module Canopy::PEG
               chunk4 = @input[@offset...@offset + 1]
             end
             if chunk4 == "]"
-              address7 = TreeNode.new(@input[@offset...@offset + 1], @offset)
+              address7 = TreeNode.new(@input[@offset...@offset + 1], @offset, [])
               @offset = @offset + 1
             else
               address7 = FAILURE
@@ -2383,7 +2386,7 @@ module Canopy::PEG
           chunk0 = @input[@offset...@offset + 1]
         end
         if chunk0 == ":"
-          address2 = TreeNode.new(@input[@offset...@offset + 1], @offset)
+          address2 = TreeNode.new(@input[@offset...@offset + 1], @offset, [])
           @offset = @offset + 1
         else
           address2 = FAILURE
@@ -2437,7 +2440,7 @@ module Canopy::PEG
             chunk0 = @input[@offset...@offset + 1]
           end
           if chunk0 == "."
-            address4 = TreeNode.new(@input[@offset...@offset + 1], @offset)
+            address4 = TreeNode.new(@input[@offset...@offset + 1], @offset, [])
             @offset = @offset + 1
           else
             address4 = FAILURE
@@ -2514,7 +2517,7 @@ module Canopy::PEG
         chunk0 = @input[@offset...@offset + 1]
       end
       if chunk0 =~ /\A[a-zA-Z_]/
-        address1 = TreeNode.new(@input[@offset...@offset + 1], @offset)
+        address1 = TreeNode.new(@input[@offset...@offset + 1], @offset, [])
         @offset = @offset + 1
       else
         address1 = FAILURE
@@ -2536,7 +2539,7 @@ module Canopy::PEG
             chunk1 = @input[@offset...@offset + 1]
           end
           if chunk1 =~ /\A[a-zA-Z0-9_]/
-            address3 = TreeNode.new(@input[@offset...@offset + 1], @offset)
+            address3 = TreeNode.new(@input[@offset...@offset + 1], @offset, [])
             @offset = @offset + 1
           else
             address3 = FAILURE
@@ -2592,7 +2595,7 @@ module Canopy::PEG
         chunk0 = @input[@offset...@offset + 1]
       end
       if chunk0 =~ /\A[\s]/
-        address0 = TreeNode.new(@input[@offset...@offset + 1], @offset)
+        address0 = TreeNode.new(@input[@offset...@offset + 1], @offset, [])
         @offset = @offset + 1
       else
         address0 = FAILURE
@@ -2629,7 +2632,7 @@ module Canopy::PEG
         chunk0 = @input[@offset...@offset + 1]
       end
       if chunk0 == "#"
-        address1 = TreeNode.new(@input[@offset...@offset + 1], @offset)
+        address1 = TreeNode.new(@input[@offset...@offset + 1], @offset, [])
         @offset = @offset + 1
       else
         address1 = FAILURE
@@ -2651,7 +2654,7 @@ module Canopy::PEG
             chunk1 = @input[@offset...@offset + 1]
           end
           if chunk1 =~ /\A[^\n]/
-            address3 = TreeNode.new(@input[@offset...@offset + 1], @offset)
+            address3 = TreeNode.new(@input[@offset...@offset + 1], @offset, [])
             @offset = @offset + 1
           else
             address3 = FAILURE

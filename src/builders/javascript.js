@@ -97,7 +97,7 @@ util.assign(Builder.prototype, {
     this.function_('var ' + name, ['text', 'offset', 'elements'], function(builder) {
       builder._line('this.text = text');
       builder._line('this.offset = offset');
-      builder._line('this.elements = elements || []');
+      builder._line('this.elements = elements');
     });
     this.function_(name + '.prototype.forEach', ['block', 'context'], function(builder) {
       builder._line('for (var el = this.elements, i = 0, n = el.length; i < n; i++) {', false);
@@ -279,7 +279,7 @@ util.assign(Builder.prototype, {
       action = 'new ' + (nodeClass || 'TreeNode');
       args   = ['this._input.substring(' + start + ', ' + end + ')', start];
     }
-    if (elements) args.push(elements);
+    args.push(elements ? elements : this.emptyList_());
 
     this.assign_(address, action + '(' + args.join(', ') + ')');
     this.assign_('this._offset', end);

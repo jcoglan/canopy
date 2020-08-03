@@ -1,7 +1,12 @@
+/**
+ * This file was generated from examples/canopy/json.peg
+ * See http://canopy.jcoglan.com/ for documentation.
+ */
+
 (function() {
   'use strict';
 
-  var extend = function (destination, source) {
+  var extend = function(destination, source) {
     if (!destination || !source) return destination;
     for (var key in source) {
       if (destination[key] !== source[key])
@@ -10,7 +15,7 @@
     return destination;
   };
 
-  var formatError = function (input, offset, expected) {
+  var formatError = function(input, offset, expected) {
     var lines = input.split(/\n/g),
         lineNo = 0,
         position = 0;
@@ -32,7 +37,7 @@
     return message + '^';
   };
 
-  var inherit = function (subclass, parent) {
+  var inherit = function(subclass, parent) {
     var chain = function() {};
     chain.prototype = parent.prototype;
     subclass.prototype = new chain();
@@ -42,7 +47,7 @@
   var TreeNode = function(text, offset, elements) {
     this.text = text;
     this.offset = offset;
-    this.elements = elements || [];
+    this.elements = elements;
   };
 
   TreeNode.prototype.forEach = function(block, context) {
@@ -177,7 +182,7 @@
         chunk0 = this._input.substring(this._offset, this._offset + 1);
       }
       if (chunk0 === '{') {
-        address1 = new TreeNode(this._input.substring(this._offset, this._offset + 1), this._offset);
+        address1 = new TreeNode(this._input.substring(this._offset, this._offset + 1), this._offset, []);
         this._offset = this._offset + 1;
       } else {
         address1 = FAILURE;
@@ -205,7 +210,7 @@
               chunk1 = this._input.substring(this._offset, this._offset + 1);
             }
             if (chunk1 === ',') {
-              address5 = new TreeNode(this._input.substring(this._offset, this._offset + 1), this._offset);
+              address5 = new TreeNode(this._input.substring(this._offset, this._offset + 1), this._offset, []);
               this._offset = this._offset + 1;
             } else {
               address5 = FAILURE;
@@ -256,7 +261,7 @@
               chunk2 = this._input.substring(this._offset, this._offset + 1);
             }
             if (chunk2 === '}') {
-              address7 = new TreeNode(this._input.substring(this._offset, this._offset + 1), this._offset);
+              address7 = new TreeNode(this._input.substring(this._offset, this._offset + 1), this._offset, []);
               this._offset = this._offset + 1;
             } else {
               address7 = FAILURE;
@@ -301,7 +306,7 @@
           chunk3 = this._input.substring(this._offset, this._offset + 1);
         }
         if (chunk3 === '{') {
-          address8 = new TreeNode(this._input.substring(this._offset, this._offset + 1), this._offset);
+          address8 = new TreeNode(this._input.substring(this._offset, this._offset + 1), this._offset, []);
           this._offset = this._offset + 1;
         } else {
           address8 = FAILURE;
@@ -325,7 +330,7 @@
               chunk4 = this._input.substring(this._offset, this._offset + 1);
             }
             if (chunk4 === '}') {
-              address10 = new TreeNode(this._input.substring(this._offset, this._offset + 1), this._offset);
+              address10 = new TreeNode(this._input.substring(this._offset, this._offset + 1), this._offset, []);
               this._offset = this._offset + 1;
             } else {
               address10 = FAILURE;
@@ -392,7 +397,7 @@
               chunk0 = this._input.substring(this._offset, this._offset + 1);
             }
             if (chunk0 === ':') {
-              address4 = new TreeNode(this._input.substring(this._offset, this._offset + 1), this._offset);
+              address4 = new TreeNode(this._input.substring(this._offset, this._offset + 1), this._offset, []);
               this._offset = this._offset + 1;
             } else {
               address4 = FAILURE;
@@ -456,7 +461,7 @@
         chunk0 = this._input.substring(this._offset, this._offset + 1);
       }
       if (chunk0 === '[') {
-        address1 = new TreeNode(this._input.substring(this._offset, this._offset + 1), this._offset);
+        address1 = new TreeNode(this._input.substring(this._offset, this._offset + 1), this._offset, []);
         this._offset = this._offset + 1;
       } else {
         address1 = FAILURE;
@@ -484,7 +489,7 @@
               chunk1 = this._input.substring(this._offset, this._offset + 1);
             }
             if (chunk1 === ',') {
-              address5 = new TreeNode(this._input.substring(this._offset, this._offset + 1), this._offset);
+              address5 = new TreeNode(this._input.substring(this._offset, this._offset + 1), this._offset, []);
               this._offset = this._offset + 1;
             } else {
               address5 = FAILURE;
@@ -535,7 +540,7 @@
               chunk2 = this._input.substring(this._offset, this._offset + 1);
             }
             if (chunk2 === ']') {
-              address7 = new TreeNode(this._input.substring(this._offset, this._offset + 1), this._offset);
+              address7 = new TreeNode(this._input.substring(this._offset, this._offset + 1), this._offset, []);
               this._offset = this._offset + 1;
             } else {
               address7 = FAILURE;
@@ -580,7 +585,7 @@
           chunk3 = this._input.substring(this._offset, this._offset + 1);
         }
         if (chunk3 === '[') {
-          address8 = new TreeNode(this._input.substring(this._offset, this._offset + 1), this._offset);
+          address8 = new TreeNode(this._input.substring(this._offset, this._offset + 1), this._offset, []);
           this._offset = this._offset + 1;
         } else {
           address8 = FAILURE;
@@ -604,7 +609,7 @@
               chunk4 = this._input.substring(this._offset, this._offset + 1);
             }
             if (chunk4 === ']') {
-              address10 = new TreeNode(this._input.substring(this._offset, this._offset + 1), this._offset);
+              address10 = new TreeNode(this._input.substring(this._offset, this._offset + 1), this._offset, []);
               this._offset = this._offset + 1;
             } else {
               address10 = FAILURE;
@@ -726,7 +731,7 @@
         chunk0 = this._input.substring(this._offset, this._offset + 1);
       }
       if (chunk0 === '"') {
-        address1 = new TreeNode(this._input.substring(this._offset, this._offset + 1), this._offset);
+        address1 = new TreeNode(this._input.substring(this._offset, this._offset + 1), this._offset, []);
         this._offset = this._offset + 1;
       } else {
         address1 = FAILURE;
@@ -751,7 +756,7 @@
             chunk1 = this._input.substring(this._offset, this._offset + 1);
           }
           if (chunk1 === '\\') {
-            address4 = new TreeNode(this._input.substring(this._offset, this._offset + 1), this._offset);
+            address4 = new TreeNode(this._input.substring(this._offset, this._offset + 1), this._offset, []);
             this._offset = this._offset + 1;
           } else {
             address4 = FAILURE;
@@ -767,7 +772,7 @@
             elements2[0] = address4;
             var address5 = FAILURE;
             if (this._offset < this._inputSize) {
-              address5 = new TreeNode(this._input.substring(this._offset, this._offset + 1), this._offset);
+              address5 = new TreeNode(this._input.substring(this._offset, this._offset + 1), this._offset, []);
               this._offset = this._offset + 1;
             } else {
               address5 = FAILURE;
@@ -802,7 +807,7 @@
               chunk2 = this._input.substring(this._offset, this._offset + 1);
             }
             if (chunk2 !== null && /^[^"]/.test(chunk2)) {
-              address3 = new TreeNode(this._input.substring(this._offset, this._offset + 1), this._offset);
+              address3 = new TreeNode(this._input.substring(this._offset, this._offset + 1), this._offset, []);
               this._offset = this._offset + 1;
             } else {
               address3 = FAILURE;
@@ -837,7 +842,7 @@
             chunk3 = this._input.substring(this._offset, this._offset + 1);
           }
           if (chunk3 === '"') {
-            address6 = new TreeNode(this._input.substring(this._offset, this._offset + 1), this._offset);
+            address6 = new TreeNode(this._input.substring(this._offset, this._offset + 1), this._offset, []);
             this._offset = this._offset + 1;
           } else {
             address6 = FAILURE;
@@ -889,7 +894,7 @@
         chunk0 = this._input.substring(this._offset, this._offset + 1);
       }
       if (chunk0 === '-') {
-        address1 = new TreeNode(this._input.substring(this._offset, this._offset + 1), this._offset);
+        address1 = new TreeNode(this._input.substring(this._offset, this._offset + 1), this._offset, []);
         this._offset = this._offset + 1;
       } else {
         address1 = FAILURE;
@@ -902,7 +907,7 @@
         }
       }
       if (address1 === FAILURE) {
-        address1 = new TreeNode(this._input.substring(index2, index2), index2);
+        address1 = new TreeNode(this._input.substring(index2, index2), index2, []);
         this._offset = index2;
       }
       if (address1 !== FAILURE) {
@@ -914,7 +919,7 @@
           chunk1 = this._input.substring(this._offset, this._offset + 1);
         }
         if (chunk1 === '0') {
-          address2 = new TreeNode(this._input.substring(this._offset, this._offset + 1), this._offset);
+          address2 = new TreeNode(this._input.substring(this._offset, this._offset + 1), this._offset, []);
           this._offset = this._offset + 1;
         } else {
           address2 = FAILURE;
@@ -935,7 +940,7 @@
             chunk2 = this._input.substring(this._offset, this._offset + 1);
           }
           if (chunk2 !== null && /^[1-9]/.test(chunk2)) {
-            address3 = new TreeNode(this._input.substring(this._offset, this._offset + 1), this._offset);
+            address3 = new TreeNode(this._input.substring(this._offset, this._offset + 1), this._offset, []);
             this._offset = this._offset + 1;
           } else {
             address3 = FAILURE;
@@ -957,7 +962,7 @@
                 chunk3 = this._input.substring(this._offset, this._offset + 1);
               }
               if (chunk3 !== null && /^[0-9]/.test(chunk3)) {
-                address5 = new TreeNode(this._input.substring(this._offset, this._offset + 1), this._offset);
+                address5 = new TreeNode(this._input.substring(this._offset, this._offset + 1), this._offset, []);
                 this._offset = this._offset + 1;
               } else {
                 address5 = FAILURE;
@@ -1011,7 +1016,7 @@
             chunk4 = this._input.substring(this._offset, this._offset + 1);
           }
           if (chunk4 === '.') {
-            address7 = new TreeNode(this._input.substring(this._offset, this._offset + 1), this._offset);
+            address7 = new TreeNode(this._input.substring(this._offset, this._offset + 1), this._offset, []);
             this._offset = this._offset + 1;
           } else {
             address7 = FAILURE;
@@ -1033,7 +1038,7 @@
                 chunk5 = this._input.substring(this._offset, this._offset + 1);
               }
               if (chunk5 !== null && /^[0-9]/.test(chunk5)) {
-                address9 = new TreeNode(this._input.substring(this._offset, this._offset + 1), this._offset);
+                address9 = new TreeNode(this._input.substring(this._offset, this._offset + 1), this._offset, []);
                 this._offset = this._offset + 1;
               } else {
                 address9 = FAILURE;
@@ -1073,7 +1078,7 @@
             this._offset = this._offset;
           }
           if (address6 === FAILURE) {
-            address6 = new TreeNode(this._input.substring(index6, index6), index6);
+            address6 = new TreeNode(this._input.substring(index6, index6), index6, []);
             this._offset = index6;
           }
           if (address6 !== FAILURE) {
@@ -1088,7 +1093,7 @@
               chunk6 = this._input.substring(this._offset, this._offset + 1);
             }
             if (chunk6 === 'e') {
-              address11 = new TreeNode(this._input.substring(this._offset, this._offset + 1), this._offset);
+              address11 = new TreeNode(this._input.substring(this._offset, this._offset + 1), this._offset, []);
               this._offset = this._offset + 1;
             } else {
               address11 = FAILURE;
@@ -1107,7 +1112,7 @@
                 chunk7 = this._input.substring(this._offset, this._offset + 1);
               }
               if (chunk7 === 'E') {
-                address11 = new TreeNode(this._input.substring(this._offset, this._offset + 1), this._offset);
+                address11 = new TreeNode(this._input.substring(this._offset, this._offset + 1), this._offset, []);
                 this._offset = this._offset + 1;
               } else {
                 address11 = FAILURE;
@@ -1132,7 +1137,7 @@
                 chunk8 = this._input.substring(this._offset, this._offset + 1);
               }
               if (chunk8 === '+') {
-                address12 = new TreeNode(this._input.substring(this._offset, this._offset + 1), this._offset);
+                address12 = new TreeNode(this._input.substring(this._offset, this._offset + 1), this._offset, []);
                 this._offset = this._offset + 1;
               } else {
                 address12 = FAILURE;
@@ -1151,7 +1156,7 @@
                   chunk9 = this._input.substring(this._offset, this._offset + 1);
                 }
                 if (chunk9 === '-') {
-                  address12 = new TreeNode(this._input.substring(this._offset, this._offset + 1), this._offset);
+                  address12 = new TreeNode(this._input.substring(this._offset, this._offset + 1), this._offset, []);
                   this._offset = this._offset + 1;
                 } else {
                   address12 = FAILURE;
@@ -1170,7 +1175,7 @@
                     chunk10 = this._input.substring(this._offset, this._offset + 0);
                   }
                   if (chunk10 === '') {
-                    address12 = new TreeNode(this._input.substring(this._offset, this._offset + 0), this._offset);
+                    address12 = new TreeNode(this._input.substring(this._offset, this._offset + 0), this._offset, []);
                     this._offset = this._offset + 0;
                   } else {
                     address12 = FAILURE;
@@ -1197,7 +1202,7 @@
                     chunk11 = this._input.substring(this._offset, this._offset + 1);
                   }
                   if (chunk11 !== null && /^[0-9]/.test(chunk11)) {
-                    address14 = new TreeNode(this._input.substring(this._offset, this._offset + 1), this._offset);
+                    address14 = new TreeNode(this._input.substring(this._offset, this._offset + 1), this._offset, []);
                     this._offset = this._offset + 1;
                   } else {
                     address14 = FAILURE;
@@ -1241,7 +1246,7 @@
               this._offset = this._offset;
             }
             if (address10 === FAILURE) {
-              address10 = new TreeNode(this._input.substring(index9, index9), index9);
+              address10 = new TreeNode(this._input.substring(index9, index9), index9, []);
               this._offset = index9;
             }
             if (address10 !== FAILURE) {
@@ -1286,7 +1291,7 @@
         chunk0 = this._input.substring(this._offset, this._offset + 4);
       }
       if (chunk0 === 'true') {
-        address0 = new TreeNode(this._input.substring(this._offset, this._offset + 4), this._offset);
+        address0 = new TreeNode(this._input.substring(this._offset, this._offset + 4), this._offset, []);
         this._offset = this._offset + 4;
       } else {
         address0 = FAILURE;
@@ -1305,7 +1310,7 @@
           chunk1 = this._input.substring(this._offset, this._offset + 5);
         }
         if (chunk1 === 'false') {
-          address0 = new TreeNode(this._input.substring(this._offset, this._offset + 5), this._offset);
+          address0 = new TreeNode(this._input.substring(this._offset, this._offset + 5), this._offset, []);
           this._offset = this._offset + 5;
         } else {
           address0 = FAILURE;
@@ -1338,7 +1343,7 @@
         chunk0 = this._input.substring(this._offset, this._offset + 4);
       }
       if (chunk0 === 'null') {
-        address0 = new TreeNode(this._input.substring(this._offset, this._offset + 4), this._offset);
+        address0 = new TreeNode(this._input.substring(this._offset, this._offset + 4), this._offset, []);
         this._offset = this._offset + 4;
       } else {
         address0 = FAILURE;
@@ -1369,7 +1374,7 @@
           chunk0 = this._input.substring(this._offset, this._offset + 1);
         }
         if (chunk0 !== null && /^[\s]/.test(chunk0)) {
-          address1 = new TreeNode(this._input.substring(this._offset, this._offset + 1), this._offset);
+          address1 = new TreeNode(this._input.substring(this._offset, this._offset + 1), this._offset, []);
           this._offset = this._offset + 1;
         } else {
           address1 = FAILURE;

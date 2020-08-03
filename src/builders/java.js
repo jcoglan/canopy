@@ -115,13 +115,6 @@ util.assign(Builder.prototype, {
       builder._line('}', false);
 
       builder._newline();
-      builder._line('public ' + name + '(String text, int offset) {', false);
-      builder._indent(function(builder) {
-        builder._line('this(text, offset, new ArrayList<' + name + '>(0))');
-      });
-      builder._line('}', false);
-
-      builder._newline();
       builder._line('public ' + name + '(String text, int offset, List<' + name + '> elements) {', false);
       builder._indent(function(builder) {
         builder.assign_('this.text', 'text');
@@ -401,7 +394,7 @@ util.assign(Builder.prototype, {
       action = 'new ' + (nodeClass || 'TreeNode');
       args   = ['input.substring(' + start + ', ' + end + ')', start];
     }
-    if (elements) args.push(elements);
+    args.push(elements ? elements : this.emptyList_());
 
     this.assign_(address, action + '(' + args.join(', ') + ')');
     this.assign_('offset', end);
@@ -523,7 +516,7 @@ util.assign(Builder.prototype, {
   },
 
   true_: function() {
-    return 'new TreeNode("", -1)';
+    return 'new TreeNode("", -1, ' + this.emptyList_(0) + ')';
   },
 
   null_: function() {
