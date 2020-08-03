@@ -257,7 +257,10 @@ util.assign(Builder.prototype, {
     this._varIndex[name] = this._varIndex[name] || 0;
     var varName = name + this._varIndex[name];
     this._varIndex[name] += 1;
-    this.assign_('var ' + varName, (value === undefined) ? this.nullNode_() : value);
+
+    if (value == undefined) value = this.nullNode_();
+    this.assign_('var ' + varName, value);
+
     return varName;
   },
 
@@ -279,7 +282,7 @@ util.assign(Builder.prototype, {
       action = 'new ' + (nodeClass || 'TreeNode');
       args   = ['this._input.substring(' + start + ', ' + end + ')', start];
     }
-    args.push(elements ? elements : this.emptyList_());
+    args.push(elements || this.emptyList_());
 
     this.assign_(address, action + '(' + args.join(', ') + ')');
     this.assign_('this._offset', end);
