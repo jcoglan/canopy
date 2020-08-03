@@ -1,12 +1,8 @@
 'use strict';
 
-var util  = require('../util');
-var Maybe = require('./maybe');
+var util = require('../util');
 
 var Action = function(expression, actionName) {
-  if (expression instanceof Maybe)
-    return new Maybe(new Action(expression._expression, actionName));
-
   this._expression = expression;
   this._actionName = actionName;
 };

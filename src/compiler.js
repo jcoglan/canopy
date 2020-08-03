@@ -47,7 +47,12 @@ var actions = {
   },
 
   action: function(text, a, b, elements) {
-    return new Action(elements[0], elements[2].id.text);
+    var actionName = elements[2].id.text;
+
+    if (elements[0] instanceof Maybe)
+      return new Maybe(new Action(elements[0]._expression, actionName));
+    else
+      return new Action(elements[0], actionName);
   },
 
   sequence: function(text, a, b, elements) {
