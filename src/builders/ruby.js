@@ -339,6 +339,12 @@ util.assign(Builder.prototype, {
     this._line('end');
   },
 
+  action_: function(address, action) {
+    var args = ['@input', -1, -1, address];
+    action = '@actions.' + action;
+    return action + '(' + args.join(', ') + ')';
+  },
+
   stringMatch_: function(expression, string) {
     return expression + ' == ' + this._quote(string);
   },

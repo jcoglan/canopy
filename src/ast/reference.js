@@ -15,8 +15,13 @@ util.assign(Reference.prototype, {
     return ['reference', this.refName];
   },
 
-  compile: function(builder, address) {
+  compile: function(builder, address, action) {
     builder.jump_(address, this.refName);
+    if (action) {
+      builder.ifNode_(address, function(builder){
+        builder.assign_(address, builder.action_(address, action));
+      }, this);
+    }
   }
 });
 
