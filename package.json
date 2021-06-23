@@ -14,7 +14,7 @@
 , "dependencies"    : { "mkdirp": ">=1.0.0", "nopt": "" }
 , "devDependencies" : { "benchmark": "", "jstest": "", "pegjs": "" }
 
-, "scripts"         : { "test": "make test" }
+, "scripts"         : { "test": "find spec -name '*_spec.js' | xargs jstest" }
 
 , "bugs"            : { "url": "https://github.com/jcoglan/canopy/issues" }
 

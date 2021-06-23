@@ -17,8 +17,8 @@ compile: src/meta_grammar.js
 src/meta_grammar.js: src/meta_grammar.peg
 	./bin/canopy $< --lang javascript
 
-test:
-	find test -name '*_spec.js' | xargs jstest
+test: src/meta_grammar.js
+	npm test
 
 examples: java js python ruby pegjs
 
