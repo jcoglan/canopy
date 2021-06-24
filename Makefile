@@ -1,32 +1,73 @@
 SHELL := /bin/bash
 PATH  := $(PATH):node_modules/.bin
 
-src_files := $(shell find src -type f)
-lib_files := $(src_files:src/%=lib/%)
+.PHONY: bootstrap compile test examples clean clean-test clean-examples
 
-.PHONY: bootstrap compile test examples clean
+
+src_files := $(shell find src -type f)
+lib_files := $(src_files:src/%=lib/%) node_modules
 
 bootstrap: test $(lib_files)
+
+compile:
+	./bin/canopy src/meta_grammar.peg
+
+test: node_modules
+	npm test
+
+clean: clean-examples clean-test
+
 
 lib/%: src/%
 	@mkdir -p $(@D)
 	cp $< $@
 
-compile: src/meta_grammar.js
+node_modules:
+	npm install --no-save
 
-src/meta_grammar.js: src/meta_grammar.peg
-	./bin/canopy $< --lang javascript
+examples/%.js: examples/%.peg
+	./bin/canopy --lang js $<
 
-test: src/meta_grammar.js
-	npm test
+test/%.js: test/%.peg
+	./bin/canopy --lang js $<
 
-examples: java js python ruby pegjs
+%/Grammar.java: %.peg
+	./bin/canopy --lang java $<
 
-%:
-	find examples/canopy -name '*.peg' -exec ./bin/canopy --lang $@ {} \;
+%.py: %.peg
+	./bin/canopy --lang python $<
 
-pegjs:
+%.rb: %.peg
+	./bin/canopy --lang ruby $<
+
+
+test_grammars := $(wildcard test/grammars/*.peg)
+
+test-js: $(test_grammars:%.peg=%.js)
+	cd test/javascript && npm install --no-save
+	cd test/javascript && npm test
+
+test-ruby: $(test_grammars:%.peg=%.rb)
+	cd test/ruby && rake
+
+clean-test:
+	find test/grammars -type f -a ! -name '*.peg' -exec rm {} \;
+
+
+example_grammars        := $(wildcard examples/canopy/*.peg)
+example_grammars_js     := $(example_grammars:%.peg=%.js)
+example_grammars_java   := $(example_grammars:%.peg=%/Grammar.java)
+example_grammars_python := $(example_grammars:%.peg=%.py)
+example_grammars_ruby   := $(example_grammars:%.peg=%.rb)
+
+examples: $(example_grammars_js) \
+	$(example_grammars_java) \
+	$(example_grammars_python) \
+	$(example_grammars_ruby) \
+	examples/pegjs
+
+examples/pegjs:
 	find examples/pegjs -name '*.peg' -exec pegjs --cache {} \;
 
-clean:
+clean-examples:
 	find examples -name '*.class' -o -name '*.pyc' -exec rm {} \;

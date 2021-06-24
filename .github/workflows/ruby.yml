@@ -1,0 +1,29 @@
+on:
+  - push
+  - pull_request
+
+jobs:
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        ruby:
+          - ruby-2.1
+          - ruby-2.2
+          - ruby-2.3
+          - ruby-2.4
+          - ruby-2.5
+          - ruby-2.6
+          - ruby-2.7
+          - ruby-3.0
+          - jruby-9.1
+          - jruby-9.2
+    name: ${{ matrix.ruby }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby }}
+      - run: make bootstrap test-ruby

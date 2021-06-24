@@ -1,5 +1,12 @@
 *.class
+*.pyc
+
 Gemfile.lock
-lib
-node_modules
 Pipfile.lock
+node_modules
+package-lock.json
+
+lib
+
+test/grammars/*.js
+test/grammars/*.rb

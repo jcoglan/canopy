@@ -1,0 +1,8 @@
+{
+  "devDependencies": {
+    "jstest": "*"
+  },
+  "scripts": {
+    "test": "find . -name '*_test.js' | xargs jstest"
+  }
+}

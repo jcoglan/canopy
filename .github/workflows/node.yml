@@ -17,15 +17,11 @@ jobs:
           - '14'
           - '15'
           - '16'
-    name: test v${{ matrix.node }}
+    name: Node.js v${{ matrix.node }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-
       - uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node }}
-
-      - run: node --version
-      - run: npm install
-      - run: npm test
+      - run: make bootstrap test-js

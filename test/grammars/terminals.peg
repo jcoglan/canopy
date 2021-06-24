@@ -1,0 +1,5 @@
+grammar Terminals
+
+test <- "any: " any_char
+
+any_char <- .
