@@ -8,6 +8,8 @@ package-lock.json
 
 lib
 
+test/grammars/**/*.java
 test/grammars/*.js
 test/grammars/*.py
 test/grammars/*.rb
+test/java/target
