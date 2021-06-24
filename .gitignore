@@ -9,4 +9,5 @@ package-lock.json
 lib
 
 test/grammars/*.js
+test/grammars/*.py
 test/grammars/*.rb

@@ -47,6 +47,9 @@ test-js: $(test_grammars:%.peg=%.js)
 	cd test/javascript && npm install --no-save
 	cd test/javascript && npm test
 
+test-python: $(test_grammars:%.peg=%.py)
+	cd test && python -m unittest discover --pattern '*_test.py'
+
 test-ruby: $(test_grammars:%.peg=%.rb)
 	cd test/ruby && rake
 
