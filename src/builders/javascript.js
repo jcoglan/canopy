@@ -350,6 +350,12 @@ util.assign(Builder.prototype, {
     this.conditional_('while', expression + ' !== ' + this.nullNode_(), block, context);
   },
 
+  action_: function(address, action) {
+    var args = ['this._input', -1, -1, address];
+    action = 'this._actions.' + action;
+    return action + '(' + args.join(', ') + ')';
+  },
+
   stringMatch_: function(expression, string) {
     return expression + ' === ' + this._quote(string);
   },

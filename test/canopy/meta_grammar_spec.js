@@ -290,6 +290,27 @@ jstest.describe("MetaGrammar", function() { with(this) {
     }})
   }})
 
+  describe('with an actionable referencing rule', function() { with(this) {
+    before(function() { with(this) {
+      this.compiler = new Compiler(' \
+        grammar References \
+          first <- second %make_rep \
+          second <- "done" \
+      ')
+    }})
+
+    it('compiles a referencing-rule parser', function() { with(this) {
+      assertEqual(['grammar', 'References',
+                    ['rule', 'first',
+                      ['action', 'make_rep',
+                        ['reference', 'second']]],
+                    ['rule', 'second',
+                      ['string', 'done']]],
+
+          compiler.toSexp() )
+    }})
+  }})
+
   describe('with comments', function() { with(this) {
     before(function() { with(this) {
       this.compiler = new Compiler(' \

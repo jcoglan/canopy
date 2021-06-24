@@ -322,6 +322,12 @@ util.assign(Builder.prototype, {
     this._indent(block, context);
   },
 
+  action_: function(address, action) {
+    var args = ['self._input', -1, -1, address];
+    action = 'self._actions.' + action;
+    return action + '(' + args.join(', ') + ')';
+  },
+
   stringMatch_: function(expression, string) {
     return expression + ' == ' + this._quote(string);
   },

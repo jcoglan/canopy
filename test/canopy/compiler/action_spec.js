@@ -191,4 +191,39 @@ jstest.describe("Compiler.Action", function() { with(this) {
       assertEqual( 0, ChoiceActionTest.parse('0', {actions: actions}) )
     }})
   }})
+
+  describe('constructing a referenced node', function() { with(this) {
+    before(function() { with(this) {
+      compile('grammar global.RefActionTest \
+        rule <- begin %override \
+		begin <- "begin" %begin')
+
+      this.actions = {
+        begin: function() { return {type: 'tBEGIN'} },
+        override: function(input, start, end, elements) { return elements.type.toLowerCase(); }
+      }
+    }})
+
+    it('creates nodes using the named action', function() { with(this) {
+      assertEqual('tbegin', RefActionTest.parse('begin', {actions: actions}) )
+    }})
+  }})
+  describe('constructing another referenced node', function() { with(this) {
+    before(function() { with(this) {
+      compile('grammar global.RefActionTest \
+        rule <- (notbegin %override) / (begin %override) \
+		notbegin <- "notbegin" %notbegin\
+		begin <- "begin" %begin')
+
+      this.actions = {
+        begin: function() { return {type: 'tBEGIN'} },
+        notbegin: function() { return {type: 'tNOTBEGIN'} },
+        override: function(input, start, end, elements) { return elements.type.toLowerCase(); }
+      }
+    }})
+
+    it('creates nodes using the named action', function() { with(this) {
+      assertEqual('tbegin', RefActionTest.parse('begin', {actions: actions}) )
+    }})
+  }})
 }})
