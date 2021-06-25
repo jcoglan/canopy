@@ -26,4 +26,4 @@ jobs:
         with:
           java-version: ${{ matrix.java }}
           distribution: adopt
-      - run: make bootstrap test-java
+      - run: make test-java
