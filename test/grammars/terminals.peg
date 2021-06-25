@@ -3,8 +3,15 @@ grammar Terminals
 test <- "any: " any_char
       / "pos-class: " positive_class
       / "neg-class: " negative_class
+      / "str-1: " single_quoted_string
+      / "str-2: " double_quoted_string
+      / "str-ci: " uncased_string
 
 any_char <- .
 
 positive_class <- [a-z]
 negative_class <- [^a-z]
+
+single_quoted_string <- 'oat'
+double_quoted_string <- "oat"
+uncased_string       <- `oat`

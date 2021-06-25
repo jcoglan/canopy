@@ -41,4 +41,82 @@ jstest.describe("terminals", function() { with(this) {
       assertThrows(SyntaxError, () => Terminals.parse("neg-class: x"))
     }})
   }})
+
+  describe("single quoted strings", function() { with(this) {
+    it("parses that exact string", function() { with(this) {
+      assertParse( ["oat", 7], Terminals.parse("str-1: oat"))
+    }})
+
+    it("matches strings case-sensitively", function() { with(this) {
+      assertThrows(SyntaxError, () => Terminals.parse("str-1: OAT"))
+    }})
+
+    it("rejects strings with additional prefixes", function() { with(this) {
+      assertThrows(SyntaxError, () => Terminals.parse("str-1: boat"))
+    }})
+
+    it("rejects strings with additional suffixes", function() { with(this) {
+      assertThrows(SyntaxError, () => Terminals.parse("str-1: oath"))
+    }})
+
+    it("rejects the empty string", function() { with(this) {
+      assertThrows(SyntaxError, () => Terminals.parse("str-1: "))
+    }})
+
+    it("rejects prefixes of the target string", function() { with(this) {
+      assertThrows(SyntaxError, () => Terminals.parse("str-1: oa"))
+    }})
+  }})
+
+  describe("double quoted strings", function() { with(this) {
+    it("parses that exact string", function() { with(this) {
+      assertParse( ["oat", 7], Terminals.parse("str-2: oat"))
+    }})
+
+    it("matches strings case-sensitively", function() { with(this) {
+      assertThrows(SyntaxError, () => Terminals.parse("str-2: OAT"))
+    }})
+
+    it("rejects strings with additional prefixes", function() { with(this) {
+      assertThrows(SyntaxError, () => Terminals.parse("str-2: boat"))
+    }})
+
+    it("rejects strings with additional suffixes", function() { with(this) {
+      assertThrows(SyntaxError, () => Terminals.parse("str-2: oath"))
+    }})
+
+    it("rejects the empty string", function() { with(this) {
+      assertThrows(SyntaxError, () => Terminals.parse("str-2: "))
+    }})
+
+    it("rejects prefixes of the target string", function() { with(this) {
+      assertThrows(SyntaxError, () => Terminals.parse("str-2: oa"))
+    }})
+  }})
+
+  describe("case insensitive strings", function() { with(this) {
+    it("parses that exact string", function() { with(this) {
+      assertParse( ["oat", 8], Terminals.parse("str-ci: oat"))
+    }})
+
+    it("matches strings case-insensitively", function() { with(this) {
+      assertParse( ["OAT", 8], Terminals.parse("str-ci: OAT"))
+    }})
+
+    it("rejects strings with additional prefixes", function() { with(this) {
+      assertThrows(SyntaxError, () => Terminals.parse("str-ci: boat"))
+    }})
+
+    it("rejects strings with additional suffixes", function() { with(this) {
+      assertThrows(SyntaxError, () => Terminals.parse("str-ci: oath"))
+    }})
+
+    it("rejects the empty string", function() { with(this) {
+      assertThrows(SyntaxError, () => Terminals.parse("str-ci: "))
+    }})
+
+    it("rejects prefixes of the target string", function() { with(this) {
+      assertThrows(SyntaxError, () => Terminals.parse("str-ci: oa"))
+    }})
+  }})
 }})

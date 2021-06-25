@@ -93,7 +93,7 @@ maybe_atom            <-  atom _* "?" %maybe
 reference             <-  identifier !assignment %reference
 
 literal_string        <-  '"' ("\\" . / [^"])* '"' %string
-                           /  "'" ("\\" . / [^'])* "'" %string
+                       /  "'" ("\\" . / [^'])* "'" %string
 
 ci_string             <-  "`" ("\\" . / [^`])* "`" %ci_string
 

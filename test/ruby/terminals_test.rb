@@ -41,4 +41,82 @@ describe "terminals" do
       assert_raises(Terminals::ParseError) { Terminals.parse("neg-class: x") }
     end
   end
+
+  describe "single quoted strings" do
+    it "parses that exact string" do
+      assert_parse ["oat", 7], Terminals.parse("str-1: oat")
+    end
+
+    it "matches strings case-sensitively" do
+      assert_raises(Terminals::ParseError) { Terminals.parse("str-1: OAT") }
+    end
+
+    it "rejects strings with additional prefixes" do
+      assert_raises(Terminals::ParseError) { Terminals.parse("str-1: boat") }
+    end
+
+    it "rejects strings with additional suffxies" do
+      assert_raises(Terminals::ParseError) { Terminals.parse("str-1: oath") }
+    end
+
+    it "rejects the empty string" do
+      assert_raises(Terminals::ParseError) { Terminals.parse("str-1: ") }
+    end
+
+    it "rejects prefixes of the target string" do
+      assert_raises(Terminals::ParseError) { Terminals.parse("str-1: oa") }
+    end
+  end
+
+  describe "double quoted strings" do
+    it "parses that exact string" do
+      assert_parse ["oat", 7], Terminals.parse("str-2: oat")
+    end
+
+    it "matches strings case-sensitively" do
+      assert_raises(Terminals::ParseError) { Terminals.parse("str-2: OAT") }
+    end
+
+    it "rejects strings with additional prefixes" do
+      assert_raises(Terminals::ParseError) { Terminals.parse("str-2: boat") }
+    end
+
+    it "rejects strings with additional suffxies" do
+      assert_raises(Terminals::ParseError) { Terminals.parse("str-2: oath") }
+    end
+
+    it "rejects the empty string" do
+      assert_raises(Terminals::ParseError) { Terminals.parse("str-2: ") }
+    end
+
+    it "rejects prefixes of the target string" do
+      assert_raises(Terminals::ParseError) { Terminals.parse("str-2: oa") }
+    end
+  end
+
+  describe "case insensitive strings" do
+    it "parses that exact string" do
+      assert_parse ["oat", 8], Terminals.parse("str-ci: oat")
+    end
+
+    it "matches strings case-sensitively" do
+      assert_parse ["OAT", 8], Terminals.parse("str-ci: OAT")
+    end
+
+    it "rejects strings with additional prefixes" do
+      assert_raises(Terminals::ParseError) { Terminals.parse("str-ci: boat") }
+    end
+
+    it "rejects strings with additional suffxies" do
+      assert_raises(Terminals::ParseError) { Terminals.parse("str-ci: oath") }
+    end
+
+    it "rejects the empty string" do
+      assert_raises(Terminals::ParseError) { Terminals.parse("str-ci: ") }
+    end
+
+    it "rejects prefixes of the target string" do
+      assert_raises(Terminals::ParseError) { Terminals.parse("str-ci: oa") }
+    end
+  end
 end
