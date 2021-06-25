@@ -1,6 +1,7 @@
 package canopy;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.Test;
 
 import test.grammars.terminals.ParseError;
@@ -12,6 +13,16 @@ class AnyCharTest extends ParseHelper {
     void parsesAnySingleCharacter() throws ParseError {
         expectParse(Terminals.parse("any: a")).text("a").offset(5);
         expectParse(Terminals.parse("any: !")).text("!").offset(5);
+    }
+
+    @Test
+    void rejectsTheEmptyString() {
+        assertThrows(ParseError.class, () -> { Terminals.parse("any: "); });
+    }
+
+    @Test
+    void rejectsInputWithTooManyCharacters() {
+        assertThrows(ParseError.class, () -> { Terminals.parse("any: ab"); });
     }
 }
 
