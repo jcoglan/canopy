@@ -26,6 +26,33 @@ class AnyCharTest extends ParseHelper {
     }
 }
 
+class CharClassTest extends ParseHelper {
+    @Test
+    void parsesCharactersWithinTheClass() throws ParseError {
+        expectParse(Terminals.parse("pos-class: x")).text("x").offset(11);
+    }
+
+    @Test
+    void rejectsCharactersOutsideTheClass() {
+        assertThrows(ParseError.class, () -> { Terminals.parse("pos-class: 0"); });
+    }
+
+    @Test
+    void matchesCharactersCaseSensitively() {
+        assertThrows(ParseError.class, () -> { Terminals.parse("pos-class: A"); });
+    }
+
+    @Test
+    void parsesCharactersOutsideANegativeClass() throws ParseError {
+        expectParse(Terminals.parse("neg-class: 0")).text("0").offset(11);
+    }
+
+    @Test
+    void rejectsCharactersWithinANegativeClass() {
+        assertThrows(ParseError.class, () -> { Terminals.parse("neg-class: x"); });
+    }
+}
+
 class ParseHelper {
     NodeMatcher expectParse(TreeNode node) {
         return new NodeMatcher(node.elements.get(1));

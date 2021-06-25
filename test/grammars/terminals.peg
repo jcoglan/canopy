@@ -1,5 +1,10 @@
 grammar Terminals
 
 test <- "any: " any_char
+      / "pos-class: " positive_class
+      / "neg-class: " negative_class
 
 any_char <- .
+
+positive_class <- [a-z]
+negative_class <- [^a-z]

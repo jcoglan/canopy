@@ -19,4 +19,26 @@ jstest.describe("terminals", function() { with(this) {
       assertThrows(SyntaxError, () => Terminals.parse("any: ab"))
     }})
   }})
+
+  describe("char class", function() { with(this) {
+    it("parses characters within the class", function() { with(this) {
+      assertParse( ["x", 11], Terminals.parse("pos-class: x") )
+    }})
+
+    it("rejects characters outside the class", function() { with(this) {
+      assertThrows(SyntaxError, () => Terminals.parse("pos-class: 0"))
+    }})
+
+    it("matches characters case-sensitively", function() { with(this) {
+      assertThrows(SyntaxError, () => Terminals.parse("pod-class: A"))
+    }})
+
+    it("parses characters outside a negative class", function() { with(this) {
+      assertParse( ["0", 11], Terminals.parse("neg-class: 0"))
+    }})
+
+    it("rejects characters within a negative class", function() { with(this) {
+      assertThrows(SyntaxError, () => Terminals.parse("neg-class: x"))
+    }})
+  }})
 }})
