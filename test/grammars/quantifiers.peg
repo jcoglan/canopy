@@ -1,5 +1,13 @@
 grammar Quantifiers
 
 test <- "maybe: " maybe
+      / "rep-0: " rep_0
+      / "rep-1: " rep_1
+      / "greedy-0: " greedy_0
+      / "greedy-1: " greedy_1
 
-maybe <- [0-9]?
+maybe    <- [0-9]?
+rep_0    <- [a-z]*
+rep_1    <- [a-z]+
+greedy_0 <- [a-z]* [a-z]
+greedy_1 <- [a-z]+ [a-z]
