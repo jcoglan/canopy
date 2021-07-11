@@ -7,7 +7,7 @@ module.exports = new jstest.Module({
     this.assertParseInner(tuple, actual)
   },
 
-  assertParseInner([text, offset, elements], actual) {
+  assertParseInner([text, offset, elements, labelled], actual) {
     this.assertEqual( text, actual.text )
     this.assertEqual( offset, actual.offset )
 
@@ -16,6 +16,11 @@ module.exports = new jstest.Module({
 
       for (let [i, elem] of elements.entries())
         this.assertParseInner(elem, actual.elements[i])
+    }
+
+    if (labelled) {
+      for (let key in labelled)
+        this.assertParseInner(labelled[key], actual[key])
     }
   }
 })

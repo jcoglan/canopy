@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import helpers.Node;
 import helpers.NodeSpec;
 
+import test.grammars.terminals.Label;
 import test.grammars.terminals.ParseError;
 import test.grammars.terminals.Terminals;
 import test.grammars.terminals.TreeNode;
@@ -164,7 +165,7 @@ class ParseHelper {
     }
 }
 
-class NodeWrapper implements Node {
+class NodeWrapper implements Node<Label> {
     private TreeNode node;
 
     NodeWrapper(TreeNode node) {
@@ -179,9 +180,13 @@ class NodeWrapper implements Node {
         return node.offset;
     }
 
-    public List<Node> elements() {
+    public List<Node<Label>> elements() {
         return node.elements.stream()
             .map((elem) -> new NodeWrapper(elem))
             .collect(Collectors.toList());
+    }
+
+    public Node<Label> get(Label key) {
+        return new NodeWrapper(node.get(key));
     }
 }

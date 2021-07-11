@@ -14,3 +14,8 @@ class ParseHelper:
 
             for i, elem in enumerate(elements):
                 self.assertParseInner(elem, actual.elements[i])
+
+        if len(tuple) > 3:
+            labelled = tuple[3]
+            for key, value in labelled.items():
+                self.assertParseInner(value, getattr(actual, key))
