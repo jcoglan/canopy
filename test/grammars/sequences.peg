@@ -1,0 +1,39 @@
+grammar Sequences
+
+test <- "seq-str: " seq_str
+      / "seq-maybe-1: " seq_maybe_1
+      / "seq-maybe-2: " seq_maybe_2
+      / "seq-maybe-3: " seq_maybe_3
+      / "seq-rep-1: " seq_repeat_1
+      / "seq-rep-2: " seq_repeat_2
+      / "seq-rep-subseq: " seq_repeat_seq
+      / "seq-label: " seq_label
+      / "seq-label-subseq: " seq_label_seq
+      / "seq-mute-1: " seq_mute_1
+      / "seq-mute-2: " seq_mute_2
+      / "seq-mute-3: " seq_mute_3
+      / "seq-mute-4: " seq_mute_4
+      / "seq-refs: " seq_refs
+
+seq_str <- "a" "b" "c"
+
+seq_maybe_1 <- "a"? "b" "c"
+seq_maybe_2 <- "a" "b"? "c"
+seq_maybe_3 <- "a" "b" "c"?
+
+seq_repeat_1 <- [a-z]* "0"
+seq_repeat_2 <- [a-z]* "z"
+
+seq_repeat_seq <- "a" ("b" [0-9])* "c"
+
+seq_label     <- "v" num:[0-9]+
+seq_label_seq <- "v" ("." part:[A-Z]+)+
+
+seq_mute_1 <- [a-z]+ @":" @" "* [0-9]+
+seq_mute_2 <- [a-z]+ @(":" " "*) [0-9]+
+seq_mute_3 <- "v" (@"." [A-Z]+)+
+seq_mute_4 <- "a" @("b" @"c" "d") "e"
+
+seq_refs <- a b:c
+a        <- "a"
+c        <- "c"
