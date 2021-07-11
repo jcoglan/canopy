@@ -302,12 +302,12 @@ class SequenceReferencesTest extends ParseHelper {
 }
 
 class ParseHelper {
-    Node expect(TreeNode node) {
+    Node<Label> expect(TreeNode node) {
         return new NodeWrapper(node.elements.get(1));
     }
 
-    NodeSpec node(String text, int offset) {
-        return new NodeSpec(text, offset);
+    NodeSpec<Label> node(String text, int offset) {
+        return new NodeSpec<Label>(text, offset);
     }
 }
 
