@@ -108,3 +108,35 @@ class OneOrMoreTest(TestCase, ParseHelper):
     def test_parses_repeating_patterns_greedily(self):
         with self.assertRaises(quantifiers.ParseError):
             quantifiers.parse("greedy-1: xy")
+
+    def test_parses_a_repeated_reference(self):
+        self.assertParse(
+            ("#abc123", 11, [
+                ("#", 11, []),
+                ("abc123", 12, [
+                    ("a", 12, []),
+                    ("b", 13, []),
+                    ("c", 14, []),
+                    ("1", 15, []),
+                    ("2", 16, []),
+                    ("3", 17, [])
+                ])
+            ]),
+            quantifiers.parse("color-ref: #abc123")
+        )
+
+    def test_parses_a_repeated_choice(self):
+        self.assertParse(
+            ("#abc123", 14, [
+                ("#", 14, []),
+                ("abc123", 15, [
+                    ("a", 15, []),
+                    ("b", 16, []),
+                    ("c", 17, []),
+                    ("1", 18, []),
+                    ("2", 19, []),
+                    ("3", 20, [])
+                ])
+            ]),
+            quantifiers.parse("color-choice: #abc123")
+        )

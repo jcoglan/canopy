@@ -5,9 +5,15 @@ test <- "maybe: " maybe
       / "rep-1: " rep_1
       / "greedy-0: " greedy_0
       / "greedy-1: " greedy_1
+      / "color-ref: " color_ref
+      / "color-choice: " color_choice
 
 maybe    <- [0-9]?
 rep_0    <- [a-z]*
 rep_1    <- [a-z]+
 greedy_0 <- [a-z]* [a-z]
 greedy_1 <- [a-z]+ [a-z]
+
+color_ref    <- "#" hex+
+color_choice <- "#" ([0-9] / [a-f])+
+hex          <- [0-9a-f]

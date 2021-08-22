@@ -119,5 +119,39 @@ jstest.describe("quantifiers", function() { with(this) {
     it("parses repeating patterns greedily", function() { with(this) {
       assertThrows(SyntaxError, () => Quantifiers.parse("greedy-1: xy"))
     }})
+
+    it("parses a repeated reference", function() { with(this) {
+      assertParse(
+        ["#abc123", 11, [
+          ["#", 11, []],
+          ["abc123", 12, [
+            ["a", 12, []],
+            ["b", 13, []],
+            ["c", 14, []],
+            ["1", 15, []],
+            ["2", 16, []],
+            ["3", 17, []]
+          ]]
+        ]],
+        Quantifiers.parse("color-ref: #abc123")
+      )
+    }})
+
+    it("parses a repeated choice", function() { with(this) {
+      assertParse(
+        ["#abc123", 14, [
+          ["#", 14, []],
+          ["abc123", 15, [
+            ["a", 15, []],
+            ["b", 16, []],
+            ["c", 17, []],
+            ["1", 18, []],
+            ["2", 19, []],
+            ["3", 20, []]
+          ]]
+        ]],
+        Quantifiers.parse("color-choice: #abc123")
+      )
+    }})
   }})
 }})

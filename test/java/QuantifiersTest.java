@@ -133,6 +133,38 @@ class OneOrMoreTest extends ParseHelper {
     void parsesRepeatingPatternsGreedily() {
         assertThrows(ParseError.class, () -> Quantifiers.parse("greedy-1: xy"));
     }
+
+    @Test
+    void parsesARepeatedReference() throws ParseError {
+        expect(Quantifiers.parse("color-ref: #abc123")).toMatch(
+            node("#abc123", 11)
+                .elem(node("#", 11).noElems())
+                .elem(node("abc123", 12)
+                    .elem(node("a", 12).noElems())
+                    .elem(node("b", 13).noElems())
+                    .elem(node("c", 14).noElems())
+                    .elem(node("1", 15).noElems())
+                    .elem(node("2", 16).noElems())
+                    .elem(node("3", 17).noElems())
+                )
+        );
+    }
+
+    @Test
+    void parsesARepeatedChoice() throws ParseError {
+        expect(Quantifiers.parse("color-choice: #abc123")).toMatch(
+            node("#abc123", 14)
+                .elem(node("#", 14).noElems())
+                .elem(node("abc123", 15)
+                    .elem(node("a", 15).noElems())
+                    .elem(node("b", 16).noElems())
+                    .elem(node("c", 17).noElems())
+                    .elem(node("1", 18).noElems())
+                    .elem(node("2", 19).noElems())
+                    .elem(node("3", 20).noElems())
+                )
+        );
+    }
 }
 
 class ParseHelper {

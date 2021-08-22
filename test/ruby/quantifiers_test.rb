@@ -113,5 +113,37 @@ describe "quantifiers" do
     it "parses repeating patterns greedily" do
       assert_raises(Quantifiers::ParseError) { Quantifiers.parse("greedy-1: xy") }
     end
+
+    it "parses a repeated reference" do
+      assert_parse \
+        ["#abc123", 11, [
+          ["#", 11, []],
+          ["abc123", 12, [
+            ["a", 12, []],
+            ["b", 13, []],
+            ["c", 14, []],
+            ["1", 15, []],
+            ["2", 16, []],
+            ["3", 17, []]
+          ]]
+        ]],
+        Quantifiers.parse("color-ref: #abc123")
+    end
+
+    it "parses a repeated choice" do
+      assert_parse \
+        ["#abc123", 14, [
+          ["#", 14, []],
+          ["abc123", 15, [
+            ["a", 15, []],
+            ["b", 16, []],
+            ["c", 17, []],
+            ["1", 18, []],
+            ["2", 19, []],
+            ["3", 20, []]
+          ]]
+        ]],
+        Quantifiers.parse("color-choice: #abc123")
+    end
   end
 end
