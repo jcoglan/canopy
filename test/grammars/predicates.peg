@@ -1,0 +1,23 @@
+grammar Predicates
+
+test <- "pos-name: " pos_name
+      / "neg-name: " neg_name
+      / "pos-seq: " pos_seq
+      / "pos-ref: " pos_ref
+      / "neg-tail-str: " neg_tail_str
+      / "neg-tail-class: " neg_tail_class
+      / "neg-tail-any: " neg_tail_any
+
+pos_name <- &[A-Z] word
+neg_name <- ![A-Z] word
+word     <- [a-zA-Z]+
+
+pos_ref  <- &alpha alphanum*
+alpha    <- [a-z]
+alphanum <- [a-z0-9]
+
+pos_seq <- &("<" [a-z]+) "<" [a-z0-9]* ">"
+
+neg_tail_str   <- "word" !"more text"
+neg_tail_class <- "word" ![a-z]
+neg_tail_any   <- "word" !.
