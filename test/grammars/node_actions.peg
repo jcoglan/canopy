@@ -1,0 +1,31 @@
+grammar NodeActions
+
+test <- "act-str: " act_str
+      / "act-class: " act_class
+      / "act-any: " act_any
+      / "act-maybe: " act_maybe
+      / "act-rep: " act_rep
+      / "act-seq: " act_seq
+      / "act-paren: " act_paren
+      / "act-choice: " act_choice
+      / "act-falsey: " act_falsey
+      / "act-falsey-pred: " act_falsey_pred
+      / "act-falsey-rep: " act_falsey_rep
+
+act_str    <- "hello" %make_str
+act_class  <- [a-z] %make_char
+act_any    <- . %make_any
+act_maybe  <- "hello"? %make_maybe
+act_rep    <- [a-z]+ %make_rep
+act_seq    <- "x" "y" "z" %make_seq
+act_paren  <- (((((.))))) %make_paren
+act_choice <- "0" %make_zero / [1-9] [0-9]* %make_int
+
+act_falsey <- "null"  %make_null
+            / "false" %make_false
+            / "0"     %make_0
+            / "''"    %make_empty_str
+            / "[]"    %make_empty_list
+
+act_falsey_pred <- &act_falsey act_choice
+act_falsey_rep  <- act_falsey+

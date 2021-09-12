@@ -3,6 +3,15 @@ module ParseHelper
     assert_parse_inner(tuple, actual.elements[1])
   end
 
+  def assert_parse_elements(elems, action_args)
+    assert_equal 5, action_args.size
+    assert_equal elems.size, action_args[4].size
+
+    elems.each_with_index do |elem, i|
+      assert_parse_inner(elem, action_args[4][i])
+    end
+  end
+
   def assert_parse_inner(tuple, actual)
     text, offset, elements, labelled = tuple
 

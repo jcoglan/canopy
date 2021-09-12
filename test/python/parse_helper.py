@@ -2,6 +2,13 @@ class ParseHelper:
     def assertParse(self, tuple, actual):
         self.assertParseInner(tuple, actual.elements[1])
 
+    def assertParseElements(self, elems, action_args):
+        self.assertEqual(5, len(action_args))
+        self.assertEqual(len(elems), len(action_args[4]))
+
+        for i, elem in enumerate(elems):
+            self.assertParseInner(elem, action_args[4][i])
+
     def assertParseInner(self, tuple, actual):
         text, offset = tuple[0:2]
 
