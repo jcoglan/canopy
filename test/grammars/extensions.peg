@@ -1,0 +1,22 @@
+grammar Extensions
+
+test <- "ext-str: " ext_str
+      / "ext-class: " ext_class
+      / "ext-any: " ext_any
+      / "ext-maybe: " ext_maybe
+      / "ext-rep: " ext_rep
+      / "ext-seq: " ext_seq
+      / "ext-paren: " ext_paren
+      / "ext-choice: " ext_choice
+      / "ext-ref: " ext_ref
+
+ext_str    <- "hello" <Ext>
+ext_class  <- [a-z] <Ext>
+ext_any    <- . <Ext>
+ext_maybe  <- "hello"? <Ext>
+ext_rep    <- [a-z]+ <Ext>
+ext_seq    <- "x" "y" "z" <Ext>
+ext_paren  <- (((((.))))) <Ext>
+ext_choice <- ("0" / [1-9] [0-9]*) <Ext>
+ext_ref    <- hello <Ext>
+hello      <- "hello"
