@@ -70,12 +70,27 @@ describe "extensions" do
 
     assert_equal [0, ["h", "e", "l", "l", "o"]], result.ext_func
   end
+
+  it "adds methods from a namespaced module" do
+    input  = "ext-ns: hello"
+    result = Extensions.parse(input, :types => Types).elements[1]
+
+    assert_equal true, result.ns_func
+  end
 end
 
 class Types
   module Ext
     def ext_func
       [elements.size, text.chars]
+    end
+  end
+
+  module NS
+    module Ext
+      def ns_func
+        true
+      end
     end
   end
 end

@@ -70,12 +70,27 @@ jstest.describe("extensions", function() { with(this) {
 
     assertEqual([0, ["h", "e", "l", "l", "o"]], result.extFunc())
   }})
+
+  it("adds methods from a namespaced module", function() { with(this) {
+    let input  = "ext-ns: hello"
+    let result = Extensions.parse(input, { types: Types }).elements[1]
+
+    assertEqual(true, result.nsFunc())
+  }})
 }})
 
 const Types = {
   Ext: {
     extFunc() {
       return [this.elements.length, this.text.split('')]
+    }
+  },
+
+  NS: {
+    Ext: {
+      nsFunc() {
+        return true
+      }
     }
   }
 }

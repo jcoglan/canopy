@@ -9,6 +9,7 @@ test <- "ext-str: " ext_str
       / "ext-paren: " ext_paren
       / "ext-choice: " ext_choice
       / "ext-ref: " ext_ref
+      / "ext-ns: " ext_ns
 
 ext_str    <- "hello" <Ext>
 ext_class  <- [a-z] <Ext>
@@ -20,3 +21,4 @@ ext_paren  <- (((((.))))) <Ext>
 ext_choice <- ("0" / [1-9] [0-9]*) <Ext>
 ext_ref    <- hello <Ext>
 hello      <- "hello"
+ext_ns     <- hello <NS.Ext>

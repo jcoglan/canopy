@@ -61,7 +61,19 @@ class ExtensionsTest(TestCase, ParseHelper):
 
         self.assertEqual((0, ["h", "e", "l", "l", "o"]), result.ext_func())
 
+    def test_adds_from_a_namespaced_module(self):
+        input  = "ext-ns: hello"
+        result = extensions.parse(input, types=Types).elements[1]
+
+        self.assertEqual(True, result.ns_func())
+
+
 class Types:
     class Ext(object):
         def ext_func(self):
             return (len(self.elements), list(self.text))
+
+    class NS:
+        class Ext(object):
+            def ns_func(self):
+                return True
