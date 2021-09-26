@@ -148,7 +148,7 @@ Say you have a grammar that contains type annotations:
     grammar Words
       root  <-  first:"foo" second:"bar" <Extension>
 
-To use this parse, you must pass in an object containing implementations of the
+To use this parser, you must pass in an object containing implementations of the
 named types via the `types` option. Each defined type contains the methods that
 will be added to the nodes.
 
