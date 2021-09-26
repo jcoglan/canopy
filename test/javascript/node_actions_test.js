@@ -64,6 +64,18 @@ jstest.describe("actions", function() { with(this) {
     ], result)
   }})
 
+  it("makes nodes from a sequence with muted elements", function() { with(this) {
+    let input  = "act-seq-mute: xyz"
+    let result = NodeActions.parse(input, { actions: new TestActions() }).elements[1]
+
+    assertEqual(["seq", input, 14, 17], result.slice(0, 4))
+
+    assertParseElements([
+      ["x", 14, []],
+      ["z", 16, []]
+    ], result)
+  }})
+
   it("makes nodes from a parenthesised expression", function() { with(this) {
     let input  = "act-paren: !"
     let result = NodeActions.parse(input, { actions: new TestActions() }).elements[1]

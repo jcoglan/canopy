@@ -27,7 +27,7 @@ util.assign(Grammar.prototype, {
     builder.package_(this._name, function(builder) {
       var actions = [];
       scan(this, function(node) {
-        if (node._actionName) {
+        if (node._actionName && actions.indexOf(node._actionName) < 0) {
           actions.push(node._actionName);
         }
       });

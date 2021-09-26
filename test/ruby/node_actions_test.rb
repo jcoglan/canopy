@@ -64,6 +64,18 @@ describe "actions" do
     ], result
   end
 
+  it "makes nodes from a sequence with muted elements" do
+    input  = "act-seq-mute: xyz"
+    result = NodeActions.parse(input, :actions => TestActions.new).elements[1]
+
+    assert_equal [:seq, input, 14, 17], result.take(4)
+
+    assert_parse_elements [
+      ["x", 14, []],
+      ["z", 16, []]
+    ], result
+  end
+
   it "makes nodes from a parenthesised expression" do
     input  = "act-paren: !"
     result = NodeActions.parse(input, :actions => TestActions.new).elements[1]

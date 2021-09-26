@@ -87,6 +87,19 @@ class NodeActionsTest extends ParseHelper {
     }
 
     @Test
+    void makesNodesFromASequenceWithMutedElements() throws ParseError {
+        String input = "act-seq-mute: xyz";
+        CustomNode result = (CustomNode)NodeActions.parse(input, new TestActions()).elements.get(1);
+
+        assertNode(
+            new CustomNode("seq", input, 14, 17)
+                .elem(node("x", 14).noElems())
+                .elem(node("z", 16).noElems()),
+            result
+        );
+    }
+
+    @Test
     void makesNodesFromAParenthesisedExpression() throws ParseError {
         String input = "act-paren: !";
         CustomNode result = (CustomNode)NodeActions.parse(input, new TestActions()).elements.get(1);

@@ -6,6 +6,7 @@ test <- "act-str: " act_str
       / "act-maybe: " act_maybe
       / "act-rep: " act_rep
       / "act-seq: " act_seq
+      / "act-seq-mute: " act_seq_mute
       / "act-paren: " act_paren
       / "act-choice: " act_choice
       / "act-falsey: " act_falsey
@@ -15,14 +16,15 @@ test <- "act-str: " act_str
       / "act-falsey-seq: " act_falsey_seq
       / "act-falsey-choice: " act_falsey_choice
 
-act_str    <- "hello" %make_str
-act_class  <- [a-z] %make_char
-act_any    <- . %make_any
-act_maybe  <- "hello"? %make_maybe
-act_rep    <- [a-z]+ %make_rep
-act_seq    <- "x" "y" "z" %make_seq
-act_paren  <- (((((.))))) %make_paren
-act_choice <- "0" %make_zero / [1-9] [0-9]* %make_int
+act_str      <- "hello" %make_str
+act_class    <- [a-z] %make_char
+act_any      <- . %make_any
+act_maybe    <- "hello"? %make_maybe
+act_rep      <- [a-z]+ %make_rep
+act_seq      <- "x" "y" "z" %make_seq
+act_seq_mute <- "x" @"y" "z" %make_seq
+act_paren    <- (((((.))))) %make_paren
+act_choice   <- "0" %make_zero / [1-9] [0-9]* %make_int
 
 act_falsey <- "null"  %make_null
             / "false" %make_false

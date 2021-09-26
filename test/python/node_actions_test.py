@@ -56,6 +56,17 @@ class NodeActionsTest(TestCase, ParseHelper):
             ("z", 11, [])
         ], result)
 
+    def test_makes_nodes_from_a_sequence_with_muted_elements(self):
+        input  = "act-seq-mute: xyz"
+        result = node_actions.parse(input, actions=TestActions()).elements[1]
+
+        self.assertEqual(["seq", input, 14, 17], result[0:4])
+
+        self.assertParseElements([
+            ("x", 14, []),
+            ("z", 16, [])
+        ], result)
+
     def test_makes_nodes_from_a_parenthesised_expression(self):
         input  = "act-paren: !"
         result = node_actions.parse(input, actions=TestActions()).elements[1]
