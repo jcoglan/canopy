@@ -125,6 +125,13 @@ jstest.describe("actions", function() { with(this) {
     let result = NodeActions.parse("act-falsey-rep: null0false''[]", { actions: new TestActions() })
     assertEqual([null, 0, false, "", []], result.elements[1].elements)
   }})
+
+  it("treats falsey values as acceptable maybe results", function() { with(this) {
+    let input  = "act-falsey-opt: null"
+    let result = NodeActions.parse(input, { actions: new TestActions() }).elements[1]
+
+    assertEqual(null, result)
+  }})
 }})
 
 class TestActions {

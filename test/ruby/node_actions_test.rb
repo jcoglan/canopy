@@ -125,6 +125,11 @@ describe "actions" do
     result = NodeActions.parse("act-falsey-rep: null0false''[]", :actions => TestActions.new)
     assert_equal [nil, 0, false, "", []], result.elements[1].elements
   end
+
+  it "treats falsey values as acceptable maybe results" do
+    result = NodeActions.parse("act-falsey-opt: null", :actions => TestActions.new)
+    assert_nil result.elements[1]
+  end
 end
 
 class TestActions
