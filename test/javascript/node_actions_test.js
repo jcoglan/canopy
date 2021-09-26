@@ -132,6 +132,14 @@ jstest.describe("actions", function() { with(this) {
 
     assertEqual(null, result)
   }})
+
+  it("treats falsey values as acceptable sequence results", function() { with(this) {
+    let input  = "act-falsey-seq: (null)"
+    let result = NodeActions.parse(input, { actions: new TestActions() }).elements[1]
+
+    assertEqual(3, result.elements.length)
+    assertEqual(null, result.elements[1])
+  }})
 }})
 
 class TestActions {

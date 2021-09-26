@@ -130,6 +130,13 @@ describe "actions" do
     result = NodeActions.parse("act-falsey-opt: null", :actions => TestActions.new)
     assert_nil result.elements[1]
   end
+
+  it "treats falsey values as acceptable sequence results" do
+    result = NodeActions.parse("act-falsey-seq: (null)", :actions => TestActions.new).elements[1]
+
+    assert_equal 3, result.elements.size
+    assert_nil result.elements[1]
+  end
 end
 
 class TestActions

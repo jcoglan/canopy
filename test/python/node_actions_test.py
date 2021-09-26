@@ -115,6 +115,13 @@ class NodeActionsTest(TestCase, ParseHelper):
 
         self.assertEqual(None, result)
 
+    def test_treats_falsey_values_as_acceptable_sequence_results(self):
+        input  = "act-falsey-seq: (null)"
+        result = node_actions.parse(input, actions=TestActions()).elements[1]
+
+        self.assertEqual(3, len(result.elements))
+        self.assertEqual(None, result.elements[1])
+
 
 class TestActions:
     def make_str(self, *args):
