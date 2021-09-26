@@ -178,6 +178,14 @@ class NodeActionsTest extends ParseHelper {
         assertEquals(3, result.elements.size());
         assertEquals(null, result.elements.get(1));
     }
+
+    @Test
+    void treatsFalseyValuesAsAcceptableChoiceResults() throws ParseError {
+        String input = "act-falsey-choice: null";
+        TreeNode result = NodeActions.parse(input, new TestActions()).elements.get(1);
+
+        assertEquals(null, result);
+    }
 }
 
 class TestActions implements Actions {

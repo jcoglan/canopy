@@ -137,6 +137,11 @@ describe "actions" do
     assert_equal 3, result.elements.size
     assert_nil result.elements[1]
   end
+
+  it "treats falsey values as acceptable choice results" do
+    result = NodeActions.parse("act-falsey-choice: null", :actions => TestActions.new).elements[1]
+    assert_nil result
+  end
 end
 
 class TestActions

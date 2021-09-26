@@ -122,6 +122,12 @@ class NodeActionsTest(TestCase, ParseHelper):
         self.assertEqual(3, len(result.elements))
         self.assertEqual(None, result.elements[1])
 
+    def test_treats_falsey_values_as_acceptable_choice_results(self):
+        input  = "act-falsey-choice: null"
+        result = node_actions.parse(input, actions=TestActions()).elements[1]
+
+        self.assertEqual(None, result)
+
 
 class TestActions:
     def make_str(self, *args):

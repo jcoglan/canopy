@@ -140,6 +140,13 @@ jstest.describe("actions", function() { with(this) {
     assertEqual(3, result.elements.length)
     assertEqual(null, result.elements[1])
   }})
+
+  it("treats falsey values as acceptable choice results", function() { with(this) {
+    let input  = "act-falsey-choice: null"
+    let result = NodeActions.parse(input, { actions: new TestActions() }).elements[1]
+
+    assertEqual(null, result)
+  }})
 }})
 
 class TestActions {

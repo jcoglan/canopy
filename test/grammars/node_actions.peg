@@ -13,6 +13,7 @@ test <- "act-str: " act_str
       / "act-falsey-rep: " act_falsey_rep
       / "act-falsey-opt: " act_falsey_opt
       / "act-falsey-seq: " act_falsey_seq
+      / "act-falsey-choice: " act_falsey_choice
 
 act_str    <- "hello" %make_str
 act_class  <- [a-z] %make_char
@@ -29,7 +30,8 @@ act_falsey <- "null"  %make_null
             / "''"    %make_empty_str
             / "[]"    %make_empty_list
 
-act_falsey_pred <- &act_falsey act_choice
-act_falsey_rep  <- act_falsey+
-act_falsey_opt  <- act_falsey?
-act_falsey_seq  <- "(" act_falsey ")"
+act_falsey_pred   <- &act_falsey act_choice
+act_falsey_rep    <- act_falsey+
+act_falsey_opt    <- act_falsey?
+act_falsey_seq    <- "(" act_falsey ")"
+act_falsey_choice <- act_falsey / "a"
