@@ -1,19 +1,17 @@
 'use strict';
 
-var util = require('../util');
+class Reference {
+  constructor (name) {
+    this.refName = name;
+  }
 
-var Reference = function(name) {
-  this.refName = name;
-};
-
-util.assign(Reference.prototype, {
-  referenceName: function() {
+  referenceName () {
     return this.refName;
-  },
+  }
 
-  compile: function(builder, address) {
+  compile (builder, address) {
     builder.jump_(address, this.refName);
   }
-});
+}
 
 module.exports = Reference;

@@ -1,20 +1,18 @@
 'use strict';
 
-var util = require('../util');
+class Action {
+  constructor (expression, actionName) {
+    this._expression = expression;
+    this._actionName = actionName;
+  }
 
-var Action = function(expression, actionName) {
-  this._expression = expression;
-  this._actionName = actionName;
-};
-
-util.assign(Action.prototype, {
-  forEach: function(callback, context) {
+  forEach (callback, context) {
     callback.call(context, this._expression);
-  },
+  }
 
-  compile: function(builder, address) {
+  compile (builder, address) {
     this._expression.compile(builder, address, this._actionName);
   }
-});
+}
 
 module.exports = Action;

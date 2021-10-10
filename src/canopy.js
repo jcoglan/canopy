@@ -10,7 +10,7 @@ module.exports = {
     ruby:       require('./builders/ruby')
   },
 
-  compile: function(grammar, builder) {
+  compile (grammar, builder) {
     var compiler = new Compiler(grammar, builder);
     return compiler.toSource();
   }

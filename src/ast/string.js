@@ -1,15 +1,13 @@
 'use strict';
 
-var util = require('../util');
+class String {
+  constructor (text, value, ci) {
+    this._text  = text;
+    this._value = value;
+    this._ci    = ci;
+  }
 
-var String = function(text, value, ci) {
-  this._text  = text;
-  this._value = value;
-  this._ci    = ci;
-};
-
-util.assign(String.prototype, {
-  compile: function(builder, address, action) {
+  compile (builder, address, action) {
     var value  = this._value,
         length = value.length,
         chunk  = builder.chunk_(length);
@@ -18,13 +16,13 @@ util.assign(String.prototype, {
                   ? builder.stringMatchCI_(chunk, value)
                   : builder.stringMatch_(chunk, value);
 
-    builder.if_(condition, function(builder) {
+    builder.if_(condition, (builder) => {
       var of = builder.offset_();
       builder.syntaxNode_(address, of, of + ' + ' + length, null, action);
-    }, function(builder) {
+    }, (builder) => {
       builder.failure_(address, this._text);
     }, this);
   }
-});
+}
 
 module.exports = String;

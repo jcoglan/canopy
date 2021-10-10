@@ -1,25 +1,23 @@
 'use strict';
 
-var util = require('../util');
+class Sequence {
+  constructor (parts) {
+    this._parts = parts;
+  }
 
-var Sequence = function(parts) {
-  this._parts = parts;
-};
-
-util.assign(Sequence.prototype, {
-  forEach: function(callback, context) {
+  forEach (callback, context) {
     this._parts.forEach(callback, context);
-  },
+  }
 
-  countUnmuted: function() {
-    return this._parts.filter(function(p) { return !p.muted() }).length;
-  },
+  countUnmuted () {
+    return this._parts.filter((p) => !p.muted()).length;
+  }
 
-  collectLabels: function(subclassName) {
-    var result = this._parts.reduce(function(state, part) {
+  collectLabels (subclassName) {
+    var result = this._parts.reduce((state, part) => {
       if (part.muted()) return state;
 
-      part.labels().forEach(function(label) { state[0][label] = state[1] });
+      part.labels().forEach((label) => state[0][label] = state[1]);
 
       return [state[0], state[1] + 1];
     }, [{}, 0]);
@@ -29,9 +27,9 @@ util.assign(Sequence.prototype, {
 
     this._nodeClassName = subclassName;
     return labels;
-  },
+  }
 
-  compile: function(builder, address, action) {
+  compile (builder, address, action) {
     var temp = builder.localVars_({
       index:    builder.offset_(),
       elements: builder.emptyList_(this.countUnmuted())
@@ -43,14 +41,14 @@ util.assign(Sequence.prototype, {
 
     this._compileExpressions(builder, 0, 0, startOffset, elements);
 
-    builder.ifNull_(elements, function(builder) {
+    builder.ifNull_(elements, (builder) => {
       builder.assign_(address, builder.nullNode_());
-    }, function(builder) {
+    }, (builder) => {
       builder.syntaxNode_(address, startOffset, builder.offset_(), elements, action, klass);
     });
-  },
+  }
 
-  _compileExpressions: function(builder, index, elIndex, startOffset, elements) {
+  _compileExpressions (builder, index, elIndex, startOffset, elements) {
     if (index === this._parts.length) return;
 
     var expAddr = builder.localVar_('address'),
@@ -59,17 +57,17 @@ util.assign(Sequence.prototype, {
 
     expr.compile(builder, expAddr);
 
-    builder.ifNode_(expAddr, function(builder) {
+    builder.ifNode_(expAddr, (builder) => {
       if (!muted) {
         builder.append_(elements, expAddr, elIndex);
         elIndex += 1;
       }
       this._compileExpressions(builder, index + 1, elIndex, startOffset, elements);
-    }, function(builder) {
+    }, (builder) => {
       builder.assign_(elements, builder.null_());
       builder.assign_(builder.offset_(), startOffset);
     }, this);
   }
-});
+}
 
 module.exports = Sequence;

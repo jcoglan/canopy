@@ -1,44 +1,42 @@
 'use strict';
 
-var util = require('../util');
+class Grammar {
+  constructor (name, rules) {
+    this._name  = name;
+    this._rules = rules;
+  }
 
-var Grammar = function(name, rules) {
-  this._name  = name;
-  this._rules = rules;
-};
-
-util.assign(Grammar.prototype, {
-  forEach: function(callback, context) {
+  forEach (callback, context) {
     this._rules.forEach(callback, context);
-  },
+  }
 
-  compile: function(builder) {
-    var scan = function(node, callback, context) {
+  compile (builder) {
+    function scan (node, callback, context) {
       callback.call(context, node);
       if (node.forEach)
-        node.forEach(function(child) { scan(child, callback, context) });
+        node.forEach((child) => scan(child, callback, context));
     };
 
-    builder.package_(this._name, function(builder) {
+    builder.package_(this._name, (builder) => {
       var actions = [];
-      scan(this, function(node) {
+      scan(this, (node) => {
         if (node._actionName && actions.indexOf(node._actionName) < 0) {
           actions.push(node._actionName);
         }
       });
 
       var nodeClassName = builder.syntaxNodeClass_(), subclassIndex = 1;
-      scan(this, function(node) {
+      scan(this, (node) => {
         var subclassName = nodeClassName + subclassIndex,
             labels = node.collectLabels && node.collectLabels(subclassName);
 
         if (!labels) return;
 
-        builder.class_(subclassName, nodeClassName, function(builder) {
+        builder.class_(subclassName, nodeClassName, (builder) => {
           var keys = [];
           for (var key in labels) keys.push(key);
           builder.attributes_(keys);
-          builder.constructor_(['text', 'offset', 'elements'], function(builder) {
+          builder.constructor_(['text', 'offset', 'elements'], (builder) => {
             for (var key in labels)
               builder.attribute_(key, builder.arrayLookup_('elements', labels[key]));
           });
@@ -46,13 +44,13 @@ util.assign(Grammar.prototype, {
         subclassIndex += 1;
       });
 
-      builder.grammarModule_(actions.sort(), function(builder) {
+      builder.grammarModule_(actions.sort(), (builder) => {
         var regexName = 'REGEX_', regexIndex = 1;
-        scan(this, function(node) {
+        scan(this, (node) => {
           if (node.regex) builder.compileRegex_(node, regexName + (regexIndex++));
         });
 
-        this._rules.forEach(function(rule) { rule.compile(builder) });
+        this._rules.forEach((rule) => { rule.compile(builder) });
       }, this);
 
       var root = this._rules[0].name;
@@ -61,6 +59,6 @@ util.assign(Grammar.prototype, {
       builder.exports_();
     }, this);
   }
-});
+}
 
 module.exports = Grammar;

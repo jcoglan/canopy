@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = {
-  assign: function(destination, source) {
+  assign: function (destination, source) {
     if (!destination || !source) return destination;
     for (var key in source) {
       if (destination[key] !== source[key])
@@ -10,7 +10,7 @@ module.exports = {
     return destination;
   },
 
-  formatError: function(input, offset, expected) {
+  formatError: function (input, offset, expected) {
     var lines = input.split(/\n/g),
         lineNo = 0,
         position = 0;
@@ -32,8 +32,8 @@ module.exports = {
     return message + '^';
   },
 
-  inherit: function(subclass, parent) {
-    var chain = function() {};
+  inherit: function (subclass, parent) {
+    function chain () {};
     chain.prototype = parent.prototype;
     subclass.prototype = new chain();
     subclass.prototype.constructor = subclass;

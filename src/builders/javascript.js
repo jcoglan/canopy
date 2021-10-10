@@ -2,66 +2,66 @@
 
 var util = require('../util');
 
-var Builder = function(parent, name, parentName) {
-  if (parent) {
-    this._parent = parent;
-    this._indentLevel = parent._indentLevel;
-  } else {
-    this._buffer = '';
-    this._indentLevel = 0;
+class Builder {
+  static create (filename) {
+    var builder = new Builder();
+    builder.filename = filename;
+    return builder;
   }
-  this._name = name;
-  this._parentName = parentName;
-  this._methodSeparator = '';
-  this._varIndex = {};
-};
 
-Builder.create = function(filename) {
-  var builder = new Builder();
-  builder.filename = filename;
-  return builder;
-};
+  constructor (parent, name, parentName) {
+    if (parent) {
+      this._parent = parent;
+      this._indentLevel = parent._indentLevel;
+    } else {
+      this._buffer = '';
+      this._indentLevel = 0;
+    }
+    this._name = name;
+    this._parentName = parentName;
+    this._methodSeparator = '';
+    this._varIndex = {};
+  }
 
-util.assign(Builder.prototype, {
-  comment: function(lines) {
-    lines = lines.map(function(line) { return ' * ' + line });
+  comment (lines) {
+    lines = lines.map((line) => ' * ' + line);
     return ['/**'].concat(lines).concat([' */']);
-  },
+  }
 
-  serialize: function() {
+  serialize () {
     var files = {};
     files[this._outputPathname()] = this._buffer;
     return files;
-  },
+  }
 
-  _outputPathname: function() {
+  _outputPathname () {
     return this.filename.replace(/\.peg$/, '.js');
-  },
+  }
 
-  _write: function(string) {
+  _write (string) {
     if (this._parent) return this._parent._write(string);
     this._buffer += string;
-  },
+  }
 
-  _indent: function(block, context) {
+  _indent (block, context) {
     this._indentLevel += 1;
     block.call(context, this);
     this._indentLevel -= 1;
-  },
+  }
 
-  _newline: function() {
+  _newline () {
     this._write('\n');
-  },
+  }
 
-  _line: function(source, semicolon) {
+  _line (source, semicolon) {
     var i = this._indentLevel;
     while (i--) this._write('  ');
     this._write(source);
     if (semicolon !== false) this._write(';');
     this._newline();
-  },
+  }
 
-  _quote: function(string) {
+  _quote (string) {
     string = string.replace(/\\/g, '\\\\')
                    .replace(/'/g, "\\'")
                    .replace(/\x08/g, '\\b')
@@ -72,11 +72,11 @@ util.assign(Builder.prototype, {
                    .replace(/\r/g, '\\r');
 
     return "'" + string + "'";
-  },
+  }
 
-  package_: function(name, block, context) {
+  package_ (name, block, context) {
     this._line('(function() {', false);
-    this._indent(function(builder) {
+    this._indent((builder) => {
       builder._line("'use strict'");
 
       builder._newline();
@@ -90,26 +90,26 @@ util.assign(Builder.prototype, {
       block.call(context, this);
     }, this);
     this._line('})()');
-  },
+  }
 
-  syntaxNodeClass_: function() {
+  syntaxNodeClass_ () {
     var name = 'TreeNode';
-    this.function_('var ' + name, ['text', 'offset', 'elements'], function(builder) {
+    this.function_('var ' + name, ['text', 'offset', 'elements'], (builder) => {
       builder._line('this.text = text');
       builder._line('this.offset = offset');
       builder._line('this.elements = elements');
     });
-    this.function_(name + '.prototype.forEach', ['block', 'context'], function(builder) {
+    this.function_(name + '.prototype.forEach', ['block', 'context'], (builder) => {
       builder._line('for (var el = this.elements, i = 0, n = el.length; i < n; i++) {', false);
-      builder._indent(function(builder) {
+      builder._indent((builder) => {
         builder._line('block.call(context, el[i], i, el)');
       });
       builder._line('}', false);
     });
     return name;
-  },
+  }
 
-  grammarModule_: function(actions, block, context) {
+  grammarModule_ (actions, block, context) {
     this._newline();
     this.assign_('var ' + this.nullNode_(), '{}');
     this._newline();
@@ -117,12 +117,12 @@ util.assign(Builder.prototype, {
     new Builder(this)._indent(block, context);
     this._newline();
     this._line('}');
-  },
+  }
 
-  compileRegex_: function() {},
+  compileRegex_ () {}
 
-  parserClass_: function(root) {
-    this.function_('var Parser', ['input', 'actions', 'types'], function(builder) {
+  parserClass_ (root) {
+    this.function_('var Parser', ['input', 'actions', 'types'], (builder) => {
       builder.assign_('this._input', 'input');
       builder.assign_('this._inputSize', 'input.length');
       builder.assign_('this._actions', 'actions');
@@ -133,13 +133,13 @@ util.assign(Builder.prototype, {
       builder.assign_('this._expected', '[]');
     });
 
-    this.function_('Parser.prototype.parse', [], function(builder) {
+    this.function_('Parser.prototype.parse', [], (builder) => {
       builder.jump_('var tree', root);
 
-      builder.if_('tree !== ' + builder.nullNode_() + ' && this._offset === this._inputSize', function(builder) {
+      builder.if_('tree !== ' + builder.nullNode_() + ' && this._offset === this._inputSize', (builder) => {
         builder.return_('tree');
       });
-      builder.if_('this._expected.length === 0', function(builder) {
+      builder.if_('this._expected.length === 0', (builder) => {
         builder.assign_('this._failure', 'this._offset');
         builder.append_('this._expected', "'<EOF>'");
       });
@@ -147,7 +147,7 @@ util.assign(Builder.prototype, {
       builder._line('throw new SyntaxError(formatError(this._input, this._failure, this._expected))');
     });
 
-    this.function_('var parse', ['input', 'options'], function(builder) {
+    this.function_('var parse', ['input', 'options'], (builder) => {
       builder.assign_('options', 'options || {}');
       builder.assign_('var parser', 'new Parser(input, options.actions, options.types)');
       builder.return_('parser.parse()');
@@ -155,9 +155,9 @@ util.assign(Builder.prototype, {
 
     this._line('extend(Parser.prototype, Grammar)');
     this._newline();
-  },
+  }
 
-  exports_: function() {
+  exports_ () {
     var grammar   = this._grammarName,
         namespace = grammar.split('.'),
         last      = namespace.pop(),
@@ -170,51 +170,51 @@ util.assign(Builder.prototype, {
     this.assign_('var exported', '{Grammar: Grammar, Parser: Parser, parse: parse}');
     this._newline();
 
-    this.if_("typeof require === 'function' && typeof exports === 'object'", function(builder) {
+    this.if_("typeof require === 'function' && typeof exports === 'object'", (builder) => {
       builder._line('extend(exports, exported)');
-      if (condition.length > 0) builder.if_(condition.join(' &&' ), function(builder) {
+      if (condition.length > 0) builder.if_(condition.join(' &&' ), (builder) => {
         builder.assign_(grammar, 'exported');
       });
-    }, function(builder) {
+    }, (builder) => {
       builder.assign_('var namespace', "typeof this !== 'undefined' ? this : window");
       for (var i = 0; i < n; i++) {
         builder.assign_('namespace', 'namespace.' + namespace[i] + ' = namespace.' + namespace[i] + ' || {}');
       }
       builder.assign_('namespace.' + last, 'exported');
     });
-  },
+  }
 
-  class_: function(name, parent, block, context) {
+  class_ (name, parent, block, context) {
     var builder = new Builder(this, name, parent);
     block.call(context, builder);
-  },
+  }
 
-  constructor_: function(args, block, context) {
-    this.function_('var ' + this._name, args, function(builder) {
+  constructor_ (args, block, context) {
+    this.function_('var ' + this._name, args, (builder) => {
       builder._line(this._parentName + '.apply(this, arguments)');
       block.call(context, builder);
     }, this);
     this._line('inherit(' + this._name + ', ' + this._parentName + ')');
-  },
+  }
 
-  function_: function(name, args, block, context) {
+  function_ (name, args, block, context) {
     this._newline();
     this._line(name + ' = function(' + args.join(', ') + ') {', false);
     new Builder(this, this._name, this._parentName)._indent(block, context);
     this._line('}');
-  },
+  }
 
-  method_: function(name, args, block, context) {
+  method_ (name, args, block, context) {
     this._write(this._methodSeparator);
     this._methodSeparator = ',\n\n';
-    this._line(name + ': function(' + args.join(', ') + ') {', false);
+    this._line(name + ' (' + args.join(', ') + ') {', false);
     new Builder(this)._indent(block, context);
     var n = this._indentLevel;
     while (n--) this._write('  ');
     this._write('}');
-  },
+  }
 
-  cache_: function(name, block, context) {
+  cache_ (name, block, context) {
     var temp      = this.localVars_({address: this.nullNode_(), index: 'this._offset'}),
         address   = temp.address,
         offset    = temp.index,
@@ -224,7 +224,7 @@ util.assign(Builder.prototype, {
     this.assign_(cacheMap, cacheMap + ' || {}');
     this.assign_('var cached', cacheAddr);
 
-    this.if_('cached', function(builder) {
+    this.if_('cached', (builder) => {
       builder.assign_('this._offset', 'cached[1]');
       builder.return_('cached[0]');
     });
@@ -232,15 +232,15 @@ util.assign(Builder.prototype, {
     block.call(context, this, address);
     this.assign_(cacheAddr,  '[' + address + ', this._offset]');
     this.return_(address);
-  },
+  }
 
-  attributes_: function() {},
+  attributes_ () {}
 
-  attribute_: function(name, value) {
+  attribute_ (name, value) {
     this.assign_("this['" + name + "']", value);
-  },
+  }
 
-  localVars_: function(vars) {
+  localVars_ (vars) {
     var names = {}, code = [], varName;
     for (var name in vars) {
       this._varIndex[name] = this._varIndex[name] || 0;
@@ -251,9 +251,9 @@ util.assign(Builder.prototype, {
     }
     this._line('var ' + code.join(', '));
     return names;
-  },
+  }
 
-  localVar_: function(name, value) {
+  localVar_ (name, value) {
     this._varIndex[name] = this._varIndex[name] || 0;
     var varName = name + this._varIndex[name];
     this._varIndex[name] += 1;
@@ -262,20 +262,20 @@ util.assign(Builder.prototype, {
     this.assign_('var ' + varName, value);
 
     return varName;
-  },
+  }
 
-  chunk_: function(length) {
+  chunk_ (length) {
     var input = 'this._input',
         ofs   = 'this._offset',
         temp  = this.localVars_({chunk: this.null_(), max: ofs + ' + ' + length});
 
-    this.if_(temp.max + ' <= this._inputSize', function(builder) {
+    this.if_(temp.max + ' <= this._inputSize', (builder) => {
       builder._line(temp.chunk + ' = ' + input + '.substring(' + ofs + ', ' + temp.max + ')');
     });
     return temp.chunk;
-  },
+  }
 
-  syntaxNode_: function(address, start, end, elements, action, nodeClass) {
+  syntaxNode_ (address, start, end, elements, action, nodeClass) {
     var args;
 
     if (action) {
@@ -289,46 +289,46 @@ util.assign(Builder.prototype, {
 
     this.assign_(address, action + '(' + args.join(', ') + ')');
     this.assign_('this._offset', end);
-  },
+  }
 
-  ifNode_: function(address, block, else_, context) {
+  ifNode_ (address, block, else_, context) {
     this.if_(address + ' !== ' + this.nullNode_(), block, else_, context);
-  },
+  }
 
-  unlessNode_: function(address, block, else_, context) {
+  unlessNode_ (address, block, else_, context) {
     this.if_(address + ' === ' + this.nullNode_(), block, else_, context);
-  },
+  }
 
-  ifNull_: function(elements, block, else_, context) {
+  ifNull_ (elements, block, else_, context) {
     this.if_(elements + ' === null', block, else_, context);
-  },
+  }
 
-  extendNode_: function(address, nodeType) {
+  extendNode_ (address, nodeType) {
     this._line('extend(' + address + ', this._types.' + nodeType + ')');
-  },
+  }
 
-  failure_: function(address, expected) {
+  failure_ (address, expected) {
     expected = this._quote(expected);
     this.assign_(address, this.nullNode_());
 
-    this.if_('this._offset > this._failure', function(builder) {
+    this.if_('this._offset > this._failure', (builder) => {
       builder.assign_('this._failure', 'this._offset');
       builder.assign_('this._expected', '[]');
     });
-    this.if_('this._offset === this._failure', function(builder) {
+    this.if_('this._offset === this._failure', (builder) => {
       builder.append_('this._expected', expected);
     });
-  },
+  }
 
-  assign_: function(name, value) {
+  assign_ (name, value) {
     this._line(name + ' = ' + value);
-  },
+  }
 
-  jump_: function(address, rule) {
+  jump_ (address, rule) {
     this.assign_(address, 'this._read_' + rule + '()');
-  },
+  }
 
-  conditional_: function(kwd, condition, block, else_, context) {
+  conditional_ (kwd, condition, block, else_, context) {
     if (typeof else_ !== 'function') {
       context = else_;
       else_   = null;
@@ -340,79 +340,79 @@ util.assign(Builder.prototype, {
       this._indent(else_, context);
     }
     this._line('}', false);
-  },
+  }
 
-  if_: function(condition, block, else_, context) {
+  if_ (condition, block, else_, context) {
     this.conditional_('if', condition, block, else_, context);
-  },
+  }
 
-  whileNotNull_: function(expression, block, context) {
+  whileNotNull_ (expression, block, context) {
     this.conditional_('while', expression + ' !== ' + this.nullNode_(), block, context);
-  },
+  }
 
-  stringMatch_: function(expression, string) {
+  stringMatch_ (expression, string) {
     return expression + ' === ' + this._quote(string);
-  },
+  }
 
-  stringMatchCI_: function(expression, string) {
+  stringMatchCI_ (expression, string) {
     return expression + ' !== null && ' +
       expression + '.toLowerCase() === ' + this._quote(string) + '.toLowerCase()';
-  },
+  }
 
-  regexMatch_: function(regex, string) {
+  regexMatch_ (regex, string) {
     return string + ' !== null && /' + regex.source + '/.test(' + string + ')';
-  },
+  }
 
-  return_: function(expression) {
+  return_ (expression) {
     this._line('return ' + expression);
-  },
+  }
 
-  arrayLookup_: function(expression, offset) {
+  arrayLookup_ (expression, offset) {
     return expression + '[' + offset + ']';
-  },
+  }
 
-  append_: function(list, value, index) {
+  append_ (list, value, index) {
     if (index === undefined)
       this._line(list + '.push(' + value + ')');
     else
       this._line(list + '[' + index + '] = ' + value);
-  },
+  }
 
-  decrement_: function(variable) {
+  decrement_ (variable) {
     this._line('--' + variable);
-  },
+  }
 
-  isZero_: function(expression) {
+  isZero_ (expression) {
     return expression + ' <= 0';
-  },
+  }
 
-  hasChars_: function() {
+  hasChars_ () {
     return 'this._offset < this._inputSize';
-  },
+  }
 
-  nullNode_: function() {
+  nullNode_ () {
     return 'FAILURE';
-  },
+  }
 
-  offset_: function() {
+  offset_ () {
     return 'this._offset';
-  },
+  }
 
-  emptyList_: function(size) {
+  emptyList_ (size) {
     return size ? 'new Array(' + size + ')' : '[]';
-  },
+  }
 
-  emptyString_: function() {
+  emptyString_ () {
     return "''";
-  },
+  }
 
-  true_: function() {
+  true_ () {
     return 'true';
-  },
+  }
 
-  null_: function() {
+  null_ () {
     return 'null';
   }
-});
+}
 
 module.exports = Builder;

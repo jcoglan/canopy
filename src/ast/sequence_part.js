@@ -1,32 +1,30 @@
 'use strict';
 
-var util = require('../util');
+class SequencePart {
+  constructor (expression, label, muted) {
+    this._expression = expression;
+    this._label      = label;
+    this._muted      = muted;
+  }
 
-var SequencePart = function(expression, label, muted) {
-  this._expression = expression;
-  this._label      = label;
-  this._muted      = muted;
-};
-
-util.assign(SequencePart.prototype, {
-  forEach: function(callback, context) {
+  forEach (callback, context) {
     callback.call(context, this._expression);
-  },
+  }
 
-  labels: function() {
+  labels () {
     var labels = [];
     if (this._label) labels.push(this._label);
     if (this._expression.refName) labels.push(this._expression.refName);
     return labels;
-  },
+  }
 
-  muted: function() {
+  muted () {
     return this._muted;
-  },
+  }
 
-  compile: function(builder, address) {
+  compile (builder, address) {
     this._expression.compile(builder, address);
   }
-});
+}
 
 module.exports = SequencePart;
