@@ -6,8 +6,8 @@ class Repeat {
     this._count      = count;
   }
 
-  forEach (callback, context) {
-    callback.call(context, this._expression);
+  *[Symbol.iterator] () {
+    yield this._expression;
   }
 
   compile (builder, address, action) {

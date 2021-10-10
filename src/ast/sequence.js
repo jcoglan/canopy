@@ -5,8 +5,8 @@ class Sequence {
     this._parts = parts;
   }
 
-  forEach (callback, context) {
-    this._parts.forEach(callback, context);
+  [Symbol.iterator] () {
+    return this._parts[Symbol.iterator]();
   }
 
   countUnmuted () {
@@ -17,8 +17,9 @@ class Sequence {
     var result = this._parts.reduce((state, part) => {
       if (part.muted()) return state;
 
-      part.labels().forEach((label) => state[0][label] = state[1]);
-
+      for (var label of part.labels()) {
+        state[0][label] = state[1];
+      }
       return [state[0], state[1] + 1];
     }, [{}, 0]);
 

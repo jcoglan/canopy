@@ -7,8 +7,8 @@ class SequencePart {
     this._muted      = muted;
   }
 
-  forEach (callback, context) {
-    callback.call(context, this._expression);
+  *[Symbol.iterator] () {
+    yield this._expression;
   }
 
   labels () {

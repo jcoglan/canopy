@@ -6,15 +6,16 @@ class Grammar {
     this._rules = rules;
   }
 
-  forEach (callback, context) {
-    this._rules.forEach(callback, context);
+  [Symbol.iterator] () {
+    return this._rules[Symbol.iterator]();
   }
 
   compile (builder) {
-    function scan (node, callback, context) {
-      callback.call(context, node);
-      if (node.forEach)
-        node.forEach((child) => scan(child, callback, context));
+    function scan (node, callback) {
+      callback(node);
+      if (node[Symbol.iterator]) {
+        for (var child of node) scan(child, callback);
+      }
     };
 
     builder.package_(this._name, (builder) => {
@@ -50,7 +51,8 @@ class Grammar {
           if (node.regex) builder.compileRegex_(node, regexName + (regexIndex++));
         });
 
-        this._rules.forEach((rule) => { rule.compile(builder) });
+        for (var rule of this._rules)
+          rule.compile(builder);
       }, this);
 
       var root = this._rules[0].name;

@@ -6,8 +6,8 @@ class Action {
     this._actionName = actionName;
   }
 
-  forEach (callback, context) {
-    callback.call(context, this._expression);
+  *[Symbol.iterator] () {
+    yield this._expression;
   }
 
   compile (builder, address) {

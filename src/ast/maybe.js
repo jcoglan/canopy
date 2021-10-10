@@ -5,8 +5,8 @@ class Maybe {
     this._expression = expression;
   }
 
-  forEach (callback, context) {
-    callback.call(context, this._expression);
+  *[Symbol.iterator] () {
+    yield this._expression;
   }
 
   compile (builder, address) {

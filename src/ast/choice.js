@@ -5,8 +5,8 @@ class Choice {
     this._options = options;
   }
 
-  forEach (callback, context) {
-    this._options.forEach(callback, context);
+  [Symbol.iterator] () {
+    return this._options[Symbol.iterator]();
   }
 
   compile (builder, address) {
