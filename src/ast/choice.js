@@ -7,11 +7,6 @@ var Choice = function(options) {
 };
 
 util.assign(Choice.prototype, {
-  toSexp: function() {
-    var options = this._options.map(function(o) { return o.toSexp() });
-    return ['choice'].concat(options);
-  },
-
   forEach: function(callback, context) {
     this._options.forEach(callback, context);
   },

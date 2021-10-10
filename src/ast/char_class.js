@@ -8,10 +8,6 @@ var CharClass = function(text, regex) {
 };
 
 util.assign(CharClass.prototype, {
-  toSexp: function() {
-    return ['char-class', this._text];
-  },
-
   compile: function(builder, address, action) {
     var regex = this.constName || this.regex,
         chunk = builder.chunk_(1);

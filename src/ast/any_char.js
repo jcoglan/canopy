@@ -5,10 +5,6 @@ var util = require('../util');
 var AnyChar = function() {};
 
 util.assign(AnyChar.prototype, {
-  toSexp: function() {
-    return ['any-char'];
-  },
-
   compile: function(builder, address, action) {
     builder.if_(builder.hasChars_(), function(builder) {
       var of = builder.offset_();

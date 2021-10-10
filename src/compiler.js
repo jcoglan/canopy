@@ -127,10 +127,6 @@ util.assign(Compiler.prototype, {
     throw new Error(message);
   },
 
-  toSexp: function(tree) {
-    return this.parseTree().toSexp();
-  },
-
   toSource: function() {
     this.parseTree().compile(this._builder);
     return this._builder.serialize();

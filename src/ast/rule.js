@@ -8,10 +8,6 @@ var Rule = function(name, expression) {
 };
 
 util.assign(Rule.prototype, {
-  toSexp: function() {
-    return ['rule', this.name, this._expression.toSexp()];
-  },
-
   forEach: function(callback, context) {
     callback.call(context, this._expression);
   },

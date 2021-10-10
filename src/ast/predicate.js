@@ -8,11 +8,6 @@ var Predicate = function(expression, positive) {
 };
 
 util.assign(Predicate.prototype, {
-  toSexp: function() {
-    var type = this._positive ? 'and' : 'not';
-    return [type, this._expression.toSexp()];
-  },
-
   forEach: function(callback, context) {
     callback.call(context, this._expression);
   },

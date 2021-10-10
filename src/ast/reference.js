@@ -11,10 +11,6 @@ util.assign(Reference.prototype, {
     return this.refName;
   },
 
-  toSexp: function() {
-    return ['reference', this.refName];
-  },
-
   compile: function(builder, address) {
     builder.jump_(address, this.refName);
   }

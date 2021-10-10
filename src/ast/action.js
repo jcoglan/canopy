@@ -8,10 +8,6 @@ var Action = function(expression, actionName) {
 };
 
 util.assign(Action.prototype, {
-  toSexp: function() {
-    return ['action', this._actionName, this._expression.toSexp()];
-  },
-
   forEach: function(callback, context) {
     callback.call(context, this._expression);
   },

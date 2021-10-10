@@ -9,11 +9,6 @@ var String = function(text, value, ci) {
 };
 
 util.assign(String.prototype, {
-  toSexp: function() {
-    var type = this._ci ? 'ci-string' : 'string';
-    return [type, this._value];
-  },
-
   compile: function(builder, address, action) {
     var value  = this._value,
         length = value.length,

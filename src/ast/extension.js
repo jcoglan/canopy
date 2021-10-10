@@ -8,10 +8,6 @@ var Extension = function(expression, typeName) {
 };
 
 util.assign(Extension.prototype, {
-  toSexp: function() {
-    return ['type', this._typeName, this._expression.toSexp()];
-  },
-
   forEach: function(callback, context) {
     callback.call(context, this._expression);
   },

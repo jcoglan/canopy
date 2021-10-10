@@ -7,10 +7,6 @@ var Maybe = function(expression) {
 };
 
 util.assign(Maybe.prototype, {
-  toSexp: function() {
-    return ['maybe', this._expression.toSexp()];
-  },
-
   forEach: function(callback, context) {
     callback.call(context, this._expression);
   },

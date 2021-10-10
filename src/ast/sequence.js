@@ -7,11 +7,6 @@ var Sequence = function(parts) {
 };
 
 util.assign(Sequence.prototype, {
-  toSexp: function() {
-    var parts = this._parts.map(function(p) { return p.toSexp() });
-    return ['sequence'].concat(parts);
-  },
-
   forEach: function(callback, context) {
     this._parts.forEach(callback, context);
   },

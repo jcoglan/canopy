@@ -8,11 +8,6 @@ var Grammar = function(name, rules) {
 };
 
 util.assign(Grammar.prototype, {
-  toSexp: function() {
-    var rules = this._rules.map(function(r) { return r.toSexp() });
-    return ['grammar', this._name].concat(rules);
-  },
-
   forEach: function(callback, context) {
     this._rules.forEach(callback, context);
   },

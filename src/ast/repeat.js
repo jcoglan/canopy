@@ -8,10 +8,6 @@ var Repeat = function(expression, count) {
 };
 
 util.assign(Repeat.prototype, {
-  toSexp: function() {
-    return ['repeat', this._count, this._expression.toSexp()];
-  },
-
   forEach: function(callback, context) {
     callback.call(context, this._expression);
   },
