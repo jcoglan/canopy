@@ -163,7 +163,7 @@ class Builder {
         condition = [];
 
     for (var i = 0; i < n; i++)
-      condition.push('typeof ' + namespace.slice(0,i+1).join('.') + " !== 'undefined'");
+      condition.push('typeof ' + namespace.slice(0, i + 1).join('.') + " !== 'undefined'");
 
     this.assign_('var exported', '{Grammar: Grammar, Parser: Parser, parse: parse}');
     this._newline();
@@ -175,8 +175,8 @@ class Builder {
       });
     }, (builder) => {
       builder.assign_('var namespace', "typeof this !== 'undefined' ? this : window");
-      for (var i = 0; i < n; i++) {
-        builder.assign_('namespace', 'namespace.' + namespace[i] + ' = namespace.' + namespace[i] + ' || {}');
+      for (var ns of namespace) {
+        builder.assign_('namespace', 'namespace.' + ns + ' = namespace.' + ns + ' || {}');
       }
       builder.assign_('namespace.' + last, 'exported');
     });

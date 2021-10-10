@@ -91,9 +91,8 @@ class Builder {
   syntaxNodeClass_ () {
     this._newBuffer('TreeNode');
 
-    var imports = ['ArrayList', 'EnumMap', 'Iterator', 'List', 'Map'];
-    for (var i = 0, n = imports.length; i < n; i++)
-      this._line('import java.util.' + imports[i]);
+    for (var impt of ['ArrayList', 'EnumMap', 'Iterator', 'List', 'Map'])
+      this._line('import java.util.' + impt);
 
     var name = 'TreeNode';
 
@@ -163,8 +162,8 @@ class Builder {
     this._newline();
     this._line('public interface Actions {', false);
     this._indent((builder) => {
-      for (var i = 0, n = actions.length ; i < n; i++)
-        builder._line('public TreeNode ' + actions[i] + '(String input, int start, int end, List<TreeNode> elements)');
+      for (var action of actions)
+        builder._line('public TreeNode ' + action + '(String input, int start, int end, List<TreeNode> elements)');
     });
     this._line('}', false);
 
@@ -296,8 +295,8 @@ class Builder {
     this._newBuffer('Label');
     this._line('public enum Label {', false);
     this._indent((builder) => {
-      for (var i = 0, n = labels.length; i < n; i++)
-        builder._line(labels[i] + (i < n - 1 ? ',' : ''), false);
+      for (var [i, label] of labels.entries())
+        builder._line(label + (i < labels.length - 1 ? ',' : ''), false);
     });
     this._line('}', false);
   }

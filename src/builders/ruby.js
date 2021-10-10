@@ -211,7 +211,7 @@ class Builder {
 
   attributes_ (names) {
     var keys = [];
-    for (var i = 0, n = names.length; i < n; i++) keys.push(':' + names[i]);
+    for (var name of names) keys.push(':' + name);
     this._line('attr_reader ' + keys.join(', '));
     this._methodSeparator = '\n';
   }
