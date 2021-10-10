@@ -1,15 +1,6 @@
 'use strict';
 
 module.exports = {
-  assign: function (destination, source) {
-    if (!destination || !source) return destination;
-    for (var key in source) {
-      if (destination[key] !== source[key])
-        destination[key] = source[key];
-    }
-    return destination;
-  },
-
   formatError: function (input, offset, expected) {
     var lines = input.split(/\n/g),
         lineNo = 0,

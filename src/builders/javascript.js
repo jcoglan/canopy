@@ -80,8 +80,6 @@ class Builder {
       builder._line("'use strict'");
 
       builder._newline();
-      builder._line('var extend = ' + util.assign.toString());
-      builder._newline();
       builder._line('var formatError = ' + util.formatError.toString());
       builder._newline();
       builder._line('var inherit = ' + util.inherit.toString());
@@ -153,7 +151,7 @@ class Builder {
       builder.return_('parser.parse()');
     });
 
-    this._line('extend(Parser.prototype, Grammar)');
+    this._line('Object.assign(Parser.prototype, Grammar)');
     this._newline();
   }
 
@@ -171,7 +169,7 @@ class Builder {
     this._newline();
 
     this.if_("typeof require === 'function' && typeof exports === 'object'", (builder) => {
-      builder._line('extend(exports, exported)');
+      builder._line('Object.assign(exports, exported)');
       if (condition.length > 0) builder.if_(condition.join(' &&' ), (builder) => {
         builder.assign_(grammar, 'exported');
       });
@@ -304,7 +302,7 @@ class Builder {
   }
 
   extendNode_ (address, nodeType) {
-    this._line('extend(' + address + ', this._types.' + nodeType + ')');
+    this._line('Object.assign(' + address + ', this._types.' + nodeType + ')');
   }
 
   failure_ (address, expected) {
