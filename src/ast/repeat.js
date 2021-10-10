@@ -1,13 +1,13 @@
-'use strict';
+'use strict'
 
 class Repeat {
   constructor (expression, count) {
-    this._expression = expression;
-    this._count      = count;
+    this._expression = expression
+    this._count      = count
   }
 
   *[Symbol.iterator] () {
-    yield this._expression;
+    yield this._expression
   }
 
   compile (builder, address, action) {
@@ -21,22 +21,22 @@ class Repeat {
         remaining   = temp.remaining,
         startOffset = temp.index,
         elements    = temp.elements,
-        elAddr      = temp.address;
+        elAddr      = temp.address
 
     builder.whileNotNull_(elAddr, (builder) => {
-      this._expression.compile(builder, elAddr);
+      this._expression.compile(builder, elAddr)
       builder.ifNode_(elAddr, (builder) => {
-        builder.append_(elements, elAddr);
-        builder.decrement_(remaining);
-      });
-    }, this);
+        builder.append_(elements, elAddr)
+        builder.decrement_(remaining)
+      })
+    }, this)
 
     builder.if_(builder.isZero_(remaining), (builder) => {
-      builder.syntaxNode_(address, startOffset, builder.offset_(), elements, action);
+      builder.syntaxNode_(address, startOffset, builder.offset_(), elements, action)
     }, (builder) => {
-      builder.assign_(address, builder.nullNode_());
-    });
+      builder.assign_(address, builder.nullNode_())
+    })
   }
 }
 
-module.exports = Repeat;
+module.exports = Repeat

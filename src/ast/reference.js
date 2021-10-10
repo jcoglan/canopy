@@ -1,17 +1,17 @@
-'use strict';
+'use strict'
 
 class Reference {
   constructor (name) {
-    this.refName = name;
+    this.refName = name
   }
 
   referenceName () {
-    return this.refName;
+    return this.refName
   }
 
   compile (builder, address) {
-    builder.jump_(address, this.refName);
+    builder.jump_(address, this.refName)
   }
 }
 
-module.exports = Reference;
+module.exports = Reference

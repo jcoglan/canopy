@@ -1,29 +1,29 @@
-'use strict';
+'use strict'
 
 class Predicate {
   constructor (expression, positive) {
-    this._expression = expression;
-    this._positive   = positive;
+    this._expression = expression
+    this._positive   = positive
   }
 
   *[Symbol.iterator] () {
-    yield this._expression;
+    yield this._expression
   }
 
   compile (builder, address) {
     var startOffset = builder.localVar_('index', builder.offset_()),
-        branch      = this._positive ? 'ifNode_' : 'unlessNode_';
+        branch      = this._positive ? 'ifNode_' : 'unlessNode_'
 
-    this._expression.compile(builder, address);
-    builder.assign_(builder.offset_(), startOffset);
+    this._expression.compile(builder, address)
+    builder.assign_(builder.offset_(), startOffset)
 
     builder[branch](address, (builder) => {
-      var of = builder.offset_();
-      builder.syntaxNode_(address, of, of, null);
+      var of = builder.offset_()
+      builder.syntaxNode_(address, of, of, null)
     }, (builder) => {
-      builder.assign_(address, builder.nullNode_());
-    });
+      builder.assign_(address, builder.nullNode_())
+    })
   }
 }
 
-module.exports = Predicate;
+module.exports = Predicate

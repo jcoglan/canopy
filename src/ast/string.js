@@ -1,28 +1,28 @@
-'use strict';
+'use strict'
 
 class String {
   constructor (text, value, ci) {
-    this._text  = text;
-    this._value = value;
-    this._ci    = ci;
+    this._text  = text
+    this._value = value
+    this._ci    = ci
   }
 
   compile (builder, address, action) {
     var value  = this._value,
         length = value.length,
-        chunk  = builder.chunk_(length);
+        chunk  = builder.chunk_(length)
 
     var condition = this._ci
                   ? builder.stringMatchCI_(chunk, value)
-                  : builder.stringMatch_(chunk, value);
+                  : builder.stringMatch_(chunk, value)
 
     builder.if_(condition, (builder) => {
-      var of = builder.offset_();
-      builder.syntaxNode_(address, of, of + ' + ' + length, null, action);
+      var of = builder.offset_()
+      builder.syntaxNode_(address, of, of + ' + ' + length, null, action)
     }, (builder) => {
-      builder.failure_(address, this._text);
-    }, this);
+      builder.failure_(address, this._text)
+    }, this)
   }
 }
 
-module.exports = String;
+module.exports = String

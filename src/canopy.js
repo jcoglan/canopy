@@ -1,6 +1,6 @@
-'use strict';
+'use strict'
 
-var Compiler = require('./compiler');
+var Compiler = require('./compiler')
 
 module.exports = {
   builders: {
@@ -11,7 +11,7 @@ module.exports = {
   },
 
   compile (grammar, builder) {
-    var compiler = new Compiler(grammar, builder);
-    return compiler.toSource();
+    var compiler = new Compiler(grammar, builder)
+    return compiler.toSource()
   }
-};
+}
