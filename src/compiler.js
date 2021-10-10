@@ -18,40 +18,35 @@ const Grammar      = require('./ast/grammar'),
       AnyChar      = require('./ast/any_char')
 
 const actions = {
-  grammar (text, a, b, elements) {
-    let rules = elements[2].elements.map((e) => e.rule)
-    return new Grammar(elements[1].id.text, rules)
+  grammar (text, a, b, [_, name, rules]) {
+    rules = rules.elements.map((e) => e.rule)
+    return new Grammar(name.id.text, rules)
   },
 
-  rule (text, a, b, elements) {
-    return new Rule(elements[0].text, elements[2])
+  rule (text, a, b, [name, _, body]) {
+    return new Rule(name.text, body)
   },
 
   paren_expr (text, a, b, elements) {
     return elements[2]
   },
 
-  choice (text, a, b, elements) {
-    let parts = [elements[0]].concat(
-      elements[1].elements.map((e) => e.expr))
-
+  choice (text, a, b, [first, rest]) {
+    let parts = [first].concat(rest.elements.map((e) => e.expr))
     return new Choice(parts)
   },
 
-  extension (text, a, b, elements) {
-    let expression = elements[0],
-        typeTag    = elements[2]
-
+  extension (text, a, b, [expression, _, typeTag]) {
     return new Extension(expression, typeTag.id.text)
   },
 
-  action (text, a, b, elements) {
-    let actionName = elements[2].id.text
+  action (text, a, b, [root, _, name]) {
+    let actionName = name.id.text
 
-    if (elements[0] instanceof Maybe)
-      return new Maybe(new Action(elements[0]._expression, actionName))
+    if (root instanceof Maybe)
+      return new Maybe(new Action(root._expression, actionName))
     else
-      return new Action(elements[0], actionName)
+      return new Action(root, actionName)
   },
 
   sequence (text, a, b, elements) {
@@ -61,29 +56,29 @@ const actions = {
     return new Sequence(parts)
   },
 
-  sequence_part (text, a, b, elements) {
-    let muted = elements[0].text !== '',
-        label = elements[1].id
+  sequence_part (text, a, b, [muted, label, expr]) {
+    muted = muted.text !== ''
+    label = label.id
 
-    return new SequencePart(elements[2], label && label.text, muted)
+    return new SequencePart(expr, label && label.text, muted)
   },
 
-  predicate (text, a, b, elements) {
-    let polarities = {'&': true, '!': false}
-    return new Predicate(elements[2], polarities[elements[0].text])
+  predicate (text, a, b, [pred, _, expr]) {
+    let polarities = { '&': true, '!': false }
+    return new Predicate(expr, polarities[pred.text])
   },
 
-  repeat (text, a, b, elements) {
-    let quantities = {'*': 0, '+': 1}
-    return new Repeat(elements[0], quantities[elements[2].text])
+  repeat (text, a, b, [expr, _, quant]) {
+    let quantities = { '*': 0, '+': 1 }
+    return new Repeat(expr, quantities[quant.text])
   },
 
-  maybe (text, a, b, elements) {
-    return new Maybe(elements[0])
+  maybe (text, a, b, [expr]) {
+    return new Maybe(expr)
   },
 
-  reference (text, a, b, elements) {
-    return new Reference(elements[0].text)
+  reference (text, a, b, [expr]) {
+    return new Reference(expr.text)
   },
 
   string (text, a, b, elements) {
@@ -93,9 +88,9 @@ const actions = {
     return new String(text, value, false)
   },
 
-  ci_string (text, a, b, elements) {
+  ci_string (text, a, b, [_, string]) {
     text = text.substring(a, b)
-    let value = eval('"' + elements[1].text + '"')
+    let value = eval('"' + string.text + '"')
 
     return new String(text, value, true)
   },
