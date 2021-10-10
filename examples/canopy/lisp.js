@@ -6,16 +6,7 @@
 (function() {
   'use strict';
 
-  var extend = function(destination, source) {
-    if (!destination || !source) return destination;
-    for (var key in source) {
-      if (destination[key] !== source[key])
-        destination[key] = source[key];
-    }
-    return destination;
-  };
-
-  var formatError = function(input, offset, expected) {
+  var formatError = function (input, offset, expected) {
     var lines = input.split(/\n/g),
         lineNo = 0,
         position = 0;
@@ -37,8 +28,8 @@
     return message + '^';
   };
 
-  var inherit = function(subclass, parent) {
-    var chain = function() {};
+  var inherit = function (subclass, parent) {
+    function chain () {};
     chain.prototype = parent.prototype;
     subclass.prototype = new chain();
     subclass.prototype.constructor = subclass;
@@ -71,7 +62,7 @@
   var FAILURE = {};
 
   var Grammar = {
-    _read_program: function() {
+    _read_program () {
       var address0 = FAILURE, index0 = this._offset;
       this._cache._program = this._cache._program || {};
       var cached = this._cache._program[index0];
@@ -97,7 +88,7 @@
       return address0;
     },
 
-    _read_cell: function() {
+    _read_cell () {
       var address0 = FAILURE, index0 = this._offset;
       this._cache._cell = this._cache._cell || {};
       var cached = this._cache._cell[index0];
@@ -174,7 +165,7 @@
       return address0;
     },
 
-    _read_list: function() {
+    _read_list () {
       var address0 = FAILURE, index0 = this._offset;
       this._cache._list = this._cache._list || {};
       var cached = this._cache._list[index0];
@@ -262,7 +253,7 @@
       return address0;
     },
 
-    _read_atom: function() {
+    _read_atom () {
       var address0 = FAILURE, index0 = this._offset;
       this._cache._atom = this._cache._atom || {};
       var cached = this._cache._atom[index0];
@@ -291,7 +282,7 @@
       return address0;
     },
 
-    _read_boolean_: function() {
+    _read_boolean_ () {
       var address0 = FAILURE, index0 = this._offset;
       this._cache._boolean_ = this._cache._boolean_ || {};
       var cached = this._cache._boolean_[index0];
@@ -344,7 +335,7 @@
       return address0;
     },
 
-    _read_integer: function() {
+    _read_integer () {
       var address0 = FAILURE, index0 = this._offset;
       this._cache._integer = this._cache._integer || {};
       var cached = this._cache._integer[index0];
@@ -424,7 +415,7 @@
       return address0;
     },
 
-    _read_string: function() {
+    _read_string () {
       var address0 = FAILURE, index0 = this._offset;
       this._cache._string = this._cache._string || {};
       var cached = this._cache._string[index0];
@@ -586,7 +577,7 @@
       return address0;
     },
 
-    _read_symbol: function() {
+    _read_symbol () {
       var address0 = FAILURE, index0 = this._offset;
       this._cache._symbol = this._cache._symbol || {};
       var cached = this._cache._symbol[index0];
@@ -654,7 +645,7 @@
       return address0;
     },
 
-    _read_space: function() {
+    _read_space () {
       var address0 = FAILURE, index0 = this._offset;
       this._cache._space = this._cache._space || {};
       var cached = this._cache._space[index0];
@@ -683,7 +674,7 @@
       return address0;
     },
 
-    _read_paren: function() {
+    _read_paren () {
       var address0 = FAILURE, index0 = this._offset;
       this._cache._paren = this._cache._paren || {};
       var cached = this._cache._paren[index0];
@@ -736,7 +727,7 @@
       return address0;
     },
 
-    _read_delimiter: function() {
+    _read_delimiter () {
       var address0 = FAILURE, index0 = this._offset;
       this._cache._delimiter = this._cache._delimiter || {};
       var cached = this._cache._delimiter[index0];
@@ -787,12 +778,12 @@
     var parser = new Parser(input, options.actions, options.types);
     return parser.parse();
   };
-  extend(Parser.prototype, Grammar);
+  Object.assign(Parser.prototype, Grammar);
 
   var exported = {Grammar: Grammar, Parser: Parser, parse: parse};
 
   if (typeof require === 'function' && typeof exports === 'object') {
-    extend(exports, exported);
+    Object.assign(exports, exported);
   } else {
     var namespace = typeof this !== 'undefined' ? this : window;
     namespace.CanopyLisp = exported;

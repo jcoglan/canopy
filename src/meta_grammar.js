@@ -6,16 +6,7 @@
 (function() {
   'use strict';
 
-  var extend = function(destination, source) {
-    if (!destination || !source) return destination;
-    for (var key in source) {
-      if (destination[key] !== source[key])
-        destination[key] = source[key];
-    }
-    return destination;
-  };
-
-  var formatError = function(input, offset, expected) {
+  var formatError = function (input, offset, expected) {
     var lines = input.split(/\n/g),
         lineNo = 0,
         position = 0;
@@ -37,8 +28,8 @@
     return message + '^';
   };
 
-  var inherit = function(subclass, parent) {
-    var chain = function() {};
+  var inherit = function (subclass, parent) {
+    function chain () {};
     chain.prototype = parent.prototype;
     subclass.prototype = new chain();
     subclass.prototype.constructor = subclass;
@@ -201,7 +192,7 @@
   var FAILURE = {};
 
   var Grammar = {
-    _read_grammar: function() {
+    _read_grammar () {
       var address0 = FAILURE, index0 = this._offset;
       this._cache._grammar = this._cache._grammar || {};
       var cached = this._cache._grammar[index0];
@@ -326,7 +317,7 @@
       return address0;
     },
 
-    _read_grammar_name: function() {
+    _read_grammar_name () {
       var address0 = FAILURE, index0 = this._offset;
       this._cache._grammar_name = this._cache._grammar_name || {};
       var cached = this._cache._grammar_name[index0];
@@ -427,7 +418,7 @@
       return address0;
     },
 
-    _read_rule: function() {
+    _read_rule () {
       var address0 = FAILURE, index0 = this._offset;
       this._cache._rule = this._cache._rule || {};
       var cached = this._cache._rule[index0];
@@ -470,7 +461,7 @@
       return address0;
     },
 
-    _read_assignment: function() {
+    _read_assignment () {
       var address0 = FAILURE, index0 = this._offset;
       this._cache._assignment = this._cache._assignment || {};
       var cached = this._cache._assignment[index0];
@@ -555,7 +546,7 @@
       return address0;
     },
 
-    _read__: function() {
+    _read__ () {
       var address0 = FAILURE, index0 = this._offset;
       this._cache.__ = this._cache.__ || {};
       var cached = this._cache.__[index0];
@@ -592,7 +583,7 @@
       return address0;
     },
 
-    _read_comment: function() {
+    _read_comment () {
       var address0 = FAILURE, index0 = this._offset;
       this._cache._comment = this._cache._comment || {};
       var cached = this._cache._comment[index0];
@@ -672,7 +663,7 @@
       return address0;
     },
 
-    _read_object_identifier: function() {
+    _read_object_identifier () {
       var address0 = FAILURE, index0 = this._offset;
       this._cache._object_identifier = this._cache._object_identifier || {};
       var cached = this._cache._object_identifier[index0];
@@ -758,7 +749,7 @@
       return address0;
     },
 
-    _read_identifier: function() {
+    _read_identifier () {
       var address0 = FAILURE, index0 = this._offset;
       this._cache._identifier = this._cache._identifier || {};
       var cached = this._cache._identifier[index0];
@@ -838,7 +829,7 @@
       return address0;
     },
 
-    _read_parsing_expression: function() {
+    _read_parsing_expression () {
       var address0 = FAILURE, index0 = this._offset;
       this._cache._parsing_expression = this._cache._parsing_expression || {};
       var cached = this._cache._parsing_expression[index0];
@@ -859,7 +850,7 @@
       return address0;
     },
 
-    _read_choice_part: function() {
+    _read_choice_part () {
       var address0 = FAILURE, index0 = this._offset;
       this._cache._choice_part = this._cache._choice_part || {};
       var cached = this._cache._choice_part[index0];
@@ -888,7 +879,7 @@
       return address0;
     },
 
-    _read_sequence_element: function() {
+    _read_sequence_element () {
       var address0 = FAILURE, index0 = this._offset;
       this._cache._sequence_element = this._cache._sequence_element || {};
       var cached = this._cache._sequence_element[index0];
@@ -917,7 +908,7 @@
       return address0;
     },
 
-    _read_atom: function() {
+    _read_atom () {
       var address0 = FAILURE, index0 = this._offset;
       this._cache._atom = this._cache._atom || {};
       var cached = this._cache._atom[index0];
@@ -942,7 +933,7 @@
       return address0;
     },
 
-    _read_terminal: function() {
+    _read_terminal () {
       var address0 = FAILURE, index0 = this._offset;
       this._cache._terminal = this._cache._terminal || {};
       var cached = this._cache._terminal[index0];
@@ -971,7 +962,7 @@
       return address0;
     },
 
-    _read_choice: function() {
+    _read_choice () {
       var address0 = FAILURE, index0 = this._offset;
       this._cache._choice = this._cache._choice || {};
       var cached = this._cache._choice[index0];
@@ -1099,7 +1090,7 @@
       return address0;
     },
 
-    _read_action_expression: function() {
+    _read_action_expression () {
       var address0 = FAILURE, index0 = this._offset;
       this._cache._action_expression = this._cache._action_expression || {};
       var cached = this._cache._action_expression[index0];
@@ -1155,7 +1146,7 @@
       return address0;
     },
 
-    _read_actionable: function() {
+    _read_actionable () {
       var address0 = FAILURE, index0 = this._offset;
       this._cache._actionable = this._cache._actionable || {};
       var cached = this._cache._actionable[index0];
@@ -1292,7 +1283,7 @@
       return address0;
     },
 
-    _read_action_tag: function() {
+    _read_action_tag () {
       var address0 = FAILURE, index0 = this._offset;
       this._cache._action_tag = this._cache._action_tag || {};
       var cached = this._cache._action_tag[index0];
@@ -1343,7 +1334,7 @@
       return address0;
     },
 
-    _read_typed_expression: function() {
+    _read_typed_expression () {
       var address0 = FAILURE, index0 = this._offset;
       this._cache._typed_expression = this._cache._typed_expression || {};
       var cached = this._cache._typed_expression[index0];
@@ -1399,7 +1390,7 @@
       return address0;
     },
 
-    _read_typable: function() {
+    _read_typable () {
       var address0 = FAILURE, index0 = this._offset;
       this._cache._typable = this._cache._typable || {};
       var cached = this._cache._typable[index0];
@@ -1420,7 +1411,7 @@
       return address0;
     },
 
-    _read_type_tag: function() {
+    _read_type_tag () {
       var address0 = FAILURE, index0 = this._offset;
       this._cache._type_tag = this._cache._type_tag || {};
       var cached = this._cache._type_tag[index0];
@@ -1495,7 +1486,7 @@
       return address0;
     },
 
-    _read_sequence: function() {
+    _read_sequence () {
       var address0 = FAILURE, index0 = this._offset;
       this._cache._sequence = this._cache._sequence || {};
       var cached = this._cache._sequence[index0];
@@ -1578,7 +1569,7 @@
       return address0;
     },
 
-    _read_sequence_part: function() {
+    _read_sequence_part () {
       var address0 = FAILURE, index0 = this._offset;
       this._cache._sequence_part = this._cache._sequence_part || {};
       var cached = this._cache._sequence_part[index0];
@@ -1631,7 +1622,7 @@
       return address0;
     },
 
-    _read_mute: function() {
+    _read_mute () {
       var address0 = FAILURE, index0 = this._offset;
       this._cache._mute = this._cache._mute || {};
       var cached = this._cache._mute[index0];
@@ -1660,7 +1651,7 @@
       return address0;
     },
 
-    _read_label: function() {
+    _read_label () {
       var address0 = FAILURE, index0 = this._offset;
       this._cache._label = this._cache._label || {};
       var cached = this._cache._label[index0];
@@ -1711,7 +1702,7 @@
       return address0;
     },
 
-    _read_paren_expression: function() {
+    _read_paren_expression () {
       var address0 = FAILURE, index0 = this._offset;
       this._cache._paren_expression = this._cache._paren_expression || {};
       var cached = this._cache._paren_expression[index0];
@@ -1828,7 +1819,7 @@
       return address0;
     },
 
-    _read_predicated_atom: function() {
+    _read_predicated_atom () {
       var address0 = FAILURE, index0 = this._offset;
       this._cache._predicated_atom = this._cache._predicated_atom || {};
       var cached = this._cache._predicated_atom[index0];
@@ -1924,7 +1915,7 @@
       return address0;
     },
 
-    _read_repeated_atom: function() {
+    _read_repeated_atom () {
       var address0 = FAILURE, index0 = this._offset;
       this._cache._repeated_atom = this._cache._repeated_atom || {};
       var cached = this._cache._repeated_atom[index0];
@@ -2020,7 +2011,7 @@
       return address0;
     },
 
-    _read_maybe_atom: function() {
+    _read_maybe_atom () {
       var address0 = FAILURE, index0 = this._offset;
       this._cache._maybe_atom = this._cache._maybe_atom || {};
       var cached = this._cache._maybe_atom[index0];
@@ -2092,7 +2083,7 @@
       return address0;
     },
 
-    _read_reference: function() {
+    _read_reference () {
       var address0 = FAILURE, index0 = this._offset;
       this._cache._reference = this._cache._reference || {};
       var cached = this._cache._reference[index0];
@@ -2135,7 +2126,7 @@
       return address0;
     },
 
-    _read_literal_string: function() {
+    _read_literal_string () {
       var address0 = FAILURE, index0 = this._offset;
       this._cache._literal_string = this._cache._literal_string || {};
       var cached = this._cache._literal_string[index0];
@@ -2454,7 +2445,7 @@
       return address0;
     },
 
-    _read_ci_string: function() {
+    _read_ci_string () {
       var address0 = FAILURE, index0 = this._offset;
       this._cache._ci_string = this._cache._ci_string || {};
       var cached = this._cache._ci_string[index0];
@@ -2616,7 +2607,7 @@
       return address0;
     },
 
-    _read_char_class: function() {
+    _read_char_class () {
       var address0 = FAILURE, index0 = this._offset;
       this._cache._char_class = this._cache._char_class || {};
       var cached = this._cache._char_class[index0];
@@ -2807,7 +2798,7 @@
       return address0;
     },
 
-    _read_any_char: function() {
+    _read_any_char () {
       var address0 = FAILURE, index0 = this._offset;
       this._cache._any_char = this._cache._any_char || {};
       var cached = this._cache._any_char[index0];
@@ -2866,12 +2857,12 @@
     var parser = new Parser(input, options.actions, options.types);
     return parser.parse();
   };
-  extend(Parser.prototype, Grammar);
+  Object.assign(Parser.prototype, Grammar);
 
   var exported = {Grammar: Grammar, Parser: Parser, parse: parse};
 
   if (typeof require === 'function' && typeof exports === 'object') {
-    extend(exports, exported);
+    Object.assign(exports, exported);
     if (typeof Canopy !== 'undefined') {
       Canopy.MetaGrammar = exported;
     }

@@ -6,16 +6,7 @@
 (function() {
   'use strict';
 
-  var extend = function(destination, source) {
-    if (!destination || !source) return destination;
-    for (var key in source) {
-      if (destination[key] !== source[key])
-        destination[key] = source[key];
-    }
-    return destination;
-  };
-
-  var formatError = function(input, offset, expected) {
+  var formatError = function (input, offset, expected) {
     var lines = input.split(/\n/g),
         lineNo = 0,
         position = 0;
@@ -37,8 +28,8 @@
     return message + '^';
   };
 
-  var inherit = function(subclass, parent) {
-    var chain = function() {};
+  var inherit = function (subclass, parent) {
+    function chain () {};
     chain.prototype = parent.prototype;
     subclass.prototype = new chain();
     subclass.prototype.constructor = subclass;
@@ -115,7 +106,7 @@
   var FAILURE = {};
 
   var Grammar = {
-    _read_document: function() {
+    _read_document () {
       var address0 = FAILURE, index0 = this._offset;
       this._cache._document = this._cache._document || {};
       var cached = this._cache._document[index0];
@@ -166,7 +157,7 @@
       return address0;
     },
 
-    _read_object: function() {
+    _read_object () {
       var address0 = FAILURE, index0 = this._offset;
       this._cache._object = this._cache._object || {};
       var cached = this._cache._object[index0];
@@ -370,7 +361,7 @@
       return address0;
     },
 
-    _read_pair: function() {
+    _read_pair () {
       var address0 = FAILURE, index0 = this._offset;
       this._cache._pair = this._cache._pair || {};
       var cached = this._cache._pair[index0];
@@ -445,7 +436,7 @@
       return address0;
     },
 
-    _read_array: function() {
+    _read_array () {
       var address0 = FAILURE, index0 = this._offset;
       this._cache._array = this._cache._array || {};
       var cached = this._cache._array[index0];
@@ -649,7 +640,7 @@
       return address0;
     },
 
-    _read_value: function() {
+    _read_value () {
       var address0 = FAILURE, index0 = this._offset;
       this._cache._value = this._cache._value || {};
       var cached = this._cache._value[index0];
@@ -716,7 +707,7 @@
       return address0;
     },
 
-    _read_string: function() {
+    _read_string () {
       var address0 = FAILURE, index0 = this._offset;
       this._cache._string = this._cache._string || {};
       var cached = this._cache._string[index0];
@@ -878,7 +869,7 @@
       return address0;
     },
 
-    _read_number: function() {
+    _read_number () {
       var address0 = FAILURE, index0 = this._offset;
       this._cache._number = this._cache._number || {};
       var cached = this._cache._number[index0];
@@ -1277,7 +1268,7 @@
       return address0;
     },
 
-    _read_boolean_: function() {
+    _read_boolean_ () {
       var address0 = FAILURE, index0 = this._offset;
       this._cache._boolean_ = this._cache._boolean_ || {};
       var cached = this._cache._boolean_[index0];
@@ -1330,7 +1321,7 @@
       return address0;
     },
 
-    _read_null_: function() {
+    _read_null_ () {
       var address0 = FAILURE, index0 = this._offset;
       this._cache._null_ = this._cache._null_ || {};
       var cached = this._cache._null_[index0];
@@ -1359,7 +1350,7 @@
       return address0;
     },
 
-    _read___: function() {
+    _read___ () {
       var address0 = FAILURE, index0 = this._offset;
       this._cache.___ = this._cache.___ || {};
       var cached = this._cache.___[index0];
@@ -1431,12 +1422,12 @@
     var parser = new Parser(input, options.actions, options.types);
     return parser.parse();
   };
-  extend(Parser.prototype, Grammar);
+  Object.assign(Parser.prototype, Grammar);
 
   var exported = {Grammar: Grammar, Parser: Parser, parse: parse};
 
   if (typeof require === 'function' && typeof exports === 'object') {
-    extend(exports, exported);
+    Object.assign(exports, exported);
   } else {
     var namespace = typeof this !== 'undefined' ? this : window;
     namespace.CanopyJson = exported;
