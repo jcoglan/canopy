@@ -11,7 +11,7 @@ class Repeat {
   }
 
   compile (builder, address, action) {
-    var temp = builder.localVars_({
+    let temp = builder.localVars_({
           remaining: this._count,
           index:     builder.offset_(),
           elements:  builder.emptyList_(),

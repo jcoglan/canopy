@@ -14,16 +14,16 @@ class Sequence {
   }
 
   collectLabels (subclassName) {
-    var result = this._parts.reduce((state, part) => {
+    let result = this._parts.reduce((state, part) => {
       if (part.muted()) return state
 
-      for (var label of part.labels()) {
+      for (let label of part.labels()) {
         state[0][label] = state[1]
       }
       return [state[0], state[1] + 1]
     }, [{}, 0])
 
-    var labels = result[0]
+    let labels = result[0]
     if (Object.keys(labels).length === 0) return null
 
     this._nodeClassName = subclassName
@@ -31,12 +31,12 @@ class Sequence {
   }
 
   compile (builder, address, action) {
-    var temp = builder.localVars_({
+    let temp = builder.localVars_({
       index:    builder.offset_(),
       elements: builder.emptyList_(this.countUnmuted())
     })
 
-    var startOffset = temp.index,
+    let startOffset = temp.index,
         elements    = temp.elements,
         klass       = this._nodeClassName
 
@@ -52,7 +52,7 @@ class Sequence {
   _compileExpressions (builder, index, elIndex, startOffset, elements) {
     if (index === this._parts.length) return
 
-    var expAddr = builder.localVar_('address'),
+    let expAddr = builder.localVar_('address'),
         expr    = this._parts[index],
         muted   = expr.muted()
 

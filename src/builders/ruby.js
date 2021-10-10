@@ -2,7 +2,7 @@
 
 class Builder {
   static create (filename) {
-    var builder = new Builder()
+    let builder = new Builder()
     builder.filename = filename
     return builder
   }
@@ -24,7 +24,7 @@ class Builder {
   }
 
   serialize () {
-    var files = {}
+    let files = {}
     files[this._outputPathname()] = this._buffer
     return files
   }
@@ -49,7 +49,7 @@ class Builder {
   }
 
   _line (source) {
-    var i = this._indentLevel
+    let i = this._indentLevel
     while (i--) this._write('  ')
     this._write(source)
     this._newline()
@@ -78,7 +78,7 @@ class Builder {
   }
 
   syntaxNodeClass_ () {
-    var name = 'TreeNode'
+    let name = 'TreeNode'
     this._line('class ' + name)
     this._indent((builder) => {
       builder._line('include Enumerable')
@@ -191,7 +191,7 @@ class Builder {
   }
 
   cache_ (name, block, context) {
-    var temp      = this.localVars_({address: this.nullNode_(), index: '@offset'}),
+    let temp      = this.localVars_({address: this.nullNode_(), index: '@offset'}),
         address   = temp.address,
         offset    = temp.index,
         cacheMap  = '@cache[:' + name + ']',
@@ -210,8 +210,8 @@ class Builder {
   }
 
   attributes_ (names) {
-    var keys = []
-    for (var name of names) keys.push(':' + name)
+    let keys = []
+    for (let name of names) keys.push(':' + name)
     this._line('attr_reader ' + keys.join(', '))
     this._methodSeparator = '\n'
   }
@@ -221,8 +221,8 @@ class Builder {
   }
 
   localVars_ (vars) {
-    var names = {}, lhs = [], rhs = [], varName
-    for (var name in vars) {
+    let names = {}, lhs = [], rhs = [], varName
+    for (let name in vars) {
       this._varIndex[name] = this._varIndex[name] || 0
       varName = name + this._varIndex[name]
       this._varIndex[name] += 1
@@ -236,7 +236,7 @@ class Builder {
 
   localVar_ (name, value) {
     this._varIndex[name] = this._varIndex[name] || 0
-    var varName = name + this._varIndex[name]
+    let varName = name + this._varIndex[name]
     this._varIndex[name] += 1
 
     if (value === undefined) value = this.nullNode_()
@@ -246,7 +246,7 @@ class Builder {
   }
 
   chunk_ (length) {
-    var input = '@input',
+    let input = '@input',
         ofs   = '@offset',
         temp  = this.localVars_({chunk: this.null_(), max: ofs + ' + ' + length})
 
@@ -257,7 +257,7 @@ class Builder {
   }
 
   syntaxNode_ (address, start, end, elements, action, nodeClass) {
-    var args
+    let args
 
     if (action) {
       action = '@actions.' + action
@@ -347,7 +347,7 @@ class Builder {
   }
 
   regexMatch_ (regex, string) {
-    var source = regex.source.replace(/^\^/g, '\\A')
+    let source = regex.source.replace(/^\^/g, '\\A')
     return string + ' =~ /' + source + '/'
   }
 

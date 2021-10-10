@@ -1,10 +1,10 @@
 'use strict'
 
-var util = require('../util')
+const util = require('../util')
 
 class Builder {
   static create (filename) {
-    var builder = new Builder()
+    let builder = new Builder()
     builder.filename = filename
     return builder
   }
@@ -29,7 +29,7 @@ class Builder {
   }
 
   serialize () {
-    var files = {}
+    let files = {}
     files[this._outputPathname()] = this._buffer
     return files
   }
@@ -54,7 +54,7 @@ class Builder {
   }
 
   _line (source, semicolon) {
-    var i = this._indentLevel
+    let i = this._indentLevel
     while (i--) this._write('  ')
     this._write(source)
     if (semicolon !== false) this._write(';')
@@ -91,7 +91,7 @@ class Builder {
   }
 
   syntaxNodeClass_ () {
-    var name = 'TreeNode'
+    let name = 'TreeNode'
     this.function_('var ' + name, ['text', 'offset', 'elements'], (builder) => {
       builder._line('this.text = text')
       builder._line('this.offset = offset')
@@ -156,13 +156,13 @@ class Builder {
   }
 
   exports_ () {
-    var grammar   = this._grammarName,
+    let grammar   = this._grammarName,
         namespace = grammar.split('.'),
         last      = namespace.pop(),
         n         = namespace.length,
         condition = []
 
-    for (var i = 0; i < n; i++)
+    for (let i = 0; i < n; i++)
       condition.push('typeof ' + namespace.slice(0, i + 1).join('.') + " !== 'undefined'")
 
     this.assign_('var exported', '{Grammar: Grammar, Parser: Parser, parse: parse}')
@@ -175,7 +175,7 @@ class Builder {
       })
     }, (builder) => {
       builder.assign_('var namespace', "typeof this !== 'undefined' ? this : window")
-      for (var ns of namespace) {
+      for (let ns of namespace) {
         builder.assign_('namespace', 'namespace.' + ns + ' = namespace.' + ns + ' || {}')
       }
       builder.assign_('namespace.' + last, 'exported')
@@ -183,7 +183,7 @@ class Builder {
   }
 
   class_ (name, parent, block, context) {
-    var builder = new Builder(this, name, parent)
+    let builder = new Builder(this, name, parent)
     block.call(context, builder)
   }
 
@@ -207,13 +207,13 @@ class Builder {
     this._methodSeparator = ',\n\n'
     this._line(name + ' (' + args.join(', ') + ') {', false)
     new Builder(this)._indent(block, context)
-    var n = this._indentLevel
+    let n = this._indentLevel
     while (n--) this._write('  ')
     this._write('}')
   }
 
   cache_ (name, block, context) {
-    var temp      = this.localVars_({address: this.nullNode_(), index: 'this._offset'}),
+    let temp      = this.localVars_({address: this.nullNode_(), index: 'this._offset'}),
         address   = temp.address,
         offset    = temp.index,
         cacheMap  = 'this._cache._' + name,
@@ -239,8 +239,8 @@ class Builder {
   }
 
   localVars_ (vars) {
-    var names = {}, code = [], varName
-    for (var name in vars) {
+    let names = {}, code = [], varName
+    for (let name in vars) {
       this._varIndex[name] = this._varIndex[name] || 0
       varName = name + this._varIndex[name]
       this._varIndex[name] += 1
@@ -253,7 +253,7 @@ class Builder {
 
   localVar_ (name, value) {
     this._varIndex[name] = this._varIndex[name] || 0
-    var varName = name + this._varIndex[name]
+    let varName = name + this._varIndex[name]
     this._varIndex[name] += 1
 
     if (value == undefined) value = this.nullNode_()
@@ -263,7 +263,7 @@ class Builder {
   }
 
   chunk_ (length) {
-    var input = 'this._input',
+    let input = 'this._input',
         ofs   = 'this._offset',
         temp  = this.localVars_({chunk: this.null_(), max: ofs + ' + ' + length})
 
@@ -274,7 +274,7 @@ class Builder {
   }
 
   syntaxNode_ (address, start, end, elements, action, nodeClass) {
-    var args
+    let args
 
     if (action) {
       action = 'this._actions.' + action

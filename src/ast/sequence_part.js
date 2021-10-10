@@ -12,7 +12,7 @@ class SequencePart {
   }
 
   labels () {
-    var labels = []
+    let labels = []
     if (this._label) labels.push(this._label)
     if (this._expression.refName) labels.push(this._expression.refName)
     return labels

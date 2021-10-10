@@ -8,16 +8,16 @@ class String {
   }
 
   compile (builder, address, action) {
-    var value  = this._value,
+    let value  = this._value,
         length = value.length,
         chunk  = builder.chunk_(length)
 
-    var condition = this._ci
+    let condition = this._ci
                   ? builder.stringMatchCI_(chunk, value)
                   : builder.stringMatch_(chunk, value)
 
     builder.if_(condition, (builder) => {
-      var of = builder.offset_()
+      let of = builder.offset_()
       builder.syntaxNode_(address, of, of + ' + ' + length, null, action)
     }, (builder) => {
       builder.failure_(address, this._text)

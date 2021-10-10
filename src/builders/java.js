@@ -1,6 +1,6 @@
 'use strict'
 
-var TYPES = {
+const TYPES = {
   address:    'TreeNode',
   chunk:      'String',
   elements:   'List<TreeNode>',
@@ -11,7 +11,7 @@ var TYPES = {
 
 class Builder {
   static create (filename, sep) {
-    var builder = new Builder()
+    let builder = new Builder()
     builder.filename = filename
     builder.pathsep = sep
     return builder
@@ -44,7 +44,7 @@ class Builder {
 
   _newBuffer (name) {
     this._currentBuffer = this.filename.replace(/\.peg$/, this.pathsep + name + '.java')
-    var namespace = this.filename.replace(/\.peg$/, '').split(this.pathsep)
+    let namespace = this.filename.replace(/\.peg$/, '').split(this.pathsep)
     this._buffers[this._currentBuffer] = 'package ' + namespace.join('.') + ';\n\n'
   }
 
@@ -64,7 +64,7 @@ class Builder {
   }
 
   _line (source, semicolon) {
-    var i = this._indentLevel
+    let i = this._indentLevel
     while (i--) this._write('    ')
     this._write(source)
     if (semicolon !== false) this._write(';')
@@ -91,10 +91,10 @@ class Builder {
   syntaxNodeClass_ () {
     this._newBuffer('TreeNode')
 
-    for (var impt of ['ArrayList', 'EnumMap', 'Iterator', 'List', 'Map'])
+    for (let impt of ['ArrayList', 'EnumMap', 'Iterator', 'List', 'Map'])
       this._line('import java.util.' + impt)
 
-    var name = 'TreeNode'
+    let name = 'TreeNode'
 
     this._newline()
     this._line('public class ' + name + ' implements Iterable<' + name + '> {', false)
@@ -162,7 +162,7 @@ class Builder {
     this._newline()
     this._line('public interface Actions {', false)
     this._indent((builder) => {
-      for (var action of actions)
+      for (let action of actions)
         builder._line('public TreeNode ' + action + '(String input, int start, int end, List<TreeNode> elements)')
     })
     this._line('}', false)
@@ -190,7 +190,7 @@ class Builder {
   }
 
   compileRegex_ (charClass, name) {
-    var regex  = charClass.regex,
+    let regex  = charClass.regex,
         source = regex.source.replace(/^\^/, '\\A')
 
     this.assign_('private static Pattern ' + name, 'Pattern.compile(' + this._quote(source) + ')')
@@ -289,13 +289,13 @@ class Builder {
   }
 
   exports_ () {
-    var labels = []
-    for (var name in this._labels) labels.push(name)
+    let labels = []
+    for (let name in this._labels) labels.push(name)
     labels = labels.sort()
     this._newBuffer('Label')
     this._line('public enum Label {', false)
     this._indent((builder) => {
-      for (var [i, label] of labels.entries())
+      for (let [i, label] of labels.entries())
         builder._line(label + (i < labels.length - 1 ? ',' : ''), false)
     })
     this._line('}', false)
@@ -325,11 +325,11 @@ class Builder {
   }
 
   cache_ (name, block, context) {
-    var builder = this
+    let builder = this
     while (builder._parent) builder = builder._parent
     builder._labels[name] = true
 
-    var temp    = this.localVars_({address: this.nullNode_(), index: 'offset'}),
+    let temp    = this.localVars_({address: this.nullNode_(), index: 'offset'}),
         address = temp.address,
         offset  = temp.index
 
@@ -351,22 +351,22 @@ class Builder {
   attributes_ () {}
 
   attribute_ (name, value) {
-    var builder = this
+    let builder = this
     while (builder._parent) builder = builder._parent
     builder._labels[name] = true
     this._line('labelled.put(Label.' + name + ', ' + value + ')')
   }
 
   localVars_ (vars) {
-    var names = {}, code = [], varName
-    for (var name in vars)
+    let names = {}, code = [], varName
+    for (let name in vars)
       names[name] = this.localVar_(name, vars[name])
     return names
   }
 
   localVar_ (name, value) {
     this._varIndex[name] = this._varIndex[name] || 0
-    var varName = name + this._varIndex[name]
+    let varName = name + this._varIndex[name]
     this._varIndex[name] += 1
 
     if (value === undefined) value = this.nullNode_()
@@ -376,7 +376,7 @@ class Builder {
   }
 
   chunk_ (length) {
-    var input = 'input',
+    let input = 'input',
         ofs   = 'offset',
         temp  = this.localVars_({chunk: this.null_(), max: ofs + ' + ' + length})
 
@@ -387,7 +387,7 @@ class Builder {
   }
 
   syntaxNode_ (address, start, end, elements, action, nodeClass) {
-    var args
+    let args
 
     if (action) {
       action = 'actions.' + action

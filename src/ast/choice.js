@@ -10,7 +10,7 @@ class Choice {
   }
 
   compile (builder, address) {
-    var startOffset = builder.localVar_('index', builder.offset_())
+    let startOffset = builder.localVar_('index', builder.offset_())
     this._compileChoices(builder, address, 0, startOffset)
   }
 

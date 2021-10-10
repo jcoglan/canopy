@@ -10,7 +10,7 @@ class Maybe {
   }
 
   compile (builder, address) {
-    var startOffset = builder.localVar_('index', builder.offset_())
+    let startOffset = builder.localVar_('index', builder.offset_())
     this._expression.compile(builder, address)
 
     builder.unlessNode_(address, (builder) => {
