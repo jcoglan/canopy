@@ -13,7 +13,7 @@ class Sequence {
     return this._parts.filter((p) => !p.muted()).length
   }
 
-  collectLabels (subclassName) {
+  collectLabels () {
     let result = this._parts.reduce((state, part) => {
       if (part.muted()) return state
 
@@ -26,8 +26,11 @@ class Sequence {
     let labels = result[0]
     if (Object.keys(labels).length === 0) return null
 
-    this._nodeClassName = subclassName
     return labels
+  }
+
+  setNodeClassName (className) {
+    this._nodeClassName = className
   }
 
   compile (builder, address, action) {
