@@ -38,9 +38,9 @@ class Builder {
     this._buffer += string
   }
 
-  _indent (block, context) {
+  _indent (block) {
     this._indentLevel += 1
-    block.call(context, this)
+    block(this)
     this._indentLevel -= 1
   }
 
@@ -71,9 +71,9 @@ class Builder {
     return '"' + string + '"'
   }
 
-  package_ (name, block, context) {
+  package_ (name, block) {
     this._line('module ' + name.replace(/\./g, '::'))
-    this._indent(block, context)
+    this._indent(block)
     this._line('end')
   }
 
@@ -97,13 +97,13 @@ class Builder {
     return name
   }
 
-  grammarModule_ (actions, block, context) {
+  grammarModule_ (actions, block) {
     this.assign_('ParseError', 'Class.new(StandardError)')
     this._newline()
     this.assign_(this.nullNode_(), 'Object.new')
     this._newline()
     this._line('module Grammar')
-    new Builder(this)._indent(block, context)
+    new Builder(this)._indent(block)
     this._line('end')
     this._newline()
   }
@@ -167,30 +167,30 @@ class Builder {
     this._line('end')
   }
 
-  class_ (name, parent, block, context) {
+  class_ (name, parent, block) {
     this._line('class ' + name + ' < ' + parent)
-    new Builder(this)._indent(block, context)
+    new Builder(this)._indent(block)
     this._line('end')
     this._newline()
   }
 
-  constructor_ (args, block, context) {
+  constructor_ (args, block) {
     this.method_('initialize', args, (builder) => {
       builder._line('super')
-      block.call(context, builder)
+      block(builder)
     })
   }
 
-  method_ (name, args, block, context) {
+  method_ (name, args, block) {
     this._write(this._methodSeparator)
     this._methodSeparator = '\n'
     args = (args.length > 0) ? '(' + args.join(', ') + ')' : ''
     this._line('def ' + name + args)
-    new Builder(this)._indent(block, context)
+    new Builder(this)._indent(block)
     this._line('end')
   }
 
-  cache_ (name, block, context) {
+  cache_ (name, block) {
     let temp      = this.localVars_({address: this.nullNode_(), index: '@offset'}),
         address   = temp.address,
         offset    = temp.index,
@@ -202,9 +202,9 @@ class Builder {
     this.if_('cached', (builder) => {
       builder._line('@offset = cached[1]')
       builder.return_('cached[0]')
-    }, this)
+    })
 
-    block.call(context, this, address)
+    block(this, address)
     this.assign_(cacheAddr, '[' + address + ', @offset]')
     this.return_(address)
   }
@@ -272,16 +272,16 @@ class Builder {
     this.assign_('@offset', end)
   }
 
-  ifNode_ (address, block, else_, context) {
-    this.unless_(address + ' == ' + this.nullNode_(), block, else_, context)
+  ifNode_ (address, block, else_) {
+    this.unless_(address + ' == ' + this.nullNode_(), block, else_)
   }
 
-  unlessNode_ (address, block, else_, context) {
-    this.if_(address + ' == ' + this.nullNode_(), block, else_, context)
+  unlessNode_ (address, block, else_) {
+    this.if_(address + ' == ' + this.nullNode_(), block, else_)
   }
 
-  ifNull_ (elements, block, else_, context) {
-    this.if_(elements + '.nil?', block, else_, context)
+  ifNull_ (elements, block, else_) {
+    this.if_(elements + '.nil?', block, else_)
   }
 
   extendNode_ (address, nodeType) {
@@ -309,31 +309,27 @@ class Builder {
     this.assign_(address, '_read_' + name)
   }
 
-  conditional_ (type, condition, block, else_, context) {
-    if (typeof else_ !== 'function') {
-      context = else_
-      else_   = null
-    }
+  conditional_ (type, condition, block, else_) {
     this._line(type + ' ' + condition)
-    this._indent(block, context)
+    this._indent(block)
     if (else_) {
       this._line('else')
-      this._indent(else_, context)
+      this._indent(else_)
     }
     this._line('end')
   }
 
-  if_ (condition, block, else_, context) {
-    this.conditional_('if', condition, block, else_, context)
+  if_ (condition, block, else_) {
+    this.conditional_('if', condition, block, else_)
   }
 
-  unless_ (condition, block, else_, context) {
-    this.conditional_('unless', condition, block, else_, context)
+  unless_ (condition, block, else_) {
+    this.conditional_('unless', condition, block, else_)
   }
 
-  whileNotNull_ (expression, block, context) {
+  whileNotNull_ (expression, block) {
     this._line('until ' + expression + ' == ' + this.nullNode_())
-    this._indent(block, context)
+    this._indent(block)
     this._line('end')
   }
 

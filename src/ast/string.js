@@ -21,7 +21,7 @@ class String {
       builder.syntaxNode_(address, of, of + ' + ' + length, null, action)
     }, (builder) => {
       builder.failure_(address, this._text)
-    }, this)
+    })
   }
 }
 

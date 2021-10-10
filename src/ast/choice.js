@@ -22,7 +22,7 @@ class Choice {
     builder.unlessNode_(address, (builder) => {
       builder.assign_(builder.offset_(), startOffset)
       this._compileChoices(builder, address, index + 1, startOffset)
-    }, this)
+    })
   }
 }
 

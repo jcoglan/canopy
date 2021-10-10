@@ -39,9 +39,9 @@ class Builder {
     this._buffer += string
   }
 
-  _indent (block, context) {
+  _indent (block) {
     this._indentLevel += 1
-    block.call(context, this)
+    block(this)
     this._indentLevel -= 1
   }
 
@@ -71,12 +71,12 @@ class Builder {
     return "'" + string + "'"
   }
 
-  package_ (name, block, context) {
+  package_ (name, block) {
     this._line('from collections import defaultdict')
     this._line('import re')
     this._newline()
     this._newline()
-    block.call(context, this)
+    block(this)
   }
 
   syntaxNodeClass_ () {
@@ -97,14 +97,14 @@ class Builder {
     return name
   }
 
-  grammarModule_ (actions, block, context) {
+  grammarModule_ (actions, block) {
     this.class_('ParseError', 'SyntaxError', (builder) => {
       builder._line('pass')
     })
     this.assign_(this.nullNode_(), 'object()')
     this._newline()
     this._newline()
-    this.class_('Grammar', 'object', block, context)
+    this.class_('Grammar', 'object', block)
   }
 
   compileRegex_ (charClass, name) {
@@ -165,29 +165,29 @@ class Builder {
     })
   }
 
-  class_ (name, parent, block, context) {
+  class_ (name, parent, block) {
     this._line('class ' + name + '(' + parent + '):')
-    new Builder(this, name, parent)._indent(block, context)
+    new Builder(this, name, parent)._indent(block)
     this._newline()
     this._newline()
   }
 
-  constructor_ (args, block, context) {
+  constructor_ (args, block) {
     this.method_('__init__', args, (builder) => {
       builder._line('super(' + this._name + ', self).__init__(' + args.join(', ') + ')')
-      block.call(context, builder)
-    }, this)
+      block(builder)
+    })
   }
 
-  method_ (name, args, block, context) {
+  method_ (name, args, block) {
     this._write(this._methodSeparator)
     this._methodSeparator = '\n'
     args = ['self'].concat(args).join(', ')
     this._line('def ' + name + '(' + args + '):')
-    new Builder(this)._indent(block, context)
+    new Builder(this)._indent(block)
   }
 
-  cache_ (name, block, context) {
+  cache_ (name, block) {
     let temp      = this.localVars_({address: this.nullNode_(), index: 'self._offset'}),
         address   = temp.address,
         offset    = temp.index,
@@ -201,7 +201,7 @@ class Builder {
       builder.return_('cached[0]')
     })
 
-    block.call(context, this, address)
+    block(this, address)
     this.assign_(cacheAddr, '(' + address + ', self._offset)')
     this.return_(address)
   }
@@ -264,16 +264,16 @@ class Builder {
     this.assign_('self._offset', end)
   }
 
-  ifNode_ (address, block, else_, context) {
-    this.if_(address + ' is not ' + this.nullNode_(), block, else_, context)
+  ifNode_ (address, block, else_) {
+    this.if_(address + ' is not ' + this.nullNode_(), block, else_)
   }
 
-  unlessNode_ (address, block, else_, context) {
-    this.if_(address + ' is ' + this.nullNode_(), block, else_, context)
+  unlessNode_ (address, block, else_) {
+    this.if_(address + ' is ' + this.nullNode_(), block, else_)
   }
 
-  ifNull_ (elements, block, else_, context) {
-    this.if_(elements + ' is None', block, else_, context)
+  ifNull_ (elements, block, else_) {
+    this.if_(elements + ' is None', block, else_)
   }
 
   extendNode_ (address, nodeType) {
@@ -302,22 +302,18 @@ class Builder {
     this.assign_(address, 'self._read_' + name + '()')
   }
 
-  if_ (condition, block, else_, context) {
-    if (typeof else_ !== 'function') {
-      context = else_
-      else_   = null
-    }
+  if_ (condition, block, else_) {
     this._line('if ' + condition + ':')
-    this._indent(block, context)
+    this._indent(block)
     if (else_) {
       this._line('else:')
-      this._indent(else_, context)
+      this._indent(else_)
     }
   }
 
-  whileNotNull_ (expression, block, context) {
+  whileNotNull_ (expression, block) {
     this._line('while ' + expression + ' is not ' + this.nullNode_() + ':')
-    this._indent(block, context)
+    this._indent(block)
   }
 
   stringMatch_ (expression, string) {

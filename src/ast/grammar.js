@@ -53,13 +53,13 @@ class Grammar {
 
         for (let rule of this._rules)
           rule.compile(builder)
-      }, this)
+      })
 
       let root = this._rules[0].name
 
       builder.parserClass_(root)
       builder.exports_()
-    }, this)
+    })
   }
 }
 

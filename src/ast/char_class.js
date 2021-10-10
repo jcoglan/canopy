@@ -15,7 +15,7 @@ class CharClass {
       builder.syntaxNode_(address, of, of + ' + 1', null, action)
     }, (builder) => {
       builder.failure_(address, this._text)
-    }, this)
+    })
   }
 }
 

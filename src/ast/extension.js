@@ -15,7 +15,7 @@ class Extension {
 
     builder.ifNode_(address, (builder) => {
       builder.extendNode_(address, this._typeName)
-    }, this)
+    })
   }
 }
 

@@ -43,9 +43,9 @@ class Builder {
     this._buffer += string
   }
 
-  _indent (block, context) {
+  _indent (block) {
     this._indentLevel += 1
-    block.call(context, this)
+    block(this)
     this._indentLevel -= 1
   }
 
@@ -74,7 +74,7 @@ class Builder {
     return "'" + string + "'"
   }
 
-  package_ (name, block, context) {
+  package_ (name, block) {
     this._line('(function() {', false)
     this._indent((builder) => {
       builder._line("'use strict'")
@@ -85,8 +85,8 @@ class Builder {
       builder._line('var inherit = ' + util.inherit.toString())
 
       this._grammarName = name
-      block.call(context, this)
-    }, this)
+      block(this)
+    })
     this._line('})()')
   }
 
@@ -107,12 +107,12 @@ class Builder {
     return name
   }
 
-  grammarModule_ (actions, block, context) {
+  grammarModule_ (actions, block) {
     this._newline()
     this.assign_('var ' + this.nullNode_(), '{}')
     this._newline()
     this._line('var Grammar = {', false)
-    new Builder(this)._indent(block, context)
+    new Builder(this)._indent(block)
     this._newline()
     this._line('}')
   }
@@ -182,37 +182,37 @@ class Builder {
     })
   }
 
-  class_ (name, parent, block, context) {
+  class_ (name, parent, block) {
     let builder = new Builder(this, name, parent)
-    block.call(context, builder)
+    block(builder)
   }
 
-  constructor_ (args, block, context) {
+  constructor_ (args, block) {
     this.function_('var ' + this._name, args, (builder) => {
       builder._line(this._parentName + '.apply(this, arguments)')
-      block.call(context, builder)
-    }, this)
+      block(builder)
+    })
     this._line('inherit(' + this._name + ', ' + this._parentName + ')')
   }
 
-  function_ (name, args, block, context) {
+  function_ (name, args, block) {
     this._newline()
     this._line(name + ' = function(' + args.join(', ') + ') {', false)
-    new Builder(this, this._name, this._parentName)._indent(block, context)
+    new Builder(this, this._name, this._parentName)._indent(block)
     this._line('}')
   }
 
-  method_ (name, args, block, context) {
+  method_ (name, args, block) {
     this._write(this._methodSeparator)
     this._methodSeparator = ',\n\n'
     this._line(name + ' (' + args.join(', ') + ') {', false)
-    new Builder(this)._indent(block, context)
+    new Builder(this)._indent(block)
     let n = this._indentLevel
     while (n--) this._write('  ')
     this._write('}')
   }
 
-  cache_ (name, block, context) {
+  cache_ (name, block) {
     let temp      = this.localVars_({address: this.nullNode_(), index: 'this._offset'}),
         address   = temp.address,
         offset    = temp.index,
@@ -227,7 +227,7 @@ class Builder {
       builder.return_('cached[0]')
     })
 
-    block.call(context, this, address)
+    block(this, address)
     this.assign_(cacheAddr,  '[' + address + ', this._offset]')
     this.return_(address)
   }
@@ -289,16 +289,16 @@ class Builder {
     this.assign_('this._offset', end)
   }
 
-  ifNode_ (address, block, else_, context) {
-    this.if_(address + ' !== ' + this.nullNode_(), block, else_, context)
+  ifNode_ (address, block, else_) {
+    this.if_(address + ' !== ' + this.nullNode_(), block, else_)
   }
 
-  unlessNode_ (address, block, else_, context) {
-    this.if_(address + ' === ' + this.nullNode_(), block, else_, context)
+  unlessNode_ (address, block, else_) {
+    this.if_(address + ' === ' + this.nullNode_(), block, else_)
   }
 
-  ifNull_ (elements, block, else_, context) {
-    this.if_(elements + ' === null', block, else_, context)
+  ifNull_ (elements, block, else_) {
+    this.if_(elements + ' === null', block, else_)
   }
 
   extendNode_ (address, nodeType) {
@@ -326,26 +326,22 @@ class Builder {
     this.assign_(address, 'this._read_' + rule + '()')
   }
 
-  conditional_ (kwd, condition, block, else_, context) {
-    if (typeof else_ !== 'function') {
-      context = else_
-      else_   = null
-    }
+  conditional_ (kwd, condition, block, else_) {
     this._line(kwd + ' (' + condition + ') {', false)
-    this._indent(block, context)
+    this._indent(block)
     if (else_) {
       this._line('} else {', false)
-      this._indent(else_, context)
+      this._indent(else_)
     }
     this._line('}', false)
   }
 
-  if_ (condition, block, else_, context) {
-    this.conditional_('if', condition, block, else_, context)
+  if_ (condition, block, else_) {
+    this.conditional_('if', condition, block, else_)
   }
 
-  whileNotNull_ (expression, block, context) {
-    this.conditional_('while', expression + ' !== ' + this.nullNode_(), block, context)
+  whileNotNull_ (expression, block) {
+    this.conditional_('while', expression + ' !== ' + this.nullNode_(), block)
   }
 
   stringMatch_ (expression, string) {

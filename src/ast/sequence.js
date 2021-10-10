@@ -67,7 +67,7 @@ class Sequence {
     }, (builder) => {
       builder.assign_(elements, builder.null_())
       builder.assign_(builder.offset_(), startOffset)
-    }, this)
+    })
   }
 }
 

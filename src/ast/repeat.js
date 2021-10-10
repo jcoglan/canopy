@@ -29,7 +29,7 @@ class Repeat {
         builder.append_(elements, elAddr)
         builder.decrement_(remaining)
       })
-    }, this)
+    })
 
     builder.if_(builder.isZero_(remaining), (builder) => {
       builder.syntaxNode_(address, startOffset, builder.offset_(), elements, action)
