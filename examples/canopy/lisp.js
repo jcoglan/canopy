@@ -785,7 +785,7 @@
   if (typeof require === 'function' && typeof exports === 'object') {
     Object.assign(exports, exported);
   } else {
-    var namespace = typeof this !== 'undefined' ? this : window;
-    namespace.CanopyLisp = exported;
+    var ns = (typeof this !== 'undefined') ? this : window;
+    ns.CanopyLisp = exported;
   }
 })();

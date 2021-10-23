@@ -2724,12 +2724,9 @@
 
   if (typeof require === 'function' && typeof exports === 'object') {
     Object.assign(exports, exported);
-    if (typeof Canopy !== 'undefined') {
-      Canopy.PEG = exported;
-    }
   } else {
-    var namespace = typeof this !== 'undefined' ? this : window;
-    namespace = namespace.Canopy = namespace.Canopy || {};
-    namespace.PEG = exported;
+    var ns = (typeof this !== 'undefined') ? this : window;
+    ns = ns.Canopy = ns.Canopy || {};
+    ns.PEG = exported;
   }
 })();

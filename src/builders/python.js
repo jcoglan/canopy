@@ -68,54 +68,7 @@ class Builder extends Base {
   }
 
   parserClass_ (root) {
-    this.class_('Parser', 'Grammar', (builder) => {
-      builder.method_('__init__', ['input', 'actions', 'types'], (builder) => {
-        builder.attribute_('_input', 'input')
-        builder.attribute_('_input_size', 'len(input)')
-        builder.attribute_('_actions', 'actions')
-        builder.attribute_('_types', 'types')
-        builder.attribute_('_offset', '0')
-        builder.attribute_('_cache', 'defaultdict(dict)')
-        builder.attribute_('_failure', '0')
-        builder.attribute_('_expected', '[]')
-      })
-
-      builder.method_('parse', [], (builder) => {
-        builder.jump_('tree', root)
-        builder.if_('tree is not ' + builder.nullNode_() + ' and self._offset == self._input_size', (builder) => {
-          builder.return_('tree')
-        })
-        builder.if_('not self._expected', (builder) => {
-          builder.assign_('self._failure', 'self._offset')
-          builder.append_('self._expected', "'<EOF>'")
-        })
-        builder._line('raise ParseError(format_error(self._input, self._failure, self._expected))')
-      })
-    })
-
-    this._line('def format_error(input, offset, expected):')
-    this._indent((builder) => {
-     builder._line("lines, line_no, position = input.split('\\n'), 0, 0")
-      builder._line('while position <= offset:')
-      builder._indent((builder) => {
-        builder._line('position += len(lines[line_no]) + 1')
-        builder._line('line_no += 1')
-      })
-      builder._line("message, line = 'Line ' + str(line_no) + ': expected ' + ', '.join(expected) + '\\n', lines[line_no - 1]")
-      builder._line("message += line + '\\n'")
-      builder._line('position -= len(line) + 1')
-      builder._line("message += ' ' * (offset - position)")
-      builder.return_("message + '^'")
-    })
-    this._newline()
-  }
-
-  exports_ () {
-    this._line('def parse(input, actions=None, types=None):')
-    this._indent((builder) => {
-      builder.assign_('parser', 'Parser(input, actions, types)')
-      builder.return_('parser.parse()')
-    })
+    this._template('python', 'parser.py', { root })
   }
 
   class_ (name, parent, block) {

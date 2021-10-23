@@ -28,9 +28,7 @@ class Grammar {
       })
 
       let root = this._rules[0].name
-
       builder.parserClass_(root)
-      builder.exports_()
     })
   }
 

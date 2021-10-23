@@ -117,96 +117,11 @@ class Builder extends Base {
 
   parserClass_ (root) {
     this._newBuffer('java', 'ParseError')
-    this._line('public class ParseError extends Exception {', false)
-    this._indent((builder) => {
-      builder._line('public ParseError(String message) {', false)
-      builder._indent((builder) => {
-        builder._line('super(message)')
-      })
-      builder._line('}', false)
-    })
-    this._line('}', false)
+    this._template('java', 'ParseError.java')
 
     this._newBuffer('java', this._grammarName)
-    this._line('import java.util.ArrayList')
-    this._line('import java.util.EnumMap')
-    this._line('import java.util.List')
-    this._line('import java.util.Map')
+    this._template('java', 'Parser.java', { root, name: this._grammarName })
 
-    this._newline()
-    this._line('public class ' + this._grammarName + ' extends Grammar {', false)
-    this._indent((builder) => {
-      builder._line('public ' + this._grammarName + '(String input, Actions actions) {', false)
-      builder._indent((builder) => {
-        builder.assign_('this.input', 'input')
-        builder.assign_('this.inputSize', 'input.length()')
-        builder.assign_('this.actions', 'actions')
-        builder.assign_('this.offset', '0')
-        builder.assign_('this.cache', 'new EnumMap<Label, Map<Integer, CacheRecord>>(Label.class)')
-        builder.assign_('this.failure', '0')
-        builder.assign_('this.expected', 'new ArrayList<String>()')
-      })
-      builder._line('}', false)
-
-      builder._newline()
-      builder._line('public static TreeNode parse(String input, Actions actions) throws ParseError {', false)
-      builder._indent((builder) => {
-        builder.assign_(this._grammarName + ' parser', 'new ' + this._grammarName + '(input, actions)')
-        builder.return_('parser.parse()')
-      })
-      builder._line('}', false)
-
-      builder._newline()
-      builder._line('public static TreeNode parse(String input) throws ParseError {', false)
-      builder._indent((builder) => {
-        builder.return_('parse(input, null)')
-      })
-      builder._line('}', false)
-
-      builder._newline()
-      builder._line('private static String formatError(String input, int offset, List<String> expected) {', false)
-      builder._indent((builder) => {
-        builder.assign_('String[] lines', 'input.split("\\n")')
-        builder._line('int lineNo = 0, position = 0')
-        builder._line('while (position <= offset) {', false)
-        builder._indent((builder) => {
-          builder._line('position += lines[lineNo].length() + 1')
-          builder._line('lineNo += 1')
-        })
-        builder._line('}', false)
-        builder.assign_('String message', '"Line " + lineNo + ": expected " + expected + "\\n"')
-        builder.assign_('String line', 'lines[lineNo - 1]')
-        builder._line('message += line + "\\n"')
-        builder._line('position -= line.length() + 1')
-        builder._line('while (position < offset) {', false)
-        builder._indent((builder) => {
-          builder._line('message += " "')
-          builder._line('position += 1')
-        })
-        builder._line('}', false)
-        builder.return_('message + "^"')
-      })
-      builder._line('}', false)
-
-      builder._newline()
-      builder._line('private TreeNode parse() throws ParseError {', false)
-      builder._indent((builder) => {
-        builder.jump_('TreeNode tree', root)
-        builder.if_('tree != ' + builder.nullNode_() + ' && offset == inputSize', (builder) => {
-          builder.return_('tree')
-        })
-        builder.if_('expected.isEmpty()', (builder) => {
-          builder.assign_('failure', 'offset')
-          builder.append_('expected', '"<EOF>"')
-        })
-        builder._line('throw new ParseError(formatError(input, failure, expected))')
-      })
-      builder._line('}', false)
-    })
-    this._line('}', false)
-  }
-
-  exports_ () {
     let labels = Object.keys(this._labels).sort()
 
     this._newBuffer('java', 'Label')

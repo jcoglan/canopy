@@ -1429,7 +1429,7 @@
   if (typeof require === 'function' && typeof exports === 'object') {
     Object.assign(exports, exported);
   } else {
-    var namespace = typeof this !== 'undefined' ? this : window;
-    namespace.CanopyJson = exported;
+    var ns = (typeof this !== 'undefined') ? this : window;
+    ns.CanopyJson = exported;
   }
 })();

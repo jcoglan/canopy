@@ -56,60 +56,7 @@ class Builder extends Base {
   }
 
   parserClass_ (root) {
-    this._line('class Parser')
-    this._indent((builder) => {
-      builder._line('include Grammar')
-      builder._methodSeparator = '\n'
-
-      builder.method_('initialize', ['input', 'actions', 'types'], (builder) => {
-        builder.attribute_('input', 'input')
-        builder.attribute_('input_size', 'input.size')
-        builder.attribute_('actions', 'actions')
-        builder.attribute_('types', 'types')
-        builder.attribute_('offset', '0')
-        builder.attribute_('cache', 'Hash.new { |h,k| h[k] = {} }')
-        builder.attribute_('failure', '0')
-        builder.attribute_('expected', '[]')
-      })
-
-      builder.method_('parse', [], (builder) => {
-        builder.jump_('tree', root)
-        builder.if_('tree != ' + builder.nullNode_() + ' and @offset == @input_size', (builder) => {
-          builder.return_('tree')
-        })
-        builder.if_('@expected.empty?', (builder) => {
-          builder.assign_('@failure', '@offset')
-          builder.append_('@expected', '"<EOF>"')
-        })
-        builder._line('raise ParseError, Parser.format_error(@input, @failure, @expected)')
-      })
-
-      builder.method_('self.format_error', ['input', 'offset', 'expected'], (builder) => {
-        builder._line('lines, line_no, position = input.split(/\\n/), 0, 0')
-        builder._line('while position <= offset')
-        builder._indent((builder) => {
-          builder._line('position += lines[line_no].size + 1')
-          builder._line('line_no += 1')
-        })
-        builder._line('end')
-        builder._line('message, line = "Line #{line_no}: expected #{expected * ", "}\\n", lines[line_no - 1]')
-        builder._line('message += "#{line}\\n"')
-        builder._line('position -= line.size + 1')
-        builder._line('message += " " * (offset - position)')
-        builder.return_('message + "^"')
-      })
-    })
-    this._line('end')
-    this._newline()
-  }
-
-  exports_ () {
-    this._line('def self.parse(input, options = {})')
-    this._indent((builder) => {
-      builder.assign_('parser', 'Parser.new(input, options[:actions], options[:types])')
-      builder._line('parser.parse')
-    })
-    this._line('end')
+    this._template('ruby', 'parser.rb', { root })
   }
 
   class_ (name, parent, block) {

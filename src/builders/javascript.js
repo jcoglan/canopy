@@ -65,66 +65,11 @@ class Builder extends Base {
   }
 
   parserClass_ (root) {
-    this.function_('var Parser', ['input', 'actions', 'types'], (builder) => {
-      builder.assign_('this._input', 'input')
-      builder.assign_('this._inputSize', 'input.length')
-      builder.assign_('this._actions', 'actions')
-      builder.assign_('this._types', 'types')
-      builder.assign_('this._offset', '0')
-      builder.assign_('this._cache', '{}')
-      builder.assign_('this._failure', '0')
-      builder.assign_('this._expected', '[]')
-    })
+    let namespace = this._grammarName.split('.'),
+        name = namespace.pop()
 
-    this.function_('Parser.prototype.parse', [], (builder) => {
-      builder.jump_('var tree', root)
-
-      builder.if_('tree !== ' + builder.nullNode_() + ' && this._offset === this._inputSize', (builder) => {
-        builder.return_('tree')
-      })
-      builder.if_('this._expected.length === 0', (builder) => {
-        builder.assign_('this._failure', 'this._offset')
-        builder.append_('this._expected', "'<EOF>'")
-      })
-      builder.assign_('this.constructor.lastError', '{offset: this._offset, expected: this._expected}')
-      builder._line('throw new SyntaxError(formatError(this._input, this._failure, this._expected))')
-    })
-
-    this.function_('var parse', ['input', 'options'], (builder) => {
-      builder.assign_('options', 'options || {}')
-      builder.assign_('var parser', 'new Parser(input, options.actions, options.types)')
-      builder.return_('parser.parse()')
-    })
-
-    this._line('Object.assign(Parser.prototype, Grammar)')
     this._newline()
-  }
-
-  exports_ () {
-    let grammar   = this._grammarName,
-        namespace = grammar.split('.'),
-        last      = namespace.pop(),
-        n         = namespace.length,
-        condition = []
-
-    for (let i = 0; i < n; i++)
-      condition.push('typeof ' + namespace.slice(0, i + 1).join('.') + " !== 'undefined'")
-
-    this.assign_('var exported', '{Grammar: Grammar, Parser: Parser, parse: parse}')
-    this._newline()
-
-    this.if_("typeof require === 'function' && typeof exports === 'object'", (builder) => {
-      builder._line('Object.assign(exports, exported)')
-      if (condition.length > 0) builder.if_(condition.join(' &&' ), (builder) => {
-        builder.assign_(grammar, 'exported')
-      })
-    }, (builder) => {
-      builder.assign_('var namespace', "typeof this !== 'undefined' ? this : window")
-      for (let ns of namespace) {
-        builder.assign_('namespace', 'namespace.' + ns + ' = namespace.' + ns + ' || {}')
-      }
-      builder.assign_('namespace.' + last, 'exported')
-    })
+    this._template('javascript', 'parser.js', { root, namespace, name })
   }
 
   class_ (name, parent, block) {
