@@ -4,7 +4,8 @@ SHELL := /bin/bash
 
 
 src_files := $(shell find src -type f)
-lib_files := $(src_files:src/%=lib/%) node_modules
+templates := $(shell find templates -type f)
+lib_files := $(src_files:src/%=lib/%) node_modules $(templates)
 
 bootstrap: test $(lib_files)
 

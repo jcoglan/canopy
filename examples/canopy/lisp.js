@@ -35,13 +35,13 @@
     subclass.prototype.constructor = subclass;
   };
 
-  var TreeNode = function(text, offset, elements) {
+  function TreeNode (text, offset, elements) {
     this.text = text;
     this.offset = offset;
     this.elements = elements;
-  };
+  }
 
-  TreeNode.prototype.forEach = function(block, context) {
+  TreeNode.prototype.forEach = function (block, context) {
     for (var el = this.elements, i = 0, n = el.length; i < n; i++) {
       block.call(context, el[i], i, el);
     }

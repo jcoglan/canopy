@@ -51,54 +51,10 @@ class Builder extends Base {
   }
 
   syntaxNodeClass_ () {
-    this._newBuffer('java', 'TreeNode')
-
-    for (let impt of ['ArrayList', 'EnumMap', 'Iterator', 'List', 'Map'])
-      this._line('import java.util.' + impt)
-
     let name = 'TreeNode'
 
-    this._newline()
-    this._line('public class ' + name + ' implements Iterable<' + name + '> {', false)
-    this._indent((builder) => {
-      builder._line('public String text')
-      builder._line('public int offset')
-      builder._line('public List<' + name + '> elements')
-      builder._newline()
-      builder._line('Map<Label, ' + name + '> labelled')
-
-      builder._newline()
-      builder._line('public ' + name + '() {', false)
-      builder._indent((builder) => {
-        builder._line('this("", -1, new ArrayList<' + name + '>(0))')
-      })
-      builder._line('}', false)
-
-      builder._newline()
-      builder._line('public ' + name + '(String text, int offset, List<' + name + '> elements) {', false)
-      builder._indent((builder) => {
-        builder.assign_('this.text', 'text')
-        builder.assign_('this.offset', 'offset')
-        builder.assign_('this.elements', 'elements')
-        builder.assign_('this.labelled', 'new EnumMap<Label, ' + name + '>(Label.class)')
-      })
-      builder._line('}', false)
-
-      builder._newline()
-      builder._line('public ' + name + ' get(Label key) {', false)
-      builder._indent((builder) => {
-        builder.return_('labelled.get(key)')
-      })
-      builder._line('}', false)
-
-      builder._newline()
-      builder._line('public Iterator<' + name + '> iterator() {', false)
-      builder._indent((builder) => {
-        builder.return_('elements.iterator()')
-      })
-      builder._line('}', false)
-    })
-    this._line('}', false)
+    this._newBuffer('java', name)
+    this._template('java', 'TreeNode.java', { name })
 
     return name
   }

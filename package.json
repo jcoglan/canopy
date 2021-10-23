@@ -7,11 +7,11 @@
 
 , "version"         : "0.4.0"
 , "engines"         : { "node": ">=0.4.0" }
-, "files"           : ["bin", "lib"]
+, "files"           : ["bin", "lib", "templates"]
 , "main"            : "./lib/canopy.js"
 , "bin"             : { "canopy": "./bin/canopy" }
 
-, "dependencies"    : { "mkdirp": ">=1.0.0", "nopt": "" }
+, "dependencies"    : { "handlebars": ">=4.0.0", "mkdirp": ">=1.0.0", "nopt": "*" }
 , "devDependencies" : { "benchmark": "", "jstest": "", "pegjs": "" }
 
 , "bugs"            : { "url": "https://github.com/jcoglan/canopy/issues" }

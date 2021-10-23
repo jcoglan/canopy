@@ -1,6 +1,8 @@
 'use strict'
 
+const { readFileSync } = require('fs')
 const { basename, dirname, join } = require('path')
+const handlebars = require('handlebars')
 
 const PEG_EXT = '.peg'
 
@@ -50,6 +52,15 @@ class Base {
     return ''
   }
 
+  _template (lang, name, args) {
+    let pathname = join(__dirname, '..', '..', 'templates', lang, name),
+        template = handlebars.compile(readFileSync(pathname, 'utf8')),
+        result   = template(args).replace(/\s*$/, '')
+
+    for (let line of result.split(/\n/))
+      this._line(line, false)
+  }
+
   _write (string) {
     if (this._parent) return this._parent._write(string)
     this._buffers[this._currentBuffer] += string
@@ -63,9 +74,12 @@ class Base {
 
   _line (source, semicolon = true) {
     let i = this._indentLevel
-    while (i--) this._write(this.tab_())
-    this._write(source)
-    if (semicolon) this._write(';')
+
+    if (source.length > 0) {
+      while (i--) this._write(this.tab_())
+      this._write(source)
+      if (semicolon) this._write(';')
+    }
     this._newline()
   }
 

@@ -42,19 +42,11 @@ class Builder extends Base {
 
   syntaxNodeClass_ () {
     let name = 'TreeNode'
-    this.class_(name, 'object', (builder) => {
-      builder.method_('__init__', ['text', 'offset', 'elements'], (builder) => {
-        builder.attribute_('text', 'text')
-        builder.attribute_('offset', 'offset')
-        builder.attribute_('elements', 'elements')
-      })
-      builder.method_('__iter__', [], (builder) => {
-        builder._line('for el in self.elements:')
-        builder._indent((builder) => {
-          builder._line('yield el')
-        })
-      })
-    })
+
+    this._template('python', 'tree_node.py', { name })
+    this._newline()
+    this._newline()
+
     return name
   }
 

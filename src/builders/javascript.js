@@ -47,18 +47,10 @@ class Builder extends Base {
 
   syntaxNodeClass_ () {
     let name = 'TreeNode'
-    this.function_('var ' + name, ['text', 'offset', 'elements'], (builder) => {
-      builder._line('this.text = text')
-      builder._line('this.offset = offset')
-      builder._line('this.elements = elements')
-    })
-    this.function_(name + '.prototype.forEach', ['block', 'context'], (builder) => {
-      builder._line('for (var el = this.elements, i = 0, n = el.length; i < n; i++) {', false)
-      builder._indent((builder) => {
-        builder._line('block.call(context, el[i], i, el)')
-      })
-      builder._line('}', false)
-    })
+
+    this._newline()
+    this._template('javascript', 'tree_node.js', { name })
+
     return name
   }
 

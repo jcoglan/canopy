@@ -37,21 +37,10 @@ class Builder extends Base {
 
   syntaxNodeClass_ () {
     let name = 'TreeNode'
-    this._line('class ' + name)
-    this._indent((builder) => {
-      builder._line('include Enumerable')
-      builder.attributes_(['text', 'offset', 'elements'])
-      builder.method_('initialize', ['text', 'offset', 'elements'], (builder) => {
-        builder.attribute_('text', 'text')
-        builder.attribute_('offset', 'offset')
-        builder.attribute_('elements', 'elements')
-      })
-      builder.method_('each', ['&block'], (builder) => {
-        builder._line('@elements.each(&block)')
-      })
-    })
-    this._line('end')
+
+    this._template('ruby', 'tree_node.rb', { name })
     this._newline()
+
     return name
   }
 
