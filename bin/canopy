@@ -27,7 +27,7 @@ try {
   ];
 
   var grammar = fs.readFileSync(inputFile, 'utf8'),
-      builder = BUILDERS[lang].create(inputFile, path.sep),
+      builder = BUILDERS[lang].create(inputFile),
       parser  = canopy.compile(grammar, builder),
       names   = Object.keys(parser);
 

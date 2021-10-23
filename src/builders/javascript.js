@@ -1,64 +1,17 @@
 'use strict'
 
+const Base = require('./base')
 const util = require('../util')
 
-class Builder {
-  static create (filename) {
-    let builder = new Builder()
-    builder.filename = filename
-    return builder
-  }
-
+class Builder extends Base {
   constructor (parent, name, parentName) {
-    if (parent) {
-      this._parent = parent
-      this._indentLevel = parent._indentLevel
-    } else {
-      this._buffer = ''
-      this._indentLevel = 0
-    }
-    this._name = name
+    super(parent, name)
     this._parentName = parentName
-    this._methodSeparator = ''
-    this._varIndex = {}
   }
 
   comment (lines) {
     lines = lines.map((line) => ' * ' + line)
     return ['/**'].concat(lines).concat([' */'])
-  }
-
-  serialize () {
-    let files = {}
-    files[this._outputPathname()] = this._buffer
-    return files
-  }
-
-  _outputPathname () {
-    return this.filename.replace(/\.peg$/, '.js')
-  }
-
-  _write (string) {
-    if (this._parent) return this._parent._write(string)
-    this._buffer += string
-  }
-
-  _indent (block) {
-    this._indentLevel += 1
-    block(this)
-    this._indentLevel -= 1
-  }
-
-  _newline () {
-    this._write('\n')
-  }
-
-  _line (source, semicolon) {
-    let i = this._indentLevel
-    while (i--) this._write('  ')
-    this._write(source)
-    if (semicolon !== false) this._write(';')
-    this._newline()
   }
 
   _quote (string) {
@@ -75,6 +28,8 @@ class Builder {
   }
 
   package_ (name, block) {
+    this._newBuffer('js')
+    
     this._line('(function() {', false)
     this._indent((builder) => {
       builder._line("'use strict'")
@@ -116,8 +71,6 @@ class Builder {
     this._newline()
     this._line('}')
   }
-
-  compileRegex_ () {}
 
   parserClass_ (root) {
     this.function_('var Parser', ['input', 'actions', 'types'], (builder) => {
@@ -232,8 +185,6 @@ class Builder {
     this.return_(address)
   }
 
-  attributes_ () {}
-
   attribute_ (name, value) {
     this.assign_("this['" + name + "']", value)
   }
@@ -318,10 +269,6 @@ class Builder {
     })
   }
 
-  assign_ (name, value) {
-    this._line(name + ' = ' + value)
-  }
-
   jump_ (address, rule) {
     this.assign_(address, 'this._read_' + rule + '()')
   }
@@ -357,10 +304,6 @@ class Builder {
     return string + ' !== null && /' + regex.source + '/.test(' + string + ')'
   }
 
-  return_ (expression) {
-    this._line('return ' + expression)
-  }
-
   arrayLookup_ (expression, offset) {
     return expression + '[' + offset + ']'
   }
@@ -370,14 +313,6 @@ class Builder {
       this._line(list + '.push(' + value + ')')
     else
       this._line(list + '[' + index + '] = ' + value)
-  }
-
-  decrement_ (variable) {
-    this._line('--' + variable)
-  }
-
-  isZero_ (expression) {
-    return expression + ' <= 0'
   }
 
   hasChars_ () {

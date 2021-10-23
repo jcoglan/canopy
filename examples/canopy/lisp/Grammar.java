@@ -45,7 +45,7 @@ abstract class Grammar {
                 address1 = _read_cell();
                 if (address1 != FAILURE) {
                     elements0.add(address1);
-                    --remaining0;
+                    remaining0 -= 1;
                 }
             }
             if (remaining0 <= 0) {
@@ -82,7 +82,7 @@ abstract class Grammar {
                 address2 = _read_space();
                 if (address2 != FAILURE) {
                     elements1.add(address2);
-                    --remaining0;
+                    remaining0 -= 1;
                 }
             }
             if (remaining0 <= 0) {
@@ -114,7 +114,7 @@ abstract class Grammar {
                         address5 = _read_space();
                         if (address5 != FAILURE) {
                             elements2.add(address5);
-                            --remaining1;
+                            remaining1 -= 1;
                         }
                     }
                     if (remaining1 <= 0) {
@@ -192,7 +192,7 @@ abstract class Grammar {
                     address3 = _read_cell();
                     if (address3 != FAILURE) {
                         elements1.add(address3);
-                        --remaining0;
+                        remaining0 -= 1;
                     }
                 }
                 if (remaining0 <= 0) {
@@ -402,7 +402,7 @@ abstract class Grammar {
                     }
                     if (address3 != FAILURE) {
                         elements1.add(address3);
-                        --remaining0;
+                        remaining0 -= 1;
                     }
                 }
                 if (remaining0 <= 0) {
@@ -553,7 +553,7 @@ abstract class Grammar {
                     }
                     if (address3 != FAILURE) {
                         elements1.add(address3);
-                        --remaining0;
+                        remaining0 -= 1;
                     }
                 }
                 if (remaining0 <= 0) {
@@ -671,7 +671,7 @@ abstract class Grammar {
                 }
                 if (address1 != FAILURE) {
                     elements0.add(address1);
-                    --remaining0;
+                    remaining0 -= 1;
                 }
             }
             if (remaining0 <= 0) {

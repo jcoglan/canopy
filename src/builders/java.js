@@ -1,5 +1,8 @@
 'use strict'
 
+const { sep } = require('path')
+const Base = require('./base')
+
 const TYPES = {
   address:    'TreeNode',
   chunk:      'String',
@@ -9,66 +12,25 @@ const TYPES = {
   remaining:  'int'
 }
 
-class Builder {
-  static create (filename, sep) {
-    let builder = new Builder()
-    builder.filename = filename
-    builder.pathsep = sep
-    return builder
+class Builder extends Base {
+  constructor (parent, name) {
+    super(parent, name)
+    this._labels = {}
   }
 
-  constructor (parent, name) {
-    if (parent) {
-      this._parent = parent
-      this._indentLevel = parent._indentLevel
-    } else {
-      this._buffer = ''
-      this._indentLevel = 0
-    }
-    this._name = name
-    this._varIndex = {}
+  tab_ () {
+    return '    '
+  }
 
-    this._buffers = {}
-    this._currentBuffer = null
-    this._labels = {}
+  initBuffer_ (pathname) {
+    let namespace = pathname.split(sep)
+    namespace.pop()
+    return 'package ' + namespace.join('.') + ';\n\n'
   }
 
   comment (lines) {
     lines = lines.map((line) => ' * ' + line)
     return ['/**'].concat(lines).concat([' */'])
-  }
-
-  serialize () {
-    return this._buffers
-  }
-
-  _newBuffer (name) {
-    this._currentBuffer = this.filename.replace(/\.peg$/, this.pathsep + name + '.java')
-    let namespace = this.filename.replace(/\.peg$/, '').split(this.pathsep)
-    this._buffers[this._currentBuffer] = 'package ' + namespace.join('.') + ';\n\n'
-  }
-
-  _write (string) {
-    if (this._parent) return this._parent._write(string)
-    this._buffers[this._currentBuffer] += string
-  }
-
-  _indent (block) {
-    this._indentLevel += 1
-    block(this)
-    this._indentLevel -= 1
-  }
-
-  _newline () {
-    this._write('\n')
-  }
-
-  _line (source, semicolon) {
-    let i = this._indentLevel
-    while (i--) this._write('    ')
-    this._write(source)
-    if (semicolon !== false) this._write(';')
-    this._newline()
   }
 
   _quote (string) {
@@ -89,7 +51,7 @@ class Builder {
   }
 
   syntaxNodeClass_ () {
-    this._newBuffer('TreeNode')
+    this._newBuffer('java', 'TreeNode')
 
     for (let impt of ['ArrayList', 'EnumMap', 'Iterator', 'List', 'Map'])
       this._line('import java.util.' + impt)
@@ -142,7 +104,7 @@ class Builder {
   }
 
   grammarModule_ (actions, block) {
-    this._newBuffer('CacheRecord')
+    this._newBuffer('java', 'CacheRecord')
     this._line('class CacheRecord {', false)
     this._indent((builder) => {
       builder._line('TreeNode node')
@@ -157,7 +119,7 @@ class Builder {
     })
     this._line('}', false)
 
-    this._newBuffer('Actions')
+    this._newBuffer('java', 'Actions')
     this._line('import java.util.List')
     this._newline()
     this._line('public interface Actions {', false)
@@ -167,7 +129,7 @@ class Builder {
     })
     this._line('}', false)
 
-    this._newBuffer('Grammar')
+    this._newBuffer('java', 'Grammar')
     this._line('import java.util.ArrayList')
     this._line('import java.util.HashMap')
     this._line('import java.util.List')
@@ -198,7 +160,7 @@ class Builder {
   }
 
   parserClass_ (root) {
-    this._newBuffer('ParseError')
+    this._newBuffer('java', 'ParseError')
     this._line('public class ParseError extends Exception {', false)
     this._indent((builder) => {
       builder._line('public ParseError(String message) {', false)
@@ -209,7 +171,7 @@ class Builder {
     })
     this._line('}', false)
 
-    this._newBuffer(this._grammarName)
+    this._newBuffer('java', this._grammarName)
     this._line('import java.util.ArrayList')
     this._line('import java.util.EnumMap')
     this._line('import java.util.List')
@@ -292,7 +254,7 @@ class Builder {
     let labels = []
     for (let name in this._labels) labels.push(name)
     labels = labels.sort()
-    this._newBuffer('Label')
+    this._newBuffer('java', 'Label')
     this._line('public enum Label {', false)
     this._indent((builder) => {
       for (let [i, label] of labels.entries())
@@ -347,8 +309,6 @@ class Builder {
     })
     this.return_(address)
   }
-
-  attributes_ () {}
 
   attribute_ (name, value) {
     let builder = this
@@ -431,10 +391,6 @@ class Builder {
     })
   }
 
-  assign_ (name, value) {
-    this._line(name + ' = ' + value)
-  }
-
   jump_ (address, rule) {
     this.assign_(address, '_read_' + rule + '()')
   }
@@ -469,10 +425,6 @@ class Builder {
     return string + ' != null && ' + regex + '.matcher(' + string + ').matches()'
   }
 
-  return_ (expression) {
-    this._line('return ' + expression)
-  }
-
   arrayLookup_ (expression, offset) {
     return expression + '.get(' + offset + ')'
   }
@@ -482,14 +434,6 @@ class Builder {
       this._line(list + '.add(' + value + ')')
     else
       this._line(list + '.add(' + index + ', ' + value + ')')
-  }
-
-  decrement_ (variable) {
-    this._line('--' + variable)
-  }
-
-  isZero_ (expression) {
-    return expression + ' <= 0'
   }
 
   hasChars_ () {

@@ -209,7 +209,7 @@
         address2 = this._read___();
         if (address2 !== FAILURE) {
           elements1.push(address2);
-          --remaining0;
+          remaining0 -= 1;
         }
       }
       if (remaining0 <= 0) {
@@ -234,7 +234,7 @@
               address7 = this._read___();
               if (address7 !== FAILURE) {
                 elements4.push(address7);
-                --remaining2;
+                remaining2 -= 1;
               }
             }
             if (remaining2 <= 0) {
@@ -265,7 +265,7 @@
             }
             if (address5 !== FAILURE) {
               elements2.push(address5);
-              --remaining1;
+              remaining1 -= 1;
             }
           }
           if (remaining1 <= 0) {
@@ -282,7 +282,7 @@
               address10 = this._read___();
               if (address10 !== FAILURE) {
                 elements5.push(address10);
-                --remaining3;
+                remaining3 -= 1;
               }
             }
             if (remaining3 <= 0) {
@@ -379,7 +379,7 @@
             address4 = this._read___();
             if (address4 !== FAILURE) {
               elements1.push(address4);
-              --remaining0;
+              remaining0 -= 1;
             }
           }
           if (remaining0 <= 0) {
@@ -478,7 +478,7 @@
         address2 = this._read___();
         if (address2 !== FAILURE) {
           elements1.push(address2);
-          --remaining0;
+          remaining0 -= 1;
         }
       }
       if (remaining0 <= 0) {
@@ -515,7 +515,7 @@
             address5 = this._read___();
             if (address5 !== FAILURE) {
               elements2.push(address5);
-              --remaining1;
+              remaining1 -= 1;
             }
           }
           if (remaining1 <= 0) {
@@ -604,7 +604,7 @@
           address3 = this._read___();
           if (address3 !== FAILURE) {
             elements1.push(address3);
-            --remaining0;
+            remaining0 -= 1;
           }
         }
         if (remaining0 <= 0) {
@@ -625,7 +625,7 @@
               address6 = this._read___();
               if (address6 !== FAILURE) {
                 elements2.push(address6);
-                --remaining1;
+                remaining1 -= 1;
               }
             }
             if (remaining1 <= 0) {
@@ -709,7 +709,7 @@
             address5 = this._read___();
             if (address5 !== FAILURE) {
               elements3.push(address5);
-              --remaining1;
+              remaining1 -= 1;
             }
           }
           if (remaining1 <= 0) {
@@ -746,7 +746,7 @@
                 address8 = this._read___();
                 if (address8 !== FAILURE) {
                   elements4.push(address8);
-                  --remaining2;
+                  remaining2 -= 1;
                 }
               }
               if (remaining2 <= 0) {
@@ -785,7 +785,7 @@
           }
           if (address3 !== FAILURE) {
             elements1.push(address3);
-            --remaining0;
+            remaining0 -= 1;
           }
         }
         if (remaining0 <= 0) {
@@ -848,7 +848,7 @@
           address4 = this._read___();
           if (address4 !== FAILURE) {
             elements2.push(address4);
-            --remaining0;
+            remaining0 -= 1;
           }
         }
         if (remaining0 <= 0) {
@@ -920,7 +920,7 @@
           address3 = this._read___();
           if (address3 !== FAILURE) {
             elements1.push(address3);
-            --remaining0;
+            remaining0 -= 1;
           }
         }
         if (remaining0 <= 0) {
@@ -993,7 +993,7 @@
           address3 = this._read___();
           if (address3 !== FAILURE) {
             elements1.push(address3);
-            --remaining0;
+            remaining0 -= 1;
           }
         }
         if (remaining0 <= 0) {
@@ -1014,7 +1014,7 @@
               address6 = this._read___();
               if (address6 !== FAILURE) {
                 elements2.push(address6);
-                --remaining1;
+                remaining1 -= 1;
               }
             }
             if (remaining1 <= 0) {
@@ -1239,7 +1239,7 @@
             address5 = this._read___();
             if (address5 !== FAILURE) {
               elements3.push(address5);
-              --remaining1;
+              remaining1 -= 1;
             }
           }
           if (remaining1 <= 0) {
@@ -1270,7 +1270,7 @@
           }
           if (address3 !== FAILURE) {
             elements1.push(address3);
-            --remaining0;
+            remaining0 -= 1;
           }
         }
         if (remaining0 <= 0) {
@@ -1763,7 +1763,7 @@
           }
           if (address3 !== FAILURE) {
             elements1.push(address3);
-            --remaining0;
+            remaining0 -= 1;
           }
         }
         if (remaining0 <= 0) {
@@ -1915,7 +1915,7 @@
             }
             if (address9 !== FAILURE) {
               elements4.push(address9);
-              --remaining1;
+              remaining1 -= 1;
             }
           }
           if (remaining1 <= 0) {
@@ -2081,7 +2081,7 @@
           }
           if (address3 !== FAILURE) {
             elements1.push(address3);
-            --remaining0;
+            remaining0 -= 1;
           }
         }
         if (remaining0 <= 0) {
@@ -2297,7 +2297,7 @@
             }
             if (address4 !== FAILURE) {
               elements1.push(address4);
-              --remaining0;
+              remaining0 -= 1;
             }
           }
           if (remaining0 <= 0) {
@@ -2462,7 +2462,7 @@
           }
           if (address3 !== FAILURE) {
             elements1.push(address3);
-            --remaining0;
+            remaining0 -= 1;
           }
         }
         if (remaining0 <= 0) {
@@ -2542,7 +2542,7 @@
           }
           if (address3 !== FAILURE) {
             elements1.push(address3);
-            --remaining0;
+            remaining0 -= 1;
           }
         }
         if (remaining0 <= 0) {
@@ -2659,7 +2659,7 @@
           }
           if (address3 !== FAILURE) {
             elements1.push(address3);
-            --remaining0;
+            remaining0 -= 1;
           }
         }
         if (remaining0 <= 0) {

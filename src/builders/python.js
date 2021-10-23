@@ -1,59 +1,18 @@
 'use strict'
 
-class Builder {
-  static create (filename) {
-    let builder = new Builder()
-    builder.filename = filename
-    return builder
-  }
+const Base = require('./base')
 
-  constructor (parent, name) {
-    if (parent) {
-      this._parent = parent
-      this._indentLevel = parent._indentLevel
-    } else {
-      this._buffer = ''
-      this._indentLevel = 0
-    }
-    this._name = name
-    this._methodSeparator = ''
-    this._varIndex = {}
+class Builder extends Base {
+  tab_ () {
+    return '    '
   }
 
   comment (lines) {
     return lines.map((line) => '# ' + line)
   }
 
-  serialize () {
-    let files = {}
-    files[this._outputPathname()] = this._buffer
-    return files
-  }
-
-  _outputPathname () {
-    return this.filename.replace(/\.peg$/, '.py')
-  }
-
-  _write (string) {
-    if (this._parent) return this._parent._write(string)
-    this._buffer += string
-  }
-
-  _indent (block) {
-    this._indentLevel += 1
-    block(this)
-    this._indentLevel -= 1
-  }
-
-  _newline () {
-    this._write('\n')
-  }
-
   _line (source) {
-    let i = this._indentLevel
-    while (i--) this._write('    ')
-    this._write(source)
-    this._newline()
+    super._line(source, false)
   }
 
   _quote (string) {
@@ -72,6 +31,8 @@ class Builder {
   }
 
   package_ (name, block) {
+    this._newBuffer('py')
+    
     this._line('from collections import defaultdict')
     this._line('import re')
     this._newline()
@@ -206,8 +167,6 @@ class Builder {
     this.return_(address)
   }
 
-  attributes_ (names) {}
-
   attribute_ (name, value) {
     this.assign_('self.' + name, value)
   }
@@ -294,10 +253,6 @@ class Builder {
     })
   }
 
-  assign_ (name, value) {
-    this._line(name + ' = ' + value)
-  }
-
   jump_ (address, name) {
     this.assign_(address, 'self._read_' + name + '()')
   }
@@ -329,10 +284,6 @@ class Builder {
     return string + ' is not None and Grammar.' + regex + '.search(' + string + ')'
   }
 
-  return_ (expression) {
-    this._line('return ' + expression)
-  }
-
   arrayLookup_ (expression, index) {
     return expression + '[' + index + ']'
   }
@@ -341,16 +292,8 @@ class Builder {
     this._line(list + '.append(' + value + ')')
   }
 
-  decrement_ (variable) {
-    this._line(variable + ' -= 1')
-  }
-
   hasChars_ () {
     return 'self._offset < self._input_size'
-  }
-
-  isZero_ (expression) {
-    return expression + ' <= 0'
   }
 
   nullNode_ () {

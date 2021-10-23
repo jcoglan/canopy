@@ -173,7 +173,7 @@ abstract class Grammar {
                         }
                         if (address4 != FAILURE) {
                             elements1.add(address4);
-                            --remaining0;
+                            remaining0 -= 1;
                         }
                     }
                     if (remaining0 <= 0) {
@@ -475,7 +475,7 @@ abstract class Grammar {
                         }
                         if (address4 != FAILURE) {
                             elements1.add(address4);
-                            --remaining0;
+                            remaining0 -= 1;
                         }
                     }
                     if (remaining0 <= 0) {
@@ -800,7 +800,7 @@ abstract class Grammar {
                     }
                     if (address3 != FAILURE) {
                         elements1.add(address3);
-                        --remaining0;
+                        remaining0 -= 1;
                     }
                 }
                 if (remaining0 <= 0) {
@@ -966,7 +966,7 @@ abstract class Grammar {
                             }
                             if (address5 != FAILURE) {
                                 elements2.add(address5);
-                                --remaining0;
+                                remaining0 -= 1;
                             }
                         }
                         if (remaining0 <= 0) {
@@ -1048,7 +1048,7 @@ abstract class Grammar {
                             }
                             if (address9 != FAILURE) {
                                 elements4.add(address9);
-                                --remaining1;
+                                remaining1 -= 1;
                             }
                         }
                         if (remaining1 <= 0) {
@@ -1222,7 +1222,7 @@ abstract class Grammar {
                                     }
                                     if (address14 != FAILURE) {
                                         elements6.add(address14);
-                                        --remaining2;
+                                        remaining2 -= 1;
                                     }
                                 }
                                 if (remaining2 <= 0) {
@@ -1416,7 +1416,7 @@ abstract class Grammar {
                 }
                 if (address1 != FAILURE) {
                     elements0.add(address1);
-                    --remaining0;
+                    remaining0 -= 1;
                 }
             }
             if (remaining0 <= 0) {
