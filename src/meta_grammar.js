@@ -35,13 +35,13 @@
     subclass.prototype.constructor = subclass;
   };
 
-  var TreeNode = function(text, offset, elements) {
+  function TreeNode (text, offset, elements) {
     this.text = text;
     this.offset = offset;
     this.elements = elements;
-  };
+  }
 
-  TreeNode.prototype.forEach = function(block, context) {
+  TreeNode.prototype.forEach = function (block, context) {
     for (var el = this.elements, i = 0, n = el.length; i < n; i++) {
       block.call(context, el[i], i, el);
     }
@@ -207,7 +207,7 @@
         address2 = this._read__();
         if (address2 !== FAILURE) {
           elements1.push(address2);
-          --remaining0;
+          remaining0 -= 1;
         }
       }
       if (remaining0 <= 0) {
@@ -232,7 +232,7 @@
               address7 = this._read__();
               if (address7 !== FAILURE) {
                 elements4.push(address7);
-                --remaining2;
+                remaining2 -= 1;
               }
             }
             if (remaining2 <= 0) {
@@ -263,7 +263,7 @@
             }
             if (address5 !== FAILURE) {
               elements2.push(address5);
-              --remaining1;
+              remaining1 -= 1;
             }
           }
           if (remaining1 <= 0) {
@@ -280,7 +280,7 @@
               address10 = this._read__();
               if (address10 !== FAILURE) {
                 elements5.push(address10);
-                --remaining3;
+                remaining3 -= 1;
               }
             }
             if (remaining3 <= 0) {
@@ -377,7 +377,7 @@
             address4 = this._read__();
             if (address4 !== FAILURE) {
               elements1.push(address4);
-              --remaining0;
+              remaining0 -= 1;
             }
           }
           if (remaining0 <= 0) {
@@ -476,7 +476,7 @@
         address2 = this._read__();
         if (address2 !== FAILURE) {
           elements1.push(address2);
-          --remaining0;
+          remaining0 -= 1;
         }
       }
       if (remaining0 <= 0) {
@@ -513,7 +513,7 @@
             address5 = this._read__();
             if (address5 !== FAILURE) {
               elements2.push(address5);
-              --remaining1;
+              remaining1 -= 1;
             }
           }
           if (remaining1 <= 0) {
@@ -634,7 +634,7 @@
           }
           if (address3 !== FAILURE) {
             elements1.push(address3);
-            --remaining0;
+            remaining0 -= 1;
           }
         }
         if (remaining0 <= 0) {
@@ -720,7 +720,7 @@
           }
           if (address3 !== FAILURE) {
             elements1.push(address3);
-            --remaining0;
+            remaining0 -= 1;
           }
         }
         if (remaining0 <= 0) {
@@ -800,7 +800,7 @@
           }
           if (address3 !== FAILURE) {
             elements1.push(address3);
-            --remaining0;
+            remaining0 -= 1;
           }
         }
         if (remaining0 <= 0) {
@@ -985,7 +985,7 @@
             address5 = this._read__();
             if (address5 !== FAILURE) {
               elements3.push(address5);
-              --remaining1;
+              remaining1 -= 1;
             }
           }
           if (remaining1 <= 0) {
@@ -1022,7 +1022,7 @@
                 address8 = this._read__();
                 if (address8 !== FAILURE) {
                   elements4.push(address8);
-                  --remaining2;
+                  remaining2 -= 1;
                 }
               }
               if (remaining2 <= 0) {
@@ -1061,7 +1061,7 @@
           }
           if (address3 !== FAILURE) {
             elements1.push(address3);
-            --remaining0;
+            remaining0 -= 1;
           }
         }
         if (remaining0 <= 0) {
@@ -1109,7 +1109,7 @@
           address3 = this._read__();
           if (address3 !== FAILURE) {
             elements1.push(address3);
-            --remaining0;
+            remaining0 -= 1;
           }
         }
         if (remaining0 <= 0) {
@@ -1194,7 +1194,7 @@
                   address3 = this._read__();
                   if (address3 !== FAILURE) {
                     elements1.push(address3);
-                    --remaining0;
+                    remaining0 -= 1;
                   }
                 }
                 if (remaining0 <= 0) {
@@ -1215,7 +1215,7 @@
                       address6 = this._read__();
                       if (address6 !== FAILURE) {
                         elements2.push(address6);
-                        --remaining1;
+                        remaining1 -= 1;
                       }
                     }
                     if (remaining1 <= 0) {
@@ -1353,7 +1353,7 @@
           address3 = this._read__();
           if (address3 !== FAILURE) {
             elements1.push(address3);
-            --remaining0;
+            remaining0 -= 1;
           }
         }
         if (remaining0 <= 0) {
@@ -1509,7 +1509,7 @@
             address5 = this._read__();
             if (address5 !== FAILURE) {
               elements3.push(address5);
-              --remaining1;
+              remaining1 -= 1;
             }
           }
           if (remaining1 <= 0) {
@@ -1540,7 +1540,7 @@
           }
           if (address3 !== FAILURE) {
             elements1.push(address3);
-            --remaining0;
+            remaining0 -= 1;
           }
         }
         if (remaining0 <= 0) {
@@ -1737,7 +1737,7 @@
           address3 = this._read__();
           if (address3 !== FAILURE) {
             elements1.push(address3);
-            --remaining0;
+            remaining0 -= 1;
           }
         }
         if (remaining0 <= 0) {
@@ -1758,7 +1758,7 @@
               address6 = this._read__();
               if (address6 !== FAILURE) {
                 elements2.push(address6);
-                --remaining1;
+                remaining1 -= 1;
               }
             }
             if (remaining1 <= 0) {
@@ -1878,7 +1878,7 @@
           address3 = this._read__();
           if (address3 !== FAILURE) {
             elements1.push(address3);
-            --remaining0;
+            remaining0 -= 1;
           }
         }
         if (remaining0 <= 0) {
@@ -1934,7 +1934,7 @@
           address3 = this._read__();
           if (address3 !== FAILURE) {
             elements1.push(address3);
-            --remaining0;
+            remaining0 -= 1;
           }
         }
         if (remaining0 <= 0) {
@@ -2030,7 +2030,7 @@
           address3 = this._read__();
           if (address3 !== FAILURE) {
             elements1.push(address3);
-            --remaining0;
+            remaining0 -= 1;
           }
         }
         if (remaining0 <= 0) {
@@ -2236,7 +2236,7 @@
           }
           if (address3 !== FAILURE) {
             elements1.push(address3);
-            --remaining0;
+            remaining0 -= 1;
           }
         }
         if (remaining0 <= 0) {
@@ -2388,7 +2388,7 @@
             }
             if (address9 !== FAILURE) {
               elements4.push(address9);
-              --remaining1;
+              remaining1 -= 1;
             }
           }
           if (remaining1 <= 0) {
@@ -2554,7 +2554,7 @@
           }
           if (address3 !== FAILURE) {
             elements1.push(address3);
-            --remaining0;
+            remaining0 -= 1;
           }
         }
         if (remaining0 <= 0) {
@@ -2741,7 +2741,7 @@
             }
             if (address4 !== FAILURE) {
               elements1.push(address4);
-              --remaining0;
+              remaining0 -= 1;
             }
           }
           if (remaining0 <= 0) {
@@ -2863,12 +2863,9 @@
 
   if (typeof require === 'function' && typeof exports === 'object') {
     Object.assign(exports, exported);
-    if (typeof Canopy !== 'undefined') {
-      Canopy.MetaGrammar = exported;
-    }
   } else {
-    var namespace = typeof this !== 'undefined' ? this : window;
-    namespace = namespace.Canopy = namespace.Canopy || {};
-    namespace.MetaGrammar = exported;
+    var ns = (typeof this !== 'undefined') ? this : window;
+    ns = ns.Canopy = ns.Canopy || {};
+    ns.MetaGrammar = exported;
   }
 })();
