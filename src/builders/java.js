@@ -251,9 +251,8 @@ class Builder extends Base {
   }
 
   exports_ () {
-    let labels = []
-    for (let name in this._labels) labels.push(name)
-    labels = labels.sort()
+    let labels = Object.keys(this._labels).sort()
+
     this._newBuffer('java', 'Label')
     this._line('public enum Label {', false)
     this._indent((builder) => {
