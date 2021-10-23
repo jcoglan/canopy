@@ -1,50 +1,50 @@
 #!/usr/bin/env node
 
-var canopy = require('../lib/canopy'),
-    fs     = require('fs'),
-    path   = require('path'),
-    mkdirp = require('mkdirp'),
-    nopt   = require('nopt');
+const fs     = require('fs')
+const mkdirp = require('mkdirp')
+const nopt   = require('nopt')
 
-var BUILDERS = {};
+const { dirname, relative } = require('path')
+const canopy = require('../lib/canopy')
 
-BUILDERS.java                     = canopy.builders.java;
-BUILDERS.js = BUILDERS.javascript = canopy.builders.javascript;
-BUILDERS.py = BUILDERS.python     = canopy.builders.python;
-BUILDERS.rb = BUILDERS.ruby       = canopy.builders.ruby;
+Object.assign(canopy.builders, {
+  js: canopy.builders.javascript,
+  py: canopy.builders.python,
+  rb: canopy.builders.ruby
+})
 
-try {
-  var options   = nopt({lang: String}, {l: '--lang'}),
+async function main () {
+  let options   = nopt({ lang: String }, { l: '--lang' }),
       lang      = options.lang || 'js',
-      inputFile = options.argv.remain[0];
+      inputFile = options.argv.remain[0]
 
-  if (!BUILDERS.hasOwnProperty(lang))
-    throw new Error('Unrecognised target language: ' + lang);
+  if (!canopy.builders.hasOwnProperty(lang))
+    throw new Error('Unrecognised target language: ' + lang)
 
-  var comment = [
-    'This file was generated from ' + path.relative(process.cwd(), inputFile),
+  let comment = [
+    'This file was generated from ' + relative(process.cwd(), inputFile),
     'See http://canopy.jcoglan.com/ for documentation.'
-  ];
+  ]
 
-  var grammar = fs.readFileSync(inputFile, 'utf8'),
-      builder = BUILDERS[lang].create(inputFile),
-      parser  = canopy.compile(grammar, builder),
-      names   = Object.keys(parser);
+  let grammar = fs.readFileSync(inputFile, 'utf8'),
+      builder = canopy.builders[lang].create(inputFile),
+      parser  = canopy.compile(grammar, builder)
 
-  var write = function(index) {
-    var name = names[index];
-    if (!name) return;
-
-    mkdirp(path.dirname(name)).then(function() {
-      var content = builder.comment(comment).join('\n') + '\n\n' + parser[name];
-      fs.writeFileSync(name, content);
-      write(index + 1);
-    });
-  };
-  write(0);
-
-} catch (e) {
-  console.error(e.message);
-  console.error(e.stack);
-  process.exit(1);
+  for (let name in parser) {
+    await mkdirp(dirname(name))
+    let content = builder.comment(comment).join('\n') + '\n\n' + parser[name]
+    fs.writeFileSync(name, content)
+  }
 }
+
+async function run () {
+  try {
+    main()
+  } catch (err) {
+    console.error(err.message)
+    console.error(err.stack)
+    process.exit(1)
+  }
+}
+
+run()
