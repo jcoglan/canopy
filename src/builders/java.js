@@ -125,12 +125,7 @@ class Builder extends Base {
     let labels = Object.keys(this._labels).sort()
 
     this._newBuffer('java', 'Label')
-    this._line('public enum Label {', false)
-    this._indent((builder) => {
-      for (let [i, label] of labels.entries())
-        builder._line(label + (i < labels.length - 1 ? ',' : ''), false)
-    })
-    this._line('}', false)
+    this._template('java', 'Label.java', { labels })
   }
 
   class_ (name, parent, block) {
