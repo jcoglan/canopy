@@ -61,29 +61,10 @@ class Builder extends Base {
 
   grammarModule_ (actions, block) {
     this._newBuffer('java', 'CacheRecord')
-    this._line('class CacheRecord {', false)
-    this._indent((builder) => {
-      builder._line('TreeNode node')
-      builder._line('int tail')
-      builder._newline()
-      builder._line('CacheRecord(TreeNode node, int tail) {', false)
-      builder._indent((builder) => {
-        builder.assign_('this.node', 'node')
-        builder.assign_('this.tail', 'tail')
-      })
-      builder._line('}', false)
-    })
-    this._line('}', false)
+    this._template('java', 'CacheRecord.java')
 
     this._newBuffer('java', 'Actions')
-    this._line('import java.util.List')
-    this._newline()
-    this._line('public interface Actions {', false)
-    this._indent((builder) => {
-      for (let action of actions)
-        builder._line('public TreeNode ' + action + '(String input, int start, int end, List<TreeNode> elements)')
-    })
-    this._line('}', false)
+    this._template('java', 'Actions.java', { actions })
 
     this._newBuffer('java', 'Grammar')
     this._line('import java.util.ArrayList')
