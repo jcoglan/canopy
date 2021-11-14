@@ -28,12 +28,12 @@ class Base {
     this._varIndex = {}
   }
 
-  tab_ () {
-    return '  '
-  }
-
   serialize () {
     return this._buffers
+  }
+
+  _tab () {
+    return '  '
   }
 
   _newBuffer (ext, name = null) {
@@ -45,10 +45,10 @@ class Base {
     } else {
       this._currentBuffer = join(dir, base + '.' + ext)
     }
-    this._buffers[this._currentBuffer] = this.initBuffer_(this._currentBuffer)
+    this._buffers[this._currentBuffer] = this._initBuffer(this._currentBuffer)
   }
 
-  initBuffer_ (pathname) {
+  _initBuffer (pathname) {
     return ''
   }
 
@@ -76,7 +76,7 @@ class Base {
     let i = this._indentLevel
 
     if (source.length > 0) {
-      while (i--) this._write(this.tab_())
+      while (i--) this._write(this._tab())
       this._write(source)
       if (semicolon) this._write(';')
     }

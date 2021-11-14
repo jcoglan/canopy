@@ -18,19 +18,14 @@ class Builder extends Base {
     this._labels = {}
   }
 
-  tab_ () {
+  _tab () {
     return '    '
   }
 
-  initBuffer_ (pathname) {
+  _initBuffer (pathname) {
     let namespace = pathname.split(sep)
     namespace.pop()
     return 'package ' + namespace.join('.') + ';\n\n'
-  }
-
-  comment (lines) {
-    lines = lines.map((line) => ' * ' + line)
-    return ['/**'].concat(lines).concat([' */'])
   }
 
   _quote (string) {
@@ -43,6 +38,11 @@ class Builder extends Base {
                    .replace(/\r/g, '\\r')
 
     return '"' + string + '"'
+  }
+
+  comment (lines) {
+    lines = lines.map((line) => ' * ' + line)
+    return ['/**'].concat(lines).concat([' */'])
   }
 
   package_ (name, block) {

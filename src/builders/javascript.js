@@ -9,11 +9,6 @@ class Builder extends Base {
     this._parentName = parentName
   }
 
-  comment (lines) {
-    lines = lines.map((line) => ' * ' + line)
-    return ['/**'].concat(lines).concat([' */'])
-  }
-
   _quote (string) {
     string = string.replace(/\\/g, '\\\\')
                    .replace(/'/g, "\\'")
@@ -25,6 +20,11 @@ class Builder extends Base {
                    .replace(/\r/g, '\\r')
 
     return "'" + string + "'"
+  }
+
+  comment (lines) {
+    lines = lines.map((line) => ' * ' + line)
+    return ['/**'].concat(lines).concat([' */'])
   }
 
   package_ (name, block) {

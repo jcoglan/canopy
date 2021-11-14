@@ -3,12 +3,8 @@
 const Base = require('./base')
 
 class Builder extends Base {
-  tab_ () {
+  _tab () {
     return '    '
-  }
-
-  comment (lines) {
-    return lines.map((line) => '# ' + line)
   }
 
   _line (source) {
@@ -28,6 +24,10 @@ class Builder extends Base {
                    .replace(/\x1b/g, '\\e')
 
     return "'" + string + "'"
+  }
+
+  comment (lines) {
+    return lines.map((line) => '# ' + line)
   }
 
   package_ (name, block) {
