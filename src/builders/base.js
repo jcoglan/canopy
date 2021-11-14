@@ -84,7 +84,7 @@ class Base {
 
   _indent (block) {
     this._indentLevel += 1
-    block(this)
+    block()
     this._indentLevel -= 1
   }
 
@@ -97,7 +97,7 @@ class Base {
     if (indent !== false) {
       this._indent(block)
     } else {
-      block(this)
+      block()
     }
     this._stack.pop()
     this._currentScope = parent

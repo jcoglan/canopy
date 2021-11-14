@@ -45,9 +45,9 @@ class Sequence {
 
     this._compileExpressions(builder, 0, 0, startOffset, elements)
 
-    builder.ifNull_(elements, (builder) => {
+    builder.ifNull_(elements, () => {
       builder.assign_(address, builder.nullNode_())
-    }, (builder) => {
+    }, () => {
       builder.syntaxNode_(address, startOffset, builder.offset_(), elements, action, klass)
     })
   }
@@ -61,13 +61,13 @@ class Sequence {
 
     expr.compile(builder, expAddr)
 
-    builder.ifNode_(expAddr, (builder) => {
+    builder.ifNode_(expAddr, () => {
       if (!muted) {
         builder.append_(elements, expAddr, elIndex)
         elIndex += 1
       }
       this._compileExpressions(builder, index + 1, elIndex, startOffset, elements)
-    }, (builder) => {
+    }, () => {
       builder.assign_(elements, builder.null_())
       builder.assign_(builder.offset_(), startOffset)
     })

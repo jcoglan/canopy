@@ -37,7 +37,7 @@ class Builder extends Base {
     this._line('import re')
     this._newline()
     this._newline()
-    block(this)
+    block()
   }
 
   syntaxNodeClass_ () {
@@ -51,8 +51,8 @@ class Builder extends Base {
   }
 
   grammarModule_ (actions, block) {
-    this.class_('ParseError', 'SyntaxError', (builder) => {
-      builder._line('pass')
+    this.class_('ParseError', 'SyntaxError', () => {
+      this._line('pass')
     })
     this.assign_(this.nullNode_(), 'object()')
     this._newline()
@@ -79,9 +79,9 @@ class Builder extends Base {
   }
 
   constructor_ (args, block) {
-    this.method_('__init__', args, (builder) => {
-      builder._line('super(' + this._currentScope.name + ', self).__init__(' + args.join(', ') + ')')
-      block(builder)
+    this.method_('__init__', args, () => {
+      this._line('super(' + this._currentScope.name + ', self).__init__(' + args.join(', ') + ')')
+      block()
     })
   }
 
@@ -102,12 +102,12 @@ class Builder extends Base {
 
     this.assign_('cached', cacheMap + '.get(' + offset + ')')
 
-    this.if_('cached', (builder) => {
-      builder.assign_('self._offset', 'cached[1]')
-      builder.return_('cached[0]')
+    this.if_('cached', () => {
+      this.assign_('self._offset', 'cached[1]')
+      this.return_('cached[0]')
     })
 
-    block(this, address)
+    block(address)
     this.assign_(cacheAddr, '(' + address + ', self._offset)')
     this.return_(address)
   }
@@ -142,8 +142,8 @@ class Builder extends Base {
         ofs   = 'self._offset',
         temp  = this.localVars_({chunk: this.null_(), max: ofs + ' + ' + length})
 
-    this.if_(temp.max + ' <= self._input_size', (builder) => {
-      builder.assign_(temp.chunk, input + '[' + ofs + ':' + temp.max + ']')
+    this.if_(temp.max + ' <= self._input_size', () => {
+      this.assign_(temp.chunk, input + '[' + ofs + ':' + temp.max + ']')
     })
     return temp.chunk
   }
@@ -185,12 +185,12 @@ class Builder extends Base {
     expected = this._quote(expected)
     this.assign_(address, this.nullNode_())
 
-    this.if_('self._offset > self._failure', (builder) => {
-      builder.assign_('self._failure', 'self._offset')
-      builder.assign_('self._expected', '[]')
+    this.if_('self._offset > self._failure', () => {
+      this.assign_('self._failure', 'self._offset')
+      this.assign_('self._expected', '[]')
     })
-    this.if_('self._offset == self._failure', (builder) => {
-      builder.append_('self._expected', expected)
+    this.if_('self._offset == self._failure', () => {
+      this.append_('self._expected', expected)
     })
   }
 

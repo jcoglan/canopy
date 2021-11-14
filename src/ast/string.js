@@ -16,10 +16,10 @@ class String {
                   ? builder.stringMatchCI_(chunk, value)
                   : builder.stringMatch_(chunk, value)
 
-    builder.if_(condition, (builder) => {
+    builder.if_(condition, () => {
       let of = builder.offset_()
       builder.syntaxNode_(address, of, of + ' + ' + length, null, action)
-    }, (builder) => {
+    }, () => {
       builder.failure_(address, this._text)
     })
   }

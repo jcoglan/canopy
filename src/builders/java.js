@@ -47,7 +47,7 @@ class Builder extends Base {
 
   package_ (name, block) {
     this._grammarName = name.replace(/\./g, '')
-    block(this)
+    block()
   }
 
   syntaxNodeClass_ () {
@@ -74,16 +74,16 @@ class Builder extends Base {
     this._line('import java.util.regex.Pattern')
     this._newline()
     this._line('abstract class Grammar {', false)
-    this._indent((builder) => {
-      builder.assign_('static TreeNode ' + builder.nullNode_(), 'new TreeNode()')
-      builder._newline()
-      builder._line('int inputSize, offset, failure')
-      builder._line('String input')
-      builder._line('List<String> expected')
-      builder._line('Map<Label, Map<Integer, CacheRecord>> cache')
-      builder._line('Actions actions')
-      builder._newline()
-      block(builder)
+    this._indent(() => {
+      this.assign_('static TreeNode ' + this.nullNode_(), 'new TreeNode()')
+      this._newline()
+      this._line('int inputSize, offset, failure')
+      this._line('String input')
+      this._line('List<String> expected')
+      this._line('Map<Label, Map<Integer, CacheRecord>> cache')
+      this._line('Actions actions')
+      this._newline()
+      block()
     })
     this._line('}', false)
   }
@@ -118,9 +118,9 @@ class Builder extends Base {
 
   constructor_ (args, block) {
     this._line(this._currentScope.name + '(String text, int offset, List<TreeNode> elements) {', false)
-    this._indent((builder) => {
-      builder._line('super(text, offset, elements)')
-      block(builder)
+    this._indent(() => {
+      this._line('super(text, offset, elements)')
+      block()
     })
     this._line('}', false)
   }
@@ -140,16 +140,16 @@ class Builder extends Base {
         offset  = temp.index
 
     this.assign_('Map<Integer, CacheRecord> rule', 'cache.get(Label.' + name + ')')
-    this.if_('rule == null', (builder) => {
-      builder.assign_('rule', 'new HashMap<Integer, CacheRecord>()')
-      builder._line('cache.put(Label.' + name + ', rule)')
+    this.if_('rule == null', () => {
+      this.assign_('rule', 'new HashMap<Integer, CacheRecord>()')
+      this._line('cache.put(Label.' + name + ', rule)')
     })
-    this.if_('rule.containsKey(offset)', (builder) => {
-      builder.assign_(address, 'rule.get(offset).node')
-      builder.assign_('offset', 'rule.get(offset).tail')
-    }, (builder) => {
-      block(builder, address)
-      builder._line('rule.put(' + offset + ', new CacheRecord(' + address + ', offset))')
+    this.if_('rule.containsKey(offset)', () => {
+      this.assign_(address, 'rule.get(offset).node')
+      this.assign_('offset', 'rule.get(offset).tail')
+    }, () => {
+      block(address)
+      this._line('rule.put(' + offset + ', new CacheRecord(' + address + ', offset))')
     })
     this.return_(address)
   }
@@ -180,8 +180,8 @@ class Builder extends Base {
         ofs   = 'offset',
         temp  = this.localVars_({chunk: this.null_(), max: ofs + ' + ' + length})
 
-    this.if_(temp.max + ' <= inputSize', (builder) => {
-      builder._line(temp.chunk + ' = ' + input + '.substring(' + ofs + ', ' + temp.max + ')')
+    this.if_(temp.max + ' <= inputSize', () => {
+      this._line(temp.chunk + ' = ' + input + '.substring(' + ofs + ', ' + temp.max + ')')
     })
     return temp.chunk
   }
@@ -222,12 +222,12 @@ class Builder extends Base {
     expected = this._quote(expected)
     this.assign_(address, this.nullNode_())
 
-    this.if_('offset > failure', (builder) => {
-      builder.assign_('failure', 'offset')
-      builder.assign_('expected', 'new ArrayList<String>()')
+    this.if_('offset > failure', () => {
+      this.assign_('failure', 'offset')
+      this.assign_('expected', 'new ArrayList<String>()')
     })
-    this.if_('offset == failure', (builder) => {
-      builder.append_('expected', expected)
+    this.if_('offset == failure', () => {
+      this.append_('expected', expected)
     })
   }
 

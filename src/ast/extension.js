@@ -13,7 +13,7 @@ class Extension {
   compile (builder, address) {
     this._expression.compile(builder, address)
 
-    builder.ifNode_(address, (builder) => {
+    builder.ifNode_(address, () => {
       builder.extendNode_(address, this._typeName)
     })
   }

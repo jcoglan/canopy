@@ -17,10 +17,10 @@ class Predicate {
     this._expression.compile(builder, address)
     builder.assign_(builder.offset_(), startOffset)
 
-    builder[branch](address, (builder) => {
+    builder[branch](address, () => {
       let of = builder.offset_()
       builder.syntaxNode_(address, of, of, null)
-    }, (builder) => {
+    }, () => {
       builder.assign_(address, builder.nullNode_())
     })
   }

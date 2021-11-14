@@ -19,7 +19,7 @@ class Choice {
 
     this._options[index].compile(builder, address)
 
-    builder.unlessNode_(address, (builder) => {
+    builder.unlessNode_(address, () => {
       builder.assign_(builder.offset_(), startOffset)
       this._compileChoices(builder, address, index + 1, startOffset)
     })

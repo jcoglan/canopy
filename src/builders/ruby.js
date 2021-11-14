@@ -67,9 +67,9 @@ class Builder extends Base {
   }
 
   constructor_ (args, block) {
-    this.method_('initialize', args, (builder) => {
-      builder._line('super')
-      block(builder)
+    this.method_('initialize', args, () => {
+      this._line('super')
+      block()
     })
   }
 
@@ -91,12 +91,12 @@ class Builder extends Base {
 
     this.assign_('cached', cacheAddr)
 
-    this.if_('cached', (builder) => {
-      builder._line('@offset = cached[1]')
-      builder.return_('cached[0]')
+    this.if_('cached', () => {
+      this._line('@offset = cached[1]')
+      this.return_('cached[0]')
     })
 
-    block(this, address)
+    block(address)
     this.assign_(cacheAddr, '[' + address + ', @offset]')
     this.return_(address)
   }
@@ -138,8 +138,8 @@ class Builder extends Base {
         ofs   = '@offset',
         temp  = this.localVars_({chunk: this.null_(), max: ofs + ' + ' + length})
 
-    this.if_(temp.max + ' <= @input_size', (builder) => {
-      builder.assign_(temp.chunk, input + '[' + ofs + '...' + temp.max + ']')
+    this.if_(temp.max + ' <= @input_size', () => {
+      this.assign_(temp.chunk, input + '[' + ofs + '...' + temp.max + ']')
     })
     return temp.chunk
   }
@@ -180,12 +180,12 @@ class Builder extends Base {
     expected = this._quote(expected)
     this.assign_(address, this.nullNode_())
 
-    this.if_('@offset > @failure', (builder) => {
-      builder.assign_('@failure', '@offset')
-      builder.assign_('@expected', '[]')
+    this.if_('@offset > @failure', () => {
+      this.assign_('@failure', '@offset')
+      this.assign_('@expected', '[]')
     })
-    this.if_('@offset == @failure', (builder) => {
-      builder.append_('@expected', expected)
+    this.if_('@offset == @failure', () => {
+      this.append_('@expected', expected)
     })
   }
 

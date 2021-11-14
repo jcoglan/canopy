@@ -23,17 +23,17 @@ class Repeat {
         elements    = temp.elements,
         elAddr      = temp.address
 
-    builder.whileNotNull_(elAddr, (builder) => {
+    builder.whileNotNull_(elAddr, () => {
       this._expression.compile(builder, elAddr)
-      builder.ifNode_(elAddr, (builder) => {
+      builder.ifNode_(elAddr, () => {
         builder.append_(elements, elAddr)
         builder.decrement_(remaining)
       })
     })
 
-    builder.if_(builder.isZero_(remaining), (builder) => {
+    builder.if_(builder.isZero_(remaining), () => {
       builder.syntaxNode_(address, startOffset, builder.offset_(), elements, action)
-    }, (builder) => {
+    }, () => {
       builder.assign_(address, builder.nullNode_())
     })
   }

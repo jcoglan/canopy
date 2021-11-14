@@ -26,16 +26,16 @@ class Builder extends Base {
     this._newBuffer('js')
     
     this._line('(function() {', false)
-    this._indent((builder) => {
-      builder._line("'use strict'")
+    this._indent(() => {
+      this._line("'use strict'")
 
-      builder._newline()
-      builder._line('var formatError = ' + util.formatError.toString())
-      builder._newline()
-      builder._line('var inherit = ' + util.inherit.toString())
+      this._newline()
+      this._line('var formatError = ' + util.formatError.toString())
+      this._newline()
+      this._line('var inherit = ' + util.inherit.toString())
 
       this._grammarName = name
-      block(this)
+      block()
     })
     this._line('})()')
   }
@@ -72,9 +72,9 @@ class Builder extends Base {
   }
 
   constructor_ (args, block) {
-    this.function_('var ' + this._currentScope.name, args, (builder) => {
-      builder._line(this._currentScope.parent + '.apply(this, arguments)')
-      block(builder)
+    this.function_('var ' + this._currentScope.name, args, () => {
+      this._line(this._currentScope.parent + '.apply(this, arguments)')
+      block()
     })
     this._line('inherit(' + this._currentScope.name + ', ' + this._currentScope.parent + ')')
   }
@@ -106,12 +106,12 @@ class Builder extends Base {
     this.assign_(cacheMap, cacheMap + ' || {}')
     this.assign_('var cached', cacheAddr)
 
-    this.if_('cached', (builder) => {
-      builder.assign_('this._offset', 'cached[1]')
-      builder.return_('cached[0]')
+    this.if_('cached', () => {
+      this.assign_('this._offset', 'cached[1]')
+      this.return_('cached[0]')
     })
 
-    block(this, address)
+    block(address)
     this.assign_(cacheAddr,  '[' + address + ', this._offset]')
     this.return_(address)
   }
@@ -145,8 +145,8 @@ class Builder extends Base {
         ofs   = 'this._offset',
         temp  = this.localVars_({chunk: this.null_(), max: ofs + ' + ' + length})
 
-    this.if_(temp.max + ' <= this._inputSize', (builder) => {
-      builder._line(temp.chunk + ' = ' + input + '.substring(' + ofs + ', ' + temp.max + ')')
+    this.if_(temp.max + ' <= this._inputSize', () => {
+      this._line(temp.chunk + ' = ' + input + '.substring(' + ofs + ', ' + temp.max + ')')
     })
     return temp.chunk
   }
@@ -187,12 +187,12 @@ class Builder extends Base {
     expected = this._quote(expected)
     this.assign_(address, this.nullNode_())
 
-    this.if_('this._offset > this._failure', (builder) => {
-      builder.assign_('this._failure', 'this._offset')
-      builder.assign_('this._expected', '[]')
+    this.if_('this._offset > this._failure', () => {
+      this.assign_('this._failure', 'this._offset')
+      this.assign_('this._expected', '[]')
     })
-    this.if_('this._offset === this._failure', (builder) => {
-      builder.append_('this._expected', expected)
+    this.if_('this._offset === this._failure', () => {
+      this.append_('this._expected', expected)
     })
   }
 

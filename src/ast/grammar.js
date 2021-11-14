@@ -13,13 +13,13 @@ class Grammar {
   compile (builder) {
     let [nodeLabels, actions, regexes] = this._gatherComponents()
 
-    builder.package_(this._name, (builder) => {
+    builder.package_(this._name, () => {
       let nodeClassName = builder.syntaxNodeClass_()
 
       for (let [i, labels] of nodeLabels.entries())
         this._compileTreeNode(builder, nodeClassName, i, labels)
 
-      builder.grammarModule_(actions.sort(), (builder) => {
+      builder.grammarModule_(actions.sort(), () => {
         for (let [i, regex] of regexes.entries())
           builder.compileRegex_(regex, 'REGEX_' + (i + 1))
 
@@ -54,10 +54,10 @@ class Grammar {
     let className = nodeClassName + (i + 1)
     node.setNodeClassName(className)
 
-    builder.class_(className, nodeClassName, (builder) => {
+    builder.class_(className, nodeClassName, () => {
       builder.attributes_(Object.keys(labels))
 
-      builder.constructor_(['text', 'offset', 'elements'], (builder) => {
+      builder.constructor_(['text', 'offset', 'elements'], () => {
         for (let key in labels)
           builder.attribute_(key, builder.arrayLookup_('elements', labels[key]))
       })

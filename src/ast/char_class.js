@@ -10,10 +10,10 @@ class CharClass {
     let regex = this.constName || this.regex,
         chunk = builder.chunk_(1)
 
-    builder.if_(builder.regexMatch_(regex, chunk), (builder) => {
+    builder.if_(builder.regexMatch_(regex, chunk), () => {
       let of = builder.offset_()
       builder.syntaxNode_(address, of, of + ' + 1', null, action)
-    }, (builder) => {
+    }, () => {
       builder.failure_(address, this._text)
     })
   }
