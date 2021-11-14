@@ -50,7 +50,7 @@ class Builder extends Base {
     this.assign_(this.nullNode_(), 'Object.new')
     this._newline()
     this._line('module Grammar')
-    new Builder(this)._indent(block)
+    this._scope(block)
     this._line('end')
     this._newline()
   }
@@ -61,7 +61,7 @@ class Builder extends Base {
 
   class_ (name, parent, block) {
     this._line('class ' + name + ' < ' + parent)
-    new Builder(this)._indent(block)
+    this._scope(block)
     this._line('end')
     this._newline()
   }
@@ -74,11 +74,11 @@ class Builder extends Base {
   }
 
   method_ (name, args, block) {
-    this._write(this._methodSeparator)
-    this._methodSeparator = '\n'
+    this._write(this._currentScope.methodSeparator)
+    this._currentScope.methodSeparator = '\n'
     args = (args.length > 0) ? '(' + args.join(', ') + ')' : ''
     this._line('def ' + name + args)
-    new Builder(this)._indent(block)
+    this._scope(block)
     this._line('end')
   }
 
@@ -105,7 +105,7 @@ class Builder extends Base {
     let keys = []
     for (let name of names) keys.push(':' + name)
     this._line('attr_reader ' + keys.join(', '))
-    this._methodSeparator = '\n'
+    this._currentScope.methodSeparator = '\n'
   }
 
   attribute_ (name, value) {
@@ -113,11 +113,9 @@ class Builder extends Base {
   }
 
   localVars_ (vars) {
-    let names = {}, lhs = [], rhs = [], varName
+    let names = {}, lhs = [], rhs = []
     for (let name in vars) {
-      this._varIndex[name] = this._varIndex[name] || 0
-      varName = name + this._varIndex[name]
-      this._varIndex[name] += 1
+      let varName = this._varName(name)
       lhs.push(varName)
       rhs.push(vars[name])
       names[name] = varName
@@ -127,9 +125,7 @@ class Builder extends Base {
   }
 
   localVar_ (name, value) {
-    this._varIndex[name] = this._varIndex[name] || 0
-    let varName = name + this._varIndex[name]
-    this._varIndex[name] += 1
+    let varName = this._varName(name)
 
     if (value === undefined) value = this.nullNode_()
     this.assign_(varName, value)

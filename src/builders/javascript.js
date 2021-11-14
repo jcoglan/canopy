@@ -4,11 +4,6 @@ const Base = require('./base')
 const util = require('../util')
 
 class Builder extends Base {
-  constructor (parent, name, parentName) {
-    super(parent, name)
-    this._parentName = parentName
-  }
-
   _quote (string) {
     string = string.replace(/\\/g, '\\\\')
                    .replace(/'/g, "\\'")
@@ -59,7 +54,7 @@ class Builder extends Base {
     this.assign_('var ' + this.nullNode_(), '{}')
     this._newline()
     this._line('var Grammar = {', false)
-    new Builder(this)._indent(block)
+    this._scope(block)
     this._newline()
     this._line('}')
   }
@@ -73,30 +68,29 @@ class Builder extends Base {
   }
 
   class_ (name, parent, block) {
-    let builder = new Builder(this, name, parent)
-    block(builder)
+    this._scope(block, name, parent, false)
   }
 
   constructor_ (args, block) {
-    this.function_('var ' + this._name, args, (builder) => {
-      builder._line(this._parentName + '.apply(this, arguments)')
+    this.function_('var ' + this._currentScope.name, args, (builder) => {
+      builder._line(this._currentScope.parent + '.apply(this, arguments)')
       block(builder)
     })
-    this._line('inherit(' + this._name + ', ' + this._parentName + ')')
+    this._line('inherit(' + this._currentScope.name + ', ' + this._currentScope.parent + ')')
   }
 
   function_ (name, args, block) {
     this._newline()
     this._line(name + ' = function(' + args.join(', ') + ') {', false)
-    new Builder(this, this._name, this._parentName)._indent(block)
+    this._scope(block)
     this._line('}')
   }
 
   method_ (name, args, block) {
-    this._write(this._methodSeparator)
-    this._methodSeparator = ',\n\n'
+    this._write(this._currentScope.methodSeparator)
+    this._currentScope.methodSeparator = ',\n\n'
     this._line(name + ' (' + args.join(', ') + ') {', false)
-    new Builder(this)._indent(block)
+    this._scope(block)
     let n = this._indentLevel
     while (n--) this._write('  ')
     this._write('}')
@@ -127,11 +121,9 @@ class Builder extends Base {
   }
 
   localVars_ (vars) {
-    let names = {}, code = [], varName
+    let names = {}, code = []
     for (let name in vars) {
-      this._varIndex[name] = this._varIndex[name] || 0
-      varName = name + this._varIndex[name]
-      this._varIndex[name] += 1
+      let varName = this._varName(name)
       code.push(varName + ' = ' + vars[name])
       names[name] = varName
     }
@@ -140,9 +132,7 @@ class Builder extends Base {
   }
 
   localVar_ (name, value) {
-    this._varIndex[name] = this._varIndex[name] || 0
-    let varName = name + this._varIndex[name]
-    this._varIndex[name] += 1
+    let varName = this._varName(name)
 
     if (value == undefined) value = this.nullNode_()
     this.assign_('var ' + varName, value)

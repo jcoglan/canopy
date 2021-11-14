@@ -6,6 +6,28 @@ const handlebars = require('handlebars')
 
 const PEG_EXT = '.peg'
 
+class Scope {
+  constructor (parentScope, name, parentName) {
+    if (name) {
+      this.name = name
+      this.parent = parentName
+    } else if (parentScope) {
+      this.name = parentScope.name
+      this.parent = parentScope.parent
+    }
+    this.methodSeparator = ''
+    this._varIndex = {}
+  }
+
+  varName (name) {
+    this._varIndex[name] = this._varIndex[name] || 0
+    let varName = name + this._varIndex[name]
+    this._varIndex[name] += 1
+
+    return varName
+  }
+}
+
 class Base {
   static create (filename) {
     let builder = new this()
@@ -13,19 +35,14 @@ class Base {
     return builder
   }
 
-  constructor (parent, name) {
-    if (parent) {
-      this._parent = parent
-      this._indentLevel = parent._indentLevel
-    } else {
-      this._buffer = ''
-      this._indentLevel = 0
-    }
-    this._name = name
+  constructor () {
+    this._indentLevel = 0
+
     this._buffers = {}
     this._currentBuffer = null
-    this._methodSeparator = ''
-    this._varIndex = {}
+
+    this._stack = [new Scope()]
+    this._currentScope = this._stack[0]
   }
 
   serialize () {
@@ -62,7 +79,6 @@ class Base {
   }
 
   _write (string) {
-    if (this._parent) return this._parent._write(string)
     this._buffers[this._currentBuffer] += string
   }
 
@@ -70,6 +86,25 @@ class Base {
     this._indentLevel += 1
     block(this)
     this._indentLevel -= 1
+  }
+
+  _scope (block, name, parentName, indent) {
+    let parent = this._stack[this._stack.length - 1]
+    let scope = new Scope(parent, name, parentName)
+    this._stack.push(scope)
+    this._currentScope = scope
+
+    if (indent !== false) {
+      this._indent(block)
+    } else {
+      block(this)
+    }
+    this._stack.pop()
+    this._currentScope = parent
+  }
+
+  _varName (name) {
+    return this._currentScope.varName(name)
   }
 
   _line (source, semicolon = true) {

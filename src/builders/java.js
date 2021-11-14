@@ -13,8 +13,8 @@ const TYPES = {
 }
 
 class Builder extends Base {
-  constructor (parent, name) {
-    super(parent, name)
+  constructor () {
+    super()
     this._labels = {}
   }
 
@@ -112,12 +112,12 @@ class Builder extends Base {
   class_ (name, parent, block) {
     this._newline()
     this._line('class ' + name + ' extends ' + parent + ' {', false)
-    new Builder(this, name)._indent(block)
+    this._scope(block, name)
     this._line('}', false)
   }
 
   constructor_ (args, block) {
-    this._line(this._name + '(String text, int offset, List<TreeNode> elements) {', false)
+    this._line(this._currentScope.name + '(String text, int offset, List<TreeNode> elements) {', false)
     this._indent((builder) => {
       builder._line('super(text, offset, elements)')
       block(builder)
@@ -128,14 +128,12 @@ class Builder extends Base {
   method_ (name, args, block) {
     this._newline()
     this._line('TreeNode ' + name + '() {', false)
-    new Builder(this)._indent(block)
+    this._scope(block)
     this._line('}', false)
   }
 
   cache_ (name, block) {
-    let builder = this
-    while (builder._parent) builder = builder._parent
-    builder._labels[name] = true
+    this._labels[name] = true
 
     let temp    = this.localVars_({address: this.nullNode_(), index: 'offset'}),
         address = temp.address,
@@ -157,23 +155,19 @@ class Builder extends Base {
   }
 
   attribute_ (name, value) {
-    let builder = this
-    while (builder._parent) builder = builder._parent
-    builder._labels[name] = true
+    this._labels[name] = true
     this._line('labelled.put(Label.' + name + ', ' + value + ')')
   }
 
   localVars_ (vars) {
-    let names = {}, code = [], varName
+    let names = {}
     for (let name in vars)
       names[name] = this.localVar_(name, vars[name])
     return names
   }
 
   localVar_ (name, value) {
-    this._varIndex[name] = this._varIndex[name] || 0
-    let varName = name + this._varIndex[name]
-    this._varIndex[name] += 1
+    let varName = this._varName(name)
 
     if (value === undefined) value = this.nullNode_()
     this.assign_(TYPES[name] + ' ' + varName, value)

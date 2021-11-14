@@ -64,7 +64,7 @@ class Builder extends Base {
     let regex = charClass.regex
     this.assign_(name, 're.compile(' + this._quote(regex.source) + ')')
     charClass.constName = name
-    this._methodSeparator = '\n'
+    this._currentScope.methodSeparator = '\n'
   }
 
   parserClass_ (root) {
@@ -73,24 +73,24 @@ class Builder extends Base {
 
   class_ (name, parent, block) {
     this._line('class ' + name + '(' + parent + '):')
-    new Builder(this, name, parent)._indent(block)
+    this._scope(block, name, parent)
     this._newline()
     this._newline()
   }
 
   constructor_ (args, block) {
     this.method_('__init__', args, (builder) => {
-      builder._line('super(' + this._name + ', self).__init__(' + args.join(', ') + ')')
+      builder._line('super(' + this._currentScope.name + ', self).__init__(' + args.join(', ') + ')')
       block(builder)
     })
   }
 
   method_ (name, args, block) {
-    this._write(this._methodSeparator)
-    this._methodSeparator = '\n'
+    this._write(this._currentScope.methodSeparator)
+    this._currentScope.methodSeparator = '\n'
     args = ['self'].concat(args).join(', ')
     this._line('def ' + name + '(' + args + '):')
-    new Builder(this)._indent(block)
+    this._scope(block)
   }
 
   cache_ (name, block) {
@@ -117,11 +117,9 @@ class Builder extends Base {
   }
 
   localVars_ (vars) {
-    let names = {}, lhs = [], rhs = [], varName
+    let names = {}, lhs = [], rhs = []
     for (let name in vars) {
-      this._varIndex[name] = this._varIndex[name] || 0
-      varName = name + this._varIndex[name]
-      this._varIndex[name] += 1
+      let varName = this._varName(name)
       lhs.push(varName)
       rhs.push(vars[name])
       names[name] = varName
@@ -131,9 +129,7 @@ class Builder extends Base {
   }
 
   localVar_ (name, value) {
-    this._varIndex[name] = this._varIndex[name] || 0
-    let varName = name + this._varIndex[name]
-    this._varIndex[name] += 1
+    let varName = this._varName(name)
 
     if (value === undefined) value = this.nullNode_()
     this.assign_(varName, value)
