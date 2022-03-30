@@ -203,6 +203,24 @@ class SequenceMutingTest(TestCase, ParseHelper):
             sequences.parse("seq-mute-4: abcde")
         )
 
+    def test_allows_the_first_element_to_be_muted(self):
+        self.assertParse(
+            ("abc", 16, [
+                ("b", 17, []),
+                ("c", 18, [])
+            ]),
+            sequences.parse("seq-mute-first: abc")
+        )
+
+    def test_allows_the_last_element_to_be_muted(self):
+        self.assertParse(
+            ("abc", 15, [
+                ("a", 15, []),
+                ("b", 16, [])
+            ]),
+            sequences.parse("seq-mute-last: abc")
+        )
+
     def test_rejects_input_missing_muted_expressions(self):
         with self.assertRaises(sequences.ParseError):
             sequences.parse("seq-mute-4: ae")
@@ -224,3 +242,16 @@ class SequenceReferencesTest(TestCase, ParseHelper):
             }),
             sequences.parse("seq-refs: ac")
         )
+
+    def test_mutes_references_from_generating_labels(self):
+        tree = sequences.parse("seq-mute-refs: ac")
+
+        self.assertParse(
+            ("ac", 15, [
+                ("a", 15, []),
+            ], {
+                "a": ("a", 15, [])
+            }),
+            tree
+        )
+        self.assertFalse(hasattr(tree, 'c'))

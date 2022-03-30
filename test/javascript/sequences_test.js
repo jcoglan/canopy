@@ -218,6 +218,26 @@ jstest.describe("sequences", function() { with(this) {
       )
     }})
 
+    it("allows the first element to be muted", function() { with(this) {
+      assertParse(
+        ["abc", 16, [
+          ["b", 17, []],
+          ["c", 18, []]
+        ]],
+        Sequences.parse("seq-mute-first: abc")
+      )
+    }})
+
+    it("allows the last element to be muted", function() { with(this) {
+      assertParse(
+        ["abc", 15, [
+          ["a", 15, []],
+          ["b", 16, []]
+        ]],
+        Sequences.parse("seq-mute-last: abc")
+      )
+    }})
+
     it("rejects input missing muted expressions", function() { with(this) {
       assertThrows(SyntaxError, () => Sequences.parse("seq-mute-4: ae"))
       assertThrows(SyntaxError, () => Sequences.parse("seq-mute-4: abde"))
@@ -237,6 +257,20 @@ jstest.describe("sequences", function() { with(this) {
         }],
         Sequences.parse("seq-refs: ac")
       )
+    }})
+
+    it("mutes references from generating labels", function() { with(this) {
+      let tree = Sequences.parse("seq-mute-refs: ac")
+
+      assertParse(
+        ["ac", 15, [
+          ["a", 15, []]
+        ], {
+          a: ["a", 15, []]
+        }],
+        tree
+      )
+      assert(!('c' in tree))
     }})
   }})
 }})

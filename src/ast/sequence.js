@@ -53,8 +53,6 @@ class Sequence {
   }
 
   _compileExpressions (builder, index, elIndex, startOffset, elements) {
-    if (index === this._parts.length) return
-
     let expAddr = builder.localVar_('address'),
         expr    = this._parts[index],
         muted   = expr.muted()
@@ -66,7 +64,11 @@ class Sequence {
         builder.append_(elements, expAddr, elIndex)
         elIndex += 1
       }
-      this._compileExpressions(builder, index + 1, elIndex, startOffset, elements)
+      if (index < this._parts.length - 1) {
+        this._compileExpressions(builder, index + 1, elIndex, startOffset, elements)
+      } else if (muted) {
+        builder.pass_()
+      }
     }, () => {
       builder.assign_(elements, builder.null_())
       builder.assign_(builder.offset_(), startOffset)

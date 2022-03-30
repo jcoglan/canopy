@@ -54,6 +54,8 @@ class Base {
     this._line(name + ' = ' + value)
   }
 
+  pass_ () {}
+
   _tab () {
     return '  '
   }

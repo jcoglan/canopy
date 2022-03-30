@@ -3,6 +3,7 @@ package canopy.sequences;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.Test;
 
@@ -281,6 +282,24 @@ class SequenceMutingTest extends ParseHelper {
     }
 
     @Test
+    void allowsTheFirstElementToBeMuted() throws ParseError {
+        expect(Sequences.parse("seq-mute-first: abc")).toMatch(
+            node("abc", 16)
+                .elem(node("b", 17).noElems())
+                .elem(node("c", 18).noElems())
+        );
+    }
+
+    @Test
+    void allowsTheLastElementToBeMuted() throws ParseError {
+        expect(Sequences.parse("seq-mute-last: abc")).toMatch(
+            node("abc", 15)
+                .elem(node("a", 15).noElems())
+                .elem(node("b", 16).noElems())
+        );
+    }
+
+    @Test
     void rejectsInputMissingMutedExpressions() {
         assertThrows(ParseError.class, () -> Sequences.parse("seq-mute-4: ae"));
         assertThrows(ParseError.class, () -> Sequences.parse("seq-mute-4: abde"));
@@ -298,6 +317,19 @@ class SequenceReferencesTest extends ParseHelper {
                 .label(Label.b, node("c", 11).noElems())
                 .label(Label.c, node("c", 11).noElems())
         );
+    }
+
+    @Test
+    void mutesReferencesFromGeneratingLabels() throws ParseError {
+        TreeNode tree = Sequences.parse("seq-mute-refs: ac");
+
+        expect(tree).toMatch(
+            node("ac", 15)
+                .elem(node("a", 15).noElems())
+                .label(Label.a, node("a", 15).noElems())
+        );
+
+        assertNull(tree.get(Label.c));
     }
 }
 

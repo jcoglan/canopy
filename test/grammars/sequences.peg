@@ -13,7 +13,10 @@ test <- "seq-str: " seq_str
       / "seq-mute-2: " seq_mute_2
       / "seq-mute-3: " seq_mute_3
       / "seq-mute-4: " seq_mute_4
+      / "seq-mute-first: " seq_mute_first
+      / "seq-mute-last: " seq_mute_last
       / "seq-refs: " seq_refs
+      / "seq-mute-refs: " seq_mute_refs
 
 seq_str <- "a" "b" "c"
 
@@ -34,6 +37,10 @@ seq_mute_2 <- [a-z]+ @(":" " "*) [0-9]+
 seq_mute_3 <- "v" (@"." [A-Z]+)+
 seq_mute_4 <- "a" @("b" @"c" "d") "e"
 
-seq_refs <- a b:c
-a        <- "a"
-c        <- "c"
+seq_mute_first <- @"a" "b" "c"
+seq_mute_last  <- "a" "b" @"c"
+
+seq_refs      <- a b:c
+seq_mute_refs <- a @c
+a             <- "a"
+c             <- "c"

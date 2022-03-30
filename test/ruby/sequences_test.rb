@@ -205,6 +205,24 @@ describe "sequences" do
         Sequences.parse("seq-mute-4: abcde")
     end
 
+    it "allows the first element to be muted" do
+      assert_parse \
+        ["abc", 16, [
+          ["b", 17, []],
+          ["c", 18, []]
+        ]],
+        Sequences.parse("seq-mute-first: abc")
+    end
+
+    it "allows the last element to be muted" do
+      assert_parse \
+        ["abc", 15, [
+          ["a", 15, []],
+          ["b", 16, []]
+        ]],
+        Sequences.parse("seq-mute-last: abc")
+    end
+
     it "rejects input missing muted expressions" do
       assert_raises(Sequences::ParseError) { Sequences.parse("seq-mute-4: ae") }
       assert_raises(Sequences::ParseError) { Sequences.parse("seq-mute-4: abde") }
@@ -223,6 +241,20 @@ describe "sequences" do
           c: ["c", 11, []]
         }],
         Sequences.parse("seq-refs: ac")
+    end
+
+    it "mutes references from generating labels" do
+      tree = Sequences.parse("seq-mute-refs: ac")
+
+      assert_parse \
+        ["ac", 15, [
+          ["a", 15, []],
+        ], {
+          a: ["a", 15, []],
+        }],
+        tree
+
+      assert !tree.respond_to?(:c)
     end
   end
 end

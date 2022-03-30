@@ -216,6 +216,10 @@ class Builder extends Base {
     this._line('break')
   }
 
+  pass_ () {
+    this._line('pass')
+  }
+
   sizeInRange_ (address, range) {
     if (range[1] === -1) {
       return 'len(' + address + ') >= ' + range[0]
