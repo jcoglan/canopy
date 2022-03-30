@@ -22,12 +22,44 @@ Parser.prototype.parse = function() {
   throw new SyntaxError(formatError(this._input, this._failure, this._expected));
 };
 
-var parse = function(input, options) {
+Object.assign(Parser.prototype, Grammar);
+
+
+function parse(input, options) {
   options = options || {};
   var parser = new Parser(input, options.actions, options.types);
   return parser.parse();
-};
-Object.assign(Parser.prototype, Grammar);
+}
+
+function formatError(input, offset, expected) {
+  var lines = input.split(/\n/g),
+      lineNo = 0,
+      position = 0;
+
+  while (position <= offset) {
+    position += lines[lineNo].length + 1;
+    lineNo += 1;
+  }
+  var message = 'Line ' + lineNo + ': expected ' + expected.join(', ') + '\n',
+      line = lines[lineNo - 1];
+
+  message += line + '\n';
+  position -= line.length + 1;
+
+  while (position < offset) {
+    message += ' ';
+    position += 1;
+  }
+  return message + '^';
+}
+
+function inherit(subclass, parent) {
+  function chain () {};
+  chain.prototype = parent.prototype;
+  subclass.prototype = new chain();
+  subclass.prototype.constructor = subclass;
+}
+
 
 var exported = {Grammar: Grammar, Parser: Parser, parse: parse};
 

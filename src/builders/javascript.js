@@ -1,7 +1,6 @@
 'use strict'
 
 const Base = require('./base')
-const util = require('../util')
 
 class Builder extends Base {
   _quote (string) {
@@ -28,12 +27,6 @@ class Builder extends Base {
     this._line('(function() {', false)
     this._indent(() => {
       this._line("'use strict'")
-
-      this._newline()
-      this._line('var formatError = ' + util.formatError.toString())
-      this._newline()
-      this._line('var inherit = ' + util.inherit.toString())
-
       this._grammarName = name
       block()
     })
