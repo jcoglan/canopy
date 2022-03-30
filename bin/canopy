@@ -23,7 +23,7 @@ async function main () {
 
   let comment = [
     'This file was generated from ' + relative(process.cwd(), inputFile),
-    'See http://canopy.jcoglan.com/ for documentation.'
+    'See https://canopy.jcoglan.com/ for documentation'
   ]
 
   let grammar = fs.readFileSync(inputFile, 'utf8'),

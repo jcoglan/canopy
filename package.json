@@ -1,6 +1,6 @@
 { "name"            : "canopy"
 , "description"     : "PEG parser compiler for JavaScript"
-, "homepage"        : "http://canopy.jcoglan.com"
+, "homepage"        : "https://canopy.jcoglan.com"
 , "author"          : "James Coglan <jcoglan@gmail.com> (http://jcoglan.com/)"
 , "keywords"        : ["parser", "compiler", "peg"]
 , "license"         : "GPL-3.0"

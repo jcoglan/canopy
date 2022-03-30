@@ -1,6 +1,6 @@
 /**
  * This file was generated from src/meta_grammar.peg
- * See http://canopy.jcoglan.com/ for documentation.
+ * See https://canopy.jcoglan.com/ for documentation
  */
 
 (function() {

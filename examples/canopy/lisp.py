@@ -1,5 +1,5 @@
 # This file was generated from examples/canopy/lisp.peg
-# See http://canopy.jcoglan.com/ for documentation.
+# See https://canopy.jcoglan.com/ for documentation
 
 from collections import defaultdict
 import re
