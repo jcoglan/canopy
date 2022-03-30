@@ -39,7 +39,7 @@ async function main () {
 
 async function run () {
   try {
-    main()
+    await main()
   } catch (err) {
     console.error(err.message)
     console.error(err.stack)
