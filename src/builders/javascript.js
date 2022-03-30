@@ -101,12 +101,12 @@ class Builder extends Base {
 
     this.if_('cached', () => {
       this.assign_('this._offset', 'cached[1]')
-      this.return_('cached[0]')
+      this._return('cached[0]')
     })
 
     block(address)
     this.assign_(cacheAddr,  '[' + address + ', this._offset]')
-    this.return_(address)
+    this._return(address)
   }
 
   attribute_ (name, value) {
@@ -193,7 +193,7 @@ class Builder extends Base {
     this.assign_(address, 'this._read_' + rule + '()')
   }
 
-  conditional_ (kwd, condition, block, else_) {
+  _conditional (kwd, condition, block, else_) {
     this._line(kwd + ' (' + condition + ') {', false)
     this._indent(block)
     if (else_) {
@@ -204,11 +204,11 @@ class Builder extends Base {
   }
 
   if_ (condition, block, else_) {
-    this.conditional_('if', condition, block, else_)
+    this._conditional('if', condition, block, else_)
   }
 
   loop_ (block) {
-    this.conditional_('while', 'true', block)
+    this._conditional('while', 'true', block)
   }
 
   break_ () {
@@ -265,7 +265,7 @@ class Builder extends Base {
     return size ? 'new Array(' + size + ')' : '[]'
   }
 
-  emptyString_ () {
+  _emptyString () {
     return "''"
   }
 

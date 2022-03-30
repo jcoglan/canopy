@@ -154,7 +154,7 @@ class Builder extends Base {
       block(address)
       this._line('rule.put(' + offset + ', new CacheRecord(' + address + ', offset))')
     })
-    this.return_(address)
+    this._return(address)
   }
 
   attribute_ (name, value) {
@@ -238,7 +238,7 @@ class Builder extends Base {
     this.assign_(address, '_read_' + rule + '()')
   }
 
-  conditional_ (kwd, condition, block, else_) {
+  _conditional (kwd, condition, block, else_) {
     this._line(kwd + ' (' + condition + ') {', false)
     this._indent(block)
     if (else_) {
@@ -249,11 +249,11 @@ class Builder extends Base {
   }
 
   if_ (condition, block, else_) {
-    this.conditional_('if', condition, block, else_)
+    this._conditional('if', condition, block, else_)
   }
 
   loop_ (block) {
-    this.conditional_('while', 'true', block)
+    this._conditional('while', 'true', block)
   }
 
   break_ () {
@@ -309,7 +309,7 @@ class Builder extends Base {
     return 'new ArrayList<TreeNode>(' + (size || '') + ')'
   }
 
-  emptyString_ () {
+  _emptyString () {
     return '""'
   }
 

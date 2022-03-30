@@ -46,6 +46,14 @@ class Base {
     return this._buffers
   }
 
+  attributes_ (names) {}
+
+  compileRegex_ (charClass, name) {}
+
+  assign_ (name, value) {
+    this._line(name + ' = ' + value)
+  }
+
   _tab () {
     return '  '
   }
@@ -116,15 +124,7 @@ class Base {
     this._write('\n')
   }
 
-  attributes_ (names) {}
-
-  compileRegex_ (charClass, name) {}
-
-  assign_ (name, value) {
-    this._line(name + ' = ' + value)
-  }
-
-  return_ (expression) {
+  _return (expression) {
     this._line('return ' + expression)
   }
 }
