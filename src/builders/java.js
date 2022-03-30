@@ -12,8 +12,8 @@ const TYPES = {
 }
 
 class Builder extends Base {
-  constructor () {
-    super()
+  constructor (...args) {
+    super(...args)
     this._labels = {}
   }
 

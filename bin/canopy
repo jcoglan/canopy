@@ -4,7 +4,7 @@ const fs     = require('fs')
 const mkdirp = require('mkdirp')
 const nopt   = require('nopt')
 
-const { dirname, relative } = require('path')
+const { basename, dirname, join, relative } = require('path')
 const canopy = require('../lib/canopy')
 
 Object.assign(canopy.builders, {
@@ -13,21 +13,43 @@ Object.assign(canopy.builders, {
   rb: canopy.builders.ruby
 })
 
+const PEG_EXT = '.peg'
+
+const options = nopt({
+  lang: String,
+  output: String
+}, {
+  l: '--lang',
+  o: '--output'
+})
+
+function resolvePaths () {
+  let input = relative(process.cwd(), options.argv.remain[0])
+  let output = options.output
+
+  if (output) {
+    output = relative(process.cwd(), output)
+  } else {
+    output = join(dirname(input), basename(input, PEG_EXT))
+  }
+  return [input, output]
+}
+
 async function main () {
-  let options   = nopt({ lang: String }, { l: '--lang' }),
-      lang      = options.lang || 'js',
-      inputFile = options.argv.remain[0]
+  let [inputPath, outputPath] = resolvePaths()
+
+  let lang  = options.lang || 'js'
 
   if (!canopy.builders.hasOwnProperty(lang))
     throw new Error('Unrecognised target language: ' + lang)
 
   let comment = [
-    'This file was generated from ' + relative(process.cwd(), inputFile),
+    'This file was generated from ' + inputPath,
     'See https://canopy.jcoglan.com/ for documentation'
   ]
 
-  let grammar = fs.readFileSync(inputFile, 'utf8'),
-      builder = canopy.builders[lang].create(inputFile),
+  let grammar = fs.readFileSync(inputPath, 'utf8'),
+      builder = canopy.builders[lang].create(outputPath),
       parser  = canopy.compile(grammar, builder)
 
   for (let name in parser) {

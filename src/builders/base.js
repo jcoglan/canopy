@@ -4,8 +4,6 @@ const { readFileSync } = require('fs')
 const { basename, dirname, join } = require('path')
 const handlebars = require('handlebars')
 
-const PEG_EXT = '.peg'
-
 class Scope {
   constructor (parentScope, name, parentName) {
     if (name) {
@@ -29,13 +27,12 @@ class Scope {
 }
 
 class Base {
-  static create (filename) {
-    let builder = new this()
-    builder.filename = filename
-    return builder
+  static create (outputPath) {
+    return new this(outputPath)
   }
 
-  constructor () {
+  constructor (outputPath) {
+    this._outputPath  = outputPath
     this._indentLevel = 0
 
     this._buffers = {}
@@ -54,13 +51,10 @@ class Base {
   }
 
   _newBuffer (ext, name = null) {
-    let dir  = dirname(this.filename),
-        base = basename(this.filename, PEG_EXT)
-
     if (name) {
-      this._currentBuffer = join(dir, base, name + '.' + ext)
+      this._currentBuffer = join(this._outputPath, name + '.' + ext)
     } else {
-      this._currentBuffer = join(dir, base + '.' + ext)
+      this._currentBuffer = join(this._outputPath + '.' + ext)
     }
     this._buffers[this._currentBuffer] = this._initBuffer(this._currentBuffer)
   }
