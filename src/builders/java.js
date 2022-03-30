@@ -138,7 +138,7 @@ class Builder extends Base {
   cache_ (name, block) {
     this._labels[name] = true
 
-    let temp    = this.localVars_({address: this.nullNode_(), index: 'offset'}),
+    let temp    = this.localVars_({ address: this.nullNode_(), index: 'offset' }),
         address = temp.address,
         offset  = temp.index
 
@@ -181,7 +181,7 @@ class Builder extends Base {
   chunk_ (length) {
     let input = 'input',
         ofs   = 'offset',
-        temp  = this.localVars_({chunk: this.null_(), max: ofs + ' + ' + length})
+        temp  = this.localVars_({ chunk: this.null_(), max: ofs + ' + ' + length })
 
     this.if_(temp.max + ' <= inputSize', () => {
       this._line(temp.chunk + ' = ' + input + '.substring(' + ofs + ', ' + temp.max + ')')

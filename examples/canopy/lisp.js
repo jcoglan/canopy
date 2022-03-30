@@ -747,7 +747,7 @@
       this._failure = this._offset;
       this._expected.push('<EOF>');
     }
-    this.constructor.lastError = {offset: this._offset, expected: this._expected};
+    this.constructor.lastError = { offset: this._offset, expected: this._expected };
     throw new SyntaxError(formatError(this._input, this._failure, this._expected));
   };
 
@@ -790,7 +790,7 @@
   }
 
 
-  var exported = {Grammar: Grammar, Parser: Parser, parse: parse};
+  var exported = { Grammar: Grammar, Parser: Parser, parse: parse };
 
   if (typeof require === 'function' && typeof exports === 'object') {
     Object.assign(exports, exported);
