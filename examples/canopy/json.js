@@ -164,7 +164,7 @@
           elements0[1] = address2;
           var address3 = FAILURE;
           var remaining0 = 0, index3 = this._offset, elements1 = [], address4 = true;
-          while (address4 !== FAILURE) {
+          while (true) {
             var index4 = this._offset, elements2 = new Array(2);
             var address5 = FAILURE;
             var chunk1 = null, max1 = this._offset + 1;
@@ -207,6 +207,8 @@
             if (address4 !== FAILURE) {
               elements1.push(address4);
               remaining0 -= 1;
+            } else {
+              break;
             }
           }
           if (remaining0 <= 0) {
@@ -443,7 +445,7 @@
           elements0[1] = address2;
           var address3 = FAILURE;
           var remaining0 = 0, index3 = this._offset, elements1 = [], address4 = true;
-          while (address4 !== FAILURE) {
+          while (true) {
             var index4 = this._offset, elements2 = new Array(2);
             var address5 = FAILURE;
             var chunk1 = null, max1 = this._offset + 1;
@@ -486,6 +488,8 @@
             if (address4 !== FAILURE) {
               elements1.push(address4);
               remaining0 -= 1;
+            } else {
+              break;
             }
           }
           if (remaining0 <= 0) {
@@ -709,7 +713,7 @@
         elements0[0] = address1;
         var address2 = FAILURE;
         var remaining0 = 0, index2 = this._offset, elements1 = [], address3 = true;
-        while (address3 !== FAILURE) {
+        while (true) {
           var index3 = this._offset;
           var index4 = this._offset, elements2 = new Array(2);
           var address4 = FAILURE;
@@ -788,6 +792,8 @@
           if (address3 !== FAILURE) {
             elements1.push(address3);
             remaining0 -= 1;
+          } else {
+            break;
           }
         }
         if (remaining0 <= 0) {
@@ -918,7 +924,7 @@
             elements1[0] = address3;
             var address4 = FAILURE;
             var remaining0 = 0, index5 = this._offset, elements2 = [], address5 = true;
-            while (address5 !== FAILURE) {
+            while (true) {
               var chunk3 = null, max3 = this._offset + 1;
               if (max3 <= this._inputSize) {
                 chunk3 = this._input.substring(this._offset, max3);
@@ -939,6 +945,8 @@
               if (address5 !== FAILURE) {
                 elements2.push(address5);
                 remaining0 -= 1;
+              } else {
+                break;
               }
             }
             if (remaining0 <= 0) {
@@ -994,7 +1002,7 @@
             elements3[0] = address7;
             var address8 = FAILURE;
             var remaining1 = 1, index8 = this._offset, elements4 = [], address9 = true;
-            while (address9 !== FAILURE) {
+            while (true) {
               var chunk5 = null, max5 = this._offset + 1;
               if (max5 <= this._inputSize) {
                 chunk5 = this._input.substring(this._offset, max5);
@@ -1015,6 +1023,8 @@
               if (address9 !== FAILURE) {
                 elements4.push(address9);
                 remaining1 -= 1;
+              } else {
+                break;
               }
             }
             if (remaining1 <= 0) {
@@ -1158,7 +1168,7 @@
                 elements5[1] = address12;
                 var address13 = FAILURE;
                 var remaining2 = 1, index13 = this._offset, elements6 = [], address14 = true;
-                while (address14 !== FAILURE) {
+                while (true) {
                   var chunk11 = null, max11 = this._offset + 1;
                   if (max11 <= this._inputSize) {
                     chunk11 = this._input.substring(this._offset, max11);
@@ -1179,6 +1189,8 @@
                   if (address14 !== FAILURE) {
                     elements6.push(address14);
                     remaining2 -= 1;
+                  } else {
+                    break;
                   }
                 }
                 if (remaining2 <= 0) {
@@ -1330,7 +1342,7 @@
         return cached[0];
       }
       var remaining0 = 0, index1 = this._offset, elements0 = [], address1 = true;
-      while (address1 !== FAILURE) {
+      while (true) {
         var chunk0 = null, max0 = this._offset + 1;
         if (max0 <= this._inputSize) {
           chunk0 = this._input.substring(this._offset, max0);
@@ -1351,6 +1363,8 @@
         if (address1 !== FAILURE) {
           elements0.push(address1);
           remaining0 -= 1;
+        } else {
+          break;
         }
       }
       if (remaining0 <= 0) {

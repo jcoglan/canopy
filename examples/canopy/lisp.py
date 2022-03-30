@@ -44,11 +44,13 @@ class Grammar(object):
             self._offset = cached[1]
             return cached[0]
         remaining0, index1, elements0, address1 = 1, self._offset, [], True
-        while address1 is not FAILURE:
+        while True:
             address1 = self._read_cell()
             if address1 is not FAILURE:
                 elements0.append(address1)
                 remaining0 -= 1
+            else:
+                break
         if remaining0 <= 0:
             address0 = TreeNode(self._input[index1:self._offset], index1, elements0)
             self._offset = self._offset
@@ -66,11 +68,13 @@ class Grammar(object):
         index1, elements0 = self._offset, []
         address1 = FAILURE
         remaining0, index2, elements1, address2 = 0, self._offset, [], True
-        while address2 is not FAILURE:
+        while True:
             address2 = self._read_space()
             if address2 is not FAILURE:
                 elements1.append(address2)
                 remaining0 -= 1
+            else:
+                break
         if remaining0 <= 0:
             address1 = TreeNode(self._input[index2:self._offset], index2, elements1)
             self._offset = self._offset
@@ -90,11 +94,13 @@ class Grammar(object):
                 elements0.append(address3)
                 address4 = FAILURE
                 remaining1, index4, elements2, address5 = 0, self._offset, [], True
-                while address5 is not FAILURE:
+                while True:
                     address5 = self._read_space()
                     if address5 is not FAILURE:
                         elements2.append(address5)
                         remaining1 -= 1
+                    else:
+                        break
                 if remaining1 <= 0:
                     address4 = TreeNode(self._input[index4:self._offset], index4, elements2)
                     self._offset = self._offset
@@ -144,11 +150,13 @@ class Grammar(object):
             elements0.append(address1)
             address2 = FAILURE
             remaining0, index2, elements1, address3 = 1, self._offset, [], True
-            while address3 is not FAILURE:
+            while True:
                 address3 = self._read_cell()
                 if address3 is not FAILURE:
                     elements1.append(address3)
                     remaining0 -= 1
+                else:
+                    break
             if remaining0 <= 0:
                 address2 = TreeNode(self._input[index2:self._offset], index2, elements1)
                 self._offset = self._offset
@@ -276,7 +284,7 @@ class Grammar(object):
             elements0.append(address1)
             address2 = FAILURE
             remaining0, index2, elements1, address3 = 0, self._offset, [], True
-            while address3 is not FAILURE:
+            while True:
                 chunk1, max1 = None, self._offset + 1
                 if max1 <= self._input_size:
                     chunk1 = self._input[self._offset:max1]
@@ -293,6 +301,8 @@ class Grammar(object):
                 if address3 is not FAILURE:
                     elements1.append(address3)
                     remaining0 -= 1
+                else:
+                    break
             if remaining0 <= 0:
                 address2 = TreeNode(self._input[index2:self._offset], index2, elements1)
                 self._offset = self._offset
@@ -339,7 +349,7 @@ class Grammar(object):
             elements0.append(address1)
             address2 = FAILURE
             remaining0, index2, elements1, address3 = 0, self._offset, [], True
-            while address3 is not FAILURE:
+            while True:
                 index3 = self._offset
                 index4, elements2 = self._offset, []
                 address4 = FAILURE
@@ -402,6 +412,8 @@ class Grammar(object):
                 if address3 is not FAILURE:
                     elements1.append(address3)
                     remaining0 -= 1
+                else:
+                    break
             if remaining0 <= 0:
                 address2 = TreeNode(self._input[index2:self._offset], index2, elements1)
                 self._offset = self._offset
@@ -449,7 +461,7 @@ class Grammar(object):
             self._offset = cached[1]
             return cached[0]
         remaining0, index1, elements0, address1 = 1, self._offset, [], True
-        while address1 is not FAILURE:
+        while True:
             index2, elements1 = self._offset, []
             address2 = FAILURE
             index3 = self._offset
@@ -489,6 +501,8 @@ class Grammar(object):
             if address1 is not FAILURE:
                 elements0.append(address1)
                 remaining0 -= 1
+            else:
+                break
         if remaining0 <= 0:
             address0 = TreeNode(self._input[index1:self._offset], index1, elements0)
             self._offset = self._offset

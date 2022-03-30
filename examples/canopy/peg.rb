@@ -240,11 +240,13 @@ module Canopy::PEG
       index1, elements0 = @offset, []
       address1 = FAILURE
       remaining0, index2, elements1, address2 = 0, @offset, [], true
-      until address2 == FAILURE
+      loop do
         address2 = _read___
         unless address2 == FAILURE
           elements1 << address2
           remaining0 -= 1
+        else
+          break
         end
       end
       if remaining0 <= 0
@@ -261,15 +263,17 @@ module Canopy::PEG
           elements0 << address3
           address4 = FAILURE
           remaining1, index3, elements2, address5 = 1, @offset, [], true
-          until address5 == FAILURE
+          loop do
             index4, elements3 = @offset, []
             address6 = FAILURE
             remaining2, index5, elements4, address7 = 0, @offset, [], true
-            until address7 == FAILURE
+            loop do
               address7 = _read___
               unless address7 == FAILURE
                 elements4 << address7
                 remaining2 -= 1
+              else
+                break
               end
             end
             if remaining2 <= 0
@@ -301,6 +305,8 @@ module Canopy::PEG
             unless address5 == FAILURE
               elements2 << address5
               remaining1 -= 1
+            else
+              break
             end
           end
           if remaining1 <= 0
@@ -313,11 +319,13 @@ module Canopy::PEG
             elements0 << address4
             address9 = FAILURE
             remaining3, index6, elements5, address10 = 0, @offset, [], true
-            until address10 == FAILURE
+            loop do
               address10 = _read___
               unless address10 == FAILURE
                 elements5 << address10
                 remaining3 -= 1
+              else
+                break
               end
             end
             if remaining3 <= 0
@@ -409,11 +417,13 @@ module Canopy::PEG
           elements0 << address2
           address3 = FAILURE
           remaining0, index3, elements1, address4 = 1, @offset, [], true
-          until address4 == FAILURE
+          loop do
             address4 = _read___
             unless address4 == FAILURE
               elements1 << address4
               remaining0 -= 1
+            else
+              break
             end
           end
           if remaining0 <= 0
@@ -506,11 +516,13 @@ module Canopy::PEG
       index1, elements0 = @offset, []
       address1 = FAILURE
       remaining0, index2, elements1, address2 = 1, @offset, [], true
-      until address2 == FAILURE
+      loop do
         address2 = _read___
         unless address2 == FAILURE
           elements1 << address2
           remaining0 -= 1
+        else
+          break
         end
       end
       if remaining0 <= 0
@@ -543,11 +555,13 @@ module Canopy::PEG
           elements0 << address3
           address4 = FAILURE
           remaining1, index3, elements2, address5 = 1, @offset, [], true
-          until address5 == FAILURE
+          loop do
             address5 = _read___
             unless address5 == FAILURE
               elements2 << address5
               remaining1 -= 1
+            else
+              break
             end
           end
           if remaining1 <= 0
@@ -630,11 +644,13 @@ module Canopy::PEG
         elements0 << address1
         address2 = FAILURE
         remaining0, index2, elements1, address3 = 0, @offset, [], true
-        until address3 == FAILURE
+        loop do
           address3 = _read___
           unless address3 == FAILURE
             elements1 << address3
             remaining0 -= 1
+          else
+            break
           end
         end
         if remaining0 <= 0
@@ -651,11 +667,13 @@ module Canopy::PEG
             elements0 << address4
             address5 = FAILURE
             remaining1, index3, elements2, address6 = 0, @offset, [], true
-            until address6 == FAILURE
+            loop do
               address6 = _read___
               unless address6 == FAILURE
                 elements2 << address6
                 remaining1 -= 1
+              else
+                break
               end
             end
             if remaining1 <= 0
@@ -730,15 +748,17 @@ module Canopy::PEG
         elements0 << address1
         address2 = FAILURE
         remaining0, index2, elements1, address3 = 1, @offset, [], true
-        until address3 == FAILURE
+        loop do
           index3, elements2 = @offset, []
           address4 = FAILURE
           remaining1, index4, elements3, address5 = 1, @offset, [], true
-          until address5 == FAILURE
+          loop do
             address5 = _read___
             unless address5 == FAILURE
               elements3 << address5
               remaining1 -= 1
+            else
+              break
             end
           end
           if remaining1 <= 0
@@ -771,11 +791,13 @@ module Canopy::PEG
               elements2 << address6
               address7 = FAILURE
               remaining2, index5, elements4, address8 = 1, @offset, [], true
-              until address8 == FAILURE
+              loop do
                 address8 = _read___
                 unless address8 == FAILURE
                   elements4 << address8
                   remaining2 -= 1
+                else
+                  break
                 end
               end
               if remaining2 <= 0
@@ -815,6 +837,8 @@ module Canopy::PEG
           unless address3 == FAILURE
             elements1 << address3
             remaining0 -= 1
+          else
+            break
           end
         end
         if remaining0 <= 0
@@ -872,11 +896,13 @@ module Canopy::PEG
         index4, elements1 = @offset, []
         address3 = FAILURE
         remaining0, index5, elements2, address4 = 1, @offset, [], true
-        until address4 == FAILURE
+        loop do
           address4 = _read___
           unless address4 == FAILURE
             elements2 << address4
             remaining0 -= 1
+          else
+            break
           end
         end
         if remaining0 <= 0
@@ -943,11 +969,13 @@ module Canopy::PEG
         elements0 << address1
         address2 = FAILURE
         remaining0, index2, elements1, address3 = 1, @offset, [], true
-        until address3 == FAILURE
+        loop do
           address3 = _read___
           unless address3 == FAILURE
             elements1 << address3
             remaining0 -= 1
+          else
+            break
           end
         end
         if remaining0 <= 0
@@ -1015,11 +1043,13 @@ module Canopy::PEG
         elements0 << address1
         address2 = FAILURE
         remaining0, index3, elements1, address3 = 0, @offset, [], true
-        until address3 == FAILURE
+        loop do
           address3 = _read___
           unless address3 == FAILURE
             elements1 << address3
             remaining0 -= 1
+          else
+            break
           end
         end
         if remaining0 <= 0
@@ -1036,11 +1066,13 @@ module Canopy::PEG
             elements0 << address4
             address5 = FAILURE
             remaining1, index4, elements2, address6 = 0, @offset, [], true
-            until address6 == FAILURE
+            loop do
               address6 = _read___
               unless address6 == FAILURE
                 elements2 << address6
                 remaining1 -= 1
+              else
+                break
               end
             end
             if remaining1 <= 0
@@ -1254,15 +1286,17 @@ module Canopy::PEG
         elements0 << address1
         address2 = FAILURE
         remaining0, index2, elements1, address3 = 1, @offset, [], true
-        until address3 == FAILURE
+        loop do
           index3, elements2 = @offset, []
           address4 = FAILURE
           remaining1, index4, elements3, address5 = 1, @offset, [], true
-          until address5 == FAILURE
+          loop do
             address5 = _read___
             unless address5 == FAILURE
               elements3 << address5
               remaining1 -= 1
+            else
+              break
             end
           end
           if remaining1 <= 0
@@ -1294,6 +1328,8 @@ module Canopy::PEG
           unless address3 == FAILURE
             elements1 << address3
             remaining0 -= 1
+          else
+            break
           end
         end
         if remaining0 <= 0
@@ -1700,7 +1736,7 @@ module Canopy::PEG
         elements0 << address1
         address2 = FAILURE
         remaining0, index3, elements1, address3 = 0, @offset, [], true
-        until address3 == FAILURE
+        loop do
           index4 = @offset
           index5, elements2 = @offset, []
           address4 = FAILURE
@@ -1779,6 +1815,8 @@ module Canopy::PEG
           unless address3 == FAILURE
             elements1 << address3
             remaining0 -= 1
+          else
+            break
           end
         end
         if remaining0 <= 0
@@ -1852,7 +1890,7 @@ module Canopy::PEG
           elements3 << address7
           address8 = FAILURE
           remaining1, index7, elements4, address9 = 0, @offset, [], true
-          until address9 == FAILURE
+          loop do
             index8 = @offset
             index9, elements5 = @offset, []
             address10 = FAILURE
@@ -1931,6 +1969,8 @@ module Canopy::PEG
             unless address9 == FAILURE
               elements4 << address9
               remaining1 -= 1
+            else
+              break
             end
           end
           if remaining1 <= 0
@@ -2017,7 +2057,7 @@ module Canopy::PEG
         elements0 << address1
         address2 = FAILURE
         remaining0, index2, elements1, address3 = 0, @offset, [], true
-        until address3 == FAILURE
+        loop do
           index3 = @offset
           index4, elements2 = @offset, []
           address4 = FAILURE
@@ -2096,6 +2136,8 @@ module Canopy::PEG
           unless address3 == FAILURE
             elements1 << address3
             remaining0 -= 1
+          else
+            break
           end
         end
         if remaining0 <= 0
@@ -2231,7 +2273,7 @@ module Canopy::PEG
           elements0 << address2
           address3 = FAILURE
           remaining0, index3, elements1, address4 = 1, @offset, [], true
-          until address4 == FAILURE
+          loop do
             index4 = @offset
             index5, elements2 = @offset, []
             address5 = FAILURE
@@ -2310,6 +2352,8 @@ module Canopy::PEG
             unless address4 == FAILURE
               elements1 << address4
               remaining0 -= 1
+            else
+              break
             end
           end
           if remaining0 <= 0
@@ -2430,7 +2474,7 @@ module Canopy::PEG
         elements0 << address1
         address2 = FAILURE
         remaining0, index2, elements1, address3 = 0, @offset, [], true
-        until address3 == FAILURE
+        loop do
           index3, elements2 = @offset, []
           address4 = FAILURE
           chunk0, max0 = nil, @offset + 1
@@ -2473,6 +2517,8 @@ module Canopy::PEG
           unless address3 == FAILURE
             elements1 << address3
             remaining0 -= 1
+          else
+            break
           end
         end
         if remaining0 <= 0
@@ -2531,7 +2577,7 @@ module Canopy::PEG
         elements0 << address1
         address2 = FAILURE
         remaining0, index2, elements1, address3 = 0, @offset, [], true
-        until address3 == FAILURE
+        loop do
           chunk1, max1 = nil, @offset + 1
           if max1 <= @input_size
             chunk1 = @input[@offset...max1]
@@ -2552,6 +2598,8 @@ module Canopy::PEG
           unless address3 == FAILURE
             elements1 << address3
             remaining0 -= 1
+          else
+            break
           end
         end
         if remaining0 <= 0
@@ -2646,7 +2694,7 @@ module Canopy::PEG
         elements0 << address1
         address2 = FAILURE
         remaining0, index2, elements1, address3 = 0, @offset, [], true
-        until address3 == FAILURE
+        loop do
           chunk1, max1 = nil, @offset + 1
           if max1 <= @input_size
             chunk1 = @input[@offset...max1]
@@ -2667,6 +2715,8 @@ module Canopy::PEG
           unless address3 == FAILURE
             elements1 << address3
             remaining0 -= 1
+          else
+            break
           end
         end
         if remaining0 <= 0

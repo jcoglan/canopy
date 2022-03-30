@@ -176,11 +176,13 @@
       var index1 = this._offset, elements0 = new Array(4);
       var address1 = FAILURE;
       var remaining0 = 0, index2 = this._offset, elements1 = [], address2 = true;
-      while (address2 !== FAILURE) {
+      while (true) {
         address2 = this._read___();
         if (address2 !== FAILURE) {
           elements1.push(address2);
           remaining0 -= 1;
+        } else {
+          break;
         }
       }
       if (remaining0 <= 0) {
@@ -197,15 +199,17 @@
           elements0[1] = address3;
           var address4 = FAILURE;
           var remaining1 = 1, index3 = this._offset, elements2 = [], address5 = true;
-          while (address5 !== FAILURE) {
+          while (true) {
             var index4 = this._offset, elements3 = new Array(2);
             var address6 = FAILURE;
             var remaining2 = 0, index5 = this._offset, elements4 = [], address7 = true;
-            while (address7 !== FAILURE) {
+            while (true) {
               address7 = this._read___();
               if (address7 !== FAILURE) {
                 elements4.push(address7);
                 remaining2 -= 1;
+              } else {
+                break;
               }
             }
             if (remaining2 <= 0) {
@@ -237,6 +241,8 @@
             if (address5 !== FAILURE) {
               elements2.push(address5);
               remaining1 -= 1;
+            } else {
+              break;
             }
           }
           if (remaining1 <= 0) {
@@ -249,11 +255,13 @@
             elements0[2] = address4;
             var address9 = FAILURE;
             var remaining3 = 0, index6 = this._offset, elements5 = [], address10 = true;
-            while (address10 !== FAILURE) {
+            while (true) {
               address10 = this._read___();
               if (address10 !== FAILURE) {
                 elements5.push(address10);
                 remaining3 -= 1;
+              } else {
+                break;
               }
             }
             if (remaining3 <= 0) {
@@ -346,11 +354,13 @@
           elements0[1] = address2;
           var address3 = FAILURE;
           var remaining0 = 1, index3 = this._offset, elements1 = [], address4 = true;
-          while (address4 !== FAILURE) {
+          while (true) {
             address4 = this._read___();
             if (address4 !== FAILURE) {
               elements1.push(address4);
               remaining0 -= 1;
+            } else {
+              break;
             }
           }
           if (remaining0 <= 0) {
@@ -445,11 +455,13 @@
       var index1 = this._offset, elements0 = new Array(3);
       var address1 = FAILURE;
       var remaining0 = 1, index2 = this._offset, elements1 = [], address2 = true;
-      while (address2 !== FAILURE) {
+      while (true) {
         address2 = this._read___();
         if (address2 !== FAILURE) {
           elements1.push(address2);
           remaining0 -= 1;
+        } else {
+          break;
         }
       }
       if (remaining0 <= 0) {
@@ -482,11 +494,13 @@
           elements0[1] = address3;
           var address4 = FAILURE;
           var remaining1 = 1, index3 = this._offset, elements2 = [], address5 = true;
-          while (address5 !== FAILURE) {
+          while (true) {
             address5 = this._read___();
             if (address5 !== FAILURE) {
               elements2.push(address5);
               remaining1 -= 1;
+            } else {
+              break;
             }
           }
           if (remaining1 <= 0) {
@@ -571,11 +585,13 @@
         elements0[0] = address1;
         var address2 = FAILURE;
         var remaining0 = 0, index2 = this._offset, elements1 = [], address3 = true;
-        while (address3 !== FAILURE) {
+        while (true) {
           address3 = this._read___();
           if (address3 !== FAILURE) {
             elements1.push(address3);
             remaining0 -= 1;
+          } else {
+            break;
           }
         }
         if (remaining0 <= 0) {
@@ -592,11 +608,13 @@
             elements0[2] = address4;
             var address5 = FAILURE;
             var remaining1 = 0, index3 = this._offset, elements2 = [], address6 = true;
-            while (address6 !== FAILURE) {
+            while (true) {
               address6 = this._read___();
               if (address6 !== FAILURE) {
                 elements2.push(address6);
                 remaining1 -= 1;
+              } else {
+                break;
               }
             }
             if (remaining1 <= 0) {
@@ -672,15 +690,17 @@
         elements0[0] = address1;
         var address2 = FAILURE;
         var remaining0 = 1, index2 = this._offset, elements1 = [], address3 = true;
-        while (address3 !== FAILURE) {
+        while (true) {
           var index3 = this._offset, elements2 = new Array(4);
           var address4 = FAILURE;
           var remaining1 = 1, index4 = this._offset, elements3 = [], address5 = true;
-          while (address5 !== FAILURE) {
+          while (true) {
             address5 = this._read___();
             if (address5 !== FAILURE) {
               elements3.push(address5);
               remaining1 -= 1;
+            } else {
+              break;
             }
           }
           if (remaining1 <= 0) {
@@ -713,11 +733,13 @@
               elements2[1] = address6;
               var address7 = FAILURE;
               var remaining2 = 1, index5 = this._offset, elements4 = [], address8 = true;
-              while (address8 !== FAILURE) {
+              while (true) {
                 address8 = this._read___();
                 if (address8 !== FAILURE) {
                   elements4.push(address8);
                   remaining2 -= 1;
+                } else {
+                  break;
                 }
               }
               if (remaining2 <= 0) {
@@ -757,6 +779,8 @@
           if (address3 !== FAILURE) {
             elements1.push(address3);
             remaining0 -= 1;
+          } else {
+            break;
           }
         }
         if (remaining0 <= 0) {
@@ -815,11 +839,13 @@
         var index4 = this._offset, elements1 = new Array(2);
         var address3 = FAILURE;
         var remaining0 = 1, index5 = this._offset, elements2 = [], address4 = true;
-        while (address4 !== FAILURE) {
+        while (true) {
           address4 = this._read___();
           if (address4 !== FAILURE) {
             elements2.push(address4);
             remaining0 -= 1;
+          } else {
+            break;
           }
         }
         if (remaining0 <= 0) {
@@ -887,11 +913,13 @@
         elements0[0] = address1;
         var address2 = FAILURE;
         var remaining0 = 1, index2 = this._offset, elements1 = [], address3 = true;
-        while (address3 !== FAILURE) {
+        while (true) {
           address3 = this._read___();
           if (address3 !== FAILURE) {
             elements1.push(address3);
             remaining0 -= 1;
+          } else {
+            break;
           }
         }
         if (remaining0 <= 0) {
@@ -960,11 +988,13 @@
         elements0[0] = address1;
         var address2 = FAILURE;
         var remaining0 = 0, index3 = this._offset, elements1 = [], address3 = true;
-        while (address3 !== FAILURE) {
+        while (true) {
           address3 = this._read___();
           if (address3 !== FAILURE) {
             elements1.push(address3);
             remaining0 -= 1;
+          } else {
+            break;
           }
         }
         if (remaining0 <= 0) {
@@ -981,11 +1011,13 @@
             elements0[2] = address4;
             var address5 = FAILURE;
             var remaining1 = 0, index4 = this._offset, elements2 = [], address6 = true;
-            while (address6 !== FAILURE) {
+            while (true) {
               address6 = this._read___();
               if (address6 !== FAILURE) {
                 elements2.push(address6);
                 remaining1 -= 1;
+              } else {
+                break;
               }
             }
             if (remaining1 <= 0) {
@@ -1202,15 +1234,17 @@
         elements0[0] = address1;
         var address2 = FAILURE;
         var remaining0 = 1, index2 = this._offset, elements1 = [], address3 = true;
-        while (address3 !== FAILURE) {
+        while (true) {
           var index3 = this._offset, elements2 = new Array(2);
           var address4 = FAILURE;
           var remaining1 = 1, index4 = this._offset, elements3 = [], address5 = true;
-          while (address5 !== FAILURE) {
+          while (true) {
             address5 = this._read___();
             if (address5 !== FAILURE) {
               elements3.push(address5);
               remaining1 -= 1;
+            } else {
+              break;
             }
           }
           if (remaining1 <= 0) {
@@ -1242,6 +1276,8 @@
           if (address3 !== FAILURE) {
             elements1.push(address3);
             remaining0 -= 1;
+          } else {
+            break;
           }
         }
         if (remaining0 <= 0) {
@@ -1656,7 +1692,7 @@
         elements0[0] = address1;
         var address2 = FAILURE;
         var remaining0 = 0, index3 = this._offset, elements1 = [], address3 = true;
-        while (address3 !== FAILURE) {
+        while (true) {
           var index4 = this._offset;
           var index5 = this._offset, elements2 = new Array(2);
           var address4 = FAILURE;
@@ -1735,6 +1771,8 @@
           if (address3 !== FAILURE) {
             elements1.push(address3);
             remaining0 -= 1;
+          } else {
+            break;
           }
         }
         if (remaining0 <= 0) {
@@ -1808,7 +1846,7 @@
           elements3[0] = address7;
           var address8 = FAILURE;
           var remaining1 = 0, index7 = this._offset, elements4 = [], address9 = true;
-          while (address9 !== FAILURE) {
+          while (true) {
             var index8 = this._offset;
             var index9 = this._offset, elements5 = new Array(2);
             var address10 = FAILURE;
@@ -1887,6 +1925,8 @@
             if (address9 !== FAILURE) {
               elements4.push(address9);
               remaining1 -= 1;
+            } else {
+              break;
             }
           }
           if (remaining1 <= 0) {
@@ -1974,7 +2014,7 @@
         elements0[0] = address1;
         var address2 = FAILURE;
         var remaining0 = 0, index2 = this._offset, elements1 = [], address3 = true;
-        while (address3 !== FAILURE) {
+        while (true) {
           var index3 = this._offset;
           var index4 = this._offset, elements2 = new Array(2);
           var address4 = FAILURE;
@@ -2053,6 +2093,8 @@
           if (address3 !== FAILURE) {
             elements1.push(address3);
             remaining0 -= 1;
+          } else {
+            break;
           }
         }
         if (remaining0 <= 0) {
@@ -2190,7 +2232,7 @@
           elements0[1] = address2;
           var address3 = FAILURE;
           var remaining0 = 1, index3 = this._offset, elements1 = [], address4 = true;
-          while (address4 !== FAILURE) {
+          while (true) {
             var index4 = this._offset;
             var index5 = this._offset, elements2 = new Array(2);
             var address5 = FAILURE;
@@ -2269,6 +2311,8 @@
             if (address4 !== FAILURE) {
               elements1.push(address4);
               remaining0 -= 1;
+            } else {
+              break;
             }
           }
           if (remaining0 <= 0) {
@@ -2391,7 +2435,7 @@
         elements0[0] = address1;
         var address2 = FAILURE;
         var remaining0 = 0, index2 = this._offset, elements1 = [], address3 = true;
-        while (address3 !== FAILURE) {
+        while (true) {
           var index3 = this._offset, elements2 = new Array(2);
           var address4 = FAILURE;
           var chunk0 = null, max0 = this._offset + 1;
@@ -2434,6 +2478,8 @@
           if (address3 !== FAILURE) {
             elements1.push(address3);
             remaining0 -= 1;
+          } else {
+            break;
           }
         }
         if (remaining0 <= 0) {
@@ -2493,7 +2539,7 @@
         elements0[0] = address1;
         var address2 = FAILURE;
         var remaining0 = 0, index2 = this._offset, elements1 = [], address3 = true;
-        while (address3 !== FAILURE) {
+        while (true) {
           var chunk1 = null, max1 = this._offset + 1;
           if (max1 <= this._inputSize) {
             chunk1 = this._input.substring(this._offset, max1);
@@ -2514,6 +2560,8 @@
           if (address3 !== FAILURE) {
             elements1.push(address3);
             remaining0 -= 1;
+          } else {
+            break;
           }
         }
         if (remaining0 <= 0) {
@@ -2610,7 +2658,7 @@
         elements0[0] = address1;
         var address2 = FAILURE;
         var remaining0 = 0, index2 = this._offset, elements1 = [], address3 = true;
-        while (address3 !== FAILURE) {
+        while (true) {
           var chunk1 = null, max1 = this._offset + 1;
           if (max1 <= this._inputSize) {
             chunk1 = this._input.substring(this._offset, max1);
@@ -2631,6 +2679,8 @@
           if (address3 !== FAILURE) {
             elements1.push(address3);
             remaining0 -= 1;
+          } else {
+            break;
           }
         }
         if (remaining0 <= 0) {

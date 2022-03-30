@@ -23,11 +23,14 @@ class Repeat {
         elements    = temp.elements,
         elAddr      = temp.address
 
-    builder.whileNotNull_(elAddr, () => {
+    builder.loop_(() => {
       this._expression.compile(builder, elAddr)
+
       builder.ifNode_(elAddr, () => {
         builder.append_(elements, elAddr)
         builder.decrement_(remaining)
+      }, () => {
+        builder.break_()
       })
     })
 

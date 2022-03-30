@@ -204,9 +204,13 @@ class Builder extends Base {
     }
   }
 
-  whileNotNull_ (expression, block) {
-    this._line('while ' + expression + ' is not ' + this.nullNode_() + ':')
+  loop_ (block) {
+    this._line('while ' + this.true_() + ':')
     this._indent(block)
+  }
+
+  break_ () {
+    this._line('break')
   }
 
   stringMatch_ (expression, string) {

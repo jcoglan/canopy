@@ -46,11 +46,13 @@ module CanopyLisp
         return cached[0]
       end
       remaining0, index1, elements0, address1 = 1, @offset, [], true
-      until address1 == FAILURE
+      loop do
         address1 = _read_cell
         unless address1 == FAILURE
           elements0 << address1
           remaining0 -= 1
+        else
+          break
         end
       end
       if remaining0 <= 0
@@ -73,11 +75,13 @@ module CanopyLisp
       index1, elements0 = @offset, []
       address1 = FAILURE
       remaining0, index2, elements1, address2 = 0, @offset, [], true
-      until address2 == FAILURE
+      loop do
         address2 = _read_space
         unless address2 == FAILURE
           elements1 << address2
           remaining0 -= 1
+        else
+          break
         end
       end
       if remaining0 <= 0
@@ -102,11 +106,13 @@ module CanopyLisp
           elements0 << address3
           address4 = FAILURE
           remaining1, index4, elements2, address5 = 0, @offset, [], true
-          until address5 == FAILURE
+          loop do
             address5 = _read_space
             unless address5 == FAILURE
               elements2 << address5
               remaining1 -= 1
+            else
+              break
             end
           end
           if remaining1 <= 0
@@ -169,11 +175,13 @@ module CanopyLisp
         elements0 << address1
         address2 = FAILURE
         remaining0, index2, elements1, address3 = 1, @offset, [], true
-        until address3 == FAILURE
+        loop do
           address3 = _read_cell
           unless address3 == FAILURE
             elements1 << address3
             remaining0 -= 1
+          else
+            break
           end
         end
         if remaining0 <= 0
@@ -336,7 +344,7 @@ module CanopyLisp
         elements0 << address1
         address2 = FAILURE
         remaining0, index2, elements1, address3 = 0, @offset, [], true
-        until address3 == FAILURE
+        loop do
           chunk1, max1 = nil, @offset + 1
           if max1 <= @input_size
             chunk1 = @input[@offset...max1]
@@ -357,6 +365,8 @@ module CanopyLisp
           unless address3 == FAILURE
             elements1 << address3
             remaining0 -= 1
+          else
+            break
           end
         end
         if remaining0 <= 0
@@ -415,7 +425,7 @@ module CanopyLisp
         elements0 << address1
         address2 = FAILURE
         remaining0, index2, elements1, address3 = 0, @offset, [], true
-        until address3 == FAILURE
+        loop do
           index3 = @offset
           index4, elements2 = @offset, []
           address4 = FAILURE
@@ -494,6 +504,8 @@ module CanopyLisp
           unless address3 == FAILURE
             elements1 << address3
             remaining0 -= 1
+          else
+            break
           end
         end
         if remaining0 <= 0
@@ -554,7 +566,7 @@ module CanopyLisp
         return cached[0]
       end
       remaining0, index1, elements0, address1 = 1, @offset, [], true
-      until address1 == FAILURE
+      loop do
         index2, elements1 = @offset, []
         address2 = FAILURE
         index3 = @offset
@@ -601,6 +613,8 @@ module CanopyLisp
         unless address1 == FAILURE
           elements0 << address1
           remaining0 -= 1
+        else
+          break
         end
       end
       if remaining0 <= 0

@@ -41,11 +41,13 @@ abstract class Grammar {
             int index1 = offset;
             List<TreeNode> elements0 = new ArrayList<TreeNode>();
             TreeNode address1 = new TreeNode("", -1, new ArrayList<TreeNode>());
-            while (address1 != FAILURE) {
+            while (true) {
                 address1 = _read_cell();
                 if (address1 != FAILURE) {
                     elements0.add(address1);
                     remaining0 -= 1;
+                } else {
+                    break;
                 }
             }
             if (remaining0 <= 0) {
@@ -78,11 +80,13 @@ abstract class Grammar {
             int index2 = offset;
             List<TreeNode> elements1 = new ArrayList<TreeNode>();
             TreeNode address2 = new TreeNode("", -1, new ArrayList<TreeNode>());
-            while (address2 != FAILURE) {
+            while (true) {
                 address2 = _read_space();
                 if (address2 != FAILURE) {
                     elements1.add(address2);
                     remaining0 -= 1;
+                } else {
+                    break;
                 }
             }
             if (remaining0 <= 0) {
@@ -110,11 +114,13 @@ abstract class Grammar {
                     int index4 = offset;
                     List<TreeNode> elements2 = new ArrayList<TreeNode>();
                     TreeNode address5 = new TreeNode("", -1, new ArrayList<TreeNode>());
-                    while (address5 != FAILURE) {
+                    while (true) {
                         address5 = _read_space();
                         if (address5 != FAILURE) {
                             elements2.add(address5);
                             remaining1 -= 1;
+                        } else {
+                            break;
                         }
                     }
                     if (remaining1 <= 0) {
@@ -188,11 +194,13 @@ abstract class Grammar {
                 int index2 = offset;
                 List<TreeNode> elements1 = new ArrayList<TreeNode>();
                 TreeNode address3 = new TreeNode("", -1, new ArrayList<TreeNode>());
-                while (address3 != FAILURE) {
+                while (true) {
                     address3 = _read_cell();
                     if (address3 != FAILURE) {
                         elements1.add(address3);
                         remaining0 -= 1;
+                    } else {
+                        break;
                     }
                 }
                 if (remaining0 <= 0) {
@@ -381,7 +389,7 @@ abstract class Grammar {
                 int index2 = offset;
                 List<TreeNode> elements1 = new ArrayList<TreeNode>();
                 TreeNode address3 = new TreeNode("", -1, new ArrayList<TreeNode>());
-                while (address3 != FAILURE) {
+                while (true) {
                     String chunk1 = null;
                     int max1 = offset + 1;
                     if (max1 <= inputSize) {
@@ -403,6 +411,8 @@ abstract class Grammar {
                     if (address3 != FAILURE) {
                         elements1.add(address3);
                         remaining0 -= 1;
+                    } else {
+                        break;
                     }
                 }
                 if (remaining0 <= 0) {
@@ -472,7 +482,7 @@ abstract class Grammar {
                 int index2 = offset;
                 List<TreeNode> elements1 = new ArrayList<TreeNode>();
                 TreeNode address3 = new TreeNode("", -1, new ArrayList<TreeNode>());
-                while (address3 != FAILURE) {
+                while (true) {
                     int index3 = offset;
                     int index4 = offset;
                     List<TreeNode> elements2 = new ArrayList<TreeNode>(2);
@@ -554,6 +564,8 @@ abstract class Grammar {
                     if (address3 != FAILURE) {
                         elements1.add(address3);
                         remaining0 -= 1;
+                    } else {
+                        break;
                     }
                 }
                 if (remaining0 <= 0) {
@@ -624,7 +636,7 @@ abstract class Grammar {
             int index1 = offset;
             List<TreeNode> elements0 = new ArrayList<TreeNode>();
             TreeNode address1 = new TreeNode("", -1, new ArrayList<TreeNode>());
-            while (address1 != FAILURE) {
+            while (true) {
                 int index2 = offset;
                 List<TreeNode> elements1 = new ArrayList<TreeNode>(2);
                 TreeNode address2 = FAILURE;
@@ -672,6 +684,8 @@ abstract class Grammar {
                 if (address1 != FAILURE) {
                     elements0.add(address1);
                     remaining0 -= 1;
+                } else {
+                    break;
                 }
             }
             if (remaining0 <= 0) {

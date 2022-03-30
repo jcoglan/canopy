@@ -207,8 +207,12 @@ class Builder extends Base {
     this.conditional_('if', condition, block, else_)
   }
 
-  whileNotNull_ (expression, block) {
-    this.conditional_('while', expression + ' !== ' + this.nullNode_(), block)
+  loop_ (block) {
+    this.conditional_('while', this.true_(), block)
+  }
+
+  break_ () {
+    this._line('break')
   }
 
   stringMatch_ (expression, string) {

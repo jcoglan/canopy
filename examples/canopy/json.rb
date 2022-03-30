@@ -188,7 +188,7 @@ module CanopyJson
           elements0 << address2
           address3 = FAILURE
           remaining0, index3, elements1, address4 = 0, @offset, [], true
-          until address4 == FAILURE
+          loop do
             index4, elements2 = @offset, []
             address5 = FAILURE
             chunk1, max1 = nil, @offset + 1
@@ -231,6 +231,8 @@ module CanopyJson
             unless address4 == FAILURE
               elements1 << address4
               remaining0 -= 1
+            else
+              break
             end
           end
           if remaining0 <= 0
@@ -465,7 +467,7 @@ module CanopyJson
           elements0 << address2
           address3 = FAILURE
           remaining0, index3, elements1, address4 = 0, @offset, [], true
-          until address4 == FAILURE
+          loop do
             index4, elements2 = @offset, []
             address5 = FAILURE
             chunk1, max1 = nil, @offset + 1
@@ -508,6 +510,8 @@ module CanopyJson
             unless address4 == FAILURE
               elements1 << address4
               remaining0 -= 1
+            else
+              break
             end
           end
           if remaining0 <= 0
@@ -729,7 +733,7 @@ module CanopyJson
         elements0 << address1
         address2 = FAILURE
         remaining0, index2, elements1, address3 = 0, @offset, [], true
-        until address3 == FAILURE
+        loop do
           index3 = @offset
           index4, elements2 = @offset, []
           address4 = FAILURE
@@ -808,6 +812,8 @@ module CanopyJson
           unless address3 == FAILURE
             elements1 << address3
             remaining0 -= 1
+          else
+            break
           end
         end
         if remaining0 <= 0
@@ -937,7 +943,7 @@ module CanopyJson
             elements1 << address3
             address4 = FAILURE
             remaining0, index5, elements2, address5 = 0, @offset, [], true
-            until address5 == FAILURE
+            loop do
               chunk3, max3 = nil, @offset + 1
               if max3 <= @input_size
                 chunk3 = @input[@offset...max3]
@@ -958,6 +964,8 @@ module CanopyJson
               unless address5 == FAILURE
                 elements2 << address5
                 remaining0 -= 1
+              else
+                break
               end
             end
             if remaining0 <= 0
@@ -1013,7 +1021,7 @@ module CanopyJson
             elements3 << address7
             address8 = FAILURE
             remaining1, index8, elements4, address9 = 1, @offset, [], true
-            until address9 == FAILURE
+            loop do
               chunk5, max5 = nil, @offset + 1
               if max5 <= @input_size
                 chunk5 = @input[@offset...max5]
@@ -1034,6 +1042,8 @@ module CanopyJson
               unless address9 == FAILURE
                 elements4 << address9
                 remaining1 -= 1
+              else
+                break
               end
             end
             if remaining1 <= 0
@@ -1177,7 +1187,7 @@ module CanopyJson
                 elements5 << address12
                 address13 = FAILURE
                 remaining2, index13, elements6, address14 = 1, @offset, [], true
-                until address14 == FAILURE
+                loop do
                   chunk11, max11 = nil, @offset + 1
                   if max11 <= @input_size
                     chunk11 = @input[@offset...max11]
@@ -1198,6 +1208,8 @@ module CanopyJson
                   unless address14 == FAILURE
                     elements6 << address14
                     remaining2 -= 1
+                  else
+                    break
                   end
                 end
                 if remaining2 <= 0
@@ -1346,7 +1358,7 @@ module CanopyJson
         return cached[0]
       end
       remaining0, index1, elements0, address1 = 0, @offset, [], true
-      until address1 == FAILURE
+      loop do
         chunk0, max0 = nil, @offset + 1
         if max0 <= @input_size
           chunk0 = @input[@offset...max0]
@@ -1367,6 +1379,8 @@ module CanopyJson
         unless address1 == FAILURE
           elements0 << address1
           remaining0 -= 1
+        else
+          break
         end
       end
       if remaining0 <= 0

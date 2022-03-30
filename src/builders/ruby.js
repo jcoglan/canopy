@@ -209,10 +209,14 @@ class Builder extends Base {
     this.conditional_('unless', condition, block, else_)
   }
 
-  whileNotNull_ (expression, block) {
-    this._line('until ' + expression + ' == ' + this.nullNode_())
+  loop_ (block) {
+    this._line('loop do')
     this._indent(block)
     this._line('end')
+  }
+
+  break_ () {
+    this._line('break')
   }
 
   stringMatch_ (expression, string) {
