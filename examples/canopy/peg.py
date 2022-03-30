@@ -160,10 +160,6 @@ class TreeNode22(TreeNode):
         self.identifier = elements[1]
 
 
-class ParseError(SyntaxError):
-    pass
-
-
 FAILURE = object()
 
 
@@ -2191,6 +2187,14 @@ class Parser(Grammar):
         raise ParseError(format_error(self._input, self._failure, self._expected))
 
 
+class ParseError(SyntaxError):
+    pass
+
+
+def parse(input, actions=None, types=None):
+    parser = Parser(input, actions, types)
+    return parser.parse()
+
 def format_error(input, offset, expected):
     lines, line_no, position = input.split('\n'), 0, 0
     while position <= offset:
@@ -2201,7 +2205,3 @@ def format_error(input, offset, expected):
     position -= len(line) + 1
     message += ' ' * (offset - position)
     return message + '^'
-
-def parse(input, actions=None, types=None):
-    parser = Parser(input, actions, types)
-    return parser.parse()

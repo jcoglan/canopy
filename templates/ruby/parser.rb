@@ -38,6 +38,8 @@ class Parser
   end
 end
 
+ParseError = Class.new(StandardError)
+
 def self.parse(input, options = {})
   parser = Parser.new(input, options[:actions], options[:types])
   parser.parse

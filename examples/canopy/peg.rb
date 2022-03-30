@@ -227,8 +227,6 @@ module Canopy::PEG
     end
   end
 
-  ParseError = Class.new(StandardError)
-
   FAILURE = Object.new
 
   module Grammar
@@ -2737,6 +2735,8 @@ module Canopy::PEG
       return message + "^"
     end
   end
+
+  ParseError = Class.new(StandardError)
 
   def self.parse(input, options = {})
     parser = Parser.new(input, options[:actions], options[:types])

@@ -51,9 +51,6 @@ class Builder extends Base {
   }
 
   grammarModule_ (block) {
-    this.class_('ParseError', 'SyntaxError', () => {
-      this._line('pass')
-    })
     this.assign_(this.nullNode_(), 'object()')
     this._newline()
     this._newline()

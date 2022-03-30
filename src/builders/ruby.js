@@ -45,8 +45,6 @@ class Builder extends Base {
   }
 
   grammarModule_ (block) {
-    this.assign_('ParseError', 'Class.new(StandardError)')
-    this._newline()
     this.assign_(this.nullNode_(), 'Object.new')
     this._newline()
     this._line('module Grammar')
