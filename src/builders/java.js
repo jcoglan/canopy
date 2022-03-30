@@ -45,8 +45,15 @@ class Builder extends Base {
     return ['/**'].concat(lines).concat([' */'])
   }
 
-  package_ (name, block) {
+  package_ (name, actions, block) {
     this._grammarName = name.replace(/\./g, '')
+
+    this._newBuffer('java', 'Actions')
+    this._template('java', 'Actions.java', { actions })
+
+    this._newBuffer('java', 'CacheRecord')
+    this._template('java', 'CacheRecord.java')
+
     block()
   }
 
@@ -59,24 +66,21 @@ class Builder extends Base {
     return name
   }
 
-  grammarModule_ (actions, block) {
-    this._newBuffer('java', 'CacheRecord')
-    this._template('java', 'CacheRecord.java')
-
-    this._newBuffer('java', 'Actions')
-    this._template('java', 'Actions.java', { actions })
-
+  grammarModule_ (block) {
     this._newBuffer('java', 'Grammar')
+
     this._line('import java.util.ArrayList')
     this._line('import java.util.HashMap')
     this._line('import java.util.List')
     this._line('import java.util.Map')
     this._line('import java.util.regex.Pattern')
     this._newline()
+
     this._line('abstract class Grammar {', false)
     this._indent(() => {
       this.assign_('static TreeNode ' + this.nullNode_(), 'new TreeNode()')
       this._newline()
+
       this._line('int inputSize, offset, failure')
       this._line('String input')
       this._line('List<String> expected')

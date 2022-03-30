@@ -30,7 +30,7 @@ class Builder extends Base {
     return lines.map((line) => '# ' + line)
   }
 
-  package_ (name, block) {
+  package_ (name, actions, block) {
     this._newBuffer('py')
     
     this._line('from collections import defaultdict')
@@ -50,7 +50,7 @@ class Builder extends Base {
     return name
   }
 
-  grammarModule_ (actions, block) {
+  grammarModule_ (block) {
     this.class_('ParseError', 'SyntaxError', () => {
       this._line('pass')
     })

@@ -12,8 +12,7 @@ bootstrap: test $(lib_files)
 compile:
 	./bin/canopy src/meta_grammar.peg
 
-test: node_modules
-	npm test
+test: node_modules test-js
 
 clean: clean-examples clean-test
 

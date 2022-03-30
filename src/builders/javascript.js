@@ -21,13 +21,13 @@ class Builder extends Base {
     return ['/**'].concat(lines).concat([' */'])
   }
 
-  package_ (name, block) {
+  package_ (name, actions, block) {
+    this._grammarName = name
     this._newBuffer('js')
     
     this._line('(function() {', false)
     this._indent(() => {
       this._line("'use strict'")
-      this._grammarName = name
       block()
     })
     this._line('})()')
@@ -42,7 +42,7 @@ class Builder extends Base {
     return name
   }
 
-  grammarModule_ (actions, block) {
+  grammarModule_ (block) {
     this._newline()
     this.assign_('var ' + this.nullNode_(), '{}')
     this._newline()

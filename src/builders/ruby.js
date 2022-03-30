@@ -27,7 +27,7 @@ class Builder extends Base {
     return lines.map((line) => '# ' + line)
   }
 
-  package_ (name, block) {
+  package_ (name, actions, block) {
     this._newBuffer('rb')
     
     this._line('module ' + name.replace(/\./g, '::'))
@@ -44,7 +44,7 @@ class Builder extends Base {
     return name
   }
 
-  grammarModule_ (actions, block) {
+  grammarModule_ (block) {
     this.assign_('ParseError', 'Class.new(StandardError)')
     this._newline()
     this.assign_(this.nullNode_(), 'Object.new')

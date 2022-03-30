@@ -13,13 +13,13 @@ class Grammar {
   compile (builder) {
     let [nodeLabels, actions, regexes] = this._gatherComponents()
 
-    builder.package_(this._name, () => {
+    builder.package_(this._name, actions.sort(), () => {
       let nodeClassName = builder.syntaxNodeClass_()
 
       for (let [i, labels] of nodeLabels.entries())
         this._compileTreeNode(builder, nodeClassName, i, labels)
 
-      builder.grammarModule_(actions.sort(), () => {
+      builder.grammarModule_(() => {
         for (let [i, regex] of regexes.entries())
           builder.compileRegex_(regex, 'REGEX_' + (i + 1))
 
