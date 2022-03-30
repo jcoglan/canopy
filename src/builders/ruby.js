@@ -271,10 +271,6 @@ class Builder extends Base {
     return '""'
   }
 
-  true_ () {
-    return 'true'
-  }
-
   null_ () {
     return 'nil'
   }

@@ -175,7 +175,7 @@
       }
       var index1 = this._offset, elements0 = new Array(4);
       var address1 = FAILURE;
-      var index2 = this._offset, elements1 = [], address2 = true;
+      var index2 = this._offset, elements1 = [], address2 = null;
       while (true) {
         address2 = this._read___();
         if (address2 !== FAILURE) {
@@ -197,11 +197,11 @@
         if (address3 !== FAILURE) {
           elements0[1] = address3;
           var address4 = FAILURE;
-          var index3 = this._offset, elements2 = [], address5 = true;
+          var index3 = this._offset, elements2 = [], address5 = null;
           while (true) {
             var index4 = this._offset, elements3 = new Array(2);
             var address6 = FAILURE;
-            var index5 = this._offset, elements4 = [], address7 = true;
+            var index5 = this._offset, elements4 = [], address7 = null;
             while (true) {
               address7 = this._read___();
               if (address7 !== FAILURE) {
@@ -251,7 +251,7 @@
           if (address4 !== FAILURE) {
             elements0[2] = address4;
             var address9 = FAILURE;
-            var index6 = this._offset, elements5 = [], address10 = true;
+            var index6 = this._offset, elements5 = [], address10 = null;
             while (true) {
               address10 = this._read___();
               if (address10 !== FAILURE) {
@@ -349,7 +349,7 @@
         if (address2 !== FAILURE) {
           elements0[1] = address2;
           var address3 = FAILURE;
-          var index3 = this._offset, elements1 = [], address4 = true;
+          var index3 = this._offset, elements1 = [], address4 = null;
           while (true) {
             address4 = this._read___();
             if (address4 !== FAILURE) {
@@ -449,7 +449,7 @@
       }
       var index1 = this._offset, elements0 = new Array(3);
       var address1 = FAILURE;
-      var index2 = this._offset, elements1 = [], address2 = true;
+      var index2 = this._offset, elements1 = [], address2 = null;
       while (true) {
         address2 = this._read___();
         if (address2 !== FAILURE) {
@@ -487,7 +487,7 @@
         if (address3 !== FAILURE) {
           elements0[1] = address3;
           var address4 = FAILURE;
-          var index3 = this._offset, elements2 = [], address5 = true;
+          var index3 = this._offset, elements2 = [], address5 = null;
           while (true) {
             address5 = this._read___();
             if (address5 !== FAILURE) {
@@ -577,7 +577,7 @@
       if (address1 !== FAILURE) {
         elements0[0] = address1;
         var address2 = FAILURE;
-        var index2 = this._offset, elements1 = [], address3 = true;
+        var index2 = this._offset, elements1 = [], address3 = null;
         while (true) {
           address3 = this._read___();
           if (address3 !== FAILURE) {
@@ -599,7 +599,7 @@
           if (address4 !== FAILURE) {
             elements0[2] = address4;
             var address5 = FAILURE;
-            var index3 = this._offset, elements2 = [], address6 = true;
+            var index3 = this._offset, elements2 = [], address6 = null;
             while (true) {
               address6 = this._read___();
               if (address6 !== FAILURE) {
@@ -680,11 +680,11 @@
       if (address1 !== FAILURE) {
         elements0[0] = address1;
         var address2 = FAILURE;
-        var index2 = this._offset, elements1 = [], address3 = true;
+        var index2 = this._offset, elements1 = [], address3 = null;
         while (true) {
           var index3 = this._offset, elements2 = new Array(4);
           var address4 = FAILURE;
-          var index4 = this._offset, elements3 = [], address5 = true;
+          var index4 = this._offset, elements3 = [], address5 = null;
           while (true) {
             address5 = this._read___();
             if (address5 !== FAILURE) {
@@ -722,7 +722,7 @@
             if (address6 !== FAILURE) {
               elements2[1] = address6;
               var address7 = FAILURE;
-              var index5 = this._offset, elements4 = [], address8 = true;
+              var index5 = this._offset, elements4 = [], address8 = null;
               while (true) {
                 address8 = this._read___();
                 if (address8 !== FAILURE) {
@@ -826,7 +826,7 @@
         var index3 = this._offset;
         var index4 = this._offset, elements1 = new Array(2);
         var address3 = FAILURE;
-        var index5 = this._offset, elements2 = [], address4 = true;
+        var index5 = this._offset, elements2 = [], address4 = null;
         while (true) {
           address4 = this._read___();
           if (address4 !== FAILURE) {
@@ -899,7 +899,7 @@
       if (address1 !== FAILURE) {
         elements0[0] = address1;
         var address2 = FAILURE;
-        var index2 = this._offset, elements1 = [], address3 = true;
+        var index2 = this._offset, elements1 = [], address3 = null;
         while (true) {
           address3 = this._read___();
           if (address3 !== FAILURE) {
@@ -973,7 +973,7 @@
       if (address1 !== FAILURE) {
         elements0[0] = address1;
         var address2 = FAILURE;
-        var index3 = this._offset, elements1 = [], address3 = true;
+        var index3 = this._offset, elements1 = [], address3 = null;
         while (true) {
           address3 = this._read___();
           if (address3 !== FAILURE) {
@@ -995,7 +995,7 @@
           if (address4 !== FAILURE) {
             elements0[2] = address4;
             var address5 = FAILURE;
-            var index4 = this._offset, elements2 = [], address6 = true;
+            var index4 = this._offset, elements2 = [], address6 = null;
             while (true) {
               address6 = this._read___();
               if (address6 !== FAILURE) {
@@ -1217,11 +1217,11 @@
       if (address1 !== FAILURE) {
         elements0[0] = address1;
         var address2 = FAILURE;
-        var index2 = this._offset, elements1 = [], address3 = true;
+        var index2 = this._offset, elements1 = [], address3 = null;
         while (true) {
           var index3 = this._offset, elements2 = new Array(2);
           var address4 = FAILURE;
-          var index4 = this._offset, elements3 = [], address5 = true;
+          var index4 = this._offset, elements3 = [], address5 = null;
           while (true) {
             address5 = this._read___();
             if (address5 !== FAILURE) {
@@ -1673,7 +1673,7 @@
       if (address1 !== FAILURE) {
         elements0[0] = address1;
         var address2 = FAILURE;
-        var index3 = this._offset, elements1 = [], address3 = true;
+        var index3 = this._offset, elements1 = [], address3 = null;
         while (true) {
           var index4 = this._offset;
           var index5 = this._offset, elements2 = new Array(2);
@@ -1826,7 +1826,7 @@
         if (address7 !== FAILURE) {
           elements3[0] = address7;
           var address8 = FAILURE;
-          var index7 = this._offset, elements4 = [], address9 = true;
+          var index7 = this._offset, elements4 = [], address9 = null;
           while (true) {
             var index8 = this._offset;
             var index9 = this._offset, elements5 = new Array(2);
@@ -1993,7 +1993,7 @@
       if (address1 !== FAILURE) {
         elements0[0] = address1;
         var address2 = FAILURE;
-        var index2 = this._offset, elements1 = [], address3 = true;
+        var index2 = this._offset, elements1 = [], address3 = null;
         while (true) {
           var index3 = this._offset;
           var index4 = this._offset, elements2 = new Array(2);
@@ -2210,7 +2210,7 @@
         if (address2 !== FAILURE) {
           elements0[1] = address2;
           var address3 = FAILURE;
-          var index3 = this._offset, elements1 = [], address4 = true;
+          var index3 = this._offset, elements1 = [], address4 = null;
           while (true) {
             var index4 = this._offset;
             var index5 = this._offset, elements2 = new Array(2);
@@ -2412,7 +2412,7 @@
       if (address1 !== FAILURE) {
         elements0[0] = address1;
         var address2 = FAILURE;
-        var index2 = this._offset, elements1 = [], address3 = true;
+        var index2 = this._offset, elements1 = [], address3 = null;
         while (true) {
           var index3 = this._offset, elements2 = new Array(2);
           var address4 = FAILURE;
@@ -2515,7 +2515,7 @@
       if (address1 !== FAILURE) {
         elements0[0] = address1;
         var address2 = FAILURE;
-        var index2 = this._offset, elements1 = [], address3 = true;
+        var index2 = this._offset, elements1 = [], address3 = null;
         while (true) {
           var chunk1 = null, max1 = this._offset + 1;
           if (max1 <= this._inputSize) {
@@ -2633,7 +2633,7 @@
       if (address1 !== FAILURE) {
         elements0[0] = address1;
         var address2 = FAILURE;
-        var index2 = this._offset, elements1 = [], address3 = true;
+        var index2 = this._offset, elements1 = [], address3 = null;
         while (true) {
           var chunk1 = null, max1 = this._offset + 1;
           if (max1 <= this._inputSize) {

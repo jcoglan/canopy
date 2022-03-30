@@ -181,7 +181,7 @@ class Grammar(object):
             return cached[0]
         index1, elements0 = self._offset, []
         address1 = FAILURE
-        index2, elements1, address2 = self._offset, [], True
+        index2, elements1, address2 = self._offset, [], None
         while True:
             address2 = self._read___()
             if address2 is not FAILURE:
@@ -200,11 +200,11 @@ class Grammar(object):
             if address3 is not FAILURE:
                 elements0.append(address3)
                 address4 = FAILURE
-                index3, elements2, address5 = self._offset, [], True
+                index3, elements2, address5 = self._offset, [], None
                 while True:
                     index4, elements3 = self._offset, []
                     address6 = FAILURE
-                    index5, elements4, address7 = self._offset, [], True
+                    index5, elements4, address7 = self._offset, [], None
                     while True:
                         address7 = self._read___()
                         if address7 is not FAILURE:
@@ -245,7 +245,7 @@ class Grammar(object):
                 if address4 is not FAILURE:
                     elements0.append(address4)
                     address9 = FAILURE
-                    index6, elements5, address10 = self._offset, [], True
+                    index6, elements5, address10 = self._offset, [], None
                     while True:
                         address10 = self._read___()
                         if address10 is not FAILURE:
@@ -323,7 +323,7 @@ class Grammar(object):
             if address2 is not FAILURE:
                 elements0.append(address2)
                 address3 = FAILURE
-                index3, elements1, address4 = self._offset, [], True
+                index3, elements1, address4 = self._offset, [], None
                 while True:
                     address4 = self._read___()
                     if address4 is not FAILURE:
@@ -405,7 +405,7 @@ class Grammar(object):
             return cached[0]
         index1, elements0 = self._offset, []
         address1 = FAILURE
-        index2, elements1, address2 = self._offset, [], True
+        index2, elements1, address2 = self._offset, [], None
         while True:
             address2 = self._read___()
             if address2 is not FAILURE:
@@ -436,7 +436,7 @@ class Grammar(object):
             if address3 is not FAILURE:
                 elements0.append(address3)
                 address4 = FAILURE
-                index3, elements2, address5 = self._offset, [], True
+                index3, elements2, address5 = self._offset, [], None
                 while True:
                     address5 = self._read___()
                     if address5 is not FAILURE:
@@ -507,7 +507,7 @@ class Grammar(object):
         if address1 is not FAILURE:
             elements0.append(address1)
             address2 = FAILURE
-            index2, elements1, address3 = self._offset, [], True
+            index2, elements1, address3 = self._offset, [], None
             while True:
                 address3 = self._read___()
                 if address3 is not FAILURE:
@@ -526,7 +526,7 @@ class Grammar(object):
                 if address4 is not FAILURE:
                     elements0.append(address4)
                     address5 = FAILURE
-                    index3, elements2, address6 = self._offset, [], True
+                    index3, elements2, address6 = self._offset, [], None
                     while True:
                         address6 = self._read___()
                         if address6 is not FAILURE:
@@ -591,11 +591,11 @@ class Grammar(object):
         if address1 is not FAILURE:
             elements0.append(address1)
             address2 = FAILURE
-            index2, elements1, address3 = self._offset, [], True
+            index2, elements1, address3 = self._offset, [], None
             while True:
                 index3, elements2 = self._offset, []
                 address4 = FAILURE
-                index4, elements3, address5 = self._offset, [], True
+                index4, elements3, address5 = self._offset, [], None
                 while True:
                     address5 = self._read___()
                     if address5 is not FAILURE:
@@ -626,7 +626,7 @@ class Grammar(object):
                     if address6 is not FAILURE:
                         elements2.append(address6)
                         address7 = FAILURE
-                        index5, elements4, address8 = self._offset, [], True
+                        index5, elements4, address8 = self._offset, [], None
                         while True:
                             address8 = self._read___()
                             if address8 is not FAILURE:
@@ -710,7 +710,7 @@ class Grammar(object):
             index3 = self._offset
             index4, elements1 = self._offset, []
             address3 = FAILURE
-            index5, elements2, address4 = self._offset, [], True
+            index5, elements2, address4 = self._offset, [], None
             while True:
                 address4 = self._read___()
                 if address4 is not FAILURE:
@@ -770,7 +770,7 @@ class Grammar(object):
         if address1 is not FAILURE:
             elements0.append(address1)
             address2 = FAILURE
-            index2, elements1, address3 = self._offset, [], True
+            index2, elements1, address3 = self._offset, [], None
             while True:
                 address3 = self._read___()
                 if address3 is not FAILURE:
@@ -830,7 +830,7 @@ class Grammar(object):
         if address1 is not FAILURE:
             elements0.append(address1)
             address2 = FAILURE
-            index3, elements1, address3 = self._offset, [], True
+            index3, elements1, address3 = self._offset, [], None
             while True:
                 address3 = self._read___()
                 if address3 is not FAILURE:
@@ -849,7 +849,7 @@ class Grammar(object):
                 if address4 is not FAILURE:
                     elements0.append(address4)
                     address5 = FAILURE
-                    index4, elements2, address6 = self._offset, [], True
+                    index4, elements2, address6 = self._offset, [], None
                     while True:
                         address6 = self._read___()
                         if address6 is not FAILURE:
@@ -1026,11 +1026,11 @@ class Grammar(object):
         if address1 is not FAILURE:
             elements0.append(address1)
             address2 = FAILURE
-            index2, elements1, address3 = self._offset, [], True
+            index2, elements1, address3 = self._offset, [], None
             while True:
                 index3, elements2 = self._offset, []
                 address4 = FAILURE
-                index4, elements3, address5 = self._offset, [], True
+                index4, elements3, address5 = self._offset, [], None
                 while True:
                     address5 = self._read___()
                     if address5 is not FAILURE:
@@ -1390,7 +1390,7 @@ class Grammar(object):
         if address1 is not FAILURE:
             elements0.append(address1)
             address2 = FAILURE
-            index3, elements1, address3 = self._offset, [], True
+            index3, elements1, address3 = self._offset, [], None
             while True:
                 index4 = self._offset
                 index5, elements2 = self._offset, []
@@ -1512,7 +1512,7 @@ class Grammar(object):
             if address7 is not FAILURE:
                 elements3.append(address7)
                 address8 = FAILURE
-                index7, elements4, address9 = self._offset, [], True
+                index7, elements4, address9 = self._offset, [], None
                 while True:
                     index8 = self._offset
                     index9, elements5 = self._offset, []
@@ -1643,7 +1643,7 @@ class Grammar(object):
         if address1 is not FAILURE:
             elements0.append(address1)
             address2 = FAILURE
-            index2, elements1, address3 = self._offset, [], True
+            index2, elements1, address3 = self._offset, [], None
             while True:
                 index3 = self._offset
                 index4, elements2 = self._offset, []
@@ -1814,7 +1814,7 @@ class Grammar(object):
             if address2 is not FAILURE:
                 elements0.append(address2)
                 address3 = FAILURE
-                index3, elements1, address4 = self._offset, [], True
+                index3, elements1, address4 = self._offset, [], None
                 while True:
                     index4 = self._offset
                     index5, elements2 = self._offset, []
@@ -1975,7 +1975,7 @@ class Grammar(object):
         if address1 is not FAILURE:
             elements0.append(address1)
             address2 = FAILURE
-            index2, elements1, address3 = self._offset, [], True
+            index2, elements1, address3 = self._offset, [], None
             while True:
                 index3, elements2 = self._offset, []
                 address4 = FAILURE
@@ -2058,7 +2058,7 @@ class Grammar(object):
         if address1 is not FAILURE:
             elements0.append(address1)
             address2 = FAILURE
-            index2, elements1, address3 = self._offset, [], True
+            index2, elements1, address3 = self._offset, [], None
             while True:
                 chunk1, max1 = None, self._offset + 1
                 if max1 <= self._input_size:
@@ -2150,7 +2150,7 @@ class Grammar(object):
         if address1 is not FAILURE:
             elements0.append(address1)
             address2 = FAILURE
-            index2, elements1, address3 = self._offset, [], True
+            index2, elements1, address3 = self._offset, [], None
             while True:
                 chunk1, max1 = None, self._offset + 1
                 if max1 <= self._input_size:

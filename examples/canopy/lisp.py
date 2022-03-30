@@ -43,7 +43,7 @@ class Grammar(object):
         if cached:
             self._offset = cached[1]
             return cached[0]
-        index1, elements0, address1 = self._offset, [], True
+        index1, elements0, address1 = self._offset, [], None
         while True:
             address1 = self._read_cell()
             if address1 is not FAILURE:
@@ -66,7 +66,7 @@ class Grammar(object):
             return cached[0]
         index1, elements0 = self._offset, []
         address1 = FAILURE
-        index2, elements1, address2 = self._offset, [], True
+        index2, elements1, address2 = self._offset, [], None
         while True:
             address2 = self._read_space()
             if address2 is not FAILURE:
@@ -91,7 +91,7 @@ class Grammar(object):
             if address3 is not FAILURE:
                 elements0.append(address3)
                 address4 = FAILURE
-                index4, elements2, address5 = self._offset, [], True
+                index4, elements2, address5 = self._offset, [], None
                 while True:
                     address5 = self._read_space()
                     if address5 is not FAILURE:
@@ -146,7 +146,7 @@ class Grammar(object):
         if address1 is not FAILURE:
             elements0.append(address1)
             address2 = FAILURE
-            index2, elements1, address3 = self._offset, [], True
+            index2, elements1, address3 = self._offset, [], None
             while True:
                 address3 = self._read_cell()
                 if address3 is not FAILURE:
@@ -279,7 +279,7 @@ class Grammar(object):
         if address1 is not FAILURE:
             elements0.append(address1)
             address2 = FAILURE
-            index2, elements1, address3 = self._offset, [], True
+            index2, elements1, address3 = self._offset, [], None
             while True:
                 chunk1, max1 = None, self._offset + 1
                 if max1 <= self._input_size:
@@ -343,7 +343,7 @@ class Grammar(object):
         if address1 is not FAILURE:
             elements0.append(address1)
             address2 = FAILURE
-            index2, elements1, address3 = self._offset, [], True
+            index2, elements1, address3 = self._offset, [], None
             while True:
                 index3 = self._offset
                 index4, elements2 = self._offset, []
@@ -454,7 +454,7 @@ class Grammar(object):
         if cached:
             self._offset = cached[1]
             return cached[0]
-        index1, elements0, address1 = self._offset, [], True
+        index1, elements0, address1 = self._offset, [], None
         while True:
             index2, elements1 = self._offset, []
             address2 = FAILURE

@@ -313,10 +313,6 @@ class Builder extends Base {
     return '""'
   }
 
-  true_ () {
-    return 'new TreeNode("", -1, ' + this.emptyList_(0) + ')'
-  }
-
   null_ () {
     return 'null'
   }

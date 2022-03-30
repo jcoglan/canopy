@@ -239,7 +239,7 @@ module Canopy::PEG
       end
       index1, elements0 = @offset, []
       address1 = FAILURE
-      index2, elements1, address2 = @offset, [], true
+      index2, elements1, address2 = @offset, [], nil
       loop do
         address2 = _read___
         unless address2 == FAILURE
@@ -261,11 +261,11 @@ module Canopy::PEG
         unless address3 == FAILURE
           elements0 << address3
           address4 = FAILURE
-          index3, elements2, address5 = @offset, [], true
+          index3, elements2, address5 = @offset, [], nil
           loop do
             index4, elements3 = @offset, []
             address6 = FAILURE
-            index5, elements4, address7 = @offset, [], true
+            index5, elements4, address7 = @offset, [], nil
             loop do
               address7 = _read___
               unless address7 == FAILURE
@@ -315,7 +315,7 @@ module Canopy::PEG
           unless address4 == FAILURE
             elements0 << address4
             address9 = FAILURE
-            index6, elements5, address10 = @offset, [], true
+            index6, elements5, address10 = @offset, [], nil
             loop do
               address10 = _read___
               unless address10 == FAILURE
@@ -412,7 +412,7 @@ module Canopy::PEG
         unless address2 == FAILURE
           elements0 << address2
           address3 = FAILURE
-          index3, elements1, address4 = @offset, [], true
+          index3, elements1, address4 = @offset, [], nil
           loop do
             address4 = _read___
             unless address4 == FAILURE
@@ -510,7 +510,7 @@ module Canopy::PEG
       end
       index1, elements0 = @offset, []
       address1 = FAILURE
-      index2, elements1, address2 = @offset, [], true
+      index2, elements1, address2 = @offset, [], nil
       loop do
         address2 = _read___
         unless address2 == FAILURE
@@ -548,7 +548,7 @@ module Canopy::PEG
         unless address3 == FAILURE
           elements0 << address3
           address4 = FAILURE
-          index3, elements2, address5 = @offset, [], true
+          index3, elements2, address5 = @offset, [], nil
           loop do
             address5 = _read___
             unless address5 == FAILURE
@@ -636,7 +636,7 @@ module Canopy::PEG
       unless address1 == FAILURE
         elements0 << address1
         address2 = FAILURE
-        index2, elements1, address3 = @offset, [], true
+        index2, elements1, address3 = @offset, [], nil
         loop do
           address3 = _read___
           unless address3 == FAILURE
@@ -658,7 +658,7 @@ module Canopy::PEG
           unless address4 == FAILURE
             elements0 << address4
             address5 = FAILURE
-            index3, elements2, address6 = @offset, [], true
+            index3, elements2, address6 = @offset, [], nil
             loop do
               address6 = _read___
               unless address6 == FAILURE
@@ -738,11 +738,11 @@ module Canopy::PEG
       unless address1 == FAILURE
         elements0 << address1
         address2 = FAILURE
-        index2, elements1, address3 = @offset, [], true
+        index2, elements1, address3 = @offset, [], nil
         loop do
           index3, elements2 = @offset, []
           address4 = FAILURE
-          index4, elements3, address5 = @offset, [], true
+          index4, elements3, address5 = @offset, [], nil
           loop do
             address5 = _read___
             unless address5 == FAILURE
@@ -780,7 +780,7 @@ module Canopy::PEG
             unless address6 == FAILURE
               elements2 << address6
               address7 = FAILURE
-              index5, elements4, address8 = @offset, [], true
+              index5, elements4, address8 = @offset, [], nil
               loop do
                 address8 = _read___
                 unless address8 == FAILURE
@@ -883,7 +883,7 @@ module Canopy::PEG
         index3 = @offset
         index4, elements1 = @offset, []
         address3 = FAILURE
-        index5, elements2, address4 = @offset, [], true
+        index5, elements2, address4 = @offset, [], nil
         loop do
           address4 = _read___
           unless address4 == FAILURE
@@ -955,7 +955,7 @@ module Canopy::PEG
       unless address1 == FAILURE
         elements0 << address1
         address2 = FAILURE
-        index2, elements1, address3 = @offset, [], true
+        index2, elements1, address3 = @offset, [], nil
         loop do
           address3 = _read___
           unless address3 == FAILURE
@@ -1028,7 +1028,7 @@ module Canopy::PEG
       unless address1 == FAILURE
         elements0 << address1
         address2 = FAILURE
-        index3, elements1, address3 = @offset, [], true
+        index3, elements1, address3 = @offset, [], nil
         loop do
           address3 = _read___
           unless address3 == FAILURE
@@ -1050,7 +1050,7 @@ module Canopy::PEG
           unless address4 == FAILURE
             elements0 << address4
             address5 = FAILURE
-            index4, elements2, address6 = @offset, [], true
+            index4, elements2, address6 = @offset, [], nil
             loop do
               address6 = _read___
               unless address6 == FAILURE
@@ -1269,11 +1269,11 @@ module Canopy::PEG
       unless address1 == FAILURE
         elements0 << address1
         address2 = FAILURE
-        index2, elements1, address3 = @offset, [], true
+        index2, elements1, address3 = @offset, [], nil
         loop do
           index3, elements2 = @offset, []
           address4 = FAILURE
-          index4, elements3, address5 = @offset, [], true
+          index4, elements3, address5 = @offset, [], nil
           loop do
             address5 = _read___
             unless address5 == FAILURE
@@ -1717,7 +1717,7 @@ module Canopy::PEG
       unless address1 == FAILURE
         elements0 << address1
         address2 = FAILURE
-        index3, elements1, address3 = @offset, [], true
+        index3, elements1, address3 = @offset, [], nil
         loop do
           index4 = @offset
           index5, elements2 = @offset, []
@@ -1870,7 +1870,7 @@ module Canopy::PEG
         unless address7 == FAILURE
           elements3 << address7
           address8 = FAILURE
-          index7, elements4, address9 = @offset, [], true
+          index7, elements4, address9 = @offset, [], nil
           loop do
             index8 = @offset
             index9, elements5 = @offset, []
@@ -2036,7 +2036,7 @@ module Canopy::PEG
       unless address1 == FAILURE
         elements0 << address1
         address2 = FAILURE
-        index2, elements1, address3 = @offset, [], true
+        index2, elements1, address3 = @offset, [], nil
         loop do
           index3 = @offset
           index4, elements2 = @offset, []
@@ -2251,7 +2251,7 @@ module Canopy::PEG
         unless address2 == FAILURE
           elements0 << address2
           address3 = FAILURE
-          index3, elements1, address4 = @offset, [], true
+          index3, elements1, address4 = @offset, [], nil
           loop do
             index4 = @offset
             index5, elements2 = @offset, []
@@ -2451,7 +2451,7 @@ module Canopy::PEG
       unless address1 == FAILURE
         elements0 << address1
         address2 = FAILURE
-        index2, elements1, address3 = @offset, [], true
+        index2, elements1, address3 = @offset, [], nil
         loop do
           index3, elements2 = @offset, []
           address4 = FAILURE
@@ -2553,7 +2553,7 @@ module Canopy::PEG
       unless address1 == FAILURE
         elements0 << address1
         address2 = FAILURE
-        index2, elements1, address3 = @offset, [], true
+        index2, elements1, address3 = @offset, [], nil
         loop do
           chunk1, max1 = nil, @offset + 1
           if max1 <= @input_size
@@ -2669,7 +2669,7 @@ module Canopy::PEG
       unless address1 == FAILURE
         elements0 << address1
         address2 = FAILURE
-        index2, elements1, address3 = @offset, [], true
+        index2, elements1, address3 = @offset, [], nil
         loop do
           chunk1, max1 = nil, @offset + 1
           if max1 <= @input_size

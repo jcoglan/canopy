@@ -14,7 +14,7 @@ class Repeat {
     let temp = builder.localVars_({
           index:     builder.offset_(),
           elements:  builder.emptyList_(),
-          address:   builder.true_()
+          address:   builder.null_()
         }),
 
         startOffset = temp.index,

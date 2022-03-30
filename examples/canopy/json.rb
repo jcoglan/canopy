@@ -187,7 +187,7 @@ module CanopyJson
         unless address2 == FAILURE
           elements0 << address2
           address3 = FAILURE
-          index3, elements1, address4 = @offset, [], true
+          index3, elements1, address4 = @offset, [], nil
           loop do
             index4, elements2 = @offset, []
             address5 = FAILURE
@@ -465,7 +465,7 @@ module CanopyJson
         unless address2 == FAILURE
           elements0 << address2
           address3 = FAILURE
-          index3, elements1, address4 = @offset, [], true
+          index3, elements1, address4 = @offset, [], nil
           loop do
             index4, elements2 = @offset, []
             address5 = FAILURE
@@ -730,7 +730,7 @@ module CanopyJson
       unless address1 == FAILURE
         elements0 << address1
         address2 = FAILURE
-        index2, elements1, address3 = @offset, [], true
+        index2, elements1, address3 = @offset, [], nil
         loop do
           index3 = @offset
           index4, elements2 = @offset, []
@@ -939,7 +939,7 @@ module CanopyJson
           unless address3 == FAILURE
             elements1 << address3
             address4 = FAILURE
-            index5, elements2, address5 = @offset, [], true
+            index5, elements2, address5 = @offset, [], nil
             loop do
               chunk3, max3 = nil, @offset + 1
               if max3 <= @input_size
@@ -1016,7 +1016,7 @@ module CanopyJson
           unless address7 == FAILURE
             elements3 << address7
             address8 = FAILURE
-            index8, elements4, address9 = @offset, [], true
+            index8, elements4, address9 = @offset, [], nil
             loop do
               chunk5, max5 = nil, @offset + 1
               if max5 <= @input_size
@@ -1181,7 +1181,7 @@ module CanopyJson
               unless address12 == FAILURE
                 elements5 << address12
                 address13 = FAILURE
-                index13, elements6, address14 = @offset, [], true
+                index13, elements6, address14 = @offset, [], nil
                 loop do
                   chunk11, max11 = nil, @offset + 1
                   if max11 <= @input_size
@@ -1351,7 +1351,7 @@ module CanopyJson
         @offset = cached[1]
         return cached[0]
       end
-      index1, elements0, address1 = @offset, [], true
+      index1, elements0, address1 = @offset, [], nil
       loop do
         chunk0, max0 = nil, @offset + 1
         if max0 <= @input_size

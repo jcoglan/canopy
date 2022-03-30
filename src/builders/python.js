@@ -205,7 +205,7 @@ class Builder extends Base {
   }
 
   loop_ (block) {
-    this._line('while ' + this.true_() + ':')
+    this._line('while True:')
     this._indent(block)
   }
 
@@ -262,10 +262,6 @@ class Builder extends Base {
 
   emptyString_ () {
     return "''"
-  }
-
-  true_ () {
-    return 'True'
   }
 
   null_ () {

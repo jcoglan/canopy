@@ -45,7 +45,7 @@ module CanopyLisp
         @offset = cached[1]
         return cached[0]
       end
-      index1, elements0, address1 = @offset, [], true
+      index1, elements0, address1 = @offset, [], nil
       loop do
         address1 = _read_cell
         unless address1 == FAILURE
@@ -73,7 +73,7 @@ module CanopyLisp
       end
       index1, elements0 = @offset, []
       address1 = FAILURE
-      index2, elements1, address2 = @offset, [], true
+      index2, elements1, address2 = @offset, [], nil
       loop do
         address2 = _read_space
         unless address2 == FAILURE
@@ -103,7 +103,7 @@ module CanopyLisp
         unless address3 == FAILURE
           elements0 << address3
           address4 = FAILURE
-          index4, elements2, address5 = @offset, [], true
+          index4, elements2, address5 = @offset, [], nil
           loop do
             address5 = _read_space
             unless address5 == FAILURE
@@ -171,7 +171,7 @@ module CanopyLisp
       unless address1 == FAILURE
         elements0 << address1
         address2 = FAILURE
-        index2, elements1, address3 = @offset, [], true
+        index2, elements1, address3 = @offset, [], nil
         loop do
           address3 = _read_cell
           unless address3 == FAILURE
@@ -339,7 +339,7 @@ module CanopyLisp
       unless address1 == FAILURE
         elements0 << address1
         address2 = FAILURE
-        index2, elements1, address3 = @offset, [], true
+        index2, elements1, address3 = @offset, [], nil
         loop do
           chunk1, max1 = nil, @offset + 1
           if max1 <= @input_size
@@ -419,7 +419,7 @@ module CanopyLisp
       unless address1 == FAILURE
         elements0 << address1
         address2 = FAILURE
-        index2, elements1, address3 = @offset, [], true
+        index2, elements1, address3 = @offset, [], nil
         loop do
           index3 = @offset
           index4, elements2 = @offset, []
@@ -559,7 +559,7 @@ module CanopyLisp
         @offset = cached[1]
         return cached[0]
       end
-      index1, elements0, address1 = @offset, [], true
+      index1, elements0, address1 = @offset, [], nil
       loop do
         index2, elements1 = @offset, []
         address2 = FAILURE

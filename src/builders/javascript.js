@@ -208,7 +208,7 @@ class Builder extends Base {
   }
 
   loop_ (block) {
-    this.conditional_('while', this.true_(), block)
+    this.conditional_('while', 'true', block)
   }
 
   break_ () {
@@ -267,10 +267,6 @@ class Builder extends Base {
 
   emptyString_ () {
     return "''"
-  }
-
-  true_ () {
-    return 'true'
   }
 
   null_ () {

@@ -39,7 +39,7 @@ abstract class Grammar {
         } else {
             int index1 = offset;
             List<TreeNode> elements0 = new ArrayList<TreeNode>();
-            TreeNode address1 = new TreeNode("", -1, new ArrayList<TreeNode>());
+            TreeNode address1 = null;
             while (true) {
                 address1 = _read_cell();
                 if (address1 != FAILURE) {
@@ -76,7 +76,7 @@ abstract class Grammar {
             TreeNode address1 = FAILURE;
             int index2 = offset;
             List<TreeNode> elements1 = new ArrayList<TreeNode>();
-            TreeNode address2 = new TreeNode("", -1, new ArrayList<TreeNode>());
+            TreeNode address2 = null;
             while (true) {
                 address2 = _read_space();
                 if (address2 != FAILURE) {
@@ -108,7 +108,7 @@ abstract class Grammar {
                     TreeNode address4 = FAILURE;
                     int index4 = offset;
                     List<TreeNode> elements2 = new ArrayList<TreeNode>();
-                    TreeNode address5 = new TreeNode("", -1, new ArrayList<TreeNode>());
+                    TreeNode address5 = null;
                     while (true) {
                         address5 = _read_space();
                         if (address5 != FAILURE) {
@@ -186,7 +186,7 @@ abstract class Grammar {
                 TreeNode address2 = FAILURE;
                 int index2 = offset;
                 List<TreeNode> elements1 = new ArrayList<TreeNode>();
-                TreeNode address3 = new TreeNode("", -1, new ArrayList<TreeNode>());
+                TreeNode address3 = null;
                 while (true) {
                     address3 = _read_cell();
                     if (address3 != FAILURE) {
@@ -379,7 +379,7 @@ abstract class Grammar {
                 TreeNode address2 = FAILURE;
                 int index2 = offset;
                 List<TreeNode> elements1 = new ArrayList<TreeNode>();
-                TreeNode address3 = new TreeNode("", -1, new ArrayList<TreeNode>());
+                TreeNode address3 = null;
                 while (true) {
                     String chunk1 = null;
                     int max1 = offset + 1;
@@ -470,7 +470,7 @@ abstract class Grammar {
                 TreeNode address2 = FAILURE;
                 int index2 = offset;
                 List<TreeNode> elements1 = new ArrayList<TreeNode>();
-                TreeNode address3 = new TreeNode("", -1, new ArrayList<TreeNode>());
+                TreeNode address3 = null;
                 while (true) {
                     int index3 = offset;
                     int index4 = offset;
@@ -622,7 +622,7 @@ abstract class Grammar {
         } else {
             int index1 = offset;
             List<TreeNode> elements0 = new ArrayList<TreeNode>();
-            TreeNode address1 = new TreeNode("", -1, new ArrayList<TreeNode>());
+            TreeNode address1 = null;
             while (true) {
                 int index2 = offset;
                 List<TreeNode> elements1 = new ArrayList<TreeNode>(2);
