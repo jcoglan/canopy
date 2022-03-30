@@ -5,6 +5,9 @@ test <- "maybe: " maybe
       / "rep-1: " rep_1
       / "greedy-0: " greedy_0
       / "greedy-1: " greedy_1
+      / "rep-exact: " rep_exact
+      / "rep-min: " rep_min
+      / "rep-range: " rep_range
       / "color-ref: " color_ref
       / "color-choice: " color_choice
 
@@ -13,6 +16,10 @@ rep_0    <- [a-z]*
 rep_1    <- [a-z]+
 greedy_0 <- [a-z]* [a-z]
 greedy_1 <- [a-z]+ [a-z]
+
+rep_exact <- [a-z]{3}
+rep_min   <- [a-z]{3,}
+rep_range <- [a-z]{3,5}
 
 color_ref    <- "#" hex+
 color_choice <- "#" ([0-9] / [a-f])+

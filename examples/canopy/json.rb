@@ -187,7 +187,7 @@ module CanopyJson
         unless address2 == FAILURE
           elements0 << address2
           address3 = FAILURE
-          remaining0, index3, elements1, address4 = 0, @offset, [], true
+          index3, elements1, address4 = @offset, [], true
           loop do
             index4, elements2 = @offset, []
             address5 = FAILURE
@@ -230,12 +230,11 @@ module CanopyJson
             end
             unless address4 == FAILURE
               elements1 << address4
-              remaining0 -= 1
             else
               break
             end
           end
-          if remaining0 <= 0
+          if elements1.size >= 0
             address3 = TreeNode.new(@input[index3...@offset], index3, elements1)
             @offset = @offset
           else
@@ -466,7 +465,7 @@ module CanopyJson
         unless address2 == FAILURE
           elements0 << address2
           address3 = FAILURE
-          remaining0, index3, elements1, address4 = 0, @offset, [], true
+          index3, elements1, address4 = @offset, [], true
           loop do
             index4, elements2 = @offset, []
             address5 = FAILURE
@@ -509,12 +508,11 @@ module CanopyJson
             end
             unless address4 == FAILURE
               elements1 << address4
-              remaining0 -= 1
             else
               break
             end
           end
-          if remaining0 <= 0
+          if elements1.size >= 0
             address3 = TreeNode.new(@input[index3...@offset], index3, elements1)
             @offset = @offset
           else
@@ -732,7 +730,7 @@ module CanopyJson
       unless address1 == FAILURE
         elements0 << address1
         address2 = FAILURE
-        remaining0, index2, elements1, address3 = 0, @offset, [], true
+        index2, elements1, address3 = @offset, [], true
         loop do
           index3 = @offset
           index4, elements2 = @offset, []
@@ -811,12 +809,11 @@ module CanopyJson
           end
           unless address3 == FAILURE
             elements1 << address3
-            remaining0 -= 1
           else
             break
           end
         end
-        if remaining0 <= 0
+        if elements1.size >= 0
           address2 = TreeNode.new(@input[index2...@offset], index2, elements1)
           @offset = @offset
         else
@@ -942,7 +939,7 @@ module CanopyJson
           unless address3 == FAILURE
             elements1 << address3
             address4 = FAILURE
-            remaining0, index5, elements2, address5 = 0, @offset, [], true
+            index5, elements2, address5 = @offset, [], true
             loop do
               chunk3, max3 = nil, @offset + 1
               if max3 <= @input_size
@@ -963,12 +960,11 @@ module CanopyJson
               end
               unless address5 == FAILURE
                 elements2 << address5
-                remaining0 -= 1
               else
                 break
               end
             end
-            if remaining0 <= 0
+            if elements2.size >= 0
               address4 = TreeNode.new(@input[index5...@offset], index5, elements2)
               @offset = @offset
             else
@@ -1020,7 +1016,7 @@ module CanopyJson
           unless address7 == FAILURE
             elements3 << address7
             address8 = FAILURE
-            remaining1, index8, elements4, address9 = 1, @offset, [], true
+            index8, elements4, address9 = @offset, [], true
             loop do
               chunk5, max5 = nil, @offset + 1
               if max5 <= @input_size
@@ -1041,12 +1037,11 @@ module CanopyJson
               end
               unless address9 == FAILURE
                 elements4 << address9
-                remaining1 -= 1
               else
                 break
               end
             end
-            if remaining1 <= 0
+            if elements4.size >= 1
               address8 = TreeNode.new(@input[index8...@offset], index8, elements4)
               @offset = @offset
             else
@@ -1186,7 +1181,7 @@ module CanopyJson
               unless address12 == FAILURE
                 elements5 << address12
                 address13 = FAILURE
-                remaining2, index13, elements6, address14 = 1, @offset, [], true
+                index13, elements6, address14 = @offset, [], true
                 loop do
                   chunk11, max11 = nil, @offset + 1
                   if max11 <= @input_size
@@ -1207,12 +1202,11 @@ module CanopyJson
                   end
                   unless address14 == FAILURE
                     elements6 << address14
-                    remaining2 -= 1
                   else
                     break
                   end
                 end
-                if remaining2 <= 0
+                if elements6.size >= 1
                   address13 = TreeNode.new(@input[index13...@offset], index13, elements6)
                   @offset = @offset
                 else
@@ -1357,7 +1351,7 @@ module CanopyJson
         @offset = cached[1]
         return cached[0]
       end
-      remaining0, index1, elements0, address1 = 0, @offset, [], true
+      index1, elements0, address1 = @offset, [], true
       loop do
         chunk0, max0 = nil, @offset + 1
         if max0 <= @input_size
@@ -1378,12 +1372,11 @@ module CanopyJson
         end
         unless address1 == FAILURE
           elements0 << address1
-          remaining0 -= 1
         else
           break
         end
       end
-      if remaining0 <= 0
+      if elements0.size >= 0
         address0 = TreeNode.new(@input[index1...@offset], index1, elements0)
         @offset = @offset
       else

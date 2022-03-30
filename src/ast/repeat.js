@@ -1,9 +1,9 @@
 'use strict'
 
 class Repeat {
-  constructor (expression, count) {
+  constructor (expression, range) {
     this._expression = expression
-    this._count      = count
+    this._range      = range
   }
 
   *[Symbol.iterator] () {
@@ -12,13 +12,11 @@ class Repeat {
 
   compile (builder, address, action) {
     let temp = builder.localVars_({
-          remaining: this._count,
           index:     builder.offset_(),
           elements:  builder.emptyList_(),
           address:   builder.true_()
         }),
 
-        remaining   = temp.remaining,
         startOffset = temp.index,
         elements    = temp.elements,
         elAddr      = temp.address
@@ -28,13 +26,12 @@ class Repeat {
 
       builder.ifNode_(elAddr, () => {
         builder.append_(elements, elAddr)
-        builder.decrement_(remaining)
       }, () => {
         builder.break_()
       })
     })
 
-    builder.if_(builder.isZero_(remaining), () => {
+    builder.if_(builder.sizeInRange_(elements, this._range), () => {
       builder.syntaxNode_(address, startOffset, builder.offset_(), elements, action)
     }, () => {
       builder.assign_(address, builder.nullNode_())

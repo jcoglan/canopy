@@ -69,8 +69,21 @@ const actions = {
   },
 
   repeat (text, a, b, [expr, _, quant]) {
-    let quantities = { '*': 0, '+': 1 }
-    return new Repeat(expr, quantities[quant.text])
+    let count
+    let range = quant.numeric_quantifier
+
+    if (quant.text === '*') {
+      count = [0, -1]
+    } else if (quant.text === '+') {
+      count = [1, -1]
+    } else if (range.max.text === '') {
+      count = [parseInt(range.min.text, 10), 0]
+    } else if (range.max.n.text === '') {
+      count = [parseInt(range.min.text, 10), -1]
+    } else {
+      count = [parseInt(range.min.text, 10), parseInt(range.max.n.text, 10)]
+    }
+    return new Repeat(expr, count)
   },
 
   maybe (text, a, b, [expr]) {

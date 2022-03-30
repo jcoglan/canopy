@@ -167,6 +167,107 @@ class OneOrMoreTest extends ParseHelper {
     }
 }
 
+class ExactlyTest extends ParseHelper {
+    @Test
+    void rejectsTheEmptyString() throws ParseError {
+        assertThrows(ParseError.class, () -> Quantifiers.parse("rep-exact: "));
+    }
+
+    @Test
+    void parsesTheRequiredNumberOfThePattern() throws ParseError {
+        expect(Quantifiers.parse("rep-exact: abc")).toMatch(
+            node("abc", 11)
+                .elem(node("a", 11).noElems())
+                .elem(node("b", 12).noElems())
+                .elem(node("c", 13).noElems())
+        );
+    }
+
+    @Test
+    void rejectsTooFewCopiesOfThePattern() throws ParseError {
+        assertThrows(ParseError.class, () -> Quantifiers.parse("rep-exact: ab"));
+    }
+
+    @Test
+    void rejectsTooManyCopiesOfThePattern() throws ParseError {
+        assertThrows(ParseError.class, () -> Quantifiers.parse("rep-exact: abcd"));
+    }
+}
+
+class MinimumTest extends ParseHelper {
+    @Test
+    void rejectsTheEmptyString() throws ParseError {
+        assertThrows(ParseError.class, () -> Quantifiers.parse("rep-min: "));
+    }
+
+    @Test
+    void parsesTheRequiredNumberOfThePattern() throws ParseError {
+        expect(Quantifiers.parse("rep-min: abc")).toMatch(
+            node("abc", 9)
+                .elem(node("a", 9).noElems())
+                .elem(node("b", 10).noElems())
+                .elem(node("c", 11).noElems())
+        );
+    }
+
+    @Test
+    void parsesMoreCopiesOfThePattern() throws ParseError {
+        expect(Quantifiers.parse("rep-min: abcdef")).toMatch(
+            node("abcdef", 9)
+                .elem(node("a", 9).noElems())
+                .elem(node("b", 10).noElems())
+                .elem(node("c", 11).noElems())
+                .elem(node("d", 12).noElems())
+                .elem(node("e", 13).noElems())
+                .elem(node("f", 14).noElems())
+        );
+    }
+
+    @Test
+    void rejectsTooFewCopiesOfThePattern() throws ParseError {
+        assertThrows(ParseError.class, () -> Quantifiers.parse("rep-min: ab"));
+    }
+}
+
+class RangeTest extends ParseHelper {
+    @Test
+    void rejectsTheEmptyString() throws ParseError {
+        assertThrows(ParseError.class, () -> Quantifiers.parse("rep-range: "));
+    }
+
+    @Test
+    void parsesTheMinimumNumberOfThePattern() throws ParseError {
+        expect(Quantifiers.parse("rep-range: abc")).toMatch(
+            node("abc", 11)
+                .elem(node("a", 11).noElems())
+                .elem(node("b", 12).noElems())
+                .elem(node("c", 13).noElems())
+        );
+    }
+
+    @Test
+    void parsesTheMaximumNumberOfThePattern() throws ParseError {
+        expect(Quantifiers.parse("rep-range: abcde")).toMatch(
+            node("abcde", 11)
+                .elem(node("a", 11).noElems())
+                .elem(node("b", 12).noElems())
+                .elem(node("c", 13).noElems())
+                .elem(node("d", 14).noElems())
+                .elem(node("e", 15).noElems())
+        );
+    }
+
+    @Test
+    void rejectsTooFewCopiesOfThePattern() throws ParseError {
+        assertThrows(ParseError.class, () -> Quantifiers.parse("rep-range: ab"));
+    }
+
+    @Test
+    void rejectsTooManyCopiesOfThePattern() throws ParseError {
+        assertThrows(ParseError.class, () -> Quantifiers.parse("rep-range: abcdef"));
+    }
+}
+
 class ParseHelper {
     Node<Label> expect(TreeNode node) {
         return new NodeWrapper(node.elements.get(1));

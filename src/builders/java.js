@@ -8,8 +8,7 @@ const TYPES = {
   chunk:      'String',
   elements:   'List<TreeNode>',
   index:      'int',
-  max:        'int',
-  remaining:  'int'
+  max:        'int'
 }
 
 class Builder extends Base {
@@ -259,6 +258,16 @@ class Builder extends Base {
 
   break_ () {
     this._line('break')
+  }
+
+  sizeInRange_ (address, range) {
+    if (range[1] === -1) {
+      return address + '.size() >= ' + range[0]
+    } else if (range[1] === 0) {
+      return address + '.size() == ' + range[0]
+    } else {
+      return address + '.size() >= ' + range[0] + ' && ' + address + '.size() <= ' + range[1]
+    }
   }
 
   stringMatch_ (expression, string) {

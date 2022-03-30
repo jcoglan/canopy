@@ -125,7 +125,6 @@ abstract class Grammar {
                 if (address2 != FAILURE) {
                     elements0.add(1, address2);
                     TreeNode address3 = FAILURE;
-                    int remaining0 = 0;
                     int index3 = offset;
                     List<TreeNode> elements1 = new ArrayList<TreeNode>();
                     TreeNode address4 = new TreeNode("", -1, new ArrayList<TreeNode>());
@@ -173,12 +172,11 @@ abstract class Grammar {
                         }
                         if (address4 != FAILURE) {
                             elements1.add(address4);
-                            remaining0 -= 1;
                         } else {
                             break;
                         }
                     }
-                    if (remaining0 <= 0) {
+                    if (elements1.size() >= 0) {
                         address3 = new TreeNode(input.substring(index3, offset), index3, elements1);
                         offset = offset;
                     } else {
@@ -429,7 +427,6 @@ abstract class Grammar {
                 if (address2 != FAILURE) {
                     elements0.add(1, address2);
                     TreeNode address3 = FAILURE;
-                    int remaining0 = 0;
                     int index3 = offset;
                     List<TreeNode> elements1 = new ArrayList<TreeNode>();
                     TreeNode address4 = new TreeNode("", -1, new ArrayList<TreeNode>());
@@ -477,12 +474,11 @@ abstract class Grammar {
                         }
                         if (address4 != FAILURE) {
                             elements1.add(address4);
-                            remaining0 -= 1;
                         } else {
                             break;
                         }
                     }
-                    if (remaining0 <= 0) {
+                    if (elements1.size() >= 0) {
                         address3 = new TreeNode(input.substring(index3, offset), index3, elements1);
                         offset = offset;
                     } else {
@@ -719,7 +715,6 @@ abstract class Grammar {
             if (address1 != FAILURE) {
                 elements0.add(0, address1);
                 TreeNode address2 = FAILURE;
-                int remaining0 = 0;
                 int index2 = offset;
                 List<TreeNode> elements1 = new ArrayList<TreeNode>();
                 TreeNode address3 = new TreeNode("", -1, new ArrayList<TreeNode>());
@@ -804,12 +799,11 @@ abstract class Grammar {
                     }
                     if (address3 != FAILURE) {
                         elements1.add(address3);
-                        remaining0 -= 1;
                     } else {
                         break;
                     }
                 }
-                if (remaining0 <= 0) {
+                if (elements1.size() >= 0) {
                     address2 = new TreeNode(input.substring(index2, offset), index2, elements1);
                     offset = offset;
                 } else {
@@ -947,7 +941,6 @@ abstract class Grammar {
                     if (address3 != FAILURE) {
                         elements1.add(0, address3);
                         TreeNode address4 = FAILURE;
-                        int remaining0 = 0;
                         int index5 = offset;
                         List<TreeNode> elements2 = new ArrayList<TreeNode>();
                         TreeNode address5 = new TreeNode("", -1, new ArrayList<TreeNode>());
@@ -972,12 +965,11 @@ abstract class Grammar {
                             }
                             if (address5 != FAILURE) {
                                 elements2.add(address5);
-                                remaining0 -= 1;
                             } else {
                                 break;
                             }
                         }
-                        if (remaining0 <= 0) {
+                        if (elements2.size() >= 0) {
                             address4 = new TreeNode(input.substring(index5, offset), index5, elements2);
                             offset = offset;
                         } else {
@@ -1031,7 +1023,6 @@ abstract class Grammar {
                     if (address7 != FAILURE) {
                         elements3.add(0, address7);
                         TreeNode address8 = FAILURE;
-                        int remaining1 = 1;
                         int index8 = offset;
                         List<TreeNode> elements4 = new ArrayList<TreeNode>();
                         TreeNode address9 = new TreeNode("", -1, new ArrayList<TreeNode>());
@@ -1056,12 +1047,11 @@ abstract class Grammar {
                             }
                             if (address9 != FAILURE) {
                                 elements4.add(address9);
-                                remaining1 -= 1;
                             } else {
                                 break;
                             }
                         }
-                        if (remaining1 <= 0) {
+                        if (elements4.size() >= 1) {
                             address8 = new TreeNode(input.substring(index8, offset), index8, elements4);
                             offset = offset;
                         } else {
@@ -1207,7 +1197,6 @@ abstract class Grammar {
                             if (address12 != FAILURE) {
                                 elements5.add(1, address12);
                                 TreeNode address13 = FAILURE;
-                                int remaining2 = 1;
                                 int index13 = offset;
                                 List<TreeNode> elements6 = new ArrayList<TreeNode>();
                                 TreeNode address14 = new TreeNode("", -1, new ArrayList<TreeNode>());
@@ -1232,12 +1221,11 @@ abstract class Grammar {
                                     }
                                     if (address14 != FAILURE) {
                                         elements6.add(address14);
-                                        remaining2 -= 1;
                                     } else {
                                         break;
                                     }
                                 }
-                                if (remaining2 <= 0) {
+                                if (elements6.size() >= 1) {
                                     address13 = new TreeNode(input.substring(index13, offset), index13, elements6);
                                     offset = offset;
                                 } else {
@@ -1403,7 +1391,6 @@ abstract class Grammar {
             address0 = rule.get(offset).node;
             offset = rule.get(offset).tail;
         } else {
-            int remaining0 = 0;
             int index1 = offset;
             List<TreeNode> elements0 = new ArrayList<TreeNode>();
             TreeNode address1 = new TreeNode("", -1, new ArrayList<TreeNode>());
@@ -1428,12 +1415,11 @@ abstract class Grammar {
                 }
                 if (address1 != FAILURE) {
                     elements0.add(address1);
-                    remaining0 -= 1;
                 } else {
                     break;
                 }
             }
-            if (remaining0 <= 0) {
+            if (elements0.size() >= 0) {
                 address0 = new TreeNode(input.substring(index1, offset), index1, elements0);
                 offset = offset;
             } else {

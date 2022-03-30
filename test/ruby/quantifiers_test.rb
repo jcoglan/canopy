@@ -146,4 +146,97 @@ describe "quantifiers" do
         Quantifiers.parse("color-choice: #abc123")
     end
   end
+
+  describe "rep-exact" do
+    it "rejects the empty string" do
+      assert_raises(Quantifiers::ParseError) { Quantifiers.parse("rep-exact: ") }
+    end
+
+    it "parses the required number of the pattern" do
+      assert_parse \
+        ["abc", 11, [
+          ["a", 11, []],
+          ["b", 12, []],
+          ["c", 13, []]
+        ]],
+        Quantifiers.parse("rep-exact: abc")
+    end
+
+    it "rejects too few copies of the pattern" do
+      assert_raises(Quantifiers::ParseError) { Quantifiers.parse("rep-exact: ab") }
+    end
+
+    it "rejects too many copies of the pattern" do
+      assert_raises(Quantifiers::ParseError) { Quantifiers.parse("rep-exact: abcd") }
+    end
+  end
+
+  describe "rep-min" do
+    it "rejects the empty string" do
+      assert_raises(Quantifiers::ParseError) { Quantifiers.parse("rep-min: ") }
+    end
+
+    it "parses the minimum number of the pattern" do
+      assert_parse \
+        ["abc", 9, [
+          ["a", 9, []],
+          ["b", 10, []],
+          ["c", 11, []]
+        ]],
+        Quantifiers.parse("rep-min: abc")
+    end
+
+    it "parses more copies of the pattern" do
+      assert_parse \
+        ["abcdef", 9, [
+          ["a", 9, []],
+          ["b", 10, []],
+          ["c", 11, []],
+          ["d", 12, []],
+          ["e", 13, []],
+          ["f", 14, []]
+        ]],
+        Quantifiers.parse("rep-min: abcdef")
+    end
+
+    it "rejects too few copies of the pattern" do
+      assert_raises(Quantifiers::ParseError) { Quantifiers.parse("rep-min: ab") }
+    end
+  end
+
+  describe "rep-range" do
+    it "rejects the empty string" do
+      assert_raises(Quantifiers::ParseError) { Quantifiers.parse("rep-range: ") }
+    end
+
+    it "parses the minimum number of the pattern" do
+      assert_parse \
+        ["abc", 11, [
+          ["a", 11, []],
+          ["b", 12, []],
+          ["c", 13, []]
+        ]],
+        Quantifiers.parse("rep-range: abc")
+    end
+
+    it "parses the maximum number of the pattern" do
+      assert_parse \
+        ["abcde", 11, [
+          ["a", 11, []],
+          ["b", 12, []],
+          ["c", 13, []],
+          ["d", 14, []],
+          ["e", 15, []]
+        ]],
+        Quantifiers.parse("rep-range: abcde")
+    end
+
+    it "rejects too few copies of the pattern" do
+      assert_raises(Quantifiers::ParseError) { Quantifiers.parse("rep-range: ab") }
+    end
+
+    it "rejects too many copies of the pattern" do
+      assert_raises(Quantifiers::ParseError) { Quantifiers.parse("rep-range: abcdef") }
+    end
+  end
 end

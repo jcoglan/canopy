@@ -213,6 +213,16 @@ class Builder extends Base {
     this._line('break')
   }
 
+  sizeInRange_ (address, range) {
+    if (range[1] === -1) {
+      return 'len(' + address + ') >= ' + range[0]
+    } else if (range[1] === 0) {
+      return 'len(' + address + ') == ' + range[0]
+    } else {
+      return 'len(' + address + ') >= ' + range[0] + ' and len(' + address + ') <= ' + range[1]
+    }
+  }
+
   stringMatch_ (expression, string) {
     return expression + ' == ' + this._quote(string)
   }

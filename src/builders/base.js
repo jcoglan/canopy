@@ -133,14 +133,6 @@ class Base {
   return_ (expression) {
     this._line('return ' + expression)
   }
-
-  decrement_ (variable) {
-    this._line(variable + ' -= 1')
-  }
-
-  isZero_ (expression) {
-    return expression + ' <= 0'
-  }
 }
 
 module.exports = Base

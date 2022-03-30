@@ -239,17 +239,16 @@ module Canopy::PEG
       end
       index1, elements0 = @offset, []
       address1 = FAILURE
-      remaining0, index2, elements1, address2 = 0, @offset, [], true
+      index2, elements1, address2 = @offset, [], true
       loop do
         address2 = _read___
         unless address2 == FAILURE
           elements1 << address2
-          remaining0 -= 1
         else
           break
         end
       end
-      if remaining0 <= 0
+      if elements1.size >= 0
         address1 = TreeNode.new(@input[index2...@offset], index2, elements1)
         @offset = @offset
       else
@@ -262,21 +261,20 @@ module Canopy::PEG
         unless address3 == FAILURE
           elements0 << address3
           address4 = FAILURE
-          remaining1, index3, elements2, address5 = 1, @offset, [], true
+          index3, elements2, address5 = @offset, [], true
           loop do
             index4, elements3 = @offset, []
             address6 = FAILURE
-            remaining2, index5, elements4, address7 = 0, @offset, [], true
+            index5, elements4, address7 = @offset, [], true
             loop do
               address7 = _read___
               unless address7 == FAILURE
                 elements4 << address7
-                remaining2 -= 1
               else
                 break
               end
             end
-            if remaining2 <= 0
+            if elements4.size >= 0
               address6 = TreeNode.new(@input[index5...@offset], index5, elements4)
               @offset = @offset
             else
@@ -304,12 +302,11 @@ module Canopy::PEG
             end
             unless address5 == FAILURE
               elements2 << address5
-              remaining1 -= 1
             else
               break
             end
           end
-          if remaining1 <= 0
+          if elements2.size >= 1
             address4 = TreeNode.new(@input[index3...@offset], index3, elements2)
             @offset = @offset
           else
@@ -318,17 +315,16 @@ module Canopy::PEG
           unless address4 == FAILURE
             elements0 << address4
             address9 = FAILURE
-            remaining3, index6, elements5, address10 = 0, @offset, [], true
+            index6, elements5, address10 = @offset, [], true
             loop do
               address10 = _read___
               unless address10 == FAILURE
                 elements5 << address10
-                remaining3 -= 1
               else
                 break
               end
             end
-            if remaining3 <= 0
+            if elements5.size >= 0
               address9 = TreeNode.new(@input[index6...@offset], index6, elements5)
               @offset = @offset
             else
@@ -416,17 +412,16 @@ module Canopy::PEG
         unless address2 == FAILURE
           elements0 << address2
           address3 = FAILURE
-          remaining0, index3, elements1, address4 = 1, @offset, [], true
+          index3, elements1, address4 = @offset, [], true
           loop do
             address4 = _read___
             unless address4 == FAILURE
               elements1 << address4
-              remaining0 -= 1
             else
               break
             end
           end
-          if remaining0 <= 0
+          if elements1.size >= 1
             address3 = TreeNode.new(@input[index3...@offset], index3, elements1)
             @offset = @offset
           else
@@ -515,17 +510,16 @@ module Canopy::PEG
       end
       index1, elements0 = @offset, []
       address1 = FAILURE
-      remaining0, index2, elements1, address2 = 1, @offset, [], true
+      index2, elements1, address2 = @offset, [], true
       loop do
         address2 = _read___
         unless address2 == FAILURE
           elements1 << address2
-          remaining0 -= 1
         else
           break
         end
       end
-      if remaining0 <= 0
+      if elements1.size >= 1
         address1 = TreeNode.new(@input[index2...@offset], index2, elements1)
         @offset = @offset
       else
@@ -554,17 +548,16 @@ module Canopy::PEG
         unless address3 == FAILURE
           elements0 << address3
           address4 = FAILURE
-          remaining1, index3, elements2, address5 = 1, @offset, [], true
+          index3, elements2, address5 = @offset, [], true
           loop do
             address5 = _read___
             unless address5 == FAILURE
               elements2 << address5
-              remaining1 -= 1
             else
               break
             end
           end
-          if remaining1 <= 0
+          if elements2.size >= 1
             address4 = TreeNode.new(@input[index3...@offset], index3, elements2)
             @offset = @offset
           else
@@ -643,17 +636,16 @@ module Canopy::PEG
       unless address1 == FAILURE
         elements0 << address1
         address2 = FAILURE
-        remaining0, index2, elements1, address3 = 0, @offset, [], true
+        index2, elements1, address3 = @offset, [], true
         loop do
           address3 = _read___
           unless address3 == FAILURE
             elements1 << address3
-            remaining0 -= 1
           else
             break
           end
         end
-        if remaining0 <= 0
+        if elements1.size >= 0
           address2 = TreeNode.new(@input[index2...@offset], index2, elements1)
           @offset = @offset
         else
@@ -666,17 +658,16 @@ module Canopy::PEG
           unless address4 == FAILURE
             elements0 << address4
             address5 = FAILURE
-            remaining1, index3, elements2, address6 = 0, @offset, [], true
+            index3, elements2, address6 = @offset, [], true
             loop do
               address6 = _read___
               unless address6 == FAILURE
                 elements2 << address6
-                remaining1 -= 1
               else
                 break
               end
             end
-            if remaining1 <= 0
+            if elements2.size >= 0
               address5 = TreeNode.new(@input[index3...@offset], index3, elements2)
               @offset = @offset
             else
@@ -747,21 +738,20 @@ module Canopy::PEG
       unless address1 == FAILURE
         elements0 << address1
         address2 = FAILURE
-        remaining0, index2, elements1, address3 = 1, @offset, [], true
+        index2, elements1, address3 = @offset, [], true
         loop do
           index3, elements2 = @offset, []
           address4 = FAILURE
-          remaining1, index4, elements3, address5 = 1, @offset, [], true
+          index4, elements3, address5 = @offset, [], true
           loop do
             address5 = _read___
             unless address5 == FAILURE
               elements3 << address5
-              remaining1 -= 1
             else
               break
             end
           end
-          if remaining1 <= 0
+          if elements3.size >= 1
             address4 = TreeNode.new(@input[index4...@offset], index4, elements3)
             @offset = @offset
           else
@@ -790,17 +780,16 @@ module Canopy::PEG
             unless address6 == FAILURE
               elements2 << address6
               address7 = FAILURE
-              remaining2, index5, elements4, address8 = 1, @offset, [], true
+              index5, elements4, address8 = @offset, [], true
               loop do
                 address8 = _read___
                 unless address8 == FAILURE
                   elements4 << address8
-                  remaining2 -= 1
                 else
                   break
                 end
               end
-              if remaining2 <= 0
+              if elements4.size >= 1
                 address7 = TreeNode.new(@input[index5...@offset], index5, elements4)
                 @offset = @offset
               else
@@ -836,12 +825,11 @@ module Canopy::PEG
           end
           unless address3 == FAILURE
             elements1 << address3
-            remaining0 -= 1
           else
             break
           end
         end
-        if remaining0 <= 0
+        if elements1.size >= 1
           address2 = TreeNode.new(@input[index2...@offset], index2, elements1)
           @offset = @offset
         else
@@ -895,17 +883,16 @@ module Canopy::PEG
         index3 = @offset
         index4, elements1 = @offset, []
         address3 = FAILURE
-        remaining0, index5, elements2, address4 = 1, @offset, [], true
+        index5, elements2, address4 = @offset, [], true
         loop do
           address4 = _read___
           unless address4 == FAILURE
             elements2 << address4
-            remaining0 -= 1
           else
             break
           end
         end
-        if remaining0 <= 0
+        if elements2.size >= 1
           address3 = TreeNode.new(@input[index5...@offset], index5, elements2)
           @offset = @offset
         else
@@ -968,17 +955,16 @@ module Canopy::PEG
       unless address1 == FAILURE
         elements0 << address1
         address2 = FAILURE
-        remaining0, index2, elements1, address3 = 1, @offset, [], true
+        index2, elements1, address3 = @offset, [], true
         loop do
           address3 = _read___
           unless address3 == FAILURE
             elements1 << address3
-            remaining0 -= 1
           else
             break
           end
         end
-        if remaining0 <= 0
+        if elements1.size >= 1
           address2 = TreeNode.new(@input[index2...@offset], index2, elements1)
           @offset = @offset
         else
@@ -1042,17 +1028,16 @@ module Canopy::PEG
       unless address1 == FAILURE
         elements0 << address1
         address2 = FAILURE
-        remaining0, index3, elements1, address3 = 0, @offset, [], true
+        index3, elements1, address3 = @offset, [], true
         loop do
           address3 = _read___
           unless address3 == FAILURE
             elements1 << address3
-            remaining0 -= 1
           else
             break
           end
         end
-        if remaining0 <= 0
+        if elements1.size >= 0
           address2 = TreeNode.new(@input[index3...@offset], index3, elements1)
           @offset = @offset
         else
@@ -1065,17 +1050,16 @@ module Canopy::PEG
           unless address4 == FAILURE
             elements0 << address4
             address5 = FAILURE
-            remaining1, index4, elements2, address6 = 0, @offset, [], true
+            index4, elements2, address6 = @offset, [], true
             loop do
               address6 = _read___
               unless address6 == FAILURE
                 elements2 << address6
-                remaining1 -= 1
               else
                 break
               end
             end
-            if remaining1 <= 0
+            if elements2.size >= 0
               address5 = TreeNode.new(@input[index4...@offset], index4, elements2)
               @offset = @offset
             else
@@ -1285,21 +1269,20 @@ module Canopy::PEG
       unless address1 == FAILURE
         elements0 << address1
         address2 = FAILURE
-        remaining0, index2, elements1, address3 = 1, @offset, [], true
+        index2, elements1, address3 = @offset, [], true
         loop do
           index3, elements2 = @offset, []
           address4 = FAILURE
-          remaining1, index4, elements3, address5 = 1, @offset, [], true
+          index4, elements3, address5 = @offset, [], true
           loop do
             address5 = _read___
             unless address5 == FAILURE
               elements3 << address5
-              remaining1 -= 1
             else
               break
             end
           end
-          if remaining1 <= 0
+          if elements3.size >= 1
             address4 = TreeNode.new(@input[index4...@offset], index4, elements3)
             @offset = @offset
           else
@@ -1327,12 +1310,11 @@ module Canopy::PEG
           end
           unless address3 == FAILURE
             elements1 << address3
-            remaining0 -= 1
           else
             break
           end
         end
-        if remaining0 <= 0
+        if elements1.size >= 1
           address2 = TreeNode.new(@input[index2...@offset], index2, elements1)
           @offset = @offset
         else
@@ -1735,7 +1717,7 @@ module Canopy::PEG
       unless address1 == FAILURE
         elements0 << address1
         address2 = FAILURE
-        remaining0, index3, elements1, address3 = 0, @offset, [], true
+        index3, elements1, address3 = @offset, [], true
         loop do
           index4 = @offset
           index5, elements2 = @offset, []
@@ -1814,12 +1796,11 @@ module Canopy::PEG
           end
           unless address3 == FAILURE
             elements1 << address3
-            remaining0 -= 1
           else
             break
           end
         end
-        if remaining0 <= 0
+        if elements1.size >= 0
           address2 = TreeNode.new(@input[index3...@offset], index3, elements1)
           @offset = @offset
         else
@@ -1889,7 +1870,7 @@ module Canopy::PEG
         unless address7 == FAILURE
           elements3 << address7
           address8 = FAILURE
-          remaining1, index7, elements4, address9 = 0, @offset, [], true
+          index7, elements4, address9 = @offset, [], true
           loop do
             index8 = @offset
             index9, elements5 = @offset, []
@@ -1968,12 +1949,11 @@ module Canopy::PEG
             end
             unless address9 == FAILURE
               elements4 << address9
-              remaining1 -= 1
             else
               break
             end
           end
-          if remaining1 <= 0
+          if elements4.size >= 0
             address8 = TreeNode.new(@input[index7...@offset], index7, elements4)
             @offset = @offset
           else
@@ -2056,7 +2036,7 @@ module Canopy::PEG
       unless address1 == FAILURE
         elements0 << address1
         address2 = FAILURE
-        remaining0, index2, elements1, address3 = 0, @offset, [], true
+        index2, elements1, address3 = @offset, [], true
         loop do
           index3 = @offset
           index4, elements2 = @offset, []
@@ -2135,12 +2115,11 @@ module Canopy::PEG
           end
           unless address3 == FAILURE
             elements1 << address3
-            remaining0 -= 1
           else
             break
           end
         end
-        if remaining0 <= 0
+        if elements1.size >= 0
           address2 = TreeNode.new(@input[index2...@offset], index2, elements1)
           @offset = @offset
         else
@@ -2272,7 +2251,7 @@ module Canopy::PEG
         unless address2 == FAILURE
           elements0 << address2
           address3 = FAILURE
-          remaining0, index3, elements1, address4 = 1, @offset, [], true
+          index3, elements1, address4 = @offset, [], true
           loop do
             index4 = @offset
             index5, elements2 = @offset, []
@@ -2351,12 +2330,11 @@ module Canopy::PEG
             end
             unless address4 == FAILURE
               elements1 << address4
-              remaining0 -= 1
             else
               break
             end
           end
-          if remaining0 <= 0
+          if elements1.size >= 1
             address3 = TreeNode.new(@input[index3...@offset], index3, elements1)
             @offset = @offset
           else
@@ -2473,7 +2451,7 @@ module Canopy::PEG
       unless address1 == FAILURE
         elements0 << address1
         address2 = FAILURE
-        remaining0, index2, elements1, address3 = 0, @offset, [], true
+        index2, elements1, address3 = @offset, [], true
         loop do
           index3, elements2 = @offset, []
           address4 = FAILURE
@@ -2516,12 +2494,11 @@ module Canopy::PEG
           end
           unless address3 == FAILURE
             elements1 << address3
-            remaining0 -= 1
           else
             break
           end
         end
-        if remaining0 <= 0
+        if elements1.size >= 0
           address2 = TreeNode.new(@input[index2...@offset], index2, elements1)
           @offset = @offset
         else
@@ -2576,7 +2553,7 @@ module Canopy::PEG
       unless address1 == FAILURE
         elements0 << address1
         address2 = FAILURE
-        remaining0, index2, elements1, address3 = 0, @offset, [], true
+        index2, elements1, address3 = @offset, [], true
         loop do
           chunk1, max1 = nil, @offset + 1
           if max1 <= @input_size
@@ -2597,12 +2574,11 @@ module Canopy::PEG
           end
           unless address3 == FAILURE
             elements1 << address3
-            remaining0 -= 1
           else
             break
           end
         end
-        if remaining0 <= 0
+        if elements1.size >= 0
           address2 = TreeNode.new(@input[index2...@offset], index2, elements1)
           @offset = @offset
         else
@@ -2693,7 +2669,7 @@ module Canopy::PEG
       unless address1 == FAILURE
         elements0 << address1
         address2 = FAILURE
-        remaining0, index2, elements1, address3 = 0, @offset, [], true
+        index2, elements1, address3 = @offset, [], true
         loop do
           chunk1, max1 = nil, @offset + 1
           if max1 <= @input_size
@@ -2714,12 +2690,11 @@ module Canopy::PEG
           end
           unless address3 == FAILURE
             elements1 << address3
-            remaining0 -= 1
           else
             break
           end
         end
-        if remaining0 <= 0
+        if elements1.size >= 0
           address2 = TreeNode.new(@input[index2...@offset], index2, elements1)
           @offset = @offset
         else

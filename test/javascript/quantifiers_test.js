@@ -154,4 +154,102 @@ jstest.describe("quantifiers", function() { with(this) {
       )
     }})
   }})
+
+  describe("rep-exact", function() { with(this) {
+    it("rejects the empty string", function() { with(this) {
+      assertThrows(SyntaxError, () => Quantifiers.parse("rep-exact: "))
+    }})
+
+    it("parses the required number of the pattern", function() { with(this) {
+      assertParse(
+        ["abc", 11, [
+          ["a", 11, []],
+          ["b", 12, []],
+          ["c", 13, []]
+        ]],
+        Quantifiers.parse("rep-exact: abc")
+      )
+    }})
+
+    it("rejects too few copies of the pattern", function() { with(this) {
+      assertThrows(SyntaxError, () => Quantifiers.parse("rep-exact: ab"))
+    }})
+
+    it("rejects too many copies of the pattern", function() { with(this) {
+      assertThrows(SyntaxError, () => Quantifiers.parse("rep-exact: abcd"))
+    }})
+  }})
+
+  describe("rep-min", function() { with(this) {
+    it("rejects the empty string", function() { with(this) {
+      assertThrows(SyntaxError, () => Quantifiers.parse("rep-min: "))
+    }})
+
+    it("parses the minimum number of the pattern", function() { with(this) {
+      assertParse(
+        ["abc", 9, [
+          ["a", 9, []],
+          ["b", 10, []],
+          ["c", 11, []]
+        ]],
+        Quantifiers.parse("rep-min: abc")
+      )
+    }})
+
+    it("parses more copies of the pattern", function() { with(this) {
+      assertParse(
+        ["abcdef", 9, [
+          ["a", 9, []],
+          ["b", 10, []],
+          ["c", 11, []],
+          ["d", 12, []],
+          ["e", 13, []],
+          ["f", 14, []]
+        ]],
+        Quantifiers.parse("rep-min: abcdef")
+      )
+    }})
+
+    it("rejects too few copies of the pattern", function() { with(this) {
+      assertThrows(SyntaxError, () => Quantifiers.parse("rep-min: ab"))
+    }})
+  }})
+
+  describe("rep-range", function() { with(this) {
+    it("rejects the empty string", function() { with(this) {
+      assertThrows(SyntaxError, () => Quantifiers.parse("rep-range: "))
+    }})
+
+    it("parses the minimum number of the pattern", function() { with(this) {
+      assertParse(
+        ["abc", 11, [
+          ["a", 11, []],
+          ["b", 12, []],
+          ["c", 13, []]
+        ]],
+        Quantifiers.parse("rep-range: abc")
+      )
+    }})
+
+    it("parses the maximum number of the pattern", function() { with(this) {
+      assertParse(
+        ["abcde", 11, [
+          ["a", 11, []],
+          ["b", 12, []],
+          ["c", 13, []],
+          ["d", 14, []],
+          ["e", 15, []]
+        ]],
+        Quantifiers.parse("rep-range: abcde")
+      )
+    }})
+
+    it("rejects too few copies of the pattern", function() { with(this) {
+      assertThrows(SyntaxError, () => Quantifiers.parse("rep-range: ab"))
+    }})
+
+    it("rejects too many copies of the pattern", function() { with(this) {
+      assertThrows(SyntaxError, () => Quantifiers.parse("rep-range: abcdef"))
+    }})
+  }})
 }})

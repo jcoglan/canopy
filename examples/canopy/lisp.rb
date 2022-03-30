@@ -45,17 +45,16 @@ module CanopyLisp
         @offset = cached[1]
         return cached[0]
       end
-      remaining0, index1, elements0, address1 = 1, @offset, [], true
+      index1, elements0, address1 = @offset, [], true
       loop do
         address1 = _read_cell
         unless address1 == FAILURE
           elements0 << address1
-          remaining0 -= 1
         else
           break
         end
       end
-      if remaining0 <= 0
+      if elements0.size >= 1
         address0 = TreeNode.new(@input[index1...@offset], index1, elements0)
         @offset = @offset
       else
@@ -74,17 +73,16 @@ module CanopyLisp
       end
       index1, elements0 = @offset, []
       address1 = FAILURE
-      remaining0, index2, elements1, address2 = 0, @offset, [], true
+      index2, elements1, address2 = @offset, [], true
       loop do
         address2 = _read_space
         unless address2 == FAILURE
           elements1 << address2
-          remaining0 -= 1
         else
           break
         end
       end
-      if remaining0 <= 0
+      if elements1.size >= 0
         address1 = TreeNode.new(@input[index2...@offset], index2, elements1)
         @offset = @offset
       else
@@ -105,17 +103,16 @@ module CanopyLisp
         unless address3 == FAILURE
           elements0 << address3
           address4 = FAILURE
-          remaining1, index4, elements2, address5 = 0, @offset, [], true
+          index4, elements2, address5 = @offset, [], true
           loop do
             address5 = _read_space
             unless address5 == FAILURE
               elements2 << address5
-              remaining1 -= 1
             else
               break
             end
           end
-          if remaining1 <= 0
+          if elements2.size >= 0
             address4 = TreeNode.new(@input[index4...@offset], index4, elements2)
             @offset = @offset
           else
@@ -174,17 +171,16 @@ module CanopyLisp
       unless address1 == FAILURE
         elements0 << address1
         address2 = FAILURE
-        remaining0, index2, elements1, address3 = 1, @offset, [], true
+        index2, elements1, address3 = @offset, [], true
         loop do
           address3 = _read_cell
           unless address3 == FAILURE
             elements1 << address3
-            remaining0 -= 1
           else
             break
           end
         end
-        if remaining0 <= 0
+        if elements1.size >= 1
           address2 = TreeNode.new(@input[index2...@offset], index2, elements1)
           @offset = @offset
         else
@@ -343,7 +339,7 @@ module CanopyLisp
       unless address1 == FAILURE
         elements0 << address1
         address2 = FAILURE
-        remaining0, index2, elements1, address3 = 0, @offset, [], true
+        index2, elements1, address3 = @offset, [], true
         loop do
           chunk1, max1 = nil, @offset + 1
           if max1 <= @input_size
@@ -364,12 +360,11 @@ module CanopyLisp
           end
           unless address3 == FAILURE
             elements1 << address3
-            remaining0 -= 1
           else
             break
           end
         end
-        if remaining0 <= 0
+        if elements1.size >= 0
           address2 = TreeNode.new(@input[index2...@offset], index2, elements1)
           @offset = @offset
         else
@@ -424,7 +419,7 @@ module CanopyLisp
       unless address1 == FAILURE
         elements0 << address1
         address2 = FAILURE
-        remaining0, index2, elements1, address3 = 0, @offset, [], true
+        index2, elements1, address3 = @offset, [], true
         loop do
           index3 = @offset
           index4, elements2 = @offset, []
@@ -503,12 +498,11 @@ module CanopyLisp
           end
           unless address3 == FAILURE
             elements1 << address3
-            remaining0 -= 1
           else
             break
           end
         end
-        if remaining0 <= 0
+        if elements1.size >= 0
           address2 = TreeNode.new(@input[index2...@offset], index2, elements1)
           @offset = @offset
         else
@@ -565,7 +559,7 @@ module CanopyLisp
         @offset = cached[1]
         return cached[0]
       end
-      remaining0, index1, elements0, address1 = 1, @offset, [], true
+      index1, elements0, address1 = @offset, [], true
       loop do
         index2, elements1 = @offset, []
         address2 = FAILURE
@@ -612,12 +606,11 @@ module CanopyLisp
         end
         unless address1 == FAILURE
           elements0 << address1
-          remaining0 -= 1
         else
           break
         end
       end
-      if remaining0 <= 0
+      if elements0.size >= 1
         address0 = TreeNode.new(@input[index1...@offset], index1, elements0)
         @offset = @offset
       else
