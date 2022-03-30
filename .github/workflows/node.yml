@@ -17,6 +17,7 @@ jobs:
           - '14'
           - '15'
           - '16'
+          - '17'
     name: Node.js v${{ matrix.node }}
     runs-on: ubuntu-latest
     steps:
