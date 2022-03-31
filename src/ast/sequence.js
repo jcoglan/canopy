@@ -17,13 +17,15 @@ class Sequence {
     let result = this._parts.reduce((state, part) => {
       if (part.muted()) return state
 
+      let [offsets, index] = state
+
       for (let label of part.labels()) {
-        state[0][label] = state[1]
+        offsets[label] = index
       }
-      return [state[0], state[1] + 1]
+      return [offsets, index + 1]
     }, [{}, 0])
 
-    let labels = result[0]
+    let [labels] = result
     if (Object.keys(labels).length === 0) return null
 
     return labels

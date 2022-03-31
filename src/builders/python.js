@@ -220,13 +220,13 @@ class Builder extends Base {
     this._line('pass')
   }
 
-  sizeInRange_ (address, range) {
-    if (range[1] === -1) {
-      return 'len(' + address + ') >= ' + range[0]
-    } else if (range[1] === 0) {
-      return 'len(' + address + ') == ' + range[0]
+  sizeInRange_ (address, [min, max]) {
+    if (max === -1) {
+      return 'len(' + address + ') >= ' + min
+    } else if (max === 0) {
+      return 'len(' + address + ') == ' + min
     } else {
-      return 'len(' + address + ') >= ' + range[0] + ' and len(' + address + ') <= ' + range[1]
+      return 'len(' + address + ') >= ' + min + ' and len(' + address + ') <= ' + max
     }
   }
 

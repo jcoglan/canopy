@@ -215,13 +215,13 @@ class Builder extends Base {
     this._line('break')
   }
 
-  sizeInRange_ (address, range) {
-    if (range[1] === -1) {
-      return address + '.length >= ' + range[0]
-    } else if (range[1] === 0) {
-      return address + '.length === ' + range[0]
+  sizeInRange_ (address, [min, max]) {
+    if (max === -1) {
+      return address + '.length >= ' + min
+    } else if (max === 0) {
+      return address + '.length === ' + min
     } else {
-      return address + '.length >= ' + range[0] + ' && ' + address + '.length <= ' + range[1]
+      return address + '.length >= ' + min + ' && ' + address + '.length <= ' + max
     }
   }
 

@@ -27,8 +27,8 @@ const actions = {
     return new Rule(name.text, body)
   },
 
-  paren_expr (text, a, b, elements) {
-    return elements[2]
+  paren_expr (text, a, b, [_, __, expr]) {
+    return expr
   },
 
   choice (text, a, b, [first, rest]) {
@@ -49,10 +49,8 @@ const actions = {
       return new Action(root, actionName)
   },
 
-  sequence (text, a, b, elements) {
-    let parts = [elements[0]].concat(
-      elements[1].elements.map((e) => e.expr))
-
+  sequence (text, a, b, [first, rest]) {
+    let parts = [first].concat(rest.elements.map((e) => e.expr))
     return new Sequence(parts)
   },
 
