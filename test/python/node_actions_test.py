@@ -44,6 +44,23 @@ class NodeActionsTest(TestCase, ParseHelper):
             ("c", 11, [])
         ], result)
 
+    def test_makes_nodes_from_a_repetition_in_parentheses(self):
+        input  = "act-rep-paren: abab"
+        result = node_actions.parse(input, actions=TestActions()).elements[1]
+
+        self.assertEqual(["rep-paren", input, 15, 19], result[0:4])
+
+        self.assertParseElements([
+            ("ab", 15, [
+                ("a", 15, []),
+                ("b", 16, [])
+            ]),
+            ("ab", 17, [
+                ("a", 17, []),
+                ("b", 18, [])
+            ])
+        ], result)
+
     def test_makes_nodes_from_a_sequence(self):
         input  = "act-seq: xyz"
         result = node_actions.parse(input, actions=TestActions()).elements[1]
@@ -161,6 +178,9 @@ class TestActions:
 
     def make_paren(self, *args):
         return ["paren"] + list(args)
+
+    def make_rep_paren(self, *args):
+        return ["rep-paren"] + list(args)
 
     def make_zero(self, *args):
         return ["zero"] + list(args)

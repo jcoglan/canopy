@@ -51,6 +51,24 @@ describe "actions" do
     ], result
   end
 
+  it "makes nodes from a repetition in parentheses" do
+    input  = "act-rep-paren: abab"
+    result = NodeActions.parse(input, :actions => TestActions.new).elements[1]
+
+    assert_equal [:rep_paren, input, 15, 19], result.take(4)
+
+    assert_parse_elements [
+      ["ab", 15, [
+        ["a", 15, []],
+        ["b", 16, []]
+      ]],
+      ["ab", 17, [
+        ["a", 17, []],
+        ["b", 18, []]
+      ]]
+    ], result
+  end
+
   it "makes nodes from a sequence" do
     input  = "act-seq: xyz"
     result = NodeActions.parse(input, :actions => TestActions.new).elements[1]
@@ -183,6 +201,10 @@ class TestActions
 
   def make_paren(*args)
     [:paren, *args]
+  end
+
+  def make_rep_paren(*args)
+    [:rep_paren, *args]
   end
 
   def make_zero(*args)

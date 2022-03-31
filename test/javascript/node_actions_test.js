@@ -51,6 +51,24 @@ jstest.describe("actions", function() { with(this) {
     ], result)
   }})
 
+  it("makes nodes from a repetition in parentheses", function() { with(this) {
+    let input  = "act-rep-paren: abab"
+    let result = NodeActions.parse(input, { actions: new TestActions() }).elements[1]
+
+    assertEqual(["rep-paren", input, 15, 19], result.slice(0, 4))
+
+    assertParseElements([
+      ["ab", 15, [
+        ["a", 15, []],
+        ["b", 16, []]
+      ]],
+      ["ab", 17, [
+        ["a", 17, []],
+        ["b", 18, []]
+      ]]
+    ], result)
+  }})
+
   it("makes nodes from a sequence", function() { with(this) {
     let input  = "act-seq: xyz"
     let result = NodeActions.parse(input, { actions: new TestActions() }).elements[1]
@@ -188,6 +206,10 @@ class TestActions {
 
   make_paren(...args) {
     return ["paren", ...args]
+  }
+
+  make_rep_paren(...args) {
+    return ["rep-paren", ...args]
   }
 
   make_zero(...args) {

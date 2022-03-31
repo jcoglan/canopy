@@ -73,6 +73,25 @@ class NodeActionsTest extends ParseHelper {
     }
 
     @Test
+    void makesNodesFromARepetitionInParentheses() throws ParseError {
+        String input = "act-rep-paren: abab";
+        CustomNode result = (CustomNode)NodeActions.parse(input, new TestActions()).elements.get(1);
+
+        assertNode(
+            new CustomNode("rep-paren", input, 15, 19)
+                .elem(node("ab", 15)
+                    .elem(node("a", 15).noElems())
+                    .elem(node("b", 16).noElems())
+                )
+                .elem(node("ab", 17)
+                    .elem(node("a", 17).noElems())
+                    .elem(node("b", 18).noElems())
+                ),
+            result
+        );
+    }
+
+    @Test
     void makesNodesFromASequence() throws ParseError {
         String input = "act-seq: xyz";
         CustomNode result = (CustomNode)NodeActions.parse(input, new TestActions()).elements.get(1);
@@ -228,6 +247,10 @@ class TestActions implements Actions {
 
     public CustomNode make_paren(String input, int start, int end, List<TreeNode> elements) {
         return new CustomNode("paren", input, start, end, elements);
+    }
+
+    public CustomNode make_rep_paren(String input, int start, int end, List<TreeNode> elements) {
+        return new CustomNode("rep-paren", input, start, end, elements);
     }
 
     public CustomNode make_zero(String input, int start, int end, List<TreeNode> elements) {
