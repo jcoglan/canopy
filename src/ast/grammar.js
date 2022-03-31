@@ -13,7 +13,7 @@ class Grammar {
   compile (builder) {
     let [nodeLabels, actions, regexes] = this._gatherComponents()
 
-    builder.package_(this._name, actions.sort(), () => {
+    builder.package_(this._name, [...actions].sort(), () => {
       let nodeClassName = builder.syntaxNodeClass_()
 
       for (let [i, labels] of nodeLabels.entries())
@@ -34,15 +34,14 @@ class Grammar {
 
   _gatherComponents () {
     let nodeLabels = [],
-        actions    = [],
+        actions    = new Set(),
         regexes    = []
 
     this._scan(this, (node) => {
       let labels = node.collectLabels && node.collectLabels()
       if (labels) nodeLabels.push([node, labels])
 
-      if (node._actionName && actions.indexOf(node._actionName) < 0)
-        actions.push(node._actionName)
+      if (node._actionName) actions.add(node._actionName)
 
       if (node.regex) regexes.push(node)
     })
@@ -55,11 +54,11 @@ class Grammar {
     node.setNodeClassName(className)
 
     builder.class_(className, nodeClassName, () => {
-      builder.attributes_(Object.keys(labels))
+      builder.attributes_(labels.keys())
 
       builder.constructor_(['text', 'offset', 'elements'], () => {
-        for (let key in labels)
-          builder.attribute_(key, builder.arrayLookup_('elements', labels[key]))
+        for (let [key, offset] of labels)
+          builder.attribute_(key, builder.arrayLookup_('elements', offset))
       })
     })
   }

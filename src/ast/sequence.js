@@ -14,21 +14,15 @@ class Sequence {
   }
 
   collectLabels () {
-    let result = this._parts.reduce((state, part) => {
-      if (part.muted()) return state
+    let labels = new Map()
+    let parts = this._parts.filter((p) => !p.muted())
 
-      let [offsets, index] = state
+    for (let [i, part] of parts.entries()) {
+      for (let label of part.labels())
+        labels.set(label, i)
+    }
 
-      for (let label of part.labels()) {
-        offsets[label] = index
-      }
-      return [offsets, index + 1]
-    }, [{}, 0])
-
-    let [labels] = result
-    if (Object.keys(labels).length === 0) return null
-
-    return labels
+    return (labels.size === 0) ? null : labels
   }
 
   setNodeClassName (className) {

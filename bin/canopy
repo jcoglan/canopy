@@ -50,11 +50,11 @@ async function main () {
 
   let grammar = fs.readFileSync(inputPath, 'utf8'),
       builder = canopy.builders[lang].create(outputPath),
-      parser  = canopy.compile(grammar, builder)
+      buffers = canopy.compile(grammar, builder)
 
-  for (let name in parser) {
+  for (let [name, source] of buffers) {
     await mkdirp(dirname(name))
-    let content = builder.comment(comment).join('\n') + '\n\n' + parser[name]
+    let content = builder.comment(comment).join('\n') + '\n\n' + source
     fs.writeFileSync(name, content)
   }
 }

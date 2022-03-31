@@ -35,7 +35,7 @@ class Base {
     this._outputPath  = outputPath
     this._indentLevel = 0
 
-    this._buffers = {}
+    this._buffers = new Map()
     this._currentBuffer = null
 
     this._stack = [new Scope()]
@@ -71,7 +71,8 @@ class Base {
     } else {
       this._currentBuffer = join(this._outputPath + '.' + ext)
     }
-    this._buffers[this._currentBuffer] = this._initBuffer(this._currentBuffer)
+    let buffer = this._initBuffer(this._currentBuffer)
+    this._buffers.set(this._currentBuffer, buffer)
   }
 
   _initBuffer (pathname) {
@@ -88,7 +89,8 @@ class Base {
   }
 
   _write (string) {
-    this._buffers[this._currentBuffer] += string
+    let name = this._currentBuffer
+    this._buffers.set(name, this._buffers.get(name) + string)
   }
 
   _indent (block) {

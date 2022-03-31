@@ -14,7 +14,7 @@ const TYPES = {
 class Builder extends Base {
   constructor (...args) {
     super(...args)
-    this._labels = {}
+    this._labels = new Set()
   }
 
   _tab () {
@@ -108,7 +108,7 @@ class Builder extends Base {
     this._newBuffer('java', name)
     this._template('java', 'Parser.java', { grammar, root, name })
 
-    let labels = Object.keys(this._labels).sort()
+    let labels = [...this._labels].sort()
 
     this._newBuffer('java', 'Label')
     this._template('java', 'Label.java', { labels })
@@ -138,7 +138,7 @@ class Builder extends Base {
   }
 
   cache_ (name, block) {
-    this._labels[name] = true
+    this._labels.add(name)
 
     let temp    = this.localVars_({ address: this.nullNode_(), index: 'offset' }),
         address = temp.address,
@@ -160,7 +160,7 @@ class Builder extends Base {
   }
 
   attribute_ (name, value) {
-    this._labels[name] = true
+    this._labels.add(name)
     this._line('labelled.put(Label.' + name + ', ' + value + ')')
   }
 
