@@ -31,6 +31,7 @@ class Builder extends Base {
   }
 
   package_ (name, actions, block) {
+    this._grammarName = name
     this._newBuffer('py')
     
     this._line('from collections import defaultdict')
@@ -65,7 +66,8 @@ class Builder extends Base {
   }
 
   parserClass_ (root) {
-    this._template('python', 'parser.py', { root })
+    let grammar = this._quote(this._grammarName)
+    this._template('python', 'parser.py', { grammar, root })
   }
 
   class_ (name, parent, block) {
@@ -179,7 +181,9 @@ class Builder extends Base {
   }
 
   failure_ (address, expected) {
+    let rule = this._quote(this._grammarName + '::' + this._ruleName)
     expected = this._quote(expected)
+
     this.assign_(address, this.nullNode_())
 
     this.if_('self._offset > self._failure', () => {
@@ -187,7 +191,7 @@ class Builder extends Base {
       this.assign_('self._expected', '[]')
     })
     this.if_('self._offset == self._failure', () => {
-      this.append_('self._expected', expected)
+      this.append_('self._expected', '(' + rule + ', ' + expected + ')')
     })
   }
 

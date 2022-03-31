@@ -16,7 +16,7 @@ abstract class Grammar {
 
     int inputSize, offset, failure;
     String input;
-    List<String> expected;
+    List<String[]> expected;
     Map<Label, Map<Integer, CacheRecord>> cache;
     Actions actions;
 
@@ -200,10 +200,10 @@ abstract class Grammar {
                 address1 = FAILURE;
                 if (offset > failure) {
                     failure = offset;
-                    expected = new ArrayList<String>();
+                    expected = new ArrayList<String[]>();
                 }
                 if (offset == failure) {
-                    expected.add("`grammar`");
+                    expected.add(new String[] { "Canopy.PEG::grammar_name", "`grammar`" });
                 }
             }
             if (address1 != FAILURE) {
@@ -222,10 +222,10 @@ abstract class Grammar {
                     address2 = FAILURE;
                     if (offset > failure) {
                         failure = offset;
-                        expected = new ArrayList<String>();
+                        expected = new ArrayList<String[]>();
                     }
                     if (offset == failure) {
-                        expected.add("\":\"");
+                        expected.add(new String[] { "Canopy.PEG::grammar_name", "\":\"" });
                     }
                 }
                 if (address2 == FAILURE) {
@@ -381,10 +381,10 @@ abstract class Grammar {
                     address3 = FAILURE;
                     if (offset > failure) {
                         failure = offset;
-                        expected = new ArrayList<String>();
+                        expected = new ArrayList<String[]>();
                     }
                     if (offset == failure) {
-                        expected.add("\"<-\"");
+                        expected.add(new String[] { "Canopy.PEG::assignment", "\"<-\"" });
                     }
                 }
                 if (address3 != FAILURE) {
@@ -485,10 +485,10 @@ abstract class Grammar {
                 address1 = FAILURE;
                 if (offset > failure) {
                     failure = offset;
-                    expected = new ArrayList<String>();
+                    expected = new ArrayList<String[]>();
                 }
                 if (offset == failure) {
-                    expected.add("\"(\"");
+                    expected.add(new String[] { "Canopy.PEG::parenthesised_expression", "\"(\"" });
                 }
             }
             if (address1 != FAILURE) {
@@ -550,10 +550,10 @@ abstract class Grammar {
                                 address7 = FAILURE;
                                 if (offset > failure) {
                                     failure = offset;
-                                    expected = new ArrayList<String>();
+                                    expected = new ArrayList<String[]>();
                                 }
                                 if (offset == failure) {
-                                    expected.add("\")\"");
+                                    expected.add(new String[] { "Canopy.PEG::parenthesised_expression", "\")\"" });
                                 }
                             }
                             if (address7 != FAILURE) {
@@ -647,10 +647,10 @@ abstract class Grammar {
                             address6 = FAILURE;
                             if (offset > failure) {
                                 failure = offset;
-                                expected = new ArrayList<String>();
+                                expected = new ArrayList<String[]>();
                             }
                             if (offset == failure) {
-                                expected.add("\"/\"");
+                                expected.add(new String[] { "Canopy.PEG::choice_expression", "\"/\"" });
                             }
                         }
                         if (address6 != FAILURE) {
@@ -924,10 +924,10 @@ abstract class Grammar {
                 address1 = FAILURE;
                 if (offset > failure) {
                     failure = offset;
-                    expected = new ArrayList<String>();
+                    expected = new ArrayList<String[]>();
                 }
                 if (offset == failure) {
-                    expected.add("\"(\"");
+                    expected.add(new String[] { "Canopy.PEG::actionable_expression", "\"(\"" });
                 }
             }
             if (address1 != FAILURE) {
@@ -989,10 +989,10 @@ abstract class Grammar {
                                 address7 = FAILURE;
                                 if (offset > failure) {
                                     failure = offset;
-                                    expected = new ArrayList<String>();
+                                    expected = new ArrayList<String[]>();
                                 }
                                 if (offset == failure) {
-                                    expected.add("\")\"");
+                                    expected.add(new String[] { "Canopy.PEG::actionable_expression", "\")\"" });
                                 }
                             }
                             if (address7 != FAILURE) {
@@ -1070,10 +1070,10 @@ abstract class Grammar {
                 address1 = FAILURE;
                 if (offset > failure) {
                     failure = offset;
-                    expected = new ArrayList<String>();
+                    expected = new ArrayList<String[]>();
                 }
                 if (offset == failure) {
-                    expected.add("\"%\"");
+                    expected.add(new String[] { "Canopy.PEG::action_tag", "\"%\"" });
                 }
             }
             if (address1 != FAILURE) {
@@ -1128,10 +1128,10 @@ abstract class Grammar {
                 address1 = FAILURE;
                 if (offset > failure) {
                     failure = offset;
-                    expected = new ArrayList<String>();
+                    expected = new ArrayList<String[]>();
                 }
                 if (offset == failure) {
-                    expected.add("\"<\"");
+                    expected.add(new String[] { "Canopy.PEG::type_tag", "\"<\"" });
                 }
             }
             if (address1 != FAILURE) {
@@ -1153,10 +1153,10 @@ abstract class Grammar {
                         address3 = FAILURE;
                         if (offset > failure) {
                             failure = offset;
-                            expected = new ArrayList<String>();
+                            expected = new ArrayList<String[]>();
                         }
                         if (offset == failure) {
-                            expected.add("\">\"");
+                            expected.add(new String[] { "Canopy.PEG::type_tag", "\">\"" });
                         }
                     }
                     if (address3 != FAILURE) {
@@ -1369,10 +1369,10 @@ abstract class Grammar {
                     address2 = FAILURE;
                     if (offset > failure) {
                         failure = offset;
-                        expected = new ArrayList<String>();
+                        expected = new ArrayList<String[]>();
                     }
                     if (offset == failure) {
-                        expected.add("\"?\"");
+                        expected.add(new String[] { "Canopy.PEG::maybe_atom", "\"?\"" });
                     }
                 }
                 if (address2 != FAILURE) {
@@ -1428,10 +1428,10 @@ abstract class Grammar {
                     address2 = FAILURE;
                     if (offset > failure) {
                         failure = offset;
-                        expected = new ArrayList<String>();
+                        expected = new ArrayList<String[]>();
                     }
                     if (offset == failure) {
-                        expected.add("\"*\"");
+                        expected.add(new String[] { "Canopy.PEG::repeated_atom", "\"*\"" });
                     }
                 }
                 if (address2 == FAILURE) {
@@ -1448,10 +1448,10 @@ abstract class Grammar {
                         address2 = FAILURE;
                         if (offset > failure) {
                             failure = offset;
-                            expected = new ArrayList<String>();
+                            expected = new ArrayList<String[]>();
                         }
                         if (offset == failure) {
-                            expected.add("\"+\"");
+                            expected.add(new String[] { "Canopy.PEG::repeated_atom", "\"+\"" });
                         }
                     }
                     if (address2 == FAILURE) {
@@ -1575,10 +1575,10 @@ abstract class Grammar {
                 address1 = FAILURE;
                 if (offset > failure) {
                     failure = offset;
-                    expected = new ArrayList<String>();
+                    expected = new ArrayList<String[]>();
                 }
                 if (offset == failure) {
-                    expected.add("\"&\"");
+                    expected.add(new String[] { "Canopy.PEG::predicated_atom", "\"&\"" });
                 }
             }
             if (address1 == FAILURE) {
@@ -1595,10 +1595,10 @@ abstract class Grammar {
                     address1 = FAILURE;
                     if (offset > failure) {
                         failure = offset;
-                        expected = new ArrayList<String>();
+                        expected = new ArrayList<String[]>();
                     }
                     if (offset == failure) {
-                        expected.add("\"!\"");
+                        expected.add(new String[] { "Canopy.PEG::predicated_atom", "\"!\"" });
                     }
                 }
                 if (address1 == FAILURE) {
@@ -1707,10 +1707,10 @@ abstract class Grammar {
                 address1 = FAILURE;
                 if (offset > failure) {
                     failure = offset;
-                    expected = new ArrayList<String>();
+                    expected = new ArrayList<String[]>();
                 }
                 if (offset == failure) {
-                    expected.add("'\"'");
+                    expected.add(new String[] { "Canopy.PEG::string_expression", "'\"'" });
                 }
             }
             if (address1 != FAILURE) {
@@ -1736,10 +1736,10 @@ abstract class Grammar {
                         address4 = FAILURE;
                         if (offset > failure) {
                             failure = offset;
-                            expected = new ArrayList<String>();
+                            expected = new ArrayList<String[]>();
                         }
                         if (offset == failure) {
-                            expected.add("\"\\\\\"");
+                            expected.add(new String[] { "Canopy.PEG::string_expression", "\"\\\\\"" });
                         }
                     }
                     if (address4 != FAILURE) {
@@ -1752,10 +1752,10 @@ abstract class Grammar {
                             address5 = FAILURE;
                             if (offset > failure) {
                                 failure = offset;
-                                expected = new ArrayList<String>();
+                                expected = new ArrayList<String[]>();
                             }
                             if (offset == failure) {
-                                expected.add("<any char>");
+                                expected.add(new String[] { "Canopy.PEG::string_expression", "<any char>" });
                             }
                         }
                         if (address5 != FAILURE) {
@@ -1788,10 +1788,10 @@ abstract class Grammar {
                             address3 = FAILURE;
                             if (offset > failure) {
                                 failure = offset;
-                                expected = new ArrayList<String>();
+                                expected = new ArrayList<String[]>();
                             }
                             if (offset == failure) {
-                                expected.add("[^\"]");
+                                expected.add(new String[] { "Canopy.PEG::string_expression", "[^\"]" });
                             }
                         }
                         if (address3 == FAILURE) {
@@ -1825,10 +1825,10 @@ abstract class Grammar {
                         address6 = FAILURE;
                         if (offset > failure) {
                             failure = offset;
-                            expected = new ArrayList<String>();
+                            expected = new ArrayList<String[]>();
                         }
                         if (offset == failure) {
-                            expected.add("'\"'");
+                            expected.add(new String[] { "Canopy.PEG::string_expression", "'\"'" });
                         }
                     }
                     if (address6 != FAILURE) {
@@ -1868,10 +1868,10 @@ abstract class Grammar {
                     address7 = FAILURE;
                     if (offset > failure) {
                         failure = offset;
-                        expected = new ArrayList<String>();
+                        expected = new ArrayList<String[]>();
                     }
                     if (offset == failure) {
-                        expected.add("\"'\"");
+                        expected.add(new String[] { "Canopy.PEG::string_expression", "\"'\"" });
                     }
                 }
                 if (address7 != FAILURE) {
@@ -1897,10 +1897,10 @@ abstract class Grammar {
                             address10 = FAILURE;
                             if (offset > failure) {
                                 failure = offset;
-                                expected = new ArrayList<String>();
+                                expected = new ArrayList<String[]>();
                             }
                             if (offset == failure) {
-                                expected.add("\"\\\\\"");
+                                expected.add(new String[] { "Canopy.PEG::string_expression", "\"\\\\\"" });
                             }
                         }
                         if (address10 != FAILURE) {
@@ -1913,10 +1913,10 @@ abstract class Grammar {
                                 address11 = FAILURE;
                                 if (offset > failure) {
                                     failure = offset;
-                                    expected = new ArrayList<String>();
+                                    expected = new ArrayList<String[]>();
                                 }
                                 if (offset == failure) {
-                                    expected.add("<any char>");
+                                    expected.add(new String[] { "Canopy.PEG::string_expression", "<any char>" });
                                 }
                             }
                             if (address11 != FAILURE) {
@@ -1949,10 +1949,10 @@ abstract class Grammar {
                                 address9 = FAILURE;
                                 if (offset > failure) {
                                     failure = offset;
-                                    expected = new ArrayList<String>();
+                                    expected = new ArrayList<String[]>();
                                 }
                                 if (offset == failure) {
-                                    expected.add("[^']");
+                                    expected.add(new String[] { "Canopy.PEG::string_expression", "[^']" });
                                 }
                             }
                             if (address9 == FAILURE) {
@@ -1986,10 +1986,10 @@ abstract class Grammar {
                             address12 = FAILURE;
                             if (offset > failure) {
                                 failure = offset;
-                                expected = new ArrayList<String>();
+                                expected = new ArrayList<String[]>();
                             }
                             if (offset == failure) {
-                                expected.add("\"'\"");
+                                expected.add(new String[] { "Canopy.PEG::string_expression", "\"'\"" });
                             }
                         }
                         if (address12 != FAILURE) {
@@ -2048,10 +2048,10 @@ abstract class Grammar {
                 address1 = FAILURE;
                 if (offset > failure) {
                     failure = offset;
-                    expected = new ArrayList<String>();
+                    expected = new ArrayList<String[]>();
                 }
                 if (offset == failure) {
-                    expected.add("\"`\"");
+                    expected.add(new String[] { "Canopy.PEG::ci_string_expression", "\"`\"" });
                 }
             }
             if (address1 != FAILURE) {
@@ -2077,10 +2077,10 @@ abstract class Grammar {
                         address4 = FAILURE;
                         if (offset > failure) {
                             failure = offset;
-                            expected = new ArrayList<String>();
+                            expected = new ArrayList<String[]>();
                         }
                         if (offset == failure) {
-                            expected.add("\"\\\\\"");
+                            expected.add(new String[] { "Canopy.PEG::ci_string_expression", "\"\\\\\"" });
                         }
                     }
                     if (address4 != FAILURE) {
@@ -2093,10 +2093,10 @@ abstract class Grammar {
                             address5 = FAILURE;
                             if (offset > failure) {
                                 failure = offset;
-                                expected = new ArrayList<String>();
+                                expected = new ArrayList<String[]>();
                             }
                             if (offset == failure) {
-                                expected.add("<any char>");
+                                expected.add(new String[] { "Canopy.PEG::ci_string_expression", "<any char>" });
                             }
                         }
                         if (address5 != FAILURE) {
@@ -2129,10 +2129,10 @@ abstract class Grammar {
                             address3 = FAILURE;
                             if (offset > failure) {
                                 failure = offset;
-                                expected = new ArrayList<String>();
+                                expected = new ArrayList<String[]>();
                             }
                             if (offset == failure) {
-                                expected.add("[^`]");
+                                expected.add(new String[] { "Canopy.PEG::ci_string_expression", "[^`]" });
                             }
                         }
                         if (address3 == FAILURE) {
@@ -2166,10 +2166,10 @@ abstract class Grammar {
                         address6 = FAILURE;
                         if (offset > failure) {
                             failure = offset;
-                            expected = new ArrayList<String>();
+                            expected = new ArrayList<String[]>();
                         }
                         if (offset == failure) {
-                            expected.add("\"`\"");
+                            expected.add(new String[] { "Canopy.PEG::ci_string_expression", "\"`\"" });
                         }
                     }
                     if (address6 != FAILURE) {
@@ -2221,10 +2221,10 @@ abstract class Grammar {
                 address0 = FAILURE;
                 if (offset > failure) {
                     failure = offset;
-                    expected = new ArrayList<String>();
+                    expected = new ArrayList<String[]>();
                 }
                 if (offset == failure) {
-                    expected.add("\".\"");
+                    expected.add(new String[] { "Canopy.PEG::any_char_expression", "\".\"" });
                 }
             }
             rule.put(index0, new CacheRecord(address0, offset));
@@ -2259,10 +2259,10 @@ abstract class Grammar {
                 address1 = FAILURE;
                 if (offset > failure) {
                     failure = offset;
-                    expected = new ArrayList<String>();
+                    expected = new ArrayList<String[]>();
                 }
                 if (offset == failure) {
-                    expected.add("\"[\"");
+                    expected.add(new String[] { "Canopy.PEG::char_class_expression", "\"[\"" });
                 }
             }
             if (address1 != FAILURE) {
@@ -2281,10 +2281,10 @@ abstract class Grammar {
                     address2 = FAILURE;
                     if (offset > failure) {
                         failure = offset;
-                        expected = new ArrayList<String>();
+                        expected = new ArrayList<String[]>();
                     }
                     if (offset == failure) {
-                        expected.add("\"^\"");
+                        expected.add(new String[] { "Canopy.PEG::char_class_expression", "\"^\"" });
                     }
                 }
                 if (address2 == FAILURE) {
@@ -2314,10 +2314,10 @@ abstract class Grammar {
                             address5 = FAILURE;
                             if (offset > failure) {
                                 failure = offset;
-                                expected = new ArrayList<String>();
+                                expected = new ArrayList<String[]>();
                             }
                             if (offset == failure) {
-                                expected.add("\"\\\\\"");
+                                expected.add(new String[] { "Canopy.PEG::char_class_expression", "\"\\\\\"" });
                             }
                         }
                         if (address5 != FAILURE) {
@@ -2330,10 +2330,10 @@ abstract class Grammar {
                                 address6 = FAILURE;
                                 if (offset > failure) {
                                     failure = offset;
-                                    expected = new ArrayList<String>();
+                                    expected = new ArrayList<String[]>();
                                 }
                                 if (offset == failure) {
-                                    expected.add("<any char>");
+                                    expected.add(new String[] { "Canopy.PEG::char_class_expression", "<any char>" });
                                 }
                             }
                             if (address6 != FAILURE) {
@@ -2366,10 +2366,10 @@ abstract class Grammar {
                                 address4 = FAILURE;
                                 if (offset > failure) {
                                     failure = offset;
-                                    expected = new ArrayList<String>();
+                                    expected = new ArrayList<String[]>();
                                 }
                                 if (offset == failure) {
-                                    expected.add("[^\\]]");
+                                    expected.add(new String[] { "Canopy.PEG::char_class_expression", "[^\\]]" });
                                 }
                             }
                             if (address4 == FAILURE) {
@@ -2403,10 +2403,10 @@ abstract class Grammar {
                             address7 = FAILURE;
                             if (offset > failure) {
                                 failure = offset;
-                                expected = new ArrayList<String>();
+                                expected = new ArrayList<String[]>();
                             }
                             if (offset == failure) {
-                                expected.add("\"]\"");
+                                expected.add(new String[] { "Canopy.PEG::char_class_expression", "\"]\"" });
                             }
                         }
                         if (address7 != FAILURE) {
@@ -2469,10 +2469,10 @@ abstract class Grammar {
                     address2 = FAILURE;
                     if (offset > failure) {
                         failure = offset;
-                        expected = new ArrayList<String>();
+                        expected = new ArrayList<String[]>();
                     }
                     if (offset == failure) {
-                        expected.add("\":\"");
+                        expected.add(new String[] { "Canopy.PEG::label", "\":\"" });
                     }
                 }
                 if (address2 != FAILURE) {
@@ -2534,10 +2534,10 @@ abstract class Grammar {
                         address4 = FAILURE;
                         if (offset > failure) {
                             failure = offset;
-                            expected = new ArrayList<String>();
+                            expected = new ArrayList<String[]>();
                         }
                         if (offset == failure) {
-                            expected.add("\".\"");
+                            expected.add(new String[] { "Canopy.PEG::object_identifier", "\".\"" });
                         }
                     }
                     if (address4 != FAILURE) {
@@ -2620,10 +2620,10 @@ abstract class Grammar {
                 address1 = FAILURE;
                 if (offset > failure) {
                     failure = offset;
-                    expected = new ArrayList<String>();
+                    expected = new ArrayList<String[]>();
                 }
                 if (offset == failure) {
-                    expected.add("[a-zA-Z_]");
+                    expected.add(new String[] { "Canopy.PEG::identifier", "[a-zA-Z_]" });
                 }
             }
             if (address1 != FAILURE) {
@@ -2645,10 +2645,10 @@ abstract class Grammar {
                         address3 = FAILURE;
                         if (offset > failure) {
                             failure = offset;
-                            expected = new ArrayList<String>();
+                            expected = new ArrayList<String[]>();
                         }
                         if (offset == failure) {
-                            expected.add("[a-zA-Z0-9_]");
+                            expected.add(new String[] { "Canopy.PEG::identifier", "[a-zA-Z0-9_]" });
                         }
                     }
                     if (address3 != FAILURE) {
@@ -2709,10 +2709,10 @@ abstract class Grammar {
                 address0 = FAILURE;
                 if (offset > failure) {
                     failure = offset;
-                    expected = new ArrayList<String>();
+                    expected = new ArrayList<String[]>();
                 }
                 if (offset == failure) {
-                    expected.add("[\\s]");
+                    expected.add(new String[] { "Canopy.PEG::__", "[\\s]" });
                 }
             }
             if (address0 == FAILURE) {
@@ -2754,10 +2754,10 @@ abstract class Grammar {
                 address1 = FAILURE;
                 if (offset > failure) {
                     failure = offset;
-                    expected = new ArrayList<String>();
+                    expected = new ArrayList<String[]>();
                 }
                 if (offset == failure) {
-                    expected.add("\"#\"");
+                    expected.add(new String[] { "Canopy.PEG::comment", "\"#\"" });
                 }
             }
             if (address1 != FAILURE) {
@@ -2779,10 +2779,10 @@ abstract class Grammar {
                         address3 = FAILURE;
                         if (offset > failure) {
                             failure = offset;
-                            expected = new ArrayList<String>();
+                            expected = new ArrayList<String[]>();
                         }
                         if (offset == failure) {
-                            expected.add("[^\\n]");
+                            expected.add(new String[] { "Canopy.PEG::comment", "[^\\n]" });
                         }
                     }
                     if (address3 != FAILURE) {

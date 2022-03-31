@@ -381,7 +381,7 @@ module Canopy::PEG
           @expected = []
         end
         if @offset == @failure
-          @expected << "`grammar`"
+          @expected << ["Canopy.PEG::grammar_name", "`grammar`"]
         end
       end
       unless address1 == FAILURE
@@ -402,7 +402,7 @@ module Canopy::PEG
             @expected = []
           end
           if @offset == @failure
-            @expected << "\":\""
+            @expected << ["Canopy.PEG::grammar_name", "\":\""]
           end
         end
         if address2 == FAILURE
@@ -542,7 +542,7 @@ module Canopy::PEG
             @expected = []
           end
           if @offset == @failure
-            @expected << "\"<-\""
+            @expected << ["Canopy.PEG::assignment", "\"<-\""]
           end
         end
         unless address3 == FAILURE
@@ -630,7 +630,7 @@ module Canopy::PEG
           @expected = []
         end
         if @offset == @failure
-          @expected << "\"(\""
+          @expected << ["Canopy.PEG::parenthesised_expression", "\"(\""]
         end
       end
       unless address1 == FAILURE
@@ -690,7 +690,7 @@ module Canopy::PEG
                   @expected = []
                 end
                 if @offset == @failure
-                  @expected << "\")\""
+                  @expected << ["Canopy.PEG::parenthesised_expression", "\")\""]
                 end
               end
               unless address7 == FAILURE
@@ -774,7 +774,7 @@ module Canopy::PEG
                 @expected = []
               end
               if @offset == @failure
-                @expected << "\"/\""
+                @expected << ["Canopy.PEG::choice_expression", "\"/\""]
               end
             end
             unless address6 == FAILURE
@@ -1022,7 +1022,7 @@ module Canopy::PEG
           @expected = []
         end
         if @offset == @failure
-          @expected << "\"(\""
+          @expected << ["Canopy.PEG::actionable_expression", "\"(\""]
         end
       end
       unless address1 == FAILURE
@@ -1082,7 +1082,7 @@ module Canopy::PEG
                   @expected = []
                 end
                 if @offset == @failure
-                  @expected << "\")\""
+                  @expected << ["Canopy.PEG::actionable_expression", "\")\""]
                 end
               end
               unless address7 == FAILURE
@@ -1155,7 +1155,7 @@ module Canopy::PEG
           @expected = []
         end
         if @offset == @failure
-          @expected << "\"%\""
+          @expected << ["Canopy.PEG::action_tag", "\"%\""]
         end
       end
       unless address1 == FAILURE
@@ -1205,7 +1205,7 @@ module Canopy::PEG
           @expected = []
         end
         if @offset == @failure
-          @expected << "\"<\""
+          @expected << ["Canopy.PEG::type_tag", "\"<\""]
         end
       end
       unless address1 == FAILURE
@@ -1229,7 +1229,7 @@ module Canopy::PEG
               @expected = []
             end
             if @offset == @failure
-              @expected << "\">\""
+              @expected << ["Canopy.PEG::type_tag", "\">\""]
             end
           end
           unless address3 == FAILURE
@@ -1418,7 +1418,7 @@ module Canopy::PEG
             @expected = []
           end
           if @offset == @failure
-            @expected << "\"?\""
+            @expected << ["Canopy.PEG::maybe_atom", "\"?\""]
           end
         end
         unless address2 == FAILURE
@@ -1469,7 +1469,7 @@ module Canopy::PEG
             @expected = []
           end
           if @offset == @failure
-            @expected << "\"*\""
+            @expected << ["Canopy.PEG::repeated_atom", "\"*\""]
           end
         end
         if address2 == FAILURE
@@ -1488,7 +1488,7 @@ module Canopy::PEG
               @expected = []
             end
             if @offset == @failure
-              @expected << "\"+\""
+              @expected << ["Canopy.PEG::repeated_atom", "\"+\""]
             end
           end
           if address2 == FAILURE
@@ -1595,7 +1595,7 @@ module Canopy::PEG
           @expected = []
         end
         if @offset == @failure
-          @expected << "\"&\""
+          @expected << ["Canopy.PEG::predicated_atom", "\"&\""]
         end
       end
       if address1 == FAILURE
@@ -1614,7 +1614,7 @@ module Canopy::PEG
             @expected = []
           end
           if @offset == @failure
-            @expected << "\"!\""
+            @expected << ["Canopy.PEG::predicated_atom", "\"!\""]
           end
         end
         if address1 == FAILURE
@@ -1711,7 +1711,7 @@ module Canopy::PEG
           @expected = []
         end
         if @offset == @failure
-          @expected << "'\"'"
+          @expected << ["Canopy.PEG::string_expression", "'\"'"]
         end
       end
       unless address1 == FAILURE
@@ -1736,7 +1736,7 @@ module Canopy::PEG
               @expected = []
             end
             if @offset == @failure
-              @expected << "\"\\\\\""
+              @expected << ["Canopy.PEG::string_expression", "\"\\\\\""]
             end
           end
           unless address4 == FAILURE
@@ -1752,7 +1752,7 @@ module Canopy::PEG
                 @expected = []
               end
               if @offset == @failure
-                @expected << "<any char>"
+                @expected << ["Canopy.PEG::string_expression", "<any char>"]
               end
             end
             unless address5 == FAILURE
@@ -1787,7 +1787,7 @@ module Canopy::PEG
                 @expected = []
               end
               if @offset == @failure
-                @expected << "[^\"]"
+                @expected << ["Canopy.PEG::string_expression", "[^\"]"]
               end
             end
             if address3 == FAILURE
@@ -1823,7 +1823,7 @@ module Canopy::PEG
               @expected = []
             end
             if @offset == @failure
-              @expected << "'\"'"
+              @expected << ["Canopy.PEG::string_expression", "'\"'"]
             end
           end
           unless address6 == FAILURE
@@ -1864,7 +1864,7 @@ module Canopy::PEG
             @expected = []
           end
           if @offset == @failure
-            @expected << "\"'\""
+            @expected << ["Canopy.PEG::string_expression", "\"'\""]
           end
         end
         unless address7 == FAILURE
@@ -1889,7 +1889,7 @@ module Canopy::PEG
                 @expected = []
               end
               if @offset == @failure
-                @expected << "\"\\\\\""
+                @expected << ["Canopy.PEG::string_expression", "\"\\\\\""]
               end
             end
             unless address10 == FAILURE
@@ -1905,7 +1905,7 @@ module Canopy::PEG
                   @expected = []
                 end
                 if @offset == @failure
-                  @expected << "<any char>"
+                  @expected << ["Canopy.PEG::string_expression", "<any char>"]
                 end
               end
               unless address11 == FAILURE
@@ -1940,7 +1940,7 @@ module Canopy::PEG
                   @expected = []
                 end
                 if @offset == @failure
-                  @expected << "[^']"
+                  @expected << ["Canopy.PEG::string_expression", "[^']"]
                 end
               end
               if address9 == FAILURE
@@ -1976,7 +1976,7 @@ module Canopy::PEG
                 @expected = []
               end
               if @offset == @failure
-                @expected << "\"'\""
+                @expected << ["Canopy.PEG::string_expression", "\"'\""]
               end
             end
             unless address12 == FAILURE
@@ -2030,7 +2030,7 @@ module Canopy::PEG
           @expected = []
         end
         if @offset == @failure
-          @expected << "\"`\""
+          @expected << ["Canopy.PEG::ci_string_expression", "\"`\""]
         end
       end
       unless address1 == FAILURE
@@ -2055,7 +2055,7 @@ module Canopy::PEG
               @expected = []
             end
             if @offset == @failure
-              @expected << "\"\\\\\""
+              @expected << ["Canopy.PEG::ci_string_expression", "\"\\\\\""]
             end
           end
           unless address4 == FAILURE
@@ -2071,7 +2071,7 @@ module Canopy::PEG
                 @expected = []
               end
               if @offset == @failure
-                @expected << "<any char>"
+                @expected << ["Canopy.PEG::ci_string_expression", "<any char>"]
               end
             end
             unless address5 == FAILURE
@@ -2106,7 +2106,7 @@ module Canopy::PEG
                 @expected = []
               end
               if @offset == @failure
-                @expected << "[^`]"
+                @expected << ["Canopy.PEG::ci_string_expression", "[^`]"]
               end
             end
             if address3 == FAILURE
@@ -2142,7 +2142,7 @@ module Canopy::PEG
               @expected = []
             end
             if @offset == @failure
-              @expected << "\"`\""
+              @expected << ["Canopy.PEG::ci_string_expression", "\"`\""]
             end
           end
           unless address6 == FAILURE
@@ -2190,7 +2190,7 @@ module Canopy::PEG
           @expected = []
         end
         if @offset == @failure
-          @expected << "\".\""
+          @expected << ["Canopy.PEG::any_char_expression", "\".\""]
         end
       end
       @cache[:any_char_expression][index0] = [address0, @offset]
@@ -2220,7 +2220,7 @@ module Canopy::PEG
           @expected = []
         end
         if @offset == @failure
-          @expected << "\"[\""
+          @expected << ["Canopy.PEG::char_class_expression", "\"[\""]
         end
       end
       unless address1 == FAILURE
@@ -2241,7 +2241,7 @@ module Canopy::PEG
             @expected = []
           end
           if @offset == @failure
-            @expected << "\"^\""
+            @expected << ["Canopy.PEG::char_class_expression", "\"^\""]
           end
         end
         if address2 == FAILURE
@@ -2270,7 +2270,7 @@ module Canopy::PEG
                 @expected = []
               end
               if @offset == @failure
-                @expected << "\"\\\\\""
+                @expected << ["Canopy.PEG::char_class_expression", "\"\\\\\""]
               end
             end
             unless address5 == FAILURE
@@ -2286,7 +2286,7 @@ module Canopy::PEG
                   @expected = []
                 end
                 if @offset == @failure
-                  @expected << "<any char>"
+                  @expected << ["Canopy.PEG::char_class_expression", "<any char>"]
                 end
               end
               unless address6 == FAILURE
@@ -2321,7 +2321,7 @@ module Canopy::PEG
                   @expected = []
                 end
                 if @offset == @failure
-                  @expected << "[^\\]]"
+                  @expected << ["Canopy.PEG::char_class_expression", "[^\\]]"]
                 end
               end
               if address4 == FAILURE
@@ -2357,7 +2357,7 @@ module Canopy::PEG
                 @expected = []
               end
               if @offset == @failure
-                @expected << "\"]\""
+                @expected << ["Canopy.PEG::char_class_expression", "\"]\""]
               end
             end
             unless address7 == FAILURE
@@ -2415,7 +2415,7 @@ module Canopy::PEG
             @expected = []
           end
           if @offset == @failure
-            @expected << "\":\""
+            @expected << ["Canopy.PEG::label", "\":\""]
           end
         end
         unless address2 == FAILURE
@@ -2469,7 +2469,7 @@ module Canopy::PEG
               @expected = []
             end
             if @offset == @failure
-              @expected << "\".\""
+              @expected << ["Canopy.PEG::object_identifier", "\".\""]
             end
           end
           unless address4 == FAILURE
@@ -2547,7 +2547,7 @@ module Canopy::PEG
           @expected = []
         end
         if @offset == @failure
-          @expected << "[a-zA-Z_]"
+          @expected << ["Canopy.PEG::identifier", "[a-zA-Z_]"]
         end
       end
       unless address1 == FAILURE
@@ -2569,7 +2569,7 @@ module Canopy::PEG
               @expected = []
             end
             if @offset == @failure
-              @expected << "[a-zA-Z0-9_]"
+              @expected << ["Canopy.PEG::identifier", "[a-zA-Z0-9_]"]
             end
           end
           unless address3 == FAILURE
@@ -2626,7 +2626,7 @@ module Canopy::PEG
           @expected = []
         end
         if @offset == @failure
-          @expected << "[\\s]"
+          @expected << ["Canopy.PEG::__", "[\\s]"]
         end
       end
       if address0 == FAILURE
@@ -2663,7 +2663,7 @@ module Canopy::PEG
           @expected = []
         end
         if @offset == @failure
-          @expected << "\"#\""
+          @expected << ["Canopy.PEG::comment", "\"#\""]
         end
       end
       unless address1 == FAILURE
@@ -2685,7 +2685,7 @@ module Canopy::PEG
               @expected = []
             end
             if @offset == @failure
-              @expected << "[^\\n]"
+              @expected << ["Canopy.PEG::comment", "[^\\n]"]
             end
           end
           unless address3 == FAILURE
@@ -2742,21 +2742,32 @@ module Canopy::PEG
       end
       if @expected.empty?
         @failure = @offset
-        @expected << "<EOF>"
+        @expected << ["Canopy.PEG", "<EOF>"]
       end
       raise ParseError, Parser.format_error(@input, @failure, @expected)
     end
 
     def self.format_error(input, offset, expected)
-      lines, line_no, position = input.split(/\n/), 0, 0
+      lines = input.split(/\n/)
+      line_no, position = 0, 0
+
       while position <= offset
         position += lines[line_no].size + 1
         line_no += 1
       end
-      message, line = "Line #{line_no}: expected #{expected * ", "}\n", lines[line_no - 1]
-      message += "#{line}\n"
-      position -= line.size + 1
-      message += " " * (offset - position)
+
+      line = lines[line_no - 1]
+      message = "Line #{line_no}: expected one of:\n\n"
+
+      expected.each do |rule, term|
+        message += "    - #{term} from #{rule}\n"
+      end
+
+      number = line_no.to_s
+      number = " " + number until number.size == 6
+
+      message += "\n#{number} | #{line}\n"
+      message += " " * (line.size + 10 + offset - position)
       return message + "^"
     end
   end

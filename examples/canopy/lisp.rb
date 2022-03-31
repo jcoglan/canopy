@@ -165,7 +165,7 @@ module CanopyLisp
           @expected = []
         end
         if @offset == @failure
-          @expected << "\"(\""
+          @expected << ["CanopyLisp::list", "\"(\""]
         end
       end
       unless address1 == FAILURE
@@ -203,7 +203,7 @@ module CanopyLisp
               @expected = []
             end
             if @offset == @failure
-              @expected << "\")\""
+              @expected << ["CanopyLisp::list", "\")\""]
             end
           end
           unless address4 == FAILURE
@@ -280,7 +280,7 @@ module CanopyLisp
           @expected = []
         end
         if @offset == @failure
-          @expected << "\"#t\""
+          @expected << ["CanopyLisp::boolean_", "\"#t\""]
         end
       end
       if address0 == FAILURE
@@ -299,7 +299,7 @@ module CanopyLisp
             @expected = []
           end
           if @offset == @failure
-            @expected << "\"#f\""
+            @expected << ["CanopyLisp::boolean_", "\"#f\""]
           end
         end
         if address0 == FAILURE
@@ -333,7 +333,7 @@ module CanopyLisp
           @expected = []
         end
         if @offset == @failure
-          @expected << "[1-9]"
+          @expected << ["CanopyLisp::integer", "[1-9]"]
         end
       end
       unless address1 == FAILURE
@@ -355,7 +355,7 @@ module CanopyLisp
               @expected = []
             end
             if @offset == @failure
-              @expected << "[0-9]"
+              @expected << ["CanopyLisp::integer", "[0-9]"]
             end
           end
           unless address3 == FAILURE
@@ -413,7 +413,7 @@ module CanopyLisp
           @expected = []
         end
         if @offset == @failure
-          @expected << "\"\\\"\""
+          @expected << ["CanopyLisp::string", "\"\\\"\""]
         end
       end
       unless address1 == FAILURE
@@ -438,7 +438,7 @@ module CanopyLisp
               @expected = []
             end
             if @offset == @failure
-              @expected << "\"\\\\\""
+              @expected << ["CanopyLisp::string", "\"\\\\\""]
             end
           end
           unless address4 == FAILURE
@@ -454,7 +454,7 @@ module CanopyLisp
                 @expected = []
               end
               if @offset == @failure
-                @expected << "<any char>"
+                @expected << ["CanopyLisp::string", "<any char>"]
               end
             end
             unless address5 == FAILURE
@@ -489,7 +489,7 @@ module CanopyLisp
                 @expected = []
               end
               if @offset == @failure
-                @expected << "[^\"]"
+                @expected << ["CanopyLisp::string", "[^\"]"]
               end
             end
             if address3 == FAILURE
@@ -525,7 +525,7 @@ module CanopyLisp
               @expected = []
             end
             if @offset == @failure
-              @expected << "\"\\\"\""
+              @expected << ["CanopyLisp::string", "\"\\\"\""]
             end
           end
           unless address6 == FAILURE
@@ -585,7 +585,7 @@ module CanopyLisp
               @expected = []
             end
             if @offset == @failure
-              @expected << "<any char>"
+              @expected << ["CanopyLisp::symbol", "<any char>"]
             end
           end
           unless address3 == FAILURE
@@ -641,7 +641,7 @@ module CanopyLisp
           @expected = []
         end
         if @offset == @failure
-          @expected << "[\\s]"
+          @expected << ["CanopyLisp::space", "[\\s]"]
         end
       end
       @cache[:space][index0] = [address0, @offset]
@@ -670,7 +670,7 @@ module CanopyLisp
           @expected = []
         end
         if @offset == @failure
-          @expected << "\"(\""
+          @expected << ["CanopyLisp::paren", "\"(\""]
         end
       end
       if address0 == FAILURE
@@ -689,7 +689,7 @@ module CanopyLisp
             @expected = []
           end
           if @offset == @failure
-            @expected << "\")\""
+            @expected << ["CanopyLisp::paren", "\")\""]
           end
         end
         if address0 == FAILURE
@@ -742,21 +742,32 @@ module CanopyLisp
       end
       if @expected.empty?
         @failure = @offset
-        @expected << "<EOF>"
+        @expected << ["CanopyLisp", "<EOF>"]
       end
       raise ParseError, Parser.format_error(@input, @failure, @expected)
     end
 
     def self.format_error(input, offset, expected)
-      lines, line_no, position = input.split(/\n/), 0, 0
+      lines = input.split(/\n/)
+      line_no, position = 0, 0
+
       while position <= offset
         position += lines[line_no].size + 1
         line_no += 1
       end
-      message, line = "Line #{line_no}: expected #{expected * ", "}\n", lines[line_no - 1]
-      message += "#{line}\n"
-      position -= line.size + 1
-      message += " " * (offset - position)
+
+      line = lines[line_no - 1]
+      message = "Line #{line_no}: expected one of:\n\n"
+
+      expected.each do |rule, term|
+        message += "    - #{term} from #{rule}\n"
+      end
+
+      number = line_no.to_s
+      number = " " + number until number.size == 6
+
+      message += "\n#{number} | #{line}\n"
+      message += " " * (line.size + 10 + offset - position)
       return message + "^"
     end
   end

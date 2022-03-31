@@ -153,7 +153,7 @@
           this._expected = [];
         }
         if (this._offset === this._failure) {
-          this._expected.push('"{"');
+          this._expected.push(['CanopyJson::object', '"{"']);
         }
       }
       if (address1 !== FAILURE) {
@@ -181,7 +181,7 @@
                 this._expected = [];
               }
               if (this._offset === this._failure) {
-                this._expected.push('","');
+                this._expected.push(['CanopyJson::object', '","']);
               }
             }
             if (address5 !== FAILURE) {
@@ -233,7 +233,7 @@
                 this._expected = [];
               }
               if (this._offset === this._failure) {
-                this._expected.push('"}"');
+                this._expected.push(['CanopyJson::object', '"}"']);
               }
             }
             if (address7 !== FAILURE) {
@@ -278,7 +278,7 @@
             this._expected = [];
           }
           if (this._offset === this._failure) {
-            this._expected.push('"{"');
+            this._expected.push(['CanopyJson::object', '"{"']);
           }
         }
         if (address8 !== FAILURE) {
@@ -302,7 +302,7 @@
                 this._expected = [];
               }
               if (this._offset === this._failure) {
-                this._expected.push('"}"');
+                this._expected.push(['CanopyJson::object', '"}"']);
               }
             }
             if (address10 !== FAILURE) {
@@ -369,7 +369,7 @@
                 this._expected = [];
               }
               if (this._offset === this._failure) {
-                this._expected.push('":"');
+                this._expected.push(['CanopyJson::pair', '":"']);
               }
             }
             if (address4 !== FAILURE) {
@@ -433,7 +433,7 @@
           this._expected = [];
         }
         if (this._offset === this._failure) {
-          this._expected.push('"["');
+          this._expected.push(['CanopyJson::array', '"["']);
         }
       }
       if (address1 !== FAILURE) {
@@ -461,7 +461,7 @@
                 this._expected = [];
               }
               if (this._offset === this._failure) {
-                this._expected.push('","');
+                this._expected.push(['CanopyJson::array', '","']);
               }
             }
             if (address5 !== FAILURE) {
@@ -513,7 +513,7 @@
                 this._expected = [];
               }
               if (this._offset === this._failure) {
-                this._expected.push('"]"');
+                this._expected.push(['CanopyJson::array', '"]"']);
               }
             }
             if (address7 !== FAILURE) {
@@ -558,7 +558,7 @@
             this._expected = [];
           }
           if (this._offset === this._failure) {
-            this._expected.push('"["');
+            this._expected.push(['CanopyJson::array', '"["']);
           }
         }
         if (address8 !== FAILURE) {
@@ -582,7 +582,7 @@
                 this._expected = [];
               }
               if (this._offset === this._failure) {
-                this._expected.push('"]"');
+                this._expected.push(['CanopyJson::array', '"]"']);
               }
             }
             if (address10 !== FAILURE) {
@@ -704,7 +704,7 @@
           this._expected = [];
         }
         if (this._offset === this._failure) {
-          this._expected.push('\'"\'');
+          this._expected.push(['CanopyJson::string', '\'"\'']);
         }
       }
       if (address1 !== FAILURE) {
@@ -729,7 +729,7 @@
               this._expected = [];
             }
             if (this._offset === this._failure) {
-              this._expected.push('"\\\\"');
+              this._expected.push(['CanopyJson::string', '"\\\\"']);
             }
           }
           if (address4 !== FAILURE) {
@@ -745,7 +745,7 @@
                 this._expected = [];
               }
               if (this._offset === this._failure) {
-                this._expected.push('<any char>');
+                this._expected.push(['CanopyJson::string', '<any char>']);
               }
             }
             if (address5 !== FAILURE) {
@@ -780,7 +780,7 @@
                 this._expected = [];
               }
               if (this._offset === this._failure) {
-                this._expected.push('[^"]');
+                this._expected.push(['CanopyJson::string', '[^"]']);
               }
             }
             if (address3 === FAILURE) {
@@ -816,7 +816,7 @@
               this._expected = [];
             }
             if (this._offset === this._failure) {
-              this._expected.push('\'"\'');
+              this._expected.push(['CanopyJson::string', '\'"\'']);
             }
           }
           if (address6 !== FAILURE) {
@@ -868,7 +868,7 @@
           this._expected = [];
         }
         if (this._offset === this._failure) {
-          this._expected.push('"-"');
+          this._expected.push(['CanopyJson::number', '"-"']);
         }
       }
       if (address1 === FAILURE) {
@@ -893,7 +893,7 @@
             this._expected = [];
           }
           if (this._offset === this._failure) {
-            this._expected.push('"0"');
+            this._expected.push(['CanopyJson::number', '"0"']);
           }
         }
         if (address2 === FAILURE) {
@@ -914,7 +914,7 @@
               this._expected = [];
             }
             if (this._offset === this._failure) {
-              this._expected.push('[1-9]');
+              this._expected.push(['CanopyJson::number', '[1-9]']);
             }
           }
           if (address3 !== FAILURE) {
@@ -936,7 +936,7 @@
                   this._expected = [];
                 }
                 if (this._offset === this._failure) {
-                  this._expected.push('[0-9]');
+                  this._expected.push(['CanopyJson::number', '[0-9]']);
                 }
               }
               if (address5 !== FAILURE) {
@@ -991,7 +991,7 @@
               this._expected = [];
             }
             if (this._offset === this._failure) {
-              this._expected.push('"."');
+              this._expected.push(['CanopyJson::number', '"."']);
             }
           }
           if (address7 !== FAILURE) {
@@ -1013,7 +1013,7 @@
                   this._expected = [];
                 }
                 if (this._offset === this._failure) {
-                  this._expected.push('[0-9]');
+                  this._expected.push(['CanopyJson::number', '[0-9]']);
                 }
               }
               if (address9 !== FAILURE) {
@@ -1069,7 +1069,7 @@
                 this._expected = [];
               }
               if (this._offset === this._failure) {
-                this._expected.push('"e"');
+                this._expected.push(['CanopyJson::number', '"e"']);
               }
             }
             if (address11 === FAILURE) {
@@ -1088,7 +1088,7 @@
                   this._expected = [];
                 }
                 if (this._offset === this._failure) {
-                  this._expected.push('"E"');
+                  this._expected.push(['CanopyJson::number', '"E"']);
                 }
               }
               if (address11 === FAILURE) {
@@ -1113,7 +1113,7 @@
                   this._expected = [];
                 }
                 if (this._offset === this._failure) {
-                  this._expected.push('"+"');
+                  this._expected.push(['CanopyJson::number', '"+"']);
                 }
               }
               if (address12 === FAILURE) {
@@ -1132,7 +1132,7 @@
                     this._expected = [];
                   }
                   if (this._offset === this._failure) {
-                    this._expected.push('"-"');
+                    this._expected.push(['CanopyJson::number', '"-"']);
                   }
                 }
                 if (address12 === FAILURE) {
@@ -1151,7 +1151,7 @@
                       this._expected = [];
                     }
                     if (this._offset === this._failure) {
-                      this._expected.push('""');
+                      this._expected.push(['CanopyJson::number', '""']);
                     }
                   }
                   if (address12 === FAILURE) {
@@ -1178,7 +1178,7 @@
                       this._expected = [];
                     }
                     if (this._offset === this._failure) {
-                      this._expected.push('[0-9]');
+                      this._expected.push(['CanopyJson::number', '[0-9]']);
                     }
                   }
                   if (address14 !== FAILURE) {
@@ -1268,7 +1268,7 @@
           this._expected = [];
         }
         if (this._offset === this._failure) {
-          this._expected.push('"true"');
+          this._expected.push(['CanopyJson::boolean_', '"true"']);
         }
       }
       if (address0 === FAILURE) {
@@ -1287,7 +1287,7 @@
             this._expected = [];
           }
           if (this._offset === this._failure) {
-            this._expected.push('"false"');
+            this._expected.push(['CanopyJson::boolean_', '"false"']);
           }
         }
         if (address0 === FAILURE) {
@@ -1320,7 +1320,7 @@
           this._expected = [];
         }
         if (this._offset === this._failure) {
-          this._expected.push('"null"');
+          this._expected.push(['CanopyJson::null_', '"null"']);
         }
       }
       this._cache._null_[index0] = [address0, this._offset];
@@ -1351,7 +1351,7 @@
             this._expected = [];
           }
           if (this._offset === this._failure) {
-            this._expected.push('[\\s]');
+            this._expected.push(['CanopyJson::__', '[\\s]']);
           }
         }
         if (address1 !== FAILURE) {
@@ -1389,7 +1389,7 @@
     }
     if (this._expected.length === 0) {
       this._failure = this._offset;
-      this._expected.push('<EOF>');
+      this._expected.push(['CanopyJson', '<EOF>']);
     }
     this.constructor.lastError = { offset: this._offset, expected: this._expected };
     throw new SyntaxError(formatError(this._input, this._failure, this._expected));
@@ -1413,11 +1413,18 @@
       position += lines[lineNo].length + 1;
       lineNo += 1;
     }
-    var message = 'Line ' + lineNo + ': expected ' + expected.join(', ') + '\n',
-        line = lines[lineNo - 1];
 
-    message += line + '\n';
-    position -= line.length + 1;
+    var line = lines[lineNo - 1],
+        message = 'Line ' + lineNo + ': expected one of:\n\n';
+
+    for (var i = 0; i < expected.length; i++) {
+      message += '    - ' + expected[i][1] + ' from ' + expected[i][0] + '\n';
+    }
+    var number = lineNo.toString();
+    while (number.length < 6) number = ' ' + number;
+    message += '\n' + number + ' | ' + line + '\n';
+
+    position -= line.length + 10;
 
     while (position < offset) {
       message += ' ';

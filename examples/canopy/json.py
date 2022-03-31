@@ -146,7 +146,7 @@ class Grammar(object):
                 self._failure = self._offset
                 self._expected = []
             if self._offset == self._failure:
-                self._expected.append('"{"')
+                self._expected.append(('CanopyJson::object', '"{"'))
         if address1 is not FAILURE:
             elements0.append(address1)
             address2 = FAILURE
@@ -170,7 +170,7 @@ class Grammar(object):
                             self._failure = self._offset
                             self._expected = []
                         if self._offset == self._failure:
-                            self._expected.append('","')
+                            self._expected.append(('CanopyJson::object', '","'))
                     if address5 is not FAILURE:
                         elements2.append(address5)
                         address6 = FAILURE
@@ -212,7 +212,7 @@ class Grammar(object):
                             self._failure = self._offset
                             self._expected = []
                         if self._offset == self._failure:
-                            self._expected.append('"}"')
+                            self._expected.append(('CanopyJson::object', '"}"'))
                     if address7 is not FAILURE:
                         elements0.append(address7)
                     else:
@@ -248,7 +248,7 @@ class Grammar(object):
                     self._failure = self._offset
                     self._expected = []
                 if self._offset == self._failure:
-                    self._expected.append('"{"')
+                    self._expected.append(('CanopyJson::object', '"{"'))
             if address8 is not FAILURE:
                 elements3.append(address8)
                 address9 = FAILURE
@@ -268,7 +268,7 @@ class Grammar(object):
                             self._failure = self._offset
                             self._expected = []
                         if self._offset == self._failure:
-                            self._expected.append('"}"')
+                            self._expected.append(('CanopyJson::object', '"}"'))
                     if address10 is not FAILURE:
                         elements3.append(address10)
                     else:
@@ -322,7 +322,7 @@ class Grammar(object):
                             self._failure = self._offset
                             self._expected = []
                         if self._offset == self._failure:
-                            self._expected.append('":"')
+                            self._expected.append(('CanopyJson::pair', '":"'))
                     if address4 is not FAILURE:
                         elements0.append(address4)
                         address5 = FAILURE
@@ -373,7 +373,7 @@ class Grammar(object):
                 self._failure = self._offset
                 self._expected = []
             if self._offset == self._failure:
-                self._expected.append('"["')
+                self._expected.append(('CanopyJson::array', '"["'))
         if address1 is not FAILURE:
             elements0.append(address1)
             address2 = FAILURE
@@ -397,7 +397,7 @@ class Grammar(object):
                             self._failure = self._offset
                             self._expected = []
                         if self._offset == self._failure:
-                            self._expected.append('","')
+                            self._expected.append(('CanopyJson::array', '","'))
                     if address5 is not FAILURE:
                         elements2.append(address5)
                         address6 = FAILURE
@@ -439,7 +439,7 @@ class Grammar(object):
                             self._failure = self._offset
                             self._expected = []
                         if self._offset == self._failure:
-                            self._expected.append('"]"')
+                            self._expected.append(('CanopyJson::array', '"]"'))
                     if address7 is not FAILURE:
                         elements0.append(address7)
                     else:
@@ -475,7 +475,7 @@ class Grammar(object):
                     self._failure = self._offset
                     self._expected = []
                 if self._offset == self._failure:
-                    self._expected.append('"["')
+                    self._expected.append(('CanopyJson::array', '"["'))
             if address8 is not FAILURE:
                 elements3.append(address8)
                 address9 = FAILURE
@@ -495,7 +495,7 @@ class Grammar(object):
                             self._failure = self._offset
                             self._expected = []
                         if self._offset == self._failure:
-                            self._expected.append('"]"')
+                            self._expected.append(('CanopyJson::array', '"]"'))
                     if address10 is not FAILURE:
                         elements3.append(address10)
                     else:
@@ -591,7 +591,7 @@ class Grammar(object):
                 self._failure = self._offset
                 self._expected = []
             if self._offset == self._failure:
-                self._expected.append('\'"\'')
+                self._expected.append(('CanopyJson::string', '\'"\''))
         if address1 is not FAILURE:
             elements0.append(address1)
             address2 = FAILURE
@@ -612,7 +612,7 @@ class Grammar(object):
                         self._failure = self._offset
                         self._expected = []
                     if self._offset == self._failure:
-                        self._expected.append('"\\\\"')
+                        self._expected.append(('CanopyJson::string', '"\\\\"'))
                 if address4 is not FAILURE:
                     elements2.append(address4)
                     address5 = FAILURE
@@ -625,7 +625,7 @@ class Grammar(object):
                             self._failure = self._offset
                             self._expected = []
                         if self._offset == self._failure:
-                            self._expected.append('<any char>')
+                            self._expected.append(('CanopyJson::string', '<any char>'))
                     if address5 is not FAILURE:
                         elements2.append(address5)
                     else:
@@ -653,7 +653,7 @@ class Grammar(object):
                             self._failure = self._offset
                             self._expected = []
                         if self._offset == self._failure:
-                            self._expected.append('[^"]')
+                            self._expected.append(('CanopyJson::string', '[^"]'))
                     if address3 is FAILURE:
                         self._offset = index3
                 if address3 is not FAILURE:
@@ -680,7 +680,7 @@ class Grammar(object):
                         self._failure = self._offset
                         self._expected = []
                     if self._offset == self._failure:
-                        self._expected.append('\'"\'')
+                        self._expected.append(('CanopyJson::string', '\'"\''))
                 if address6 is not FAILURE:
                     elements0.append(address6)
                 else:
@@ -721,7 +721,7 @@ class Grammar(object):
                 self._failure = self._offset
                 self._expected = []
             if self._offset == self._failure:
-                self._expected.append('"-"')
+                self._expected.append(('CanopyJson::number', '"-"'))
         if address1 is FAILURE:
             address1 = TreeNode(self._input[index2:index2], index2, [])
             self._offset = index2
@@ -741,7 +741,7 @@ class Grammar(object):
                     self._failure = self._offset
                     self._expected = []
                 if self._offset == self._failure:
-                    self._expected.append('"0"')
+                    self._expected.append(('CanopyJson::number', '"0"'))
             if address2 is FAILURE:
                 self._offset = index3
                 index4, elements1 = self._offset, []
@@ -758,7 +758,7 @@ class Grammar(object):
                         self._failure = self._offset
                         self._expected = []
                     if self._offset == self._failure:
-                        self._expected.append('[1-9]')
+                        self._expected.append(('CanopyJson::number', '[1-9]'))
                 if address3 is not FAILURE:
                     elements1.append(address3)
                     address4 = FAILURE
@@ -776,7 +776,7 @@ class Grammar(object):
                                 self._failure = self._offset
                                 self._expected = []
                             if self._offset == self._failure:
-                                self._expected.append('[0-9]')
+                                self._expected.append(('CanopyJson::number', '[0-9]'))
                         if address5 is not FAILURE:
                             elements2.append(address5)
                         else:
@@ -819,7 +819,7 @@ class Grammar(object):
                         self._failure = self._offset
                         self._expected = []
                     if self._offset == self._failure:
-                        self._expected.append('"."')
+                        self._expected.append(('CanopyJson::number', '"."'))
                 if address7 is not FAILURE:
                     elements3.append(address7)
                     address8 = FAILURE
@@ -837,7 +837,7 @@ class Grammar(object):
                                 self._failure = self._offset
                                 self._expected = []
                             if self._offset == self._failure:
-                                self._expected.append('[0-9]')
+                                self._expected.append(('CanopyJson::number', '[0-9]'))
                         if address9 is not FAILURE:
                             elements4.append(address9)
                         else:
@@ -882,7 +882,7 @@ class Grammar(object):
                             self._failure = self._offset
                             self._expected = []
                         if self._offset == self._failure:
-                            self._expected.append('"e"')
+                            self._expected.append(('CanopyJson::number', '"e"'))
                     if address11 is FAILURE:
                         self._offset = index11
                         chunk7, max7 = None, self._offset + 1
@@ -897,7 +897,7 @@ class Grammar(object):
                                 self._failure = self._offset
                                 self._expected = []
                             if self._offset == self._failure:
-                                self._expected.append('"E"')
+                                self._expected.append(('CanopyJson::number', '"E"'))
                         if address11 is FAILURE:
                             self._offset = index11
                     if address11 is not FAILURE:
@@ -916,7 +916,7 @@ class Grammar(object):
                                 self._failure = self._offset
                                 self._expected = []
                             if self._offset == self._failure:
-                                self._expected.append('"+"')
+                                self._expected.append(('CanopyJson::number', '"+"'))
                         if address12 is FAILURE:
                             self._offset = index12
                             chunk9, max9 = None, self._offset + 1
@@ -931,7 +931,7 @@ class Grammar(object):
                                     self._failure = self._offset
                                     self._expected = []
                                 if self._offset == self._failure:
-                                    self._expected.append('"-"')
+                                    self._expected.append(('CanopyJson::number', '"-"'))
                             if address12 is FAILURE:
                                 self._offset = index12
                                 chunk10, max10 = None, self._offset + 0
@@ -946,7 +946,7 @@ class Grammar(object):
                                         self._failure = self._offset
                                         self._expected = []
                                     if self._offset == self._failure:
-                                        self._expected.append('""')
+                                        self._expected.append(('CanopyJson::number', '""'))
                                 if address12 is FAILURE:
                                     self._offset = index12
                         if address12 is not FAILURE:
@@ -966,7 +966,7 @@ class Grammar(object):
                                         self._failure = self._offset
                                         self._expected = []
                                     if self._offset == self._failure:
-                                        self._expected.append('[0-9]')
+                                        self._expected.append(('CanopyJson::number', '[0-9]'))
                                 if address14 is not FAILURE:
                                     elements6.append(address14)
                                 else:
@@ -1036,7 +1036,7 @@ class Grammar(object):
                 self._failure = self._offset
                 self._expected = []
             if self._offset == self._failure:
-                self._expected.append('"true"')
+                self._expected.append(('CanopyJson::boolean_', '"true"'))
         if address0 is FAILURE:
             self._offset = index1
             chunk1, max1 = None, self._offset + 5
@@ -1051,7 +1051,7 @@ class Grammar(object):
                     self._failure = self._offset
                     self._expected = []
                 if self._offset == self._failure:
-                    self._expected.append('"false"')
+                    self._expected.append(('CanopyJson::boolean_', '"false"'))
             if address0 is FAILURE:
                 self._offset = index1
         self._cache['boolean_'][index0] = (address0, self._offset)
@@ -1075,7 +1075,7 @@ class Grammar(object):
                 self._failure = self._offset
                 self._expected = []
             if self._offset == self._failure:
-                self._expected.append('"null"')
+                self._expected.append(('CanopyJson::null_', '"null"'))
         self._cache['null_'][index0] = (address0, self._offset)
         return address0
 
@@ -1099,7 +1099,7 @@ class Grammar(object):
                     self._failure = self._offset
                     self._expected = []
                 if self._offset == self._failure:
-                    self._expected.append('[\\s]')
+                    self._expected.append(('CanopyJson::__', '[\\s]'))
             if address1 is not FAILURE:
                 elements0.append(address1)
             else:
@@ -1130,7 +1130,7 @@ class Parser(Grammar):
             return tree
         if not self._expected:
             self._failure = self._offset
-            self._expected.append('<EOF>')
+            self._expected.append(('CanopyJson', '<EOF>'))
         raise ParseError(format_error(self._input, self._failure, self._expected))
 
 
@@ -1143,12 +1143,23 @@ def parse(input, actions=None, types=None):
     return parser.parse()
 
 def format_error(input, offset, expected):
-    lines, line_no, position = input.split('\n'), 0, 0
+    lines = input.split('\n')
+    line_no, position = 0, 0
+
     while position <= offset:
         position += len(lines[line_no]) + 1
         line_no += 1
-    message, line = 'Line ' + str(line_no) + ': expected ' + ', '.join(expected) + '\n', lines[line_no - 1]
-    message += line + '\n'
-    position -= len(line) + 1
-    message += ' ' * (offset - position)
+
+    line = lines[line_no - 1]
+    message = 'Line ' + str(line_no) + ': expected one of:\n\n'
+
+    for pair in expected:
+        message += '    - ' + pair[1] + ' from ' + pair[0] + '\n'
+
+    number = str(line_no)
+    while len(number) < 6:
+        number = ' ' + number
+
+    message += '\n' + number + ' | ' + line + '\n'
+    message += ' ' * (len(line) + 10 + offset - position)
     return message + '^'

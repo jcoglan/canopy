@@ -163,7 +163,7 @@
           this._expected = [];
         }
         if (this._offset === this._failure) {
-          this._expected.push('"("');
+          this._expected.push(['CanopyLisp::list', '"("']);
         }
       }
       if (address1 !== FAILURE) {
@@ -201,7 +201,7 @@
               this._expected = [];
             }
             if (this._offset === this._failure) {
-              this._expected.push('")"');
+              this._expected.push(['CanopyLisp::list', '")"']);
             }
           }
           if (address4 !== FAILURE) {
@@ -280,7 +280,7 @@
           this._expected = [];
         }
         if (this._offset === this._failure) {
-          this._expected.push('"#t"');
+          this._expected.push(['CanopyLisp::boolean_', '"#t"']);
         }
       }
       if (address0 === FAILURE) {
@@ -299,7 +299,7 @@
             this._expected = [];
           }
           if (this._offset === this._failure) {
-            this._expected.push('"#f"');
+            this._expected.push(['CanopyLisp::boolean_', '"#f"']);
           }
         }
         if (address0 === FAILURE) {
@@ -334,7 +334,7 @@
           this._expected = [];
         }
         if (this._offset === this._failure) {
-          this._expected.push('[1-9]');
+          this._expected.push(['CanopyLisp::integer', '[1-9]']);
         }
       }
       if (address1 !== FAILURE) {
@@ -356,7 +356,7 @@
               this._expected = [];
             }
             if (this._offset === this._failure) {
-              this._expected.push('[0-9]');
+              this._expected.push(['CanopyLisp::integer', '[0-9]']);
             }
           }
           if (address3 !== FAILURE) {
@@ -415,7 +415,7 @@
           this._expected = [];
         }
         if (this._offset === this._failure) {
-          this._expected.push('"\\""');
+          this._expected.push(['CanopyLisp::string', '"\\""']);
         }
       }
       if (address1 !== FAILURE) {
@@ -440,7 +440,7 @@
               this._expected = [];
             }
             if (this._offset === this._failure) {
-              this._expected.push('"\\\\"');
+              this._expected.push(['CanopyLisp::string', '"\\\\"']);
             }
           }
           if (address4 !== FAILURE) {
@@ -456,7 +456,7 @@
                 this._expected = [];
               }
               if (this._offset === this._failure) {
-                this._expected.push('<any char>');
+                this._expected.push(['CanopyLisp::string', '<any char>']);
               }
             }
             if (address5 !== FAILURE) {
@@ -491,7 +491,7 @@
                 this._expected = [];
               }
               if (this._offset === this._failure) {
-                this._expected.push('[^"]');
+                this._expected.push(['CanopyLisp::string', '[^"]']);
               }
             }
             if (address3 === FAILURE) {
@@ -527,7 +527,7 @@
               this._expected = [];
             }
             if (this._offset === this._failure) {
-              this._expected.push('"\\""');
+              this._expected.push(['CanopyLisp::string', '"\\""']);
             }
           }
           if (address6 !== FAILURE) {
@@ -588,7 +588,7 @@
               this._expected = [];
             }
             if (this._offset === this._failure) {
-              this._expected.push('<any char>');
+              this._expected.push(['CanopyLisp::symbol', '<any char>']);
             }
           }
           if (address3 !== FAILURE) {
@@ -645,7 +645,7 @@
           this._expected = [];
         }
         if (this._offset === this._failure) {
-          this._expected.push('[\\s]');
+          this._expected.push(['CanopyLisp::space', '[\\s]']);
         }
       }
       this._cache._space[index0] = [address0, this._offset];
@@ -675,7 +675,7 @@
           this._expected = [];
         }
         if (this._offset === this._failure) {
-          this._expected.push('"("');
+          this._expected.push(['CanopyLisp::paren', '"("']);
         }
       }
       if (address0 === FAILURE) {
@@ -694,7 +694,7 @@
             this._expected = [];
           }
           if (this._offset === this._failure) {
-            this._expected.push('")"');
+            this._expected.push(['CanopyLisp::paren', '")"']);
           }
         }
         if (address0 === FAILURE) {
@@ -745,7 +745,7 @@
     }
     if (this._expected.length === 0) {
       this._failure = this._offset;
-      this._expected.push('<EOF>');
+      this._expected.push(['CanopyLisp', '<EOF>']);
     }
     this.constructor.lastError = { offset: this._offset, expected: this._expected };
     throw new SyntaxError(formatError(this._input, this._failure, this._expected));
@@ -769,11 +769,18 @@
       position += lines[lineNo].length + 1;
       lineNo += 1;
     }
-    var message = 'Line ' + lineNo + ': expected ' + expected.join(', ') + '\n',
-        line = lines[lineNo - 1];
 
-    message += line + '\n';
-    position -= line.length + 1;
+    var line = lines[lineNo - 1],
+        message = 'Line ' + lineNo + ': expected one of:\n\n';
+
+    for (var i = 0; i < expected.length; i++) {
+      message += '    - ' + expected[i][1] + ' from ' + expected[i][0] + '\n';
+    }
+    var number = lineNo.toString();
+    while (number.length < 6) number = ' ' + number;
+    message += '\n' + number + ' | ' + line + '\n';
+
+    position -= line.length + 10;
 
     while (position < offset) {
       message += ' ';

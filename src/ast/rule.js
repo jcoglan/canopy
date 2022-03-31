@@ -11,9 +11,11 @@ class Rule {
   }
 
   compile (builder, address) {
-    builder.method_('_read_' + this.name, [], () => {
-      builder.cache_(this.name, (address) => {
-        this._expression.compile(builder, address)
+    builder.rule_(this.name, () => {
+      builder.method_('_read_' + this.name, [], () => {
+        builder.cache_(this.name, (address) => {
+          this._expression.compile(builder, address)
+        })
       })
     })
   }

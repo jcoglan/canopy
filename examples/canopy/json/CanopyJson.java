@@ -18,7 +18,7 @@ public class CanopyJson extends Grammar {
         this.offset = 0;
         this.cache = new EnumMap<Label, Map<Integer, CacheRecord>>(Label.class);
         this.failure = 0;
-        this.expected = new ArrayList<String>();
+        this.expected = new ArrayList<String[]>();
     }
 
     public static TreeNode parse(String input, Actions actions) throws ParseError {
@@ -30,17 +30,28 @@ public class CanopyJson extends Grammar {
         return parse(input, null);
     }
 
-    private static String formatError(String input, int offset, List<String> expected) {
+    private static String formatError(String input, int offset, List<String[]> expected) {
         String[] lines = input.split("\n");
         int lineNo = 0, position = 0;
+
         while (position <= offset) {
             position += lines[lineNo].length() + 1;
             lineNo += 1;
         }
-        String message = "Line " + lineNo + ": expected " + expected + "\n";
+
         String line = lines[lineNo - 1];
-        message += line + "\n";
-        position -= line.length() + 1;
+        String message = "Line " + lineNo + ": expected one of:\n\n";
+
+        for (String[] pair : expected) {
+            message += "    - " + pair[1] + " from " + pair[0] + "\n";
+        }
+
+        String number = "" + lineNo;
+        while (number.length() < 6) number = " " + number;
+        message += "\n" + number + " | " + line + "\n";
+
+        position -= line.length() + 10;
+
         while (position < offset) {
             message += " ";
             position += 1;
@@ -55,7 +66,7 @@ public class CanopyJson extends Grammar {
         }
         if (expected.isEmpty()) {
             failure = offset;
-            expected.add("<EOF>");
+            expected.add(new String[] { "CanopyJson", "<EOF>" });
         }
         throw new ParseError(formatError(input, failure, expected));
     }

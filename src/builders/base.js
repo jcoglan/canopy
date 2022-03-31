@@ -50,6 +50,11 @@ class Base {
 
   compileRegex_ (charClass, name) {}
 
+  rule_ (name, block) {
+    this._ruleName = name
+    block()
+  }
+
   assign_ (name, value) {
     this._line(name + ' = ' + value)
   }

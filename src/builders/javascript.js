@@ -53,11 +53,12 @@ class Builder extends Base {
   }
 
   parserClass_ (root) {
-    let namespace = this._grammarName.split('.'),
+    let grammar = this._quote(this._grammarName),
+        namespace = this._grammarName.split('.'),
         name = namespace.pop()
 
     this._newline()
-    this._template('javascript', 'parser.js', { root, namespace, name })
+    this._template('javascript', 'parser.js', { grammar, root, namespace, name })
   }
 
   class_ (name, parent, block) {
@@ -177,7 +178,9 @@ class Builder extends Base {
   }
 
   failure_ (address, expected) {
+    let rule = this._quote(this._grammarName + '::' + this._ruleName)
     expected = this._quote(expected)
+
     this.assign_(address, this.nullNode_())
 
     this.if_('this._offset > this._failure', () => {
@@ -185,7 +188,7 @@ class Builder extends Base {
       this.assign_('this._expected', '[]')
     })
     this.if_('this._offset === this._failure', () => {
-      this.append_('this._expected', expected)
+      this.append_('this._expected', '[' + rule + ', ' + expected + ']')
     })
   }
 

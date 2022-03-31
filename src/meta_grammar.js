@@ -337,7 +337,7 @@
           this._expected = [];
         }
         if (this._offset === this._failure) {
-          this._expected.push('`grammar`');
+          this._expected.push(['Canopy.MetaGrammar::grammar_name', '`grammar`']);
         }
       }
       if (address1 !== FAILURE) {
@@ -358,7 +358,7 @@
             this._expected = [];
           }
           if (this._offset === this._failure) {
-            this._expected.push('":"');
+            this._expected.push(['Canopy.MetaGrammar::grammar_name', '":"']);
           }
         }
         if (address2 === FAILURE) {
@@ -500,7 +500,7 @@
             this._expected = [];
           }
           if (this._offset === this._failure) {
-            this._expected.push('"<-"');
+            this._expected.push(['Canopy.MetaGrammar::assignment', '"<-"']);
           }
         }
         if (address3 !== FAILURE) {
@@ -568,7 +568,7 @@
           this._expected = [];
         }
         if (this._offset === this._failure) {
-          this._expected.push('[ \\t\\n\\r]');
+          this._expected.push(['Canopy.MetaGrammar::_', '[ \\t\\n\\r]']);
         }
       }
       if (address0 === FAILURE) {
@@ -606,7 +606,7 @@
           this._expected = [];
         }
         if (this._offset === this._failure) {
-          this._expected.push('"#"');
+          this._expected.push(['Canopy.MetaGrammar::comment', '"#"']);
         }
       }
       if (address1 !== FAILURE) {
@@ -628,7 +628,7 @@
               this._expected = [];
             }
             if (this._offset === this._failure) {
-              this._expected.push('[^\\n]');
+              this._expected.push(['Canopy.MetaGrammar::comment', '[^\\n]']);
             }
           }
           if (address3 !== FAILURE) {
@@ -695,7 +695,7 @@
               this._expected = [];
             }
             if (this._offset === this._failure) {
-              this._expected.push('"."');
+              this._expected.push(['Canopy.MetaGrammar::object_identifier', '"."']);
             }
           }
           if (address4 !== FAILURE) {
@@ -774,7 +774,7 @@
           this._expected = [];
         }
         if (this._offset === this._failure) {
-          this._expected.push('[a-zA-Z_]');
+          this._expected.push(['Canopy.MetaGrammar::identifier', '[a-zA-Z_]']);
         }
       }
       if (address1 !== FAILURE) {
@@ -796,7 +796,7 @@
               this._expected = [];
             }
             if (this._offset === this._failure) {
-              this._expected.push('[a-zA-Z0-9_]');
+              this._expected.push(['Canopy.MetaGrammar::identifier', '[a-zA-Z0-9_]']);
             }
           }
           if (address3 !== FAILURE) {
@@ -855,7 +855,7 @@
           this._expected = [];
         }
         if (this._offset === this._failure) {
-          this._expected.push('[1-9]');
+          this._expected.push(['Canopy.MetaGrammar::integer', '[1-9]']);
         }
       }
       if (address1 !== FAILURE) {
@@ -877,7 +877,7 @@
               this._expected = [];
             }
             if (this._offset === this._failure) {
-              this._expected.push('[0-9]');
+              this._expected.push(['Canopy.MetaGrammar::integer', '[0-9]']);
             }
           }
           if (address3 !== FAILURE) {
@@ -1095,7 +1095,7 @@
                 this._expected = [];
               }
               if (this._offset === this._failure) {
-                this._expected.push('"/"');
+                this._expected.push(['Canopy.MetaGrammar::choice', '"/"']);
               }
             }
             if (address6 !== FAILURE) {
@@ -1270,7 +1270,7 @@
                   this._expected = [];
                 }
                 if (this._offset === this._failure) {
-                  this._expected.push('"("');
+                  this._expected.push(['Canopy.MetaGrammar::actionable', '"("']);
                 }
               }
               if (address1 !== FAILURE) {
@@ -1330,7 +1330,7 @@
                           this._expected = [];
                         }
                         if (this._offset === this._failure) {
-                          this._expected.push('")"');
+                          this._expected.push(['Canopy.MetaGrammar::actionable', '")"']);
                         }
                       }
                       if (address7 !== FAILURE) {
@@ -1396,7 +1396,7 @@
           this._expected = [];
         }
         if (this._offset === this._failure) {
-          this._expected.push('"%"');
+          this._expected.push(['Canopy.MetaGrammar::action_tag', '"%"']);
         }
       }
       if (address1 !== FAILURE) {
@@ -1525,7 +1525,7 @@
           this._expected = [];
         }
         if (this._offset === this._failure) {
-          this._expected.push('"<"');
+          this._expected.push(['Canopy.MetaGrammar::type_tag', '"<"']);
         }
       }
       if (address1 !== FAILURE) {
@@ -1549,7 +1549,7 @@
               this._expected = [];
             }
             if (this._offset === this._failure) {
-              this._expected.push('">"');
+              this._expected.push(['Canopy.MetaGrammar::type_tag', '">"']);
             }
           }
           if (address3 !== FAILURE) {
@@ -1736,7 +1736,7 @@
           this._expected = [];
         }
         if (this._offset === this._failure) {
-          this._expected.push('"@"');
+          this._expected.push(['Canopy.MetaGrammar::mute', '"@"']);
         }
       }
       this._cache._mute[index0] = [address0, this._offset];
@@ -1771,7 +1771,7 @@
             this._expected = [];
           }
           if (this._offset === this._failure) {
-            this._expected.push('":"');
+            this._expected.push(['Canopy.MetaGrammar::label', '":"']);
           }
         }
         if (address2 !== FAILURE) {
@@ -1874,7 +1874,7 @@
           this._expected = [];
         }
         if (this._offset === this._failure) {
-          this._expected.push('"*"');
+          this._expected.push(['Canopy.MetaGrammar::quantifier', '"*"']);
         }
       }
       if (address0 === FAILURE) {
@@ -1893,7 +1893,7 @@
             this._expected = [];
           }
           if (this._offset === this._failure) {
-            this._expected.push('"+"');
+            this._expected.push(['Canopy.MetaGrammar::quantifier', '"+"']);
           }
         }
         if (address0 === FAILURE) {
@@ -1914,7 +1914,7 @@
               this._expected = [];
             }
             if (this._offset === this._failure) {
-              this._expected.push('"{"');
+              this._expected.push(['Canopy.MetaGrammar::quantifier', '"{"']);
             }
           }
           if (address1 !== FAILURE) {
@@ -1974,7 +1974,7 @@
                       this._expected = [];
                     }
                     if (this._offset === this._failure) {
-                      this._expected.push('"}"');
+                      this._expected.push(['Canopy.MetaGrammar::quantifier', '"}"']);
                     }
                   }
                   if (address7 !== FAILURE) {
@@ -2063,7 +2063,7 @@
               this._expected = [];
             }
             if (this._offset === this._failure) {
-              this._expected.push('","');
+              this._expected.push(['Canopy.MetaGrammar::numeric_quantifier', '","']);
             }
           }
           if (address5 !== FAILURE) {
@@ -2165,7 +2165,7 @@
           this._expected = [];
         }
         if (this._offset === this._failure) {
-          this._expected.push('"("');
+          this._expected.push(['Canopy.MetaGrammar::paren_expression', '"("']);
         }
       }
       if (address1 !== FAILURE) {
@@ -2225,7 +2225,7 @@
                   this._expected = [];
                 }
                 if (this._offset === this._failure) {
-                  this._expected.push('")"');
+                  this._expected.push(['Canopy.MetaGrammar::paren_expression', '")"']);
                 }
               }
               if (address7 !== FAILURE) {
@@ -2285,7 +2285,7 @@
           this._expected = [];
         }
         if (this._offset === this._failure) {
-          this._expected.push('"&"');
+          this._expected.push(['Canopy.MetaGrammar::predicated_atom', '"&"']);
         }
       }
       if (address1 === FAILURE) {
@@ -2304,7 +2304,7 @@
             this._expected = [];
           }
           if (this._offset === this._failure) {
-            this._expected.push('"!"');
+            this._expected.push(['Canopy.MetaGrammar::predicated_atom', '"!"']);
           }
         }
         if (address1 === FAILURE) {
@@ -2403,7 +2403,7 @@
               this._expected = [];
             }
             if (this._offset === this._failure) {
-              this._expected.push('"?"');
+              this._expected.push(['Canopy.MetaGrammar::maybe_atom', '"?"']);
             }
           }
           if (address4 !== FAILURE) {
@@ -2498,7 +2498,7 @@
           this._expected = [];
         }
         if (this._offset === this._failure) {
-          this._expected.push('\'"\'');
+          this._expected.push(['Canopy.MetaGrammar::literal_string', '\'"\'']);
         }
       }
       if (address1 !== FAILURE) {
@@ -2523,7 +2523,7 @@
               this._expected = [];
             }
             if (this._offset === this._failure) {
-              this._expected.push('"\\\\"');
+              this._expected.push(['Canopy.MetaGrammar::literal_string', '"\\\\"']);
             }
           }
           if (address4 !== FAILURE) {
@@ -2539,7 +2539,7 @@
                 this._expected = [];
               }
               if (this._offset === this._failure) {
-                this._expected.push('<any char>');
+                this._expected.push(['Canopy.MetaGrammar::literal_string', '<any char>']);
               }
             }
             if (address5 !== FAILURE) {
@@ -2574,7 +2574,7 @@
                 this._expected = [];
               }
               if (this._offset === this._failure) {
-                this._expected.push('[^"]');
+                this._expected.push(['Canopy.MetaGrammar::literal_string', '[^"]']);
               }
             }
             if (address3 === FAILURE) {
@@ -2610,7 +2610,7 @@
               this._expected = [];
             }
             if (this._offset === this._failure) {
-              this._expected.push('\'"\'');
+              this._expected.push(['Canopy.MetaGrammar::literal_string', '\'"\'']);
             }
           }
           if (address6 !== FAILURE) {
@@ -2651,7 +2651,7 @@
             this._expected = [];
           }
           if (this._offset === this._failure) {
-            this._expected.push('"\'"');
+            this._expected.push(['Canopy.MetaGrammar::literal_string', '"\'"']);
           }
         }
         if (address7 !== FAILURE) {
@@ -2676,7 +2676,7 @@
                 this._expected = [];
               }
               if (this._offset === this._failure) {
-                this._expected.push('"\\\\"');
+                this._expected.push(['Canopy.MetaGrammar::literal_string', '"\\\\"']);
               }
             }
             if (address10 !== FAILURE) {
@@ -2692,7 +2692,7 @@
                   this._expected = [];
                 }
                 if (this._offset === this._failure) {
-                  this._expected.push('<any char>');
+                  this._expected.push(['Canopy.MetaGrammar::literal_string', '<any char>']);
                 }
               }
               if (address11 !== FAILURE) {
@@ -2727,7 +2727,7 @@
                   this._expected = [];
                 }
                 if (this._offset === this._failure) {
-                  this._expected.push('[^\']');
+                  this._expected.push(['Canopy.MetaGrammar::literal_string', '[^\']']);
                 }
               }
               if (address9 === FAILURE) {
@@ -2763,7 +2763,7 @@
                 this._expected = [];
               }
               if (this._offset === this._failure) {
-                this._expected.push('"\'"');
+                this._expected.push(['Canopy.MetaGrammar::literal_string', '"\'"']);
               }
             }
             if (address12 !== FAILURE) {
@@ -2818,7 +2818,7 @@
           this._expected = [];
         }
         if (this._offset === this._failure) {
-          this._expected.push('"`"');
+          this._expected.push(['Canopy.MetaGrammar::ci_string', '"`"']);
         }
       }
       if (address1 !== FAILURE) {
@@ -2843,7 +2843,7 @@
               this._expected = [];
             }
             if (this._offset === this._failure) {
-              this._expected.push('"\\\\"');
+              this._expected.push(['Canopy.MetaGrammar::ci_string', '"\\\\"']);
             }
           }
           if (address4 !== FAILURE) {
@@ -2859,7 +2859,7 @@
                 this._expected = [];
               }
               if (this._offset === this._failure) {
-                this._expected.push('<any char>');
+                this._expected.push(['Canopy.MetaGrammar::ci_string', '<any char>']);
               }
             }
             if (address5 !== FAILURE) {
@@ -2894,7 +2894,7 @@
                 this._expected = [];
               }
               if (this._offset === this._failure) {
-                this._expected.push('[^`]');
+                this._expected.push(['Canopy.MetaGrammar::ci_string', '[^`]']);
               }
             }
             if (address3 === FAILURE) {
@@ -2930,7 +2930,7 @@
               this._expected = [];
             }
             if (this._offset === this._failure) {
-              this._expected.push('"`"');
+              this._expected.push(['Canopy.MetaGrammar::ci_string', '"`"']);
             }
           }
           if (address6 !== FAILURE) {
@@ -2981,7 +2981,7 @@
           this._expected = [];
         }
         if (this._offset === this._failure) {
-          this._expected.push('"["');
+          this._expected.push(['Canopy.MetaGrammar::char_class', '"["']);
         }
       }
       if (address1 !== FAILURE) {
@@ -3002,7 +3002,7 @@
             this._expected = [];
           }
           if (this._offset === this._failure) {
-            this._expected.push('"^"');
+            this._expected.push(['Canopy.MetaGrammar::char_class', '"^"']);
           }
         }
         if (address2 === FAILURE) {
@@ -3031,7 +3031,7 @@
                 this._expected = [];
               }
               if (this._offset === this._failure) {
-                this._expected.push('"\\\\"');
+                this._expected.push(['Canopy.MetaGrammar::char_class', '"\\\\"']);
               }
             }
             if (address5 !== FAILURE) {
@@ -3047,7 +3047,7 @@
                   this._expected = [];
                 }
                 if (this._offset === this._failure) {
-                  this._expected.push('<any char>');
+                  this._expected.push(['Canopy.MetaGrammar::char_class', '<any char>']);
                 }
               }
               if (address6 !== FAILURE) {
@@ -3082,7 +3082,7 @@
                   this._expected = [];
                 }
                 if (this._offset === this._failure) {
-                  this._expected.push('[^\\]]');
+                  this._expected.push(['Canopy.MetaGrammar::char_class', '[^\\]]']);
                 }
               }
               if (address4 === FAILURE) {
@@ -3118,7 +3118,7 @@
                 this._expected = [];
               }
               if (this._offset === this._failure) {
-                this._expected.push('"]"');
+                this._expected.push(['Canopy.MetaGrammar::char_class', '"]"']);
               }
             }
             if (address7 !== FAILURE) {
@@ -3171,7 +3171,7 @@
           this._expected = [];
         }
         if (this._offset === this._failure) {
-          this._expected.push('"."');
+          this._expected.push(['Canopy.MetaGrammar::any_char', '"."']);
         }
       }
       this._cache._any_char[index0] = [address0, this._offset];
@@ -3197,7 +3197,7 @@
     }
     if (this._expected.length === 0) {
       this._failure = this._offset;
-      this._expected.push('<EOF>');
+      this._expected.push(['Canopy.MetaGrammar', '<EOF>']);
     }
     this.constructor.lastError = { offset: this._offset, expected: this._expected };
     throw new SyntaxError(formatError(this._input, this._failure, this._expected));
@@ -3221,11 +3221,18 @@
       position += lines[lineNo].length + 1;
       lineNo += 1;
     }
-    var message = 'Line ' + lineNo + ': expected ' + expected.join(', ') + '\n',
-        line = lines[lineNo - 1];
 
-    message += line + '\n';
-    position -= line.length + 1;
+    var line = lines[lineNo - 1],
+        message = 'Line ' + lineNo + ': expected one of:\n\n';
+
+    for (var i = 0; i < expected.length; i++) {
+      message += '    - ' + expected[i][1] + ' from ' + expected[i][0] + '\n';
+    }
+    var number = lineNo.toString();
+    while (number.length < 6) number = ' ' + number;
+    message += '\n' + number + ' | ' + line + '\n';
+
+    position -= line.length + 10;
 
     while (position < offset) {
       message += ' ';

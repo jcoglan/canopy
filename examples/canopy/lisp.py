@@ -142,7 +142,7 @@ class Grammar(object):
                 self._failure = self._offset
                 self._expected = []
             if self._offset == self._failure:
-                self._expected.append('"("')
+                self._expected.append(('CanopyLisp::list', '"("'))
         if address1 is not FAILURE:
             elements0.append(address1)
             address2 = FAILURE
@@ -173,7 +173,7 @@ class Grammar(object):
                         self._failure = self._offset
                         self._expected = []
                     if self._offset == self._failure:
-                        self._expected.append('")"')
+                        self._expected.append(('CanopyLisp::list', '")"'))
                 if address4 is not FAILURE:
                     elements0.append(address4)
                 else:
@@ -234,7 +234,7 @@ class Grammar(object):
                 self._failure = self._offset
                 self._expected = []
             if self._offset == self._failure:
-                self._expected.append('"#t"')
+                self._expected.append(('CanopyLisp::boolean_', '"#t"'))
         if address0 is FAILURE:
             self._offset = index1
             chunk1, max1 = None, self._offset + 2
@@ -249,7 +249,7 @@ class Grammar(object):
                     self._failure = self._offset
                     self._expected = []
                 if self._offset == self._failure:
-                    self._expected.append('"#f"')
+                    self._expected.append(('CanopyLisp::boolean_', '"#f"'))
             if address0 is FAILURE:
                 self._offset = index1
         self._cache['boolean_'][index0] = (address0, self._offset)
@@ -275,7 +275,7 @@ class Grammar(object):
                 self._failure = self._offset
                 self._expected = []
             if self._offset == self._failure:
-                self._expected.append('[1-9]')
+                self._expected.append(('CanopyLisp::integer', '[1-9]'))
         if address1 is not FAILURE:
             elements0.append(address1)
             address2 = FAILURE
@@ -293,7 +293,7 @@ class Grammar(object):
                         self._failure = self._offset
                         self._expected = []
                     if self._offset == self._failure:
-                        self._expected.append('[0-9]')
+                        self._expected.append(('CanopyLisp::integer', '[0-9]'))
                 if address3 is not FAILURE:
                     elements1.append(address3)
                 else:
@@ -339,7 +339,7 @@ class Grammar(object):
                 self._failure = self._offset
                 self._expected = []
             if self._offset == self._failure:
-                self._expected.append('"\\""')
+                self._expected.append(('CanopyLisp::string', '"\\""'))
         if address1 is not FAILURE:
             elements0.append(address1)
             address2 = FAILURE
@@ -360,7 +360,7 @@ class Grammar(object):
                         self._failure = self._offset
                         self._expected = []
                     if self._offset == self._failure:
-                        self._expected.append('"\\\\"')
+                        self._expected.append(('CanopyLisp::string', '"\\\\"'))
                 if address4 is not FAILURE:
                     elements2.append(address4)
                     address5 = FAILURE
@@ -373,7 +373,7 @@ class Grammar(object):
                             self._failure = self._offset
                             self._expected = []
                         if self._offset == self._failure:
-                            self._expected.append('<any char>')
+                            self._expected.append(('CanopyLisp::string', '<any char>'))
                     if address5 is not FAILURE:
                         elements2.append(address5)
                     else:
@@ -401,7 +401,7 @@ class Grammar(object):
                             self._failure = self._offset
                             self._expected = []
                         if self._offset == self._failure:
-                            self._expected.append('[^"]')
+                            self._expected.append(('CanopyLisp::string', '[^"]'))
                     if address3 is FAILURE:
                         self._offset = index3
                 if address3 is not FAILURE:
@@ -428,7 +428,7 @@ class Grammar(object):
                         self._failure = self._offset
                         self._expected = []
                     if self._offset == self._failure:
-                        self._expected.append('"\\""')
+                        self._expected.append(('CanopyLisp::string', '"\\""'))
                 if address6 is not FAILURE:
                     elements0.append(address6)
                 else:
@@ -478,7 +478,7 @@ class Grammar(object):
                         self._failure = self._offset
                         self._expected = []
                     if self._offset == self._failure:
-                        self._expected.append('<any char>')
+                        self._expected.append(('CanopyLisp::symbol', '<any char>'))
                 if address3 is not FAILURE:
                     elements1.append(address3)
                 else:
@@ -522,7 +522,7 @@ class Grammar(object):
                 self._failure = self._offset
                 self._expected = []
             if self._offset == self._failure:
-                self._expected.append('[\\s]')
+                self._expected.append(('CanopyLisp::space', '[\\s]'))
         self._cache['space'][index0] = (address0, self._offset)
         return address0
 
@@ -545,7 +545,7 @@ class Grammar(object):
                 self._failure = self._offset
                 self._expected = []
             if self._offset == self._failure:
-                self._expected.append('"("')
+                self._expected.append(('CanopyLisp::paren', '"("'))
         if address0 is FAILURE:
             self._offset = index1
             chunk1, max1 = None, self._offset + 1
@@ -560,7 +560,7 @@ class Grammar(object):
                     self._failure = self._offset
                     self._expected = []
                 if self._offset == self._failure:
-                    self._expected.append('")"')
+                    self._expected.append(('CanopyLisp::paren', '")"'))
             if address0 is FAILURE:
                 self._offset = index1
         self._cache['paren'][index0] = (address0, self._offset)
@@ -600,7 +600,7 @@ class Parser(Grammar):
             return tree
         if not self._expected:
             self._failure = self._offset
-            self._expected.append('<EOF>')
+            self._expected.append(('CanopyLisp', '<EOF>'))
         raise ParseError(format_error(self._input, self._failure, self._expected))
 
 
@@ -613,12 +613,23 @@ def parse(input, actions=None, types=None):
     return parser.parse()
 
 def format_error(input, offset, expected):
-    lines, line_no, position = input.split('\n'), 0, 0
+    lines = input.split('\n')
+    line_no, position = 0, 0
+
     while position <= offset:
         position += len(lines[line_no]) + 1
         line_no += 1
-    message, line = 'Line ' + str(line_no) + ': expected ' + ', '.join(expected) + '\n', lines[line_no - 1]
-    message += line + '\n'
-    position -= len(line) + 1
-    message += ' ' * (offset - position)
+
+    line = lines[line_no - 1]
+    message = 'Line ' + str(line_no) + ': expected one of:\n\n'
+
+    for pair in expected:
+        message += '    - ' + pair[1] + ' from ' + pair[0] + '\n'
+
+    number = str(line_no)
+    while len(number) < 6:
+        number = ' ' + number
+
+    message += '\n' + number + ' | ' + line + '\n'
+    message += ' ' * (len(line) + 10 + offset - position)
     return message + '^'

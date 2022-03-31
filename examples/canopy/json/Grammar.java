@@ -16,7 +16,7 @@ abstract class Grammar {
 
     int inputSize, offset, failure;
     String input;
-    List<String> expected;
+    List<String[]> expected;
     Map<Label, Map<Integer, CacheRecord>> cache;
     Actions actions;
 
@@ -112,10 +112,10 @@ abstract class Grammar {
                 address1 = FAILURE;
                 if (offset > failure) {
                     failure = offset;
-                    expected = new ArrayList<String>();
+                    expected = new ArrayList<String[]>();
                 }
                 if (offset == failure) {
-                    expected.add("\"{\"");
+                    expected.add(new String[] { "CanopyJson::object", "\"{\"" });
                 }
             }
             if (address1 != FAILURE) {
@@ -144,10 +144,10 @@ abstract class Grammar {
                             address5 = FAILURE;
                             if (offset > failure) {
                                 failure = offset;
-                                expected = new ArrayList<String>();
+                                expected = new ArrayList<String[]>();
                             }
                             if (offset == failure) {
-                                expected.add("\",\"");
+                                expected.add(new String[] { "CanopyJson::object", "\",\"" });
                             }
                         }
                         if (address5 != FAILURE) {
@@ -197,10 +197,10 @@ abstract class Grammar {
                             address7 = FAILURE;
                             if (offset > failure) {
                                 failure = offset;
-                                expected = new ArrayList<String>();
+                                expected = new ArrayList<String[]>();
                             }
                             if (offset == failure) {
-                                expected.add("\"}\"");
+                                expected.add(new String[] { "CanopyJson::object", "\"}\"" });
                             }
                         }
                         if (address7 != FAILURE) {
@@ -244,10 +244,10 @@ abstract class Grammar {
                     address8 = FAILURE;
                     if (offset > failure) {
                         failure = offset;
-                        expected = new ArrayList<String>();
+                        expected = new ArrayList<String[]>();
                     }
                     if (offset == failure) {
-                        expected.add("\"{\"");
+                        expected.add(new String[] { "CanopyJson::object", "\"{\"" });
                     }
                 }
                 if (address8 != FAILURE) {
@@ -269,10 +269,10 @@ abstract class Grammar {
                             address10 = FAILURE;
                             if (offset > failure) {
                                 failure = offset;
-                                expected = new ArrayList<String>();
+                                expected = new ArrayList<String[]>();
                             }
                             if (offset == failure) {
-                                expected.add("\"}\"");
+                                expected.add(new String[] { "CanopyJson::object", "\"}\"" });
                             }
                         }
                         if (address10 != FAILURE) {
@@ -343,10 +343,10 @@ abstract class Grammar {
                             address4 = FAILURE;
                             if (offset > failure) {
                                 failure = offset;
-                                expected = new ArrayList<String>();
+                                expected = new ArrayList<String[]>();
                             }
                             if (offset == failure) {
-                                expected.add("\":\"");
+                                expected.add(new String[] { "CanopyJson::pair", "\":\"" });
                             }
                         }
                         if (address4 != FAILURE) {
@@ -414,10 +414,10 @@ abstract class Grammar {
                 address1 = FAILURE;
                 if (offset > failure) {
                     failure = offset;
-                    expected = new ArrayList<String>();
+                    expected = new ArrayList<String[]>();
                 }
                 if (offset == failure) {
-                    expected.add("\"[\"");
+                    expected.add(new String[] { "CanopyJson::array", "\"[\"" });
                 }
             }
             if (address1 != FAILURE) {
@@ -446,10 +446,10 @@ abstract class Grammar {
                             address5 = FAILURE;
                             if (offset > failure) {
                                 failure = offset;
-                                expected = new ArrayList<String>();
+                                expected = new ArrayList<String[]>();
                             }
                             if (offset == failure) {
-                                expected.add("\",\"");
+                                expected.add(new String[] { "CanopyJson::array", "\",\"" });
                             }
                         }
                         if (address5 != FAILURE) {
@@ -499,10 +499,10 @@ abstract class Grammar {
                             address7 = FAILURE;
                             if (offset > failure) {
                                 failure = offset;
-                                expected = new ArrayList<String>();
+                                expected = new ArrayList<String[]>();
                             }
                             if (offset == failure) {
-                                expected.add("\"]\"");
+                                expected.add(new String[] { "CanopyJson::array", "\"]\"" });
                             }
                         }
                         if (address7 != FAILURE) {
@@ -546,10 +546,10 @@ abstract class Grammar {
                     address8 = FAILURE;
                     if (offset > failure) {
                         failure = offset;
-                        expected = new ArrayList<String>();
+                        expected = new ArrayList<String[]>();
                     }
                     if (offset == failure) {
-                        expected.add("\"[\"");
+                        expected.add(new String[] { "CanopyJson::array", "\"[\"" });
                     }
                 }
                 if (address8 != FAILURE) {
@@ -571,10 +571,10 @@ abstract class Grammar {
                             address10 = FAILURE;
                             if (offset > failure) {
                                 failure = offset;
-                                expected = new ArrayList<String>();
+                                expected = new ArrayList<String[]>();
                             }
                             if (offset == failure) {
-                                expected.add("\"]\"");
+                                expected.add(new String[] { "CanopyJson::array", "\"]\"" });
                             }
                         }
                         if (address10 != FAILURE) {
@@ -706,10 +706,10 @@ abstract class Grammar {
                 address1 = FAILURE;
                 if (offset > failure) {
                     failure = offset;
-                    expected = new ArrayList<String>();
+                    expected = new ArrayList<String[]>();
                 }
                 if (offset == failure) {
-                    expected.add("'\"'");
+                    expected.add(new String[] { "CanopyJson::string", "'\"'" });
                 }
             }
             if (address1 != FAILURE) {
@@ -735,10 +735,10 @@ abstract class Grammar {
                         address4 = FAILURE;
                         if (offset > failure) {
                             failure = offset;
-                            expected = new ArrayList<String>();
+                            expected = new ArrayList<String[]>();
                         }
                         if (offset == failure) {
-                            expected.add("\"\\\\\"");
+                            expected.add(new String[] { "CanopyJson::string", "\"\\\\\"" });
                         }
                     }
                     if (address4 != FAILURE) {
@@ -751,10 +751,10 @@ abstract class Grammar {
                             address5 = FAILURE;
                             if (offset > failure) {
                                 failure = offset;
-                                expected = new ArrayList<String>();
+                                expected = new ArrayList<String[]>();
                             }
                             if (offset == failure) {
-                                expected.add("<any char>");
+                                expected.add(new String[] { "CanopyJson::string", "<any char>" });
                             }
                         }
                         if (address5 != FAILURE) {
@@ -787,10 +787,10 @@ abstract class Grammar {
                             address3 = FAILURE;
                             if (offset > failure) {
                                 failure = offset;
-                                expected = new ArrayList<String>();
+                                expected = new ArrayList<String[]>();
                             }
                             if (offset == failure) {
-                                expected.add("[^\"]");
+                                expected.add(new String[] { "CanopyJson::string", "[^\"]" });
                             }
                         }
                         if (address3 == FAILURE) {
@@ -824,10 +824,10 @@ abstract class Grammar {
                         address6 = FAILURE;
                         if (offset > failure) {
                             failure = offset;
-                            expected = new ArrayList<String>();
+                            expected = new ArrayList<String[]>();
                         }
                         if (offset == failure) {
-                            expected.add("'\"'");
+                            expected.add(new String[] { "CanopyJson::string", "'\"'" });
                         }
                     }
                     if (address6 != FAILURE) {
@@ -883,10 +883,10 @@ abstract class Grammar {
                 address1 = FAILURE;
                 if (offset > failure) {
                     failure = offset;
-                    expected = new ArrayList<String>();
+                    expected = new ArrayList<String[]>();
                 }
                 if (offset == failure) {
-                    expected.add("\"-\"");
+                    expected.add(new String[] { "CanopyJson::number", "\"-\"" });
                 }
             }
             if (address1 == FAILURE) {
@@ -909,10 +909,10 @@ abstract class Grammar {
                     address2 = FAILURE;
                     if (offset > failure) {
                         failure = offset;
-                        expected = new ArrayList<String>();
+                        expected = new ArrayList<String[]>();
                     }
                     if (offset == failure) {
-                        expected.add("\"0\"");
+                        expected.add(new String[] { "CanopyJson::number", "\"0\"" });
                     }
                 }
                 if (address2 == FAILURE) {
@@ -932,10 +932,10 @@ abstract class Grammar {
                         address3 = FAILURE;
                         if (offset > failure) {
                             failure = offset;
-                            expected = new ArrayList<String>();
+                            expected = new ArrayList<String[]>();
                         }
                         if (offset == failure) {
-                            expected.add("[1-9]");
+                            expected.add(new String[] { "CanopyJson::number", "[1-9]" });
                         }
                     }
                     if (address3 != FAILURE) {
@@ -957,10 +957,10 @@ abstract class Grammar {
                                 address5 = FAILURE;
                                 if (offset > failure) {
                                     failure = offset;
-                                    expected = new ArrayList<String>();
+                                    expected = new ArrayList<String[]>();
                                 }
                                 if (offset == failure) {
-                                    expected.add("[0-9]");
+                                    expected.add(new String[] { "CanopyJson::number", "[0-9]" });
                                 }
                             }
                             if (address5 != FAILURE) {
@@ -1014,10 +1014,10 @@ abstract class Grammar {
                         address7 = FAILURE;
                         if (offset > failure) {
                             failure = offset;
-                            expected = new ArrayList<String>();
+                            expected = new ArrayList<String[]>();
                         }
                         if (offset == failure) {
-                            expected.add("\".\"");
+                            expected.add(new String[] { "CanopyJson::number", "\".\"" });
                         }
                     }
                     if (address7 != FAILURE) {
@@ -1039,10 +1039,10 @@ abstract class Grammar {
                                 address9 = FAILURE;
                                 if (offset > failure) {
                                     failure = offset;
-                                    expected = new ArrayList<String>();
+                                    expected = new ArrayList<String[]>();
                                 }
                                 if (offset == failure) {
-                                    expected.add("[0-9]");
+                                    expected.add(new String[] { "CanopyJson::number", "[0-9]" });
                                 }
                             }
                             if (address9 != FAILURE) {
@@ -1097,10 +1097,10 @@ abstract class Grammar {
                             address11 = FAILURE;
                             if (offset > failure) {
                                 failure = offset;
-                                expected = new ArrayList<String>();
+                                expected = new ArrayList<String[]>();
                             }
                             if (offset == failure) {
-                                expected.add("\"e\"");
+                                expected.add(new String[] { "CanopyJson::number", "\"e\"" });
                             }
                         }
                         if (address11 == FAILURE) {
@@ -1117,10 +1117,10 @@ abstract class Grammar {
                                 address11 = FAILURE;
                                 if (offset > failure) {
                                     failure = offset;
-                                    expected = new ArrayList<String>();
+                                    expected = new ArrayList<String[]>();
                                 }
                                 if (offset == failure) {
-                                    expected.add("\"E\"");
+                                    expected.add(new String[] { "CanopyJson::number", "\"E\"" });
                                 }
                             }
                             if (address11 == FAILURE) {
@@ -1143,10 +1143,10 @@ abstract class Grammar {
                                 address12 = FAILURE;
                                 if (offset > failure) {
                                     failure = offset;
-                                    expected = new ArrayList<String>();
+                                    expected = new ArrayList<String[]>();
                                 }
                                 if (offset == failure) {
-                                    expected.add("\"+\"");
+                                    expected.add(new String[] { "CanopyJson::number", "\"+\"" });
                                 }
                             }
                             if (address12 == FAILURE) {
@@ -1163,10 +1163,10 @@ abstract class Grammar {
                                     address12 = FAILURE;
                                     if (offset > failure) {
                                         failure = offset;
-                                        expected = new ArrayList<String>();
+                                        expected = new ArrayList<String[]>();
                                     }
                                     if (offset == failure) {
-                                        expected.add("\"-\"");
+                                        expected.add(new String[] { "CanopyJson::number", "\"-\"" });
                                     }
                                 }
                                 if (address12 == FAILURE) {
@@ -1183,10 +1183,10 @@ abstract class Grammar {
                                         address12 = FAILURE;
                                         if (offset > failure) {
                                             failure = offset;
-                                            expected = new ArrayList<String>();
+                                            expected = new ArrayList<String[]>();
                                         }
                                         if (offset == failure) {
-                                            expected.add("\"\"");
+                                            expected.add(new String[] { "CanopyJson::number", "\"\"" });
                                         }
                                     }
                                     if (address12 == FAILURE) {
@@ -1213,10 +1213,10 @@ abstract class Grammar {
                                         address14 = FAILURE;
                                         if (offset > failure) {
                                             failure = offset;
-                                            expected = new ArrayList<String>();
+                                            expected = new ArrayList<String[]>();
                                         }
                                         if (offset == failure) {
-                                            expected.add("[0-9]");
+                                            expected.add(new String[] { "CanopyJson::number", "[0-9]" });
                                         }
                                     }
                                     if (address14 != FAILURE) {
@@ -1309,10 +1309,10 @@ abstract class Grammar {
                 address0 = FAILURE;
                 if (offset > failure) {
                     failure = offset;
-                    expected = new ArrayList<String>();
+                    expected = new ArrayList<String[]>();
                 }
                 if (offset == failure) {
-                    expected.add("\"true\"");
+                    expected.add(new String[] { "CanopyJson::boolean_", "\"true\"" });
                 }
             }
             if (address0 == FAILURE) {
@@ -1329,10 +1329,10 @@ abstract class Grammar {
                     address0 = FAILURE;
                     if (offset > failure) {
                         failure = offset;
-                        expected = new ArrayList<String>();
+                        expected = new ArrayList<String[]>();
                     }
                     if (offset == failure) {
-                        expected.add("\"false\"");
+                        expected.add(new String[] { "CanopyJson::boolean_", "\"false\"" });
                     }
                 }
                 if (address0 == FAILURE) {
@@ -1368,10 +1368,10 @@ abstract class Grammar {
                 address0 = FAILURE;
                 if (offset > failure) {
                     failure = offset;
-                    expected = new ArrayList<String>();
+                    expected = new ArrayList<String[]>();
                 }
                 if (offset == failure) {
-                    expected.add("\"null\"");
+                    expected.add(new String[] { "CanopyJson::null_", "\"null\"" });
                 }
             }
             rule.put(index0, new CacheRecord(address0, offset));
@@ -1407,10 +1407,10 @@ abstract class Grammar {
                     address1 = FAILURE;
                     if (offset > failure) {
                         failure = offset;
-                        expected = new ArrayList<String>();
+                        expected = new ArrayList<String[]>();
                     }
                     if (offset == failure) {
-                        expected.add("[\\s]");
+                        expected.add(new String[] { "CanopyJson::__", "[\\s]" });
                     }
                 }
                 if (address1 != FAILURE) {

@@ -45,7 +45,7 @@ class Builder extends Base {
   }
 
   package_ (name, actions, block) {
-    this._grammarName = name.replace(/\./g, '')
+    this._grammarName = name
 
     this._newBuffer('java', 'Actions')
     this._template('java', 'Actions.java', { actions })
@@ -82,7 +82,7 @@ class Builder extends Base {
 
       this._line('int inputSize, offset, failure')
       this._line('String input')
-      this._line('List<String> expected')
+      this._line('List<String[]> expected')
       this._line('Map<Label, Map<Integer, CacheRecord>> cache')
       this._line('Actions actions')
       this._newline()
@@ -103,8 +103,10 @@ class Builder extends Base {
     this._newBuffer('java', 'ParseError')
     this._template('java', 'ParseError.java')
 
-    this._newBuffer('java', this._grammarName)
-    this._template('java', 'Parser.java', { root, name: this._grammarName })
+    let grammar = this._quote(this._grammarName)
+    let name = this._grammarName.replace(/\./g, '')
+    this._newBuffer('java', name)
+    this._template('java', 'Parser.java', { grammar, root, name })
 
     let labels = Object.keys(this._labels).sort()
 
@@ -222,15 +224,17 @@ class Builder extends Base {
   }
 
   failure_ (address, expected) {
+    let rule = this._quote(this._grammarName + '::' + this._ruleName)
     expected = this._quote(expected)
+
     this.assign_(address, this.nullNode_())
 
     this.if_('offset > failure', () => {
       this.assign_('failure', 'offset')
-      this.assign_('expected', 'new ArrayList<String>()')
+      this.assign_('expected', 'new ArrayList<String[]>()')
     })
     this.if_('offset == failure', () => {
-      this.append_('expected', expected)
+      this.append_('expected', 'new String[] { ' + rule + ', ' + expected + ' }')
     })
   }
 

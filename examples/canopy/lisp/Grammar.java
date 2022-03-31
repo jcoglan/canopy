@@ -16,7 +16,7 @@ abstract class Grammar {
 
     int inputSize, offset, failure;
     String input;
-    List<String> expected;
+    List<String[]> expected;
     Map<Label, Map<Integer, CacheRecord>> cache;
     Actions actions;
 
@@ -175,10 +175,10 @@ abstract class Grammar {
                 address1 = FAILURE;
                 if (offset > failure) {
                     failure = offset;
-                    expected = new ArrayList<String>();
+                    expected = new ArrayList<String[]>();
                 }
                 if (offset == failure) {
-                    expected.add("\"(\"");
+                    expected.add(new String[] { "CanopyLisp::list", "\"(\"" });
                 }
             }
             if (address1 != FAILURE) {
@@ -216,10 +216,10 @@ abstract class Grammar {
                         address4 = FAILURE;
                         if (offset > failure) {
                             failure = offset;
-                            expected = new ArrayList<String>();
+                            expected = new ArrayList<String[]>();
                         }
                         if (offset == failure) {
-                            expected.add("\")\"");
+                            expected.add(new String[] { "CanopyLisp::list", "\")\"" });
                         }
                     }
                     if (address4 != FAILURE) {
@@ -306,10 +306,10 @@ abstract class Grammar {
                 address0 = FAILURE;
                 if (offset > failure) {
                     failure = offset;
-                    expected = new ArrayList<String>();
+                    expected = new ArrayList<String[]>();
                 }
                 if (offset == failure) {
-                    expected.add("\"#t\"");
+                    expected.add(new String[] { "CanopyLisp::boolean_", "\"#t\"" });
                 }
             }
             if (address0 == FAILURE) {
@@ -326,10 +326,10 @@ abstract class Grammar {
                     address0 = FAILURE;
                     if (offset > failure) {
                         failure = offset;
-                        expected = new ArrayList<String>();
+                        expected = new ArrayList<String[]>();
                     }
                     if (offset == failure) {
-                        expected.add("\"#f\"");
+                        expected.add(new String[] { "CanopyLisp::boolean_", "\"#f\"" });
                     }
                 }
                 if (address0 == FAILURE) {
@@ -368,10 +368,10 @@ abstract class Grammar {
                 address1 = FAILURE;
                 if (offset > failure) {
                     failure = offset;
-                    expected = new ArrayList<String>();
+                    expected = new ArrayList<String[]>();
                 }
                 if (offset == failure) {
-                    expected.add("[1-9]");
+                    expected.add(new String[] { "CanopyLisp::integer", "[1-9]" });
                 }
             }
             if (address1 != FAILURE) {
@@ -393,10 +393,10 @@ abstract class Grammar {
                         address3 = FAILURE;
                         if (offset > failure) {
                             failure = offset;
-                            expected = new ArrayList<String>();
+                            expected = new ArrayList<String[]>();
                         }
                         if (offset == failure) {
-                            expected.add("[0-9]");
+                            expected.add(new String[] { "CanopyLisp::integer", "[0-9]" });
                         }
                     }
                     if (address3 != FAILURE) {
@@ -459,10 +459,10 @@ abstract class Grammar {
                 address1 = FAILURE;
                 if (offset > failure) {
                     failure = offset;
-                    expected = new ArrayList<String>();
+                    expected = new ArrayList<String[]>();
                 }
                 if (offset == failure) {
-                    expected.add("\"\\\"\"");
+                    expected.add(new String[] { "CanopyLisp::string", "\"\\\"\"" });
                 }
             }
             if (address1 != FAILURE) {
@@ -488,10 +488,10 @@ abstract class Grammar {
                         address4 = FAILURE;
                         if (offset > failure) {
                             failure = offset;
-                            expected = new ArrayList<String>();
+                            expected = new ArrayList<String[]>();
                         }
                         if (offset == failure) {
-                            expected.add("\"\\\\\"");
+                            expected.add(new String[] { "CanopyLisp::string", "\"\\\\\"" });
                         }
                     }
                     if (address4 != FAILURE) {
@@ -504,10 +504,10 @@ abstract class Grammar {
                             address5 = FAILURE;
                             if (offset > failure) {
                                 failure = offset;
-                                expected = new ArrayList<String>();
+                                expected = new ArrayList<String[]>();
                             }
                             if (offset == failure) {
-                                expected.add("<any char>");
+                                expected.add(new String[] { "CanopyLisp::string", "<any char>" });
                             }
                         }
                         if (address5 != FAILURE) {
@@ -540,10 +540,10 @@ abstract class Grammar {
                             address3 = FAILURE;
                             if (offset > failure) {
                                 failure = offset;
-                                expected = new ArrayList<String>();
+                                expected = new ArrayList<String[]>();
                             }
                             if (offset == failure) {
-                                expected.add("[^\"]");
+                                expected.add(new String[] { "CanopyLisp::string", "[^\"]" });
                             }
                         }
                         if (address3 == FAILURE) {
@@ -577,10 +577,10 @@ abstract class Grammar {
                         address6 = FAILURE;
                         if (offset > failure) {
                             failure = offset;
-                            expected = new ArrayList<String>();
+                            expected = new ArrayList<String[]>();
                         }
                         if (offset == failure) {
-                            expected.add("\"\\\"\"");
+                            expected.add(new String[] { "CanopyLisp::string", "\"\\\"\"" });
                         }
                     }
                     if (address6 != FAILURE) {
@@ -646,10 +646,10 @@ abstract class Grammar {
                         address3 = FAILURE;
                         if (offset > failure) {
                             failure = offset;
-                            expected = new ArrayList<String>();
+                            expected = new ArrayList<String[]>();
                         }
                         if (offset == failure) {
-                            expected.add("<any char>");
+                            expected.add(new String[] { "CanopyLisp::symbol", "<any char>" });
                         }
                     }
                     if (address3 != FAILURE) {
@@ -709,10 +709,10 @@ abstract class Grammar {
                 address0 = FAILURE;
                 if (offset > failure) {
                     failure = offset;
-                    expected = new ArrayList<String>();
+                    expected = new ArrayList<String[]>();
                 }
                 if (offset == failure) {
-                    expected.add("[\\s]");
+                    expected.add(new String[] { "CanopyLisp::space", "[\\s]" });
                 }
             }
             rule.put(index0, new CacheRecord(address0, offset));
@@ -745,10 +745,10 @@ abstract class Grammar {
                 address0 = FAILURE;
                 if (offset > failure) {
                     failure = offset;
-                    expected = new ArrayList<String>();
+                    expected = new ArrayList<String[]>();
                 }
                 if (offset == failure) {
-                    expected.add("\"(\"");
+                    expected.add(new String[] { "CanopyLisp::paren", "\"(\"" });
                 }
             }
             if (address0 == FAILURE) {
@@ -765,10 +765,10 @@ abstract class Grammar {
                     address0 = FAILURE;
                     if (offset > failure) {
                         failure = offset;
-                        expected = new ArrayList<String>();
+                        expected = new ArrayList<String[]>();
                     }
                     if (offset == failure) {
-                        expected.add("\")\"");
+                        expected.add(new String[] { "CanopyLisp::paren", "\")\"" });
                     }
                 }
                 if (address0 == FAILURE) {

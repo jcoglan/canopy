@@ -16,7 +16,7 @@ Parser.prototype.parse = function() {
   }
   if (this._expected.length === 0) {
     this._failure = this._offset;
-    this._expected.push('<EOF>');
+    this._expected.push([{{{grammar}}}, '<EOF>']);
   }
   this.constructor.lastError = { offset: this._offset, expected: this._expected };
   throw new SyntaxError(formatError(this._input, this._failure, this._expected));
@@ -40,11 +40,18 @@ function formatError(input, offset, expected) {
     position += lines[lineNo].length + 1;
     lineNo += 1;
   }
-  var message = 'Line ' + lineNo + ': expected ' + expected.join(', ') + '\n',
-      line = lines[lineNo - 1];
 
-  message += line + '\n';
-  position -= line.length + 1;
+  var line = lines[lineNo - 1],
+      message = 'Line ' + lineNo + ': expected one of:\n\n';
+
+  for (var i = 0; i < expected.length; i++) {
+    message += '    - ' + expected[i][1] + ' from ' + expected[i][0] + '\n';
+  }
+  var number = lineNo.toString();
+  while (number.length < 6) number = ' ' + number;
+  message += '\n' + number + ' | ' + line + '\n';
+
+  position -= line.length + 10;
 
   while (position < offset) {
     message += ' ';

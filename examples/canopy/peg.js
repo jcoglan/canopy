@@ -318,7 +318,7 @@
           this._expected = [];
         }
         if (this._offset === this._failure) {
-          this._expected.push('`grammar`');
+          this._expected.push(['Canopy.PEG::grammar_name', '`grammar`']);
         }
       }
       if (address1 !== FAILURE) {
@@ -339,7 +339,7 @@
             this._expected = [];
           }
           if (this._offset === this._failure) {
-            this._expected.push('":"');
+            this._expected.push(['Canopy.PEG::grammar_name', '":"']);
           }
         }
         if (address2 === FAILURE) {
@@ -481,7 +481,7 @@
             this._expected = [];
           }
           if (this._offset === this._failure) {
-            this._expected.push('"<-"');
+            this._expected.push(['Canopy.PEG::assignment', '"<-"']);
           }
         }
         if (address3 !== FAILURE) {
@@ -571,7 +571,7 @@
           this._expected = [];
         }
         if (this._offset === this._failure) {
-          this._expected.push('"("');
+          this._expected.push(['Canopy.PEG::parenthesised_expression', '"("']);
         }
       }
       if (address1 !== FAILURE) {
@@ -631,7 +631,7 @@
                   this._expected = [];
                 }
                 if (this._offset === this._failure) {
-                  this._expected.push('")"');
+                  this._expected.push(['Canopy.PEG::parenthesised_expression', '")"']);
                 }
               }
               if (address7 !== FAILURE) {
@@ -716,7 +716,7 @@
                 this._expected = [];
               }
               if (this._offset === this._failure) {
-                this._expected.push('"/"');
+                this._expected.push(['Canopy.PEG::choice_expression', '"/"']);
               }
             }
             if (address6 !== FAILURE) {
@@ -967,7 +967,7 @@
           this._expected = [];
         }
         if (this._offset === this._failure) {
-          this._expected.push('"("');
+          this._expected.push(['Canopy.PEG::actionable_expression', '"("']);
         }
       }
       if (address1 !== FAILURE) {
@@ -1027,7 +1027,7 @@
                   this._expected = [];
                 }
                 if (this._offset === this._failure) {
-                  this._expected.push('")"');
+                  this._expected.push(['Canopy.PEG::actionable_expression', '")"']);
                 }
               }
               if (address7 !== FAILURE) {
@@ -1101,7 +1101,7 @@
           this._expected = [];
         }
         if (this._offset === this._failure) {
-          this._expected.push('"%"');
+          this._expected.push(['Canopy.PEG::action_tag', '"%"']);
         }
       }
       if (address1 !== FAILURE) {
@@ -1152,7 +1152,7 @@
           this._expected = [];
         }
         if (this._offset === this._failure) {
-          this._expected.push('"<"');
+          this._expected.push(['Canopy.PEG::type_tag', '"<"']);
         }
       }
       if (address1 !== FAILURE) {
@@ -1176,7 +1176,7 @@
               this._expected = [];
             }
             if (this._offset === this._failure) {
-              this._expected.push('">"');
+              this._expected.push(['Canopy.PEG::type_tag', '">"']);
             }
           }
           if (address3 !== FAILURE) {
@@ -1368,7 +1368,7 @@
             this._expected = [];
           }
           if (this._offset === this._failure) {
-            this._expected.push('"?"');
+            this._expected.push(['Canopy.PEG::maybe_atom', '"?"']);
           }
         }
         if (address2 !== FAILURE) {
@@ -1420,7 +1420,7 @@
             this._expected = [];
           }
           if (this._offset === this._failure) {
-            this._expected.push('"*"');
+            this._expected.push(['Canopy.PEG::repeated_atom', '"*"']);
           }
         }
         if (address2 === FAILURE) {
@@ -1439,7 +1439,7 @@
               this._expected = [];
             }
             if (this._offset === this._failure) {
-              this._expected.push('"+"');
+              this._expected.push(['Canopy.PEG::repeated_atom', '"+"']);
             }
           }
           if (address2 === FAILURE) {
@@ -1549,7 +1549,7 @@
           this._expected = [];
         }
         if (this._offset === this._failure) {
-          this._expected.push('"&"');
+          this._expected.push(['Canopy.PEG::predicated_atom', '"&"']);
         }
       }
       if (address1 === FAILURE) {
@@ -1568,7 +1568,7 @@
             this._expected = [];
           }
           if (this._offset === this._failure) {
-            this._expected.push('"!"');
+            this._expected.push(['Canopy.PEG::predicated_atom', '"!"']);
           }
         }
         if (address1 === FAILURE) {
@@ -1667,7 +1667,7 @@
           this._expected = [];
         }
         if (this._offset === this._failure) {
-          this._expected.push('\'"\'');
+          this._expected.push(['Canopy.PEG::string_expression', '\'"\'']);
         }
       }
       if (address1 !== FAILURE) {
@@ -1692,7 +1692,7 @@
               this._expected = [];
             }
             if (this._offset === this._failure) {
-              this._expected.push('"\\\\"');
+              this._expected.push(['Canopy.PEG::string_expression', '"\\\\"']);
             }
           }
           if (address4 !== FAILURE) {
@@ -1708,7 +1708,7 @@
                 this._expected = [];
               }
               if (this._offset === this._failure) {
-                this._expected.push('<any char>');
+                this._expected.push(['Canopy.PEG::string_expression', '<any char>']);
               }
             }
             if (address5 !== FAILURE) {
@@ -1743,7 +1743,7 @@
                 this._expected = [];
               }
               if (this._offset === this._failure) {
-                this._expected.push('[^"]');
+                this._expected.push(['Canopy.PEG::string_expression', '[^"]']);
               }
             }
             if (address3 === FAILURE) {
@@ -1779,7 +1779,7 @@
               this._expected = [];
             }
             if (this._offset === this._failure) {
-              this._expected.push('\'"\'');
+              this._expected.push(['Canopy.PEG::string_expression', '\'"\'']);
             }
           }
           if (address6 !== FAILURE) {
@@ -1820,7 +1820,7 @@
             this._expected = [];
           }
           if (this._offset === this._failure) {
-            this._expected.push('"\'"');
+            this._expected.push(['Canopy.PEG::string_expression', '"\'"']);
           }
         }
         if (address7 !== FAILURE) {
@@ -1845,7 +1845,7 @@
                 this._expected = [];
               }
               if (this._offset === this._failure) {
-                this._expected.push('"\\\\"');
+                this._expected.push(['Canopy.PEG::string_expression', '"\\\\"']);
               }
             }
             if (address10 !== FAILURE) {
@@ -1861,7 +1861,7 @@
                   this._expected = [];
                 }
                 if (this._offset === this._failure) {
-                  this._expected.push('<any char>');
+                  this._expected.push(['Canopy.PEG::string_expression', '<any char>']);
                 }
               }
               if (address11 !== FAILURE) {
@@ -1896,7 +1896,7 @@
                   this._expected = [];
                 }
                 if (this._offset === this._failure) {
-                  this._expected.push('[^\']');
+                  this._expected.push(['Canopy.PEG::string_expression', '[^\']']);
                 }
               }
               if (address9 === FAILURE) {
@@ -1932,7 +1932,7 @@
                 this._expected = [];
               }
               if (this._offset === this._failure) {
-                this._expected.push('"\'"');
+                this._expected.push(['Canopy.PEG::string_expression', '"\'"']);
               }
             }
             if (address12 !== FAILURE) {
@@ -1987,7 +1987,7 @@
           this._expected = [];
         }
         if (this._offset === this._failure) {
-          this._expected.push('"`"');
+          this._expected.push(['Canopy.PEG::ci_string_expression', '"`"']);
         }
       }
       if (address1 !== FAILURE) {
@@ -2012,7 +2012,7 @@
               this._expected = [];
             }
             if (this._offset === this._failure) {
-              this._expected.push('"\\\\"');
+              this._expected.push(['Canopy.PEG::ci_string_expression', '"\\\\"']);
             }
           }
           if (address4 !== FAILURE) {
@@ -2028,7 +2028,7 @@
                 this._expected = [];
               }
               if (this._offset === this._failure) {
-                this._expected.push('<any char>');
+                this._expected.push(['Canopy.PEG::ci_string_expression', '<any char>']);
               }
             }
             if (address5 !== FAILURE) {
@@ -2063,7 +2063,7 @@
                 this._expected = [];
               }
               if (this._offset === this._failure) {
-                this._expected.push('[^`]');
+                this._expected.push(['Canopy.PEG::ci_string_expression', '[^`]']);
               }
             }
             if (address3 === FAILURE) {
@@ -2099,7 +2099,7 @@
               this._expected = [];
             }
             if (this._offset === this._failure) {
-              this._expected.push('"`"');
+              this._expected.push(['Canopy.PEG::ci_string_expression', '"`"']);
             }
           }
           if (address6 !== FAILURE) {
@@ -2148,7 +2148,7 @@
           this._expected = [];
         }
         if (this._offset === this._failure) {
-          this._expected.push('"."');
+          this._expected.push(['Canopy.PEG::any_char_expression', '"."']);
         }
       }
       this._cache._any_char_expression[index0] = [address0, this._offset];
@@ -2179,7 +2179,7 @@
           this._expected = [];
         }
         if (this._offset === this._failure) {
-          this._expected.push('"["');
+          this._expected.push(['Canopy.PEG::char_class_expression', '"["']);
         }
       }
       if (address1 !== FAILURE) {
@@ -2200,7 +2200,7 @@
             this._expected = [];
           }
           if (this._offset === this._failure) {
-            this._expected.push('"^"');
+            this._expected.push(['Canopy.PEG::char_class_expression', '"^"']);
           }
         }
         if (address2 === FAILURE) {
@@ -2229,7 +2229,7 @@
                 this._expected = [];
               }
               if (this._offset === this._failure) {
-                this._expected.push('"\\\\"');
+                this._expected.push(['Canopy.PEG::char_class_expression', '"\\\\"']);
               }
             }
             if (address5 !== FAILURE) {
@@ -2245,7 +2245,7 @@
                   this._expected = [];
                 }
                 if (this._offset === this._failure) {
-                  this._expected.push('<any char>');
+                  this._expected.push(['Canopy.PEG::char_class_expression', '<any char>']);
                 }
               }
               if (address6 !== FAILURE) {
@@ -2280,7 +2280,7 @@
                   this._expected = [];
                 }
                 if (this._offset === this._failure) {
-                  this._expected.push('[^\\]]');
+                  this._expected.push(['Canopy.PEG::char_class_expression', '[^\\]]']);
                 }
               }
               if (address4 === FAILURE) {
@@ -2316,7 +2316,7 @@
                 this._expected = [];
               }
               if (this._offset === this._failure) {
-                this._expected.push('"]"');
+                this._expected.push(['Canopy.PEG::char_class_expression', '"]"']);
               }
             }
             if (address7 !== FAILURE) {
@@ -2375,7 +2375,7 @@
             this._expected = [];
           }
           if (this._offset === this._failure) {
-            this._expected.push('":"');
+            this._expected.push(['Canopy.PEG::label', '":"']);
           }
         }
         if (address2 !== FAILURE) {
@@ -2430,7 +2430,7 @@
               this._expected = [];
             }
             if (this._offset === this._failure) {
-              this._expected.push('"."');
+              this._expected.push(['Canopy.PEG::object_identifier', '"."']);
             }
           }
           if (address4 !== FAILURE) {
@@ -2509,7 +2509,7 @@
           this._expected = [];
         }
         if (this._offset === this._failure) {
-          this._expected.push('[a-zA-Z_]');
+          this._expected.push(['Canopy.PEG::identifier', '[a-zA-Z_]']);
         }
       }
       if (address1 !== FAILURE) {
@@ -2531,7 +2531,7 @@
               this._expected = [];
             }
             if (this._offset === this._failure) {
-              this._expected.push('[a-zA-Z0-9_]');
+              this._expected.push(['Canopy.PEG::identifier', '[a-zA-Z0-9_]']);
             }
           }
           if (address3 !== FAILURE) {
@@ -2589,7 +2589,7 @@
           this._expected = [];
         }
         if (this._offset === this._failure) {
-          this._expected.push('[\\s]');
+          this._expected.push(['Canopy.PEG::__', '[\\s]']);
         }
       }
       if (address0 === FAILURE) {
@@ -2627,7 +2627,7 @@
           this._expected = [];
         }
         if (this._offset === this._failure) {
-          this._expected.push('"#"');
+          this._expected.push(['Canopy.PEG::comment', '"#"']);
         }
       }
       if (address1 !== FAILURE) {
@@ -2649,7 +2649,7 @@
               this._expected = [];
             }
             if (this._offset === this._failure) {
-              this._expected.push('[^\\n]');
+              this._expected.push(['Canopy.PEG::comment', '[^\\n]']);
             }
           }
           if (address3 !== FAILURE) {
@@ -2703,7 +2703,7 @@
     }
     if (this._expected.length === 0) {
       this._failure = this._offset;
-      this._expected.push('<EOF>');
+      this._expected.push(['Canopy.PEG', '<EOF>']);
     }
     this.constructor.lastError = { offset: this._offset, expected: this._expected };
     throw new SyntaxError(formatError(this._input, this._failure, this._expected));
@@ -2727,11 +2727,18 @@
       position += lines[lineNo].length + 1;
       lineNo += 1;
     }
-    var message = 'Line ' + lineNo + ': expected ' + expected.join(', ') + '\n',
-        line = lines[lineNo - 1];
 
-    message += line + '\n';
-    position -= line.length + 1;
+    var line = lines[lineNo - 1],
+        message = 'Line ' + lineNo + ': expected one of:\n\n';
+
+    for (var i = 0; i < expected.length; i++) {
+      message += '    - ' + expected[i][1] + ' from ' + expected[i][0] + '\n';
+    }
+    var number = lineNo.toString();
+    while (number.length < 6) number = ' ' + number;
+    message += '\n' + number + ' | ' + line + '\n';
+
+    position -= line.length + 10;
 
     while (position < offset) {
       message += ' ';

@@ -177,7 +177,7 @@ module CanopyJson
           @expected = []
         end
         if @offset == @failure
-          @expected << "\"{\""
+          @expected << ["CanopyJson::object", "\"{\""]
         end
       end
       unless address1 == FAILURE
@@ -205,7 +205,7 @@ module CanopyJson
                 @expected = []
               end
               if @offset == @failure
-                @expected << "\",\""
+                @expected << ["CanopyJson::object", "\",\""]
               end
             end
             unless address5 == FAILURE
@@ -257,7 +257,7 @@ module CanopyJson
                 @expected = []
               end
               if @offset == @failure
-                @expected << "\"}\""
+                @expected << ["CanopyJson::object", "\"}\""]
               end
             end
             unless address7 == FAILURE
@@ -302,7 +302,7 @@ module CanopyJson
             @expected = []
           end
           if @offset == @failure
-            @expected << "\"{\""
+            @expected << ["CanopyJson::object", "\"{\""]
           end
         end
         unless address8 == FAILURE
@@ -326,7 +326,7 @@ module CanopyJson
                 @expected = []
               end
               if @offset == @failure
-                @expected << "\"}\""
+                @expected << ["CanopyJson::object", "\"}\""]
               end
             end
             unless address10 == FAILURE
@@ -392,7 +392,7 @@ module CanopyJson
                 @expected = []
               end
               if @offset == @failure
-                @expected << "\":\""
+                @expected << ["CanopyJson::pair", "\":\""]
               end
             end
             unless address4 == FAILURE
@@ -455,7 +455,7 @@ module CanopyJson
           @expected = []
         end
         if @offset == @failure
-          @expected << "\"[\""
+          @expected << ["CanopyJson::array", "\"[\""]
         end
       end
       unless address1 == FAILURE
@@ -483,7 +483,7 @@ module CanopyJson
                 @expected = []
               end
               if @offset == @failure
-                @expected << "\",\""
+                @expected << ["CanopyJson::array", "\",\""]
               end
             end
             unless address5 == FAILURE
@@ -535,7 +535,7 @@ module CanopyJson
                 @expected = []
               end
               if @offset == @failure
-                @expected << "\"]\""
+                @expected << ["CanopyJson::array", "\"]\""]
               end
             end
             unless address7 == FAILURE
@@ -580,7 +580,7 @@ module CanopyJson
             @expected = []
           end
           if @offset == @failure
-            @expected << "\"[\""
+            @expected << ["CanopyJson::array", "\"[\""]
           end
         end
         unless address8 == FAILURE
@@ -604,7 +604,7 @@ module CanopyJson
                 @expected = []
               end
               if @offset == @failure
-                @expected << "\"]\""
+                @expected << ["CanopyJson::array", "\"]\""]
               end
             end
             unless address10 == FAILURE
@@ -724,7 +724,7 @@ module CanopyJson
           @expected = []
         end
         if @offset == @failure
-          @expected << "'\"'"
+          @expected << ["CanopyJson::string", "'\"'"]
         end
       end
       unless address1 == FAILURE
@@ -749,7 +749,7 @@ module CanopyJson
               @expected = []
             end
             if @offset == @failure
-              @expected << "\"\\\\\""
+              @expected << ["CanopyJson::string", "\"\\\\\""]
             end
           end
           unless address4 == FAILURE
@@ -765,7 +765,7 @@ module CanopyJson
                 @expected = []
               end
               if @offset == @failure
-                @expected << "<any char>"
+                @expected << ["CanopyJson::string", "<any char>"]
               end
             end
             unless address5 == FAILURE
@@ -800,7 +800,7 @@ module CanopyJson
                 @expected = []
               end
               if @offset == @failure
-                @expected << "[^\"]"
+                @expected << ["CanopyJson::string", "[^\"]"]
               end
             end
             if address3 == FAILURE
@@ -836,7 +836,7 @@ module CanopyJson
               @expected = []
             end
             if @offset == @failure
-              @expected << "'\"'"
+              @expected << ["CanopyJson::string", "'\"'"]
             end
           end
           unless address6 == FAILURE
@@ -887,7 +887,7 @@ module CanopyJson
           @expected = []
         end
         if @offset == @failure
-          @expected << "\"-\""
+          @expected << ["CanopyJson::number", "\"-\""]
         end
       end
       if address1 == FAILURE
@@ -912,7 +912,7 @@ module CanopyJson
             @expected = []
           end
           if @offset == @failure
-            @expected << "\"0\""
+            @expected << ["CanopyJson::number", "\"0\""]
           end
         end
         if address2 == FAILURE
@@ -933,7 +933,7 @@ module CanopyJson
               @expected = []
             end
             if @offset == @failure
-              @expected << "[1-9]"
+              @expected << ["CanopyJson::number", "[1-9]"]
             end
           end
           unless address3 == FAILURE
@@ -955,7 +955,7 @@ module CanopyJson
                   @expected = []
                 end
                 if @offset == @failure
-                  @expected << "[0-9]"
+                  @expected << ["CanopyJson::number", "[0-9]"]
                 end
               end
               unless address5 == FAILURE
@@ -1010,7 +1010,7 @@ module CanopyJson
               @expected = []
             end
             if @offset == @failure
-              @expected << "\".\""
+              @expected << ["CanopyJson::number", "\".\""]
             end
           end
           unless address7 == FAILURE
@@ -1032,7 +1032,7 @@ module CanopyJson
                   @expected = []
                 end
                 if @offset == @failure
-                  @expected << "[0-9]"
+                  @expected << ["CanopyJson::number", "[0-9]"]
                 end
               end
               unless address9 == FAILURE
@@ -1088,7 +1088,7 @@ module CanopyJson
                 @expected = []
               end
               if @offset == @failure
-                @expected << "\"e\""
+                @expected << ["CanopyJson::number", "\"e\""]
               end
             end
             if address11 == FAILURE
@@ -1107,7 +1107,7 @@ module CanopyJson
                   @expected = []
                 end
                 if @offset == @failure
-                  @expected << "\"E\""
+                  @expected << ["CanopyJson::number", "\"E\""]
                 end
               end
               if address11 == FAILURE
@@ -1132,7 +1132,7 @@ module CanopyJson
                   @expected = []
                 end
                 if @offset == @failure
-                  @expected << "\"+\""
+                  @expected << ["CanopyJson::number", "\"+\""]
                 end
               end
               if address12 == FAILURE
@@ -1151,7 +1151,7 @@ module CanopyJson
                     @expected = []
                   end
                   if @offset == @failure
-                    @expected << "\"-\""
+                    @expected << ["CanopyJson::number", "\"-\""]
                   end
                 end
                 if address12 == FAILURE
@@ -1170,7 +1170,7 @@ module CanopyJson
                       @expected = []
                     end
                     if @offset == @failure
-                      @expected << "\"\""
+                      @expected << ["CanopyJson::number", "\"\""]
                     end
                   end
                   if address12 == FAILURE
@@ -1197,7 +1197,7 @@ module CanopyJson
                       @expected = []
                     end
                     if @offset == @failure
-                      @expected << "[0-9]"
+                      @expected << ["CanopyJson::number", "[0-9]"]
                     end
                   end
                   unless address14 == FAILURE
@@ -1286,7 +1286,7 @@ module CanopyJson
           @expected = []
         end
         if @offset == @failure
-          @expected << "\"true\""
+          @expected << ["CanopyJson::boolean_", "\"true\""]
         end
       end
       if address0 == FAILURE
@@ -1305,7 +1305,7 @@ module CanopyJson
             @expected = []
           end
           if @offset == @failure
-            @expected << "\"false\""
+            @expected << ["CanopyJson::boolean_", "\"false\""]
           end
         end
         if address0 == FAILURE
@@ -1337,7 +1337,7 @@ module CanopyJson
           @expected = []
         end
         if @offset == @failure
-          @expected << "\"null\""
+          @expected << ["CanopyJson::null_", "\"null\""]
         end
       end
       @cache[:null_][index0] = [address0, @offset]
@@ -1367,7 +1367,7 @@ module CanopyJson
             @expected = []
           end
           if @offset == @failure
-            @expected << "[\\s]"
+            @expected << ["CanopyJson::__", "[\\s]"]
           end
         end
         unless address1 == FAILURE
@@ -1408,21 +1408,32 @@ module CanopyJson
       end
       if @expected.empty?
         @failure = @offset
-        @expected << "<EOF>"
+        @expected << ["CanopyJson", "<EOF>"]
       end
       raise ParseError, Parser.format_error(@input, @failure, @expected)
     end
 
     def self.format_error(input, offset, expected)
-      lines, line_no, position = input.split(/\n/), 0, 0
+      lines = input.split(/\n/)
+      line_no, position = 0, 0
+
       while position <= offset
         position += lines[line_no].size + 1
         line_no += 1
       end
-      message, line = "Line #{line_no}: expected #{expected * ", "}\n", lines[line_no - 1]
-      message += "#{line}\n"
-      position -= line.size + 1
-      message += " " * (offset - position)
+
+      line = lines[line_no - 1]
+      message = "Line #{line_no}: expected one of:\n\n"
+
+      expected.each do |rule, term|
+        message += "    - #{term} from #{rule}\n"
+      end
+
+      number = line_no.to_s
+      number = " " + number until number.size == 6
+
+      message += "\n#{number} | #{line}\n"
+      message += " " * (line.size + 10 + offset - position)
       return message + "^"
     end
   end

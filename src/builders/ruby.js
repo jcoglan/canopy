@@ -28,6 +28,7 @@ class Builder extends Base {
   }
 
   package_ (name, actions, block) {
+    this._grammarName = name
     this._newBuffer('rb')
     
     this._line('module ' + name.replace(/\./g, '::'))
@@ -54,7 +55,8 @@ class Builder extends Base {
   }
 
   parserClass_ (root) {
-    this._template('ruby', 'parser.rb', { root })
+    let grammar = this._quote(this._grammarName)
+    this._template('ruby', 'parser.rb', { grammar, root })
   }
 
   class_ (name, parent, block) {
@@ -175,7 +177,9 @@ class Builder extends Base {
   }
 
   failure_ (address, expected) {
+    let rule = this._quote(this._grammarName + '::' + this._ruleName)
     expected = this._quote(expected)
+
     this.assign_(address, this.nullNode_())
 
     this.if_('@offset > @failure', () => {
@@ -183,7 +187,7 @@ class Builder extends Base {
       this.assign_('@expected', '[]')
     })
     this.if_('@offset == @failure', () => {
-      this.append_('@expected', expected)
+      this.append_('@expected', '[' + rule + ', ' + expected + ']')
     })
   }
 

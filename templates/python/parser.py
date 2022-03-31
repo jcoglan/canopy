@@ -15,7 +15,7 @@ class Parser(Grammar):
             return tree
         if not self._expected:
             self._failure = self._offset
-            self._expected.append('<EOF>')
+            self._expected.append(({{{grammar}}}, '<EOF>'))
         raise ParseError(format_error(self._input, self._failure, self._expected))
 
 
@@ -28,12 +28,23 @@ def parse(input, actions=None, types=None):
     return parser.parse()
 
 def format_error(input, offset, expected):
-    lines, line_no, position = input.split('\n'), 0, 0
+    lines = input.split('\n')
+    line_no, position = 0, 0
+
     while position <= offset:
         position += len(lines[line_no]) + 1
         line_no += 1
-    message, line = 'Line ' + str(line_no) + ': expected ' + ', '.join(expected) + '\n', lines[line_no - 1]
-    message += line + '\n'
-    position -= len(line) + 1
-    message += ' ' * (offset - position)
+
+    line = lines[line_no - 1]
+    message = 'Line ' + str(line_no) + ': expected one of:\n\n'
+
+    for pair in expected:
+        message += '    - ' + pair[1] + ' from ' + pair[0] + '\n'
+
+    number = str(line_no)
+    while len(number) < 6:
+        number = ' ' + number
+
+    message += '\n' + number + ' | ' + line + '\n'
+    message += ' ' * (len(line) + 10 + offset - position)
     return message + '^'

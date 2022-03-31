@@ -299,7 +299,7 @@ class Grammar(object):
                 self._failure = self._offset
                 self._expected = []
             if self._offset == self._failure:
-                self._expected.append('`grammar`')
+                self._expected.append(('Canopy.PEG::grammar_name', '`grammar`'))
         if address1 is not FAILURE:
             elements0.append(address1)
             address2 = FAILURE
@@ -316,7 +316,7 @@ class Grammar(object):
                     self._failure = self._offset
                     self._expected = []
                 if self._offset == self._failure:
-                    self._expected.append('":"')
+                    self._expected.append(('Canopy.PEG::grammar_name', '":"'))
             if address2 is FAILURE:
                 address2 = TreeNode(self._input[index2:index2], index2, [])
                 self._offset = index2
@@ -432,7 +432,7 @@ class Grammar(object):
                     self._failure = self._offset
                     self._expected = []
                 if self._offset == self._failure:
-                    self._expected.append('"<-"')
+                    self._expected.append(('Canopy.PEG::assignment', '"<-"'))
             if address3 is not FAILURE:
                 elements0.append(address3)
                 address4 = FAILURE
@@ -503,7 +503,7 @@ class Grammar(object):
                 self._failure = self._offset
                 self._expected = []
             if self._offset == self._failure:
-                self._expected.append('"("')
+                self._expected.append(('Canopy.PEG::parenthesised_expression', '"("'))
         if address1 is not FAILURE:
             elements0.append(address1)
             address2 = FAILURE
@@ -553,7 +553,7 @@ class Grammar(object):
                                 self._failure = self._offset
                                 self._expected = []
                             if self._offset == self._failure:
-                                self._expected.append('")"')
+                                self._expected.append(('Canopy.PEG::parenthesised_expression', '")"'))
                         if address7 is not FAILURE:
                             elements0.append(address7)
                         else:
@@ -622,7 +622,7 @@ class Grammar(object):
                             self._failure = self._offset
                             self._expected = []
                         if self._offset == self._failure:
-                            self._expected.append('"/"')
+                            self._expected.append(('Canopy.PEG::choice_expression', '"/"'))
                     if address6 is not FAILURE:
                         elements2.append(address6)
                         address7 = FAILURE
@@ -826,7 +826,7 @@ class Grammar(object):
                 self._failure = self._offset
                 self._expected = []
             if self._offset == self._failure:
-                self._expected.append('"("')
+                self._expected.append(('Canopy.PEG::actionable_expression', '"("'))
         if address1 is not FAILURE:
             elements0.append(address1)
             address2 = FAILURE
@@ -876,7 +876,7 @@ class Grammar(object):
                                 self._failure = self._offset
                                 self._expected = []
                             if self._offset == self._failure:
-                                self._expected.append('")"')
+                                self._expected.append(('Canopy.PEG::actionable_expression', '")"'))
                         if address7 is not FAILURE:
                             elements0.append(address7)
                         else:
@@ -933,7 +933,7 @@ class Grammar(object):
                 self._failure = self._offset
                 self._expected = []
             if self._offset == self._failure:
-                self._expected.append('"%"')
+                self._expected.append(('Canopy.PEG::action_tag', '"%"'))
         if address1 is not FAILURE:
             elements0.append(address1)
             address2 = FAILURE
@@ -974,7 +974,7 @@ class Grammar(object):
                 self._failure = self._offset
                 self._expected = []
             if self._offset == self._failure:
-                self._expected.append('"<"')
+                self._expected.append(('Canopy.PEG::type_tag', '"<"'))
         if address1 is not FAILURE:
             elements0.append(address1)
             address2 = FAILURE
@@ -994,7 +994,7 @@ class Grammar(object):
                         self._failure = self._offset
                         self._expected = []
                     if self._offset == self._failure:
-                        self._expected.append('">"')
+                        self._expected.append(('Canopy.PEG::type_tag', '">"'))
                 if address3 is not FAILURE:
                     elements0.append(address3)
                 else:
@@ -1150,7 +1150,7 @@ class Grammar(object):
                     self._failure = self._offset
                     self._expected = []
                 if self._offset == self._failure:
-                    self._expected.append('"?"')
+                    self._expected.append(('Canopy.PEG::maybe_atom', '"?"'))
             if address2 is not FAILURE:
                 elements0.append(address2)
             else:
@@ -1192,7 +1192,7 @@ class Grammar(object):
                     self._failure = self._offset
                     self._expected = []
                 if self._offset == self._failure:
-                    self._expected.append('"*"')
+                    self._expected.append(('Canopy.PEG::repeated_atom', '"*"'))
             if address2 is FAILURE:
                 self._offset = index2
                 chunk1, max1 = None, self._offset + 1
@@ -1207,7 +1207,7 @@ class Grammar(object):
                         self._failure = self._offset
                         self._expected = []
                     if self._offset == self._failure:
-                        self._expected.append('"+"')
+                        self._expected.append(('Canopy.PEG::repeated_atom', '"+"'))
                 if address2 is FAILURE:
                     self._offset = index2
             if address2 is not FAILURE:
@@ -1291,7 +1291,7 @@ class Grammar(object):
                 self._failure = self._offset
                 self._expected = []
             if self._offset == self._failure:
-                self._expected.append('"&"')
+                self._expected.append(('Canopy.PEG::predicated_atom', '"&"'))
         if address1 is FAILURE:
             self._offset = index2
             chunk1, max1 = None, self._offset + 1
@@ -1306,7 +1306,7 @@ class Grammar(object):
                     self._failure = self._offset
                     self._expected = []
                 if self._offset == self._failure:
-                    self._expected.append('"!"')
+                    self._expected.append(('Canopy.PEG::predicated_atom', '"!"'))
             if address1 is FAILURE:
                 self._offset = index2
         if address1 is not FAILURE:
@@ -1386,7 +1386,7 @@ class Grammar(object):
                 self._failure = self._offset
                 self._expected = []
             if self._offset == self._failure:
-                self._expected.append('\'"\'')
+                self._expected.append(('Canopy.PEG::string_expression', '\'"\''))
         if address1 is not FAILURE:
             elements0.append(address1)
             address2 = FAILURE
@@ -1407,7 +1407,7 @@ class Grammar(object):
                         self._failure = self._offset
                         self._expected = []
                     if self._offset == self._failure:
-                        self._expected.append('"\\\\"')
+                        self._expected.append(('Canopy.PEG::string_expression', '"\\\\"'))
                 if address4 is not FAILURE:
                     elements2.append(address4)
                     address5 = FAILURE
@@ -1420,7 +1420,7 @@ class Grammar(object):
                             self._failure = self._offset
                             self._expected = []
                         if self._offset == self._failure:
-                            self._expected.append('<any char>')
+                            self._expected.append(('Canopy.PEG::string_expression', '<any char>'))
                     if address5 is not FAILURE:
                         elements2.append(address5)
                     else:
@@ -1448,7 +1448,7 @@ class Grammar(object):
                             self._failure = self._offset
                             self._expected = []
                         if self._offset == self._failure:
-                            self._expected.append('[^"]')
+                            self._expected.append(('Canopy.PEG::string_expression', '[^"]'))
                     if address3 is FAILURE:
                         self._offset = index4
                 if address3 is not FAILURE:
@@ -1475,7 +1475,7 @@ class Grammar(object):
                         self._failure = self._offset
                         self._expected = []
                     if self._offset == self._failure:
-                        self._expected.append('\'"\'')
+                        self._expected.append(('Canopy.PEG::string_expression', '\'"\''))
                 if address6 is not FAILURE:
                     elements0.append(address6)
                 else:
@@ -1508,7 +1508,7 @@ class Grammar(object):
                     self._failure = self._offset
                     self._expected = []
                 if self._offset == self._failure:
-                    self._expected.append('"\'"')
+                    self._expected.append(('Canopy.PEG::string_expression', '"\'"'))
             if address7 is not FAILURE:
                 elements3.append(address7)
                 address8 = FAILURE
@@ -1529,7 +1529,7 @@ class Grammar(object):
                             self._failure = self._offset
                             self._expected = []
                         if self._offset == self._failure:
-                            self._expected.append('"\\\\"')
+                            self._expected.append(('Canopy.PEG::string_expression', '"\\\\"'))
                     if address10 is not FAILURE:
                         elements5.append(address10)
                         address11 = FAILURE
@@ -1542,7 +1542,7 @@ class Grammar(object):
                                 self._failure = self._offset
                                 self._expected = []
                             if self._offset == self._failure:
-                                self._expected.append('<any char>')
+                                self._expected.append(('Canopy.PEG::string_expression', '<any char>'))
                         if address11 is not FAILURE:
                             elements5.append(address11)
                         else:
@@ -1570,7 +1570,7 @@ class Grammar(object):
                                 self._failure = self._offset
                                 self._expected = []
                             if self._offset == self._failure:
-                                self._expected.append('[^\']')
+                                self._expected.append(('Canopy.PEG::string_expression', '[^\']'))
                         if address9 is FAILURE:
                             self._offset = index8
                     if address9 is not FAILURE:
@@ -1597,7 +1597,7 @@ class Grammar(object):
                             self._failure = self._offset
                             self._expected = []
                         if self._offset == self._failure:
-                            self._expected.append('"\'"')
+                            self._expected.append(('Canopy.PEG::string_expression', '"\'"'))
                     if address12 is not FAILURE:
                         elements3.append(address12)
                     else:
@@ -1639,7 +1639,7 @@ class Grammar(object):
                 self._failure = self._offset
                 self._expected = []
             if self._offset == self._failure:
-                self._expected.append('"`"')
+                self._expected.append(('Canopy.PEG::ci_string_expression', '"`"'))
         if address1 is not FAILURE:
             elements0.append(address1)
             address2 = FAILURE
@@ -1660,7 +1660,7 @@ class Grammar(object):
                         self._failure = self._offset
                         self._expected = []
                     if self._offset == self._failure:
-                        self._expected.append('"\\\\"')
+                        self._expected.append(('Canopy.PEG::ci_string_expression', '"\\\\"'))
                 if address4 is not FAILURE:
                     elements2.append(address4)
                     address5 = FAILURE
@@ -1673,7 +1673,7 @@ class Grammar(object):
                             self._failure = self._offset
                             self._expected = []
                         if self._offset == self._failure:
-                            self._expected.append('<any char>')
+                            self._expected.append(('Canopy.PEG::ci_string_expression', '<any char>'))
                     if address5 is not FAILURE:
                         elements2.append(address5)
                     else:
@@ -1701,7 +1701,7 @@ class Grammar(object):
                             self._failure = self._offset
                             self._expected = []
                         if self._offset == self._failure:
-                            self._expected.append('[^`]')
+                            self._expected.append(('Canopy.PEG::ci_string_expression', '[^`]'))
                     if address3 is FAILURE:
                         self._offset = index3
                 if address3 is not FAILURE:
@@ -1728,7 +1728,7 @@ class Grammar(object):
                         self._failure = self._offset
                         self._expected = []
                     if self._offset == self._failure:
-                        self._expected.append('"`"')
+                        self._expected.append(('Canopy.PEG::ci_string_expression', '"`"'))
                 if address6 is not FAILURE:
                     elements0.append(address6)
                 else:
@@ -1766,7 +1766,7 @@ class Grammar(object):
                 self._failure = self._offset
                 self._expected = []
             if self._offset == self._failure:
-                self._expected.append('"."')
+                self._expected.append(('Canopy.PEG::any_char_expression', '"."'))
         self._cache['any_char_expression'][index0] = (address0, self._offset)
         return address0
 
@@ -1790,7 +1790,7 @@ class Grammar(object):
                 self._failure = self._offset
                 self._expected = []
             if self._offset == self._failure:
-                self._expected.append('"["')
+                self._expected.append(('Canopy.PEG::char_class_expression', '"["'))
         if address1 is not FAILURE:
             elements0.append(address1)
             address2 = FAILURE
@@ -1807,7 +1807,7 @@ class Grammar(object):
                     self._failure = self._offset
                     self._expected = []
                 if self._offset == self._failure:
-                    self._expected.append('"^"')
+                    self._expected.append(('Canopy.PEG::char_class_expression', '"^"'))
             if address2 is FAILURE:
                 address2 = TreeNode(self._input[index2:index2], index2, [])
                 self._offset = index2
@@ -1831,7 +1831,7 @@ class Grammar(object):
                             self._failure = self._offset
                             self._expected = []
                         if self._offset == self._failure:
-                            self._expected.append('"\\\\"')
+                            self._expected.append(('Canopy.PEG::char_class_expression', '"\\\\"'))
                     if address5 is not FAILURE:
                         elements2.append(address5)
                         address6 = FAILURE
@@ -1844,7 +1844,7 @@ class Grammar(object):
                                 self._failure = self._offset
                                 self._expected = []
                             if self._offset == self._failure:
-                                self._expected.append('<any char>')
+                                self._expected.append(('Canopy.PEG::char_class_expression', '<any char>'))
                         if address6 is not FAILURE:
                             elements2.append(address6)
                         else:
@@ -1872,7 +1872,7 @@ class Grammar(object):
                                 self._failure = self._offset
                                 self._expected = []
                             if self._offset == self._failure:
-                                self._expected.append('[^\\]]')
+                                self._expected.append(('Canopy.PEG::char_class_expression', '[^\\]]'))
                         if address4 is FAILURE:
                             self._offset = index4
                     if address4 is not FAILURE:
@@ -1899,7 +1899,7 @@ class Grammar(object):
                             self._failure = self._offset
                             self._expected = []
                         if self._offset == self._failure:
-                            self._expected.append('"]"')
+                            self._expected.append(('Canopy.PEG::char_class_expression', '"]"'))
                     if address7 is not FAILURE:
                         elements0.append(address7)
                     else:
@@ -1946,7 +1946,7 @@ class Grammar(object):
                     self._failure = self._offset
                     self._expected = []
                 if self._offset == self._failure:
-                    self._expected.append('":"')
+                    self._expected.append(('Canopy.PEG::label', '":"'))
             if address2 is not FAILURE:
                 elements0.append(address2)
             else:
@@ -1991,7 +1991,7 @@ class Grammar(object):
                         self._failure = self._offset
                         self._expected = []
                     if self._offset == self._failure:
-                        self._expected.append('"."')
+                        self._expected.append(('Canopy.PEG::object_identifier', '"."'))
                 if address4 is not FAILURE:
                     elements2.append(address4)
                     address5 = FAILURE
@@ -2054,7 +2054,7 @@ class Grammar(object):
                 self._failure = self._offset
                 self._expected = []
             if self._offset == self._failure:
-                self._expected.append('[a-zA-Z_]')
+                self._expected.append(('Canopy.PEG::identifier', '[a-zA-Z_]'))
         if address1 is not FAILURE:
             elements0.append(address1)
             address2 = FAILURE
@@ -2072,7 +2072,7 @@ class Grammar(object):
                         self._failure = self._offset
                         self._expected = []
                     if self._offset == self._failure:
-                        self._expected.append('[a-zA-Z0-9_]')
+                        self._expected.append(('Canopy.PEG::identifier', '[a-zA-Z0-9_]'))
                 if address3 is not FAILURE:
                     elements1.append(address3)
                 else:
@@ -2117,7 +2117,7 @@ class Grammar(object):
                 self._failure = self._offset
                 self._expected = []
             if self._offset == self._failure:
-                self._expected.append('[\\s]')
+                self._expected.append(('Canopy.PEG::__', '[\\s]'))
         if address0 is FAILURE:
             self._offset = index1
             address0 = self._read_comment()
@@ -2146,7 +2146,7 @@ class Grammar(object):
                 self._failure = self._offset
                 self._expected = []
             if self._offset == self._failure:
-                self._expected.append('"#"')
+                self._expected.append(('Canopy.PEG::comment', '"#"'))
         if address1 is not FAILURE:
             elements0.append(address1)
             address2 = FAILURE
@@ -2164,7 +2164,7 @@ class Grammar(object):
                         self._failure = self._offset
                         self._expected = []
                     if self._offset == self._failure:
-                        self._expected.append('[^\\n]')
+                        self._expected.append(('Canopy.PEG::comment', '[^\\n]'))
                 if address3 is not FAILURE:
                     elements1.append(address3)
                 else:
@@ -2208,7 +2208,7 @@ class Parser(Grammar):
             return tree
         if not self._expected:
             self._failure = self._offset
-            self._expected.append('<EOF>')
+            self._expected.append(('Canopy.PEG', '<EOF>'))
         raise ParseError(format_error(self._input, self._failure, self._expected))
 
 
@@ -2221,12 +2221,23 @@ def parse(input, actions=None, types=None):
     return parser.parse()
 
 def format_error(input, offset, expected):
-    lines, line_no, position = input.split('\n'), 0, 0
+    lines = input.split('\n')
+    line_no, position = 0, 0
+
     while position <= offset:
         position += len(lines[line_no]) + 1
         line_no += 1
-    message, line = 'Line ' + str(line_no) + ': expected ' + ', '.join(expected) + '\n', lines[line_no - 1]
-    message += line + '\n'
-    position -= len(line) + 1
-    message += ' ' * (offset - position)
+
+    line = lines[line_no - 1]
+    message = 'Line ' + str(line_no) + ': expected one of:\n\n'
+
+    for pair in expected:
+        message += '    - ' + pair[1] + ' from ' + pair[0] + '\n'
+
+    number = str(line_no)
+    while len(number) < 6:
+        number = ' ' + number
+
+    message += '\n' + number + ' | ' + line + '\n'
+    message += ' ' * (len(line) + 10 + offset - position)
     return message + '^'
