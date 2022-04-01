@@ -10,4 +10,4 @@ For usage documentation see [canopy.jcoglan.com][2].
 See `CONTRIBUTING.md` for instructions for building the project.
 
 [1]: http://en.wikipedia.org/wiki/Parsing_expression_grammar
-[2]: http://canopy.jcoglan.com
+[2]: https://canopy.jcoglan.com
