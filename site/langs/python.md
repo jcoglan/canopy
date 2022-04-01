@@ -25,8 +25,15 @@ We can compile this grammar into a Python module using `canopy`:
 
     $ canopy url.peg --lang python
 
-This creates a file called `url.py` that contains all the parser logic. Let's
-try it out:
+This creates a file called `url.py` that contains all the parser logic, and it
+works in Node and in the browser. The `--output` option can be used to override
+the default location:
+
+    $ canopy url.peg --lang python --output some/dir/url
+
+This will write the generated parser into the file `some/dir/url.py`.
+
+Let's try our parser out:
 
 ```py
 import url

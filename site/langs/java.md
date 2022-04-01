@@ -31,7 +31,15 @@ example if you run:
 
     $ canopy com/jcoglan/canopy/url.peg --lang java
 
-then you will get a package named `com.jcoglan.canopy.url`. Let's try it out:
+then you will get a package named `com.jcoglan.canopy.url`. The `--output`
+option can be used to override this:
+
+    $ canopy com/jcoglan/canopy/url.peg --lang java --output some/dir/url
+
+This will write the generated files into the directory `some/dir/url` with the
+package name `some.dir.url`.
+
+Let's try out our parser:
 
 ```java
 import url.URL;

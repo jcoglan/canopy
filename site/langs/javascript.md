@@ -26,7 +26,14 @@ We can compile this grammar into a JavaScript module using `canopy`:
     $ canopy url.peg --lang js
 
 This creates a file called `url.js` that contains all the parser logic, and it
-works in Node and in the browser. Let's try it out:
+works in Node and in the browser. The `--output` option can be used to override
+the default location:
+
+    $ canopy url.peg --lang js --output some/dir/url
+
+This will write the generated parser into the file `some/dir/url.js`.
+
+Let's try our parser out:
 
 ```js
 const url = require('./url')
