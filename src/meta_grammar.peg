@@ -2,8 +2,7 @@ grammar Canopy.MetaGrammar
 
 # ==============================================================================
 
-grammar               <-  _* grammar_name (_* rule)+ _*
-                          %grammar
+grammar               <-  _* grammar_name (_* rule)+ _* %grammar
 
 grammar_name          <-  `grammar` ":"? _+ id:object_identifier
 
@@ -49,10 +48,6 @@ terminal              <-  literal_string
 
 # ==============================================================================
 
-choice                <-  choice_part (_* "/" _* expr:choice_part)+ %choice
-
-# ==============================================================================
-
 action_expression     <-  actionable _+ action_tag %action
 
 actionable            <-  sequence
@@ -71,6 +66,10 @@ typable               <-  sequence
                        /  sequence_element
 
 type_tag              <-  "<" id:object_identifier ">"
+
+# ==============================================================================
+
+choice                <-  choice_part (_* "/" _* expr:choice_part)+ %choice
 
 # ==============================================================================
 
