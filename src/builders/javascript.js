@@ -25,7 +25,7 @@ class Builder extends Base {
     this._grammarName = name
     this._newBuffer('js')
     
-    this._line('(function() {', false)
+    this._line('(function () {', false)
     this._indent(() => {
       this._line("'use strict'")
       block()
@@ -75,7 +75,7 @@ class Builder extends Base {
 
   function_ (name, args, block) {
     this._newline()
-    this._line(name + ' = function(' + args.join(', ') + ') {', false)
+    this._line(name + ' = function (' + args.join(', ') + ') {', false)
     this._scope(block)
     this._line('}')
   }

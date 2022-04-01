@@ -3,7 +3,7 @@
  * See https://canopy.jcoglan.com/ for documentation
  */
 
-(function() {
+(function () {
   'use strict';
 
   function TreeNode (text, offset, elements) {
@@ -18,13 +18,19 @@
     }
   };
 
-  var TreeNode1 = function(text, offset, elements) {
+  if (typeof Symbol !== 'undefined' && Symbol.iterator) {
+    TreeNode.prototype[Symbol.iterator] = function () {
+      return this.elements[Symbol.iterator]();
+    };
+  }
+
+  var TreeNode1 = function (text, offset, elements) {
     TreeNode.apply(this, arguments);
     this['data'] = elements[1];
   };
   inherit(TreeNode1, TreeNode);
 
-  var TreeNode2 = function(text, offset, elements) {
+  var TreeNode2 = function (text, offset, elements) {
     TreeNode.apply(this, arguments);
     this['cells'] = elements[1];
   };
@@ -802,7 +808,7 @@
   if (typeof require === 'function' && typeof exports === 'object') {
     Object.assign(exports, exported);
   } else {
-    var ns = (typeof this !== 'undefined') ? this : window;
+    var ns = (typeof this === 'undefined') ? window : this;
     ns.CanopyLisp = exported;
   }
 })();

@@ -73,7 +73,7 @@ var exported = { Grammar: Grammar, Parser: Parser, parse: parse };
 if (typeof require === 'function' && typeof exports === 'object') {
   Object.assign(exports, exported);
 } else {
-  var ns = (typeof this !== 'undefined') ? this : window;
+  var ns = (typeof this === 'undefined') ? window : this;
 {{#each namespace}}
   ns = ns.{{this}} = ns.{{this}} || {};
 {{/each}}

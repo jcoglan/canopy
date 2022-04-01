@@ -3,7 +3,7 @@
  * See https://canopy.jcoglan.com/ for documentation
  */
 
-(function() {
+(function () {
   'use strict';
 
   function TreeNode (text, offset, elements) {
@@ -18,26 +18,32 @@
     }
   };
 
-  var TreeNode1 = function(text, offset, elements) {
+  if (typeof Symbol !== 'undefined' && Symbol.iterator) {
+    TreeNode.prototype[Symbol.iterator] = function () {
+      return this.elements[Symbol.iterator]();
+    };
+  }
+
+  var TreeNode1 = function (text, offset, elements) {
     TreeNode.apply(this, arguments);
     this['grammar_name'] = elements[1];
     this['rules'] = elements[2];
   };
   inherit(TreeNode1, TreeNode);
 
-  var TreeNode2 = function(text, offset, elements) {
+  var TreeNode2 = function (text, offset, elements) {
     TreeNode.apply(this, arguments);
     this['grammar_rule'] = elements[1];
   };
   inherit(TreeNode2, TreeNode);
 
-  var TreeNode3 = function(text, offset, elements) {
+  var TreeNode3 = function (text, offset, elements) {
     TreeNode.apply(this, arguments);
     this['object_identifier'] = elements[3];
   };
   inherit(TreeNode3, TreeNode);
 
-  var TreeNode4 = function(text, offset, elements) {
+  var TreeNode4 = function (text, offset, elements) {
     TreeNode.apply(this, arguments);
     this['identifier'] = elements[0];
     this['assignment'] = elements[1];
@@ -45,13 +51,13 @@
   };
   inherit(TreeNode4, TreeNode);
 
-  var TreeNode5 = function(text, offset, elements) {
+  var TreeNode5 = function (text, offset, elements) {
     TreeNode.apply(this, arguments);
     this['parsing_expression'] = elements[2];
   };
   inherit(TreeNode5, TreeNode);
 
-  var TreeNode6 = function(text, offset, elements) {
+  var TreeNode6 = function (text, offset, elements) {
     TreeNode.apply(this, arguments);
     this['first_part'] = elements[0];
     this['choice_part'] = elements[0];
@@ -59,45 +65,45 @@
   };
   inherit(TreeNode6, TreeNode);
 
-  var TreeNode7 = function(text, offset, elements) {
+  var TreeNode7 = function (text, offset, elements) {
     TreeNode.apply(this, arguments);
     this['expression'] = elements[3];
     this['choice_part'] = elements[3];
   };
   inherit(TreeNode7, TreeNode);
 
-  var TreeNode8 = function(text, offset, elements) {
+  var TreeNode8 = function (text, offset, elements) {
     TreeNode.apply(this, arguments);
     this['type_tag'] = elements[1];
   };
   inherit(TreeNode8, TreeNode);
 
-  var TreeNode9 = function(text, offset, elements) {
+  var TreeNode9 = function (text, offset, elements) {
     TreeNode.apply(this, arguments);
     this['actionable_expression'] = elements[0];
     this['action_tag'] = elements[2];
   };
   inherit(TreeNode9, TreeNode);
 
-  var TreeNode10 = function(text, offset, elements) {
+  var TreeNode10 = function (text, offset, elements) {
     TreeNode.apply(this, arguments);
     this['actionable_expression'] = elements[2];
   };
   inherit(TreeNode10, TreeNode);
 
-  var TreeNode11 = function(text, offset, elements) {
+  var TreeNode11 = function (text, offset, elements) {
     TreeNode.apply(this, arguments);
     this['identifier'] = elements[1];
   };
   inherit(TreeNode11, TreeNode);
 
-  var TreeNode12 = function(text, offset, elements) {
+  var TreeNode12 = function (text, offset, elements) {
     TreeNode.apply(this, arguments);
     this['object_identifier'] = elements[1];
   };
   inherit(TreeNode12, TreeNode);
 
-  var TreeNode13 = function(text, offset, elements) {
+  var TreeNode13 = function (text, offset, elements) {
     TreeNode.apply(this, arguments);
     this['first_part'] = elements[0];
     this['sequence_part'] = elements[0];
@@ -105,58 +111,58 @@
   };
   inherit(TreeNode13, TreeNode);
 
-  var TreeNode14 = function(text, offset, elements) {
+  var TreeNode14 = function (text, offset, elements) {
     TreeNode.apply(this, arguments);
     this['expression'] = elements[1];
     this['sequence_part'] = elements[1];
   };
   inherit(TreeNode14, TreeNode);
 
-  var TreeNode15 = function(text, offset, elements) {
+  var TreeNode15 = function (text, offset, elements) {
     TreeNode.apply(this, arguments);
     this['expression'] = elements[1];
   };
   inherit(TreeNode15, TreeNode);
 
-  var TreeNode16 = function(text, offset, elements) {
+  var TreeNode16 = function (text, offset, elements) {
     TreeNode.apply(this, arguments);
     this['atom'] = elements[0];
   };
   inherit(TreeNode16, TreeNode);
 
-  var TreeNode17 = function(text, offset, elements) {
+  var TreeNode17 = function (text, offset, elements) {
     TreeNode.apply(this, arguments);
     this['atom'] = elements[0];
     this['quantifier'] = elements[1];
   };
   inherit(TreeNode17, TreeNode);
 
-  var TreeNode18 = function(text, offset, elements) {
+  var TreeNode18 = function (text, offset, elements) {
     TreeNode.apply(this, arguments);
     this['predicate'] = elements[0];
     this['atom'] = elements[1];
   };
   inherit(TreeNode18, TreeNode);
 
-  var TreeNode19 = function(text, offset, elements) {
+  var TreeNode19 = function (text, offset, elements) {
     TreeNode.apply(this, arguments);
     this['identifier'] = elements[0];
   };
   inherit(TreeNode19, TreeNode);
 
-  var TreeNode20 = function(text, offset, elements) {
+  var TreeNode20 = function (text, offset, elements) {
     TreeNode.apply(this, arguments);
     this['identifier'] = elements[0];
   };
   inherit(TreeNode20, TreeNode);
 
-  var TreeNode21 = function(text, offset, elements) {
+  var TreeNode21 = function (text, offset, elements) {
     TreeNode.apply(this, arguments);
     this['identifier'] = elements[0];
   };
   inherit(TreeNode21, TreeNode);
 
-  var TreeNode22 = function(text, offset, elements) {
+  var TreeNode22 = function (text, offset, elements) {
     TreeNode.apply(this, arguments);
     this['identifier'] = elements[1];
   };
@@ -2760,7 +2766,7 @@
   if (typeof require === 'function' && typeof exports === 'object') {
     Object.assign(exports, exported);
   } else {
-    var ns = (typeof this !== 'undefined') ? this : window;
+    var ns = (typeof this === 'undefined') ? window : this;
     ns = ns.Canopy = ns.Canopy || {};
     ns.PEG = exported;
   }

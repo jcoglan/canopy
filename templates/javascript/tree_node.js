@@ -9,3 +9,9 @@ function {{name}} (text, offset, elements) {
     block.call(context, el[i], i, el);
   }
 };
+
+if (typeof Symbol !== 'undefined' && Symbol.iterator) {
+  {{name}}.prototype[Symbol.iterator] = function () {
+    return this.elements[Symbol.iterator]();
+  };
+}

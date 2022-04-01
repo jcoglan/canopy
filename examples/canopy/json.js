@@ -3,7 +3,7 @@
  * See https://canopy.jcoglan.com/ for documentation
  */
 
-(function() {
+(function () {
   'use strict';
 
   function TreeNode (text, offset, elements) {
@@ -18,31 +18,37 @@
     }
   };
 
-  var TreeNode1 = function(text, offset, elements) {
+  if (typeof Symbol !== 'undefined' && Symbol.iterator) {
+    TreeNode.prototype[Symbol.iterator] = function () {
+      return this.elements[Symbol.iterator]();
+    };
+  }
+
+  var TreeNode1 = function (text, offset, elements) {
     TreeNode.apply(this, arguments);
     this['__'] = elements[2];
   };
   inherit(TreeNode1, TreeNode);
 
-  var TreeNode2 = function(text, offset, elements) {
+  var TreeNode2 = function (text, offset, elements) {
     TreeNode.apply(this, arguments);
     this['pair'] = elements[1];
   };
   inherit(TreeNode2, TreeNode);
 
-  var TreeNode3 = function(text, offset, elements) {
+  var TreeNode3 = function (text, offset, elements) {
     TreeNode.apply(this, arguments);
     this['pair'] = elements[1];
   };
   inherit(TreeNode3, TreeNode);
 
-  var TreeNode4 = function(text, offset, elements) {
+  var TreeNode4 = function (text, offset, elements) {
     TreeNode.apply(this, arguments);
     this['__'] = elements[1];
   };
   inherit(TreeNode4, TreeNode);
 
-  var TreeNode5 = function(text, offset, elements) {
+  var TreeNode5 = function (text, offset, elements) {
     TreeNode.apply(this, arguments);
     this['__'] = elements[2];
     this['string'] = elements[1];
@@ -50,25 +56,25 @@
   };
   inherit(TreeNode5, TreeNode);
 
-  var TreeNode6 = function(text, offset, elements) {
+  var TreeNode6 = function (text, offset, elements) {
     TreeNode.apply(this, arguments);
     this['value'] = elements[1];
   };
   inherit(TreeNode6, TreeNode);
 
-  var TreeNode7 = function(text, offset, elements) {
+  var TreeNode7 = function (text, offset, elements) {
     TreeNode.apply(this, arguments);
     this['value'] = elements[1];
   };
   inherit(TreeNode7, TreeNode);
 
-  var TreeNode8 = function(text, offset, elements) {
+  var TreeNode8 = function (text, offset, elements) {
     TreeNode.apply(this, arguments);
     this['__'] = elements[1];
   };
   inherit(TreeNode8, TreeNode);
 
-  var TreeNode9 = function(text, offset, elements) {
+  var TreeNode9 = function (text, offset, elements) {
     TreeNode.apply(this, arguments);
     this['__'] = elements[2];
   };
@@ -1446,7 +1452,7 @@
   if (typeof require === 'function' && typeof exports === 'object') {
     Object.assign(exports, exported);
   } else {
-    var ns = (typeof this !== 'undefined') ? this : window;
+    var ns = (typeof this === 'undefined') ? window : this;
     ns.CanopyJson = exported;
   }
 })();
