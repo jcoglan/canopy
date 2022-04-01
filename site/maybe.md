@@ -34,7 +34,10 @@ require('./future').parse('')
    == { text: '', offset: 0, elements: [] }
 
 require('./future').parse('perfect')
-Error: Line 1: expected "future"
-perfect
-^
+SyntaxError: Line 1: expected one of:
+
+    - "future" from Future::root
+
+     1 | perfect
+         ^
 ```

@@ -47,32 +47,32 @@ For example, let's implement actions for the above parser that translate the
 input text into a JavaScript value representing the same structure:
 
 ```js
-var maps = require('./maps');
+const maps = require('./maps')
 
-var actions = {
-  make_map: function(input, start, end, elements) {
-    var map = {};
-    map[elements[1]] = elements[3];
-    return map;
+const actions = {
+  make_map (input, start, end, elements) {
+    let map = {}
+    map[elements[1]] = elements[3]
+    return map
   },
 
-  make_string: function(input, start, end, elements) {
-    return elements[1].text;
+  make_string (input, start, end, elements) {
+    return elements[1].text
   },
 
-  make_list: function(input, start, end, elements) {
-    var list = [elements[1]];
-    elements[2].forEach(function(el) { list.push(el.value) });
-    return list;
+  make_list (input, start, end, elements) {
+    let list = [elements[1]]
+    elements[2].forEach((el) => list.push(el.value))
+    return list
   },
 
-  make_number: function(input, start, end, elements) {
-    return parseInt(input.substring(start, end), 10);
+  make_number (input, start, end, elements) {
+    return parseInt(input.substring(start, end), 10)
   }
-};
+}
 
-var result = maps.parse("{'ints':[1,2,3]}", {actions: actions});
-console.log(result);
+let result = maps.parse("{'ints':[1,2,3]}", { actions })
+console.log(result)
 ```
 
 This program prints
@@ -118,18 +118,18 @@ Let's take a simple example: matching a string literal:
       root  <-  "hello" <HelloNode>
 
 ```js
-var strings = require('./strings');
+const strings = require('./strings')
 
-var types = {
+const types = {
   HelloNode: {
-    upcase: function() {
-      return this.text.toUpperCase();
+    upcase () {
+      return this.text.toUpperCase()
     }
   }
-};
+}
 
-var tree = strings.parse('hello', {types: types});
-console.log(tree.upcase());
+let tree = strings.parse('hello', { types })
+console.log(tree.upcase())
 ```
 
 The grammar says that a node matching `hello` is of type `HelloNode`. Then in
@@ -160,17 +160,17 @@ For example the following means that a node matching the sequence
 The extension methods have access to the labelled node from the sequence.
 
 ```js
-var words = require('./words');
+const words = require('./words')
 
-var types = {
+const types = {
   Extension: {
-    convert: function() {
-      return this.first.text + this.second.text.toUpperCase();
+    convert () {
+      return this.first.text + this.second.text.toUpperCase()
     }
   }
-};
+}
 
-words.parse('foobar', {types: types}).convert()
+words.parse('foobar', { types }).convert()
   == 'fooBAR'
 ```
 
@@ -194,19 +194,19 @@ you need to parenthesize the choice and place the type afterward.
       beta    <-  first:"j" second:"c"
 
 ```js
-var choices = require('./choices');
+const choices = require('./choices')
 
-var types = {
+const types = {
   Extension: {
-    convert: function() {
-      return this.first.text + this.second.text.toUpperCase();
+    convert () {
+      return this.first.text + this.second.text.toUpperCase()
     }
   }
-};
+}
 
-choices.parse('az', {types: types}).convert()
+choices.parse('az', { types }).convert()
    == 'aZ'
 
-choices.parse('jc', {types: types}).convert()
+choices.parse('jc', { types }).convert()
    == 'jC'
 ```

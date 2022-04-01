@@ -25,9 +25,12 @@ require('./alphanum').parse('7')
    == { text: '7', offset: 0, elements: [] }
 
 require('./alphanum').parse('!')
-Error: Line 1: expected [A-Za-z0-9]
-!
-^
+SyntaxError: Line 1: expected one of:
+
+    - [A-Za-z0-9] from Alphanum::root
+
+     1 | !
+         ^
 ```
 
 There is a special character class denoted by `.` (period). This matches any

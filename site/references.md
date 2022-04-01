@@ -21,15 +21,13 @@ simplified example of using rules to match an email address:
 require('./email').parse('bob@example.com')
    == { text: 'bob@example.com',
         offset: 0,
-        elements: 
-         [ { text: 'bob', offset: 0, elements: [...] },
-           { text: '@', offset: 3, elements: [] },
-           { text: 'example.com', offset: 4, elements: [...] } ],
+        elements: [
+          { text: 'bob', offset: 0, elements: [...] },
+          { text: '@', offset: 3, elements: [] },
+          { text: 'example.com', offset: 4, elements: [...] }
+        ],
         username: { text: 'bob', offset: 0, elements: [...] },
-        host: 
-         { text: 'example.com',
-           offset: 4,
-           elements: [...] } }
+        host: { text: 'example.com', offset: 4, elements: [...] } }
 ```
 
 As you can see in the above parse tree, the rules referenced by the `email` rule
@@ -37,7 +35,7 @@ add named nodes called `username` and `host` to the parse tree. This gives you
 an easier way to traverse the tree than using the `elements` array.
 
 ```js
-var tree = require('./email').parse('bob@example.com');
+let tree = require('./email').parse('bob@example.com')
 tree.username.text    == 'bob'
 tree.host.text        == 'example.com'
 ```
@@ -50,13 +48,13 @@ matching nested lists of numbers:
 
     grammar Lists
       value   <-  list / number
-      list    <-  "[" value ("," value)* "]" 
+      list    <-  "[" value ("," value)* "]"
       number  <-  [0-9]
 
 We can parse a string using this grammar and browse the tree it generates:
 
 ```js
-var tree = require('./lists').parse('[[1,2],3]')
+let tree = require('./lists').parse('[[1,2],3]')
 
 tree.text
    == '[[1,2],3]'

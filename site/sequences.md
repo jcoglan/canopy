@@ -24,21 +24,27 @@ resulting parses of the possible inputs:
 require('./hamlet').parse('to be')
    == { text: 'to be',
         offset: 0,
-        elements: 
-         [ { text: '', offset: 0, elements: [] },
-           { text: 'to be', offset: 0, elements: [] } ] }
+        elements: [
+          { text: '', offset: 0, elements: [] },
+          { text: 'to be', offset: 0, elements: [] }
+        ] }
 
 require('./hamlet').parse('not to be')
    == { text: 'not to be',
         offset: 0,
-        elements: 
-         [ { text: 'not ', offset: 0, elements: [] },
-           { text: 'to be', offset: 4, elements: [] } ] }
+        elements: [
+          { text: 'not ', offset: 0, elements: [] },
+          { text: 'to be', offset: 4, elements: [] }
+        ] }
 
 require('./hamlet').parse('or not to be')
-Error: Line 1: expected "to be"
-or not to be
-^
+SyntaxError: Line 1: expected one of:
+
+    - "not " from Hamlet::root
+    - "to be" from Hamlet::root
+
+     1 | or not to be
+         ^
 ```
 
 ## Labelled nodes
@@ -70,18 +76,17 @@ labelled nodes in the output:
 ```js
 tree = require('./hash').parse("{'foo' => 36}")
 
-   == { text: '{\'foo\' => 36}',
+   == { text: "{'foo' => 36}",
         offset: 0,
-        elements: 
-         [ { text: '{', offset: 0, elements: [] },
-           { text: '\'foo\'', offset: 1, elements: [...] },
-           { text: ' => ', offset: 6, elements: [] },
-           { text: '36', offset: 10, elements: [...] },
-           { text: '}', offset: 12, elements: [] } ],
-        string: 
-         { text: '\'foo\'', offset: 1, elements: [...] },
-        number: 
-         { text: '36', offset: 10, elements: [...] } }
+        elements: [
+          { text: '{', offset: 0, elements: [] },
+          { text: "'foo'", offset: 1, elements: [...] },
+          { text: ' => ', offset: 6, elements: [] },
+          { text: '36', offset: 10, elements: [...] },
+          { text: '}', offset: 12, elements: [] }
+        ],
+        string: { text: "'foo'", offset: 1, elements: [...] },
+        number: { text: '36', offset: 10, elements: [...] } }
 
 tree.string.text
    == "'foo'"
@@ -92,4 +97,5 @@ tree.number.text
 
 Here we see that `tree.string` is the same as `tree.elements[1]`, and
 `tree.number` is the same as `tree.elements[3]`. These labels make it much
-easier to navigate the tree and help keep your code readable.
+easier to navigate the tree, and reduce the amount you need to change your code
+if elements are added or removed from a sequence.

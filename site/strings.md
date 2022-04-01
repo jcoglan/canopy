@@ -23,14 +23,20 @@ require('./parsers').parse('I like parsers')
         elements: [] }
 
 require('./parsers').parse('this is not valid')
-Error: Line 1: expected "I like parsers"
-this is not valid
-^
+SyntaxError: Line 1: expected one of:
+
+    - "I like parsers" from Parsers::root
+
+     1 | this is not valid
+         ^
 
 require('./parsers').parse('I like PARSERS')
-Error: Line 1: expected "I like parsers"
-I like PARSERS
-^
+SyntaxError: Line 1: expected one of:
+
+    - "I like parsers" from Parsers::root
+
+     1 | I like PARSERS
+         ^
 ```
 
 As you can see from the last example, strings are case-sensitive. You can create
