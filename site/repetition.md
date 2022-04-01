@@ -39,3 +39,16 @@ SyntaxError: Line 1: expected one of:
      1 | bad
          ^
 ```
+
+Canopy also supports numeric repetition, which takes the following forms:
+
+- `expr{n}` matches `expr` exactly `n` times
+- `expr{n,}` matches `expr` at least `n` times
+- `expr{n,m}` matches `expr` at least `n` times and at most `m` times
+
+For example, this grammar accepts the word `badger` repeated 3, 4 or 5 times:
+
+###### badger.peg
+
+    grammar Badger
+      root  <-  "badger"{3,5}
