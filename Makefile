@@ -45,11 +45,13 @@ test_grammars := $(wildcard test/grammars/*.peg)
 test/javascript/node_modules:
 	cd test/javascript && npm install --no-save
 
-test-js: test/javascript/node_modules $(test_grammars:%.peg=%.js)
-	cd test/javascript && npm test
+test-all: test-java test-js test-python test-ruby
 
 test-java: $(test_grammars:%.peg=%/Grammar.java)
 	cd test/java && mvn clean test
+
+test-js: test/javascript/node_modules $(test_grammars:%.peg=%.js)
+	cd test/javascript && npm test
 
 test-python: $(test_grammars:%.peg=%.py)
 	cd test && python -m unittest discover --pattern '*_test.py'
