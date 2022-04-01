@@ -1,5 +1,2 @@
-title:    Canopy
-markdown: redcarpet
-
-redcarpet:
-  extensions: [smart]
+title:  Canopy
+url:    https://canopy.jcoglan.com/

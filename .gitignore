@@ -13,3 +13,5 @@ test/grammars/*.js
 test/grammars/*.py
 test/grammars/*.rb
 test/java/target
+
+.jekyll-cache
