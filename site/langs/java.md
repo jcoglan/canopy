@@ -5,22 +5,21 @@ title: Java
 
 ## Java
 
-To get an overview of how to use Canopy with Java, consider this example
+To get an overview of how to use Canopy with Java, consider this example of a
 simplified grammar for URLs:
 
 ###### url.peg
 
     grammar URL
-
-    url       <-  scheme "://" host pathname search hash?
-    scheme    <-  "http" "s"?
-    host      <-  hostname port?
-    hostname  <-  segment ("." segment)*
-    segment   <-  [a-z0-9-]+
-    port      <-  ":" [0-9]+
-    pathname  <-  "/" [^ ?]*
-    search    <-  ("?" query:[^ #]*)?
-    hash      <-  "#" [^ ]*
+      url       <-  scheme "://" host pathname search hash?
+      scheme    <-  "http" "s"?
+      host      <-  hostname port?
+      hostname  <-  segment ("." segment)*
+      segment   <-  [a-z0-9-]+
+      port      <-  ":" [0-9]+
+      pathname  <-  "/" [^ ?]*
+      search    <-  ("?" query:[^ #]*)?
+      hash      <-  "#" [^ ]*
 
 We can compile this grammar into a Java package using `canopy`:
 
@@ -98,7 +97,10 @@ public class Example {
 ## Parsing errors
 
 If you give the parser an input text that does not match the grammar, a
-`ParseError` is thrown:
+`url.ParseError` is thrown. The error message will list any of the strings or
+character classes the parser was expecting to find at the furthest position it
+got to, along with the rule those expectations come from, and it will highlight
+the line of the input where the syntax error occurs.
 
 ```java
 import url.URL;
@@ -111,11 +113,12 @@ public class Example {
     }
 }
 
-/*  prints:
-
-    url.ParseError: Line 1: expected [[a-z0-9-]]
-    https://example.com./
-                        ^                             */
+// url.ParseError: Line 1: expected one of:
+//
+//     - [a-z0-9-] from URL::segment
+//
+//      1 | https://example.com./
+//                              ^
 ```
 
 ## Implementing actions
