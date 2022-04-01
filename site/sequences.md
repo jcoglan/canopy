@@ -74,7 +74,7 @@ labelled expression that matches one or more digits. These two children create
 labelled nodes in the output:
 
 ```js
-tree = require('./hash').parse("{'foo' => 36}")
+let tree = require('./hash').parse("{'foo' => 36}")
 
    == { text: "{'foo' => 36}",
         offset: 0,
@@ -99,3 +99,34 @@ Here we see that `tree.string` is the same as `tree.elements[1]`, and
 `tree.number` is the same as `tree.elements[3]`. These labels make it much
 easier to navigate the tree, and reduce the amount you need to change your code
 if elements are added or removed from a sequence.
+
+## Muting
+
+To make it more convenient to work with parse trees, we can label expressions in
+the grammar as _muted_, meaning they won't generate nodes in the output. For
+example, in the grammar above, the `"{"`, `" => "` and `"}"` items don't contain
+meaningful information and we can mute them by placing a `@` symbol before them.
+
+###### hash.peg
+
+    grammar Hash
+      object  <-  @"{" string @" => " number:[0-9]+ @"}"
+      string  <-  "'" [^']* "'"
+
+Now, the nodes for those elements will be excluded from the parse tree.
+
+```js
+require('./hash').parse("{'foo' => 36}")
+
+   == { text: "{'foo' => 36}",
+        offset: 0,
+        elements: [
+          { text: "'foo'", offset: 1, elements: [...] },
+          { text: '36', offset: 10, elements: [...] }
+        ],
+        string: { text: "'foo'", offset: 1, elements: [...] },
+        number: { text: '36', offset: 10, elements: [...] } }
+```
+
+Muted items are also excluded from the `elements` array that is passed to
+[tree-building functions][/types.html].
