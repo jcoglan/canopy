@@ -6,7 +6,7 @@ title: Grammar syntax
 ## Grammar syntax
 
 Canopy grammar definitions are written using standard
-[PEG](http://en.wikipedia.org/wiki/Parsing_expression_grammar notation) notation
+[PEG](https://en.wikipedia.org/wiki/Parsing_expression_grammar) notation
 and stored in files with the `.peg` extension. They _only_ specify the static
 grammar of the language and do not contain inline processing code. However, you
 can add additional methods to parse trees by [implementing parsing
