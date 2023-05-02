@@ -8,15 +8,15 @@ jobs:
       fail-fast: false
       matrix:
         java:
-          - '8'
-          - '9'
-          - '10'
           - '11'
           - '12'
           - '13'
           - '14'
           - '15'
           - '16'
+          - '17'
+          - '18'
+          - '19'
     name: Java v${{ matrix.java }}
     runs-on: ubuntu-latest
     steps:
