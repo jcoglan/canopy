@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
-const fs     = require('fs')
-const mkdirp = require('mkdirp')
-const nopt   = require('nopt')
+const fs         = require('fs')
+const { mkdirp } = require('mkdirp')
+const nopt       = require('nopt')
 
 const { basename, dirname, join, relative } = require('path')
 const canopy = require('../lib/canopy')
