@@ -17,7 +17,7 @@ jobs:
           - '3.10'
           - '3.11'
     name: Python v${{ matrix.python }}
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
