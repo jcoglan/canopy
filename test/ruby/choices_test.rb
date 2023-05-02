@@ -53,4 +53,19 @@ describe "choices" do
       assert_raises(Choices::ParseError) { Choices.parse("choice-rep: abcadba") }
     end
   end
+
+  describe "containing sequences" do
+    it "parses one branch of the choice" do
+      assert_parse \
+        ["ab", 13, [
+          ["a", 13, []],
+          ["b", 14, []]
+        ]],
+        Choices.parse("choice-bind: ab")
+    end
+
+    it "binds sequences tighter than choices" do
+      assert_raises(Choices::ParseError) { Choices.parse("choice-bind: abef") }
+    end
+  end
 end

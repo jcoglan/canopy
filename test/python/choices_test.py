@@ -49,3 +49,18 @@ class ChoiceRepetitionTest(TestCase, ParseHelper):
     def test_rejects_if_any_iteration_does_not_match_the_options(self):
         with self.assertRaises(choices.ParseError):
             choices.parse("choice-rep: abcadba")
+
+
+class ChoiceSequenceTest(TestCase, ParseHelper):
+    def test_parses_one_branch_of_the_choice(self):
+        self.assertParse(
+            ("ab", 13, [
+                ("a", 13, []),
+                ("b", 14, [])
+            ]),
+            choices.parse("choice-bind: ab")
+        )
+
+    def test_binds_sequences_tighter_than_choices(self):
+        with self.assertRaises(choices.ParseError):
+            choices.parse("choice-bind: abef")

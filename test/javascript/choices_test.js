@@ -55,4 +55,20 @@ jstest.describe("choices", function() { with(this) {
       assertThrows(SyntaxError, () => Choices.parse("choice-rep: abcadba"))
     }})
   }})
+
+  describe("containing sequences", function() { with(this) {
+    it("parses one branch of the choice", function() { with(this) {
+      assertParse(
+        ["ab", 13, [
+          ["a", 13, []],
+          ["b", 14, []]
+        ]],
+        Choices.parse("choice-bind: ab")
+      )
+    }})
+
+    it("binds sequences tighter than choices", function() { with(this) {
+      assertThrows(SyntaxError, () => Choices.parse("choice-bind: abef"))
+    }})
+  }})
 }})

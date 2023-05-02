@@ -3,7 +3,9 @@ grammar Choices
 test <- "choice-abc: " choice_abc
       / "choice-seq: " choice_seq
       / "choice-rep: " choice_rep
+      / "choice-bind: " choice_bind
 
-choice_abc <- "a" / "b" / "c"
-choice_seq <- ("re" / "rep") "peat"
-choice_rep <- ("a" / "b" / "c")+
+choice_abc  <- "a" / "b" / "c"
+choice_seq  <- ("re" / "rep") "peat"
+choice_rep  <- ("a" / "b" / "c")+
+choice_bind <- "a" "b" / "c" "d" / "e" "f"

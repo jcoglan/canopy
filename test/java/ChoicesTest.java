@@ -68,6 +68,22 @@ class ChoiceRepetitionTest extends ParseHelper {
     }
 }
 
+class ChoiceSequenceTest extends ParseHelper {
+    @Test
+    void parsesOneBranchOfTheChoice() throws ParseError {
+        expect(Choices.parse("choice-bind: ab")).toMatch(
+            node("ab", 13)
+                .elem(node("a", 13).noElems())
+                .elem(node("b", 14).noElems())
+        );
+    }
+
+    @Test
+    void testBindsSequencesTighterThanChoices() {
+        assertThrows(ParseError.class, () -> Choices.parse("choice-bind: abef"));
+    }
+}
+
 class ParseHelper {
     Node<Label> expect(TreeNode node) {
         return new NodeWrapper(node.elements.get(1));
