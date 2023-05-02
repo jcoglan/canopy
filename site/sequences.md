@@ -129,4 +129,4 @@ require('./hash').parse("{'foo' => 36}")
 ```
 
 Muted items are also excluded from the `elements` array that is passed to
-[tree-building functions][/types.html].
+[tree-building functions](/types.html).
