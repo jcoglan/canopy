@@ -78,14 +78,14 @@ class Builder extends Base {
 
     this._line('public abstract class Grammar {', false)
     this._indent(() => {
-      this.assign_('static TreeNode ' + this.nullNode_(), 'new TreeNode()')
+      this.assign_('public static TreeNode ' + this.nullNode_(), 'new TreeNode()')
       this._newline()
 
-      this._line('int inputSize, offset, failure')
-      this._line('String input')
-      this._line('List<String[]> expected')
-      this._line('Dictionary<Label, Dictionary<int, CacheRecord>> cache')
-      this._line('Actions actions')
+      this._line('public int inputSize, offset, failure')
+      this._line('public String input')
+      this._line('public List<String[]> expected')
+      this._line('public Dictionary<Label, Dictionary<int, CacheRecord>> cache')
+      this._line('public Actions actions')
       this._newline()
       block()
     })
@@ -122,9 +122,8 @@ class Builder extends Base {
   }
 
   constructor_ (args, block) {
-    this._line(this._currentScope.name + '(String text, int offset, List<TreeNode> elements) {', false)
+    this._line('public ' + this._currentScope.name + '(String text, int offset, List<TreeNode> elements) : base(text, offset, elements){', false)
     this._indent(() => {
-      this._line('base(text, offset, elements)')
       block()
     })
     this._line('}', false)
@@ -132,7 +131,7 @@ class Builder extends Base {
 
   method_ (name, args, block) {
     this._newline()
-    this._line('TreeNode ' + name + '() {', false)
+    this._line('public TreeNode ' + name + '() {', false)
     this._scope(block)
     this._line('}', false)
   }
@@ -147,9 +146,9 @@ class Builder extends Base {
         address = temp.address,
         offset  = temp.index
 
-    this.assign_('Dictionary<Integer, CacheRecord> rule', 'cache[Label.' + name + ']')
+    this.assign_('Dictionary<int, CacheRecord> rule', 'cache[Label.' + name + ']')
     this.if_('rule == null', () => {
-      this.assign_('rule', 'new Dictionary<Integer, CacheRecord>()')
+      this.assign_('rule', 'new Dictionary<int, CacheRecord>()')
       this.assign_('cache[Label.' + name + ']','rule')
     })
     this.if_('rule.ContainsKey(offset)', () => {
@@ -291,7 +290,7 @@ class Builder extends Base {
   }
 
   arrayLookup_ (expression, offset) {
-    return expression + '.GetValue(' + offset + ')'
+    return expression + '[' + offset + ']'
   }
 
   append_ (list, value, index) {

@@ -2,7 +2,7 @@
 
 using System.Collections.Generic;
 using System.Collections;
-//import static org.junit.jupiter.api.Assertions.assertEquals;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 public class ElementsSpec<L> {
     private List<NodeSpec<L>> elements = null;
@@ -24,9 +24,9 @@ public class ElementsSpec<L> {
         }
 
         List<Node<L>> actualElems = node.elements();
-        assertEquals(elements.Count, actualElems.Count);
+        Assert.AreEqual(elements.Count, actualElems.Count);
 
-        for (int i = 0; i < elements.size(); i++) {
+        for (int i = 0; i < elements.Count; i++) {
             elements[i].assertMatches(actualElems[i]);
         }
     }
