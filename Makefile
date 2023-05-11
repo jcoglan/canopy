@@ -50,6 +50,9 @@ test-all: test-java test-js test-python test-ruby
 test-java: $(test_grammars:%.peg=%/Grammar.java)
 	cd test/java && mvn clean test
 
+test-java: $(test_grammars:%.peg=%/Grammar.cs)
+	cd test/cs && dotnet test
+
 test-js: test/javascript/node_modules $(test_grammars:%.peg=%.js)
 	cd test/javascript && npm test
 
