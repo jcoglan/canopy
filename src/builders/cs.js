@@ -115,7 +115,6 @@ class Builder extends Base {
   }
 
   class_ (name, parent, block) {
-    console.log(`class_ ${name}##${parent}##${block}`)
     this._newline()
     this._line('class ' + name + ' : ' + parent + ' {', false)
     this._scope(block, name)
