@@ -2,13 +2,15 @@
 
 using System.Collections.Generic;
 using System.Collections;
+using System;
+
 //import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class NodeSpec<L> {
     private String text;
     private int offset;
     private ElementsSpec<L> elements = new ElementsSpec<L>();
-    private HashMap<L, NodeSpec<L>> labelled = new HashMap<L, NodeSpec<L>>();
+    private Dictionary<L, NodeSpec<L>> labelled = new Dictionary<L, NodeSpec<L>>();
 
     public NodeSpec(String text, int offset) {
         this.text = text;

@@ -33,6 +33,9 @@ test/%.js: test/%.peg $(lib_files)
 %/Grammar.java: %.peg $(lib_files)
 	./bin/canopy --lang java $<
 
+%/Grammar.cs: %.peg $(lib_files)
+	./bin/canopy --lang cs $<
+
 %.py: %.peg $(lib_files)
 	./bin/canopy --lang python $<
 
@@ -51,7 +54,7 @@ test-java: $(test_grammars:%.peg=%/Grammar.java)
 	cd test/java && mvn clean test
 
 test-cs: $(test_grammars:%.peg=%/Grammar.cs)
-	cd test/cs && dotnet test
+	cd test/cs/choices && dotnet test
 
 test-js: test/javascript/node_modules $(test_grammars:%.peg=%.js)
 	cd test/javascript && npm test
