@@ -24,7 +24,8 @@ class Builder extends Base {
   _initBuffer (pathname) {
     let namespace = pathname.split(sep)
     namespace.pop()
-    return 'package ' + namespace.join('.') + ';\n\n'
+    //return 'package ' + namespace.join('.') + ';\n\n'
+    return '//@TODO: Do we need a cs equivalent to this?\n //package ' + namespace.join('.') + ';\n\n'
   }
 
   _quote (string) {
@@ -114,6 +115,7 @@ class Builder extends Base {
   }
 
   class_ (name, parent, block) {
+    console.log(`class_ ${name}##${parent}##${block}`)
     this._newline()
     this._line('class ' + name + ' : ' + parent + ' {', false)
     this._scope(block, name)
@@ -135,8 +137,11 @@ class Builder extends Base {
     this._scope(block)
     this._line('}', false)
   }
-
+  set_label_name(name) {
+    return 'peg_' + name
+  }
   cache_ (name, block) {
+    name = this.set_label_name(name)//we have to do this in case the name is a keyword
     this._labels.add(name)
 
     let temp    = this.localVars_({ address: this.nullNode_(), index: 'offset' }),
@@ -146,7 +151,7 @@ class Builder extends Base {
     this.assign_('Dictionary<Integer, CacheRecord> rule', 'cache[Label.' + name + ']')
     this.if_('rule == null', () => {
       this.assign_('rule', 'new Dictionary<Integer, CacheRecord>()')
-      this.assign_('cache[Label.' + name + ']',rule)
+      this.assign_('cache[Label.' + name + ']','rule')
     })
     this.if_('rule.ContainsKey(offset)', () => {
       this.assign_(address, 'rule[offset].node')
@@ -159,6 +164,7 @@ class Builder extends Base {
   }
 
   attribute_ (name, value) {
+    name = this.set_label_name(name)//we have to do this in case the name is a keyword
     this._labels.add(name)
     this.assign_('labelled[Label.' + name + ']', value)
   }

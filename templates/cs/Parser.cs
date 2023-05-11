@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Collections;
 
 
-public class {{name}} extends Grammar {
+public class {{name}} : Grammar {
     public {{name}}(String input, Actions actions) {
         this.input = input;
         this.inputSize = input.Length;
