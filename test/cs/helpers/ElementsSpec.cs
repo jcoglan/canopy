@@ -5,15 +5,15 @@ using System.Collections;
 //import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ElementsSpec<L> {
-    private ArrayList<NodeSpec<L>> elements = null;
+    private List<NodeSpec<L>> elements = null;
 
     public void noElems() {
-        elements = new ArrayList<NodeSpec<L>>();
+        elements = new List<NodeSpec<L>>();
     }
 
     public void elem(NodeSpec<L> elem) {
         if (elements == null) {
-            elements = new ArrayList<NodeSpec<L>>();
+            elements = new List<NodeSpec<L>>();
         }
         elements.Add(elem);
     }

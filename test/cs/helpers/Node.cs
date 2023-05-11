@@ -2,6 +2,7 @@
 
 using System.Collections.Generic;
 using System.Collections;
+using System;
 
 public interface Node<L> {
     public String text();

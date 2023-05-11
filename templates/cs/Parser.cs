@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Collections;
-
+using System;
 
 public class {{name}} : Grammar {
     public {{name}}(String input, Actions actions) {
@@ -10,7 +10,7 @@ public class {{name}} : Grammar {
         this.offset = 0;
         this.cache = new Dictionary<Label, Dictionary<Integer, CacheRecord>>();
         this.failure = 0;
-        this.expected = new ArrayList<String[]>();
+        this.expected = new List<String[]>();
     }
 
     public static TreeNode parse(String input, Actions actions) {

@@ -68,7 +68,7 @@ class Builder extends Base {
 
   grammarModule_ (block) {
     this._newBuffer('cs', 'Grammar')
-
+    this._line('using System')
     this._line('using System.Collections')
     this._line('using System.Collections.Generic')
     //this._line('import java.util.List') in System.Collections.Generic
@@ -76,7 +76,7 @@ class Builder extends Base {
     this._line('using System.Text.RegularExpressions')
     this._newline()
 
-    this._line('abstract class Grammar {', false)
+    this._line('public abstract class Grammar {', false)
     this._indent(() => {
       this.assign_('static TreeNode ' + this.nullNode_(), 'new TreeNode()')
       this._newline()
@@ -84,7 +84,7 @@ class Builder extends Base {
       this._line('int inputSize, offset, failure')
       this._line('String input')
       this._line('List<String[]> expected')
-      this._line('Dictionary<Label, Dictionary<Integer, CacheRecord>> cache')
+      this._line('Dictionary<Label, Dictionary<int, CacheRecord>> cache')
       this._line('Actions actions')
       this._newline()
       block()
@@ -235,7 +235,7 @@ class Builder extends Base {
 
     this.if_('offset > failure', () => {
       this.assign_('failure', 'offset')
-      this.assign_('expected', 'new ArrayList<String[]>()')
+      this.assign_('expected', 'new List<String[]>()')
     })
     this.if_('offset == failure', () => {
       this.append_('expected', 'new String[] { ' + rule + ', ' + expected + ' }')
@@ -314,7 +314,7 @@ class Builder extends Base {
   }
 
   emptyList_ (size) {
-    return 'new ArrayList<TreeNode>(' + (size || '') + ')'
+    return 'new List<TreeNode>(' + (size || '') + ')'
   }
 
   _emptyString () {

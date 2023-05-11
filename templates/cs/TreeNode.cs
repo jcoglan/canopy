@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Collections;
-
+using System;
 
 public class {{name}} : IEnumerable<{{name}}> {
     public String text;
@@ -10,7 +10,7 @@ public class {{name}} : IEnumerable<{{name}}> {
     Dictionary<Label, {{name}}> labelled;
 
     public {{name}}() {
-        this("", -1, new ArrayList<{{name}}>(0));
+        this("", -1, new List<{{name}}>(0));
     }
 
     public {{name}}(String text, int offset, List<{{name}}> elements) {
@@ -24,7 +24,7 @@ public class {{name}} : IEnumerable<{{name}}> {
         return labelled[key];
     }
 
-    public IEnumerable<{{name}}> iterator() {
+    public IEnumerator<{{name}}> iterator() {
         foreach(var items in elements)
         { 
             // Returning the element after every iteration
@@ -32,7 +32,7 @@ public class {{name}} : IEnumerable<{{name}}> {
         }
     }
 
-    public IEnumerable<{{name}}> GetEnumerator() {
+    public IEnumerator<{{name}}> GetEnumerator() {
         foreach(var items in elements)
         { 
             // Returning the element after every iteration
