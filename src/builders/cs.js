@@ -45,6 +45,10 @@ class Builder extends Base {
     return ['/**'].concat(lines).concat([' */'])
   }
 
+  pragma (directive) {
+    this._line("#pragma " + directive, false)
+  }
+
   package_ (name, actions, block) {
     this._grammarName = name
 
@@ -68,11 +72,11 @@ class Builder extends Base {
 
   grammarModule_ (block) {
     this._newBuffer('cs', 'Grammar')
+    //some pragmas to kill warnings
+    this.pragma("warning disable CS1717")
     this._line('using System')
     this._line('using System.Collections')
     this._line('using System.Collections.Generic')
-    //this._line('import java.util.List') in System.Collections.Generic
-   // this._line('import java.util.Map') gonna use dictionary
     this._line('using System.Text.RegularExpressions')
     this._newline()
 
@@ -85,7 +89,19 @@ class Builder extends Base {
       this._line('public String input')
       this._line('public List<String[]> expected')
       this._line('public Dictionary<Label, Dictionary<int, CacheRecord>> cache')
-      this._line('public Actions actions')
+      this._line('public Actions? actions')
+      //default constructor
+      this._line('public Grammar() {',false)
+      this._indent(() => {
+        this.assign_('this.input','\"\"')
+        this.assign_('this.inputSize','0')
+        this.assign_('this.actions','null')
+        this.assign_('this.offset','0')
+        this.assign_('this.cache','new Dictionary<Label, Dictionary<int, CacheRecord>>()')
+        this.assign_('this.failure','0')
+        this.assign_('this.expected','new List<String[]>()')
+      })
+      this._line('}',false)
       this._newline()
       block()
     })
@@ -145,7 +161,7 @@ class Builder extends Base {
     let temp    = this.localVars_({ address: this.nullNode_(), index: 'offset' }),
         address = temp.address,
         offset  = temp.index
-    this._line('Dictionary<int, CacheRecord> rule')
+    this._line('Dictionary<int, CacheRecord>? rule')
     this._line('cache.TryGetValue(Label.' + name + ', out rule)')    
     this.if_('rule == null', () => {
       this.assign_('rule', 'new Dictionary<int, CacheRecord>()')
@@ -178,7 +194,8 @@ class Builder extends Base {
     let varName = this._varName(name)
 
     if (value === undefined) value = this.nullNode_()
-    this.assign_(TYPES[name] + ' ' + varName, value)
+    let nullable = value === 'null' ? '?' : '' //we need to explictly declare it as nullable
+    this.assign_(TYPES[name] + nullable +' ' + varName, value)
 
     return varName
   }
@@ -286,7 +303,6 @@ class Builder extends Base {
   }
 
   regexMatch_ (regex, string) {
-    //return string + ' != null && ' + regex + '.matcher(' + string + ').matches()'
     return string + ' != null && ' + regex + '.IsMatch(' + string + ')'
   }
 

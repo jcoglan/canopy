@@ -20,8 +20,8 @@ public class {{name}} : IEnumerable<{{name}}> {
         this.labelled = new Dictionary<Label, {{name}}>();
     }
 
-    public {{name}} get(Label key) {
-        {{name}} ret;
+    public {{name}}? get(Label key) {
+        {{name}}? ret;
         labelled.TryGetValue(key, out ret);
         return ret;
     }

@@ -6,18 +6,10 @@ using System;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-//import helpers.Node;
-//import helpers.NodeSpec;
-
-using test.grammars.terminals.Label;
-using test.grammars.terminals.ParseError;
-using test.grammars.terminals.Terminals;
-using test.grammars.terminals.TreeNode;
-
 [TestClass]
-class AnyCharTest : ParseHelper {
+public class AnyCharTest : ParseHelper {
     [TestMethod]
-    void parsesAnySingleCharacter(){
+    public void parsesAnySingleCharacter(){
         expect(Terminals.parse("any: a")).toMatch(node("a", 5));
         expect(Terminals.parse("any: !")).toMatch(node("!", 5));
     }
@@ -25,189 +17,189 @@ class AnyCharTest : ParseHelper {
     [TestMethod]
     [ExpectedException(typeof(ParseError),
     "Expected a ParseError")]
-    void rejectsTheEmptyString() {
+    public void rejectsTheEmptyString() {
         Terminals.parse("any: ");
     }
 
     [TestMethod]
     [ExpectedException(typeof(ParseError),
     "Expected a ParseError")]
-    void rejectsInputWithTooManyCharacters() {
+    public void rejectsInputWithTooManyCharacters() {
         Terminals.parse("any: ab");
     }
 }
 [TestClass]
-class CharClassTest : ParseHelper {
+public class CharClassTest : ParseHelper {
     [TestMethod]
-    void parsesCharactersWithinTheClass(){
+    public void parsesCharactersWithinTheClass(){
         expect(Terminals.parse("pos-class: x")).toMatch(node("x", 11));
     }
 
     [TestMethod]
     [ExpectedException(typeof(ParseError),
     "Expected a ParseError")]
-    void rejectsCharactersOutsideTheClass() {
+    public void rejectsCharactersOutsideTheClass() {
         Terminals.parse("pos-class: 0");
     }
 
     [TestMethod]
     [ExpectedException(typeof(ParseError),
     "Expected a ParseError")]
-    void matchesCharactersCaseSensitively() {
+    public void matchesCharactersCaseSensitively() {
         Terminals.parse("pos-class: A");
     }
 
     [TestMethod]
-    void parsesCharactersOutsideANegativeClass(){
+    public void parsesCharactersOutsideANegativeClass(){
         expect(Terminals.parse("neg-class: 0")).toMatch(node("0", 11));
     }
 
     [TestMethod]
     [ExpectedException(typeof(ParseError),
     "Expected a ParseError")]
-    void rejectsCharactersWithinANegativeClass() {
+    public void rejectsCharactersWithinANegativeClass() {
         Terminals.parse("neg-class: x");
     }
 }
 [TestClass]
-class SingleQuotedStringTest : ParseHelper {
+public class SingleQuotedStringTest : ParseHelper {
     [TestMethod]
-    void parsesThatExactString(){
+    public void parsesThatExactString(){
         expect(Terminals.parse("str-1: oat")).toMatch(node("oat", 7));
     }
 
     [TestMethod]
     [ExpectedException(typeof(ParseError),
     "Expected a ParseError")]
-    void matchesStringsCaseSensitively() {
+    public void matchesStringsCaseSensitively() {
         Terminals.parse("str-1: OAT");
     }
 
     [TestMethod]
     [ExpectedException(typeof(ParseError),
     "Expected a ParseError")]
-    void rejectsStringsWithAdditionalPrefixes() {
+    public void rejectsStringsWithAdditionalPrefixes() {
         Terminals.parse("str-1: boat");
     }
 
     [TestMethod]
     [ExpectedException(typeof(ParseError),
     "Expected a ParseError")]
-    void rejectsStringsWithAdditionalSuffixes() {
+    public void rejectsStringsWithAdditionalSuffixes() {
         Terminals.parse("str-1: oath");
     }
 
     [TestMethod]
     [ExpectedException(typeof(ParseError),
     "Expected a ParseError")]
-    void rejectsTheEmptyString() {
+    public void rejectsTheEmptyString() {
         Terminals.parse("str-1: ");
     }
 
     [TestMethod]
     [ExpectedException(typeof(ParseError),
     "Expected a ParseError")]
-    void rejectsPrefixesOfTheTargetString() {
+    public void rejectsPrefixesOfTheTargetString() {
         Terminals.parse("str-1: oa");
     }
 }
 [TestClass]
-class DoubleQuotedStringTest : ParseHelper {
+public class DoubleQuotedStringTest : ParseHelper {
     [TestMethod]
-    void parsesThatExactString(){
+    public void parsesThatExactString(){
         expect(Terminals.parse("str-2: oat")).toMatch(node("oat", 7));
     }
 
     [TestMethod]
     [ExpectedException(typeof(ParseError),
     "Expected a ParseError")]
-    void matchesStringsCaseSensitively() {
+    public void matchesStringsCaseSensitively() {
         Terminals.parse("str-2: OAT");
     }
 
     [TestMethod]
     [ExpectedException(typeof(ParseError),
     "Expected a ParseError")]
-    void rejectsStringsWithAdditionalPrefixes() {
+    public void rejectsStringsWithAdditionalPrefixes() {
         Terminals.parse("str-2: boat");
     }
 
     [TestMethod]
     [ExpectedException(typeof(ParseError),
     "Expected a ParseError")]
-    void rejectsStringsWithAdditionalSuffixes() {
+    public void rejectsStringsWithAdditionalSuffixes() {
         Terminals.parse("str-2: oath");
     }
 
     [TestMethod]
     [ExpectedException(typeof(ParseError),
     "Expected a ParseError")]
-    void rejectsTheEmptyString() {
+    public void rejectsTheEmptyString() {
         Terminals.parse("str-2: ");
     }
 
     [TestMethod]
     [ExpectedException(typeof(ParseError),
     "Expected a ParseError")]
-    void rejectsPrefixesOfTheTargetString() {
+    public void rejectsPrefixesOfTheTargetString() {
         Terminals.parse("str-2: oa");
     }
 }
 [TestClass]
-class CaseInsensitiveStringTest : ParseHelper {
+public class CaseInsensitiveStringTest : ParseHelper {
     [TestMethod]
-    void parsesThatExactString(){
+    public void parsesThatExactString(){
         expect(Terminals.parse("str-ci: oat")).toMatch(node("oat", 8));
     }
 
     [TestMethod]
-    void matchesStringsCaseInsensitively(){
+    public void matchesStringsCaseInsensitively(){
         expect(Terminals.parse("str-ci: OAT")).toMatch(node("OAT", 8));
     }
 
     [TestMethod]
     [ExpectedException(typeof(ParseError),
     "Expected a ParseError")]
-    void rejectsStringsWithAdditionalPrefixes() {
+    public void rejectsStringsWithAdditionalPrefixes() {
         Terminals.parse("str-ci: boat");
     }
 
     [TestMethod]
     [ExpectedException(typeof(ParseError),
     "Expected a ParseError")]
-    void rejectsStringsWithAdditionalSuffixes() {
+    public void rejectsStringsWithAdditionalSuffixes() {
         Terminals.parse("str-ci: oath");
     }
 
     [TestMethod]
     [ExpectedException(typeof(ParseError),
     "Expected a ParseError")]
-    void rejectsTheEmptyString() {
+    public void rejectsTheEmptyString() {
         Terminals.parse("str-ci: ");
     }
 
     [TestMethod]
     [ExpectedException(typeof(ParseError),
     "Expected a ParseError")]
-    void rejectsPrefixesOfTheTargetString() {
+    public void rejectsPrefixesOfTheTargetString() {
         Terminals.parse("str-ci: oa");
     }
 }
 
-class ParseHelper {
-    Node<Label> expect(TreeNode node) {
-        return new NodeWrapper(node.elements.get(1));
+public class ParseHelper {
+    public Node<Label> expect(TreeNode node) {
+        return new NodeWrapper(node.elements[1]);
     }
 
-    NodeSpec<Label> node(String text, int offset) {
+    public NodeSpec<Label> node(String text, int offset) {
         return new NodeSpec<Label>(text, offset);
     }
 }
+#pragma warning disable CS8602
+public class NodeWrapper : Node<Label> {
+    private TreeNode? node;
 
-class NodeWrapper : Node<Label> {
-    private TreeNode node;
-
-    NodeWrapper(TreeNode node) {
+    public NodeWrapper(TreeNode? node) {
         this.node = node;
     }
 
@@ -230,3 +222,4 @@ class NodeWrapper : Node<Label> {
         return new NodeWrapper(node.get(key));
     }
 }
+#pragma warning restore CS8602

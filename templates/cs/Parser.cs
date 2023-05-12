@@ -3,7 +3,7 @@ using System.Collections;
 using System;
 
 public class {{name}} : Grammar {
-    public {{name}}(String input, Actions actions) {
+    public {{name}}(String input, Actions? actions) {
         this.input = input;
         this.inputSize = input.Length;
         this.actions = actions;
@@ -13,7 +13,7 @@ public class {{name}} : Grammar {
         this.expected = new List<String[]>();
     }
 
-    public static TreeNode parse(String input, Actions actions) {
+    public static TreeNode parse(String input, Actions? actions) {
         {{name}} parser = new {{name}}(input, actions);
         return parser.parse();
     }
