@@ -5,7 +5,7 @@ using System.Collections;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 public class ElementsSpec<L> {
-    private List<NodeSpec<L>> elements = null;
+    private List<NodeSpec<L>>? elements = null;
 
     public void noElems() {
         elements = new List<NodeSpec<L>>();

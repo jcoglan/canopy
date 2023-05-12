@@ -319,10 +319,11 @@ public class ParseHelper {
     }
 }
 
+#pragma warning disable CS8602
 public class NodeWrapper : Node<Label> {
-    private TreeNode node;
+    private TreeNode? node;
 
-    public NodeWrapper(TreeNode node) {
+    public NodeWrapper(TreeNode? node) {
         this.node = node;
     }
 
@@ -346,3 +347,4 @@ public class NodeWrapper : Node<Label> {
         return new NodeWrapper(node.get(key));
     }
 }
+#pragma warning restore CS8602
