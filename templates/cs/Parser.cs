@@ -8,7 +8,7 @@ public class {{name}} : Grammar {
         this.inputSize = input.Length;
         this.actions = actions;
         this.offset = 0;
-        this.cache = new Dictionary<Label, Dictionary<Integer, CacheRecord>>();
+        this.cache = new Dictionary<Label, Dictionary<int, CacheRecord>>();
         this.failure = 0;
         this.expected = new List<String[]>();
     }

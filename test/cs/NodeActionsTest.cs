@@ -310,16 +310,16 @@ class CustomNode : TreeNode {
     }
 }
 
-class ParseHelper {
-    Node<Label> expect(TreeNode node) {
+public class ParseHelper {
+    public Node<Label> expect(TreeNode node) {
         return new NodeWrapper(node.elements.get(1));
     }
 
-    NodeSpec<Label> node(String text, int offset) {
+    public NodeSpec<Label> node(String text, int offset) {
         return new NodeSpec<Label>(text, offset);
     }
 
-    void assertNode(CustomNode expected, CustomNode actual) {
+    public void assertNode(CustomNode expected, CustomNode actual) {
         assertEquals(expected.type, actual.type);
         assertEquals(expected.input, actual.input);
         assertEquals(expected.start, actual.start);
@@ -328,10 +328,10 @@ class ParseHelper {
     }
 }
 
-class NodeWrapper : Node<Label> {
+public class NodeWrapper : Node<Label> {
     private TreeNode node;
 
-    NodeWrapper(TreeNode node) {
+    public NodeWrapper(TreeNode node) {
         this.node = node;
     }
 
