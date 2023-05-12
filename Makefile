@@ -57,6 +57,7 @@ test-cs: $(test_grammars:%.peg=%/Grammar.cs)
 	cd test/cs/choices && dotnet test
 	cd test/cs/node_actions && dotnet test
 	cd test/cs/predicates && dotnet test
+	cd test/cs/quantifiers && dotnet test
 
 test-js: test/javascript/node_modules $(test_grammars:%.peg=%.js)
 	cd test/javascript && npm test
