@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <Nullable>enable</Nullable>
+
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.11.0" />
+     <PackageReference Include="MSTest.TestAdapter" Version="2.0.0" />
+    <PackageReference Include="MSTest.TestFramework" Version="2.0.0" />
+    <PackageReference Include="coverlet.collector" Version="3.1.0" />
+    <Compile Include="./QuantifiersTest.cs" />
+    <Compile Include="../helpers/ElementsSpec.cs" />
+    <Compile Include="../helpers/Node.cs" />
+    <Compile Include="../helpers/NodeSpec.cs" />
+    <Compile Include="../../grammars/quantifiers/Actions.cs" />
+    <Compile Include="../../grammars/quantifiers/CacheRecord.cs" />
+    <Compile Include="../../grammars/quantifiers/Quantifiers.cs" />
+    <Compile Include="../../grammars/quantifiers/Grammar.cs" />
+    <Compile Include="../../grammars/quantifiers/Label.cs" />
+    <Compile Include="../../grammars/quantifiers/ParseError.cs" />
+    <Compile Include="../../grammars/quantifiers/TreeNode.cs" />
+  </ItemGroup>
+
+</Project>
