@@ -21,7 +21,9 @@ public class {{name}} : IEnumerable<{{name}}> {
     }
 
     public {{name}} get(Label key) {
-        return labelled[key];
+        {{name}} ret;
+        labelled.TryGetValue(key, out ret);
+        return ret;
     }
 
     public IEnumerator<{{name}}> iterator() {

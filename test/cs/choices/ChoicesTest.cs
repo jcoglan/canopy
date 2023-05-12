@@ -77,7 +77,7 @@ public class ChoiceRepetitionTest : ParseHelper {
 }
 
 [TestClass]
-class ChoiceSequenceTest : ParseHelper {
+public class ChoiceSequenceTest : ParseHelper {
     [TestMethod]
     public void parsesOneBranchOfTheChoice(){
         expect(Choices.parse("choice-bind: ab")).toMatch(
