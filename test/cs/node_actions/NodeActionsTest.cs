@@ -6,21 +6,13 @@ using System;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-//import helpers.ElementsSpec;
-//import helpers.Node;
-//import helpers.NodeSpec;
 
-using test.grammars.node_actions.Actions;
-using test.grammars.node_actions.Label;
-using test.grammars.node_actions.ParseError;
-using test.grammars.node_actions.NodeActions;
-using test.grammars.node_actions.TreeNode;
 [TestClass]
 class NodeActionsTest : ParseHelper {
     [TestMethod]
     void makesNodesFromAString(){
         String input = "act-str: hello";
-        CustomNode result = (CustomNode)NodeActions.parse(input, new TestActions()).elements.get(1);
+        CustomNode result = (CustomNode)NodeActions.parse(input, new TestActions()).elements.ElementAtOrDefault(1);
 
         assertNode(new CustomNode("str", input, 9, 14).noElems(), result);
     }
@@ -28,7 +20,7 @@ class NodeActionsTest : ParseHelper {
     [TestMethod]
     void makesNodesFromACharClass(){
         String input = "act-class: k";
-        CustomNode result = (CustomNode)NodeActions.parse(input, new TestActions()).elements.get(1);
+        CustomNode result = (CustomNode)NodeActions.parse(input, new TestActions()).elements.ElementAtOrDefault(1);
 
         assertNode(new CustomNode("char", input, 11, 12).noElems(), result);
     }
@@ -36,7 +28,7 @@ class NodeActionsTest : ParseHelper {
     [TestMethod]
     void makesNodesFromAnyChar(){
         String input = "act-any: ?";
-        CustomNode result = (CustomNode)NodeActions.parse(input, new TestActions()).elements.get(1);
+        CustomNode result = (CustomNode)NodeActions.parse(input, new TestActions()).elements.ElementAtOrDefault(1);
 
         assertNode(new CustomNode("any", input, 9, 10).noElems(), result);
     }
@@ -44,7 +36,7 @@ class NodeActionsTest : ParseHelper {
     [TestMethod]
     void makesNodesFromAMaybeRule(){
         String input = "act-maybe: hello";
-        CustomNode result = (CustomNode)NodeActions.parse(input, new TestActions()).elements.get(1);
+        CustomNode result = (CustomNode)NodeActions.parse(input, new TestActions()).elements.ElementAtOrDefault(1);
 
         assertNode(new CustomNode("maybe", input, 11, 16).noElems(), result);
     }
@@ -60,7 +52,7 @@ class NodeActionsTest : ParseHelper {
     [TestMethod]
     void makesNodesFromARepetition(){
         String input = "act-rep: abc";
-        CustomNode result = (CustomNode)NodeActions.parse(input, new TestActions()).elements.get(1);
+        CustomNode result = (CustomNode)NodeActions.parse(input, new TestActions()).elements.ElementAtOrDefault(1);
 
         assertNode(
             new CustomNode("rep", input, 9, 12)
@@ -74,7 +66,7 @@ class NodeActionsTest : ParseHelper {
     [TestMethod]
     void makesNodesFromARepetitionInParentheses(){
         String input = "act-rep-paren: abab";
-        CustomNode result = (CustomNode)NodeActions.parse(input, new TestActions()).elements.get(1);
+        CustomNode result = (CustomNode)NodeActions.parse(input, new TestActions()).elements.ElementAtOrDefault(1);
 
         assertNode(
             new CustomNode("rep-paren", input, 15, 19)
@@ -93,7 +85,7 @@ class NodeActionsTest : ParseHelper {
     [TestMethod]
     void makesNodesFromASequence(){
         String input = "act-seq: xyz";
-        CustomNode result = (CustomNode)NodeActions.parse(input, new TestActions()).elements.get(1);
+        CustomNode result = (CustomNode)NodeActions.parse(input, new TestActions()).elements.ElementAtOrDefault(1);
 
         assertNode(
             new CustomNode("seq", input, 9, 12)
@@ -107,7 +99,7 @@ class NodeActionsTest : ParseHelper {
     [TestMethod]
     void makesNodesFromASequenceWithMutedElements(){
         String input = "act-seq-mute: xyz";
-        CustomNode result = (CustomNode)NodeActions.parse(input, new TestActions()).elements.get(1);
+        CustomNode result = (CustomNode)NodeActions.parse(input, new TestActions()).elements.ElementAtOrDefault(1);
 
         assertNode(
             new CustomNode("seq", input, 14, 17)
@@ -120,7 +112,7 @@ class NodeActionsTest : ParseHelper {
     [TestMethod]
     void makesNodesFromAParenthesisedExpression(){
         String input = "act-paren: !";
-        CustomNode result = (CustomNode)NodeActions.parse(input, new TestActions()).elements.get(1);
+        CustomNode result = (CustomNode)NodeActions.parse(input, new TestActions()).elements.ElementAtOrDefault(1);
 
         assertNode(new CustomNode("paren", input, 11, 12).noElems(), result);
     }
@@ -128,11 +120,11 @@ class NodeActionsTest : ParseHelper {
     [TestMethod]
     void bindsToTheOptionsOfAChoice(){
         String input = "act-choice: 0";
-        CustomNode result = (CustomNode)NodeActions.parse(input, new TestActions()).elements.get(1);
+        CustomNode result = (CustomNode)NodeActions.parse(input, new TestActions()).elements.ElementAtOrDefault(1);
         assertNode(new CustomNode("zero", input, 12, 13).noElems(), result);
 
         input = "act-choice: 42";
-        result = (CustomNode)NodeActions.parse(input, new TestActions()).elements.get(1);
+        result = (CustomNode)NodeActions.parse(input, new TestActions()).elements.ElementAtOrDefault(1);
 
         assertNode(
             new CustomNode("int", input, 12, 14)
@@ -146,38 +138,38 @@ class NodeActionsTest : ParseHelper {
 
     [TestMethod]
     void treatsNullAsAValidResult(){
-        CustomNode result = (CustomNode)NodeActions.parse("act-falsey: null", new TestActions()).elements.get(1);
+        CustomNode result = (CustomNode)NodeActions.parse("act-falsey: null", new TestActions()).elements.ElementAtOrDefault(1);
         assertEquals(null, result);
     }
 
     [TestMethod]
     void treatsFalseAsAValidResult(){
-        CustomNode result = (CustomNode)NodeActions.parse("act-falsey: false", new TestActions()).elements.get(1);
+        CustomNode result = (CustomNode)NodeActions.parse("act-falsey: false", new TestActions()).elements.ElementAtOrDefault(1);
         assertEquals(null, result);
     }
 
     [TestMethod]
     void treatsZeroAsAValidResult(){
-        CustomNode result = (CustomNode)NodeActions.parse("act-falsey: 0", new TestActions()).elements.get(1);
+        CustomNode result = (CustomNode)NodeActions.parse("act-falsey: 0", new TestActions()).elements.ElementAtOrDefault(1);
         assertEquals(null, result);
     }
 
     [TestMethod]
     void treatsEmptyStringsAsAValidResult(){
-        CustomNode result = (CustomNode)NodeActions.parse("act-falsey: ''", new TestActions()).elements.get(1);
+        CustomNode result = (CustomNode)NodeActions.parse("act-falsey: ''", new TestActions()).elements.ElementAtOrDefault(1);
         assertEquals(null, result);
     }
 
     [TestMethod]
     void treatsEmptyListsAsAValidResult(){
-        CustomNode result = (CustomNode)NodeActions.parse("act-falsey: []", new TestActions()).elements.get(1);
+        CustomNode result = (CustomNode)NodeActions.parse("act-falsey: []", new TestActions()).elements.ElementAtOrDefault(1);
         assertEquals(null, result);
     }
 
     [TestMethod]
     void treatsFalseyValuesAsAcceptableLookaheadResults(){
         String input = "act-falsey-pred: 0";
-        CustomNode result = (CustomNode)NodeActions.parse(input, new TestActions()).elements.get(1).elements.get(1);
+        CustomNode result = (CustomNode)NodeActions.parse(input, new TestActions()).elements.ElementAtOrDefault(1).elements.ElementAtOrDefault(1);
 
         assertNode(new CustomNode("zero", input, 17, 18).noElems(), result);
     }
@@ -185,41 +177,41 @@ class NodeActionsTest : ParseHelper {
     [TestMethod]
     void treatsFalseyValuesAsAcceptableRepetitionResults(){
         String input = "act-falsey-rep: null0false''[]";
-        List<TreeNode> elements = NodeActions.parse(input, new TestActions()).elements.get(1).elements;
+        List<TreeNode> elements = NodeActions.parse(input, new TestActions()).elements.ElementAtOrDefault(1).elements;
 
-        assertEquals(5, elements.size());
+        Assert.AreEqual(5, elements.Count);
         foreach (TreeNode elem in elements) {
-            assertEquals(null, elem);
+            Assert.AreEqual(null, elem);
         }
     }
 
     [TestMethod]
     void treatsFalseyValuesAsAcceptableMaybeResults(){
         String input = "act-falsey-opt: null";
-        TreeNode result = NodeActions.parse(input, new TestActions()).elements.get(1);
+        TreeNode result = NodeActions.parse(input, new TestActions()).elements.ElementAtOrDefault(1);
 
-        assertEquals(null, result);
+        Assert.AreEqual(null, result);
     }
 
     [TestMethod]
     void treatsFalseyValuesAsAcceptableSequenceResults(){
         String input = "act-falsey-seq: (null)";
-        TreeNode result = NodeActions.parse(input, new TestActions()).elements.get(1);
+        TreeNode result = NodeActions.parse(input, new TestActions()).elements.ElementAtOrDefault(1);
 
-        assertEquals(3, result.elements.size());
-        assertEquals(null, result.elements.get(1));
+        Assert.AreEqual(3, result.elements.Count);
+        Assert.AreEqual(null, result.elements.ElementAtOrDefault(1));
     }
 
     [TestMethod]
     void treatsFalseyValuesAsAcceptableChoiceResults(){
         String input = "act-falsey-choice: null";
-        TreeNode result = NodeActions.parse(input, new TestActions()).elements.get(1);
+        TreeNode result = NodeActions.parse(input, new TestActions()).elements.ElementAtOrDefault(1);
 
-        assertEquals(null, result);
+        Assert.AreEqual(null, result);
     }
 }
 
-class TestActions : Actions {
+public class TestActions : Actions {
     public CustomNode make_str(String input, int start, int end, List<TreeNode> elements) {
         return new CustomNode("str", input, start, end, elements);
     }
@@ -281,17 +273,17 @@ class TestActions : Actions {
     }
 }
 
-class CustomNode : TreeNode {
+public class CustomNode : TreeNode {
     String type, input;
     int start, end;
     List<TreeNode> elements;
     ElementsSpec<Label> elemsSpec = new ElementsSpec<Label>();
 
-    CustomNode(String type, String input, int start, int end) {
+    public CustomNode(String type, String input, int start, int end) {
         this(type, input, start, end, null);
     }
 
-    CustomNode(String type, String input, int start, int end, List<TreeNode> elements) {
+    public CustomNode(String type, String input, int start, int end, List<TreeNode> elements) {
         this.type = type;
         this.input = input;
         this.start = start;
@@ -299,12 +291,12 @@ class CustomNode : TreeNode {
         this.elements = elements;
     }
 
-    CustomNode noElems() {
+    public CustomNode noElems() {
         elemsSpec.noElems();
         return this;
     }
 
-    CustomNode elem(NodeSpec<Label> elem) {
+    public CustomNode elem(NodeSpec<Label> elem) {
         elemsSpec.elem(elem);
         return this;
     }
@@ -312,7 +304,7 @@ class CustomNode : TreeNode {
 
 public class ParseHelper {
     public Node<Label> expect(TreeNode node) {
-        return new NodeWrapper(node.elements.get(1));
+        return new NodeWrapper(node.elements.ElementAtOrDefault(1));
     }
 
     public NodeSpec<Label> node(String text, int offset) {
@@ -320,10 +312,10 @@ public class ParseHelper {
     }
 
     public void assertNode(CustomNode expected, CustomNode actual) {
-        assertEquals(expected.type, actual.type);
-        assertEquals(expected.input, actual.input);
-        assertEquals(expected.start, actual.start);
-        assertEquals(expected.end, actual.end);
+        Assert.AreEqual(expected.type, actual.type);
+        Assert.AreEqual(expected.input, actual.input);
+        Assert.AreEqual(expected.start, actual.start);
+        Assert.AreEqual(expected.end, actual.end);
         expected.elemsSpec.check(new NodeWrapper(new TreeNode("", 0, actual.elements)));
     }
 }
@@ -352,6 +344,6 @@ public class NodeWrapper : Node<Label> {
     }
 
     public Node<Label> get(Label key) {
-        return new NodeWrapper(node.get(key));
+        return new NodeWrapper(node.ElementAtOrDefault(key));
     }
 }

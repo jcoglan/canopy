@@ -20,7 +20,7 @@ public class ChoiceStringsTest : ParseHelper {
         expect(Choices.parse("choice-abc: b")).toMatch(node("b", 12));
         expect(Choices.parse("choice-abc: c")).toMatch(node("c", 12));
     }
-
+ 
     [TestMethod]
     [ExpectedException(typeof(ParseError),
     "Expected a ParseError")]
@@ -49,9 +49,10 @@ public class ChoiceStringsTest : ParseHelper {
     "Expected a ParseError")]
     public void doesNotBacktrackIfLaterRulesFail() {
         Choices.parse("choice-seq: reppeat");
-    }
+    } 
 }
 
+[TestClass]
 public class ChoiceRepetitionTest : ParseHelper {
     [TestMethod]
     public void parsesADifferentOptionOnEachIteration(){
@@ -75,6 +76,7 @@ public class ChoiceRepetitionTest : ParseHelper {
     }
 }
 
+[TestClass]
 class ChoiceSequenceTest : ParseHelper {
     [TestMethod]
     public void parsesOneBranchOfTheChoice(){
