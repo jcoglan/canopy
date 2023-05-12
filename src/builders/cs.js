@@ -286,7 +286,8 @@ class Builder extends Base {
   }
 
   regexMatch_ (regex, string) {
-    return string + ' != null && ' + regex + '.matcher(' + string + ').matches()'
+    //return string + ' != null && ' + regex + '.matcher(' + string + ').matches()'
+    return string + ' != null && ' + regex + '.IsMatch(' + string + ')'
   }
 
   arrayLookup_ (expression, offset) {
