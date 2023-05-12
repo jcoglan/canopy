@@ -3,14 +3,14 @@
 using System.Collections.Generic;
 using System.Collections;
 using System;
-
+using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 
 [TestClass]
-class NodeActionsTest : ParseHelper {
+public class NodeActionsTest : ParseHelper {
     [TestMethod]
-    void makesNodesFromAString(){
+    public void makesNodesFromAString(){
         String input = "act-str: hello";
         CustomNode result = (CustomNode)NodeActions.parse(input, new TestActions()).elements.ElementAtOrDefault(1);
 
@@ -18,7 +18,7 @@ class NodeActionsTest : ParseHelper {
     }
 
     [TestMethod]
-    void makesNodesFromACharClass(){
+    public void makesNodesFromACharClass(){
         String input = "act-class: k";
         CustomNode result = (CustomNode)NodeActions.parse(input, new TestActions()).elements.ElementAtOrDefault(1);
 
@@ -26,7 +26,7 @@ class NodeActionsTest : ParseHelper {
     }
 
     [TestMethod]
-    void makesNodesFromAnyChar(){
+    public void makesNodesFromAnyChar(){
         String input = "act-any: ?";
         CustomNode result = (CustomNode)NodeActions.parse(input, new TestActions()).elements.ElementAtOrDefault(1);
 
@@ -34,7 +34,7 @@ class NodeActionsTest : ParseHelper {
     }
 
     [TestMethod]
-    void makesNodesFromAMaybeRule(){
+    public void makesNodesFromAMaybeRule(){
         String input = "act-maybe: hello";
         CustomNode result = (CustomNode)NodeActions.parse(input, new TestActions()).elements.ElementAtOrDefault(1);
 
@@ -42,7 +42,7 @@ class NodeActionsTest : ParseHelper {
     }
 
     [TestMethod]
-    void doesNotInvokeAnActionForAMaybeRuleWithNoMatch(){
+    public void doesNotInvokeAnActionForAMaybeRuleWithNoMatch(){
         String input = "act-maybe: ";
         TreeNode result = NodeActions.parse(input, new TestActions());
 
@@ -50,7 +50,7 @@ class NodeActionsTest : ParseHelper {
     }
 
     [TestMethod]
-    void makesNodesFromARepetition(){
+    public void makesNodesFromARepetition(){
         String input = "act-rep: abc";
         CustomNode result = (CustomNode)NodeActions.parse(input, new TestActions()).elements.ElementAtOrDefault(1);
 
@@ -64,7 +64,7 @@ class NodeActionsTest : ParseHelper {
     }
 
     [TestMethod]
-    void makesNodesFromARepetitionInParentheses(){
+    public void makesNodesFromARepetitionInParentheses(){
         String input = "act-rep-paren: abab";
         CustomNode result = (CustomNode)NodeActions.parse(input, new TestActions()).elements.ElementAtOrDefault(1);
 
@@ -83,7 +83,7 @@ class NodeActionsTest : ParseHelper {
     }
 
     [TestMethod]
-    void makesNodesFromASequence(){
+    public void makesNodesFromASequence(){
         String input = "act-seq: xyz";
         CustomNode result = (CustomNode)NodeActions.parse(input, new TestActions()).elements.ElementAtOrDefault(1);
 
@@ -97,7 +97,7 @@ class NodeActionsTest : ParseHelper {
     }
 
     [TestMethod]
-    void makesNodesFromASequenceWithMutedElements(){
+    public void makesNodesFromASequenceWithMutedElements(){
         String input = "act-seq-mute: xyz";
         CustomNode result = (CustomNode)NodeActions.parse(input, new TestActions()).elements.ElementAtOrDefault(1);
 
@@ -110,7 +110,7 @@ class NodeActionsTest : ParseHelper {
     }
 
     [TestMethod]
-    void makesNodesFromAParenthesisedExpression(){
+    public void makesNodesFromAParenthesisedExpression(){
         String input = "act-paren: !";
         CustomNode result = (CustomNode)NodeActions.parse(input, new TestActions()).elements.ElementAtOrDefault(1);
 
@@ -118,7 +118,7 @@ class NodeActionsTest : ParseHelper {
     }
 
     [TestMethod]
-    void bindsToTheOptionsOfAChoice(){
+    public void bindsToTheOptionsOfAChoice(){
         String input = "act-choice: 0";
         CustomNode result = (CustomNode)NodeActions.parse(input, new TestActions()).elements.ElementAtOrDefault(1);
         assertNode(new CustomNode("zero", input, 12, 13).noElems(), result);
@@ -137,37 +137,37 @@ class NodeActionsTest : ParseHelper {
     }
 
     [TestMethod]
-    void treatsNullAsAValidResult(){
+    public void treatsNullAsAValidResult(){
         CustomNode result = (CustomNode)NodeActions.parse("act-falsey: null", new TestActions()).elements.ElementAtOrDefault(1);
-        assertEquals(null, result);
+        Assert.AreEqual(null, result);
     }
 
     [TestMethod]
-    void treatsFalseAsAValidResult(){
+    public void treatsFalseAsAValidResult(){
         CustomNode result = (CustomNode)NodeActions.parse("act-falsey: false", new TestActions()).elements.ElementAtOrDefault(1);
-        assertEquals(null, result);
+        Assert.AreEqual(null, result);
     }
 
     [TestMethod]
-    void treatsZeroAsAValidResult(){
+    public void treatsZeroAsAValidResult(){
         CustomNode result = (CustomNode)NodeActions.parse("act-falsey: 0", new TestActions()).elements.ElementAtOrDefault(1);
-        assertEquals(null, result);
+        Assert.AreEqual(null, result);
     }
 
     [TestMethod]
-    void treatsEmptyStringsAsAValidResult(){
+    public void treatsEmptyStringsAsAValidResult(){
         CustomNode result = (CustomNode)NodeActions.parse("act-falsey: ''", new TestActions()).elements.ElementAtOrDefault(1);
-        assertEquals(null, result);
+        Assert.AreEqual(null, result);
     }
 
     [TestMethod]
-    void treatsEmptyListsAsAValidResult(){
+    public void treatsEmptyListsAsAValidResult(){
         CustomNode result = (CustomNode)NodeActions.parse("act-falsey: []", new TestActions()).elements.ElementAtOrDefault(1);
-        assertEquals(null, result);
+        Assert.AreEqual(null, result);
     }
 
     [TestMethod]
-    void treatsFalseyValuesAsAcceptableLookaheadResults(){
+    public void treatsFalseyValuesAsAcceptableLookaheadResults(){
         String input = "act-falsey-pred: 0";
         CustomNode result = (CustomNode)NodeActions.parse(input, new TestActions()).elements.ElementAtOrDefault(1).elements.ElementAtOrDefault(1);
 
@@ -175,7 +175,7 @@ class NodeActionsTest : ParseHelper {
     }
 
     [TestMethod]
-    void treatsFalseyValuesAsAcceptableRepetitionResults(){
+    public void treatsFalseyValuesAsAcceptableRepetitionResults(){
         String input = "act-falsey-rep: null0false''[]";
         List<TreeNode> elements = NodeActions.parse(input, new TestActions()).elements.ElementAtOrDefault(1).elements;
 
@@ -186,7 +186,7 @@ class NodeActionsTest : ParseHelper {
     }
 
     [TestMethod]
-    void treatsFalseyValuesAsAcceptableMaybeResults(){
+    public void treatsFalseyValuesAsAcceptableMaybeResults(){
         String input = "act-falsey-opt: null";
         TreeNode result = NodeActions.parse(input, new TestActions()).elements.ElementAtOrDefault(1);
 
@@ -194,7 +194,7 @@ class NodeActionsTest : ParseHelper {
     }
 
     [TestMethod]
-    void treatsFalseyValuesAsAcceptableSequenceResults(){
+    public void treatsFalseyValuesAsAcceptableSequenceResults(){
         String input = "act-falsey-seq: (null)";
         TreeNode result = NodeActions.parse(input, new TestActions()).elements.ElementAtOrDefault(1);
 
@@ -203,7 +203,7 @@ class NodeActionsTest : ParseHelper {
     }
 
     [TestMethod]
-    void treatsFalseyValuesAsAcceptableChoiceResults(){
+    public void treatsFalseyValuesAsAcceptableChoiceResults(){
         String input = "act-falsey-choice: null";
         TreeNode result = NodeActions.parse(input, new TestActions()).elements.ElementAtOrDefault(1);
 
@@ -212,75 +212,74 @@ class NodeActionsTest : ParseHelper {
 }
 
 public class TestActions : Actions {
-    public CustomNode make_str(String input, int start, int end, List<TreeNode> elements) {
+    public TreeNode make_str(String input, int start, int end, List<TreeNode> elements) {
         return new CustomNode("str", input, start, end, elements);
     }
 
-    public CustomNode make_char(String input, int start, int end, List<TreeNode> elements) {
+    public TreeNode make_char(String input, int start, int end, List<TreeNode> elements) {
         return new CustomNode("char", input, start, end, elements);
     }
 
-    public CustomNode make_any(String input, int start, int end, List<TreeNode> elements) {
+    public TreeNode make_any(String input, int start, int end, List<TreeNode> elements) {
         return new CustomNode("any", input, start, end, elements);
     }
 
-    public CustomNode make_maybe(String input, int start, int end, List<TreeNode> elements) {
+    public TreeNode make_maybe(String input, int start, int end, List<TreeNode> elements) {
         return new CustomNode("maybe", input, start, end, elements);
     }
 
-    public CustomNode make_rep(String input, int start, int end, List<TreeNode> elements) {
+    public TreeNode make_rep(String input, int start, int end, List<TreeNode> elements) {
         return new CustomNode("rep", input, start, end, elements);
     }
 
-    public CustomNode make_seq(String input, int start, int end, List<TreeNode> elements) {
+    public TreeNode make_seq(String input, int start, int end, List<TreeNode> elements) {
         return new CustomNode("seq", input, start, end, elements);
     }
 
-    public CustomNode make_paren(String input, int start, int end, List<TreeNode> elements) {
+    public TreeNode make_paren(String input, int start, int end, List<TreeNode> elements) {
         return new CustomNode("paren", input, start, end, elements);
     }
 
-    public CustomNode make_rep_paren(String input, int start, int end, List<TreeNode> elements) {
+    public TreeNode make_rep_paren(String input, int start, int end, List<TreeNode> elements) {
         return new CustomNode("rep-paren", input, start, end, elements);
     }
 
-    public CustomNode make_zero(String input, int start, int end, List<TreeNode> elements) {
+    public TreeNode make_zero(String input, int start, int end, List<TreeNode> elements) {
         return new CustomNode("zero", input, start, end, elements);
     }
 
-    public CustomNode make_int(String input, int start, int end, List<TreeNode> elements) {
+    public TreeNode make_int(String input, int start, int end, List<TreeNode> elements) {
         return new CustomNode("int", input, start, end, elements);
     }
 
-    public CustomNode make_null(String input, int start, int end, List<TreeNode> elements) {
+    public TreeNode make_null(String input, int start, int end, List<TreeNode> elements) {
         return null;
     }
 
-    public CustomNode make_false(String input, int start, int end, List<TreeNode> elements) {
+    public TreeNode make_false(String input, int start, int end, List<TreeNode> elements) {
         return null;
     }
 
-    public CustomNode make_0(String input, int start, int end, List<TreeNode> elements) {
+    public TreeNode make_0(String input, int start, int end, List<TreeNode> elements) {
         return null;
     }
 
-    public CustomNode make_empty_str(String input, int start, int end, List<TreeNode> elements) {
+    public TreeNode make_empty_str(String input, int start, int end, List<TreeNode> elements) {
         return null;
     }
 
-    public CustomNode make_empty_list(String input, int start, int end, List<TreeNode> elements) {
+    public TreeNode make_empty_list(String input, int start, int end, List<TreeNode> elements) {
         return null;
     }
 }
 
 public class CustomNode : TreeNode {
-    String type, input;
-    int start, end;
-    List<TreeNode> elements;
-    ElementsSpec<Label> elemsSpec = new ElementsSpec<Label>();
+    public String type, input;
+    public int start, end;
+    public List<TreeNode> elements;
+    public ElementsSpec<Label> elemsSpec = new ElementsSpec<Label>();
 
-    public CustomNode(String type, String input, int start, int end) {
-        this(type, input, start, end, null);
+    public CustomNode(String type, String input, int start, int end) : this(type, input, start, end, null){
     }
 
     public CustomNode(String type, String input, int start, int end, List<TreeNode> elements) {
@@ -344,6 +343,6 @@ public class NodeWrapper : Node<Label> {
     }
 
     public Node<Label> get(Label key) {
-        return new NodeWrapper(node.ElementAtOrDefault(key));
+        return new NodeWrapper(node.get(key));
     }
 }
