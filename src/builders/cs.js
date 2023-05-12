@@ -145,8 +145,8 @@ class Builder extends Base {
     let temp    = this.localVars_({ address: this.nullNode_(), index: 'offset' }),
         address = temp.address,
         offset  = temp.index
-
-    this.assign_('Dictionary<int, CacheRecord> rule', 'cache[Label.' + name + ']')
+    this._line('Dictionary<int, CacheRecord> rule')
+    this._line('cache.TryGetValue(Label.' + name + ', out rule)')    
     this.if_('rule == null', () => {
       this.assign_('rule', 'new Dictionary<int, CacheRecord>()')
       this.assign_('cache[Label.' + name + ']','rule')
@@ -189,7 +189,7 @@ class Builder extends Base {
         temp  = this.localVars_({ chunk: this.null_(), max: ofs + ' + ' + length })
 
     this.if_(temp.max + ' <= inputSize', () => {
-      this._line(temp.chunk + ' = ' + input + '.Substring(' + ofs + ', ' + temp.max + '- 1 - ' + ofs + ')')
+      this._line(temp.chunk + ' = ' + input + '.Substring(' + ofs + ', ' + temp.max + ' - ' + ofs + ')')
     })
     return temp.chunk
   }
@@ -202,7 +202,7 @@ class Builder extends Base {
       args   = ['input', start, end]
     } else {
       action = 'new ' + (nodeClass || 'TreeNode')
-      args   = ['input.Substring(' + start + ', ' + end  + '- 1 - ' + start +')', start]
+      args   = ['input.Substring(' + start + ', ' + end  + ' - ' + start +')', start]
     }
     args.push(elements || this.emptyList_())
 
