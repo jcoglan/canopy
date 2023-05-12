@@ -8,14 +8,14 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 //import helpers.Node;
 //import helpers.NodeSpec;
 
-using test.grammars.choices.Label;
+/* using test.grammars.choices.Label;
 using test.grammars.choices.ParseError;
 using test.grammars.choices.Choices;
-using test.grammars.choices.TreeNode;
+using test.grammars.choices.TreeNode; */
 [TestClass]
 public class ChoiceStringsTest : ParseHelper {
     [TestMethod]
-    void parsesAnyOfTheChoiceOptions(){
+    public void parsesAnyOfTheChoiceOptions(){
         expect(Choices.parse("choice-abc: a")).toMatch(node("a", 12));
         expect(Choices.parse("choice-abc: b")).toMatch(node("b", 12));
         expect(Choices.parse("choice-abc: c")).toMatch(node("c", 12));
@@ -24,19 +24,19 @@ public class ChoiceStringsTest : ParseHelper {
     [TestMethod]
     [ExpectedException(typeof(ParseError),
     "Expected a ParseError")]
-    void rejectsInputMatchingNoneOfTheOptions() {
+    public void rejectsInputMatchingNoneOfTheOptions() {
         Choices.parse("choice-abc: d");
     }
 
     [TestMethod]
     [ExpectedException(typeof(ParseError),
     "Expected a ParseError")]
-    void rejectsSuperstringsOfTheOptions() {
+    public void rejectsSuperstringsOfTheOptions() {
         Choices.parse("choice-abc: ab");
     }
 
     [TestMethod]
-    void parsesAChoiceAsPartOfASequence(){
+    public void parsesAChoiceAsPartOfASequence(){
         expect(Choices.parse("choice-seq: repeat")).toMatch(
             node("repeat", 12)
                 .elem(node("re", 12).noElems())
@@ -47,14 +47,14 @@ public class ChoiceStringsTest : ParseHelper {
     [TestMethod]
     [ExpectedException(typeof(ParseError),
     "Expected a ParseError")]
-    void doesNotBacktrackIfLaterRulesFail() {
+    public void doesNotBacktrackIfLaterRulesFail() {
         Choices.parse("choice-seq: reppeat");
     }
 }
 
-class ChoiceRepetitionTest : ParseHelper {
+public class ChoiceRepetitionTest : ParseHelper {
     [TestMethod]
-    void parsesADifferentOptionOnEachIteration(){
+    public void parsesADifferentOptionOnEachIteration(){
         expect(Choices.parse("choice-rep: abcabba")).toMatch(
             node("abcabba", 12)
                 .elem(node("a", 12).noElems())
@@ -70,14 +70,14 @@ class ChoiceRepetitionTest : ParseHelper {
     [TestMethod]
     [ExpectedException(typeof(ParseError),
     "Expected a ParseError")]
-    void rejectsIfAnyIterationDoesNotMatchTheOptions() {
+    public void rejectsIfAnyIterationDoesNotMatchTheOptions() {
         Choices.parse("choice-rep: abcadba");
     }
 }
 
 class ChoiceSequenceTest : ParseHelper {
     [TestMethod]
-    void parsesOneBranchOfTheChoice(){
+    public void parsesOneBranchOfTheChoice(){
         expect(Choices.parse("choice-bind: ab")).toMatch(
             node("ab", 13)
                 .elem(node("a", 13).noElems())
@@ -88,25 +88,25 @@ class ChoiceSequenceTest : ParseHelper {
     [TestMethod]
     [ExpectedException(typeof(ParseError),
     "Expected a ParseError")]
-    void testBindsSequencesTighterThanChoices() {
+    public void testBindsSequencesTighterThanChoices() {
         Choices.parse("choice-bind: abef");
     }
 }
 
-class ParseHelper {
-    Node<Label> expect(TreeNode node) {
-        return new NodeWrapper(node.elements.get(1));
+public class ParseHelper {
+    public Node<Label> expect(TreeNode node) {
+        return new NodeWrapper(node.elements[1]);
     }
 
-    NodeSpec<Label> node(String text, int offset) {
+    public NodeSpec<Label> node(String text, int offset) {
         return new NodeSpec<Label>(text, offset);
     }
 }
 
-class NodeWrapper : Node<Label> {
+public class NodeWrapper : Node<Label> {
     private TreeNode node;
 
-    NodeWrapper(TreeNode node) {
+    public NodeWrapper(TreeNode node) {
         this.node = node;
     }
 

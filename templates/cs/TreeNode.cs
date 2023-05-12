@@ -7,10 +7,10 @@ public class {{name}} : IEnumerable<{{name}}> {
     public int offset;
     public List<{{name}}> elements;
 
-    Dictionary<Label, {{name}}> labelled;
+    public Dictionary<Label, {{name}}> labelled;
 
-    public {{name}}() {
-        this("", -1, new List<{{name}}>(0));
+    public {{name}}() : this("", -1, new List<{{name}}>(0)) {
+        
     }
 
     public {{name}}(String text, int offset, List<{{name}}> elements) {

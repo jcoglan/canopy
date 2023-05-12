@@ -1,8 +1,8 @@
-class CacheRecord {
-    TreeNode node;
-    int tail;
+public class CacheRecord {
+    public TreeNode node;
+    public int tail;
 
-    CacheRecord(TreeNode node, int tail) {
+    public CacheRecord(TreeNode node, int tail) {
         this.node = node;
         this.tail = tail;
     }
