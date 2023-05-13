@@ -24,7 +24,7 @@ namespace canopy.{{namespace}} {
         }
 
         private static String formatError(String input, int offset, List<String[]> expected) {
-            String[] lines = input.Split("\n");
+            String[] lines = input.Split('\n');
             int lineNo = 0, position = 0;
 
             while (position <= offset) {

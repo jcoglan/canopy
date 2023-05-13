@@ -6,6 +6,7 @@ jobs:
   test:
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
         dotnet-version: [ '3.1.x', '6.0.x' ]
     steps:
