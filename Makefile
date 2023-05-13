@@ -55,6 +55,8 @@ test-java: $(test_grammars:%.peg=%/Grammar.java)
 
 test-cs: $(test_grammars:%.peg=%/Grammar.cs)
 	cd test/cs/choices && dotnet test
+	ls -la test/grammars/node_actions
+	cat test/grammars/node_actions/Actions.cs
 	cd test/cs/node_actions && dotnet test
 	cd test/cs/predicates && dotnet test
 	cd test/cs/quantifiers && dotnet test
