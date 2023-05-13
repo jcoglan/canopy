@@ -1,9 +1,10 @@
-//package canopy.predicates;
 using System.Collections.Generic;
 using System.Collections;
 using System;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+using canopy.test.grammars.predicates;
 
 [TestClass]
 public class PositiveLookAheadTest : ParseHelper {

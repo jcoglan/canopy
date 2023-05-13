@@ -1,11 +1,9 @@
-//package canopy.node_actions;
-
 using System.Collections.Generic;
 using System.Collections;
 using System;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-
+using canopy.test.grammars.node_actions;
 
 [TestClass]
 public class NodeActionsTest : ParseHelper {
@@ -272,7 +270,7 @@ public class TestActions : Actions {
         return null;
     }
 }
-
+#pragma warning disable CS0108
 public class CustomNode : TreeNode {
     public String type, input;
     public int start, end;
@@ -300,6 +298,7 @@ public class CustomNode : TreeNode {
         return this;
     }
 }
+#pragma warning restore CS0108
 
 public class ParseHelper {
     public Node<Label> expect(TreeNode node) {
