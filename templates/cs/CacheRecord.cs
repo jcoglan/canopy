@@ -1,9 +1,12 @@
-public class CacheRecord {
-    public TreeNode node;
-    public int tail;
+namespace canopy.{{namespace}} {
 
-    public CacheRecord(TreeNode node, int tail) {
-        this.node = node;
-        this.tail = tail;
+    public class CacheRecord {
+        public TreeNode node;
+        public int tail;
+
+        public CacheRecord(TreeNode node, int tail) {
+            this.node = node;
+            this.tail = tail;
+        }
     }
 }

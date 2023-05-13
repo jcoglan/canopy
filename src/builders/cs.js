@@ -15,6 +15,7 @@ class Builder extends Base {
   constructor (...args) {
     super(...args)
     this._labels = new Set()
+    this.namespace = ""
   }
 
   _tab () {
@@ -22,10 +23,10 @@ class Builder extends Base {
   }
 
   _initBuffer (pathname) {
-    let namespace = pathname.split(sep)
-    namespace.pop()
-    //return 'package ' + namespace.join('.') + ';\n\n'
-    return '//@TODO: Do we need a cs equivalent to this?\n //package ' + namespace.join('.') + ';\n\n'
+    this.namespace = pathname.split(sep)
+    this.namespace.pop()
+    this.namespace = this.namespace.join('.')
+    return '//canopy namespace: ' + this.namespace + ';\n\n'
   }
 
   _quote (string) {
@@ -53,10 +54,10 @@ class Builder extends Base {
     this._grammarName = name
 
     this._newBuffer('cs', 'Actions')
-    this._template('cs', 'Actions.cs', { actions })
+    this._template('cs', 'Actions.cs', { actions, namespace:this.namespace })
 
     this._newBuffer('cs', 'CacheRecord')
-    this._template('cs', 'CacheRecord.cs')
+    this._template('cs', 'CacheRecord.cs', { namespace:this.namespace })
 
     block()
   }
@@ -65,7 +66,7 @@ class Builder extends Base {
     let name = 'TreeNode'
 
     this._newBuffer('cs', name)
-    this._template('cs', 'TreeNode.cs', { name })
+    this._template('cs', 'TreeNode.cs', { name, namespace:this.namespace})
 
     return name
   }
@@ -79,33 +80,35 @@ class Builder extends Base {
     this._line('using System.Collections.Generic')
     this._line('using System.Text.RegularExpressions')
     this._newline()
-
-    this._line('public abstract class Grammar {', false)
+    this._line('namespace canopy.' + this.namespace + ' {', false)
     this._indent(() => {
-      this.assign_('public static TreeNode ' + this.nullNode_(), 'new TreeNode()')
-      this._newline()
-
-      this._line('public int inputSize, offset, failure')
-      this._line('public String input')
-      this._line('public List<String[]> expected')
-      this._line('public Dictionary<Label, Dictionary<int, CacheRecord>> cache')
-      this._line('public Actions? actions')
-      //default constructor
-      this._line('public Grammar() {',false)
+      this._line('public abstract class Grammar {', false)
       this._indent(() => {
-        this.assign_('this.input','\"\"')
-        this.assign_('this.inputSize','0')
-        this.assign_('this.actions','null')
-        this.assign_('this.offset','0')
-        this.assign_('this.cache','new Dictionary<Label, Dictionary<int, CacheRecord>>()')
-        this.assign_('this.failure','0')
-        this.assign_('this.expected','new List<String[]>()')
+        this.assign_('public static TreeNode ' + this.nullNode_(), 'new TreeNode()')
+        this._newline()
+
+        this._line('public int inputSize, offset, failure')
+        this._line('public String input')
+        this._line('public List<String[]> expected')
+        this._line('public Dictionary<Label, Dictionary<int, CacheRecord>> cache')
+        this._line('public Actions? actions')
+        //default constructor
+        this._line('public Grammar() {',false)
+        this._indent(() => {
+          this.assign_('this.input','\"\"')
+          this.assign_('this.inputSize','0')
+          this.assign_('this.actions','null')
+          this.assign_('this.offset','0')
+          this.assign_('this.cache','new Dictionary<Label, Dictionary<int, CacheRecord>>()')
+          this.assign_('this.failure','0')
+          this.assign_('this.expected','new List<String[]>()')
+        })
+        this._line('}',false)
+        this._newline()
+        block()
       })
-      this._line('}',false)
-      this._newline()
-      block()
     })
-    this._line('}', false)
+    this._line('}}', false)
   }
 
   compileRegex_ (charClass, name) {
@@ -117,23 +120,27 @@ class Builder extends Base {
 
   parserClass_ (root) {
     this._newBuffer('cs', 'ParseError')
-    this._template('cs', 'ParseError.cs')
+    this._template('cs', 'ParseError.cs', { namespace:this.namespace})
 
     let grammar = this._quote(this._grammarName)
     let name = this._grammarName.replace(/\./g, '')
     this._newBuffer('cs', name)
-    this._template('cs', 'Parser.cs', { grammar, root, name })
+    this._template('cs', 'Parser.cs', { grammar, root, name, namespace:this.namespace })
 
     let labels = [...this._labels].sort()
 
     this._newBuffer('cs', 'Label')
-    this._template('cs', 'Label.cs', { labels })
+    this._template('cs', 'Label.cs', { labels, namespace:this.namespace })
   }
 
   class_ (name, parent, block) {
     this._newline()
+    this._line('namespace canopy.' + this.namespace + ' {', false)
+    this._indent(() => {
     this._line('class ' + name + ' : ' + parent + ' {', false)
     this._scope(block, name)
+    this._line('}', false)
+    })
     this._line('}', false)
   }
 
