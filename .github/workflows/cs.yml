@@ -12,9 +12,10 @@ jobs:
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: '3.1.x'
-          DOTNET_SDK: netcoreapp3.1
       - name: Run test 3.1.x
         run: make test-cs
+        env:
+          DOTNET_SDK: netcoreapp3.1
   test-dotnet60:
     runs-on: ubuntu-latest
     steps:
@@ -24,7 +25,8 @@ jobs:
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: '6.0.x'
-          DOTNET_SDK: net6.0
       - name: Run test 6.0.x
         run: make test-cs
+        env:
+          DOTNET_SDK: net6.0
 
