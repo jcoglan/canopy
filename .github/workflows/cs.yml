@@ -3,18 +3,28 @@ on:
   - pull_request
 
 jobs:
-  test:
+  test-dotnet31:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        dotnet-versions: [ {dotnet-version:'3.1.x',dotnet-sdk:'netcoreapp3.1'}, {dotnet-version:'6.0.x',dotnet-sdk:'net6.0'} ]
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
-      - name: Setup .NET Core SDK ${{ matrix.dotnet-versions.dotnet-version }}
+      - name: Setup .NET Core SDK 3.1.x
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: ${{ matrix.dotnet-versions.dotnet-version }}
-          DOTNET_SDK: ${{ matrix.dotnet-versions.dotnet-sdk }}
-      - name: Run test ${{ matrix.dotnet-versions.dotnet-version }}
+          dotnet-version: '3.1.x'
+          DOTNET_SDK: netcoreapp3.1
+      - name: Run test 3.1.x
         run: make test-cs
+  test-dotnet60:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+      - name: Setup .NET Core SDK 6.0.x
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '6.0.x'
+          DOTNET_SDK: net6.0
+      - name: Run test 6.0.x
+        run: make test-cs
+
