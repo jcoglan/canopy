@@ -1,13 +1,14 @@
-//package canopy.sequences;
-
 using System.Collections.Generic;
 using System.Collections;
 using System;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
+using canopy.test.grammars.sequences;
+#pragma warning disable CS8600
+#pragma warning disable CS8604
 [TestClass]
-public class  SequenceStringsTest : ParseHelper {
+public class SequenceStringsTest : ParseHelper {
     [TestMethod]
     public void parsesAMatchingSequence(){
         expect(Sequences.parse("seq-str: abc")).toMatch(
@@ -386,3 +387,5 @@ public class  NodeWrapper : Node<Label> {
         return new NodeWrapper(node.get(key));
     }
 }
+#pragma warning restore CS8600
+#pragma warning restore CS8604

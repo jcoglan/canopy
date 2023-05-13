@@ -1,10 +1,10 @@
-//package canopy.terminals;
-
 using System.Collections.Generic;
 using System.Collections;
 using System;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+using canopy.test.grammars.terminals;
 
 [TestClass]
 public class AnyCharTest : ParseHelper {
