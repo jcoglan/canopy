@@ -5,13 +5,8 @@ using System;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-//import helpers.Node;
-//import helpers.NodeSpec;
+using canopy.test.grammars.choices;
 
-/* using test.grammars.choices.Label;
-using test.grammars.choices.ParseError;
-using test.grammars.choices.Choices;
-using test.grammars.choices.TreeNode; */
 [TestClass]
 public class ChoiceStringsTest : ParseHelper {
     [TestMethod]
