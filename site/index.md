@@ -20,3 +20,5 @@ Canopy can generate parsers in the following languages:
 * [JavaScript](/langs/javascript.html)
 * [Python](/langs/python.html)
 * [Ruby](/langs/ruby.html)
+* [.Net](/langs/cs.html)
+
