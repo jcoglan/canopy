@@ -10,7 +10,5 @@ public interface Node<L> {
     public List<Node<L>> elements();
     public Node<L> get(L label);
 
-    /*default*/ void toMatch(NodeSpec<L> spec) {
-        spec.assertMatches(this);
-    }
+    public void toMatch(NodeSpec<L> spec);
 }

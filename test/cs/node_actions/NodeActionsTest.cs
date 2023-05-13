@@ -345,5 +345,9 @@ public class NodeWrapper : Node<Label> {
     public Node<Label> get(Label key) {
         return new NodeWrapper(node.get(key));
     }
+
+    public void toMatch(NodeSpec<Label> spec) {
+        spec.assertMatches(this);
+    }
 }
 #pragma warning restore CS8602
