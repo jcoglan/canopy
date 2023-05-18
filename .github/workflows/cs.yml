@@ -1,0 +1,85 @@
+on:
+  - push
+  - pull_request
+
+jobs:
+  test-dotnet21:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+      - name: Setup .NET Core SDK 2.1.x
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '2.1.x'
+      - name: Run test 2.1.x
+        run: make test-cs
+        env:
+          DOTNET_SDK: netcoreapp2.1
+  test-dotnet22:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+      - name: Setup .NET Core SDK 2.2.x
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '2.2.x'
+      - name: Run test 2.2.x
+        run: make test-cs
+        env:
+          DOTNET_SDK: netcoreapp2.2
+  test-dotnet30:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+      - name: Setup .NET Core SDK 3.0.x
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '3.0.x'
+      - name: Run test 3.0.x
+        run: make test-cs
+        env:
+          DOTNET_SDK: netcoreapp3.0
+  test-dotnet31:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+      - name: Setup .NET Core SDK 3.1.x
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '3.1.x'
+      - name: Run test 3.1.x
+        run: make test-cs
+        env:
+          DOTNET_SDK: netcoreapp3.1
+  test-dotnet50:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+      - name: Setup .NET Core SDK 5.0.x
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '5.0.x'
+      - name: Run test 5.0.x
+        run: make test-cs
+        env:
+          DOTNET_SDK: net5.0
+  test-dotnet60:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+      - name: Setup .NET Core SDK 6.0.x
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '6.0.x'
+      - name: Run test 6.0.x
+        run: make test-cs
+        env:
+          DOTNET_SDK: net6.0
+
+
