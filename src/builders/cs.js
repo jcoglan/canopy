@@ -91,7 +91,7 @@ class Builder extends Base {
         this._line('public String input')
         this._line('public List<String[]> expected')
         this._line('public Dictionary<Label, Dictionary<int, CacheRecord>> cache')
-        this._line('public Actions? actions')
+        this._line('public Actions actions')
         //default constructor
         this._line('public Grammar() {',false)
         this._indent(() => {
@@ -168,7 +168,7 @@ class Builder extends Base {
     let temp    = this.localVars_({ address: this.nullNode_(), index: 'offset' }),
         address = temp.address,
         offset  = temp.index
-    this._line('Dictionary<int, CacheRecord>? rule')
+    this._line('Dictionary<int, CacheRecord> rule')
     this._line('cache.TryGetValue(Label.' + name + ', out rule)')    
     this.if_('rule == null', () => {
       this.assign_('rule', 'new Dictionary<int, CacheRecord>()')
@@ -201,8 +201,7 @@ class Builder extends Base {
     let varName = this._varName(name)
 
     if (value === undefined) value = this.nullNode_()
-    let nullable = value === 'null' ? '?' : '' //we need to explictly declare it as nullable
-    this.assign_(TYPES[name] + nullable +' ' + varName, value)
+    this.assign_(TYPES[name] + ' ' + varName, value)
 
     return varName
   }
