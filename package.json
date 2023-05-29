@@ -11,7 +11,7 @@
 , "main"            : "./lib/canopy.js"
 , "bin"             : { "canopy": "./bin/canopy" }
 
-, "dependencies"    : { "handlebars": ">=4.0.0", "mkdirp": ">=3.0.0", "nopt": "*" }
+, "dependencies"    : { "handlebars": ">=4.0.0", "nopt": "*" }
 , "devDependencies" : { "benchmark": "", "jstest": "", "pegjs": "" }
 
 , "bugs"            : { "url": "https://github.com/jcoglan/canopy/issues" }
