@@ -28,4 +28,5 @@ jobs:
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.ruby }}
+      - run: ruby --version
       - run: make test-ruby

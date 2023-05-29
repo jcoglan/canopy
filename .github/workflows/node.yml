@@ -21,4 +21,5 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node }}
+      - run: node --version
       - run: make test-js
