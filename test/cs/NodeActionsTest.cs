@@ -1,9 +1,10 @@
 namespace canopy.node_actions {
     using System.Collections.Generic;
-    using System.Collections;
-    using System;
     using System.Linq;
+    using System;
+
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+
     using canopy.test.grammars.node_actions;
 
     [TestClass]

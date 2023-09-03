@@ -1,6 +1,5 @@
 namespace canopy.sequences {
     using System.Collections.Generic;
-    using System.Collections;
     using System;
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
