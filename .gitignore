@@ -1,4 +1,5 @@
 *.class
+*.dll
 *.pyc
 
 Gemfile.lock
@@ -8,10 +9,13 @@ package-lock.json
 
 lib
 
+test/grammars/**/*.cs
 test/grammars/**/*.java
 test/grammars/*.js
 test/grammars/*.py
 test/grammars/*.rb
+test/cs/bin
+test/cs/obj
 test/java/target
 
 .jekyll-cache
