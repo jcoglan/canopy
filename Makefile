@@ -55,12 +55,7 @@ test-java: $(test_grammars:%.peg=%/Grammar.java)
 
 DOTNET_SDK?=netcoreapp3.1
 test-cs: $(test_grammars:%.peg=%/Grammar.cs)
-	cd test/cs/choices && dotnet test --framework ${DOTNET_SDK}
-	cd test/cs/node_actions && dotnet test --framework ${DOTNET_SDK}
-	cd test/cs/predicates && dotnet test --framework ${DOTNET_SDK}
-	cd test/cs/quantifiers && dotnet test --framework ${DOTNET_SDK}
-	cd test/cs/sequences && dotnet test --framework ${DOTNET_SDK}
-	cd test/cs/terminals && dotnet test --framework ${DOTNET_SDK}
+	cd test/cs && dotnet test --framework ${DOTNET_SDK}
 
 test-js: test/javascript/node_modules $(test_grammars:%.peg=%.js)
 	cd test/javascript && npm test
