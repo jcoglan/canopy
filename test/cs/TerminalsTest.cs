@@ -16,15 +16,13 @@ namespace canopy.terminals {
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ParseError),
-        "Expected a ParseError")]
+        [ExpectedException(typeof(ParseError))]
         public void rejectsTheEmptyString() {
             Terminals.parse("any: ");
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ParseError),
-        "Expected a ParseError")]
+        [ExpectedException(typeof(ParseError))]
         public void rejectsInputWithTooManyCharacters() {
             Terminals.parse("any: ab");
         }
@@ -37,15 +35,13 @@ namespace canopy.terminals {
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ParseError),
-        "Expected a ParseError")]
+        [ExpectedException(typeof(ParseError))]
         public void rejectsCharactersOutsideTheClass() {
             Terminals.parse("pos-class: 0");
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ParseError),
-        "Expected a ParseError")]
+        [ExpectedException(typeof(ParseError))]
         public void matchesCharactersCaseSensitively() {
             Terminals.parse("pos-class: A");
         }
@@ -56,8 +52,7 @@ namespace canopy.terminals {
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ParseError),
-        "Expected a ParseError")]
+        [ExpectedException(typeof(ParseError))]
         public void rejectsCharactersWithinANegativeClass() {
             Terminals.parse("neg-class: x");
         }
@@ -70,36 +65,31 @@ namespace canopy.terminals {
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ParseError),
-        "Expected a ParseError")]
+        [ExpectedException(typeof(ParseError))]
         public void matchesStringsCaseSensitively() {
             Terminals.parse("str-1: OAT");
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ParseError),
-        "Expected a ParseError")]
+        [ExpectedException(typeof(ParseError))]
         public void rejectsStringsWithAdditionalPrefixes() {
             Terminals.parse("str-1: boat");
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ParseError),
-        "Expected a ParseError")]
+        [ExpectedException(typeof(ParseError))]
         public void rejectsStringsWithAdditionalSuffixes() {
             Terminals.parse("str-1: oath");
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ParseError),
-        "Expected a ParseError")]
+        [ExpectedException(typeof(ParseError))]
         public void rejectsTheEmptyString() {
             Terminals.parse("str-1: ");
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ParseError),
-        "Expected a ParseError")]
+        [ExpectedException(typeof(ParseError))]
         public void rejectsPrefixesOfTheTargetString() {
             Terminals.parse("str-1: oa");
         }
@@ -112,36 +102,31 @@ namespace canopy.terminals {
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ParseError),
-        "Expected a ParseError")]
+        [ExpectedException(typeof(ParseError))]
         public void matchesStringsCaseSensitively() {
             Terminals.parse("str-2: OAT");
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ParseError),
-        "Expected a ParseError")]
+        [ExpectedException(typeof(ParseError))]
         public void rejectsStringsWithAdditionalPrefixes() {
             Terminals.parse("str-2: boat");
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ParseError),
-        "Expected a ParseError")]
+        [ExpectedException(typeof(ParseError))]
         public void rejectsStringsWithAdditionalSuffixes() {
             Terminals.parse("str-2: oath");
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ParseError),
-        "Expected a ParseError")]
+        [ExpectedException(typeof(ParseError))]
         public void rejectsTheEmptyString() {
             Terminals.parse("str-2: ");
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ParseError),
-        "Expected a ParseError")]
+        [ExpectedException(typeof(ParseError))]
         public void rejectsPrefixesOfTheTargetString() {
             Terminals.parse("str-2: oa");
         }
@@ -159,29 +144,25 @@ namespace canopy.terminals {
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ParseError),
-        "Expected a ParseError")]
+        [ExpectedException(typeof(ParseError))]
         public void rejectsStringsWithAdditionalPrefixes() {
             Terminals.parse("str-ci: boat");
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ParseError),
-        "Expected a ParseError")]
+        [ExpectedException(typeof(ParseError))]
         public void rejectsStringsWithAdditionalSuffixes() {
             Terminals.parse("str-ci: oath");
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ParseError),
-        "Expected a ParseError")]
+        [ExpectedException(typeof(ParseError))]
         public void rejectsTheEmptyString() {
             Terminals.parse("str-ci: ");
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ParseError),
-        "Expected a ParseError")]
+        [ExpectedException(typeof(ParseError))]
         public void rejectsPrefixesOfTheTargetString() {
             Terminals.parse("str-ci: oa");
         }

@@ -17,15 +17,13 @@ namespace canopy.choices {
         }
      
         [TestMethod]
-        [ExpectedException(typeof(ParseError),
-        "Expected a ParseError")]
+        [ExpectedException(typeof(ParseError))]
         public void rejectsInputMatchingNoneOfTheOptions() {
             Choices.parse("choice-abc: d");
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ParseError),
-        "Expected a ParseError")]
+        [ExpectedException(typeof(ParseError))]
         public void rejectsSuperstringsOfTheOptions() {
             Choices.parse("choice-abc: ab");
         }
@@ -40,8 +38,7 @@ namespace canopy.choices {
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ParseError),
-        "Expected a ParseError")]
+        [ExpectedException(typeof(ParseError))]
         public void doesNotBacktrackIfLaterRulesFail() {
             Choices.parse("choice-seq: reppeat");
         } 
@@ -64,8 +61,7 @@ namespace canopy.choices {
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ParseError),
-        "Expected a ParseError")]
+        [ExpectedException(typeof(ParseError))]
         public void rejectsIfAnyIterationDoesNotMatchTheOptions() {
             Choices.parse("choice-rep: abcadba");
         }
@@ -83,8 +79,7 @@ namespace canopy.choices {
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ParseError),
-        "Expected a ParseError")]
+        [ExpectedException(typeof(ParseError))]
         public void testBindsSequencesTighterThanChoices() {
             Choices.parse("choice-bind: abef");
         }

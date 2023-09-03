@@ -26,8 +26,7 @@ namespace canopy.predicates {
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ParseError),
-        "Expected a ParseError")]
+        [ExpectedException(typeof(ParseError))]
         public void rejectsWordsWhereThePredicateDoesNotMatch() {
             Predicates.parse("pos-name: london");
         }
@@ -80,8 +79,7 @@ namespace canopy.predicates {
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ParseError),
-        "Expected a ParseError")]
+        [ExpectedException(typeof(ParseError))]
         public void rejectsWordsWhereThePredicateMatches() {
             Predicates.parse("neg-name: Word");
         }
@@ -114,20 +112,17 @@ namespace canopy.predicates {
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ParseError),
-        "Expected a ParseError")]
+        [ExpectedException(typeof(ParseError))]
         public void rejectsInputsThatMatchTheNegativePattern1() {
             Predicates.parse("neg-tail-str: wordmore text");
         }
         [TestMethod]
-        [ExpectedException(typeof(ParseError),
-        "Expected a ParseError")]
+        [ExpectedException(typeof(ParseError))]
         public void rejectsInputsThatMatchTheNegativePattern2() {
             Predicates.parse("neg-tail-class: words");
         }
         [TestMethod]
-        [ExpectedException(typeof(ParseError),
-        "Expected a ParseError")]
+        [ExpectedException(typeof(ParseError))]
         public void rejectsInputsThatMatchTheNegativePattern3() {
             Predicates.parse("neg-tail-any: word ");
         }

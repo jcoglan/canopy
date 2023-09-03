@@ -20,8 +20,7 @@ namespace canopy.quantifiers {
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ParseError),
-        "Expected a ParseError")]
+        [ExpectedException(typeof(ParseError))]
         public void rejectsANonMatchingCharacter() {
             Quantifiers.parse("maybe: a");
         }
@@ -64,22 +63,19 @@ namespace canopy.quantifiers {
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ParseError),
-        "Expected a ParseError")]
+        [ExpectedException(typeof(ParseError))]
         public void rejectsStringsWithANonMatchingPrefix() {
             Quantifiers.parse("rep-0: 4x");
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ParseError),
-        "Expected a ParseError")]
+        [ExpectedException(typeof(ParseError))]
         public void rejectsStringsWithANonMatchingSuffix() {
             Quantifiers.parse("rep-0: x4");
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ParseError),
-        "Expected a ParseError")]
+        [ExpectedException(typeof(ParseError))]
         public void parsesRepeatingPatternsGreedily() {
             Quantifiers.parse("greedy-0: xy");
         }
@@ -87,8 +83,7 @@ namespace canopy.quantifiers {
     [TestClass]
     public class  OneOrMoreTest : ParseHelper {
         [TestMethod]
-        [ExpectedException(typeof(ParseError),
-        "Expected a ParseError")]
+        [ExpectedException(typeof(ParseError))]
         public void rejectsTheEmptyString(){
             Quantifiers.parse("rep-1: ");
         }
@@ -124,22 +119,19 @@ namespace canopy.quantifiers {
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ParseError),
-        "Expected a ParseError")]
+        [ExpectedException(typeof(ParseError))]
         public void rejectsStringsWithANonMatchingPrefix() {
             Quantifiers.parse("rep-1: 4x");
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ParseError),
-        "Expected a ParseError")]
+        [ExpectedException(typeof(ParseError))]
         public void rejectsStringsWithANonMatchingSuffix() {
             Quantifiers.parse("rep-1: x4");
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ParseError),
-        "Expected a ParseError")]
+        [ExpectedException(typeof(ParseError))]
         public void parsesRepeatingPatternsGreedily() {
             Quantifiers.parse("greedy-1: xy");
         }
@@ -179,8 +171,7 @@ namespace canopy.quantifiers {
     [TestClass]
     public class  ExactlyTest : ParseHelper {
         [TestMethod]
-        [ExpectedException(typeof(ParseError),
-        "Expected a ParseError")]
+        [ExpectedException(typeof(ParseError))]
         public void rejectsTheEmptyString(){
             Quantifiers.parse("rep-exact: ");
         }
@@ -196,15 +187,13 @@ namespace canopy.quantifiers {
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ParseError),
-        "Expected a ParseError")]
+        [ExpectedException(typeof(ParseError))]
         public void rejectsTooFewCopiesOfThePattern(){
             Quantifiers.parse("rep-exact: ab");
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ParseError),
-        "Expected a ParseError")]
+        [ExpectedException(typeof(ParseError))]
         public void rejectsTooManyCopiesOfThePattern(){
             Quantifiers.parse("rep-exact: abcd");
         }
@@ -212,8 +201,7 @@ namespace canopy.quantifiers {
     [TestClass]
     public class  MinimumTest : ParseHelper {
         [TestMethod]
-        [ExpectedException(typeof(ParseError),
-        "Expected a ParseError")]
+        [ExpectedException(typeof(ParseError))]
         public void rejectsTheEmptyString(){
             Quantifiers.parse("rep-min: ");
         }
@@ -242,8 +230,7 @@ namespace canopy.quantifiers {
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ParseError),
-        "Expected a ParseError")]
+        [ExpectedException(typeof(ParseError))]
         public void rejectsTooFewCopiesOfThePattern(){
             Quantifiers.parse("rep-min: ab");
         }
@@ -251,8 +238,7 @@ namespace canopy.quantifiers {
     [TestClass]
     public class  RangeTest : ParseHelper {
         [TestMethod]
-        [ExpectedException(typeof(ParseError),
-        "Expected a ParseError")]
+        [ExpectedException(typeof(ParseError))]
         public void rejectsTheEmptyString(){
             Quantifiers.parse("rep-range: ");
         }
@@ -280,15 +266,13 @@ namespace canopy.quantifiers {
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ParseError),
-        "Expected a ParseError")]
+        [ExpectedException(typeof(ParseError))]
         public void rejectsTooFewCopiesOfThePattern(){
             Quantifiers.parse("rep-range: ab");
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ParseError),
-        "Expected a ParseError")]
+        [ExpectedException(typeof(ParseError))]
         public void rejectsTooManyCopiesOfThePattern(){
             Quantifiers.parse("rep-range: abcdef");
         }

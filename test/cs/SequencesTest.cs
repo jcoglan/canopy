@@ -21,43 +21,37 @@ namespace canopy.sequences {
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ParseError),
-        "Expected a ParseError")]
+        [ExpectedException(typeof(ParseError))]
         public void rejectsAMissingPrefix() {
             Sequences.parse("seq-str: bc");
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ParseError),
-        "Expected a ParseError")]
+        [ExpectedException(typeof(ParseError))]
         public void rejectsAnAdditionalPrefix() {
             Sequences.parse("seq-str: zabc");
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ParseError),
-        "Expected a ParseError")]
+        [ExpectedException(typeof(ParseError))]
         public void rejectsAMissingMiddle() {
             Sequences.parse("seq-str: ac");
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ParseError),
-        "Expected a ParseError")]
+        [ExpectedException(typeof(ParseError))]
         public void rejectsAnAdditionalMiddle() {
             Sequences.parse("seq-str: azbzc");
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ParseError),
-        "Expected a ParseError")]
+        [ExpectedException(typeof(ParseError))]
         public void rejectsAMissingSuffix() {
             Sequences.parse("seq-str: ab");
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ParseError),
-        "Expected a ParseError")]
+        [ExpectedException(typeof(ParseError))]
         public void rejectsAnAdditionalSuffix() {
             Sequences.parse("seq-str: abcz");
         }
@@ -119,8 +113,7 @@ namespace canopy.sequences {
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ParseError),
-        "Expected a ParseError")]
+        [ExpectedException(typeof(ParseError))]
         public void parsesRepetitionsGreedily() {
             Sequences.parse("seq-rep-2: aaa");
         }
@@ -151,8 +144,7 @@ namespace canopy.sequences {
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ParseError),
-        "Expected a ParseError")]
+        [ExpectedException(typeof(ParseError))]
         public void rejectsTheInputIfTheSubSequenceDoesNotMatch() {
             Sequences.parse("seq-rep-subseq: ab1b2bc");
         }
@@ -310,15 +302,13 @@ namespace canopy.sequences {
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ParseError),
-        "Expected a ParseError")]
+        [ExpectedException(typeof(ParseError))]
         public void rejectsInputMissingMutedExpressions1() {
             Sequences.parse("seq-mute-4: ae");
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ParseError),
-        "Expected a ParseError")]
+        [ExpectedException(typeof(ParseError))]
         public void rejectsInputMissingMutedExpressions2() {
             Sequences.parse("seq-mute-4: abde");
         }
