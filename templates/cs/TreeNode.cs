@@ -10,9 +10,7 @@ namespace canopy.{{namespace}} {
 
         public Dictionary<Label, {{name}}> labelled;
 
-        public {{name}}() : this("", -1, new List<{{name}}>(0)) {
-            
-        }
+        public {{name}}() : this("", -1, new List<{{name}}>(0)) {}
 
         public {{name}}(String text, int offset, List<{{name}}> elements) {
             this.text = text;
@@ -28,25 +26,19 @@ namespace canopy.{{namespace}} {
         }
 
         public IEnumerator<{{name}}> iterator() {
-            foreach(var items in elements)
-            { 
-                // Returning the element after every iteration
+            foreach (var items in elements) {
                 yield return items;
             }
         }
 
         public IEnumerator<{{name}}> GetEnumerator() {
-            foreach(var items in elements)
-            { 
-                // Returning the element after every iteration
+            foreach (var items in elements) {
                 yield return items;
             }
         }
-        System.Collections.IEnumerator
-        System.Collections.IEnumerable.GetEnumerator()
-    {
-        // Invoke IEnumerator<string> GetEnumerator() above.
-        return GetEnumerator();
+
+        IEnumerator IEnumerable.GetEnumerator() {
+            return GetEnumerator();
+        }
     }
- }
 }
