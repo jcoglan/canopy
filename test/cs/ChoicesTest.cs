@@ -9,7 +9,7 @@ namespace canopy.choices {
     [TestClass]
     public class ChoiceStringsTest : ParseHelper {
         [TestMethod]
-        public void parsesAnyOfTheChoiceOptions(){
+        public void parsesAnyOfTheChoiceOptions() {
             expect(Choices.parse("choice-abc: a")).toMatch(node("a", 12));
             expect(Choices.parse("choice-abc: b")).toMatch(node("b", 12));
             expect(Choices.parse("choice-abc: c")).toMatch(node("c", 12));
@@ -28,7 +28,7 @@ namespace canopy.choices {
         }
 
         [TestMethod]
-        public void parsesAChoiceAsPartOfASequence(){
+        public void parsesAChoiceAsPartOfASequence() {
             expect(Choices.parse("choice-seq: repeat")).toMatch(
                 node("repeat", 12)
                     .elem(node("re", 12).noElems())
@@ -46,7 +46,7 @@ namespace canopy.choices {
     [TestClass]
     public class ChoiceRepetitionTest : ParseHelper {
         [TestMethod]
-        public void parsesADifferentOptionOnEachIteration(){
+        public void parsesADifferentOptionOnEachIteration() {
             expect(Choices.parse("choice-rep: abcabba")).toMatch(
                 node("abcabba", 12)
                     .elem(node("a", 12).noElems())
@@ -69,7 +69,7 @@ namespace canopy.choices {
     [TestClass]
     public class ChoiceSequenceTest : ParseHelper {
         [TestMethod]
-        public void parsesOneBranchOfTheChoice(){
+        public void parsesOneBranchOfTheChoice() {
             expect(Choices.parse("choice-bind: ab")).toMatch(
                 node("ab", 13)
                     .elem(node("a", 13).noElems())

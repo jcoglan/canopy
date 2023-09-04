@@ -9,7 +9,7 @@ namespace canopy.predicates {
     [TestClass]
     public class PositiveLookAheadTest : ParseHelper {
         [TestMethod]
-        public void checksTheFirstCharacterOfAWord(){
+        public void checksTheFirstCharacterOfAWord() {
             expect(Predicates.parse("pos-name: London")).toMatch(
                 node("London", 10)
                     .elem(node("", 10).noElems())
@@ -31,7 +31,7 @@ namespace canopy.predicates {
         }
 
         [TestMethod]
-        public void resetsTheCursorAfterMatching(){
+        public void resetsTheCursorAfterMatching() {
             expect(Predicates.parse("pos-seq: <abc123>")).toMatch(
                 node("<abc123>", 9)
                     .elem(node("", 9).noElems())
@@ -49,7 +49,7 @@ namespace canopy.predicates {
         }
 
         [TestMethod]
-        public void usesAReferenceAsAPredicate(){
+        public void usesAReferenceAsAPredicate() {
             expect(Predicates.parse("pos-ref: c99")).toMatch(
                 node("c99", 9)
                     .elem(node("", 9).noElems())
@@ -61,10 +61,11 @@ namespace canopy.predicates {
             );
         }
     }
+
     [TestClass]
     public class NegativeLookAheadTest : ParseHelper {
         [TestMethod]
-        public void checksTheFirstCharacterOfAWord(){
+        public void checksTheFirstCharacterOfAWord() {
             expect(Predicates.parse("neg-name: word")).toMatch(
                 node("word", 10)
                     .elem(node("", 10).noElems())
@@ -84,7 +85,7 @@ namespace canopy.predicates {
         }
 
         [TestMethod]
-        public void checksForAStringAtTheEnd(){
+        public void checksForAStringAtTheEnd() {
             expect(Predicates.parse("neg-tail-str: word")).toMatch(
                 node("word", 14)
                     .elem(node("word", 14).noElems())
@@ -93,7 +94,7 @@ namespace canopy.predicates {
         }
 
         [TestMethod]
-        public void checksForAClassAtTheEnd(){
+        public void checksForAClassAtTheEnd() {
             expect(Predicates.parse("neg-tail-class: word")).toMatch(
                 node("word", 16)
                     .elem(node("word", 16).noElems())
@@ -102,7 +103,7 @@ namespace canopy.predicates {
         }
 
         [TestMethod]
-        public void checksForAnyCharAtTheEnd(){
+        public void checksForAnyCharAtTheEnd() {
             expect(Predicates.parse("neg-tail-any: word")).toMatch(
                 node("word", 14)
                     .elem(node("word", 14).noElems())
@@ -115,11 +116,13 @@ namespace canopy.predicates {
         public void rejectsInputsThatMatchTheNegativePattern1() {
             Predicates.parse("neg-tail-str: wordmore text");
         }
+
         [TestMethod]
         [ExpectedException(typeof(ParseError))]
         public void rejectsInputsThatMatchTheNegativePattern2() {
             Predicates.parse("neg-tail-class: words");
         }
+
         [TestMethod]
         [ExpectedException(typeof(ParseError))]
         public void rejectsInputsThatMatchTheNegativePattern3() {

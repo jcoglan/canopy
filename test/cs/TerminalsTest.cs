@@ -9,7 +9,7 @@ namespace canopy.terminals {
     [TestClass]
     public class AnyCharTest : ParseHelper {
         [TestMethod]
-        public void parsesAnySingleCharacter(){
+        public void parsesAnySingleCharacter() {
             expect(Terminals.parse("any: a")).toMatch(node("a", 5));
             expect(Terminals.parse("any: !")).toMatch(node("!", 5));
         }
@@ -26,10 +26,11 @@ namespace canopy.terminals {
             Terminals.parse("any: ab");
         }
     }
+
     [TestClass]
     public class CharClassTest : ParseHelper {
         [TestMethod]
-        public void parsesCharactersWithinTheClass(){
+        public void parsesCharactersWithinTheClass() {
             expect(Terminals.parse("pos-class: x")).toMatch(node("x", 11));
         }
 
@@ -46,7 +47,7 @@ namespace canopy.terminals {
         }
 
         [TestMethod]
-        public void parsesCharactersOutsideANegativeClass(){
+        public void parsesCharactersOutsideANegativeClass() {
             expect(Terminals.parse("neg-class: 0")).toMatch(node("0", 11));
         }
 
@@ -56,10 +57,11 @@ namespace canopy.terminals {
             Terminals.parse("neg-class: x");
         }
     }
+
     [TestClass]
     public class SingleQuotedStringTest : ParseHelper {
         [TestMethod]
-        public void parsesThatExactString(){
+        public void parsesThatExactString() {
             expect(Terminals.parse("str-1: oat")).toMatch(node("oat", 7));
         }
 
@@ -93,10 +95,11 @@ namespace canopy.terminals {
             Terminals.parse("str-1: oa");
         }
     }
+
     [TestClass]
     public class DoubleQuotedStringTest : ParseHelper {
         [TestMethod]
-        public void parsesThatExactString(){
+        public void parsesThatExactString() {
             expect(Terminals.parse("str-2: oat")).toMatch(node("oat", 7));
         }
 
@@ -130,15 +133,16 @@ namespace canopy.terminals {
             Terminals.parse("str-2: oa");
         }
     }
+
     [TestClass]
     public class CaseInsensitiveStringTest : ParseHelper {
         [TestMethod]
-        public void parsesThatExactString(){
+        public void parsesThatExactString() {
             expect(Terminals.parse("str-ci: oat")).toMatch(node("oat", 8));
         }
 
         [TestMethod]
-        public void matchesStringsCaseInsensitively(){
+        public void matchesStringsCaseInsensitively() {
             expect(Terminals.parse("str-ci: OAT")).toMatch(node("OAT", 8));
         }
 
@@ -191,6 +195,7 @@ namespace canopy.terminals {
         public int offset() {
             return node.offset;
         }
+
         public List<Node<Label>> elements() {
             List<Node<Label>> ret = new List<Node<Label>>();
             foreach (var item in node.elements) {

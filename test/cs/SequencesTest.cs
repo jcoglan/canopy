@@ -10,7 +10,7 @@ namespace canopy.sequences {
     [TestClass]
     public class SequenceStringsTest : ParseHelper {
         [TestMethod]
-        public void parsesAMatchingSequence(){
+        public void parsesAMatchingSequence() {
             expect(Sequences.parse("seq-str: abc")).toMatch(
                 node("abc", 9)
                     .elem(node("a", 9).noElems())
@@ -55,10 +55,11 @@ namespace canopy.sequences {
             Sequences.parse("seq-str: abcz");
         }
     }
+
     [TestClass]
-    public class  SequenceMaybesTest : ParseHelper {
+    public class SequenceMaybesTest : ParseHelper {
         [TestMethod]
-        public void parsesAtTheStart(){
+        public void parsesAtTheStart() {
             expect(Sequences.parse("seq-maybe-1: bc")).toMatch(
                 node("bc", 13)
                     .elem(node("", 13).noElems())
@@ -68,7 +69,7 @@ namespace canopy.sequences {
         }
 
         [TestMethod]
-        public void parsesInTheMiddle(){
+        public void parsesInTheMiddle() {
             expect(Sequences.parse("seq-maybe-2: ac")).toMatch(
                 node("ac", 13)
                     .elem(node("a", 13).noElems())
@@ -78,7 +79,7 @@ namespace canopy.sequences {
         }
 
         [TestMethod]
-        public void parsesAtTheEnd(){
+        public void parsesAtTheEnd() {
             expect(Sequences.parse("seq-maybe-3: ab")).toMatch(
                 node("ab", 13)
                     .elem(node("a", 13).noElems())
@@ -87,10 +88,11 @@ namespace canopy.sequences {
             );
         }
     }
+
     [TestClass]
-    public class  SequenceRepetitionTest : ParseHelper {
+    public class SequenceRepetitionTest : ParseHelper {
         [TestMethod]
-        public void allowsEmptyMatches(){
+        public void allowsEmptyMatches() {
             expect(Sequences.parse("seq-rep-1: 0")).toMatch(
                 node("0", 11)
                     .elem(node("", 11).noElems())
@@ -99,7 +101,7 @@ namespace canopy.sequences {
         }
 
         [TestMethod]
-        public void allowsNonEmptyMatches(){
+        public void allowsNonEmptyMatches() {
             expect(Sequences.parse("seq-rep-1: abc0")).toMatch(
                 node("abc0", 11)
                     .elem(node("abc", 11)
@@ -117,10 +119,11 @@ namespace canopy.sequences {
             Sequences.parse("seq-rep-2: aaa");
         }
     }
+
     [TestClass]
-    public class  SequenceRepeatedSubSequenceTest : ParseHelper {
+    public class SequenceRepeatedSubSequenceTest : ParseHelper {
         [TestMethod]
-        public void parsesANestedTree(){
+        public void parsesANestedTree() {
             expect(Sequences.parse("seq-rep-subseq: ab1b2b3c")).toMatch(
                 node("ab1b2b3c", 16)
                     .elem(node("a", 16).noElems())
@@ -148,10 +151,11 @@ namespace canopy.sequences {
             Sequences.parse("seq-rep-subseq: ab1b2bc");
         }
     }
+
     [TestClass]
-    public class  SequenceLabellingTest : ParseHelper {
+    public class SequenceLabellingTest : ParseHelper {
         [TestMethod]
-        public void createsNamedReferencesToChildNodes(){
+        public void createsNamedReferencesToChildNodes() {
             expect(Sequences.parse("seq-label: v987")).toMatch(
                 node("v987", 11)
                     .elem(node("v", 11).noElems())
@@ -169,7 +173,7 @@ namespace canopy.sequences {
         }
 
         [TestMethod]
-        public void createsNamedReferencesInsideRepeatedSubSequences(){
+        public void createsNamedReferencesInsideRepeatedSubSequences() {
             expect(Sequences.parse("seq-label-subseq: v.AB.CD.EF")).toMatch(
                 node("v.AB.CD.EF", 18)
                     .elem(node("v", 18).noElems())
@@ -211,10 +215,11 @@ namespace canopy.sequences {
             );
         }
     }
+
     [TestClass]
-    public class  SequenceMutingTest : ParseHelper {
+    public class SequenceMutingTest : ParseHelper {
         [TestMethod]
-        public void removesChildNodesFromTheSequence(){
+        public void removesChildNodesFromTheSequence() {
             expect(Sequences.parse("seq-mute-1: key: 42")).toMatch(
                 node("key: 42", 12)
                     .elem(node("key", 12)
@@ -230,7 +235,7 @@ namespace canopy.sequences {
         }
 
         [TestMethod]
-        public void removesChildSequencesFromTheSequence(){
+        public void removesChildSequencesFromTheSequence() {
             expect(Sequences.parse("seq-mute-2: key: 42")).toMatch(
                 node("key: 42", 12)
                     .elem(node("key", 12)
@@ -246,7 +251,7 @@ namespace canopy.sequences {
         }
 
         [TestMethod]
-        public void removesNodesFromChildSequences(){
+        public void removesNodesFromChildSequences() {
             expect(Sequences.parse("seq-mute-3: v.AB.CD.EF")).toMatch(
                 node("v.AB.CD.EF", 12)
                     .elem(node("v", 12).noElems())
@@ -274,7 +279,7 @@ namespace canopy.sequences {
         }
 
         [TestMethod]
-        public void correctlyHandlesNestedExpressionsUsingMutes(){
+        public void correctlyHandlesNestedExpressionsUsingMutes() {
             expect(Sequences.parse("seq-mute-4: abcde")).toMatch(
                 node("abcde", 12)
                     .elem(node("a", 12).noElems())
@@ -283,7 +288,7 @@ namespace canopy.sequences {
         }
 
         [TestMethod]
-        public void allowsTheFirstElementToBeMuted(){
+        public void allowsTheFirstElementToBeMuted() {
             expect(Sequences.parse("seq-mute-first: abc")).toMatch(
                 node("abc", 16)
                     .elem(node("b", 17).noElems())
@@ -292,7 +297,7 @@ namespace canopy.sequences {
         }
 
         [TestMethod]
-        public void allowsTheLastElementToBeMuted(){
+        public void allowsTheLastElementToBeMuted() {
             expect(Sequences.parse("seq-mute-last: abc")).toMatch(
                 node("abc", 15)
                     .elem(node("a", 15).noElems())
@@ -312,10 +317,11 @@ namespace canopy.sequences {
             Sequences.parse("seq-mute-4: abde");
         }
     }
+
     [TestClass]
-    public class  SequenceReferencesTest : ParseHelper {
+    public class SequenceReferencesTest : ParseHelper {
         [TestMethod]
-        public void assignsLabelsToReferenceExpressions(){
+        public void assignsLabelsToReferenceExpressions() {
             expect(Sequences.parse("seq-refs: ac")).toMatch(
                 node("ac", 10)
                     .elem(node("a", 10).noElems())
@@ -327,7 +333,7 @@ namespace canopy.sequences {
         }
 
         [TestMethod]
-        public void mutesReferencesFromGeneratingLabels(){
+        public void mutesReferencesFromGeneratingLabels() {
             TreeNode tree = Sequences.parse("seq-mute-refs: ac");
 
             expect(tree).toMatch(
@@ -340,7 +346,7 @@ namespace canopy.sequences {
         }
     }
 
-    public class  ParseHelper {
+    public class ParseHelper {
         public Node<Label> expect(TreeNode node) {
             return new NodeWrapper(node.elements[1]);
         }
@@ -350,7 +356,7 @@ namespace canopy.sequences {
         }
     }
 
-    public class  NodeWrapper : Node<Label> {
+    public class NodeWrapper : Node<Label> {
         private TreeNode node;
 
         public NodeWrapper(TreeNode node) {

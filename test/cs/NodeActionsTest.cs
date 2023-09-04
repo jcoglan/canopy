@@ -10,7 +10,7 @@ namespace canopy.node_actions {
     [TestClass]
     public class NodeActionsTest : ParseHelper {
         [TestMethod]
-        public void makesNodesFromAString(){
+        public void makesNodesFromAString() {
             String input = "act-str: hello";
             CustomNode result = (CustomNode)NodeActions.parse(input, new TestActions()).elements.ElementAtOrDefault(1);
 
@@ -18,7 +18,7 @@ namespace canopy.node_actions {
         }
 
         [TestMethod]
-        public void makesNodesFromACharClass(){
+        public void makesNodesFromACharClass() {
             String input = "act-class: k";
             CustomNode result = (CustomNode)NodeActions.parse(input, new TestActions()).elements.ElementAtOrDefault(1);
 
@@ -26,7 +26,7 @@ namespace canopy.node_actions {
         }
 
         [TestMethod]
-        public void makesNodesFromAnyChar(){
+        public void makesNodesFromAnyChar() {
             String input = "act-any: ?";
             CustomNode result = (CustomNode)NodeActions.parse(input, new TestActions()).elements.ElementAtOrDefault(1);
 
@@ -34,7 +34,7 @@ namespace canopy.node_actions {
         }
 
         [TestMethod]
-        public void makesNodesFromAMaybeRule(){
+        public void makesNodesFromAMaybeRule() {
             String input = "act-maybe: hello";
             CustomNode result = (CustomNode)NodeActions.parse(input, new TestActions()).elements.ElementAtOrDefault(1);
 
@@ -42,7 +42,7 @@ namespace canopy.node_actions {
         }
 
         [TestMethod]
-        public void doesNotInvokeAnActionForAMaybeRuleWithNoMatch(){
+        public void doesNotInvokeAnActionForAMaybeRuleWithNoMatch() {
             String input = "act-maybe: ";
             TreeNode result = NodeActions.parse(input, new TestActions());
 
@@ -50,7 +50,7 @@ namespace canopy.node_actions {
         }
 
         [TestMethod]
-        public void makesNodesFromARepetition(){
+        public void makesNodesFromARepetition() {
             String input = "act-rep: abc";
             CustomNode result = (CustomNode)NodeActions.parse(input, new TestActions()).elements.ElementAtOrDefault(1);
 
@@ -64,7 +64,7 @@ namespace canopy.node_actions {
         }
 
         [TestMethod]
-        public void makesNodesFromARepetitionInParentheses(){
+        public void makesNodesFromARepetitionInParentheses() {
             String input = "act-rep-paren: abab";
             CustomNode result = (CustomNode)NodeActions.parse(input, new TestActions()).elements.ElementAtOrDefault(1);
 
@@ -83,7 +83,7 @@ namespace canopy.node_actions {
         }
 
         [TestMethod]
-        public void makesNodesFromASequence(){
+        public void makesNodesFromASequence() {
             String input = "act-seq: xyz";
             CustomNode result = (CustomNode)NodeActions.parse(input, new TestActions()).elements.ElementAtOrDefault(1);
 
@@ -97,7 +97,7 @@ namespace canopy.node_actions {
         }
 
         [TestMethod]
-        public void makesNodesFromASequenceWithMutedElements(){
+        public void makesNodesFromASequenceWithMutedElements() {
             String input = "act-seq-mute: xyz";
             CustomNode result = (CustomNode)NodeActions.parse(input, new TestActions()).elements.ElementAtOrDefault(1);
 
@@ -110,7 +110,7 @@ namespace canopy.node_actions {
         }
 
         [TestMethod]
-        public void makesNodesFromAParenthesisedExpression(){
+        public void makesNodesFromAParenthesisedExpression() {
             String input = "act-paren: !";
             CustomNode result = (CustomNode)NodeActions.parse(input, new TestActions()).elements.ElementAtOrDefault(1);
 
@@ -118,7 +118,7 @@ namespace canopy.node_actions {
         }
 
         [TestMethod]
-        public void bindsToTheOptionsOfAChoice(){
+        public void bindsToTheOptionsOfAChoice() {
             String input = "act-choice: 0";
             CustomNode result = (CustomNode)NodeActions.parse(input, new TestActions()).elements.ElementAtOrDefault(1);
             assertNode(new CustomNode("zero", input, 12, 13).noElems(), result);
@@ -137,37 +137,37 @@ namespace canopy.node_actions {
         }
 
         [TestMethod]
-        public void treatsNullAsAValidResult(){
+        public void treatsNullAsAValidResult() {
             CustomNode result = (CustomNode)NodeActions.parse("act-falsey: null", new TestActions()).elements.ElementAtOrDefault(1);
             Assert.AreEqual(null, result);
         }
 
         [TestMethod]
-        public void treatsFalseAsAValidResult(){
+        public void treatsFalseAsAValidResult() {
             CustomNode result = (CustomNode)NodeActions.parse("act-falsey: false", new TestActions()).elements.ElementAtOrDefault(1);
             Assert.AreEqual(null, result);
         }
 
         [TestMethod]
-        public void treatsZeroAsAValidResult(){
+        public void treatsZeroAsAValidResult() {
             CustomNode result = (CustomNode)NodeActions.parse("act-falsey: 0", new TestActions()).elements.ElementAtOrDefault(1);
             Assert.AreEqual(null, result);
         }
 
         [TestMethod]
-        public void treatsEmptyStringsAsAValidResult(){
+        public void treatsEmptyStringsAsAValidResult() {
             CustomNode result = (CustomNode)NodeActions.parse("act-falsey: ''", new TestActions()).elements.ElementAtOrDefault(1);
             Assert.AreEqual(null, result);
         }
 
         [TestMethod]
-        public void treatsEmptyListsAsAValidResult(){
+        public void treatsEmptyListsAsAValidResult() {
             CustomNode result = (CustomNode)NodeActions.parse("act-falsey: []", new TestActions()).elements.ElementAtOrDefault(1);
             Assert.AreEqual(null, result);
         }
 
         [TestMethod]
-        public void treatsFalseyValuesAsAcceptableLookaheadResults(){
+        public void treatsFalseyValuesAsAcceptableLookaheadResults() {
             String input = "act-falsey-pred: 0";
             CustomNode result = (CustomNode)NodeActions.parse(input, new TestActions()).elements.ElementAtOrDefault(1).elements.ElementAtOrDefault(1);
 
@@ -175,7 +175,7 @@ namespace canopy.node_actions {
         }
 
         [TestMethod]
-        public void treatsFalseyValuesAsAcceptableRepetitionResults(){
+        public void treatsFalseyValuesAsAcceptableRepetitionResults() {
             String input = "act-falsey-rep: null0false''[]";
             List<TreeNode> elements = NodeActions.parse(input, new TestActions()).elements.ElementAtOrDefault(1).elements;
 
@@ -186,7 +186,7 @@ namespace canopy.node_actions {
         }
 
         [TestMethod]
-        public void treatsFalseyValuesAsAcceptableMaybeResults(){
+        public void treatsFalseyValuesAsAcceptableMaybeResults() {
             String input = "act-falsey-opt: null";
             TreeNode result = NodeActions.parse(input, new TestActions()).elements.ElementAtOrDefault(1);
 
@@ -194,7 +194,7 @@ namespace canopy.node_actions {
         }
 
         [TestMethod]
-        public void treatsFalseyValuesAsAcceptableSequenceResults(){
+        public void treatsFalseyValuesAsAcceptableSequenceResults() {
             String input = "act-falsey-seq: (null)";
             TreeNode result = NodeActions.parse(input, new TestActions()).elements.ElementAtOrDefault(1);
 
@@ -203,7 +203,7 @@ namespace canopy.node_actions {
         }
 
         [TestMethod]
-        public void treatsFalseyValuesAsAcceptableChoiceResults(){
+        public void treatsFalseyValuesAsAcceptableChoiceResults() {
             String input = "act-falsey-choice: null";
             TreeNode result = NodeActions.parse(input, new TestActions()).elements.ElementAtOrDefault(1);
 

@@ -9,12 +9,12 @@ namespace canopy.quantifiers {
     [TestClass]
     public class MaybeTest : ParseHelper {
         [TestMethod]
-        public void parsesAMatchingCharacter(){
+        public void parsesAMatchingCharacter() {
             expect(Quantifiers.parse("maybe: 4")).toMatch(node("4", 7).noElems());
         }
 
         [TestMethod]
-        public void parsesTheEmptyString(){
+        public void parsesTheEmptyString() {
             expect(Quantifiers.parse("maybe: ")).toMatch(node("", 7).noElems());
         }
 
@@ -24,15 +24,16 @@ namespace canopy.quantifiers {
             Quantifiers.parse("maybe: a");
         }
     }
+
     [TestClass]
-    public class  ZeroOrMoreTest : ParseHelper {
+    public class ZeroOrMoreTest : ParseHelper {
         [TestMethod]
-        public void parsesTheEmptyString(){
+        public void parsesTheEmptyString() {
             expect(Quantifiers.parse("rep-0: ")).toMatch(node("", 7).noElems());
         }
 
         [TestMethod]
-        public void parsesOneOccurrenceOfThePattern(){
+        public void parsesOneOccurrenceOfThePattern() {
             expect(Quantifiers.parse("rep-0: z")).toMatch(
                 node("z", 7)
                     .elem(node("z", 7).noElems())
@@ -40,7 +41,7 @@ namespace canopy.quantifiers {
         }
 
         [TestMethod]
-        public void parsesManyOccurrencesOfTheSameInstanceOfThePattern(){
+        public void parsesManyOccurrencesOfTheSameInstanceOfThePattern() {
             expect(Quantifiers.parse("rep-0: zzzz")).toMatch(
                 node("zzzz", 7)
                     .elem(node("z", 7).noElems())
@@ -51,7 +52,7 @@ namespace canopy.quantifiers {
         }
 
         [TestMethod]
-        public void parsesManyOccurrencesOfDifferentInstancesOfThePattern(){
+        public void parsesManyOccurrencesOfDifferentInstancesOfThePattern() {
             expect(Quantifiers.parse("rep-0: wxyz")).toMatch(
                 node("wxyz", 7)
                     .elem(node("w", 7).noElems())
@@ -79,16 +80,17 @@ namespace canopy.quantifiers {
             Quantifiers.parse("greedy-0: xy");
         }
     }
+
     [TestClass]
-    public class  OneOrMoreTest : ParseHelper {
+    public class OneOrMoreTest : ParseHelper {
         [TestMethod]
         [ExpectedException(typeof(ParseError))]
-        public void rejectsTheEmptyString(){
+        public void rejectsTheEmptyString() {
             Quantifiers.parse("rep-1: ");
         }
 
         [TestMethod]
-        public void parsesOneOccurrenceOfThePattern(){
+        public void parsesOneOccurrenceOfThePattern() {
             expect(Quantifiers.parse("rep-1: z")).toMatch(
                 node("z", 7)
                     .elem(node("z", 7).noElems())
@@ -96,7 +98,7 @@ namespace canopy.quantifiers {
         }
 
         [TestMethod]
-        public void parsesManyOccurrencesOfTheSameInstanceOfThePattern(){
+        public void parsesManyOccurrencesOfTheSameInstanceOfThePattern() {
             expect(Quantifiers.parse("rep-1: zzzz")).toMatch(
                 node("zzzz", 7)
                     .elem(node("z", 7).noElems())
@@ -107,7 +109,7 @@ namespace canopy.quantifiers {
         }
 
         [TestMethod]
-        public void parsesManyOccurrencesOfDifferentInstancesOfThePattern(){
+        public void parsesManyOccurrencesOfDifferentInstancesOfThePattern() {
             expect(Quantifiers.parse("rep-1: wxyz")).toMatch(
                 node("wxyz", 7)
                     .elem(node("w", 7).noElems())
@@ -136,7 +138,7 @@ namespace canopy.quantifiers {
         }
 
         [TestMethod]
-        public void parsesARepeatedReference(){
+        public void parsesARepeatedReference() {
             expect(Quantifiers.parse("color-ref: #abc123")).toMatch(
                 node("#abc123", 11)
                     .elem(node("#", 11).noElems())
@@ -152,7 +154,7 @@ namespace canopy.quantifiers {
         }
 
         [TestMethod]
-        public void parsesARepeatedChoice(){
+        public void parsesARepeatedChoice() {
             expect(Quantifiers.parse("color-choice: #abc123")).toMatch(
                 node("#abc123", 14)
                     .elem(node("#", 14).noElems())
@@ -167,16 +169,17 @@ namespace canopy.quantifiers {
             );
         }
     }
+
     [TestClass]
-    public class  ExactlyTest : ParseHelper {
+    public class ExactlyTest : ParseHelper {
         [TestMethod]
         [ExpectedException(typeof(ParseError))]
-        public void rejectsTheEmptyString(){
+        public void rejectsTheEmptyString() {
             Quantifiers.parse("rep-exact: ");
         }
 
         [TestMethod]
-        public void parsesTheRequiredNumberOfThePattern(){
+        public void parsesTheRequiredNumberOfThePattern() {
             expect(Quantifiers.parse("rep-exact: abc")).toMatch(
                 node("abc", 11)
                     .elem(node("a", 11).noElems())
@@ -187,26 +190,27 @@ namespace canopy.quantifiers {
 
         [TestMethod]
         [ExpectedException(typeof(ParseError))]
-        public void rejectsTooFewCopiesOfThePattern(){
+        public void rejectsTooFewCopiesOfThePattern() {
             Quantifiers.parse("rep-exact: ab");
         }
 
         [TestMethod]
         [ExpectedException(typeof(ParseError))]
-        public void rejectsTooManyCopiesOfThePattern(){
+        public void rejectsTooManyCopiesOfThePattern() {
             Quantifiers.parse("rep-exact: abcd");
         }
     }
+
     [TestClass]
-    public class  MinimumTest : ParseHelper {
+    public class MinimumTest : ParseHelper {
         [TestMethod]
         [ExpectedException(typeof(ParseError))]
-        public void rejectsTheEmptyString(){
+        public void rejectsTheEmptyString() {
             Quantifiers.parse("rep-min: ");
         }
 
         [TestMethod]
-        public void parsesTheRequiredNumberOfThePattern(){
+        public void parsesTheRequiredNumberOfThePattern() {
             expect(Quantifiers.parse("rep-min: abc")).toMatch(
                 node("abc", 9)
                     .elem(node("a", 9).noElems())
@@ -216,7 +220,7 @@ namespace canopy.quantifiers {
         }
 
         [TestMethod]
-        public void parsesMoreCopiesOfThePattern(){
+        public void parsesMoreCopiesOfThePattern() {
             expect(Quantifiers.parse("rep-min: abcdef")).toMatch(
                 node("abcdef", 9)
                     .elem(node("a", 9).noElems())
@@ -230,20 +234,21 @@ namespace canopy.quantifiers {
 
         [TestMethod]
         [ExpectedException(typeof(ParseError))]
-        public void rejectsTooFewCopiesOfThePattern(){
+        public void rejectsTooFewCopiesOfThePattern() {
             Quantifiers.parse("rep-min: ab");
         }
     }
+
     [TestClass]
-    public class  RangeTest : ParseHelper {
+    public class RangeTest : ParseHelper {
         [TestMethod]
         [ExpectedException(typeof(ParseError))]
-        public void rejectsTheEmptyString(){
+        public void rejectsTheEmptyString() {
             Quantifiers.parse("rep-range: ");
         }
 
         [TestMethod]
-        public void parsesTheMinimumNumberOfThePattern(){
+        public void parsesTheMinimumNumberOfThePattern() {
             expect(Quantifiers.parse("rep-range: abc")).toMatch(
                 node("abc", 11)
                     .elem(node("a", 11).noElems())
@@ -253,7 +258,7 @@ namespace canopy.quantifiers {
         }
 
         [TestMethod]
-        public void parsesTheMaximumNumberOfThePattern(){
+        public void parsesTheMaximumNumberOfThePattern() {
             expect(Quantifiers.parse("rep-range: abcde")).toMatch(
                 node("abcde", 11)
                     .elem(node("a", 11).noElems())
@@ -266,18 +271,18 @@ namespace canopy.quantifiers {
 
         [TestMethod]
         [ExpectedException(typeof(ParseError))]
-        public void rejectsTooFewCopiesOfThePattern(){
+        public void rejectsTooFewCopiesOfThePattern() {
             Quantifiers.parse("rep-range: ab");
         }
 
         [TestMethod]
         [ExpectedException(typeof(ParseError))]
-        public void rejectsTooManyCopiesOfThePattern(){
+        public void rejectsTooManyCopiesOfThePattern() {
             Quantifiers.parse("rep-range: abcdef");
         }
     }
 
-    public class  ParseHelper {
+    public class ParseHelper {
         public Node<Label> expect(TreeNode node) {
             return new NodeWrapper(node.elements[1]);
         }

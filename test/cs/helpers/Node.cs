@@ -1,5 +1,3 @@
-//package helpers;
-
 using System.Collections.Generic;
 using System;
 
