@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System;
 
-namespace canopy.{{namespace}} {
+namespace {{namespace}} {
     public interface Actions {
     {{#each actions}}
         public TreeNode {{this}}(String input, int start, int end, List<TreeNode> elements);

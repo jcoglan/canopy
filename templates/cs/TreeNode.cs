@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Collections;
 using System;
 
-namespace canopy.{{namespace}} {
+namespace {{namespace}} {
     public class {{name}} : IEnumerable<{{name}}> {
         public String text;
         public int offset;

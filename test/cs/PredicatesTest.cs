@@ -4,7 +4,7 @@ namespace canopy.predicates {
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-    using canopy.test.grammars.predicates;
+    using test.grammars.predicates;
 
     [TestClass]
     public class PositiveLookAheadTest : ParseHelper {

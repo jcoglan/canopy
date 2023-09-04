@@ -1,4 +1,4 @@
-namespace canopy.{{namespace}} {
+namespace {{namespace}} {
 
     public class CacheRecord {
         public TreeNode node;

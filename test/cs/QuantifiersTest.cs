@@ -4,7 +4,7 @@ namespace canopy.quantifiers {
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-    using canopy.test.grammars.quantifiers;
+    using test.grammars.quantifiers;
 
     [TestClass]
     public class MaybeTest : ParseHelper {

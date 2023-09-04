@@ -4,7 +4,7 @@ namespace canopy.sequences {
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-    using canopy.test.grammars.sequences;
+    using test.grammars.sequences;
 
     [TestClass]
     public class SequenceStringsTest : ParseHelper {

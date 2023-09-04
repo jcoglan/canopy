@@ -4,7 +4,7 @@ namespace canopy.terminals {
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-    using canopy.test.grammars.terminals;
+    using test.grammars.terminals;
 
     [TestClass]
     public class AnyCharTest : ParseHelper {

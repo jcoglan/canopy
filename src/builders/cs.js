@@ -84,7 +84,7 @@ class Builder extends Base {
     this._line('using System.Text.RegularExpressions')
     this._newline()
 
-    this._line('namespace canopy.' + this._namespace + ' {', false)
+    this._line('namespace ' + this._namespace + ' {', false)
     this._indent(() => {
       this._line('public abstract class Grammar {', false)
       this._indent(() => {
@@ -141,7 +141,7 @@ class Builder extends Base {
 
   class_ (name, parent, block) {
     this._newline()
-    this._line('namespace canopy.' + this._namespace + ' {', false)
+    this._line('namespace ' + this._namespace + ' {', false)
     this._indent(() => {
       this._line('class ' + name + ' : ' + parent + ' {', false)
       this._scope(block, name)

@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Collections;
 using System;
 
-namespace canopy.{{namespace}} {
+namespace {{namespace}} {
     public class {{name}} : Grammar {
         public {{name}}(String input, Actions actions) {
             this.input = input;

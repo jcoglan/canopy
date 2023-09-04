@@ -4,7 +4,7 @@ namespace canopy.choices {
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-    using canopy.test.grammars.choices;
+    using test.grammars.choices;
 
     [TestClass]
     public class ChoiceStringsTest : ParseHelper {

@@ -5,7 +5,7 @@ namespace canopy.node_actions {
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-    using canopy.test.grammars.node_actions;
+    using test.grammars.node_actions;
 
     [TestClass]
     public class NodeActionsTest : ParseHelper {
