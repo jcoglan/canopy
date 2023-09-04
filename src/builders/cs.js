@@ -15,7 +15,7 @@ class Builder extends Base {
   constructor (...args) {
     super(...args)
     this._labels = new Set()
-    this.namespace = ""
+    this._namespace = ''
   }
 
   _tab () {
@@ -23,10 +23,11 @@ class Builder extends Base {
   }
 
   _initBuffer (pathname) {
-    this.namespace = pathname.split(sep)
-    this.namespace.pop()
-    this.namespace = this.namespace.join('.')
-    return '//canopy namespace: ' + this.namespace + ';\n\n'
+    this._namespace = pathname.split(sep)
+    this._namespace.pop()
+    this._namespace = this._namespace.join('.')
+
+    return ''
   }
 
   _quote (string) {
@@ -54,10 +55,10 @@ class Builder extends Base {
     this._grammarName = name
 
     this._newBuffer('cs', 'Actions')
-    this._template('cs', 'Actions.cs', { actions, namespace:this.namespace })
+    this._template('cs', 'Actions.cs', { actions, namespace: this._namespace })
 
     this._newBuffer('cs', 'CacheRecord')
-    this._template('cs', 'CacheRecord.cs', { namespace:this.namespace })
+    this._template('cs', 'CacheRecord.cs', { namespace: this._namespace })
 
     block()
   }
@@ -66,21 +67,24 @@ class Builder extends Base {
     let name = 'TreeNode'
 
     this._newBuffer('cs', name)
-    this._template('cs', 'TreeNode.cs', { name, namespace:this.namespace})
+    this._template('cs', 'TreeNode.cs', { name, namespace: this._namespace })
 
     return name
   }
 
   grammarModule_ (block) {
     this._newBuffer('cs', 'Grammar')
-    //some pragmas to kill warnings
+
+    // some pragmas to kill warnings
     this.pragma("warning disable CS1717")
+
     this._line('using System')
     this._line('using System.Collections')
     this._line('using System.Collections.Generic')
     this._line('using System.Text.RegularExpressions')
     this._newline()
-    this._line('namespace canopy.' + this.namespace + ' {', false)
+
+    this._line('namespace canopy.' + this._namespace + ' {', false)
     this._indent(() => {
       this._line('public abstract class Grammar {', false)
       this._indent(() => {
@@ -92,16 +96,17 @@ class Builder extends Base {
         this._line('public List<String[]> expected')
         this._line('public Dictionary<Label, Dictionary<int, CacheRecord>> cache')
         this._line('public Actions actions')
+
         //default constructor
         this._line('public Grammar() {',false)
         this._indent(() => {
-          this.assign_('this.input','\"\"')
-          this.assign_('this.inputSize','0')
-          this.assign_('this.actions','null')
-          this.assign_('this.offset','0')
-          this.assign_('this.cache','new Dictionary<Label, Dictionary<int, CacheRecord>>()')
-          this.assign_('this.failure','0')
-          this.assign_('this.expected','new List<String[]>()')
+          this.assign_('this.input', '\"\"')
+          this.assign_('this.inputSize', '0')
+          this.assign_('this.actions', 'null')
+          this.assign_('this.offset', '0')
+          this.assign_('this.cache', 'new Dictionary<Label, Dictionary<int, CacheRecord>>()')
+          this.assign_('this.failure', '0')
+          this.assign_('this.expected', 'new List<String[]>()')
         })
         this._line('}',false)
         this._newline()
@@ -114,38 +119,39 @@ class Builder extends Base {
   compileRegex_ (charClass, name) {
     let regex  = charClass.regex,
         source = regex.source.replace(/^\^/, '\\A')
+
     this.assign_('private static Regex ' + name, 'new Regex(' + this._quote(source) + ')')
     charClass.constName = name
   }
 
   parserClass_ (root) {
     this._newBuffer('cs', 'ParseError')
-    this._template('cs', 'ParseError.cs', { namespace:this.namespace})
+    this._template('cs', 'ParseError.cs', { namespace: this._namespace })
 
     let grammar = this._quote(this._grammarName)
     let name = this._grammarName.replace(/\./g, '')
     this._newBuffer('cs', name)
-    this._template('cs', 'Parser.cs', { grammar, root, name, namespace:this.namespace })
+    this._template('cs', 'Parser.cs', { grammar, root, name, namespace: this._namespace })
 
     let labels = [...this._labels].sort()
 
     this._newBuffer('cs', 'Label')
-    this._template('cs', 'Label.cs', { labels, namespace:this.namespace })
+    this._template('cs', 'Label.cs', { labels, namespace: this._namespace })
   }
 
   class_ (name, parent, block) {
     this._newline()
-    this._line('namespace canopy.' + this.namespace + ' {', false)
+    this._line('namespace canopy.' + this._namespace + ' {', false)
     this._indent(() => {
-    this._line('class ' + name + ' : ' + parent + ' {', false)
-    this._scope(block, name)
-    this._line('}', false)
+      this._line('class ' + name + ' : ' + parent + ' {', false)
+      this._scope(block, name)
+      this._line('}', false)
     })
     this._line('}', false)
   }
 
   constructor_ (args, block) {
-    this._line('public ' + this._currentScope.name + '(String text, int offset, List<TreeNode> elements) : base(text, offset, elements){', false)
+    this._line('public ' + this._currentScope.name + '(String text, int offset, List<TreeNode> elements) : base(text, offset, elements) {', false)
     this._indent(() => {
       block()
     })
@@ -158,16 +164,19 @@ class Builder extends Base {
     this._scope(block)
     this._line('}', false)
   }
-  set_label_name(name) {
+
+  _setLabelName(name) {
     return 'peg_' + name
   }
+
   cache_ (name, block) {
-    name = this.set_label_name(name)//we have to do this in case the name is a keyword
+    name = this._setLabelName(name)
     this._labels.add(name)
 
     let temp    = this.localVars_({ address: this.nullNode_(), index: 'offset' }),
         address = temp.address,
         offset  = temp.index
+
     this._line('Dictionary<int, CacheRecord> rule')
     this._line('cache.TryGetValue(Label.' + name + ', out rule)')    
     this.if_('rule == null', () => {
@@ -185,7 +194,7 @@ class Builder extends Base {
   }
 
   attribute_ (name, value) {
-    name = this.set_label_name(name)//we have to do this in case the name is a keyword
+    name = this._setLabelName(name)
     this._labels.add(name)
     this.assign_('labelled[Label.' + name + ']', value)
   }
