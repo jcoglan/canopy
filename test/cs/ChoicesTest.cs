@@ -94,11 +94,10 @@ namespace canopy.choices {
         }
     }
 
-    #pragma warning disable CS8602
     public class NodeWrapper : Node<Label> {
-        private TreeNode? node;
+        private TreeNode node;
 
-        public NodeWrapper(TreeNode? node) {
+        public NodeWrapper(TreeNode node) {
             this.node = node;
         }
 
@@ -126,5 +125,4 @@ namespace canopy.choices {
             spec.assertMatches(this);
         }
     }
-    #pragma warning restore CS8602
 }

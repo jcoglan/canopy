@@ -5,10 +5,9 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 public class NodeSpec<L> {
     private String text_value;
     private int offset_value;
-#pragma warning disable CS8714
     private ElementsSpec<L> elements = new ElementsSpec<L>();
     private Dictionary<L, NodeSpec<L>> labelled = new Dictionary<L, NodeSpec<L>>();
-#pragma warning restore CS8714
+
     public NodeSpec(String text, int offset) {
         this.text_value = text;
         this.offset_value = offset;

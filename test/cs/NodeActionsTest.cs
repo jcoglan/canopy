@@ -272,11 +272,11 @@ namespace canopy.node_actions {
             return null;
         }
     }
-    #pragma warning disable CS0108
+
     public class CustomNode : TreeNode {
         public String type, input;
         public int start, end;
-        public List<TreeNode> elements;
+        new public List<TreeNode> elements;
         public ElementsSpec<Label> elemsSpec = new ElementsSpec<Label>();
 
         public CustomNode(String type, String input, int start, int end) : this(type, input, start, end, null){
@@ -300,7 +300,6 @@ namespace canopy.node_actions {
             return this;
         }
     }
-    #pragma warning restore CS0108
 
     public class ParseHelper {
         public Node<Label> expect(TreeNode node) {
@@ -320,11 +319,10 @@ namespace canopy.node_actions {
         }
     }
 
-    #pragma warning disable CS8602
     public class NodeWrapper : Node<Label> {
-        private TreeNode? node;
+        private TreeNode node;
 
-        public NodeWrapper(TreeNode? node) {
+        public NodeWrapper(TreeNode node) {
             this.node = node;
         }
 
@@ -352,5 +350,4 @@ namespace canopy.node_actions {
             spec.assertMatches(this);
         }
     }
-    #pragma warning restore CS8602
 }

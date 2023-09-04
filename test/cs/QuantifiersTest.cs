@@ -291,11 +291,11 @@ namespace canopy.quantifiers {
             return new NodeSpec<Label>(text, offset);
         }
     }
-    #pragma warning disable CS8602
-    public class NodeWrapper : Node<Label> {
-        private TreeNode? node;
 
-        public NodeWrapper(TreeNode? node) {
+    public class NodeWrapper : Node<Label> {
+        private TreeNode node;
+
+        public NodeWrapper(TreeNode node) {
             this.node = node;
         }
 
@@ -323,5 +323,4 @@ namespace canopy.quantifiers {
             spec.assertMatches(this);
         }
     }
-    #pragma warning restore CS8602
 }

@@ -5,8 +5,7 @@ namespace canopy.sequences {
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     using canopy.test.grammars.sequences;
-    #pragma warning disable CS8600
-    #pragma warning disable CS8604
+
     [TestClass]
     public class SequenceStringsTest : ParseHelper {
         [TestMethod]
@@ -387,6 +386,4 @@ namespace canopy.sequences {
             spec.assertMatches(this);
         }
     }
-    #pragma warning restore CS8600
-    #pragma warning restore CS8604
 }
